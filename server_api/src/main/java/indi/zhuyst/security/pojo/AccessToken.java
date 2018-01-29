@@ -12,5 +12,5 @@ public class AccessToken {
 
     private Long expire;
 
-    private UserDetails user;
+    private SecurityUser user;
 }

@@ -1,4 +1,4 @@
-package indi.zhuyst.skyblog.controller;
+package indi.zhuyst.security.controller;
 
 import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.pojo.R;
@@ -7,7 +7,9 @@ import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.service.SecurityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,10 +22,17 @@ public class AuthController extends BaseController{
     @Autowired
     private SecurityService securityService;
 
-    @ApiOperation("登陆，获取Token")
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    /**
+     * 欺骗Swagger的扫描，正式的登陆授权由Spring Security完成
+     * @see indi.zhuyst.security.config.WebSecurityConfig#configure(WebSecurity)
+     * @param username 用户名
+     * @param password 密码
+     * @return AccessToken
+     */
+    @ApiOperation(value = "登陆，获取Token",httpMethod = "POST")
+    @RequestMapping(value = "/login",method = RequestMethod.PUT)
     public R<AccessToken> login(String username, String password) {
-        return null;
+        return R.ok(new AccessToken());
     }
 
     @ApiOperation("通过老Token换取新Token")
