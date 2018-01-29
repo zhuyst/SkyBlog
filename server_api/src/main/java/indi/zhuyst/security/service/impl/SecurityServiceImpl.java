@@ -70,6 +70,10 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
 
     @Override
     public Claims getClaimByToken(String token) {
+        if(this.isTokenValid(token)){
+            throw new AccessDeniedException("token失效，请重新登录");
+        }
+
         try {
             return Jwts.parser()
                     .setSigningKey(secret)
@@ -81,7 +85,12 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
     }
 
     @Override
-    public boolean isTokenExpired(Date expiration) {
+    public boolean isTokenValid(String token) {
+        Claims claims = this.getClaimByToken(token);
+        return isTokenExpired(claims.getExpiration());
+    }
+
+    private boolean isTokenExpired(Date expiration) {
         return expiration.before(new Date());
     }
 }
