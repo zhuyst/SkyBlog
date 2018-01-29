@@ -5,7 +5,6 @@ import indi.zhuyst.security.filter.TokenFilter;
 import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.service.SecurityService;
-import indi.zhuyst.skyblog.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -73,7 +72,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                 .antMatchers("/api/",
                         "/login",
-                        "/api/**/public/**")
+                        "/api/**/public/**",
+                        "/auth/**")
                     .permitAll()
                 .anyRequest()
                     .authenticated()
