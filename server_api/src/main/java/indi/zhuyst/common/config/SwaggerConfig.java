@@ -39,7 +39,7 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public Docket api(){
-        Docket docket =  new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.SWAGGER_2)
                 .securitySchemes(apiKey())
                 .globalOperationParameters(headerToken())
                 .produces(Collections.singleton("application/json;charset=UTF-8"))
@@ -52,8 +52,6 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(Predicates.or(PathSelectors.any()))
                 .build();
-
-        return docket;
     }
 
     private ApiInfo apiInfo(){
