@@ -24,9 +24,6 @@ import java.io.IOException;
 public class TokenFilter extends OncePerRequestFilter{
 
     @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Autowired
     private SecurityService securityService;
 
     @Override
@@ -37,13 +34,7 @@ public class TokenFilter extends OncePerRequestFilter{
             return;
         }
 
-        Claims claims = securityService.getClaimByToken(token);
-        if(securityService.isTokenExpired(claims.getExpiration())) {
-            throw new AccessDeniedException("token失效，请重新登录");
-        }
-
-        String username = securityService.getUsernameByToken(token);
-        SecurityUser user = (SecurityUser) userDetailsService.loadUserByUsername(username);
+        SecurityUser user = securityService.getUserByToken(token);
 
         if(user != null && SecurityUtil.getAuthentication() == null){
             UsernamePasswordAuthenticationToken authenticationToken =

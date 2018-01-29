@@ -16,7 +16,7 @@ public interface SecurityService{
 
     Claims getClaimByToken(String token);
 
-    boolean isTokenExpired(Date expiration);
+    boolean isTokenValid(String token);
 
     String getHeader();
 
