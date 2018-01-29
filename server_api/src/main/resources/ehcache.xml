@@ -1,0 +1,36 @@
+<config
+        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xsi:schemaLocation="
+        http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd">
+    <!-- 这个配置是ehcache 自己的配置 用来配置ehcache manager
+       比如我们可以配置ehcache 实例
+       -->
+
+    <!-- 定义一个cache 实例配置 别名是 product
+     key 的类型为 string
+     最多允许2000 个 entries（可以理解为2000个key-value 对 ）
+     最多使用500m内存
+     -->
+    <!--<cache alias="product">-->
+        <!--&lt;!&ndash;<key-type>java.lang.String</key-type>&ndash;&gt;-->
+        <!--<resources>-->
+            <!--<heap unit="entries">2000</heap>-->
+            <!--<offheap unit="MB">500</offheap>-->
+        <!--</resources>-->
+    <!--</cache>-->
+
+    <!-- 定义一个cache模板 ，模板是抽象定义，可以被cache 实例配置继承  -->
+    <cache-template name="myDefaults">
+        <key-type>java.lang.String</key-type>
+        <value-type>java.lang.String</value-type>
+        <heap unit="entries">200</heap>
+    </cache-template>
+
+    <!-- 定义一个 default cache  使用 myDefaults 模板 这里 覆盖了模板的key-type 配置 -->
+    <!--<cache alias="default" uses-template="myDefaults">-->
+        <!--<key-type>java.lang.Object</key-type>-->
+        <!--<value-type>java.lang.Object</value-type>-->
+    <!--</cache>-->
+
+</config>

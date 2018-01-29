@@ -1,0 +1,43 @@
+.content_main{
+    margin: 3%;
+}
+
+.editor{
+    margin-top: 20px;
+}
+
+.edit_button{
+    margin-bottom: 15px;
+}
+
+.comment_send{
+
+}
+
+.comment{
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.comment_button{
+    margin-top: 10px;
+}
+
+.comment_last{
+    margin-bottom: 0;
+}
+
+.comment_footer{
+    text-align: right;
+    font-size: 12px;
+}
+
+.comment_footer a{
+    color: #f16c20;
+    margin-left: 10px;
+}
+
+.pager{
+    margin-bottom: 0;
+}

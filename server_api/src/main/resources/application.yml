@@ -1,0 +1,89 @@
+#logging:
+#  level:
+#    root: debug
+spring:
+  jackson:
+    property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/skyblog?characterEncoding=utf-8&useSSL=false
+    username: test
+    password: zhuyst
+    driver-class-name: com.mysql.jdbc.Driver
+
+    druid:
+      initial-size: 0
+      min-idle: 1
+      max-active: 20
+      max-wait: 60000
+
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: false
+
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+
+      remove-abandoned: true
+      remove-abandoned-timeout-millis: 1800
+      log-abandoned: true
+      filters: mergeStat,log4j,wall
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+      web-stat-filter:
+        url-pattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*'
+
+      stat-view-servlet:
+        url-pattern: /druid/*
+        allow: 127.0.0.1
+        login-username: zhuyst
+        login-password: zhuyst
+        reset-enable: false
+
+      aop-patterns: indi.zhuyst.skyblog.util.*,indi.zhuyst.skyblog.dao.*
+
+  aop:
+    proxy-target-class: true
+
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+
+  cache:
+    type: jcache
+    jcache:
+      config: ehcache.xml
+      provider: org.ehcache.jsr107.EhcacheCachingProvider
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: indi.zhuyst.skyblog.entity
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  row-bounds-with-count: true
+  offset-as-page-num: true
+  page-size-zero: true
+
+mapper:
+  identity: mysql
+  not-empty: true
+  mappers[0]: indi.zhuyst.common.dao.BaseDao
+
+server:
+  tomcat:
+    uri-encoding: UTF-8
+
+skyblog:
+  jwt:
+    secret: zojoKieDTQYZXVi4dGKIn4qTkQA=
+    expire: 604800
+    header: Token
