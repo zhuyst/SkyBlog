@@ -1,7 +1,6 @@
 package indi.zhuyst.skyblog.entity;
 
 import indi.zhuyst.common.entity.BaseEntity;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
