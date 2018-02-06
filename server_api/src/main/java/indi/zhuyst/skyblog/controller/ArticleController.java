@@ -2,18 +2,17 @@ package indi.zhuyst.skyblog.controller;
 
 import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.controller.BaseController;
+import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.R;
-import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.skyblog.entity.Article;
 import indi.zhuyst.skyblog.entity.Comment;
-import indi.zhuyst.skyblog.pojo.*;
+import indi.zhuyst.skyblog.pojo.ArticleDTO;
+import indi.zhuyst.skyblog.pojo.CommentDTO;
 import indi.zhuyst.skyblog.service.ArticleService;
 import indi.zhuyst.skyblog.service.CommentService;
-import indi.zhuyst.security.util.SecurityUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,26 +58,34 @@ public class ArticleController extends BaseController{
         return produceResult(articleService.delete(id),"删除文章失败");
     }
 
-    @RequestMapping(value = "/public/list/{pageNum}",method = RequestMethod.GET)
+    @RequestMapping(value = "/public/list/",method = RequestMethod.GET)
     @ApiOperation(value = "查询文章列表")
-    public R<PageInfo<ArticleDTO>> listArticle(@PathVariable("pageNum")Integer pageNum){
-        PageInfo<ArticleDTO> pageInfo = articleService.listArticle(pageNum);
+    public R<PageInfo<ArticleDTO>> listArticle(Query<Article> query){
+        PageInfo<ArticleDTO> pageInfo = articleService.listArticle(query);
         return R.ok(pageInfo);
     }
 
-    @RequestMapping(value = "/public/classify/{id}/{pageNum}",method = RequestMethod.GET)
+    @RequestMapping(value = "/public/classify/{id}/",method = RequestMethod.GET)
     @ApiOperation(value = "根据分类id查询文章列表")
     public R<PageInfo<ArticleDTO>> listArticleByClassify(@PathVariable("id")Integer classifyId,
-                                                         @PathVariable("pageNum")Integer pageNum){
-        PageInfo<ArticleDTO> pageInfo = articleService.listArticleByClassify(classifyId,pageNum);
+                                                         Query<Article> query){
+        Article article = new Article();
+        article.setClassifyId(classifyId);
+        query.setEntity(article);
+
+        PageInfo<ArticleDTO> pageInfo = articleService.listArticle(query);
         return R.ok(pageInfo);
     }
 
-    @RequestMapping(value = "/public/{id}/comment/{pageNum}",method = RequestMethod.GET)
+    @RequestMapping(value = "/public/{id}/comment/",method = RequestMethod.GET)
     @ApiOperation(value = "查询文章下的评论列表")
     public R<PageInfo<CommentDTO>> listComment(@PathVariable("id")Integer articleId,
-                                               @PathVariable("pageNum")Integer pageNum){
-        PageInfo<CommentDTO> pageInfo = commentService.listComment(articleId,pageNum);
+                                               Query<Comment> query){
+        Comment comment = new Comment();
+        comment.setArticleId(articleId);
+        query.setEntity(comment);
+
+        PageInfo<CommentDTO> pageInfo = commentService.listComment(query);
         return R.ok(pageInfo);
     }
 
@@ -96,13 +103,8 @@ public class ArticleController extends BaseController{
     @ApiOperation(value = "根据id删除评论")
     @PreAuthorize("isAuthenticated()")
     public R deleteComment(@PathVariable("id") Integer id){
-        Comment comment = commentService.getCommentDTO(id);
-        SecurityUser user = SecurityUtil.getUser();
-
-        if(!user.isAdmin() || !comment.getAuthorId().equals(user.getId())){
-            throw new AccessDeniedException("您没有权限进行该操作");
-        }
-
+        Comment comment = commentService.getByID(id);
+        checkPerms(comment.getAuthorId());
         return produceResult(commentService.delete(id),"评论删除失败");
     }
 }

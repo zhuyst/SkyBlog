@@ -2,16 +2,14 @@ package indi.zhuyst.common.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.github.pagehelper.PageRowBounds;
 import indi.zhuyst.common.dao.BaseDao;
 import indi.zhuyst.common.entity.BaseEntity;
-import indi.zhuyst.common.util.PageUtil;
+import indi.zhuyst.common.pojo.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional(readOnly = true,rollbackFor = RuntimeException.class)
 public abstract class BaseCrudServiceImpl<D extends BaseDao<E>,E extends BaseEntity>
         extends BaseService implements BaseCrudService<E>{
 
@@ -20,28 +18,33 @@ public abstract class BaseCrudServiceImpl<D extends BaseDao<E>,E extends BaseEnt
     @Autowired
     protected D dao;
 
+    @Override
     public E getByID(int id){
         return dao.selectByPrimaryKey(id);
     }
 
-    public PageInfo<E> listByCondition(Integer pageNum,E entity){
-        PageRowBounds rowBounds = PageUtil.getPageRowBounds(pageNum,DEFAULT_PAGE_SIZE);
-        return this.listByCondition(rowBounds,entity);
+    @Override
+    public PageInfo<E> listByCondition(Query<E> query){
+        if(query.getPageSize() == null){
+            query.setPageSize(DEFAULT_PAGE_SIZE);
+        }
+        return PageHelper.startPage(query.getPageNum(),query.getPageSize()).doSelectPageInfo(
+                () -> dao.select(query.getEntity())
+        );
     }
 
-    public PageInfo<E> listByCondition(PageRowBounds rowBounds,E entity){
-        List<E> list = dao.selectByRowBounds(entity,rowBounds);
-        return new PageInfo<>(list);
-    }
-
+    @Override
     public List<E> listAll(){
         return dao.selectAll();
     }
 
+    @Override
     public long countAll(){
         return PageHelper.count(() -> dao.selectAll());
     }
 
+    @Override
+    @Transactional
     public E save(E entity){
         boolean isSuccess;
 
@@ -55,6 +58,8 @@ public abstract class BaseCrudServiceImpl<D extends BaseDao<E>,E extends BaseEnt
         return isSuccess ? this.getByID(entity.getId()) : null;
     }
 
+    @Override
+    @Transactional
     public boolean delete(int id){
         return dao.deleteByPrimaryKey(id) > 0;
     }

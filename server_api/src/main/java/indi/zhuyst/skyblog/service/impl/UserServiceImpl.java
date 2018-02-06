@@ -1,16 +1,17 @@
 package indi.zhuyst.skyblog.service.impl;
 
 import com.github.pagehelper.PageInfo;
-import indi.zhuyst.common.service.BaseCrudServiceImpl;
-import indi.zhuyst.skyblog.dao.UserDao;
-import indi.zhuyst.skyblog.entity.User;
-import indi.zhuyst.security.enums.RoleEnum;
 import indi.zhuyst.common.exception.FieldErrorException;
 import indi.zhuyst.common.pojo.Error;
+import indi.zhuyst.common.pojo.Query;
+import indi.zhuyst.common.service.BaseCrudServiceImpl;
+import indi.zhuyst.common.util.PageUtil;
+import indi.zhuyst.security.enums.RoleEnum;
 import indi.zhuyst.security.pojo.SecurityUser;
+import indi.zhuyst.skyblog.dao.UserDao;
+import indi.zhuyst.skyblog.entity.User;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.UserService;
-import indi.zhuyst.common.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -114,8 +115,8 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     }
 
     @Override
-    public PageInfo<UserDTO> listUser(Integer pageNum, User user){
-        PageInfo<User> pageInfo = super.listByCondition(pageNum,user);
+    public PageInfo<UserDTO> listUser(Query<User> query){
+        PageInfo<User> pageInfo = super.listByCondition(query);
         return this.produceDTOPageInfo(pageInfo.getList());
     }
 

@@ -1,8 +1,10 @@
 package indi.zhuyst.skyblog.service.impl;
 
 import com.github.pagehelper.PageInfo;
-import com.github.pagehelper.PageRowBounds;
+import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.BaseCrudServiceImpl;
+import indi.zhuyst.common.util.PageUtil;
+import indi.zhuyst.security.util.SecurityUtil;
 import indi.zhuyst.skyblog.dao.CommentDao;
 import indi.zhuyst.skyblog.entity.Comment;
 import indi.zhuyst.skyblog.entity.User;
@@ -10,8 +12,6 @@ import indi.zhuyst.skyblog.pojo.CommentDTO;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.CommentService;
 import indi.zhuyst.skyblog.service.UserService;
-import indi.zhuyst.common.util.PageUtil;
-import indi.zhuyst.security.util.SecurityUtil;
 import indi.zhuyst.skyblog.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,17 +61,8 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
     }
 
     @Override
-    public PageInfo<CommentDTO> listComment(int articleId, Integer pageNum){
-        PageRowBounds rowBounds = PageUtil.getPageRowBounds(pageNum,COMMENT_PAGE_SIZE);
-        return this.listComment(articleId,rowBounds);
-    }
-
-    @Override
-    public PageInfo<CommentDTO> listComment(int articleId, PageRowBounds rowBounds){
-        Comment comment = new Comment();
-        comment.setArticleId(articleId);
-
-        PageInfo<Comment> pageInfo = super.listByCondition(rowBounds,comment);
+    public PageInfo<CommentDTO> listComment(Query<Comment> query){
+        PageInfo<Comment> pageInfo = super.listByCondition(query);
 
         List<CommentDTO> pojoList = new ArrayList<>();
         for(Comment c : pageInfo.getList()){

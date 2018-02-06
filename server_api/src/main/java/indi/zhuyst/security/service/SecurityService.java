@@ -4,8 +4,6 @@ import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.pojo.SecurityUser;
 import io.jsonwebtoken.Claims;
 
-import java.util.Date;
-
 public interface SecurityService{
 
     AccessToken generateToken(String username);

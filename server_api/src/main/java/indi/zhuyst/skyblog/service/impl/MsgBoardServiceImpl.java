@@ -1,12 +1,11 @@
 package indi.zhuyst.skyblog.service.impl;
 
 import com.github.pagehelper.PageInfo;
-import com.github.pagehelper.PageRowBounds;
+import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.skyblog.dao.ArticleDao;
 import indi.zhuyst.skyblog.entity.Article;
 import indi.zhuyst.skyblog.entity.Comment;
 import indi.zhuyst.skyblog.pojo.CommentDTO;
-import indi.zhuyst.common.util.PageUtil;
 import indi.zhuyst.skyblog.service.CommentService;
 import indi.zhuyst.skyblog.service.MsgBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
     private static final int MSG_BOARD_KEY = 1;
-    private static final int MSG_PAGE_SIZE = 20;
 
     @Autowired
     private ArticleDao articleDao;
@@ -45,13 +43,12 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
     }
 
     @Override
-    public PageInfo<CommentDTO> listMsg(Integer pageNum){
-        PageRowBounds rowBounds = PageUtil.getPageRowBounds(pageNum,MSG_PAGE_SIZE);
-
+    public PageInfo<CommentDTO> listMsg(Query<Comment> query){
         Comment comment = new Comment();
         comment.setArticleId(MSG_BOARD_KEY);
 
-        return commentService.listComment(MSG_BOARD_KEY,rowBounds);
+        query.setEntity(comment);
+        return commentService.listComment(query);
     }
 
     @Override

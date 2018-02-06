@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import java.util.Date;
-import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
