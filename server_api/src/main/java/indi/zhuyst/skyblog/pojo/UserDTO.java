@@ -1,8 +1,8 @@
 package indi.zhuyst.skyblog.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import indi.zhuyst.skyblog.entity.User;
 import indi.zhuyst.security.enums.RoleEnum;
+import indi.zhuyst.skyblog.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;

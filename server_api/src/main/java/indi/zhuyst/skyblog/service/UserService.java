@@ -1,6 +1,7 @@
 package indi.zhuyst.skyblog.service;
 
 import com.github.pagehelper.PageInfo;
+import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.BaseCrudService;
 import indi.zhuyst.skyblog.entity.User;
 import indi.zhuyst.skyblog.pojo.UserDTO;
@@ -16,6 +17,6 @@ public interface UserService extends BaseCrudService<User>,UserDetailsService{
 
     UserDTO saveUser(User user);
 
-    PageInfo<UserDTO> listUser(Integer pageNum, User user);
+    PageInfo<UserDTO> listUser(Query<User> query);
 
 }

@@ -1,8 +1,8 @@
 package indi.zhuyst.common.service;
 
 import com.github.pagehelper.PageInfo;
-import com.github.pagehelper.PageRowBounds;
 import indi.zhuyst.common.entity.BaseEntity;
+import indi.zhuyst.common.pojo.Query;
 
 import java.util.List;
 
@@ -10,9 +10,7 @@ public interface BaseCrudService<E extends BaseEntity> {
 
     E getByID(int id);
 
-    PageInfo<E> listByCondition(Integer pageNum, E entity);
-
-    PageInfo<E> listByCondition(PageRowBounds rowBounds, E entity);
+    PageInfo<E> listByCondition(Query<E> query);
 
     long countAll();
 

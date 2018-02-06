@@ -5,7 +5,10 @@ import indi.zhuyst.common.util.JsonUtil;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class R<T>{
 

@@ -17,5 +17,4 @@ public interface ClassifyService {
 
     List<Classify> deleteClassify(Integer id);
 
-
 }

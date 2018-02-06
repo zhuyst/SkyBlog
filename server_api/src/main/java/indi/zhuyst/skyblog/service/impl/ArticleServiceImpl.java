@@ -1,8 +1,10 @@
 package indi.zhuyst.skyblog.service.impl;
 
 import com.github.pagehelper.PageInfo;
-import com.github.pagehelper.PageRowBounds;
+import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.BaseCrudServiceImpl;
+import indi.zhuyst.common.util.PageUtil;
+import indi.zhuyst.security.util.SecurityUtil;
 import indi.zhuyst.skyblog.dao.ArticleDao;
 import indi.zhuyst.skyblog.entity.Article;
 import indi.zhuyst.skyblog.entity.Classify;
@@ -12,8 +14,6 @@ import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.ArticleService;
 import indi.zhuyst.skyblog.service.ClassifyService;
 import indi.zhuyst.skyblog.service.UserService;
-import indi.zhuyst.common.util.PageUtil;
-import indi.zhuyst.security.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +23,6 @@ import java.util.List;
 
 @Service
 public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> implements ArticleService{
-    private static final int ARTICLE_PAGE_SZE = 5;
-
     @Autowired
     private UserService userService;
 
@@ -43,27 +41,19 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
         return super.save(article);
     }
 
+    @Override
     public ArticleDTO getArticleDTO(int id){
         Article article = super.getByID(id);
         return this.produceDTO(article);
     }
 
-    public PageInfo<ArticleDTO> listArticleByClassify(int classifyId, Integer pageNum){
-        PageRowBounds bounds = PageUtil.getPageRowBounds(pageNum,ARTICLE_PAGE_SZE);
-
-        Article article = new Article();
-        article.setClassifyId(classifyId);
-
-        PageInfo<Article> pageInfo = super.listByCondition(bounds,article);
+    @Override
+    public PageInfo<ArticleDTO> listArticle(Query<Article> query){
+        PageInfo<Article> pageInfo = super.listByCondition(query);
         return this.produceDTOPageInfo(pageInfo);
     }
 
-    public PageInfo<ArticleDTO> listArticle(Integer pageNum){
-        PageRowBounds bounds = PageUtil.getPageRowBounds(pageNum,ARTICLE_PAGE_SZE);
-        PageInfo<Article> pageInfo = super.listByCondition(bounds,null);
-        return this.produceDTOPageInfo(pageInfo);
-    }
-
+    @Override
     public ArticleDTO saveArticle(Article article){
         ArticleDTO pojo = null;
 

@@ -2,8 +2,9 @@ package indi.zhuyst.skyblog.controller;
 
 import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.controller.BaseController;
-import indi.zhuyst.skyblog.entity.User;
+import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.R;
+import indi.zhuyst.skyblog.entity.User;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.UserService;
 import io.swagger.annotations.Api;
@@ -22,25 +23,6 @@ public class UserController extends BaseController{
 
     @Autowired
     private UserService userService;
-
-//    @RequestMapping(value = "/public/isLogin",method = RequestMethod.GET)
-//    @ApiOperation(value = "判断用户是否登陆")
-//    public R<User> isLogin(){
-//
-//        boolean isLogin = SecurityUtil.isLogin();
-//        if(isLogin){
-//            r.setCode(R.SUCCESS_CODE);
-//
-//            User user = SecurityUtil.getUser();
-//            r.setEntity(user);
-//        }
-//        else {
-//            r.setCode(R.ERROR_CODE);
-//            r.setMessage("用户未登录");
-//        }
-//
-//        return r;
-//    }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
     @ApiOperation(value = "更新用户信息")
@@ -74,11 +56,11 @@ public class UserController extends BaseController{
         return produceResult(userService.delete(id),"不存在该用户");
     }
 
-    @RequestMapping(value = "/list/{pageNum}",method = RequestMethod.GET)
+    @RequestMapping(value = "/list/",method = RequestMethod.GET)
     @ApiOperation(value = "查询用户列表")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
-    public R<PageInfo<UserDTO>> listUser(@PathVariable("pageNum")Integer pageNum){
-        PageInfo<UserDTO> pageInfo = userService.listUser(pageNum,new User());
+    public R<PageInfo<UserDTO>> listUser(Query<User> query){
+        PageInfo<UserDTO> pageInfo = userService.listUser(query);
         return R.ok(pageInfo);
     }
 }

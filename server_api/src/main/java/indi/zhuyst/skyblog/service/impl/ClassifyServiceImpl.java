@@ -55,6 +55,7 @@ public class ClassifyServiceImpl implements ClassifyService{
         return list;
     }
 
+    @Override
     public List<Classify> saveClassify(Classify classify){
         boolean isSuccess;
         if(classify.getId() == null){
@@ -67,6 +68,7 @@ public class ClassifyServiceImpl implements ClassifyService{
         return this.produceList(isSuccess);
     }
 
+    @Override
     public List<Classify> deleteClassify(Integer id){
         boolean isSuccess = dao.deleteByPrimaryKey(id) > 0;
         return this.produceList(isSuccess);
