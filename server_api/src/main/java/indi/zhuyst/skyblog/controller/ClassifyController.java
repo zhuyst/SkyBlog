@@ -3,7 +3,6 @@ package indi.zhuyst.skyblog.controller;
 import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.pojo.R;
 import indi.zhuyst.skyblog.entity.Classify;
-import indi.zhuyst.skyblog.pojo.ClassifyAndArticles;
 import indi.zhuyst.skyblog.service.ClassifyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -54,12 +53,5 @@ public class ClassifyController extends BaseController{
     public R<List<Classify>> deleteClassify(@ApiParam("分类ID") @PathVariable("id")Integer id){
         List<Classify> list = classifyService.deleteClassify(id);
         return produceResult(list,"删除分类成功");
-    }
-
-    @RequestMapping(value = "/title/",method = RequestMethod.GET)
-    @ApiOperation(value = "查询分类列表及分类下的文章标题")
-    public R<List<ClassifyAndArticles>> listClassifyAndArticlesTitle(){
-        List<ClassifyAndArticles> list = classifyService.listClassifyAndArticles();
-        return R.ok(list);
     }
 }

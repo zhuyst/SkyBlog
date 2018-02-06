@@ -2,7 +2,6 @@ package indi.zhuyst.common.pojo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import springfox.documentation.annotations.ApiIgnore;
 
 @Data
 public class Query<E> {
