@@ -8,28 +8,24 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
+import java.util.List;
+
 /**
- * 文章DTO，包含分类对象以及作者对象
+ * 分类以及分类下的文章列表
  * @author zhuyst
  */
-@Data
 @NoArgsConstructor
+@Data
 @EqualsAndHashCode(callSuper = false)
-public class ArticleDTO extends Article{
+public class ClassifyAndArticles extends Classify{
 
     /**
-     * 分类对象
+     * 文章列表
      */
-    @ApiModelProperty("分类对象")
-    private Classify classify;
+    @ApiModelProperty("文章列表")
+    private List<Article> articles;
 
-    /**
-     * 作者对象
-     */
-    @ApiModelProperty("作者对象")
-    private UserDTO author;
-
-    public ArticleDTO(Article article){
-        BeanUtils.copyProperties(article,this);
+    public ClassifyAndArticles(Classify classify){
+        BeanUtils.copyProperties(classify,this);
     }
 }

@@ -2,6 +2,7 @@ package indi.zhuyst.common.pojo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import indi.zhuyst.common.util.JsonUtil;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,27 +11,64 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 返回结果对象
+ * @param <T> 返回的实体类
+ * @author zhuyst
+ */
 public class R<T>{
 
+    /**
+     * CODE:成功
+     * @see #code
+     */
     public static final int SUCCESS_CODE = 200;
 
+    /**
+     * CODE:没有权限
+     * @see #code
+     */
     public static final int FORBIDDEN_CODE = 403;
 
+    /**
+     * CODE:没有找到该资源
+     * @see #code
+     */
     public static final int NOT_FOUND_CODE = 404;
 
+    /**
+     * CODE:服务器错误
+     * @see #code
+     */
     public static final int ERROR_CODE = 500;
 
+    /**
+     * 状态码
+     */
+    @ApiModelProperty("状态码")
     @Getter
     private Integer code;
 
+    /**
+     * 结果信息
+     */
+    @ApiModelProperty("结果信息")
     @Getter
     @Setter
     private String message;
 
+    /**
+     * 返回实体对象
+     */
+    @ApiModelProperty("返回实体对象")
     @Getter
     @Setter
     private T entity;
 
+    /**
+     * 字段验证错误信息
+     */
+    @ApiModelProperty("字段验证错误信息")
     @Getter
     private Map<String,String> errors;
 

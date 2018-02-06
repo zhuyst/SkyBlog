@@ -12,9 +12,12 @@ import indi.zhuyst.skyblog.service.ArticleService;
 import indi.zhuyst.skyblog.service.CommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @Api(value = "ArticleApi",description = "文章相关Api")
@@ -29,15 +32,16 @@ public class ArticleController extends BaseController{
 
     @RequestMapping(value = "/public/{id}",method = RequestMethod.GET)
     @ApiOperation(value = "根据id查询文章")
-    public R<ArticleDTO> getArticle(@PathVariable("id")Integer id){
+    public R<ArticleDTO> getArticle(@ApiParam("文章ID") @PathVariable("id")Integer id){
         ArticleDTO pojo = articleService.getArticleDTO(id);
-        return produceResult(pojo,"未找到该文章");
+        return produceResult(pojo,R.NOT_FOUND_CODE,"未找到该文章");
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
     @ApiOperation(value = "更新文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
-    public R<ArticleDTO> updateArticle(@PathVariable("id")Integer id, @RequestBody Article article){
+    public R<ArticleDTO> updateArticle(@ApiParam("文章ID") @PathVariable("id")Integer id,
+                                       @ApiParam("文章对象") @Valid @RequestBody Article article){
         article.setId(id);
         ArticleDTO pojo = articleService.saveArticle(article);
         return produceResult(pojo,"更新文章失败");
@@ -46,7 +50,7 @@ public class ArticleController extends BaseController{
     @RequestMapping(value = "/",method = RequestMethod.POST)
     @ApiOperation(value = "新增文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
-    public R<ArticleDTO> insertArticle(@RequestBody Article article){
+    public R<ArticleDTO> insertArticle(@ApiParam("文章对象") @Valid @RequestBody Article article){
         ArticleDTO pojo = articleService.saveArticle(article);
         return produceResult(pojo,"新增文章失败");
     }
@@ -54,46 +58,47 @@ public class ArticleController extends BaseController{
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @ApiOperation(value = "根据id删除文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
-    public R deleteArticle(@PathVariable("id")Integer id){
+    public R deleteArticle(@ApiParam("文章ID") @PathVariable("id")Integer id){
         return produceResult(articleService.delete(id),"删除文章失败");
     }
 
     @RequestMapping(value = "/public/list/",method = RequestMethod.GET)
     @ApiOperation(value = "查询文章列表")
-    public R<PageInfo<ArticleDTO>> listArticle(Query<Article> query){
-        PageInfo<ArticleDTO> pageInfo = articleService.listArticle(query);
+    public R<PageInfo<ArticleDTO>> listArticle(Query query){
+        PageInfo<ArticleDTO> pageInfo = articleService.listArticle(new Query<>(query));
         return R.ok(pageInfo);
     }
 
     @RequestMapping(value = "/public/classify/{id}/",method = RequestMethod.GET)
     @ApiOperation(value = "根据分类id查询文章列表")
-    public R<PageInfo<ArticleDTO>> listArticleByClassify(@PathVariable("id")Integer classifyId,
-                                                         Query<Article> query){
+    public R<PageInfo<ArticleDTO>> listArticleByClassify(@ApiParam("分类ID")
+                                                             @PathVariable("id")Integer classifyId,
+                                                         Query query){
         Article article = new Article();
         article.setClassifyId(classifyId);
-        query.setEntity(article);
+        Query<Article> articleQuery = new Query<>(query,article);
 
-        PageInfo<ArticleDTO> pageInfo = articleService.listArticle(query);
+        PageInfo<ArticleDTO> pageInfo = articleService.listArticle(articleQuery);
         return R.ok(pageInfo);
     }
 
     @RequestMapping(value = "/public/{id}/comment/",method = RequestMethod.GET)
     @ApiOperation(value = "查询文章下的评论列表")
-    public R<PageInfo<CommentDTO>> listComment(@PathVariable("id")Integer articleId,
-                                               Query<Comment> query){
+    public R<PageInfo<CommentDTO>> listComment(@ApiParam("文章ID") @PathVariable("id")Integer articleId,
+                                               Query query){
         Comment comment = new Comment();
         comment.setArticleId(articleId);
-        query.setEntity(comment);
+        Query<Comment> commentQuery = new Query<>(query,comment);
 
-        PageInfo<CommentDTO> pageInfo = commentService.listComment(query);
+        PageInfo<CommentDTO> pageInfo = commentService.listComment(commentQuery);
         return R.ok(pageInfo);
     }
 
     @RequestMapping(value = "/{id}/comment/",method = RequestMethod.POST)
     @ApiOperation(value = "新增该id的文章下的评论")
     @PreAuthorize("isAuthenticated()")
-    public R<CommentDTO> insertComment(@PathVariable("id") Integer articleId,
-                                       @RequestBody Comment comment){
+    public R<CommentDTO> insertComment(@ApiParam("文章ID") @PathVariable("id") Integer articleId,
+                                       @ApiParam("评论对象") @Valid @RequestBody Comment comment){
         comment.setArticleId(articleId);
         CommentDTO pojo = commentService.saveComment(comment);
         return produceResult(pojo,"新增评论失败");
@@ -102,7 +107,7 @@ public class ArticleController extends BaseController{
     @RequestMapping(value = "/comment/{id}",method = RequestMethod.DELETE)
     @ApiOperation(value = "根据id删除评论")
     @PreAuthorize("isAuthenticated()")
-    public R deleteComment(@PathVariable("id") Integer id){
+    public R deleteComment(@ApiParam("评论ID") @PathVariable("id") Integer id){
         Comment comment = commentService.getByID(id);
         checkPerms(comment.getAuthorId());
         return produceResult(commentService.delete(id),"评论删除失败");

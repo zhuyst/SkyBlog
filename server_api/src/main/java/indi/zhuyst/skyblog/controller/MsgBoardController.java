@@ -11,6 +11,7 @@ import indi.zhuyst.skyblog.pojo.CommentDTO;
 import indi.zhuyst.skyblog.service.MsgBoardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -27,15 +28,15 @@ public class MsgBoardController extends BaseController{
 
     @RequestMapping(value = "/public/list/",method = RequestMethod.GET)
     @ApiOperation(value = "查询留言列表")
-    public R<PageInfo<CommentDTO>> listMsg(Query<Comment> query){
-        PageInfo<CommentDTO> pageInfo = msgBoardService.listMsg(query);
+    public R<PageInfo<CommentDTO>> listMsg(Query query){
+        PageInfo<CommentDTO> pageInfo = msgBoardService.listMsg(new Query<>(query));
         return R.ok(pageInfo);
     }
 
     @RequestMapping(value = "/",method = RequestMethod.POST)
     @ApiOperation(value = "新增留言")
     @PreAuthorize("isAuthenticated()")
-    public R<CommentDTO> insertMsg(@Valid @RequestBody Comment comment){
+    public R<CommentDTO> insertMsg(@ApiParam("留言对象") @Valid @RequestBody Comment comment){
         User user = SecurityUtil.getUser();
         comment.setAuthorId(user.getId());
 
@@ -46,7 +47,7 @@ public class MsgBoardController extends BaseController{
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @ApiOperation(value = "根据id删除留言")
     @PreAuthorize("isAuthenticated()")
-    public R deleteMsg(@PathVariable("id")Integer id){
+    public R deleteMsg(@ApiParam("留言ID") @PathVariable("id")Integer id){
         Comment comment = msgBoardService.getMsg(id);
         checkPerms(comment.getAuthorId());
         return produceResult(msgBoardService.deleteMsg(id),"删除文章失败");
