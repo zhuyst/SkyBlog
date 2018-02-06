@@ -2,6 +2,7 @@ package indi.zhuyst.skyblog.controller;
 
 import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.controller.BaseController;
+import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.R;
 import indi.zhuyst.skyblog.entity.User;
@@ -40,7 +41,7 @@ public class UserController extends BaseController{
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN') or #id == authentication.principal.id")
     public R<UserDTO> getUser(@ApiParam("用户ID") @PathVariable("id") @P("id") Integer id){
         UserDTO user = userService.getUserDTO(id);
-        return produceResult(user,R.NOT_FOUND_CODE,"未找到该用户");
+        return produceResult(user, CodeEnum.NOT_FOUND.getCode(),"未找到该用户");
     }
 
     @RequestMapping(value = "/public/",method = RequestMethod.POST)

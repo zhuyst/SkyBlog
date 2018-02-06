@@ -2,6 +2,7 @@ package indi.zhuyst.skyblog.controller;
 
 import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.controller.BaseController;
+import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.R;
 import indi.zhuyst.skyblog.entity.Article;
@@ -34,7 +35,7 @@ public class ArticleController extends BaseController{
     @ApiOperation(value = "根据id查询文章")
     public R<ArticleDTO> getArticle(@ApiParam("文章ID") @PathVariable("id")Integer id){
         ArticleDTO pojo = articleService.getArticleDTO(id);
-        return produceResult(pojo,R.NOT_FOUND_CODE,"未找到该文章");
+        return produceResult(pojo, CodeEnum.NOT_FOUND.getCode(),"未找到该文章");
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
