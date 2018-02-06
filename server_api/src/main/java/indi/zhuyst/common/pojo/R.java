@@ -1,11 +1,15 @@
 package indi.zhuyst.common.pojo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.util.JsonUtil;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cache.annotation.Cacheable;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,31 +20,10 @@ import java.util.Map;
  * @param <T> 返回的实体类
  * @author zhuyst
  */
-public class R<T>{
+@NoArgsConstructor
+public class R<T> implements Serializable{
 
-    /**
-     * CODE:成功
-     * @see #code
-     */
-    public static final int SUCCESS_CODE = 200;
-
-    /**
-     * CODE:没有权限
-     * @see #code
-     */
-    public static final int FORBIDDEN_CODE = 403;
-
-    /**
-     * CODE:没有找到该资源
-     * @see #code
-     */
-    public static final int NOT_FOUND_CODE = 404;
-
-    /**
-     * CODE:服务器错误
-     * @see #code
-     */
-    public static final int ERROR_CODE = 500;
+    private static final long serialVersionUID = -3712751146584906976L;
 
     /**
      * 状态码
@@ -72,72 +55,115 @@ public class R<T>{
     @Getter
     private Map<String,String> errors;
 
-    private R() {}
-
+    /**
+     * 通过code实例化对象，调用{@link #setCode(int)}
+     * @param code 状态码
+     */
     private R(int code){
         this.setCode(code);
     }
 
+    /**
+     * 通过codeEnum实例化对象，调用{@link #setCode(CodeEnum)}
+     * @param codeEnum 状态码枚举类
+     */
+    private R(CodeEnum codeEnum){
+        this.setCode(codeEnum);
+    }
+
+    /**
+     * 通过code与message直接实例化
+     * @param code 状态码
+     * @param message 结果信息
+     */
     private R(int code, String message){
         this.code = code;
         this.message = message;
     }
 
+    /**
+     * 成功 - 获取结果对象
+     * @return 结果对象
+     */
     public static R ok(){
         R r = new R();
-        r.setCode(SUCCESS_CODE);
+        r.setCode(CodeEnum.SUCCESS);
         return r;
     }
 
+    /**
+     * 成功 - 通过CodeEnum获取带有实体的结果对象
+     * @param entity 实体类
+     * @param <T> 实体类的类型
+     * @return 带有实体的结果对象
+     */
     public static <T> R<T> ok(T entity){
         R<T> r = new R<>();
-        r.setCode(SUCCESS_CODE);
+        r.setCode(CodeEnum.SUCCESS);
         r.setEntity(entity);
         return r;
     }
 
-    public static R error(int code){
-        return new R(code);
+    /**
+     * 错误 - 通过CodeEnum获取结果对象
+     * @param codeEnum 状态码枚举类
+     * @return 结果对象
+     */
+    public static R error(CodeEnum codeEnum){
+        return new R(codeEnum);
     }
 
+    /**
+     * 错误 - 通过message获取结果对象，code默认为{@link CodeEnum#ERROR}
+     * @param message 错误信息
+     * @return 结果对象
+     */
     public static R error(String message){
-        R r = error(ERROR_CODE);
+        R r = error(CodeEnum.ERROR);
         r.setMessage(message);
         return r;
     }
 
+    /**
+     * 错误 - 通过code和message直接获取结果对象
+     * @param code 状态码
+     * @param message 错误信息
+     * @return 结果对象
+     */
     public static R error(int code,String message){
         return new R(code,message);
     }
 
+    /**
+     * 设置code，调用{@link CodeEnum#getByCode(int)}
+     * @param code code
+     */
     public void setCode(int code) {
-        this.code = code;
-
-        String msg;
-        switch (code){
-            case SUCCESS_CODE:
-                msg = "OK";
-                break;
-            case FORBIDDEN_CODE:
-                msg = "您没有权限访问这个资源";
-                break;
-            case NOT_FOUND_CODE:
-                msg = "NOT FOUND";
-                break;
-            case ERROR_CODE:
-                msg = "ERROR";
-                break;
-            default:
-                msg = "未知错误，请联系管理员";
-                break;
-        }
-        this.setMessage(msg);
+        CodeEnum codeEnum = CodeEnum.getByCode(code);
+        this.setCode(codeEnum);
     }
 
+    /**
+     * 通过CodeEnum设置code与message
+     * @param codeEnum 状态码枚举类
+     */
+    public void setCode(CodeEnum codeEnum){
+        this.code = codeEnum.getCode();
+        this.message = codeEnum.getDefaultMessage();
+    }
+
+    /**
+     * 添加字段错误
+     * @param errors 字段错误数组
+     */
     public void addError(Error... errors){
         this.addError(Arrays.asList(errors));
     }
 
+    /**
+     * 添加字段错误
+     * @param errors 字段错误集合
+     */
     public void addError(Collection<Error> errors){
         if(this.errors == null){
             this.errors = new HashMap<>();
@@ -148,10 +174,18 @@ public class R<T>{
         }
     }
 
+    /**
+     * 判断是否有字段错误
+     * @return 是否有字段错误
+     */
     public boolean hasErrors(){
         return errors != null && !errors.isEmpty();
     }
 
+    /**
+     * 将结果对象转为JSON字符串
+     * @return 转换后的JSON字符串
+     */
     public String toJsonStr(){
         try {
             return JsonUtil.toJsonString(this);

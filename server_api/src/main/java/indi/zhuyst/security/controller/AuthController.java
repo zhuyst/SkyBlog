@@ -1,6 +1,7 @@
 package indi.zhuyst.security.controller;
 
 import indi.zhuyst.common.controller.BaseController;
+import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.pojo.R;
 import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.service.SecurityService;
@@ -39,7 +40,7 @@ public class AuthController extends BaseController{
      */
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public R loginGET(){
-        return R.error(R.FORBIDDEN_CODE,"请求参数中没有包含Token");
+        return R.error(CodeEnum.FORBIDDEN.getCode(),"请求参数中没有包含Token");
     }
 
     @ApiOperation("通过老Token换取新Token")

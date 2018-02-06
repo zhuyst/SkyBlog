@@ -32,14 +32,25 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurerAdapter {
 
+    /**
+     * 安全服务
+     */
     @Autowired
     private SecurityService securityService;
 
+    /**
+     * 将路径/api/映射到SwaggerUI主界面
+     * @param registry 映射记录
+     */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addRedirectViewController("/api/","/swagger-ui.html");
     }
 
+    /**
+     * Bean注册：配置Swagger扫描参数
+     * @return Docket
+     */
     @Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
@@ -57,6 +68,10 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
                 .build();
     }
 
+    /**
+     * API基本信息
+     * @return ApiInfo
+     */
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder().title("SkyBlog")
                 .description("SkyBlog接口一览")
@@ -64,12 +79,22 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
                 .version("0.1").build();
     }
 
+    /**
+     * 加入授权Header - Token
+     * @see indi.zhuyst.security.filter.TokenFilter
+     * @return 授权Key
+     */
     private List<ApiKey> apiKey(){
         ApiKey apiKey = new ApiKey(securityService.getHeader(),
                 securityService.getHeader(),"header");
         return Collections.singletonList(apiKey);
     }
 
+    /**
+     * 所有的接口加入公共请求参数 - Token
+     * @see indi.zhuyst.security.filter.TokenFilter
+     * @return 公共请求参数列表
+     */
     private List<Parameter> headerToken(){
         ParameterBuilder tokenPar = new ParameterBuilder();
 
