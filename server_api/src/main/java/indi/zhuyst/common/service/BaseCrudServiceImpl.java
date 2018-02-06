@@ -23,6 +23,8 @@ public abstract class BaseCrudServiceImpl<D extends BaseDao<E>,E extends BaseEnt
         return dao.selectByPrimaryKey(id);
     }
 
+
+
     @Override
     public PageInfo<E> listByCondition(Query<E> query){
         if(query.getPageSize() == null){

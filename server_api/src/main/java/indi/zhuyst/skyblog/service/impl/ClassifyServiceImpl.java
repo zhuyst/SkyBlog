@@ -4,7 +4,7 @@ import indi.zhuyst.skyblog.dao.ArticleDao;
 import indi.zhuyst.skyblog.dao.ClassifyDao;
 import indi.zhuyst.skyblog.entity.Article;
 import indi.zhuyst.skyblog.entity.Classify;
-import indi.zhuyst.skyblog.pojo.ClassifyAndArticlesTitle;
+import indi.zhuyst.skyblog.pojo.ClassifyAndArticles;
 import indi.zhuyst.skyblog.service.ClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,24 +32,18 @@ public class ClassifyServiceImpl implements ClassifyService{
     }
 
     @Override
-    public List<ClassifyAndArticlesTitle> listClassifyAndArticlesTitle(){
-        List<ClassifyAndArticlesTitle> list = new ArrayList<>();
+    public List<ClassifyAndArticles> listClassifyAndArticles(){
+        List<ClassifyAndArticles> list = new ArrayList<>();
 
         List<Classify> classifies = this.listClassify();
         for(Classify classify : classifies){
-            ClassifyAndArticlesTitle pojo = new ClassifyAndArticlesTitle(classify);
+            ClassifyAndArticles pojo = new ClassifyAndArticles(classify);
 
             Article article = new Article();
             article.setClassifyId(classify.getId());
+
             List<Article> articles = articleDao.select(article);
-
-            List<String> titles = new ArrayList<>();
-            for(Article a : articles){
-                titles.add(a.getTitle());
-            }
-            pojo.setTitles(titles);
-
-            list.add(pojo);
+            pojo.setArticles(articles);
         }
 
         return list;

@@ -24,6 +24,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Swagger - API文档配置类
+ * @author zhuyst
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurerAdapter {

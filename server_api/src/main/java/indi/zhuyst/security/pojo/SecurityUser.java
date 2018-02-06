@@ -3,6 +3,8 @@ package indi.zhuyst.security.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import indi.zhuyst.skyblog.entity.User;
 import indi.zhuyst.skyblog.pojo.UserDTO;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,11 +14,24 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * 用户权限对象
+ * @author zhuyst
+ */
 public class SecurityUser extends UserDTO implements UserDetails, CredentialsContainer {
 
+    /**
+     * 角色前缀
+     */
+    @ApiModelProperty(hidden = true)
     private static final String PREFIX = "ROLE_";
 
+    /**
+     * 权限集合
+     */
     @JsonIgnore
+    @Getter
+    @ApiModelProperty(hidden = true)
     private List<GrantedAuthority> authorities = new ArrayList<>();
 
     public SecurityUser(User user){
@@ -25,11 +40,6 @@ public class SecurityUser extends UserDTO implements UserDetails, CredentialsCon
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(PREFIX +
                 this.getRoleEnum().getName());
         authorities.add(authority);
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
     }
 
     @Override
