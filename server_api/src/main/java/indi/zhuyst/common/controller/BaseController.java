@@ -1,6 +1,5 @@
 package indi.zhuyst.common.controller;
 
-import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.pojo.R;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.util.SecurityUtil;
@@ -72,6 +71,8 @@ public abstract class BaseController {
      */
     protected void checkPerms(int authorId){
         SecurityUser user = getUser();
+
+        // 不是管理员或者作者ID不等于当前用于ID，则为越权
         if(!user.isAdmin() || authorId != user.getId()){
             throw new AccessDeniedException("您没有权限进行该操作");
         }

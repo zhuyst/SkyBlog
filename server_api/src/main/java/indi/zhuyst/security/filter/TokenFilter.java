@@ -17,6 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Token认证核心，通过获取请求中的Token来判断用户
+ * @author zhuyst
+ */
 @Component
 public class TokenFilter extends OncePerRequestFilter{
 
@@ -25,8 +29,10 @@ public class TokenFilter extends OncePerRequestFilter{
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+        final String nullStr = "null";
+
         String token = getRequestToken(request);
-        if(StringUtils.isBlank(token) || token.equals("null")) {
+        if(StringUtils.isBlank(token) || nullStr.equals(token)) {
             chain.doFilter(request,response);
             return;
         }
@@ -47,10 +53,10 @@ public class TokenFilter extends OncePerRequestFilter{
      * 获取请求的token
      */
     private String getRequestToken(HttpServletRequest httpRequest){
-        //从header中获取token
+        // 从header中获取token
         String token = httpRequest.getHeader(securityService.getHeader());
 
-        //如果header中不存在token，则从参数中获取token
+        // 如果header中不存在token，则从参数中获取token
         if(StringUtils.isBlank(token)){
             token = httpRequest.getParameter(securityService.getHeader());
         }

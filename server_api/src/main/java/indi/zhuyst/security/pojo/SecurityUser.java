@@ -19,6 +19,8 @@ import java.util.List;
  */
 public class SecurityUser extends UserDTO implements UserDetails, CredentialsContainer {
 
+    private static final long serialVersionUID = -5625371204361074651L;
+
     /**
      * 角色前缀
      */

@@ -32,9 +32,6 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurerAdapter {
 
-    /**
-     * 安全服务
-     */
     @Autowired
     private SecurityService securityService;
 
@@ -49,20 +46,28 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
 
     /**
      * Bean注册：配置Swagger扫描参数
+     * 扫描注解了{@link ApiOperation}的接口
      * @return Docket
      */
     @Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
+
+                // 配置公共请求参数以及授权方式
                 .securitySchemes(apiKey())
                 .globalOperationParameters(headerToken())
+
+                // Restful API均生成JSON字符串
                 .produces(Collections.singleton("application/json;charset=UTF-8"))
+
                 .genericModelSubstitutes(DeferredResult.class)
                 .useDefaultResponseMessages(false)
                 .forCodeGeneration(true)
                 .pathMapping("/")
                 .apiInfo(apiInfo())
                 .select()
+
+                // 扫描有ApiOperation注解的接口
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(Predicates.or(PathSelectors.any()))
                 .build();

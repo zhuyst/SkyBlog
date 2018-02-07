@@ -37,9 +37,13 @@ public abstract class BaseCrudServiceImpl<D extends BaseDao<E>,E extends BaseEnt
 
     @Override
     public PageInfo<E> listByCondition(Query<E> query){
+
+        // 如果没有指定页面大小，设定一个默认值
         if(query.getPageSize() == null){
             query.setPageSize(DEFAULT_PAGE_SIZE);
         }
+
+        // 进行分页
         return PageHelper.startPage(query.getPageNum(),query.getPageSize()).doSelectPageInfo(
                 () -> dao.select(query.getEntity())
         );
@@ -65,13 +69,17 @@ public abstract class BaseCrudServiceImpl<D extends BaseDao<E>,E extends BaseEnt
     public E save(E entity){
         boolean isSuccess;
 
+        // 如果ID为NULL，执行INSERT操作
         if(entity.getId() == null){
             isSuccess = dao.insertUseGeneratedKeys(entity) > 0;
         }
+
+        // 反则执行UPDATE操作
         else {
             isSuccess = dao.updateByPrimaryKeySelective(entity) > 0;
         }
 
+        // 如果成功则访问对象，反则访问NULL
         return isSuccess ? this.getByID(entity.getId()) : null;
     }
 

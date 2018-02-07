@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 授权相关Controller
+ * @author zhuyst
+ */
 @RestController
 @RequestMapping("/auth")
 @Api(value = "AuthApi",description = "授权相关API")
@@ -43,6 +47,11 @@ public class AuthController extends BaseController{
         return R.error(CodeEnum.FORBIDDEN.getCode(),"请求参数中没有包含Token");
     }
 
+    /**
+     * 通过老Token换取新Token
+     * @param token 老Token
+     * @return 新Token
+     */
     @ApiOperation("通过老Token换取新Token")
     @RequestMapping(value = "/refresh",method = RequestMethod.POST)
     public R<AccessToken> refresh(String token){
