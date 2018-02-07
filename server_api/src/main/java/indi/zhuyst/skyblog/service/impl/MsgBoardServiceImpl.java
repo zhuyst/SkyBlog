@@ -11,6 +11,7 @@ import indi.zhuyst.skyblog.service.MsgBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
@@ -52,12 +53,14 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
     }
 
     @Override
+    @Transactional
     public CommentDTO insertMsg(Comment comment){
         comment.setArticleId(MSG_BOARD_KEY);
         return commentService.saveComment(comment);
     }
 
     @Override
+    @Transactional
     public boolean deleteMsg(Integer id){
         return commentService.delete(id);
     }

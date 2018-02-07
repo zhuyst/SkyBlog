@@ -10,11 +10,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * BaseCrudService的实现类
+ * @param <D> 操作对应实体的DAO
+ * @param <E> 操作的实体类
+ * @author zhuyst
+ */
 public abstract class BaseCrudServiceImpl<D extends BaseDao<E>,E extends BaseEntity>
         extends BaseService implements BaseCrudService<E>{
 
+    /**
+     * 默认页面大小
+     */
     private static final int DEFAULT_PAGE_SIZE = 10;
 
+    /**
+     * 操作DAO
+     */
     @Autowired
     protected D dao;
 
@@ -22,8 +34,6 @@ public abstract class BaseCrudServiceImpl<D extends BaseDao<E>,E extends BaseEnt
     public E getByID(int id){
         return dao.selectByPrimaryKey(id);
     }
-
-
 
     @Override
     public PageInfo<E> listByCondition(Query<E> query){
@@ -43,6 +53,11 @@ public abstract class BaseCrudServiceImpl<D extends BaseDao<E>,E extends BaseEnt
     @Override
     public long countAll(){
         return PageHelper.count(() -> dao.selectAll());
+    }
+
+    @Override
+    public long countByCondition(Query<E> query) {
+        return PageHelper.count(() -> dao.select(query.getEntity()));
     }
 
     @Override
