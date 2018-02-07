@@ -6,6 +6,7 @@ import indi.zhuyst.skyblog.entity.Classify;
 import indi.zhuyst.skyblog.service.ClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,9 +15,6 @@ public class ClassifyServiceImpl implements ClassifyService{
 
     @Autowired
     private ClassifyDao dao;
-
-    @Autowired
-    private ArticleDao articleDao;
 
     @Override
     public Classify getById(int id){
@@ -29,6 +27,7 @@ public class ClassifyServiceImpl implements ClassifyService{
     }
 
     @Override
+    @Transactional
     public List<Classify> saveClassify(Classify classify){
         boolean isSuccess;
         if(classify.getId() == null){
@@ -42,6 +41,7 @@ public class ClassifyServiceImpl implements ClassifyService{
     }
 
     @Override
+    @Transactional
     public List<Classify> deleteClassify(Integer id){
         boolean isSuccess = dao.deleteByPrimaryKey(id) > 0;
         return this.produceList(isSuccess);

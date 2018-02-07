@@ -16,6 +16,7 @@ import indi.zhuyst.skyblog.service.ClassifyService;
 import indi.zhuyst.skyblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +31,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
     private ClassifyService classifyService;
 
     @Override
+    @Transactional
     public Article save(Article article) {
         if(article.getId() == null){
             article.setCreateDate(new Date());
@@ -54,6 +56,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
     }
 
     @Override
+    @Transactional
     public ArticleDTO saveArticle(Article article){
         ArticleDTO pojo = null;
 

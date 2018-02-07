@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     }
 
     @Override
+    @Transactional
     public User save(User user) {
         if(user.getId() == null){
             user.setRole(RoleEnum.VISITOR.getId());
@@ -103,6 +105,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     }
 
     @Override
+    @Transactional
     public UserDTO saveUser(User user){
         UserDTO dto = null;
 

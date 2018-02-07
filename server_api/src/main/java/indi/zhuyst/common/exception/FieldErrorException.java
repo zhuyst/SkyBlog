@@ -1,6 +1,7 @@
 package indi.zhuyst.common.exception;
 
 import indi.zhuyst.common.pojo.Error;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +19,7 @@ public class FieldErrorException extends RuntimeException{
     /**
      * 字段错误列表
      */
+    @Getter
     private List<Error> errors;
 
     /**
@@ -35,9 +37,5 @@ public class FieldErrorException extends RuntimeException{
     public FieldErrorException(Collection<Error> errors){
         super(errors.toString());
         this.errors = new ArrayList<>(errors);
-    }
-
-    public List<Error> getErrors() {
-        return errors;
     }
 }
