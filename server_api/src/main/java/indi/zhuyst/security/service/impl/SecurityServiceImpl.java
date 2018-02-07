@@ -18,21 +18,41 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+/**
+ * SecurityService实现类
+ * @author zhuyst
+ */
 @Service
 @ConfigurationProperties(prefix = "skyblog.jwt")
 public class SecurityServiceImpl extends BaseService implements SecurityService{
 
+    /**
+     * username在Claims中的name
+     */
     private static final String CLAIM_USERNAME = "username";
+
+    /**
+     * role在Claims中的name
+     */
     private static final String CLAIM_ROLE = "role";
 
+    /**
+     * 密钥
+     */
     @Getter
     @Setter
     private String secret;
 
+    /**
+     * Token在Header中的Name
+     */
     @Getter
     @Setter
     private String header;
 
+    /**
+     * Token过期时间
+     */
     @Getter
     @Setter
     private Long expire;
@@ -99,6 +119,11 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
         return isTokenExpired(claims.getExpiration());
     }
 
+    /**
+     * 判断Token是否过期
+     * @param expiration 过期时间
+     * @return 是否过期
+     */
     private boolean isTokenExpired(Date expiration) {
         return expiration.before(new Date());
     }
