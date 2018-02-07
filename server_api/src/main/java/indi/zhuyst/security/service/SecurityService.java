@@ -6,9 +6,9 @@ import io.jsonwebtoken.Claims;
 
 public interface SecurityService{
 
-    AccessToken generateToken(String username);
+    AccessToken generateToken(SecurityUser user);
 
-    String getUsernameByToken(String token);
+    Integer getIDByToken(String token);
 
     SecurityUser getUserByToken(String token);
 

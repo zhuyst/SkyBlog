@@ -4,6 +4,7 @@ import indi.zhuyst.common.service.BaseService;
 import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.service.SecurityService;
+import indi.zhuyst.skyblog.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -21,8 +22,8 @@ import java.util.Date;
 @ConfigurationProperties(prefix = "skyblog.jwt")
 public class SecurityServiceImpl extends BaseService implements SecurityService{
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private static final String CLAIM_USERNAME = "username";
+    private static final String CLAIM_ROLE = "role";
 
     @Getter
     @Setter
@@ -37,14 +38,16 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
     private Long expire;
 
     @Override
-    public AccessToken generateToken(String username) {
+    public AccessToken generateToken(SecurityUser user) {
         AccessToken accessToken = new AccessToken();
 
         Date nowDate = new Date();
         Date expireDate = new Date(nowDate.getTime() + expire * 1000);
 
         String token = Jwts.builder()
-                .setSubject(username)
+                .setSubject(String.valueOf(user.getId()))
+                .claim(CLAIM_USERNAME,user.getUsername())
+                .claim(CLAIM_ROLE,user.getRole())
                 .setIssuedAt(nowDate)
                 .setExpiration(expireDate)
                 .signWith(SignatureAlgorithm.HS512, secret)
@@ -57,15 +60,21 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
     }
 
     @Override
-    public String getUsernameByToken(String token) {
+    public Integer getIDByToken(String token) {
         Claims claims = this.getClaimByToken(token);
-        return claims.getSubject();
+        return Integer.valueOf(claims.getSubject());
     }
 
     @Override
     public SecurityUser getUserByToken(String token) {
-        String username = this.getUsernameByToken(token);
-        return (SecurityUser) userDetailsService.loadUserByUsername(username);
+        Claims claims = this.getClaimByToken(token);
+
+        User user = new User();
+        user.setId(Integer.valueOf(claims.getSubject()));
+        user.setUsername(claims.get(CLAIM_USERNAME,String.class));
+        user.setRole(claims.get(CLAIM_ROLE,Integer.class));
+
+        return new SecurityUser(user);
     }
 
     @Override

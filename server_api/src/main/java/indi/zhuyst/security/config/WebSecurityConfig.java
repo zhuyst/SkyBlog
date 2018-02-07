@@ -145,7 +145,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 
             SecurityUser user = (SecurityUser) authentication.getPrincipal();
-            AccessToken token = securityService.generateToken(user.getUsername());
+            AccessToken token = securityService.generateToken(user);
             token.setUser(user);
 
             response.getWriter().write(R.ok(token).toJsonStr());
