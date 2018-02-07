@@ -5,7 +5,7 @@ const initialState = {
 };
 
 const UserReducer = (state = initialState,action) =>{
-    const { type,condition } = action;
+    const { type,result } = action;
 
     switch (type){
         case SET_LOGIN_USER:
@@ -16,7 +16,7 @@ const UserReducer = (state = initialState,action) =>{
         case UPDATE_USER_INFO_RESPONSE:
             return {
                 ...state,
-                user : condition.entity
+                user : result.entity
             };
         default:
             return state;

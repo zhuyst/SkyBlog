@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const LoginReducer = (state = initialState,action) => {
-    const {type,condition} = action;
+    const {type,result} = action;
 
     switch (type){
         case LOGIN_CLEAR:{
@@ -25,12 +25,15 @@ const LoginReducer = (state = initialState,action) => {
                 message : null
             };
 
-            if(condition.code === 200){
+            if(result.code === 200){
                 login_state.ok = true;
+            }
+            else if(result.code === 403){
+                login_state.ok = null;
             }
             else {
                 login_state.ok = false;
-                login_state.message = condition.message
+                login_state.message = result.message
             }
 
             return {
