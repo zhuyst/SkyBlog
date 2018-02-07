@@ -32,13 +32,6 @@ public interface SecurityService{
     SecurityUser getUserByToken(String token);
 
     /**
-     * 获取JWT的Claims
-     * @param token JWT
-     * @return Claims
-     */
-    Claims getClaimByToken(String token);
-
-    /**
      * 判断Token是否可用/合法
      * @param token 要判断的Token
      * @return 是否可用/合法
