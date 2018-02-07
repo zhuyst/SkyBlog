@@ -4,13 +4,17 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * 权限Token，包含过期时间以及当前用户对象
  * @author zhuyst
  */
 @Data
 @NoArgsConstructor
-public class AccessToken {
+public class AccessToken implements Serializable{
+
+    private static final long serialVersionUID = 5027023587582035877L;
 
     /**
      * AccessToken

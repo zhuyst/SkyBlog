@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.cache.annotation.Cacheable;
 
 import java.io.Serializable;
 import java.util.Arrays;
