@@ -38,13 +38,16 @@ public class TokenFilter extends OncePerRequestFilter{
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
 
-        // 有时请求会错误发送null
+        // 有时请求会错误发送null与undefined
         final String nullStr = "null";
+        final String undefinedStr = "undefined";
 
         String token = getRequestToken(request);
 
         // 如果token不存在，则直接放行，由之后的Filter拦截
-        if(StringUtils.isBlank(token) || nullStr.equals(token)) {
+        if(StringUtils.isBlank(token) ||
+                nullStr.equals(token) ||
+                undefinedStr.equals(token)) {
             chain.doFilter(request,response);
             return;
         }
