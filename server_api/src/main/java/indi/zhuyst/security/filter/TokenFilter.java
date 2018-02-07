@@ -27,18 +27,30 @@ public class TokenFilter extends OncePerRequestFilter{
     @Autowired
     private SecurityService securityService;
 
+    /**
+     * 通过获取请求中的Token来设置Spring Security的Authentication
+     * @param request 当前request，用于获取Token
+     * @param response 当前response
+     * @param chain chain
+     * @throws ServletException Servlet异常
+     * @throws IOException IO异常
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+
+        // 有时请求会错误发送null
         final String nullStr = "null";
 
         String token = getRequestToken(request);
+
+        // 如果token不存在，则直接放行，由之后的Filter拦截
         if(StringUtils.isBlank(token) || nullStr.equals(token)) {
             chain.doFilter(request,response);
             return;
         }
 
+        // 从Token中读取User，设置Authentication
         SecurityUser user = securityService.getUserByToken(token);
-
         if(user != null && SecurityUtil.getAuthentication() == null){
             UsernamePasswordAuthenticationToken authenticationToken =
                     new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
