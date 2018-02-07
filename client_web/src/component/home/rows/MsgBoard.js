@@ -3,13 +3,14 @@ import { Panel } from 'react-bootstrap'
 
 class MsgBoard extends React.Component{
     render(){
-        const title = (
-            <h3>留言板</h3>
-        );
-
         return(
-            <Panel header={title} bsStyle="primary">
-                这里是内容
+            <Panel bsStyle="primary">
+                <Panel.Heading>
+                    <Panel.Title componentClass="h3">留言板</Panel.Title>
+                </Panel.Heading>
+                <Panel.Body>
+                    这里是内容
+                </Panel.Body>
             </Panel>
         )
     }

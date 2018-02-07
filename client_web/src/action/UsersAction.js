@@ -1,7 +1,11 @@
+import * as Cookies from 'js-cookie'
 import fetch from 'isomorphic-fetch'
 import {startSubmit,stopSubmit} from 'redux-form'
 
-import {USER_API_URL, FAIL_CONDITION, _insert, checkStatus, _update} from "../Api";
+import {
+    USER_API_URL, FAIL_RESULT, _insert, checkStatus, _update, REFRESH_URL, ContentType, HttpMethod,
+    COOKIE_TOKEN
+} from "../Api";
 import {FORM_REGISTER,FORM_USERINFO} from "../Form";
 import {dispatch} from "../store/Store";
 import {login, loginResponse, setLoginModelShow, setUserInfoModelShow} from "./common/ModelAction";
@@ -21,25 +25,25 @@ export const registerUser = (user) => (dispatch) => {
     dispatch(startSubmit(FORM_REGISTER));
     return fetch(url,_insert(user))
         .then(response => checkStatus(response))
-        .then(condition => dispatch(registerUserResponse(condition)))
-        .catch(() => dispatch(registerUserResponse(FAIL_CONDITION)));
+        .then(result => dispatch(registerUserResponse(result)))
+        .catch(() => dispatch(registerUserResponse(FAIL_RESULT)));
 };
 
-const registerUserResponse = (condition) => {
-    dispatch(stopSubmit(FORM_REGISTER,condition.errors));
+const registerUserResponse = (result) => {
+    dispatch(stopSubmit(FORM_REGISTER,result.errors));
 
-    if(condition.code === 200){
+    if(result.code === 200){
         dispatch(setLoginModelShow(false));
         dispatch(success("注册成功，开始登陆"));
-        dispatch(login(condition.entity));
+        dispatch(login(result.entity));
     }
     else {
-        dispatch(error(condition.message));
+        dispatch(error(result.message));
     }
 
     return {
         type : REGISTER_USER_RESPONSE,
-        condition : condition
+        result : result
     }
 };
 
@@ -70,37 +74,43 @@ export const updateUserInfo = (user) => dispatch => {
     dispatch(startSubmit(FORM_USERINFO));
     return fetch(url,_update(user))
         .then(response => checkStatus(response))
-        .then(condition => dispatch(updateUserInfoResponse(condition)))
-        .catch(() => dispatch(updateUserInfoResponse(FAIL_CONDITION)))
+        .then(result => dispatch(updateUserInfoResponse(result)))
+        .catch(() => dispatch(updateUserInfoResponse(FAIL_RESULT)))
 };
 
-const updateUserInfoResponse = (condition) =>{
-    dispatch(stopSubmit(FORM_USERINFO,condition.errors));
+const updateUserInfoResponse = (result) =>{
+    dispatch(stopSubmit(FORM_USERINFO,result.errors));
 
-    if(condition.code === 200){
+    if(result.code === 200){
         dispatch(setUserInfoModelShow(false));
-        dispatch(setLoginUser(condition.entity));
+        dispatch(setLoginUser(result.entity));
         dispatch(info("修改个人信息成功"));
     }
     else{
-        dispatch(error(condition.message));
+        dispatch(error(result.message));
     }
 
     return {
         type : UPDATE_USER_INFO_RESPONSE,
-        condition : condition
+        result : result
     }
 };
 
 export const checkUserLoginState = () => dispatch => {
-    const url = USER_API_URL + "/public/isLogin";
+    let token = Cookies.get(COOKIE_TOKEN);
+    if(typeof(token) === "undefined"){
+        token = "";
+    }
 
-    return fetch(url,{
-        credentials: "include"
-    })
-        .then(response => checkStatus(response))
-        .then(condition => dispatch(loginResponse(condition)))
-        .catch(() => dispatch(loginResponse(FAIL_CONDITION)))
+    return fetch(REFRESH_URL,{
+            method: HttpMethod.POST,
+            headers: {
+                "Content-type": ContentType.FORM
+            },
+            body: `token=${token}`
+        }).then(response => checkStatus(response))
+        .then(result => dispatch(loginResponse(result)))
+        .catch(() => dispatch(loginResponse(FAIL_RESULT)))
 };
 
 export const setLoginUser = user => {

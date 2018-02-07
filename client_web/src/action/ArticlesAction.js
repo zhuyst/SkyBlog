@@ -16,13 +16,13 @@ export const insertArticle = article => dispatch => {
 
     return fetch(url,_insert(article))
         .then(response => checkStatus(response))
-        .then(condition => insertArticleResponse(condition))
+        .then(result => insertArticleResponse(result))
 };
 
-const insertArticleResponse = condition => {
+const insertArticleResponse = result => {
     return {
         type : INSERT_ARTICLE_RESPONSE,
-        condition : condition
+        result : result
     }
 };
 

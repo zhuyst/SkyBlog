@@ -1,7 +1,8 @@
+import * as Cookies from 'js-cookie'
 import fetch from 'isomorphic-fetch'
 import {startSubmit,stopSubmit,change} from 'redux-form'
 
-import {LOGIN_URL,LOGOUT_URL,HttpMethod,ContentType,FAIL_CONDITION,checkStatus} from "../../Api";
+import {LOGIN_URL, HttpMethod, ContentType, FAIL_RESULT, checkStatus, COOKIE_TOKEN} from "../../Api";
 import {FORM_LOGIN,FORM_USERINFO} from "../../Form";
 import {dispatch} from "../../store/Store";
 import {success,info,error} from "./NotifyAction";
@@ -45,24 +46,27 @@ export const login = (user) => (dispatch) => {
     dispatch(startSubmit(FORM_LOGIN));
     return fetch(LOGIN_URL,{
         method: HttpMethod.POST,
-        credentials: "include",
         headers: {
             "Content-type": ContentType.FORM
         },
         body: `username=${user.username}&password=${user.password}`
     }).then(response => checkStatus(response))
-        .then(condition => dispatch(loginResponse(condition)))
-        .catch(() => dispatch(loginResponse(FAIL_CONDITION)));
+        .then(result => dispatch(loginResponse(result)))
+        .catch(() => dispatch(loginResponse(FAIL_RESULT)));
 };
 
-export const loginResponse = (condition) => {
+export const loginResponse = (result) => {
     dispatch(stopSubmit(FORM_LOGIN));
 
-    if(condition.code === 200){
+    if(result.code === 200){
         dispatch(setLoginModelShow(false));
 
-        const user = condition.entity;
+        const entity = result.entity;
+
+        const user = entity.user;
         dispatch(setLoginUser(user));
+
+        Cookies.set(COOKIE_TOKEN,entity.token,{ expires: entity.expire });
 
         dispatch(change(FORM_USERINFO,"id",user.id));
         dispatch(change(FORM_USERINFO,"username",user.username));
@@ -70,22 +74,19 @@ export const loginResponse = (condition) => {
 
         dispatch(success("登陆成功"));
     }
-    else {
-        dispatch(error(condition.message));
+    else if(result.code !== 403){
+        dispatch(error(result.message));
     }
 
     return {
         type : LOGIN_RESPONSE,
-        condition : condition
+        result : result
     }
 };
 
 export const logout = () => (dispatch) =>{
-    dispatch(info("登出成功"));
+    Cookies.remove(COOKIE_TOKEN);
 
-    return fetch(LOGOUT_URL,{
-        method : HttpMethod.POST,
-        credentials: "include",
-    }).then(response => checkStatus(response))
-        .then(() => dispatch(loginClear()));
+    dispatch(info("登出成功"));
+    dispatch(loginClear());
 };

@@ -1,13 +1,17 @@
+import * as Cookies from 'js-cookie'
+
 const SERVER_BASE_URL = "http://localhost:8080";
 const API_URL = SERVER_BASE_URL + "/api";
 
-export const LOGIN_URL = SERVER_BASE_URL + "/login";
-export const LOGOUT_URL = SERVER_BASE_URL + "/logout";
+export const LOGIN_URL = SERVER_BASE_URL + "/auth/login";
+export const REFRESH_URL = SERVER_BASE_URL + "/auth/refresh";
 
 export const USER_API_URL = API_URL + "/users";
 export const ARTICLE_API_URL = API_URL + "/articles";
 export const CLASSIFY_API_URL = API_URL + "/classifies";
 export const MSG_BOARD_API_URL = API_URL + "/msg_board";
+
+export const COOKIE_TOKEN = "Token";
 
 export const ContentType = {
     JSON : "application/json;charset=UTF-8",
@@ -21,15 +25,18 @@ export const HttpMethod = {
     DELETE : "DELETE"
 };
 
-const headers = {
-    "Content-type": ContentType.JSON
+const getHeaders = () => {
+    const token = Cookies.get(COOKIE_TOKEN);
+    return {
+        "Content-type": ContentType.JSON,
+        COOKIE_TOKEN: token
+    }
 };
 
 export const _query = body => {
     return {
         method : HttpMethod.GET,
-        credentials: "include",
-        headers: headers,
+        headers: getHeaders(),
         body : JSON.stringify(body)
     }
 };
@@ -37,8 +44,7 @@ export const _query = body => {
 export const _insert = body => {
     return {
         method : HttpMethod.POST,
-        credentials: "include",
-        headers: headers,
+        headers: getHeaders(),
         body : JSON.stringify(body)
     }
 };
@@ -46,8 +52,7 @@ export const _insert = body => {
 export const _update = body => {
     return {
         method : HttpMethod.PUT,
-        credentials: "include",
-        headers: headers,
+        headers: getHeaders(),
         body : JSON.stringify(body)
     }
 };
@@ -55,8 +60,7 @@ export const _update = body => {
 export const _delete = body => {
     return {
         method : HttpMethod.DELETE,
-        credentials: "include",
-        headers: headers,
+        headers: getHeaders(),
         body : JSON.stringify(body)
     }
 };
@@ -70,7 +74,7 @@ export const checkStatus = response => {
     }
 };
 
-export const FAIL_CONDITION = {
+export const FAIL_RESULT = {
     code: 500,
     message: "网络请求失败"
 };
