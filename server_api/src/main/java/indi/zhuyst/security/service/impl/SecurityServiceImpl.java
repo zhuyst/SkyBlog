@@ -82,6 +82,7 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
 
         accessToken.setToken(token);
         accessToken.setExpire(expire);
+        accessToken.setUser(user);
 
         return accessToken;
     }

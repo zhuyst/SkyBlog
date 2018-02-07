@@ -94,7 +94,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
                 // 设置TokenFilter作为Token认证
                 .addFilterBefore(tokenFilter,UsernamePasswordAuthenticationFilter.class)
-                .cors().and()
+                
+                // 配置CORS
+                .cors()
+                    .configurationSource(corsConfigurationSource())
+                    .and()
 
                 // 设置安全拦截
                 .authorizeRequests()
@@ -125,9 +129,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
+        configuration.addAllowedOrigin("*");
         configuration.addAllowedMethod("*");
-        configuration.addAllowedHeader("*");
-        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

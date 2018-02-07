@@ -56,10 +56,11 @@ public class GlobalExceptionHandler {
 
     /**
      * 处理异常 - {@link AccessDeniedException}
+     * @param e 授权异常
      * @return 授权失败/错误结果对象
      */
     @ExceptionHandler(AccessDeniedException.class)
-    public R accessDeniedExceptionHandler(){
-        return R.error(CodeEnum.FORBIDDEN);
+    public R accessDeniedExceptionHandler(AccessDeniedException e){
+        return R.error(CodeEnum.FORBIDDEN.getCode(),e.getMessage());
     }
 }
