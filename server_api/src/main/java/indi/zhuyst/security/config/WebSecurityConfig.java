@@ -8,6 +8,7 @@ import indi.zhuyst.security.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -94,14 +95,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
                 // 设置TokenFilter作为Token认证
                 .addFilterBefore(tokenFilter,UsernamePasswordAuthenticationFilter.class)
-                
-                // 配置CORS
-                .cors()
-                    .configurationSource(corsConfigurationSource())
-                    .and()
 
                 // 设置安全拦截
                 .authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS).permitAll()
+
                 // SwaggerUI、公共接口、授权接口放行
                 .antMatchers("/api/",
                         "/api/**/public/**",
@@ -119,23 +117,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                     .successHandler(loginSuccessHandlerBean())
                     .failureHandler(loginFailureHandlerBean())
                     .permitAll();
-    }
-
-    /**
-     * Restful API，配置CORS解决跨域问题
-     * @return CORS配置
-     */
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.addAllowedOrigin("*");
-        configuration.addAllowedMethod("*");
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-
-        return source;
     }
 
     /**

@@ -1,7 +1,9 @@
 package indi.zhuyst.common.pojo;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -10,6 +12,8 @@ import java.io.Serializable;
  * @author zhuyst
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Query<E> implements Serializable{
 
     private static final long serialVersionUID = 3616619501307355095L;
