@@ -1,4 +1,5 @@
 import * as Cookies from 'js-cookie'
+import fetch from 'isomorphic-fetch'
 
 const SERVER_BASE_URL = "http://localhost:8080";
 const API_URL = SERVER_BASE_URL + "/api";
@@ -29,40 +30,42 @@ const getHeaders = () => {
     const token = Cookies.get(COOKIE_TOKEN);
     return {
         "Content-type": ContentType.JSON,
-        COOKIE_TOKEN: token
+        "Token": token
     }
 };
 
-export const _query = body => {
-    return {
+export const _query = (url,body) => {
+    url = new URL(url);
+    Object.keys(body).forEach(key => url.searchParams.append(key, body[key]));
+
+    return fetch(url,{
         method : HttpMethod.GET,
         headers: getHeaders(),
-        body : JSON.stringify(body)
-    }
+    }).then(response => checkStatus(response))
 };
 
-export const _insert = body => {
-    return {
+export const _insert = (url,body) => {
+    return fetch(url,{
         method : HttpMethod.POST,
         headers: getHeaders(),
         body : JSON.stringify(body)
-    }
+    }).then(response => checkStatus(response))
 };
 
-export const _update = body => {
-    return {
+export const _update = (url,body) => {
+    return fetch(url,{
         method : HttpMethod.PUT,
         headers: getHeaders(),
         body : JSON.stringify(body)
-    }
+    }).then(response => checkStatus(response))
 };
 
-export const _delete = body => {
-    return {
+export const _delete = (url,body) => {
+    return fetch(url,{
         method : HttpMethod.DELETE,
         headers: getHeaders(),
         body : JSON.stringify(body)
-    }
+    }).then(response => checkStatus(response))
 };
 
 export const checkStatus = response => {

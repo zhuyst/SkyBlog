@@ -10,12 +10,12 @@ class Rows extends React.Component{
     render(){
         return (
             <Row className="rows">
-                <Col md={5} mdOffset={2} sm={12}>
+                <Col md={6} mdOffset={1} sm={12}>
                     <div>
                         <Article/>
                     </div>
                 </Col>
-                <Col md={3} sm={12}>
+                <Col md={4} sm={12}>
                     <div>
                         <MsgBoard/>
                     </div>

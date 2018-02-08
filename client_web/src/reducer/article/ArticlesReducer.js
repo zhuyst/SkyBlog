@@ -1,15 +1,17 @@
-import {ARTICLE_CHANGE_PAGE} from "../../action/article/ArticlesAction";
+import {LIST_ARTICLES_RESPONSE} from "../../action/ArticlesAction";
 
 const initialState = {
-    articles_pageNum : 1
+    articles : []
 };
 
 const ArticleReducer = (state = initialState,action) => {
     switch (action.type){
-        case ARTICLE_CHANGE_PAGE :
+        case LIST_ARTICLES_RESPONSE:
+            const articles = state.articles;
+            articles.push(action.articles);
             return {
                 ...state,
-                articles_pageNum: action.articles_pageNum
+                articles:articles
             };
         default :
             return state;

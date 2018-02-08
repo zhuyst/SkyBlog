@@ -2,9 +2,12 @@ import {EDIT_CONTENT, SET_ARTICLE} from "../../action/article/ContentAction";
 
 const initialArticle = {
     id : 0,
-    title : "",
-    subTitle : "",
-    content : "#### 文章内容\n`Markdown编辑器`"
+    title : "文章标题",
+    subTitle : "文章副标题",
+    content : {
+        text: "#### 文章内容\n`Markdown编辑器`",
+        selection: null
+    }
 };
 
 const initialState = {
