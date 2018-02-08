@@ -31,7 +31,7 @@ class Content extends React.Component{
         const {editing,article,editContent} = this.props;
         const {title,subTitle,content} = article;
 
-        const markdown = (<ReactMarkdown source={content}/>);
+        const markdown = (<ReactMarkdown source={content.text}/>);
 
         let contentArea;
         let right;

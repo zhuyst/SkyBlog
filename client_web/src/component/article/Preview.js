@@ -14,23 +14,27 @@ class Preview extends React.Component{
 
         return (
                 <div className={className}>
-                    <Panel collapsible defaultExpanded>
+                    <Panel defaultExpanded>
                         <Panel.Heading>
-                            文章标题id={id}
+                            <Panel.Title toggle>
+                                文章标题id={id}
+                            </Panel.Title>
                         </Panel.Heading>
-                        <Panel.Body>
-                            <Link to={path}>
-                                <div className="preview_image">
-                                    <Image src={loading} responsive/>
-                                </div>
-                                <div className="preview_content">
-                                    <h3 className="preview_title"><Link to={path}>文章标题</Link></h3>
-                                    <p>
-                                        文章内容预览
-                                    </p>
-                                </div>
-                            </Link>
-                        </Panel.Body>
+                        <Panel.Collapse>
+                            <Panel.Body>
+                                <Link to={path}>
+                                    {/*<div className="preview_image">*/}
+                                        {/*<Image src={loading} responsive/>*/}
+                                    {/*</div>*/}
+                                    <div className="preview_content">
+                                        <h3 className="preview_title"><Link to={path}>文章标题</Link></h3>
+                                        <p>
+                                            文章内容预览
+                                        </p>
+                                    </div>
+                                </Link>
+                            </Panel.Body>
+                        </Panel.Collapse>
                     </Panel>
                 </div>
         )

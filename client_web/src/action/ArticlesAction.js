@@ -1,8 +1,7 @@
-import fetch from 'isomorphic-fetch'
-import {_insert, ARTICLE_API_URL, checkStatus, HttpMethod} from "../Api";
+import {_insert, _query, ARTICLE_API_URL, checkStatus, HttpMethod} from "../Api";
 
 export const INSERT_ARTICLE_RESPONSE = "INSERT_ARTICLE_RESPONSE";
-export const LIST_ARTICLES = "LIST_ARTICLES";
+export const LIST_ARTICLES_RESPONSE = "LIST_ARTICLES_RESPONSE";
 export const GET_ARTICLE_INFO = "GET_ARTICLE_INFO";
 export const UPDATE_ARTICLE = "UPDATE_ARTICLE";
 export const DELETE_ARTICLE  = "DELETE_ARTICLE";
@@ -14,9 +13,8 @@ export const DELETE_COMMENT = "DELETE_COMMENT";
 export const insertArticle = article => dispatch => {
     const url = ARTICLE_API_URL + "/";
 
-    return fetch(url,_insert(article))
-        .then(response => checkStatus(response))
-        .then(result => insertArticleResponse(result))
+    return _insert(url,article)
+        .then(result => dispatch(insertArticleResponse(result)))
 };
 
 const insertArticleResponse = result => {
@@ -26,11 +24,17 @@ const insertArticleResponse = result => {
     }
 };
 
-export const listArticles = (pageNum) => {
+export const listArticles = (pageNum,pageSize) => dispatch => {
+    return _query(ARTICLE_API_URL + "/public/list/", {
+            pageNum : pageNum,
+            pageSize : pageSize
+        }).then(result => dispatch(listArticlesResponse(result)))
+};
+
+const listArticlesResponse = result => {
     return {
-        type : LIST_ARTICLES,
-        url : ARTICLE_API_URL + `/public/list/${pageNum}`,
-        method : HttpMethod.GET
+        type : LIST_ARTICLES_RESPONSE,
+        articles : result.entity
     }
 };
 

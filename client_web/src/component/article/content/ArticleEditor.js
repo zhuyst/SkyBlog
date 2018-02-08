@@ -1,5 +1,5 @@
 import React from 'react'
-import Editor from 'react-md-editor'
+import ReactMde, { ReactMdeCommands } from 'react-mde';
 import {connect} from 'react-redux'
 import { Field,reduxForm,change } from 'redux-form'
 import {Col, ControlLabel, FormGroup, Row} from "react-bootstrap";
@@ -9,6 +9,10 @@ import FieldGroup from "../../common/FieldGroup";
 
 import '../../../static/css/article/editor.css'
 import {setArticle} from "../../../action/article/ContentAction";
+
+import 'react-mde/lib/styles/css/react-mde.css';
+import 'react-mde/lib/styles/css/react-mde-toolbar.css';
+import 'react-mde/lib/styles/css/react-mde-textarea.css';
 
 class ArticleEditor extends React.Component{
 
@@ -57,7 +61,9 @@ const editor = ({ input: { value, onChange }}) => {
     return (
         <FormGroup>
             <ControlLabel>文章内容</ControlLabel>
-            <Editor value={value} onChange={onChange} />
+            <ReactMde value={value}
+                      onChange={onChange}
+                      commands={ReactMdeCommands.getDefaultCommands()}/>
         </FormGroup>
     )
 };
