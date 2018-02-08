@@ -132,7 +132,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
         if(user.getUsername() != null){
             oldUser = this.getByUsername(user.getUsername());
             if(oldUser != null){
-                Error error = new Error(fieldUsername,"该用户名已被注册，请换一个用户名试试");
+                Error error = new Error(fieldUsername,"该用户名已被使用，请换一个用户名试试");
                 errors.add(error);
             }
         }
@@ -140,7 +140,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
         if(user.getNickname() != null){
             oldUser = this.getByNickName(user.getNickname());
             if(oldUser != null){
-                Error error = new Error(fieldNickname,"该昵称已被注册，请换一个昵称试试");
+                Error error = new Error(fieldNickname,"该昵称已被使用，请换一个昵称试试");
                 errors.add(error);
             }
         }
