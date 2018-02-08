@@ -1,5 +1,6 @@
 package indi.zhuyst.skyblog.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import indi.zhuyst.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -51,6 +52,7 @@ public class Article extends BaseEntity {
      */
     @ApiModelProperty("创建时间")
     @Column(name = "create_date")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
     private Date createDate;
 
     /**
@@ -58,6 +60,7 @@ public class Article extends BaseEntity {
      */
     @ApiModelProperty("更新时间")
     @Column(name = "update_date")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
     private Date updateDate;
 
     /**
