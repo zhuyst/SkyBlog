@@ -2,6 +2,7 @@ package indi.zhuyst.skyblog.entity;
 
 import indi.zhuyst.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -64,4 +65,18 @@ public class Article extends BaseEntity {
      */
     @ApiModelProperty("文章正文")
     private String content;
+
+    public Article(Integer id,String title, String subTitle,
+                   Integer classifyId, Integer authorId,
+                   Date createDate, Date updateDate,
+                   String content) {
+        this.id = id;
+        this.title = title;
+        this.subTitle = subTitle;
+        this.classifyId = classifyId;
+        this.authorId = authorId;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.content = content;
+    }
 }

@@ -1,5 +1,6 @@
 package indi.zhuyst.skyblog.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.BaseCrudServiceImpl;
@@ -13,6 +14,7 @@ import indi.zhuyst.skyblog.pojo.ArticleDTO;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.ArticleService;
 import indi.zhuyst.skyblog.service.ClassifyService;
+import indi.zhuyst.skyblog.service.MsgBoardService;
 import indi.zhuyst.skyblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,15 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
 
     @Autowired
     private ClassifyService classifyService;
+
+    @Override
+    public Article getByID(int id) {
+        if(id == MsgBoardServiceImpl.MSG_BOARD_KEY){
+            return null;
+        }
+
+        return super.getByID(id);
+    }
 
     @Override
     @Transactional
@@ -51,7 +62,9 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
 
     @Override
     public PageInfo<ArticleDTO> listArticle(Query<Article> query){
-        PageInfo<Article> pageInfo = super.listByCondition(query);
+        PageInfo<Article> pageInfo =
+                PageHelper.startPage(query.getPageNum(),query.getPageSize())
+                .doSelectPageInfo(() -> dao.selectAllWithoutID(MsgBoardServiceImpl.MSG_BOARD_KEY));
         return this.produceDTOPageInfo(pageInfo);
     }
 
@@ -69,6 +82,10 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
     }
 
     private ArticleDTO produceDTO(Article article){
+        if(article == null){
+            return null;
+        }
+
         ArticleDTO pojo = new ArticleDTO(article);
 
         UserDTO user = userService.getUserDTO(article.getAuthorId());

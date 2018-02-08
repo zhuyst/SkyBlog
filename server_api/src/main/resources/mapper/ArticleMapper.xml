@@ -42,4 +42,11 @@
     -->
     content
   </sql>
+  <select id="selectAllWithoutID" resultMap="ResultMapWithBLOBs">
+    SELECT
+      <include refid="Base_Column_List"/>,
+      <include refid="Blob_Column_List"/>
+    FROM article
+    WHERE id != #{id}
+  </select>
 </mapper>
