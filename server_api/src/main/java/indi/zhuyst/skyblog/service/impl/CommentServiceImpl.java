@@ -77,6 +77,10 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
     }
 
     private CommentDTO produceDTO(Comment comment){
+        if(comment == null){
+            return null;
+        }
+
         CommentDTO pojo = new CommentDTO(comment);
 
         UserDTO user = userService.getUserDTO(comment.getAuthorId());

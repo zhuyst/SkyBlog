@@ -151,6 +151,10 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     }
 
     private UserDTO produceDTO(User user){
+        if(user == null){
+            return null;
+        }
+
         user.setPassword(null);
         return new UserDTO(user);
     }

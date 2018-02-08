@@ -15,7 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
-    private static final int MSG_BOARD_KEY = 1;
+
+    public static final int MSG_BOARD_KEY = 1;
 
     @Autowired
     private ArticleDao articleDao;
