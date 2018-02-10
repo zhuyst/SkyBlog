@@ -11,11 +11,14 @@ import CommentList from './CommentList'
 import ArticleEditor from './ArticleEditor'
 
 import '../../../static/css/article/content.css'
+import {getArticleInfo} from "../../../action/ArticlesAction";
 
 class Content extends React.Component{
     componentWillMount(){
         document.title = `${this.props.article.title} - 博客文章 - 青云的小窝`;
+    }
 
+    componentDidMount(){
         const id = this.props.match.params.id;
         const editContent = this.props.editContent;
 
@@ -23,13 +26,14 @@ class Content extends React.Component{
             editContent(true);
         }
         else {
+            this.props.getArticle(id);
             editContent(false);
         }
     }
 
     render(){
         const {editing,article,editContent} = this.props;
-        const {title,subTitle,content} = article;
+        const {title,sub_title,content} = article;
 
         const markdown = (<ReactMarkdown source={content.text}/>);
 
@@ -47,7 +51,7 @@ class Content extends React.Component{
             );
             right = (
                 <div>
-                    <PageHeader>{title}  <small>{subTitle}</small></PageHeader>
+                    <PageHeader>{title}  <small>{sub_title}</small></PageHeader>
                     {markdown}
                 </div>
             )
@@ -55,7 +59,7 @@ class Content extends React.Component{
         else {
             contentArea = (
                 <div>
-                    <PageHeader>{title}  <small>{subTitle}</small></PageHeader>
+                    <PageHeader>{title}  <small>{sub_title}</small></PageHeader>
                     <Button bsStyle="primary" className="edit_button"
                             onClick={() => editContent(true)}>编辑</Button>
                     {markdown}
@@ -108,6 +112,9 @@ const mapDispatchToProps = dispatch => {
     return {
         editContent : editing =>{
             dispatch(editContent(editing))
+        },
+        getArticle : id =>{
+            dispatch(getArticleInfo(id))
         }
     }
 };

@@ -1,9 +1,10 @@
 import {EDIT_CONTENT, SET_ARTICLE} from "../../action/article/ContentAction";
+import {GET_ARTICLE_INFO_RESPONSE} from "../../action/ArticlesAction";
 
 const initialArticle = {
     id : 0,
     title : "文章标题",
-    subTitle : "文章副标题",
+    sub_title : "文章副标题",
     content : {
         text: "#### 文章内容\n`Markdown编辑器`",
         selection: null
@@ -26,6 +27,19 @@ const ContentReducer = (state = initialState,action) => {
             return {
                 ...state,
                 article : action.article
+            };
+        case GET_ARTICLE_INFO_RESPONSE:
+            let article = action.article;
+            article = {
+                ...article,
+                content: {
+                    text : article.content,
+                    selection: null
+                }
+            };
+            return {
+                ...state,
+                article : article
             };
         default :
             return state;
