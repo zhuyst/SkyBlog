@@ -17,11 +17,15 @@ import MsgBoard from '../msgboard/Index'
 import {checkUserLoginState} from "../../action/UsersAction";
 
 import '../../static/css/common/common.css'
+import {listArticles} from "../../action/ArticlesAction";
 
 class Index extends React.Component{
     componentWillMount(){
-        const { checkUserLoginState } = this.props;
-        checkUserLoginState();
+        this.props.checkUserLoginState();
+    }
+
+    componentDidMount(){
+        this.props.initArticles();
     }
 
     render(){
@@ -56,6 +60,9 @@ const mapDispatchToProps = dispatch => {
     return {
         checkUserLoginState : () => {
             dispatch(checkUserLoginState());
+        },
+        initArticles : () => {
+            dispatch(listArticles(1,5))
         }
     }
 };
