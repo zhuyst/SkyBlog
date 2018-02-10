@@ -1,21 +1,28 @@
 import {LIST_ARTICLES_RESPONSE} from "../../action/ArticlesAction";
 
 const initialState = {
-    articles : []
+    list : [],
+    pageNum : 1,
+    pages : 0,
+    total : 0
 };
 
-const ArticleReducer = (state = initialState,action) => {
+const ArticlesReducer = (state = initialState,action) => {
     switch (action.type){
         case LIST_ARTICLES_RESPONSE:
-            const articles = state.articles;
-            articles.push(action.articles);
+            const page = action.page;
+            const newList = state.list.concat(page.list);
+
             return {
                 ...state,
-                articles:articles
+                list : newList,
+                pageNum : page.page_num,
+                pages : page.pages,
+                total : page.total
             };
         default :
             return state;
     }
 };
 
-export default ArticleReducer
+export default ArticlesReducer

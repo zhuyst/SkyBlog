@@ -12,12 +12,25 @@ class Articles extends React.Component{
     }
 
     render(){
+        const list = this.props.list;
+        const articles = [];
+        list.forEach((article,i) => {
+            if(i === 0){
+                articles.push(
+                    <Preview article={article} isFirst={true}/>
+                )
+            }
+            else{
+                articles.push (
+                    <Preview article={article}/>
+                )
+            }
+        });
+
         return(
             <div>
                 <PanelGroup id="articles">
-                    <Preview id={1} isFirst={true}/>
-                    <Preview id={2}/>
-                    <Preview id={3}/>
+                    {articles}
                 </PanelGroup>
             </div>
         )
@@ -26,7 +39,7 @@ class Articles extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        articles : state.articles.articles
+        list : state.articles.list
     }
 };
 

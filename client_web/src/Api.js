@@ -1,6 +1,9 @@
 import * as Cookies from 'js-cookie'
 import fetch from 'isomorphic-fetch'
 
+import {dispatch} from "./store/Store";
+import {error} from "./action/common/NotifyAction";
+
 const SERVER_BASE_URL = "http://localhost:8080";
 const API_URL = SERVER_BASE_URL + "/api";
 
@@ -42,6 +45,7 @@ export const _query = (url,body) => {
         method : HttpMethod.GET,
         headers: getHeaders(),
     }).then(response => checkStatus(response))
+        .catch(() => dispatch(error("未知错误，请联系管理员")))
 };
 
 export const _insert = (url,body) => {
@@ -50,6 +54,7 @@ export const _insert = (url,body) => {
         headers: getHeaders(),
         body : JSON.stringify(body)
     }).then(response => checkStatus(response))
+        .catch(() => dispatch(error("未知错误，请联系管理员")))
 };
 
 export const _update = (url,body) => {
@@ -58,6 +63,7 @@ export const _update = (url,body) => {
         headers: getHeaders(),
         body : JSON.stringify(body)
     }).then(response => checkStatus(response))
+        .catch(() => dispatch(error("未知错误，请联系管理员")))
 };
 
 export const _delete = (url,body) => {
@@ -66,6 +72,7 @@ export const _delete = (url,body) => {
         headers: getHeaders(),
         body : JSON.stringify(body)
     }).then(response => checkStatus(response))
+        .catch(() => dispatch(error("未知错误，请联系管理员")))
 };
 
 export const checkStatus = response => {
