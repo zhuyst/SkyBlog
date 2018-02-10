@@ -1,8 +1,8 @@
-import {_insert, _query, ARTICLE_API_URL, checkStatus, HttpMethod} from "../Api";
+import {_insert, _query, ARTICLE_API_URL, HttpMethod} from "../Api";
 
 export const INSERT_ARTICLE_RESPONSE = "INSERT_ARTICLE_RESPONSE";
 export const LIST_ARTICLES_RESPONSE = "LIST_ARTICLES_RESPONSE";
-export const GET_ARTICLE_INFO = "GET_ARTICLE_INFO";
+export const GET_ARTICLE_INFO_RESPONSE = "GET_ARTICLE_INFO_RESPONSE";
 export const UPDATE_ARTICLE = "UPDATE_ARTICLE";
 export const DELETE_ARTICLE  = "DELETE_ARTICLE";
 
@@ -38,11 +38,16 @@ const listArticlesResponse = result => {
     }
 };
 
-export const getArticleInfo = (id) => {
+export const getArticleInfo = id => dispatch => {
+    const url = ARTICLE_API_URL + `/public/${id}`;
+    return _query(url)
+        .then(result => dispatch(getArticleInfoResponse(result)))
+};
+
+const getArticleInfoResponse = result => {
     return {
-        type : GET_ARTICLE_INFO,
-        url : ARTICLE_API_URL + `/public/${id}`,
-        method : HttpMethod.GET
+        type : GET_ARTICLE_INFO_RESPONSE,
+        article : result.entity
     }
 };
 

@@ -33,7 +33,7 @@ class ArticleEditor extends React.Component{
                         placeholder="请输入文章标题"
                     />
                     <FieldGroup
-                        name="subTitle"
+                        name="sub_title"
                         type="text"
                         label="文章副标题"
                         placeholder="请输入文章副标题"
@@ -108,7 +108,7 @@ const mapDispatchToProps = dispatch => {
     return {
         setArticleForm : (article) => {
             dispatch(change(FORM_ARTICLE,"title",article.title));
-            dispatch(change(FORM_ARTICLE,"subTitle",article.subTitle));
+            dispatch(change(FORM_ARTICLE,"sub_title",article.sub_title));
             dispatch(change(FORM_ARTICLE,"content",article.content));
         }
     }

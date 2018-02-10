@@ -38,8 +38,10 @@ const getHeaders = () => {
 };
 
 export const _query = (url,body) => {
-    url = new URL(url);
-    Object.keys(body).forEach(key => url.searchParams.append(key, body[key]));
+    if(typeof(body) != "undefined" || body != null){
+        url = new URL(url);
+        Object.keys(body).forEach(key => url.searchParams.append(key, body[key]));
+    }
 
     return fetch(url,{
         method : HttpMethod.GET,
