@@ -43,38 +43,38 @@ export const _query = (url,body) => {
         Object.keys(body).forEach(key => url.searchParams.append(key, body[key]));
     }
 
-    return fetch(url,{
+    const promise = fetch(url,{
         method : HttpMethod.GET,
         headers: getHeaders(),
-    }).then(response => checkStatus(response))
-        .catch(() => dispatch(error("未知错误，请联系管理员")))
+    });
+    return handleFetch(promise);
 };
 
 export const _insert = (url,body) => {
-    return fetch(url,{
+    const promise = fetch(url,{
         method : HttpMethod.POST,
         headers: getHeaders(),
         body : JSON.stringify(body)
-    }).then(response => checkStatus(response))
-        .catch(() => dispatch(error("未知错误，请联系管理员")))
+    });
+    return handleFetch(promise);
 };
 
 export const _update = (url,body) => {
-    return fetch(url,{
+    const promise = fetch(url,{
         method : HttpMethod.PUT,
         headers: getHeaders(),
         body : JSON.stringify(body)
-    }).then(response => checkStatus(response))
-        .catch(() => dispatch(error("未知错误，请联系管理员")))
+    });
+    return handleFetch(promise);
 };
 
 export const _delete = (url,body) => {
-    return fetch(url,{
+    const promise = fetch(url,{
         method : HttpMethod.DELETE,
         headers: getHeaders(),
         body : JSON.stringify(body)
-    }).then(response => checkStatus(response))
-        .catch(() => dispatch(error("未知错误，请联系管理员")))
+    });
+    return handleFetch(promise);
 };
 
 export const checkStatus = response => {
@@ -84,6 +84,12 @@ export const checkStatus = response => {
     else {
         throw new Error();
     }
+};
+
+const handleFetch = promise => {
+    return promise
+        .then(response => checkStatus(response))
+        .catch(() => dispatch(error("未知错误，请联系管理员")))
 };
 
 export const FAIL_RESULT = {
