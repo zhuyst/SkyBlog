@@ -19,6 +19,8 @@ import java.util.Date;
 @NoArgsConstructor
 public class Comment extends BaseEntity {
 
+    private static final long serialVersionUID = -6237119613422043750L;
+
     /**
      * 评论正文
      */
@@ -27,6 +29,7 @@ public class Comment extends BaseEntity {
 
     /**
      * 文章ID
+     * @see Article
      */
     @ApiModelProperty("文章ID")
     @Column(name = "article_id")
@@ -34,6 +37,7 @@ public class Comment extends BaseEntity {
 
     /**
      * 作者ID
+     * @see User
      */
     @ApiModelProperty("作者ID")
     @Column(name = "author_id")
@@ -41,6 +45,7 @@ public class Comment extends BaseEntity {
 
     /**
      * 上级评论ID
+     * @see Comment
      */
     @ApiModelProperty("上级评论ID")
     @Column(name = "previous_comment_id")

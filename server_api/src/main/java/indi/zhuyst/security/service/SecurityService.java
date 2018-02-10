@@ -2,7 +2,6 @@ package indi.zhuyst.security.service;
 
 import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.pojo.SecurityUser;
-import io.jsonwebtoken.Claims;
 
 /**
  * Spring Security相关服务接口

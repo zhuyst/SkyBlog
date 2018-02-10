@@ -17,6 +17,8 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 public class User extends BaseEntity {
 
+    private static final long serialVersionUID = 7113965213256370649L;
+
     /**
      * 用户名
      */

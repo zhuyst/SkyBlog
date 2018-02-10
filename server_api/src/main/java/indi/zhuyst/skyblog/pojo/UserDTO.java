@@ -4,15 +4,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import indi.zhuyst.security.enums.RoleEnum;
 import indi.zhuyst.skyblog.entity.User;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.beans.BeanUtils;
 
 /**
  * 用户DTO，包含角色枚举类
  * @author zhuyst
  */
+@ToString
+@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
 public class UserDTO extends User {
+
+    private static final long serialVersionUID = -733620414805243891L;
 
     /**
      * 角色枚举类，通过{@link #role}获取

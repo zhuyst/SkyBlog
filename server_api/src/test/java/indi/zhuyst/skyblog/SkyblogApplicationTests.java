@@ -1,7 +1,6 @@
 package indi.zhuyst.skyblog;
 
 import indi.zhuyst.security.pojo.SecurityUser;
-import indi.zhuyst.security.util.SecurityUtil;
 import indi.zhuyst.skyblog.entity.Article;
 import indi.zhuyst.skyblog.entity.User;
 import indi.zhuyst.skyblog.service.ArticleService;
