@@ -7,22 +7,18 @@ import {listArticles} from "../../action/ArticlesAction";
 
 class Articles extends React.Component{
 
-    componentDidMount(){
-        this.props.listArticles(1);
-    }
-
     render(){
         const list = this.props.list;
         const articles = [];
         list.forEach((article,i) => {
             if(i === 0){
                 articles.push(
-                    <Preview article={article} isFirst={true}/>
+                    <Preview key={article.id} article={article} isFirst={true}/>
                 )
             }
             else{
                 articles.push (
-                    <Preview article={article}/>
+                    <Preview key={article.id} article={article}/>
                 )
             }
         });
