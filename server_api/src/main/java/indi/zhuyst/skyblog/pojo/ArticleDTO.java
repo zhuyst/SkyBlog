@@ -17,14 +17,18 @@ import org.springframework.beans.BeanUtils;
 @EqualsAndHashCode(callSuper = false)
 public class ArticleDTO extends Article{
 
+    private static final long serialVersionUID = -1201642195559990379L;
+
     /**
      * 分类对象
+     * @see #classifyId
      */
     @ApiModelProperty("分类对象")
     private Classify classify;
 
     /**
      * 作者对象
+     * @see #authorId
      */
     @ApiModelProperty("作者对象")
     private UserDTO author;

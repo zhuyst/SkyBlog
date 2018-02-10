@@ -5,6 +5,7 @@ import indi.zhuyst.skyblog.entity.User;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,6 +18,7 @@ import java.util.List;
  * 用户权限对象
  * @author zhuyst
  */
+@ToString
 public class SecurityUser extends UserDTO implements UserDetails, CredentialsContainer {
 
     private static final long serialVersionUID = -5625371204361074651L;

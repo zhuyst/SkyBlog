@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -20,6 +21,7 @@ import java.util.Map;
  * @author zhuyst
  */
 @NoArgsConstructor
+@ToString
 public class R<T> implements Serializable{
 
     private static final long serialVersionUID = -3712751146584906976L;

@@ -3,7 +3,6 @@ package indi.zhuyst.skyblog.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import indi.zhuyst.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -20,6 +19,8 @@ import java.util.Date;
 @NoArgsConstructor
 public class Article extends BaseEntity {
 
+    private static final long serialVersionUID = 8343236688927410161L;
+
     /**
      * 文章标题
      */
@@ -35,6 +36,7 @@ public class Article extends BaseEntity {
 
     /**
      * 分类ID
+     * @see Classify
      */
     @ApiModelProperty("分类ID")
     @Column(name = "classify_id")
@@ -42,6 +44,7 @@ public class Article extends BaseEntity {
 
     /**
      * 作者ID
+     * @see User
      */
     @ApiModelProperty("作者ID")
     @Column(name = "author_id")

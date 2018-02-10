@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Classify extends BaseEntity {
 
+    private static final long serialVersionUID = 6077264447508816892L;
+
     /**
      * 文章名
      */

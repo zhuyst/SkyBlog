@@ -16,14 +16,18 @@ import org.springframework.beans.BeanUtils;
 @EqualsAndHashCode(callSuper = false)
 public class CommentDTO extends Comment{
 
+    private static final long serialVersionUID = -8051478888596801720L;
+
     /**
      * 作者对象
+     * @see #authorId
      */
     @ApiModelProperty("作者对象")
     private UserDTO author;
 
     /**
      * 上级评论对象
+     * @see #previousCommentId
      */
     @ApiModelProperty("上级评论对象")
     private Comment previousComment;
