@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Servlet相关工具类
  */
-public class ServletUtil {
+public class ServletUtils {
 
     /**
      * 获取当前线程的HttpServletRequest

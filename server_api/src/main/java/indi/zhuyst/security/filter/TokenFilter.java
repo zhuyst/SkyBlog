@@ -2,7 +2,7 @@ package indi.zhuyst.security.filter;
 
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.service.SecurityService;
-import indi.zhuyst.security.util.SecurityUtil;
+import indi.zhuyst.security.util.SecurityUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -54,7 +54,7 @@ public class TokenFilter extends OncePerRequestFilter{
 
         // 从Token中读取User，设置Authentication
         SecurityUser user = securityService.getUserByToken(token);
-        if(user != null && SecurityUtil.getAuthentication() == null){
+        if(user != null && SecurityUtils.getAuthentication() == null){
             UsernamePasswordAuthenticationToken authenticationToken =
                     new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
             authenticationToken.setDetails(new WebAuthenticationDetails(request));

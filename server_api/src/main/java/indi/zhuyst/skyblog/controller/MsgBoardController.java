@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.R;
-import indi.zhuyst.security.util.SecurityUtil;
+import indi.zhuyst.security.util.SecurityUtils;
 import indi.zhuyst.skyblog.entity.Comment;
 import indi.zhuyst.skyblog.entity.User;
 import indi.zhuyst.skyblog.pojo.CommentDTO;
@@ -37,7 +37,7 @@ public class MsgBoardController extends BaseController{
     @ApiOperation(value = "新增留言")
     @PreAuthorize("isAuthenticated()")
     public R<CommentDTO> insertMsg(@ApiParam("留言对象") @Valid @RequestBody Comment comment){
-        User user = SecurityUtil.getUser();
+        User user = SecurityUtils.getUser();
         comment.setAuthorId(user.getId());
 
         CommentDTO pojo = msgBoardService.insertMsg(comment);
