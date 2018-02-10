@@ -9,7 +9,7 @@ import java.io.IOException;
  * Json工具类
  * @author zhuyst
  */
-public class JsonUtil {
+public class JsonUtils {
 
     /**
      * Jackson Mapper

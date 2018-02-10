@@ -1,6 +1,7 @@
 package indi.zhuyst.common.util;
 
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * 分页工具类
  * @author zhuyst
  */
-public class PageUtil {
+public class PageUtils {
 
     /**
      * 拷贝分页对象信息到新的分页对象当中
@@ -18,13 +19,9 @@ public class PageUtil {
      * @return 拷贝后的分页对象
      */
     public static <T> PageInfo<T> copyNewInfo(PageInfo pageInfo, List<T> list){
-        PageInfo<T> returnPageInfo = new PageInfo<>(list);
-
-        returnPageInfo.setPages(pageInfo.getPages());
-        returnPageInfo.setPageSize(pageInfo.getPageSize());
-        returnPageInfo.setTotal(pageInfo.getTotal());
-        returnPageInfo.setPageNum(pageInfo.getPageNum());
-
+        PageInfo<T> returnPageInfo = new PageInfo<>();
+        BeanUtils.copyProperties(pageInfo,returnPageInfo,"list");
+        returnPageInfo.setList(list);
         return returnPageInfo;
     }
 }

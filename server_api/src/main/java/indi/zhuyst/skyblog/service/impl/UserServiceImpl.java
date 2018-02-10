@@ -5,7 +5,7 @@ import indi.zhuyst.common.exception.FieldErrorException;
 import indi.zhuyst.common.pojo.Error;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.BaseCrudServiceImpl;
-import indi.zhuyst.common.util.PageUtil;
+import indi.zhuyst.common.util.PageUtils;
 import indi.zhuyst.security.enums.RoleEnum;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.skyblog.dao.UserDao;
@@ -169,7 +169,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
             pojoList.add(pojo);
         }
 
-        return PageUtil.copyNewInfo(pageInfo,pojoList);
+        return PageUtils.copyNewInfo(pageInfo,pojoList);
     }
 
     @Override

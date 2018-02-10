@@ -2,7 +2,7 @@ package indi.zhuyst.common.controller;
 
 import indi.zhuyst.common.pojo.R;
 import indi.zhuyst.security.pojo.SecurityUser;
-import indi.zhuyst.security.util.SecurityUtil;
+import indi.zhuyst.security.util.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
@@ -62,7 +62,7 @@ public abstract class BaseController {
      * @return 用户对象
      */
     protected SecurityUser getUser(){
-        return SecurityUtil.getUser();
+        return SecurityUtils.getUser();
     }
 
     /**

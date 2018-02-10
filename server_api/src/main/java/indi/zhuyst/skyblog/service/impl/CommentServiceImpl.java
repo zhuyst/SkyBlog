@@ -3,8 +3,8 @@ package indi.zhuyst.skyblog.service.impl;
 import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.BaseCrudServiceImpl;
-import indi.zhuyst.common.util.PageUtil;
-import indi.zhuyst.security.util.SecurityUtil;
+import indi.zhuyst.common.util.PageUtils;
+import indi.zhuyst.security.util.SecurityUtils;
 import indi.zhuyst.skyblog.dao.CommentDao;
 import indi.zhuyst.skyblog.entity.Comment;
 import indi.zhuyst.skyblog.entity.User;
@@ -38,7 +38,7 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
 
         comment.setCreateDate(new Date());
 
-        User user = SecurityUtil.getUser();
+        User user = SecurityUtils.getUser();
         comment.setAuthorId(user.getId());
 
         return super.save(comment);
@@ -73,7 +73,7 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
             pojoList.add(pojo);
         }
 
-        return PageUtil.copyNewInfo(pageInfo,pojoList);
+        return PageUtils.copyNewInfo(pageInfo,pojoList);
     }
 
     private CommentDTO produceDTO(Comment comment){

@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * Spring Security相关工具类
  * @author zhuyst
  */
-public class SecurityUtil {
+public class SecurityUtils {
 
     /**
      * 获取当前请求的Authentication

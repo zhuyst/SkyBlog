@@ -2,7 +2,7 @@ package indi.zhuyst.common.pojo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import indi.zhuyst.common.enums.CodeEnum;
-import indi.zhuyst.common.util.JsonUtil;
+import indi.zhuyst.common.util.JsonUtils;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -189,7 +189,7 @@ public class R<T> implements Serializable{
      */
     public String toJsonStr(){
         try {
-            return JsonUtil.toJsonString(this);
+            return JsonUtils.toJsonString(this);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
