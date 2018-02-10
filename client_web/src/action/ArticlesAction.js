@@ -34,7 +34,7 @@ export const listArticles = (pageNum,pageSize) => dispatch => {
 const listArticlesResponse = result => {
     return {
         type : LIST_ARTICLES_RESPONSE,
-        articles : result.entity
+        page : result.entity
     }
 };
 

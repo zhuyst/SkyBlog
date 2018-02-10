@@ -1,13 +1,13 @@
 import React from 'react'
-import {Image, Panel} from "react-bootstrap";
+import {Panel} from "react-bootstrap";
 import { Link } from "react-router-dom";
-
-import loading from '../../static/images/loading.gif'
 
 class Preview extends React.Component{
 
     render(){
-        const id = this.props.id;
+        const article = this.props.article;
+        const id = article.id;
+
         const path = `/article/${id}`;
 
         let className = this.props.isFirst ? "preview preview_first" : "preview";
@@ -17,20 +17,17 @@ class Preview extends React.Component{
                     <Panel defaultExpanded>
                         <Panel.Heading>
                             <Panel.Title toggle>
-                                文章标题id={id}
+                                {article.title}
                             </Panel.Title>
                         </Panel.Heading>
                         <Panel.Collapse>
                             <Panel.Body>
                                 <Link to={path}>
-                                    {/*<div className="preview_image">*/}
-                                        {/*<Image src={loading} responsive/>*/}
-                                    {/*</div>*/}
                                     <div className="preview_content">
-                                        <h3 className="preview_title"><Link to={path}>文章标题</Link></h3>
-                                        <p>
-                                            文章内容预览
-                                        </p>
+                                        <h3 className="preview_title">{article.title}</h3>
+                                        <p className="preview_sub_title">{article.sub_title}</p>
+                                        <p className="preview_preview">{article.content}</p>
+                                        <p className="preview_date">发布时间 : {article.create_date}</p>
                                     </div>
                                 </Link>
                             </Panel.Body>
