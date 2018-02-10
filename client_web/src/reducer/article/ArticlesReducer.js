@@ -2,7 +2,7 @@ import {LIST_ARTICLES_RESPONSE} from "../../action/ArticlesAction";
 
 const initialState = {
     list : [],
-    pageNum : 1,
+    page_num : 1,
     pages : 0,
     total : 0
 };
@@ -16,7 +16,7 @@ const ArticlesReducer = (state = initialState,action) => {
             return {
                 ...state,
                 list : newList,
-                pageNum : page.page_num,
+                page_num : page.page_num,
                 pages : page.pages,
                 total : page.total
             };
