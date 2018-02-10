@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {Badge, Button, Col, ListGroup,
     ListGroupItem, Well} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
@@ -19,7 +20,7 @@ class Navigation extends React.Component{
                 </LinkContainer>
 
                 <ListGroup>
-                    <ListGroupItem href="#" active>所有文章<Badge>42</Badge></ListGroupItem>
+                    <ListGroupItem href="#" active>所有文章<Badge>{this.props.total}</Badge></ListGroupItem>
                 </ListGroup>
 
                 <ListGroup>
@@ -44,4 +45,15 @@ class Navigation extends React.Component{
     }
 }
 
-export default Navigation
+const mapStateToProps = state => {
+    return {
+        total : state.articles.total
+    }
+};
+
+const NavigationContainer = connect(
+    mapStateToProps,
+    null
+)(Navigation);
+
+export default NavigationContainer

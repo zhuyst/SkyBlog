@@ -65,6 +65,25 @@
     font-weight: bold;
 }
 
+.pager{
+    text-align: center;
+    font-weight: bolder;
+}
+
+.more_articles :hover{
+    background-color: #faebcc;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.more_articles_left{
+    float: left;
+}
+
+.more_articles_right{
+    float: right;
+}
+
 .navigation_title{
     margin: 20px auto 20px auto;
     padding-bottom: 9px;
