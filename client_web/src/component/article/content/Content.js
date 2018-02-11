@@ -1,5 +1,5 @@
 import React from 'react'
-import {Breadcrumb, Button, Col, PageHeader, Row} from "react-bootstrap";
+import {Breadcrumb, Button, ButtonGroup, Col, PageHeader, Row} from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
 import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
@@ -11,7 +11,7 @@ import CommentList from './CommentList'
 import ArticleEditor from './ArticleEditor'
 
 import '../../../static/css/article/content.css'
-import {getArticleInfo} from "../../../action/ArticlesAction";
+import {deleteArticle, getArticleInfo} from "../../../action/ArticlesAction";
 import {initialArticle} from "../../../reducer/article/ContentReducer";
 
 class Content extends React.Component{
@@ -34,7 +34,8 @@ class Content extends React.Component{
     }
 
     render(){
-        const {editing,article,editContent} = this.props;
+        const {editing,article,
+            editContent,deleteArticle} = this.props;
         const {title,sub_title,content} = article;
 
         const markdown = (<ReactMarkdown source={content.text}/>);
@@ -56,8 +57,12 @@ class Content extends React.Component{
             contentArea = (
                 <div>
                     <PageHeader>{title}  <small>{sub_title}</small></PageHeader>
-                    <Button bsStyle="primary" className="edit_button"
-                            onClick={() => editContent(true)}>编辑</Button>
+                    <ButtonGroup>
+                        <Button bsStyle="primary" className="edit_button"
+                                onClick={() => editContent(true)}>编辑</Button>
+                        <Button bsStyle="danger"
+                                onClick={() => deleteArticle(article.id)}>删除</Button>
+                    </ButtonGroup>
                     {markdown}
                 </div>
             );
@@ -114,6 +119,9 @@ const mapDispatchToProps = dispatch => {
         },
         setArticle : article =>{
             dispatch(setArticle(article))
+        },
+        deleteArticle : id => {
+            dispatch(deleteArticle(id))
         }
     }
 };
