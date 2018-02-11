@@ -13,7 +13,7 @@ import {editContent, setArticle} from "../../../action/article/ContentAction";
 import 'react-mde/lib/styles/css/react-mde.css';
 import 'react-mde/lib/styles/css/react-mde-toolbar.css';
 import 'react-mde/lib/styles/css/react-mde-textarea.css';
-import {insertArticle, listArticles, updateArticle} from "../../../action/ArticlesAction";
+import {deleteArticle, insertArticle, updateArticle} from "../../../action/ArticlesAction";
 
 class ArticleEditor extends React.Component{
 
@@ -23,7 +23,10 @@ class ArticleEditor extends React.Component{
     }
 
     render(){
-        const {submitting,handleSubmit,editContent} = this.props;
+        const {submitting,handleSubmit,
+            editContent,deleteArticle} = this.props;
+
+        const id = this.props.article.id;
         return (
             <div>
                 <ButtonGroup>
@@ -34,6 +37,8 @@ class ArticleEditor extends React.Component{
                                 handleSubmit();
                                 editContent(false)
                             }}>保存并退出</Button>
+                    <Button disabled={submitting} bsStyle="danger"
+                            onClick={() => deleteArticle(id)}>删除</Button>
                 </ButtonGroup>
                 <div className="editor">
                     <form>
@@ -136,11 +141,14 @@ const mapDispatchToProps = dispatch => {
         editContent : editing =>{
             dispatch(editContent(editing))
         },
-        setArticleForm : (article) => {
+        setArticleForm : article => {
             dispatch(change(FORM_ARTICLE,"id",article.id));
             dispatch(change(FORM_ARTICLE,"title",article.title));
             dispatch(change(FORM_ARTICLE,"sub_title",article.sub_title));
             dispatch(change(FORM_ARTICLE,"content",article.content));
+        },
+        deleteArticle : id => {
+            dispatch(deleteArticle(id))
         }
     }
 };

@@ -1,4 +1,8 @@
+import {startSubmit,stopSubmit} from 'redux-form'
+
 import {_delete, _insert, _query, _update, ARTICLE_API_URL, HttpMethod} from "../Api";
+import {error, info} from "./common/NotifyAction";
+import {FORM_ARTICLE} from "../Form";
 
 export const LIST_ARTICLES_RESPONSE = "LIST_ARTICLES_RESPONSE";
 export const GET_ARTICLE_INFO_RESPONSE = "GET_ARTICLE_INFO_RESPONSE";
@@ -12,16 +16,28 @@ export const LIST_COMMENTS = "LIST_COMMENTS";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 
 export const insertArticle = article => dispatch => {
+    dispatch(startSubmit(FORM_ARTICLE));
+
     const url = ARTICLE_API_URL + "/";
     return _insert(url,article)
-        .then(result => dispatch(insertArticleResponse(result)))
+        .then(result => {
+            dispatch(stopSubmit(FORM_ARTICLE,result.errors));
+
+            if(result.code === 200){
+                dispatch(info("新增文章成功"));
+                dispatch(insertArticleResponse(result))
+            }
+            else {
+                dispatch(error(result.message));
+            }
+        })
         .then(() => dispatch(listArticles(1,5)))
 };
 
 const insertArticleResponse = result => {
     return {
         type : INSERT_ARTICLE_RESPONSE,
-        result : result
+        article : result.entity
     }
 };
 
@@ -53,10 +69,21 @@ const getArticleInfoResponse = result => {
 };
 
 export const updateArticle = article => dispatch =>{
+    dispatch(startSubmit(FORM_ARTICLE));
+
     const url = ARTICLE_API_URL + `/${article.id}`;
     return _update(url,article)
-        .then(result => dispatch(updateArticleResponse(result)))
-        .then(() => dispatch(listArticles(1,5)))
+        .then(result => {
+            dispatch(stopSubmit(FORM_ARTICLE,result.errors));
+
+            if(result.code === 200){
+                dispatch(info("更新文章成功"));
+                dispatch(updateArticleResponse(result))
+            }
+            else {
+                dispatch(error(result.message));
+            }
+        }).then(() => dispatch(listArticles(1,5)))
 };
 
 const updateArticleResponse = result =>{
@@ -67,10 +94,21 @@ const updateArticleResponse = result =>{
 };
 
 export const deleteArticle = id => dispatch => {
+    dispatch(startSubmit(FORM_ARTICLE));
+
     const url = ARTICLE_API_URL + `/${id}`;
     return _delete(url)
-        .then(result => dispatch(deleteArticleResponse(result)))
-        .then(() => dispatch(listArticles(1,5)))
+        .then(result => {
+            dispatch(stopSubmit(FORM_ARTICLE,result.errors));
+
+            if(result.code === 200){
+                dispatch(info("删除文章成功"));
+                dispatch(deleteArticleResponse(result))
+            }
+            else {
+                dispatch(error(result.message));
+            }
+        }).then(() => dispatch(listArticles(1,5)))
 };
 
 const deleteArticleResponse = result => {
