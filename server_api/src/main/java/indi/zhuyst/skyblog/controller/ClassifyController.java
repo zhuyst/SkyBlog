@@ -33,6 +33,7 @@ public class ClassifyController extends BaseController{
     @ApiOperation(value = "新增分类")
     @PreAuthorize("isAuthenticated()")
     public R<List<Classify>> insertClassify(@ApiParam("分类对象") @Valid @RequestBody Classify classify){
+        classify.setId(null);
         List<Classify> list = classifyService.saveClassify(classify);
         return produceResult(list,"新增分类失败");
     }

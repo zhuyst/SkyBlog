@@ -37,6 +37,8 @@ public class MsgBoardController extends BaseController{
     @ApiOperation(value = "新增留言")
     @PreAuthorize("isAuthenticated()")
     public R<CommentDTO> insertMsg(@ApiParam("留言对象") @Valid @RequestBody Comment comment){
+        comment.setId(null);
+
         User user = SecurityUtils.getUser();
         comment.setAuthorId(user.getId());
 
