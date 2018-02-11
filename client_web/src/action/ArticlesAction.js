@@ -27,12 +27,19 @@ export const insertArticle = article => dispatch => {
             if(result.code === 200){
                 dispatch(success("新增文章成功"));
                 dispatch(insertArticleResponse(result));
-                dispatch(replace(`/article/${result.entity.id}`))
             }
             else {
                 dispatch(error(result.message));
             }
-        }).then(() => dispatch(listArticles(1,5)))
+            return result;
+        }).then(result => {
+            dispatch(listArticles(1,5));
+            return result;
+        }).then(result => {
+            if(result.code === 200){
+                dispatch(replace(`/article/${result.entity.id}`))
+            }
+        })
 };
 
 const insertArticleResponse = result => {
