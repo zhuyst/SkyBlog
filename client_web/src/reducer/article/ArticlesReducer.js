@@ -30,7 +30,6 @@ const ArticlesReducer = (state = initialState,action) => {
                     // 所以只需要扫描这个范围进行去重即可
                     for(let j = stateList.length - page.page_size;
                         j < stateList.length;j++){
-                        console.log(i + "--" + j);
                         if(resultList[i].id === stateList[j].id){
                             isRepeat = true;
                             break;
