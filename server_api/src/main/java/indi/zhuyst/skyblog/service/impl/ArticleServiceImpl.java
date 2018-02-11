@@ -63,7 +63,8 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
     public PageInfo<ArticleDTO> listArticle(Query<Article> query){
         PageInfo<Article> pageInfo =
                 PageHelper.startPage(query.getPageNum(),query.getPageSize())
-                .doSelectPageInfo(() -> dao.selectAllWithoutID(MsgBoardServiceImpl.MSG_BOARD_KEY));
+                        .setOrderBy("update_date desc")
+                        .doSelectPageInfo(() -> dao.selectAllWithoutID(MsgBoardServiceImpl.MSG_BOARD_KEY));
         return this.produceDTOPageInfo(pageInfo);
     }
 

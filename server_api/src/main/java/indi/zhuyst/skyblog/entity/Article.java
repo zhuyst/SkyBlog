@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.OrderBy;
 import java.util.Date;
 
 /**
@@ -63,6 +64,7 @@ public class Article extends BaseEntity {
      */
     @ApiModelProperty("更新时间")
     @Column(name = "update_date")
+    @OrderBy("desc")
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
     private Date updateDate;
 
