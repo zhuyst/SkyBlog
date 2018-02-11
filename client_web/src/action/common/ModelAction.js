@@ -53,8 +53,7 @@ export const login = (user) => (dispatch) => {
         .then(result => {
             dispatch(stopSubmit(FORM_LOGIN));
             afterLogin(result,dispatch);
-            dispatch(loginResponse(result))
-        }).catch(() => dispatch(loginResponse(FAIL_RESULT)));
+        }).catch(() => dispatch(afterLogin(FAIL_RESULT,dispatch)));
 };
 
 export const loginResponse = (result) => {

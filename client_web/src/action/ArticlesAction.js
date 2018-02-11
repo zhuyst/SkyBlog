@@ -1,4 +1,5 @@
 import {startSubmit, stopSubmit} from 'redux-form'
+import {replace} from 'react-router-redux'
 
 import {_delete, _insert, _query, _update, ARTICLE_API_URL, HttpMethod} from "../Api";
 import {error, success} from "./common/NotifyAction";
@@ -25,13 +26,13 @@ export const insertArticle = article => dispatch => {
 
             if(result.code === 200){
                 dispatch(success("新增文章成功"));
-                dispatch(insertArticleResponse(result))
+                dispatch(insertArticleResponse(result));
+                dispatch(replace(`/article/${result.entity.id}`))
             }
             else {
                 dispatch(error(result.message));
             }
-        })
-        .then(() => dispatch(listArticles(1,5)))
+        }).then(() => dispatch(listArticles(1,5)))
 };
 
 const insertArticleResponse = result => {
@@ -109,6 +110,7 @@ export const deleteArticle = id => dispatch => {
                 dispatch(error(result.message));
             }
         }).then(() => dispatch(listArticles(1,5)))
+        .then(() => dispatch(replace("/article")))
 };
 
 const deleteArticleResponse = result => {

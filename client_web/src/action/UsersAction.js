@@ -7,7 +7,7 @@ import {
     COOKIE_TOKEN
 } from "../Api";
 import {FORM_REGISTER,FORM_USERINFO} from "../Form";
-import {login, setLoginModelShow, setUserInfoModelShow} from "./common/ModelAction";
+import {login, loginResponse, setLoginModelShow, setUserInfoModelShow} from "./common/ModelAction";
 import {success, error, info} from "./common/NotifyAction";
 
 export const LIST_USERS = "LIST_USERS";
@@ -133,6 +133,7 @@ export const afterLogin = (result,dispatch) => {
     else if(result.code !== 403){
         dispatch(error(result.message));
     }
+    dispatch(loginResponse(result))
 };
 
 export const setLoginUser = user => {
