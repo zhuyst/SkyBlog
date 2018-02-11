@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
      * @return 错误结果对象
      */
     @ExceptionHandler(FieldErrorException.class)
-    public R fieldErrorException(FieldErrorException e){
+    public R fieldErrorExceptionHandler(FieldErrorException e){
         R r = R.error(CodeEnum.ERROR.getCode(),"表单验证失败");
 
         List<Error> list = e.getErrors();
