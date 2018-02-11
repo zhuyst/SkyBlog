@@ -47,6 +47,7 @@ public class UserController extends BaseController{
     @RequestMapping(value = "/public/",method = RequestMethod.POST)
     @ApiOperation(value = "注册新用户")
     public R<UserDTO> register(@ApiParam("用户对象") @Valid @RequestBody User newUser){
+        newUser.setId(null);
         UserDTO pojo = userService.saveUser(newUser);
         return produceResult(pojo,"用户注册失败");
     }

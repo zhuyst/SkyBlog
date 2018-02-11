@@ -27,7 +27,7 @@ public class CacheConfig implements CommandLineRunner{
     private RedisTemplate<Object,Object> redisTemplate;
 
     /**
-     * 设置RedisTemplate的序列化方式，并且清除缓存
+     * 设置{@link #redisTemplate}的序列化方式，并且清除缓存
      */
     @Override
     public void run(String... args) {

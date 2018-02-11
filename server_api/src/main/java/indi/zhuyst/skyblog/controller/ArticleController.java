@@ -52,6 +52,7 @@ public class ArticleController extends BaseController{
     @ApiOperation(value = "新增文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R<ArticleDTO> insertArticle(@ApiParam("文章对象") @Valid @RequestBody Article article){
+        article.setId(null);
         ArticleDTO pojo = articleService.saveArticle(article);
         return produceResult(pojo,"新增文章失败");
     }
@@ -100,7 +101,9 @@ public class ArticleController extends BaseController{
     @PreAuthorize("isAuthenticated()")
     public R<CommentDTO> insertComment(@ApiParam("文章ID") @PathVariable("id") Integer articleId,
                                        @ApiParam("评论对象") @Valid @RequestBody Comment comment){
+        comment.setId(null);
         comment.setArticleId(articleId);
+
         CommentDTO pojo = commentService.saveComment(comment);
         return produceResult(pojo,"新增评论失败");
     }
