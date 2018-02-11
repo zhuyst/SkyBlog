@@ -1,10 +1,10 @@
 import React from 'react'
-import {Breadcrumb, Button, ButtonGroup, Col, PageHeader, Row} from "react-bootstrap";
+import {Breadcrumb, Button, Col, PageHeader, Row} from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
 import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 
-import {editContent} from "../../../action/article/ContentAction";
+import {editContent, setArticle} from "../../../action/article/ContentAction";
 
 import CommentSender from './CommentSender'
 import CommentList from './CommentList'
@@ -12,6 +12,7 @@ import ArticleEditor from './ArticleEditor'
 
 import '../../../static/css/article/content.css'
 import {getArticleInfo} from "../../../action/ArticlesAction";
+import {initialArticle} from "../../../reducer/article/ContentReducer";
 
 class Content extends React.Component{
     componentWillMount(){
@@ -24,6 +25,7 @@ class Content extends React.Component{
 
         if(id === "new"){
             editContent(true);
+            this.props.setArticle(initialArticle);
         }
         else {
             this.props.getArticle(id);
@@ -41,13 +43,7 @@ class Content extends React.Component{
         let right;
         if(editing){
             contentArea = (
-                <div>
-                    <ButtonGroup>
-                        <Button bsStyle="success">保存</Button>
-                        <Button bsStyle="success" onClick={() => editContent(false)}>保存并退出</Button>
-                    </ButtonGroup>
-                    <ArticleEditor article={article} />
-                </div>
+                <ArticleEditor article={article} />
             );
             right = (
                 <div>
@@ -115,6 +111,9 @@ const mapDispatchToProps = dispatch => {
         },
         getArticle : id =>{
             dispatch(getArticleInfo(id))
+        },
+        setArticle : article =>{
+            dispatch(setArticle(article))
         }
     }
 };

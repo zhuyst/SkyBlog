@@ -1,7 +1,7 @@
 import {EDIT_CONTENT, SET_ARTICLE} from "../../action/article/ContentAction";
 import {GET_ARTICLE_INFO_RESPONSE} from "../../action/ArticlesAction";
 
-const initialArticle = {
+export const initialArticle = {
     id : 0,
     title : "文章标题",
     sub_title : "文章副标题",
