@@ -2,17 +2,18 @@ import React from 'react'
 import ReactMde, { ReactMdeCommands } from 'react-mde';
 import {connect} from 'react-redux'
 import { Field,reduxForm,change } from 'redux-form'
-import {Col, ControlLabel, FormGroup, Row} from "react-bootstrap";
+import {Button, ButtonGroup, Col, ControlLabel, FormGroup, Row} from "react-bootstrap";
 
 import {FORM_ARTICLE} from "../../../Form";
 import FieldGroup from "../../common/FieldGroup";
 
 import '../../../static/css/article/editor.css'
-import {setArticle} from "../../../action/article/ContentAction";
+import {editContent, setArticle} from "../../../action/article/ContentAction";
 
 import 'react-mde/lib/styles/css/react-mde.css';
 import 'react-mde/lib/styles/css/react-mde-toolbar.css';
 import 'react-mde/lib/styles/css/react-mde-textarea.css';
+import {insertArticle, listArticles, updateArticle} from "../../../action/ArticlesAction";
 
 class ArticleEditor extends React.Component{
 
@@ -22,36 +23,49 @@ class ArticleEditor extends React.Component{
     }
 
     render(){
-        const handleSubmit = this.props.handleSubmit;
+        const {submitting,handleSubmit,editContent} = this.props;
         return (
-            <div className="editor">
-                <form onSubmit={handleSubmit}>
-                    <FieldGroup
-                        name="title"
-                        type="text"
-                        label="文章标题"
-                        placeholder="请输入文章标题"
-                    />
-                    <FieldGroup
-                        name="sub_title"
-                        type="text"
-                        label="文章副标题"
-                        placeholder="请输入文章副标题"
-                    />
-                    <Row>
-                        <Col md={8} sm={12}>
-                            <FormGroup controlId="classify">
-                                <ControlLabel>文章分类</ControlLabel>
-                                <Field name="classify" component="select" className="form-control">
-                                    <option value={1}>分类1</option>
-                                    <option value={2}>分类2</option>
-                                    <option value={3}>分类3</option>
-                                </Field>
-                            </FormGroup>
-                        </Col>
-                    </Row>
-                    <Field name="content" component={editor}/>
-                </form>
+            <div>
+                <ButtonGroup>
+                    <Button disabled={submitting} bsStyle="success"
+                            onClick={handleSubmit}>保存</Button>
+                    <Button disabled={submitting} bsStyle="success"
+                            onClick={() => {
+                                handleSubmit();
+                                editContent(false)
+                            }}>保存并退出</Button>
+                </ButtonGroup>
+                <div className="editor">
+                    <form>
+                        <Field name="id" component="input" type="hidden"/>
+                        <FieldGroup
+                            name="title"
+                            type="text"
+                            label="文章标题"
+                            placeholder="请输入文章标题"
+                        />
+                        <FieldGroup
+                            name="sub_title"
+                            type="text"
+                            label="文章副标题"
+                            placeholder="请输入文章副标题"
+                        />
+                        <Row>
+                            <Col md={8} sm={12}>
+                                <FormGroup controlId="classify">
+                                    <ControlLabel>文章分类</ControlLabel>
+                                    <Field name="classify" component="select" className="form-control">
+                                        <option value="">未分类</option>
+                                        <option value={1}>分类1</option>
+                                        <option value={2}>分类2</option>
+                                        <option value={3}>分类3</option>
+                                    </Field>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <Field name="content" component={editor}/>
+                    </form>
+                </div>
             </div>
         )
     }
@@ -69,7 +83,20 @@ const editor = ({ input: { value, onChange }}) => {
 };
 
 const onSubmit = (values,dispatch) => {
+    const {id,title,sub_title,content} = values;
+    const article = {
+        id : id,
+        title : title,
+        sub_title : sub_title,
+        content : content.text
+    };
 
+    if(values.id === 0){
+        dispatch(insertArticle(article));
+    }
+    else {
+        dispatch(updateArticle(article));
+    }
 };
 
 const validate = values => {
@@ -80,7 +107,7 @@ const validate = values => {
         errors.title = "文章标题不能为空";
     }
 
-    if(!content || content.length === 0){
+    if(!content || content.text.length === 0){
         errors.content = "文章内容不能为空";
     }
 
@@ -106,7 +133,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        editContent : editing =>{
+            dispatch(editContent(editing))
+        },
         setArticleForm : (article) => {
+            dispatch(change(FORM_ARTICLE,"id",article.id));
             dispatch(change(FORM_ARTICLE,"title",article.title));
             dispatch(change(FORM_ARTICLE,"sub_title",article.sub_title));
             dispatch(change(FORM_ARTICLE,"content",article.content));

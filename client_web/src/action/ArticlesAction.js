@@ -1,10 +1,11 @@
-import {_insert, _query, ARTICLE_API_URL, HttpMethod} from "../Api";
+import {_delete, _insert, _query, _update, ARTICLE_API_URL, HttpMethod} from "../Api";
 
-export const INSERT_ARTICLE_RESPONSE = "INSERT_ARTICLE_RESPONSE";
 export const LIST_ARTICLES_RESPONSE = "LIST_ARTICLES_RESPONSE";
 export const GET_ARTICLE_INFO_RESPONSE = "GET_ARTICLE_INFO_RESPONSE";
-export const UPDATE_ARTICLE = "UPDATE_ARTICLE";
-export const DELETE_ARTICLE  = "DELETE_ARTICLE";
+
+export const INSERT_ARTICLE_RESPONSE = "INSERT_ARTICLE_RESPONSE";
+export const UPDATE_ARTICLE_RESPONSE = "UPDATE_ARTICLE_RESPONSE";
+export const DELETE_ARTICLE_RESPONSE  = "DELETE_ARTICLE_RESPONSE";
 
 export const INSERT_NEW_COMMENT = "INSERT_NEW_COMMENT";
 export const LIST_COMMENTS = "LIST_COMMENTS";
@@ -12,9 +13,9 @@ export const DELETE_COMMENT = "DELETE_COMMENT";
 
 export const insertArticle = article => dispatch => {
     const url = ARTICLE_API_URL + "/";
-
     return _insert(url,article)
         .then(result => dispatch(insertArticleResponse(result)))
+        .then(() => dispatch(listArticles(1,5)))
 };
 
 const insertArticleResponse = result => {
@@ -51,20 +52,31 @@ const getArticleInfoResponse = result => {
     }
 };
 
-export const updateArticle = (article) => {
+export const updateArticle = article => dispatch =>{
+    const url = ARTICLE_API_URL + `/${article.id}`;
+    return _update(url,article)
+        .then(result => dispatch(updateArticleResponse(result)))
+        .then(() => dispatch(listArticles(1,5)))
+};
+
+const updateArticleResponse = result =>{
     return {
-        type : UPDATE_ARTICLE,
-        url : ARTICLE_API_URL + `/${article.id}`,
-        method : HttpMethod.PUT,
-        article : article
+        type : UPDATE_ARTICLE_RESPONSE,
+        article : result.entity
     }
 };
 
-export const deleteArticle = (id) => {
+export const deleteArticle = id => dispatch => {
+    const url = ARTICLE_API_URL + `/${id}`;
+    return _delete(url)
+        .then(result => dispatch(deleteArticleResponse(result)))
+        .then(() => dispatch(listArticles(1,5)))
+};
+
+const deleteArticleResponse = result => {
     return {
-        type : DELETE_ARTICLE,
-        url : ARTICLE_API_URL + `/${id}`,
-        method : HttpMethod.DELETE
+        type : DELETE_ARTICLE_RESPONSE,
+        result : result
     }
 };
 
