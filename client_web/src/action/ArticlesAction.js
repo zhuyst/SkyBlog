@@ -1,7 +1,7 @@
-import {startSubmit,stopSubmit} from 'redux-form'
+import {startSubmit, stopSubmit} from 'redux-form'
 
 import {_delete, _insert, _query, _update, ARTICLE_API_URL, HttpMethod} from "../Api";
-import {error, info} from "./common/NotifyAction";
+import {error, success} from "./common/NotifyAction";
 import {FORM_ARTICLE} from "../Form";
 
 export const LIST_ARTICLES_RESPONSE = "LIST_ARTICLES_RESPONSE";
@@ -24,7 +24,7 @@ export const insertArticle = article => dispatch => {
             dispatch(stopSubmit(FORM_ARTICLE,result.errors));
 
             if(result.code === 200){
-                dispatch(info("新增文章成功"));
+                dispatch(success("新增文章成功"));
                 dispatch(insertArticleResponse(result))
             }
             else {
@@ -77,7 +77,7 @@ export const updateArticle = article => dispatch =>{
             dispatch(stopSubmit(FORM_ARTICLE,result.errors));
 
             if(result.code === 200){
-                dispatch(info("更新文章成功"));
+                dispatch(success("更新文章成功"));
                 dispatch(updateArticleResponse(result))
             }
             else {
@@ -102,7 +102,7 @@ export const deleteArticle = id => dispatch => {
             dispatch(stopSubmit(FORM_ARTICLE,result.errors));
 
             if(result.code === 200){
-                dispatch(info("删除文章成功"));
+                dispatch(success("删除文章成功"));
                 dispatch(deleteArticleResponse(result))
             }
             else {
