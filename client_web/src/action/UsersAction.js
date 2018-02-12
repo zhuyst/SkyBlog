@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch'
 import {change, startSubmit, stopSubmit} from 'redux-form'
 
 import {
-    USER_API_URL, FAIL_RESULT, _insert, checkStatus, _update, REFRESH_URL, ContentType, HttpMethod,
+    USER_API_URL, FAIL_RESULT, _post, checkStatus, _put, REFRESH_URL, ContentType, HttpMethod,
     COOKIE_TOKEN
 } from "../Api";
 import {FORM_REGISTER,FORM_USERINFO} from "../Form";
@@ -21,7 +21,7 @@ export const registerUser = (user) => (dispatch) => {
     const url = USER_API_URL + "/public/";
 
     dispatch(startSubmit(FORM_REGISTER));
-    return fetch(url,_insert(user))
+    return fetch(url,_post(user))
         .then(response => checkStatus(response))
         .then(result => {
             dispatch(stopSubmit(FORM_REGISTER,result.errors));
@@ -71,7 +71,7 @@ export const updateUserInfo = (user) => dispatch => {
     const url = USER_API_URL + `/${user.id}`;
 
     dispatch(startSubmit(FORM_USERINFO));
-    return fetch(url,_update(user))
+    return fetch(url,_put(user))
         .then(response => checkStatus(response))
         .then(result => {
             dispatch(stopSubmit(FORM_USERINFO,result.errors));
