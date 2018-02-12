@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactMde, { ReactMdeCommands } from 'react-mde';
 import {connect} from 'react-redux'
+import {push} from 'react-router-redux'
 import { Field,reduxForm,change } from 'redux-form'
 import {Button, ButtonGroup, Col, ControlLabel, FormGroup, Row} from "react-bootstrap";
 
@@ -24,7 +25,7 @@ class ArticleEditor extends React.Component{
 
     render(){
         const {submitting,handleSubmit,
-            deleteArticle} = this.props;
+            goBack,deleteArticle} = this.props;
 
         const id = this.props.article.id;
         const isNew = (id === 0);
@@ -42,7 +43,8 @@ class ArticleEditor extends React.Component{
                             onClick={() => {
                                 handleSubmit();
                             }}>保存并退出</Button>
-                    <Button disabled={submitting} bsStyle="primary">
+                    <Button disabled={submitting} bsStyle="primary"
+                            onClick={() => goBack(isNew,id)}>
                         放弃{action}并返回
                     </Button>
                     {deleteButton}
@@ -153,6 +155,14 @@ const mapDispatchToProps = dispatch => {
         },
         deleteArticle : id => {
             dispatch(deleteArticle(id))
+        },
+        goBack : (isNew,id) => {
+            if(isNew){
+                dispatch(push("/article"))
+            }
+            else {
+                dispatch(push(`/article/${id}`))
+            }
         }
     }
 };
