@@ -60,7 +60,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(getArticleInfo(id))
         },
         setArticle : article =>{
-            dispatch(setArticle(article))
+            dispatch(setArticle(article));
         },
         deleteArticle : id => {
             dispatch(deleteArticle(id))
