@@ -10,44 +10,70 @@ import FieldGroup from "../../common/FieldGroup";
 
 import '../../../static/css/article/editor.css'
 import {setArticle} from "../../../action/article/ContentAction";
+import {deleteArticle, insertArticle, updateArticle} from "../../../action/ArticlesAction";
 
 import 'react-mde/lib/styles/css/react-mde.css';
 import 'react-mde/lib/styles/css/react-mde-toolbar.css';
 import 'react-mde/lib/styles/css/react-mde-textarea.css';
-import {deleteArticle, insertArticle, updateArticle} from "../../../action/ArticlesAction";
 
 class ArticleEditor extends React.Component{
 
     componentWillMount(){
-        const {article,setArticleForm} = this.props;
-        setArticleForm(article);
+        this.init();
     }
 
+    componentDidUpdate(){
+        this.init();
+    }
+
+    init = () => {
+        const {article,setArticleForm} = this.props;
+        setArticleForm(article);
+    };
+
     render(){
-        const {submitting,handleSubmit,
-            goBack,deleteArticle} = this.props;
+        const {submitting,handleSubmit,goBack,
+            insertArticle,updateArticle,deleteArticle} = this.props;
 
         const id = this.props.article.id;
         const isNew = (id === 0);
         const action = isNew ? "新增" : "修改";
-        const deleteButton = isNew ? "" : (
-            <Button disabled={submitting} bsStyle="danger"
-                    onClick={() => deleteArticle(id)}>删除</Button>
-        );
         return (
             <div>
                 <ButtonGroup>
                     <Button disabled={submitting} bsStyle="success"
-                            onClick={handleSubmit}>保存</Button>
+                            onClick={handleSubmit(data => {
+                                const article = convert(data);
+                                if(data.id === 0){
+                                    insertArticle(article,false);
+                                }
+                                else {
+                                    updateArticle(article,false);
+                                }
+                            })}>
+                        保存
+                    </Button>
                     <Button disabled={submitting} bsStyle="success"
-                            onClick={() => {
-                                handleSubmit();
-                            }}>保存并退出</Button>
+                            onClick={handleSubmit(data => {
+                                const article = convert(data);
+                                if(data.id === 0){
+                                    insertArticle(article,true);
+                                }
+                                else {
+                                    updateArticle(article,true);
+                                }
+                            })}>
+                        保存并返回
+                    </Button>
                     <Button disabled={submitting} bsStyle="primary"
                             onClick={() => goBack(isNew,id)}>
                         放弃{action}并返回
                     </Button>
-                    {deleteButton}
+                    {!isNew &&
+                    <Button disabled={submitting} bsStyle="danger"
+                            onClick={() => deleteArticle(id)}>
+                        删除
+                    </Button>}
                 </ButtonGroup>
                 <div className="editor">
                     <form>
@@ -96,21 +122,14 @@ const editor = ({ input: { value, onChange }}) => {
     )
 };
 
-const onSubmit = (values,dispatch) => {
-    const {id,title,sub_title,content} = values;
-    const article = {
+const convert = data => {
+    const {id,title,sub_title,content} = data;
+    return {
         id : id,
         title : title,
         sub_title : sub_title,
         content : content.text
     };
-
-    if(values.id === 0){
-        dispatch(insertArticle(article));
-    }
-    else {
-        dispatch(updateArticle(article));
-    }
 };
 
 const validate = values => {
@@ -134,7 +153,6 @@ const onChange = (values,dispatch) => {
 
 const ArticleEditorForm = reduxForm({
     form : FORM_ARTICLE,
-    onSubmit : onSubmit,
     onChange : onChange,
     validate : validate
 })(ArticleEditor);
@@ -152,6 +170,12 @@ const mapDispatchToProps = dispatch => {
             dispatch(change(FORM_ARTICLE,"title",article.title));
             dispatch(change(FORM_ARTICLE,"sub_title",article.sub_title));
             dispatch(change(FORM_ARTICLE,"content",article.content));
+        },
+        insertArticle : (article,back) => {
+            dispatch(insertArticle(article,back))
+        },
+        updateArticle : (article,back) => {
+            dispatch(updateArticle(article,back));
         },
         deleteArticle : id => {
             dispatch(deleteArticle(id))

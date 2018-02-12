@@ -1,4 +1,4 @@
-import {EDIT_CONTENT, SET_ARTICLE} from "../../action/article/ContentAction";
+import {SET_ARTICLE} from "../../action/article/ContentAction";
 import {GET_ARTICLE_INFO_RESPONSE, INSERT_ARTICLE_RESPONSE, UPDATE_ARTICLE_RESPONSE} from "../../action/ArticlesAction";
 
 export const initialArticle = {
@@ -13,6 +13,7 @@ export const initialArticle = {
 
 const initialState = {
     article : initialArticle,
+    back : false
 };
 
 const convert = action => {

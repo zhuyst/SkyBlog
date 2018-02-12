@@ -16,7 +16,7 @@ export const INSERT_NEW_COMMENT = "INSERT_NEW_COMMENT";
 export const LIST_COMMENTS = "LIST_COMMENTS";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 
-export const insertArticle = (article) => dispatch => {
+export const insertArticle = (article,back) => dispatch => {
     dispatch(startSubmit(FORM_ARTICLE));
 
     const url = ARTICLE_API_URL + "/";
@@ -37,7 +37,12 @@ export const insertArticle = (article) => dispatch => {
             return result;
         }).then(result => {
             if(result.code === 200){
-                dispatch(replace(`/article/${result.entity.id}`))
+                if(back){
+                    dispatch(replace(`/article/${result.entity.id}`))
+                }
+                else {
+                    dispatch(replace(`/article/${result.entity.id}/edit`))
+                }
             }
         })
 };
@@ -76,7 +81,7 @@ const getArticleInfoResponse = result => {
     }
 };
 
-export const updateArticle = article => dispatch =>{
+export const updateArticle = (article,back) => dispatch =>{
     dispatch(startSubmit(FORM_ARTICLE));
 
     const url = ARTICLE_API_URL + `/${article.id}`;
@@ -91,7 +96,16 @@ export const updateArticle = article => dispatch =>{
             else {
                 dispatch(error(result.message));
             }
-        }).then(() => dispatch(listArticles(1,5)))
+
+            return result;
+        }).then(result => {
+            dispatch(listArticles(1,5));
+            return result;
+        }).then(result => {
+            if(back && result.code === 200){
+                dispatch(replace(`/article/${result.entity.id}`))
+            }
+        })
 };
 
 const updateArticleResponse = result =>{
