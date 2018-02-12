@@ -37,7 +37,7 @@ const getHeaders = () => {
     }
 };
 
-export const _query = (url,body) => {
+export const _get = (url,body) => {
     if(typeof(body) != "undefined" || body != null){
         url = new URL(url);
         Object.keys(body).forEach(key => url.searchParams.append(key, body[key]));
@@ -50,7 +50,7 @@ export const _query = (url,body) => {
     return handleFetch(promise);
 };
 
-export const _insert = (url,body) => {
+export const _post = (url,body) => {
     const promise = fetch(url,{
         method : HttpMethod.POST,
         headers: getHeaders(),
@@ -59,7 +59,7 @@ export const _insert = (url,body) => {
     return handleFetch(promise);
 };
 
-export const _update = (url,body) => {
+export const _put = (url,body) => {
     const promise = fetch(url,{
         method : HttpMethod.PUT,
         headers: getHeaders(),

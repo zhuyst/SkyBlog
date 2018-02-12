@@ -1,5 +1,9 @@
 import {SET_ARTICLE} from "../../action/article/ContentAction";
 import {GET_ARTICLE_INFO_RESPONSE, INSERT_ARTICLE_RESPONSE, UPDATE_ARTICLE_RESPONSE} from "../../action/ArticlesAction";
+import {
+    DELETE_COMMENT_RESPONSE, INSERT_COMMENT_RESPONSE,
+    LIST_COMMENTS_RESPONSE
+} from "../../action/article/CommentAction";
 
 export const initialArticle = {
     id : 0,
@@ -13,7 +17,7 @@ export const initialArticle = {
 
 const initialState = {
     article : initialArticle,
-    back : false
+    comments : []
 };
 
 const convert = action => {
@@ -48,6 +52,18 @@ const ContentReducer = (state = initialState,action) => {
             return {
                 ...state,
                 article : convert(action)
+            };
+        case INSERT_COMMENT_RESPONSE:
+            return {
+                ...state
+            };
+        case LIST_COMMENTS_RESPONSE:
+            return {
+                ...state
+            };
+        case DELETE_COMMENT_RESPONSE:
+            return {
+                ...state
             };
         default :
             return state;
