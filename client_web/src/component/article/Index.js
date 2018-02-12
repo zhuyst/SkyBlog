@@ -7,6 +7,7 @@ import Navigation from './Navigation'
 import Content from './content/Content'
 
 import '../../static/css/article/article.css'
+import EditContent from "./edit/EditContent";
 
 class Index extends React.Component{
     componentWillMount(){
@@ -19,7 +20,8 @@ class Index extends React.Component{
         return(
             <div className="articles_main">
                 <Route exact strict path={path} component={index}/>
-                <Route path={path + "/:id"} component={Content}/>
+                <Route exact strict path={path + "/:id"} component={Content}/>
+                <Route path={path + "/:id/edit"} component={EditContent} />
             </div>
         )
     }

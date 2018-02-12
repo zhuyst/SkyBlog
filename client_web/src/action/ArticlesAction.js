@@ -16,7 +16,7 @@ export const INSERT_NEW_COMMENT = "INSERT_NEW_COMMENT";
 export const LIST_COMMENTS = "LIST_COMMENTS";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 
-export const insertArticle = article => dispatch => {
+export const insertArticle = (article) => dispatch => {
     dispatch(startSubmit(FORM_ARTICLE));
 
     const url = ARTICLE_API_URL + "/";

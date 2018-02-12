@@ -1,119 +1,72 @@
 import React from 'react'
-import {Breadcrumb, Button, ButtonGroup, Col, PageHeader, Row} from "react-bootstrap";
-import { LinkContainer } from 'react-router-bootstrap'
+import {Button, ButtonGroup, PageHeader} from "react-bootstrap";
 import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
+import {push} from 'react-router-redux'
 
-import {editContent, setArticle} from "../../../action/article/ContentAction";
+import {setArticle} from "../../../action/article/ContentAction";
+import {deleteArticle, getArticleInfo} from "../../../action/ArticlesAction";
+import {initialArticle} from "../../../reducer/article/ContentReducer";
 
 import CommentSender from './CommentSender'
 import CommentList from './CommentList'
-import ArticleEditor from './ArticleEditor'
+import Article from "../Article";
 
 import '../../../static/css/article/content.css'
-import {deleteArticle, getArticleInfo} from "../../../action/ArticlesAction";
-import {initialArticle} from "../../../reducer/article/ContentReducer";
 
 class Content extends React.Component{
     componentWillMount(){
         document.title = `${this.props.article.title} - 博客文章 - 青云的小窝`;
-    }
 
-    componentDidMount(){
         const id = this.props.match.params.id;
-        const editContent = this.props.editContent;
-
         if(id === "new"){
-            editContent(true);
             this.props.setArticle(initialArticle);
         }
         else {
             this.props.getArticle(id);
-            editContent(false);
         }
     }
 
     render(){
-        const {editing,article,
-            editContent,deleteArticle} = this.props;
-        const {title,sub_title,content} = article;
+        const {article, editContent,
+            deleteArticle} = this.props;
+        const {id,title,sub_title,content} = article;
 
-        const markdown = (<ReactMarkdown source={content.text}/>);
+        const contentArea = (
+            <div>
+                <PageHeader>{title}  <small>{sub_title}</small></PageHeader>
+                <ButtonGroup>
+                    <Button bsStyle="primary" className="edit_button"
+                            onClick={() => editContent(id)}>编辑</Button>
+                    <Button bsStyle="danger"
+                            onClick={() => deleteArticle(id)}>删除</Button>
+                </ButtonGroup>
+                <ReactMarkdown source={content.text}/>
+            </div>
+        );
 
-        let contentArea;
-        let right;
-        if(editing){
-            contentArea = (
-                <ArticleEditor article={article} />
-            );
-            right = (
-                <div>
-                    <PageHeader>{title}  <small>{sub_title}</small></PageHeader>
-                    {markdown}
-                </div>
-            )
-        }
-        else {
-            contentArea = (
-                <div>
-                    <PageHeader>{title}  <small>{sub_title}</small></PageHeader>
-                    <ButtonGroup>
-                        <Button bsStyle="primary" className="edit_button"
-                                onClick={() => editContent(true)}>编辑</Button>
-                        <Button bsStyle="danger"
-                                onClick={() => deleteArticle(article.id)}>删除</Button>
-                    </ButtonGroup>
-                    {markdown}
-                </div>
-            );
-            right = (
-                <div>
-                    <CommentList/>
-                    <CommentSender/>
-                </div>
-            )
-        }
+        const right = (
+            <div>
+                <CommentList/>
+                <CommentSender/>
+            </div>
+        );
 
         return (
-            <Row>
-                <Col mdOffset={1} md={5}>
-                    <Breadcrumb>
-                        <LinkContainer to="/article">
-                            <Breadcrumb.Item>
-                                博客文章
-                            </Breadcrumb.Item>
-                        </LinkContainer>
-                        <LinkContainer to="#">
-                            <Breadcrumb.Item>
-                                分类
-                            </Breadcrumb.Item>
-                        </LinkContainer>
-                        <Breadcrumb.Item active>
-                            {title}
-                        </Breadcrumb.Item>
-                    </Breadcrumb>
-                    {contentArea}
-                </Col>
-                <Col md={5}>
-                    {right}
-                </Col>
-            </Row>
+            <Article contentArea={contentArea}
+                     right={right} article={article}/>
         )
     }
 }
 
 const mapStateToProps = state => {
     return {
-        article : state.article.article,
-        editing : state.article.editing
+        article : state.article.article
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        editContent : editing =>{
-            dispatch(editContent(editing))
-        },
         getArticle : id =>{
             dispatch(getArticleInfo(id))
         },
@@ -122,6 +75,9 @@ const mapDispatchToProps = dispatch => {
         },
         deleteArticle : id => {
             dispatch(deleteArticle(id))
+        },
+        editContent : id => {
+            dispatch(push(`/article/${id}/edit`))
         }
     }
 };

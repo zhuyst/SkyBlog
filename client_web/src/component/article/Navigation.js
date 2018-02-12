@@ -14,7 +14,7 @@ class Navigation extends React.Component{
                     </Col>
                 </div>
 
-                <LinkContainer to="/article/new">
+                <LinkContainer to="/article/new/edit">
                     <Button bsStyle="success" bsSize="large" block
                             className="navigation_button">  新增文章  </Button>
                 </LinkContainer>

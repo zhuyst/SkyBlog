@@ -8,7 +8,7 @@ import {FORM_ARTICLE} from "../../../Form";
 import FieldGroup from "../../common/FieldGroup";
 
 import '../../../static/css/article/editor.css'
-import {editContent, setArticle} from "../../../action/article/ContentAction";
+import {setArticle} from "../../../action/article/ContentAction";
 
 import 'react-mde/lib/styles/css/react-mde.css';
 import 'react-mde/lib/styles/css/react-mde-toolbar.css';
@@ -17,16 +17,22 @@ import {deleteArticle, insertArticle, updateArticle} from "../../../action/Artic
 
 class ArticleEditor extends React.Component{
 
-    componentDidMount(){
+    componentWillMount(){
         const {article,setArticleForm} = this.props;
         setArticleForm(article);
     }
 
     render(){
         const {submitting,handleSubmit,
-            editContent,deleteArticle} = this.props;
+            deleteArticle} = this.props;
 
         const id = this.props.article.id;
+        const isNew = (id === 0);
+        const action = isNew ? "新增" : "修改";
+        const deleteButton = isNew ? "" : (
+            <Button disabled={submitting} bsStyle="danger"
+                    onClick={() => deleteArticle(id)}>删除</Button>
+        );
         return (
             <div>
                 <ButtonGroup>
@@ -35,10 +41,11 @@ class ArticleEditor extends React.Component{
                     <Button disabled={submitting} bsStyle="success"
                             onClick={() => {
                                 handleSubmit();
-                                editContent(false)
                             }}>保存并退出</Button>
-                    <Button disabled={submitting} bsStyle="danger"
-                            onClick={() => deleteArticle(id)}>删除</Button>
+                    <Button disabled={submitting} bsStyle="primary">
+                        放弃{action}并返回
+                    </Button>
+                    {deleteButton}
                 </ButtonGroup>
                 <div className="editor">
                     <form>
@@ -138,9 +145,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        editContent : editing =>{
-            dispatch(editContent(editing))
-        },
         setArticleForm : article => {
             dispatch(change(FORM_ARTICLE,"id",article.id));
             dispatch(change(FORM_ARTICLE,"title",article.title));
