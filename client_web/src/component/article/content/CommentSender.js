@@ -62,8 +62,20 @@ const textArea = (field) => {
     )
 };
 
+const validate = values => {
+    const errors = {};
+    const {content} = values;
+
+    if(!content || content.length === 0){
+        errors.content = "评论内容不能为空"
+    }
+
+    return errors;
+};
+
 const CommentSenderForm = reduxForm({
     form : FORM_COMMENT,
+    validate : validate
 })(CommentSender);
 
 const mapStateToProps = state => {

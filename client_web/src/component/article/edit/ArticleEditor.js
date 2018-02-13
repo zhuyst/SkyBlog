@@ -31,9 +31,26 @@ class ArticleEditor extends React.Component{
         setArticleForm(article);
     };
 
+    submit = (data,back) => {
+        const {id,title,sub_title,content} = data;
+        const article = {
+            id : id,
+            title : title,
+            sub_title : sub_title,
+            content : content.text
+        };
+
+        if(data.id === 0){
+            this.props.insertArticle(article,back);
+        }
+        else {
+            this.props.updateArticle(article,back);
+        }
+    };
+
     render(){
         const {submitting,handleSubmit,goBack,
-            insertArticle,updateArticle,deleteArticle} = this.props;
+            deleteArticle} = this.props;
 
         const id = this.props.article.id;
         const isNew = (id === 0);
@@ -42,27 +59,11 @@ class ArticleEditor extends React.Component{
             <div>
                 <ButtonGroup>
                     <Button disabled={submitting} bsStyle="success"
-                            onClick={handleSubmit(data => {
-                                const article = convert(data);
-                                if(data.id === 0){
-                                    insertArticle(article,false);
-                                }
-                                else {
-                                    updateArticle(article,false);
-                                }
-                            })}>
+                            onClick={handleSubmit(data => this.submit(data,false))}>
                         保存
                     </Button>
                     <Button disabled={submitting} bsStyle="success"
-                            onClick={handleSubmit(data => {
-                                const article = convert(data);
-                                if(data.id === 0){
-                                    insertArticle(article,true);
-                                }
-                                else {
-                                    updateArticle(article,true);
-                                }
-                            })}>
+                            onClick={handleSubmit(data => this.submit(data,true))}>
                         保存并返回
                     </Button>
                     <Button disabled={submitting} bsStyle="primary"
@@ -120,16 +121,6 @@ const editor = ({ input: { value, onChange }}) => {
                       commands={ReactMdeCommands.getDefaultCommands()}/>
         </FormGroup>
     )
-};
-
-const convert = data => {
-    const {id,title,sub_title,content} = data;
-    return {
-        id : id,
-        title : title,
-        sub_title : sub_title,
-        content : content.text
-    };
 };
 
 const validate = values => {
