@@ -1,5 +1,6 @@
 import {_delete, _get, _post, ARTICLE_API_URL} from "../../Api";
 import {error, success} from "../common/NotifyAction";
+import {COMMENT_PAGE_SIZE} from "../../Constant";
 
 export const SET_ARTICLE = "SET_ARTICLE";
 
@@ -14,10 +15,20 @@ export const setArticle = article => {
     }
 };
 
-export const insertComment = (id, comment) => dispatch => {
-    const url = ARTICLE_API_URL + `/${id}/comment/`;
+export const insertComment = (articleId, comment, pageNum) => dispatch => {
+    const url = ARTICLE_API_URL + `/${articleId}/comment/`;
     return _post(url,comment)
-        .then(result => insertCommentResponse(result));
+        .then(result => {
+            if(result.code === 200){
+                dispatch(success("新增评论成功"));
+                dispatch(insertCommentResponse(result));
+
+                reloadComments(pageNum,articleId,dispatch);
+            }
+            else {
+                dispatch(error(result.message));
+            }
+        });
 };
 
 const insertCommentResponse = result => {
@@ -49,17 +60,11 @@ export const deleteComment = (id,articleId,pageNum) => dispatch => {
             if(result.code === 200){
                 dispatch(success("删除评论成功"));
                 dispatch(deleteCommentResponse(id));
+
+                reloadComments(pageNum,articleId,dispatch);
             }
             else {
                 dispatch(error(result.message));
-            }
-            return result;
-        }).then(result => {
-            if(result.code === 200){
-
-                // 重新加载大小为 pageNum*10 的评论列表
-                const pageSize = pageNum * 10;
-                dispatch(listComments(articleId,1,pageSize))
             }
         })
 };
@@ -69,4 +74,10 @@ const deleteCommentResponse = result => {
         type : DELETE_COMMENT_RESPONSE,
         result : result
     }
+};
+
+const reloadComments = (pageNum,articleId,dispatch) => {
+    // 重新加载大小为 pageNum*pageSize 的评论列表
+    const pageSize = pageNum * COMMENT_PAGE_SIZE;
+    dispatch(listComments(articleId,1,pageSize))
 };
