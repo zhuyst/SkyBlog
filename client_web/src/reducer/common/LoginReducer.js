@@ -1,17 +1,19 @@
 import {LOGIN_CLEAR, LOGIN_RESPONSE} from "../../action/common/ModelAction";
 import {SET_LOGIN_USER, UPDATE_USER_INFO_RESPONSE} from "../../action/UsersAction";
 
+const initialUser = {
+    id: 0,
+    username : "",
+    nickname : "",
+    admin : false
+};
+
 const initialState = {
     login_state : {
         ok : null,
         message : null
     },
-    user : {
-        id: 0,
-        username : "",
-        nickname : "",
-        admin : false
-    }
+    user : initialUser
 };
 
 const LoginReducer = (state = initialState,action) => {
@@ -23,7 +25,8 @@ const LoginReducer = (state = initialState,action) => {
                 ...state,
                 login_state : {
                     ok : null
-                }
+                },
+                user : initialUser
             }
         }
         case LOGIN_RESPONSE:{

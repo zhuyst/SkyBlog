@@ -14,10 +14,13 @@ class Navigation extends React.Component{
                     </Col>
                 </div>
 
-                <LinkContainer to="/article/new/edit">
-                    <Button bsStyle="success" bsSize="large" block
-                            className="navigation_button">  新增文章  </Button>
-                </LinkContainer>
+                {
+                    this.props.admin &&
+                    <LinkContainer to="/article/new/edit">
+                        <Button bsStyle="success" bsSize="large" block
+                                className="navigation_button">  新增文章  </Button>
+                    </LinkContainer>
+                }
 
                 <ListGroup>
                     <ListGroupItem href="#" active>所有文章<Badge>{this.props.total}</Badge></ListGroupItem>
@@ -47,7 +50,8 @@ class Navigation extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        total : state.articles.total
+        total : state.articles.total,
+        admin : state.login.user.admin
     }
 };
 

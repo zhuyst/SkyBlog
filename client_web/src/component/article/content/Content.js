@@ -35,12 +35,15 @@ class Content extends React.Component{
         const contentArea = (
             <div>
                 <PageHeader>{title}  <small>{sub_title}</small></PageHeader>
-                <ButtonGroup>
-                    <Button bsStyle="primary" className="edit_button"
-                            onClick={() => editContent(id)}>编辑</Button>
-                    <Button bsStyle="danger"
-                            onClick={() => deleteArticle(id)}>删除</Button>
-                </ButtonGroup>
+                {
+                    this.props.admin &&
+                    <ButtonGroup>
+                        <Button bsStyle="primary" className="edit_button"
+                                onClick={() => editContent(id)}>编辑</Button>
+                        <Button bsStyle="danger"
+                                onClick={() => deleteArticle(id)}>删除</Button>
+                    </ButtonGroup>
+                }
                 <ReactMarkdown source={content.text}/>
             </div>
         );
@@ -61,7 +64,8 @@ class Content extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        article : state.article
+        article : state.article,
+        admin : state.login.user.admin
     }
 };
 
