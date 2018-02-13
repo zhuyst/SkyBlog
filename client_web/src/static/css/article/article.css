@@ -70,17 +70,17 @@
     font-weight: bolder;
 }
 
-.more_articles :hover{
+.more :hover{
     background-color: #faebcc;
     text-decoration: underline;
     cursor: pointer;
 }
 
-.more_articles_left{
+.more_left{
     float: left;
 }
 
-.more_articles_right{
+.more_right{
     float: right;
 }
 

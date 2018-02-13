@@ -28,8 +28,8 @@ class Content extends React.Component{
     }
 
     render(){
-        const {article, editContent,
-            deleteArticle} = this.props;
+        const {article,
+            editContent, deleteArticle} = this.props;
         const {id,title,sub_title,content} = article;
 
         const contentArea = (

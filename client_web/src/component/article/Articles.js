@@ -34,11 +34,11 @@ class Articles extends React.Component{
         }
         else {
             pager = (
-                <div className="more_articles">
+                <div className="more">
                     <div onClick={() => this.props.listArticles(page_num + 1)}>
                         <Alert bsStyle="warning">
                             <p>
-                            <span className="more_articles_left">
+                            <span className="more_left">
                                 <i className="fa fa-angle-double-down fa-lg"/>
                             </span>
 
@@ -46,7 +46,7 @@ class Articles extends React.Component{
                                 &nbsp;&nbsp;点击查看更多文章&nbsp;&nbsp;
                                 <i className="fa fa-toggle-down" />
 
-                                <span className="more_articles_right">
+                                <span className="more_right">
                                 <i className="fa fa-angle-double-down fa-lg"/>
                             </span>
                             </p>
