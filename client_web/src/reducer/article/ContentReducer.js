@@ -13,14 +13,16 @@ export const initialArticle = {
     }
 };
 
+export const initialComments = {
+    list : [],
+    page_num : 1,
+    pages : 0,
+    total : 0
+};
+
 const initialState = () => {
     return Object.assign({
-        comments : {
-            list : [],
-            page_num : 1,
-            pages : 0,
-            total : 0
-        }
+        comments : initialComments
     },initialArticle)
 };
 
@@ -41,7 +43,9 @@ const ContentReducer = (state = initialState(),action) => {
                     selection: null
                 }
             };
-            return Object.assign(state,convertArticle);
+            return Object.assign(state,convertArticle,{
+                comments : initialComments
+            });
 
         case LIST_COMMENTS_RESPONSE:
             comments = action.comments;
