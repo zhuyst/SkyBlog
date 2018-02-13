@@ -1,9 +1,10 @@
 import {startSubmit, stopSubmit} from 'redux-form'
 import {replace} from 'react-router-redux'
+import {change} from 'redux-form'
 
 import {_delete, _post, _get, _put, ARTICLE_API_URL} from "../Api";
 import {error, success} from "./common/NotifyAction";
-import {FORM_ARTICLE} from "../Form";
+import {ARTICLE_PAGE_SIZE, FORM_ARTICLE, FORM_COMMENT} from "../Constant";
 import {listComments} from "./article/ContentAction";
 
 export const LIST_ARTICLES_RESPONSE = "LIST_ARTICLES_RESPONSE";
@@ -24,22 +25,18 @@ export const insertArticle = (article,back) => dispatch => {
             if(result.code === 200){
                 dispatch(success("新增文章成功"));
                 dispatch(insertArticleResponse(result));
-            }
-            else {
-                dispatch(error(result.message));
-            }
-            return result;
-        }).then(result => {
-            dispatch(listArticles(1,5));
-            return result;
-        }).then(result => {
-            if(result.code === 200){
+
+                dispatch(listArticles(1,ARTICLE_PAGE_SIZE));
+
                 if(back){
                     dispatch(replace(`/article/${result.entity.id}`))
                 }
                 else {
                     dispatch(replace(`/article/${result.entity.id}/edit`))
                 }
+            }
+            else {
+                dispatch(error(result.message));
             }
         })
 };
@@ -70,8 +67,11 @@ export const getArticleInfo = id => dispatch => {
     return _get(url)
         .then(result => {
             dispatch(getArticleInfoResponse(result));
-            return result;
-        }).then(result => dispatch(listComments(result.entity.id,1,10)))
+
+            const id = result.entity.id;
+            dispatch(change(FORM_COMMENT,"article_id",id));
+            dispatch(listComments(id,1,10))
+        })
 };
 
 const getArticleInfoResponse = result => {
@@ -91,21 +91,18 @@ export const updateArticle = (article,back) => dispatch =>{
 
             if(result.code === 200){
                 dispatch(success("更新文章成功"));
-                dispatch(updateArticleResponse(result))
+                dispatch(updateArticleResponse(result));
+
+                dispatch(listArticles(1, 5));
+
+                if(back){
+                    dispatch(replace(`/article/${result.entity.id}`))
+                }
             }
             else {
                 dispatch(error(result.message));
             }
-
-            return result;
-        }).then(result => {
-            dispatch(listArticles(1,5));
-            return result;
-        }).then(result => {
-            if(back && result.code === 200){
-                dispatch(replace(`/article/${result.entity.id}`))
-            }
-        })
+        });
 };
 
 const updateArticleResponse = result =>{
@@ -125,13 +122,15 @@ export const deleteArticle = id => dispatch => {
 
             if(result.code === 200){
                 dispatch(success("删除文章成功"));
-                dispatch(deleteArticleResponse(result))
+                dispatch(deleteArticleResponse(result));
+
+                dispatch(listArticles(1,ARTICLE_PAGE_SIZE));
+                dispatch(replace("/article"));
             }
             else {
                 dispatch(error(result.message));
             }
-        }).then(() => dispatch(listArticles(1,5)))
-        .then(() => dispatch(replace("/article")))
+        })
 };
 
 const deleteArticleResponse = result => {
