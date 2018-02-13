@@ -34,9 +34,7 @@ class CommentList extends React.Component{
                 <div className="pager" style={{
                     marginTop : 0
                 }}>
-                    <Alert bsStyle="info" style={{
-                        marginBottom: 0
-                    }}>
+                    <Alert bsStyle="info" className="comment_pager">
                         &nbsp;&nbsp;这篇文章还没人评论，快在下方评论吧！&nbsp;&nbsp;
                     </Alert>
                 </div>
@@ -45,7 +43,7 @@ class CommentList extends React.Component{
         else if(page_num === pages){
             pager = (
                 <div className="pager">
-                    <Alert bsStyle="info">
+                    <Alert bsStyle="info" className="comment_pager">
                         &nbsp;&nbsp;已经没有更多评论啦！&nbsp;&nbsp;
                     </Alert>
                 </div>
@@ -56,9 +54,7 @@ class CommentList extends React.Component{
                 <div className="pager">
                     <div className="more">
                         <div onClick={() => listComments(id,page_num + 1,10)}>
-                            <Alert bsStyle="warning" style={{
-                                marginBottom : 0
-                            }}>
+                            <Alert bsStyle="warning" className="comment_pager">
                                 <p>
                             <span className="more_left">
                                 <i className="fa fa-angle-double-down fa-lg"/>
