@@ -6,7 +6,7 @@ import {
     USER_API_URL, FAIL_RESULT, _post, checkStatus, _put, REFRESH_URL, ContentType, HttpMethod,
     COOKIE_TOKEN
 } from "../Api";
-import {FORM_REGISTER,FORM_USERINFO} from "../Form";
+import {FORM_REGISTER,FORM_USERINFO} from "../Constant";
 import {login, loginResponse, setLoginModelShow, setUserInfoModelShow} from "./common/ModelAction";
 import {success, error, info} from "./common/NotifyAction";
 

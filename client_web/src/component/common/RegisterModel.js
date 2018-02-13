@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form'
 
 import {registerUser} from "../../action/UsersAction";
 
-import {FORM_REGISTER} from "../../Form";
+import {FORM_REGISTER} from "../../Constant";
 import FieldGroup,{MODE_SUCCESS} from './FieldGroup'
 
 class RegisterModel extends React.Component{
