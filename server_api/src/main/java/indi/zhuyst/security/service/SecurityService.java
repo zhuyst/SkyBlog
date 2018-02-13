@@ -10,9 +10,17 @@ import indi.zhuyst.security.pojo.SecurityUser;
 public interface SecurityService{
 
     /**
+     * 使用用户名与密码进行登陆
+     * @param username 用户名
+     * @param password 密码
+     * @return AccessToken
+     */
+    AccessToken login(String username,String password);
+
+    /**
      * 使用User生成JWT
      * @param user 要生成Token的用户
-     * @return
+     * @return AccessToken
      */
     AccessToken generateToken(SecurityUser user);
 

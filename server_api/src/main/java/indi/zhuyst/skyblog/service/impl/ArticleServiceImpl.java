@@ -55,7 +55,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
 
     @Override
     public ArticleDTO getArticleDTO(int id){
-        Article article = super.getByID(id);
+        Article article = getByID(id);
         return this.produceDTO(article);
     }
 
