@@ -1,15 +1,9 @@
 package indi.zhuyst.security.config;
 
-import indi.zhuyst.common.pojo.R;
 import indi.zhuyst.security.filter.TokenFilter;
-import indi.zhuyst.security.pojo.AccessToken;
-import indi.zhuyst.security.pojo.SecurityUser;
-import indi.zhuyst.security.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,8 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
@@ -33,9 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
     private UserDetailsService userDetailsService;
-
-    @Autowired
-    private SecurityService securityService;
 
     @Autowired
     private TokenFilter tokenFilter;
@@ -105,43 +94,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
                 // 其他请求均进行权限拦截
                 .anyRequest()
-                    .authenticated()
-                    .and()
-
-                // 配置表单登陆路径
-                .formLogin()
-                    .loginPage("/auth/login")
-                    .successHandler(loginSuccessHandlerBean())
-                    .failureHandler(loginFailureHandlerBean())
-                    .permitAll();
-    }
-
-    /**
-     * 登陆验证成功时返回的内容 - 返回{@link AccessToken}
-     * @return 登陆验证成功Handler
-     */
-    @Bean
-    public AuthenticationSuccessHandler loginSuccessHandlerBean(){
-        return (request, response, authentication) -> {
-            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-
-            SecurityUser user = (SecurityUser) authentication.getPrincipal();
-            AccessToken token = securityService.generateToken(user);
-            token.setUser(user);
-
-            response.getWriter().write(R.ok(token).toJsonStr());
-        };
-    }
-
-    /**
-     * 登陆验证失败时返回的内容
-     * @return 登陆验证失败Handler
-     */
-    @Bean
-    public AuthenticationFailureHandler loginFailureHandlerBean(){
-        return (request, response, authentication) -> {
-            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-            response.getWriter().write(R.error("用户名/密码不正确").toJsonStr());
-        };
+                    .authenticated();
     }
 }

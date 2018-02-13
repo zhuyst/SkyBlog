@@ -1,6 +1,7 @@
 package indi.zhuyst.security.service.impl;
 
 import indi.zhuyst.common.service.BaseService;
+import indi.zhuyst.common.util.ServletUtils;
 import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.service.SecurityService;
@@ -10,10 +11,16 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
@@ -23,6 +30,10 @@ import java.util.Date;
 @Service
 @ConfigurationProperties(prefix = "skyblog.jwt")
 public class SecurityServiceImpl extends BaseService implements SecurityService{
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
 
     /**
      * {@link SecurityUser#username}在Claims中的name
@@ -54,6 +65,24 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
     @Getter
     @Setter
     private Long expire;
+
+    @Override
+    public AccessToken login(String username, String password) {
+        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
+                username, password);
+
+        HttpServletRequest request = ServletUtils.getRequest();
+        authRequest.setDetails(new WebAuthenticationDetails(request));
+
+        try{
+            Authentication authentication = authenticationManager.authenticate(authRequest);
+            SecurityUser user = (SecurityUser) authentication.getPrincipal();
+
+            return generateToken(user);
+        }catch (Exception e){
+            throw new AccessDeniedException("用户名/密码不正确");
+        }
+    }
 
     @Override
     public AccessToken generateToken(SecurityUser user) {
