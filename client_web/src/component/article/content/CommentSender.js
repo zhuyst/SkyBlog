@@ -17,13 +17,16 @@ class CommentSender extends React.Component{
                             </Col>
                             <Col md={2} smHidden xsHidden>
                                 <Button bsStyle="primary"
+                                        block
                                         style={{
                                             height : '60px'
                                         }}>
                                     提交</Button>
                             </Col>
-                            <Col lgHidden mdHidden className="comment_button">
-                                <Button bsStyle="primary" block>  提交  </Button>
+                            <Col sm={12} lgHidden mdHidden>
+                                <Button bsStyle="primary" block style={{
+                                    marginTop: 10
+                                }}>提交</Button>
                             </Col>
                         </Row>
                     </FormGroup>
