@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form'
 
 import {login,loginClear} from "../../action/common/ModelAction";
 
-import {FORM_LOGIN} from "../../Form";
+import {FORM_LOGIN} from "../../Constant";
 import FieldGroup,{MODE_NULL} from './FieldGroup'
 
 class LoginModel extends React.Component{

@@ -3,7 +3,7 @@ import {Button, Modal} from "react-bootstrap";
 import FieldGroup, {MODE_SUCCESS} from "./FieldGroup";
 import { Field,reduxForm } from 'redux-form'
 
-import {FORM_USERINFO} from "../../Form";
+import {FORM_USERINFO} from "../../Constant";
 import {validate as validateInfo} from "./RegisterModel";
 import {updateUserInfo} from "../../action/UsersAction";
 

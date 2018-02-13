@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch'
 import {startSubmit,stopSubmit} from 'redux-form'
 
 import {LOGIN_URL, HttpMethod, ContentType, FAIL_RESULT, checkStatus, COOKIE_TOKEN} from "../../Api";
-import {FORM_LOGIN} from "../../Form";
+import {FORM_LOGIN} from "../../Constant";
 import {info} from "./NotifyAction";
 import {afterLogin} from "../UsersAction";
 

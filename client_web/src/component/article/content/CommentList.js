@@ -4,6 +4,7 @@ import {Alert, Badge,Panel} from 'react-bootstrap'
 import Comment from './Comment'
 import {connect} from "react-redux";
 import {listComments} from "../../../action/article/ContentAction";
+import {COMMENT_PAGE_SIZE} from "../../../Constant";
 
 class CommentList extends React.Component{
 
@@ -53,7 +54,7 @@ class CommentList extends React.Component{
             pager = (
                 <div className="pager">
                     <div className="more">
-                        <div onClick={() => listComments(id,page_num + 1,10)}>
+                        <div onClick={() => listComments(id,page_num + 1,COMMENT_PAGE_SIZE)}>
                             <Alert bsStyle="warning" className="comment_pager">
                                 <p>
                             <span className="more_left">
@@ -99,7 +100,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         listComments : (id,pageNum) => {
-            dispatch(listComments(id,pageNum,10))
+            dispatch(listComments(id,pageNum,COMMENT_PAGE_SIZE))
         }
     }
 };

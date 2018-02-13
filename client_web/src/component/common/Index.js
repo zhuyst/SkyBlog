@@ -18,6 +18,7 @@ import {checkUserLoginState} from "../../action/UsersAction";
 
 import '../../static/css/common/common.css'
 import {listArticles} from "../../action/ArticlesAction";
+import {ARTICLE_PAGE_SIZE} from "../../Constant";
 
 class Index extends React.Component{
     componentWillMount(){
@@ -62,7 +63,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(checkUserLoginState());
         },
         initArticles : () => {
-            dispatch(listArticles(1,5))
+            dispatch(listArticles(1,ARTICLE_PAGE_SIZE))
         }
     }
 };
