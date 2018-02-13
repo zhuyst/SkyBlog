@@ -4,6 +4,7 @@ import {
     DELETE_COMMENT_RESPONSE, INSERT_COMMENT_RESPONSE,
     LIST_COMMENTS_RESPONSE
 } from "../../action/article/CommentAction";
+import {concatList} from "../Util";
 
 export const initialArticle = {
     id : 0,
@@ -17,7 +18,12 @@ export const initialArticle = {
 
 const initialState = {
     article : initialArticle,
-    comments : []
+    comments : {
+        list : [],
+        page_num : 1,
+        pages : 0,
+        total : 0
+    }
 };
 
 const convert = action => {
@@ -58,8 +64,17 @@ const ContentReducer = (state = initialState,action) => {
                 ...state
             };
         case LIST_COMMENTS_RESPONSE:
+            const comments = action.comments;
+            const newList = concatList(comments,state.comments.list);
+
             return {
-                ...state
+                ...state,
+                comments : {
+                    list: newList,
+                    page_num: comments.page_num,
+                    page_size: comments.page_size,
+                    total: comments.total
+                }
             };
         case DELETE_COMMENT_RESPONSE:
             return {

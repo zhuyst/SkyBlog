@@ -4,6 +4,7 @@ import {replace} from 'react-router-redux'
 import {_delete, _post, _get, _put, ARTICLE_API_URL, HttpMethod} from "../Api";
 import {error, success} from "./common/NotifyAction";
 import {FORM_ARTICLE} from "../Form";
+import {listComments} from "./article/CommentAction";
 
 export const LIST_ARTICLES_RESPONSE = "LIST_ARTICLES_RESPONSE";
 export const GET_ARTICLE_INFO_RESPONSE = "GET_ARTICLE_INFO_RESPONSE";
@@ -67,7 +68,10 @@ const listArticlesResponse = result => {
 export const getArticleInfo = id => dispatch => {
     const url = ARTICLE_API_URL + `/public/${id}`;
     return _get(url)
-        .then(result => dispatch(getArticleInfoResponse(result)))
+        .then(result => {
+            dispatch(getArticleInfoResponse(result));
+            return result;
+        }).then(result => dispatch(listComments(result.entity.id,1,10)))
 };
 
 const getArticleInfoResponse = result => {
