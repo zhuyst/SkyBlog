@@ -1,5 +1,5 @@
 import React from 'react'
-import {Alert, Badge, Pager, Panel} from 'react-bootstrap'
+import {Alert, Badge,Panel} from 'react-bootstrap'
 
 import Comment from './Comment'
 import {connect} from "react-redux";
@@ -29,34 +29,51 @@ class CommentList extends React.Component{
         });
 
         let pager;
-        if(page_num === pages){
+        if(total === 0){
             pager = (
-                <Alert bsStyle="info">
-                    &nbsp;&nbsp;已经没有更多评论啦！&nbsp;&nbsp;
-                </Alert>
+                <div className="pager" style={{
+                    marginTop : 0
+                }}>
+                    <Alert bsStyle="info" style={{
+                        marginBottom: 0
+                    }}>
+                        &nbsp;&nbsp;这篇文章还没人评论，快在下方评论吧！&nbsp;&nbsp;
+                    </Alert>
+                </div>
+            )
+        }
+        else if(page_num === pages){
+            pager = (
+                <div className="pager">
+                    <Alert bsStyle="info">
+                        &nbsp;&nbsp;已经没有更多评论啦！&nbsp;&nbsp;
+                    </Alert>
+                </div>
             )
         }
         else {
             pager = (
-                <div className="more">
-                    <div onClick={() => listComments(id,page_num + 1,10)}>
-                        <Alert bsStyle="warning" style={{
-                            marginBottom : 0
-                        }}>
-                            <p>
+                <div className="pager">
+                    <div className="more">
+                        <div onClick={() => listComments(id,page_num + 1,10)}>
+                            <Alert bsStyle="warning" style={{
+                                marginBottom : 0
+                            }}>
+                                <p>
                             <span className="more_left">
                                 <i className="fa fa-angle-double-down fa-lg"/>
                             </span>
 
-                                <i className="fa fa-toggle-down" />
-                                &nbsp;&nbsp;点击查看更多评论&nbsp;&nbsp;
-                                <i className="fa fa-toggle-down" />
+                                    <i className="fa fa-toggle-down" />
+                                    &nbsp;&nbsp;点击查看更多评论&nbsp;&nbsp;
+                                    <i className="fa fa-toggle-down" />
 
-                                <span className="more_right">
+                                    <span className="more_right">
                                 <i className="fa fa-angle-double-down fa-lg"/>
                             </span>
-                            </p>
-                        </Alert>
+                                </p>
+                            </Alert>
+                        </div>
                     </div>
                 </div>
             )
@@ -69,9 +86,7 @@ class CommentList extends React.Component{
                 </Panel.Heading>
                 <Panel.Body>
                     {commentList}
-                    <div className="pager">
-                        {pager}
-                    </div>
+                    {pager}
                 </Panel.Body>
             </Panel>
         )

@@ -1,7 +1,7 @@
 import {startSubmit, stopSubmit} from 'redux-form'
 import {replace} from 'react-router-redux'
 
-import {_delete, _post, _get, _put, ARTICLE_API_URL, HttpMethod} from "../Api";
+import {_delete, _post, _get, _put, ARTICLE_API_URL} from "../Api";
 import {error, success} from "./common/NotifyAction";
 import {FORM_ARTICLE} from "../Form";
 import {listComments} from "./article/ContentAction";
