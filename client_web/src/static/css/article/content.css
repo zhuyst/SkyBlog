@@ -36,6 +36,8 @@
 .comment_footer a{
     color: #f16c20;
     margin-left: 10px;
+
+    cursor:pointer
 }
 
 .pager{

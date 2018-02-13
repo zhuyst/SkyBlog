@@ -3,7 +3,7 @@ import {Alert, Badge, Pager, Panel} from 'react-bootstrap'
 
 import Comment from './Comment'
 import {connect} from "react-redux";
-import {listComments} from "../../../action/article/CommentAction";
+import {listComments} from "../../../action/article/ContentAction";
 
 class CommentList extends React.Component{
 
@@ -17,7 +17,8 @@ class CommentList extends React.Component{
         list.forEach((comment,i) => {
             if(i === list.length - 1){
                 commentList.push(
-                    <Comment key={comment.id} comment={comment} isLast={true}/>
+                    <Comment key={comment.id} comment={comment}
+                             isLast={true}/>
                 )
             }
             else {
@@ -79,7 +80,7 @@ class CommentList extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        article : state.article.article,
+        article : state.article,
         comments : state.article.comments
     }
 };

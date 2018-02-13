@@ -50,7 +50,7 @@ class EditContent extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        article : state.article.article
+        article : state.article
     }
 };
 
