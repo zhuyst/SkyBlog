@@ -1,8 +1,12 @@
 import React from 'react'
+import {connect} from "react-redux";
+import {deleteComment} from "../../../action/article/ContentAction";
 
 class Comment extends React.Component{
     render(){
-        const comment = this.props.comment;
+        const {comment, pageNum,articleId,
+            deleteComment} = this.props;
+        const id = comment.id;
 
         const className = this.props.isLast ? "comment comment_last" : "comment";
 
@@ -13,7 +17,7 @@ class Comment extends React.Component{
                     {comment.content}
                 </p>
                 <div className="comment_footer">
-                    <a>删除</a>
+                    <a onClick={() => deleteComment(id,articleId,pageNum)}>删除</a>
                     <a>回复</a>
                 </div>
             </div>
@@ -21,4 +25,24 @@ class Comment extends React.Component{
     }
 }
 
-export default Comment
+const mapStateToProps = state => {
+    return {
+        articleId : state.article.id,
+        pageNum : state.article.comments.page_num
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteComment : (id,articleId,pageNum) => {
+            dispatch(deleteComment(id,articleId,pageNum))
+        }
+    }
+};
+
+const CommentContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Comment);
+
+export default CommentContainer;

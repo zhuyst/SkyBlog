@@ -1,9 +1,6 @@
 import {SET_ARTICLE} from "../../action/article/ContentAction";
 import {GET_ARTICLE_INFO_RESPONSE, INSERT_ARTICLE_RESPONSE, UPDATE_ARTICLE_RESPONSE} from "../../action/ArticlesAction";
-import {
-    DELETE_COMMENT_RESPONSE, INSERT_COMMENT_RESPONSE,
-    LIST_COMMENTS_RESPONSE
-} from "../../action/article/CommentAction";
+import {LIST_COMMENTS_RESPONSE} from "../../action/article/ContentAction";
 import {concatList} from "../Util";
 
 export const initialArticle = {
@@ -16,69 +13,48 @@ export const initialArticle = {
     }
 };
 
-const initialState = {
-    article : initialArticle,
-    comments : {
-        list : [],
-        page_num : 1,
-        pages : 0,
-        total : 0
-    }
-};
-
-const convert = action => {
-    const article = action.article;
-    return {
-        ...article,
-        content: {
-            text : article.content,
-            selection: null
+const initialState = () => {
+    return Object.assign({
+        comments : {
+            list : [],
+            page_num : 1,
+            pages : 0,
+            total : 0
         }
-    }
+    },initialArticle)
 };
 
-const ContentReducer = (state = initialState,action) => {
+const ContentReducer = (state = initialState(),action) => {
+    let newList;
+    let comments;
+
     switch(action.type){
         case SET_ARTICLE:
-            return {
-                ...state,
-                article : action.article
+            return Object.assign(state,action.article);
+
+        case GET_ARTICLE_INFO_RESPONSE || INSERT_ARTICLE_RESPONSE || UPDATE_ARTICLE_RESPONSE:
+            const article = action.article;
+            const convertArticle = {
+                ...article,
+                content: {
+                    text : article.content,
+                    selection: null
+                }
             };
-        case GET_ARTICLE_INFO_RESPONSE:
-            return {
-                ...state,
-                article : convert(action)
-            };
-        case INSERT_ARTICLE_RESPONSE:
-            return {
-                ...state,
-                article : convert(action)
-            };
-        case UPDATE_ARTICLE_RESPONSE:
-            return {
-                ...state,
-                article : convert(action)
-            };
-        case INSERT_COMMENT_RESPONSE:
-            return {
-                ...state
-            };
+            return Object.assign(state,convertArticle);
+
         case LIST_COMMENTS_RESPONSE:
-            const comments = action.comments;
-            const newList = concatList(comments,state.comments.list);
+            comments = action.comments;
+            newList = concatList(comments,state.comments.list);
 
             return {
                 ...state,
                 comments : {
                     list: newList,
                     page_num: comments.page_num,
-                    page_size: comments.page_size,
+                    pages: comments.pages,
                     total: comments.total
                 }
-            };
-        case DELETE_COMMENT_RESPONSE:
-            return {
-                ...state
             };
         default :
             return state;
