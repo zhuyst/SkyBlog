@@ -17,7 +17,10 @@ class Comment extends React.Component{
                     {comment.content}
                 </p>
                 <div className="comment_footer">
-                    <a onClick={() => deleteComment(id,articleId,pageNum)}>删除</a>
+                    {
+                        this.props.admin &&
+                        <a onClick={() => deleteComment(id,articleId,pageNum)}>删除</a>
+                    }
                     <a>回复</a>
                 </div>
             </div>
@@ -28,7 +31,8 @@ class Comment extends React.Component{
 const mapStateToProps = state => {
     return {
         articleId : state.article.id,
-        pageNum : state.article.comments.page_num
+        pageNum : state.article.comments.page_num,
+        admin : state.login.user.admin
     }
 };
 
