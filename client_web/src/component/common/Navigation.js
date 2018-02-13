@@ -94,7 +94,7 @@ const mapStateToProps = state => {
         registerModel_show : state.navigation.registerModel_show,
         userInfoModel_show : state.navigation.userInfoModel_show,
         login_state : state.login.login_state,
-        user : state.user.user
+        user : state.login.user
     }
 };
 
