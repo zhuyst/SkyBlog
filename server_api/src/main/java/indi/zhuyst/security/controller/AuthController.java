@@ -51,7 +51,7 @@ public class AuthController extends BaseController{
      */
     @ApiOperation("通过老Token换取新Token")
     @RequestMapping(value = "/refresh",method = RequestMethod.POST)
-    public R<AccessToken> refresh(@ApiParam("老Token") String token){
+    public R<AccessToken> refresh(@ApiParam("老Token") @RequestParam String token){
         Integer userId = securityService.getIDByToken(token);
         User user = userService.getByID(userId);
 
