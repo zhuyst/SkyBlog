@@ -4,9 +4,10 @@ import {deleteComment} from "../../../action/article/ContentAction";
 
 class Comment extends React.Component{
     render(){
-        const {comment, pageNum,articleId,
+        const {comment, pageNum,articleId,login,
             deleteComment} = this.props;
         const id = comment.id;
+        const user = login.user;
 
         const className = this.props.isLast ? "comment comment_last" : "comment";
 
@@ -16,13 +17,16 @@ class Comment extends React.Component{
                     <strong>{comment.author.nickname} : </strong>
                     {comment.content}
                 </p>
-                <div className="comment_footer">
-                    {
-                        this.props.admin &&
-                        <a onClick={() => deleteComment(id,articleId,pageNum)}>删除</a>
-                    }
-                    <a>回复</a>
-                </div>
+                {
+                    login.ok &&
+                    <div className="comment_footer">
+                        {
+                            (user.admin || user.id === comment.author_id) &&
+                            <a onClick={() => deleteComment(id,articleId,pageNum)}>删除</a>
+                        }
+                        <a>回复</a>
+                    </div>
+                }
             </div>
         )
     }
@@ -32,7 +36,7 @@ const mapStateToProps = state => {
     return {
         articleId : state.article.id,
         pageNum : state.article.comments.page_num,
-        admin : state.login.user.admin
+        login : state.login
     }
 };
 

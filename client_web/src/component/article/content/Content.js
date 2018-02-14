@@ -11,6 +11,7 @@ import {initialArticle} from "../../../reducer/article/ContentReducer";
 import CommentSender from './CommentSender'
 import CommentList from './CommentList'
 import Article from "../Article";
+import ArticleTitle from "./ArticleTitle";
 
 import '../../../static/css/article/content.css'
 
@@ -28,15 +29,16 @@ class Content extends React.Component{
     }
 
     render(){
-        const {article,
+        const {article,login,
             editContent, deleteArticle} = this.props;
-        const {id,title,sub_title,content} = article;
+        const user = login.user;
+        const {id,content} = article;
 
         const contentArea = (
             <div>
-                <PageHeader>{title}  <small>{sub_title}</small></PageHeader>
+                <ArticleTitle article={article}/>
                 {
-                    this.props.admin &&
+                    user.admin &&
                     <ButtonGroup>
                         <Button bsStyle="primary" className="edit_button"
                                 onClick={() => editContent(id)}>编辑</Button>
@@ -51,7 +53,10 @@ class Content extends React.Component{
         const right = (
             <div>
                 <CommentList/>
-                <CommentSender/>
+                {
+                    login.ok &&
+                    <CommentSender/>
+                }
             </div>
         );
 
@@ -65,7 +70,7 @@ class Content extends React.Component{
 const mapStateToProps = state => {
     return {
         article : state.article,
-        admin : state.login.user.admin
+        login : state.login
     }
 };
 

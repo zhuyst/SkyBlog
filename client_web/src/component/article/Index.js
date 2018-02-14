@@ -7,7 +7,8 @@ import Navigation from './Navigation'
 import Content from './content/Content'
 
 import '../../static/css/article/article.css'
-import EditContent from "./edit/EditContent";
+import EditContent from "./content/edit/EditContent";
+import {connect} from "react-redux";
 
 class Index extends React.Component{
     componentWillMount(){
@@ -15,13 +16,17 @@ class Index extends React.Component{
     }
 
     render(){
+        const login = this.props.login;
         const path = this.props.match.path;
 
         return(
             <div className="articles_main">
                 <Route exact strict path={path} component={index}/>
                 <Route exact strict path={path + "/:id"} component={Content}/>
-                <Route path={path + "/:id/edit"} component={EditContent} />
+                {
+                    login.ok &&
+                    <Route path={path + "/:id/edit"} component={EditContent} />
+                }
             </div>
         )
     }
@@ -38,4 +43,15 @@ const index = () => (
     </Row>
 );
 
-export default Index
+const mapStateToProps = state => {
+    return {
+        login: state.login
+    }
+};
+
+const IndexContainer = connect(
+    mapStateToProps,
+    null
+)(Index);
+
+export default IndexContainer

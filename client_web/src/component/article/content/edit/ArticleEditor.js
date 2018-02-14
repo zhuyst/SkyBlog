@@ -5,10 +5,10 @@ import {push} from 'react-router-redux'
 import { Field,reduxForm,change } from 'redux-form'
 import {Button, ButtonGroup, Col, ControlLabel, FormGroup, Row} from "react-bootstrap";
 
-import {FORM_ARTICLE} from "../../../Constant";
-import FieldGroup from "../../common/FieldGroup";
+import {FORM_ARTICLE} from "../../../../Constant";
+import FieldGroup from "../../../common/FieldGroup";
 
-import '../../../static/css/article/editor.css'
+import '../../../../static/css/article/editor.css'
 import {setArticle} from "../../../action/article/ContentAction";
 import {deleteArticle, insertArticle, updateArticle} from "../../../action/ArticlesAction";
 
