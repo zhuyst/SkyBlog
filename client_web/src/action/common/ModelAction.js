@@ -5,7 +5,7 @@ import {startSubmit,stopSubmit} from 'redux-form'
 import {LOGIN_URL, HttpMethod, ContentType, FAIL_RESULT, checkStatus, COOKIE_TOKEN} from "../../Api";
 import {FORM_LOGIN} from "../../Constant";
 import {info} from "./NotifyAction";
-import {afterLogin} from "../UsersAction";
+import {afterLogin} from "../user/UsersAction";
 
 export const SET_LOGIN_MODEL_SHOW = "SET_LOGIN_MODEL_SHOW";
 export const SET_REGISTER_MODEL_SHOW = "SET_REGISTER_MODEL_SHOW";

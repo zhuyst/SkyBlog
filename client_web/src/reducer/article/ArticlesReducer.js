@@ -1,4 +1,4 @@
-import {LIST_ARTICLES_RESPONSE} from "../../action/ArticlesAction";
+import {LIST_ARTICLES_RESPONSE} from "../../action/article/ArticlesAction";
 import {concatList} from "../Util";
 
 const initialState = {

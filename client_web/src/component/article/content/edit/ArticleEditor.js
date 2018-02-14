@@ -10,7 +10,7 @@ import FieldGroup from "../../../common/FieldGroup";
 
 import '../../../../static/css/article/editor.css'
 import {setArticle} from "../../../../action/article/ContentAction";
-import {deleteArticle, insertArticle, updateArticle} from "../../../../action/ArticlesAction";
+import {deleteArticle, insertArticle, updateArticle} from "../../../../action/article/ArticlesAction";
 
 import 'react-mde/lib/styles/css/react-mde.css';
 import 'react-mde/lib/styles/css/react-mde-toolbar.css';

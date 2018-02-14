@@ -1,5 +1,5 @@
 import {LOGIN_CLEAR, LOGIN_RESPONSE} from "../../action/common/ModelAction";
-import {SET_LOGIN_USER, UPDATE_USER_INFO_RESPONSE} from "../../action/UsersAction";
+import {SET_LOGIN_USER, UPDATE_USER_INFO_RESPONSE} from "../../action/user/UsersAction";
 
 const initialUser = {
     id: 0,

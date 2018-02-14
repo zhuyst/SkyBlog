@@ -2,10 +2,10 @@ import {startSubmit, stopSubmit} from 'redux-form'
 import {replace} from 'react-router-redux'
 import {change} from 'redux-form'
 
-import {_delete, _post, _get, _put, ARTICLE_API_URL} from "../Api";
-import {error, success} from "./common/NotifyAction";
-import {ARTICLE_PAGE_SIZE, FORM_ARTICLE, FORM_COMMENT} from "../Constant";
-import {listComments} from "./article/ContentAction";
+import {_delete, _post, _get, _put, ARTICLE_API_URL} from "../../Api";
+import {error, success} from "../common/NotifyAction";
+import {ARTICLE_PAGE_SIZE, FORM_ARTICLE, FORM_COMMENT} from "../../Constant";
+import {listComments} from "./ContentAction";
 
 export const LIST_ARTICLES_RESPONSE = "LIST_ARTICLES_RESPONSE";
 export const GET_ARTICLE_INFO_RESPONSE = "GET_ARTICLE_INFO_RESPONSE";

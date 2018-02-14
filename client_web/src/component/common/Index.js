@@ -14,12 +14,12 @@ import Home from '../home/Index'
 import Article from '../article/Index'
 import MsgBoard from '../msgboard/Index'
 
-import {checkUserLoginState} from "../../action/UsersAction";
+import {checkUserLoginState} from "../../action/user/UsersAction";
 
 import '../../static/css/common/common.css'
-import {listArticles} from "../../action/ArticlesAction";
+import {listArticles} from "../../action/article/ArticlesAction";
 import {ARTICLE_PAGE_SIZE} from "../../Constant";
-import {listClassify} from "../../action/ClassifyAction";
+import {listClassify} from "../../action/article/ClassifyAction";
 
 class Index extends React.Component{
     componentWillMount(){
