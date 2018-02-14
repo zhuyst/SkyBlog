@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 import ArticleEditor from "./ArticleEditor";
 import ArticleTitle from "../ArticleTitle";
-import Article from "../../Article";
+import Article from "../Article";
 
 import {initialArticle} from "../../../../reducer/article/ContentReducer";
 import {deleteArticle, getArticleInfo} from "../../../../action/ArticlesAction";
