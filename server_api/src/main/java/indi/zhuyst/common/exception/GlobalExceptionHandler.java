@@ -63,4 +63,9 @@ public class GlobalExceptionHandler {
     public R accessDeniedExceptionHandler(AccessDeniedException e){
         return R.error(CodeEnum.FORBIDDEN.getCode(),e.getMessage());
     }
+
+    @ExceptionHandler(CommonException.class)
+    public R commonExceptionHandler(CommonException e){
+        return R.error(e.getCode(),e.getMessage());
+    }
 }
