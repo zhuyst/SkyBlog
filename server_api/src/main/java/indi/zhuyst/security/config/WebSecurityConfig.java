@@ -22,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * Spring Security配置类
+ * @author zhuyst
  */
 @Configuration
 @EnableWebSecurity
