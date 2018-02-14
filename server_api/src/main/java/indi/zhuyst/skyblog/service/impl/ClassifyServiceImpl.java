@@ -73,6 +73,17 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     @Transactional
     public List<ClassifyDTO> deleteClassify(Integer id){
         boolean isSuccess = dao.deleteByPrimaryKey(id) > 0;
+
+        if(isSuccess){
+
+            // 删除分类后，将分类下的文章归为未分类
+            List<Article> articles = articleDao.selectBaseInfoByClassify(id);
+            for(Article article : articles){
+                article.setClassifyId(NOT_CLASSIFY_KEY);
+                articleDao.updateByPrimaryKeySelective(article);
+            }
+        }
+
         return this.produceDTOList(isSuccess);
     }
 
