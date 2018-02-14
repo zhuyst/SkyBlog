@@ -5,7 +5,7 @@ import { Field,reduxForm } from 'redux-form'
 
 import {FORM_USERINFO} from "../../Constant";
 import {validate as validateInfo} from "./RegisterModel";
-import {updateUserInfo} from "../../action/UsersAction";
+import {updateUserInfo} from "../../action/user/UsersAction";
 
 class UserInfoModel extends React.Component{
     render(){

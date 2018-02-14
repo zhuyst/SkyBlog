@@ -3,7 +3,7 @@ import {Alert, PanelGroup} from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import Preview from './Preview'
-import {listArticles} from "../../action/ArticlesAction";
+import {listArticles} from "../../action/article/ArticlesAction";
 
 class Articles extends React.Component{
 

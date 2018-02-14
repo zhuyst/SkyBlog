@@ -1,4 +1,4 @@
-import {_get, CLASSIFY_API_URL} from "../Api";
+import {_get, CLASSIFY_API_URL} from "../../Api";
 
 export const LIST_CLASSIFY_RESPONSE = "LIST_CLASSIFY_RESPONSE";
 export const INSERT_CLASSIFY_RESPONSE = "INSERT_CLASSIFY_RESPONSE";

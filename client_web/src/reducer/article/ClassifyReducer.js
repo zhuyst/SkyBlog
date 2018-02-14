@@ -1,4 +1,4 @@
-import {LIST_CLASSIFY_RESPONSE} from "../../action/ClassifyAction";
+import {LIST_CLASSIFY_RESPONSE} from "../../action/article/ClassifyAction";
 
 const initialState = {
     list : []

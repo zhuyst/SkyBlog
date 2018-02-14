@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import {push} from 'react-router-redux'
 
 import {setArticle} from "../../../action/article/ContentAction";
-import {deleteArticle, getArticleInfo} from "../../../action/ArticlesAction";
+import {deleteArticle, getArticleInfo} from "../../../action/article/ArticlesAction";
 import {initialArticle} from "../../../reducer/article/ContentReducer";
 
 import CommentSender from './CommentSender'

@@ -7,7 +7,7 @@ import ArticlesReducer from './article/ArticlesReducer'
 import NavigationReducer from './common/NavigationReducer'
 import ContentReducer from "./article/ContentReducer";
 import LoginReducer from './common/LoginReducer'
-import UserReducer from './common/UsersReducer'
+import UserReducer from './user/UsersReducer'
 import ClassifyReducer from './article/ClassifyReducer'
 
 const AppReducer = combineReducers({

@@ -5,10 +5,10 @@ import {change, startSubmit, stopSubmit} from 'redux-form'
 import {
     USER_API_URL, FAIL_RESULT, _post, checkStatus, _put, REFRESH_URL, ContentType, HttpMethod,
     COOKIE_TOKEN
-} from "../Api";
-import {FORM_REGISTER,FORM_USERINFO} from "../Constant";
-import {login, loginResponse, setLoginModelShow, setUserInfoModelShow} from "./common/ModelAction";
-import {success, error, info} from "./common/NotifyAction";
+} from "../../Api";
+import {FORM_REGISTER,FORM_USERINFO} from "../../Constant";
+import {login, loginResponse, setLoginModelShow, setUserInfoModelShow} from "../common/ModelAction";
+import {success, error, info} from "../common/NotifyAction";
 
 export const LIST_USERS = "LIST_USERS";
 export const REGISTER_USER_RESPONSE = "REGISTER_USER_RESPONSE";
