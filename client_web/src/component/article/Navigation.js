@@ -6,6 +6,33 @@ import {LinkContainer} from 'react-router-bootstrap'
 
 class Navigation extends React.Component{
     render(){
+        const {admin,total,classifyList} = this.props;
+
+        let list = [];
+        classifyList.forEach(classify => {
+            const articles = classify.articles;
+            const articleList = [];
+            articles.forEach(article => {
+                articleList.push(
+                    <LinkContainer to={`/article/${article.id}`}>
+                        <ListGroupItem>{article.title}</ListGroupItem>
+                    </LinkContainer>
+                )
+            });
+
+            list.push(
+                <ListGroup>
+                    <LinkContainer to="/article">
+                        <ListGroupItem href="#" active>
+                            {classify.name}
+                            <Badge>{articles.length}</Badge>
+                        </ListGroupItem>
+                    </LinkContainer>
+                    {articleList}
+                </ListGroup>
+            )
+        });
+
         return(
             <Well>
                 <div className="navigation_title">
@@ -15,34 +42,23 @@ class Navigation extends React.Component{
                 </div>
 
                 {
-                    this.props.admin &&
+                    admin &&
                     <LinkContainer to="/article/new/edit">
                         <Button bsStyle="success" bsSize="large" block
-                                className="navigation_button">  新增文章  </Button>
+                                className="navigation_button">新增文章</Button>
                     </LinkContainer>
                 }
 
                 <ListGroup>
-                    <ListGroupItem href="#" active>所有文章<Badge>{this.props.total}</Badge></ListGroupItem>
+                    <LinkContainer to="/article">
+                        <ListGroupItem active>
+                            所有文章
+                            <Badge>{total}</Badge>
+                        </ListGroupItem>
+                    </LinkContainer>
                 </ListGroup>
 
-                <ListGroup>
-                    <ListGroupItem href="#" active>分类1<Badge>42</Badge></ListGroupItem>
-                    <ListGroupItem href="#">分类1 文章1</ListGroupItem>
-                    <ListGroupItem href="#">分类1 文章2</ListGroupItem>
-                </ListGroup>
-
-                <ListGroup>
-                    <ListGroupItem href="#" active>分类2<Badge>42</Badge></ListGroupItem>
-                    <ListGroupItem href="#">分类2 文章1</ListGroupItem>
-                    <ListGroupItem href="#">分类2 文章2</ListGroupItem>
-                </ListGroup>
-
-                <ListGroup>
-                    <ListGroupItem href="#" active>分类3<Badge>42</Badge></ListGroupItem>
-                    <ListGroupItem href="#">分类3 文章1</ListGroupItem>
-                    <ListGroupItem href="#">分类3 文章2</ListGroupItem>
-                </ListGroup>
+                {list}
             </Well>
         )
     }
@@ -51,6 +67,7 @@ class Navigation extends React.Component{
 const mapStateToProps = state => {
     return {
         total : state.articles.total,
+        classifyList : state.classify.list,
         admin : state.login.user.admin
     }
 };

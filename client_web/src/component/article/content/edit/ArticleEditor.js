@@ -102,7 +102,6 @@ class ArticleEditor extends React.Component{
                                 <FormGroup controlId="classify_id">
                                     <ControlLabel>文章分类</ControlLabel>
                                     <Field name="classify_id" component="select" className="form-control">
-                                        <option value="">未分类</option>
                                         {classifyOptions}
                                     </Field>
                                 </FormGroup>
