@@ -36,7 +36,7 @@ const ContentReducer = (state = initialState(),action) => {
 
     switch(action.type){
         case SET_ARTICLE:
-            return Object.assign(state,action.article);
+            return Object.assign({},state,action.article);
 
         case GET_ARTICLE_INFO_RESPONSE || INSERT_ARTICLE_RESPONSE || UPDATE_ARTICLE_RESPONSE:
             const article = action.article;
@@ -47,7 +47,7 @@ const ContentReducer = (state = initialState(),action) => {
                     selection: null
                 }
             };
-            return Object.assign(state,convertArticle,{
+            return Object.assign({},state,convertArticle,{
                 comments : initialComments
             });
 
