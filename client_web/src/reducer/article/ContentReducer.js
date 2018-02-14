@@ -7,6 +7,10 @@ export const initialArticle = {
     id : 0,
     title : "文章标题",
     sub_title : "文章副标题",
+
+    classify : null,
+    classify_id : 0,
+
     content : {
         text: "#### 文章内容\n`Markdown编辑器`",
         selection: null

@@ -19,6 +19,7 @@ import {checkUserLoginState} from "../../action/UsersAction";
 import '../../static/css/common/common.css'
 import {listArticles} from "../../action/ArticlesAction";
 import {ARTICLE_PAGE_SIZE} from "../../Constant";
+import {listClassify} from "../../action/ClassifyAction";
 
 class Index extends React.Component{
     componentWillMount(){
@@ -27,6 +28,7 @@ class Index extends React.Component{
 
     componentDidMount(){
         this.props.initArticles();
+        this.props.initClassify();
     }
 
     render(){
@@ -64,6 +66,9 @@ const mapDispatchToProps = dispatch => {
         },
         initArticles : () => {
             dispatch(listArticles(1,ARTICLE_PAGE_SIZE))
+        },
+        initClassify : () => {
+            dispatch(listClassify())
         }
     }
 };
