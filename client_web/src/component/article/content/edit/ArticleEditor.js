@@ -9,8 +9,8 @@ import {FORM_ARTICLE} from "../../../../Constant";
 import FieldGroup from "../../../common/FieldGroup";
 
 import '../../../../static/css/article/editor.css'
-import {setArticle} from "../../../action/article/ContentAction";
-import {deleteArticle, insertArticle, updateArticle} from "../../../action/ArticlesAction";
+import {setArticle} from "../../../../action/article/ContentAction";
+import {deleteArticle, insertArticle, updateArticle} from "../../../../action/ArticlesAction";
 
 import 'react-mde/lib/styles/css/react-mde.css';
 import 'react-mde/lib/styles/css/react-mde-toolbar.css';

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, ButtonGroup, PageHeader} from "react-bootstrap";
+import {Button, ButtonGroup} from "react-bootstrap";
 import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 import {push} from 'react-router-redux'
