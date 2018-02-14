@@ -1,9 +1,14 @@
 package indi.zhuyst.security.config;
 
+import indi.zhuyst.common.enums.CodeEnum;
+import indi.zhuyst.common.pojo.R;
 import indi.zhuyst.security.filter.TokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +18,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Spring Security配置类
@@ -79,6 +90,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
 
+                // 处理异常
+                .exceptionHandling()
+                    .accessDeniedHandler(accessDeniedHandler())
+                    .and()
+
                 // 设置TokenFilter作为Token认证
                 .addFilterBefore(tokenFilter,UsernamePasswordAuthenticationFilter.class)
 
@@ -95,5 +111,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 // 其他请求均进行权限拦截
                 .anyRequest()
                     .authenticated();
+    }
+
+    /**
+     * 设置未授权或没有权限时访问的内容
+     * @return Handler
+     */
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler(){
+        return (request, response, accessDeniedException) -> {
+            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            response.getWriter().write(R.error(CodeEnum.FORBIDDEN.getCode(),
+                    "未授权或没有权限访问该接口").toJsonStr());
+        };
     }
 }
