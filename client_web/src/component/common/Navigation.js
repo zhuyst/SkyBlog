@@ -17,10 +17,11 @@ class Navigation extends React.Component{
     render(){
         const { setLoginModelShow,setRegisterModelShow,logout,setUserInfoModelShow,
             loginModel_show,registerModel_show,userInfoModel_show,
-            login_state,user } = this.props;
+            login } = this.props;
+        const user = login.user;
 
         let right;
-        if(login_state.ok){
+        if(login.ok){
             right = (
                 <Nav pullRight>
                     <NavDropdown title={user.nickname} id={user.id}>
@@ -93,8 +94,7 @@ const mapStateToProps = state => {
         loginModel_show : state.navigation.loginModel_show,
         registerModel_show : state.navigation.registerModel_show,
         userInfoModel_show : state.navigation.userInfoModel_show,
-        login_state : state.login.login_state,
-        user : state.login.user
+        login : state.login
     }
 };
 
