@@ -10,4 +10,6 @@ import java.util.List;
 public interface ArticleDao extends BaseDao<Article> {
 
     List<Article> selectAllWithoutID(int id);
+
+    List<String> selectTitleByClassify(int classifyId);
 }

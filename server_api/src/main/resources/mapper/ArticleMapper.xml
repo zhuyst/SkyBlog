@@ -49,4 +49,8 @@
     FROM article
     WHERE id != #{id}
   </select>
+  <select id="selectTitleByClassify" resultType="java.lang.String">
+    SELECT title from article
+    WHERE classify_id = #{classifyId}
+  </select>
 </mapper>

@@ -1,13 +1,16 @@
 package indi.zhuyst.skyblog.service.impl;
 
+import indi.zhuyst.skyblog.dao.ArticleDao;
 import indi.zhuyst.skyblog.dao.ClassifyDao;
 import indi.zhuyst.skyblog.entity.Classify;
+import indi.zhuyst.skyblog.pojo.ClassifyDTO;
 import indi.zhuyst.skyblog.service.ClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,6 +18,9 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
 
     @Autowired
     private ClassifyDao dao;
+
+    @Autowired
+    private ArticleDao articleDao;
 
     @Override
     public void run(String... args) throws Exception {
@@ -30,18 +36,27 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     }
 
     @Override
-    public Classify getById(int id){
-        return dao.selectByPrimaryKey(id);
+    public ClassifyDTO getById(int id){
+        Classify classify = dao.selectByPrimaryKey(id);
+        return this.produceDTO(classify);
     }
 
     @Override
-    public List<Classify> listClassify(){
-        return dao.selectAll();
+    public List<ClassifyDTO> listClassify(){
+        List<Classify> list = dao.selectAll();
+        List<ClassifyDTO> dtoList = new ArrayList<>();
+
+        for(Classify classify : list){
+            ClassifyDTO dto = this.produceDTO(classify);
+            dtoList.add(dto);
+        }
+
+        return dtoList;
     }
 
     @Override
     @Transactional
-    public List<Classify> saveClassify(Classify classify){
+    public List<ClassifyDTO> saveClassify(Classify classify){
         boolean isSuccess;
         if(classify.getId() == null){
             isSuccess = dao.insertUseGeneratedKeys(classify) > 0;
@@ -50,18 +65,31 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
             isSuccess = dao.updateByPrimaryKeySelective(classify) > 0;
         }
 
-        return this.produceList(isSuccess);
+        return this.produceDTOList(isSuccess);
     }
 
     @Override
     @Transactional
-    public List<Classify> deleteClassify(Integer id){
+    public List<ClassifyDTO> deleteClassify(Integer id){
         boolean isSuccess = dao.deleteByPrimaryKey(id) > 0;
-        return this.produceList(isSuccess);
+        return this.produceDTOList(isSuccess);
     }
 
-    private List<Classify> produceList(boolean isSuccess){
-        List<Classify> list = null;
+    private ClassifyDTO produceDTO(Classify classify){
+        if(classify == null){
+            return null;
+        }
+
+        ClassifyDTO dto = new ClassifyDTO(classify);
+
+        List<String> titles = articleDao.selectTitleByClassify(classify.getId());
+        dto.setArticleTitles(titles);
+
+        return dto;
+    }
+
+    private List<ClassifyDTO> produceDTOList(boolean isSuccess){
+        List<ClassifyDTO> list = null;
 
         if(isSuccess){
             list = this.listClassify();
