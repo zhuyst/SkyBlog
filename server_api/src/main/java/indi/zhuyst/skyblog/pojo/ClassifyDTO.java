@@ -1,5 +1,6 @@
 package indi.zhuyst.skyblog.pojo;
 
+import indi.zhuyst.skyblog.entity.Article;
 import indi.zhuyst.skyblog.entity.Classify;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -21,11 +22,11 @@ public class ClassifyDTO extends Classify{
     private static final long serialVersionUID = -8733947910859840369L;
 
     /**
-     * 文章标题列表
+     * 该分类下的文章列表
      * 通过{@link indi.zhuyst.skyblog.entity.Article#classifyId}获得
      */
-    @ApiModelProperty("文章标题列表")
-    private List<String> titles;
+    @ApiModelProperty("该分类下的文章列表")
+    private List<Article> articles;
 
     public ClassifyDTO(Classify classify){
         BeanUtils.copyProperties(classify,this);

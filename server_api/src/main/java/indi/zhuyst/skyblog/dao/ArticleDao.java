@@ -11,5 +11,5 @@ public interface ArticleDao extends BaseDao<Article> {
 
     List<Article> selectAllWithoutID(int id);
 
-    List<String> selectTitleByClassify(int classifyId);
+    List<Article> selectBaseInfoByClassify(int classifyId);
 }

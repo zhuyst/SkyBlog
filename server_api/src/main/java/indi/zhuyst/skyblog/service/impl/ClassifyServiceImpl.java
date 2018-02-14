@@ -2,6 +2,7 @@ package indi.zhuyst.skyblog.service.impl;
 
 import indi.zhuyst.skyblog.dao.ArticleDao;
 import indi.zhuyst.skyblog.dao.ClassifyDao;
+import indi.zhuyst.skyblog.entity.Article;
 import indi.zhuyst.skyblog.entity.Classify;
 import indi.zhuyst.skyblog.pojo.ClassifyDTO;
 import indi.zhuyst.skyblog.service.ClassifyService;
@@ -82,8 +83,8 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
 
         ClassifyDTO dto = new ClassifyDTO(classify);
 
-        List<String> titles = articleDao.selectTitleByClassify(classify.getId());
-        dto.setArticleTitles(titles);
+        List<Article> articles = articleDao.selectBaseInfoByClassify(classify.getId());
+        dto.setArticles(articles);
 
         return dto;
     }
