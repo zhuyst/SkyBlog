@@ -1,5 +1,6 @@
 package indi.zhuyst.common.controller;
 
+import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.pojo.R;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.util.SecurityUtils;
@@ -28,7 +29,7 @@ public abstract class BaseController {
      * @return 结果对象
      */
     protected <T> R<T> produceResult(T pojo,String errorMsg){
-        return pojo == null ? R.error(errorMsg) : R.ok(pojo);
+        return this.produceResult(pojo, CodeEnum.ERROR.getCode(),errorMsg);
     }
 
     /**
