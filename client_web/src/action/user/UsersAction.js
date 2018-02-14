@@ -4,17 +4,19 @@ import {change, startSubmit, stopSubmit} from 'redux-form'
 
 import {
     USER_API_URL, FAIL_RESULT, _post, checkStatus, _put, REFRESH_URL, ContentType, HttpMethod,
-    COOKIE_TOKEN
+    COOKIE_TOKEN, _get, _delete
 } from "../../Api";
 import {FORM_REGISTER,FORM_USERINFO} from "../../Constant";
 import {login, loginResponse, setLoginModelShow, setUserInfoModelShow} from "../common/ModelAction";
 import {success, error, info} from "../common/NotifyAction";
 
-export const LIST_USERS = "LIST_USERS";
+export const LIST_USERS_RESPONSE = "LIST_USERS_RESPONSE";
+export const GET_USER_INFO_RESPONSE = "GET_USER_INFO_RESPONSE";
+
 export const REGISTER_USER_RESPONSE = "REGISTER_USER_RESPONSE";
-export const DELETE_USER = "DELETE_USER";
-export const GET_USER_INFO = "GET_USER_INFO";
+export const DELETE_USER_RESPONSE = "DELETE_USER_RESPONSE";
 export const UPDATE_USER_INFO_RESPONSE = "UPDATE_USER_INFO_RESPONSE";
+
 export const SET_LOGIN_USER = "SET_LOGIN_USER";
 
 export const registerUser = (user) => (dispatch) => {
@@ -46,24 +48,44 @@ const registerUserResponse = (result) => {
     }
 };
 
-export const listUsers = (pageNum) => {
+export const listUsers = (pageNum,pageSize) => dispatch => {
+    const url = USER_API_URL + `/list/${pageNum}`;
+    return _get(url,{
+        pageNum : pageNum,
+        pageSize : pageSize
+    }).then(result => dispatch(listUsersResponse(result)))
+};
+
+const listUsersResponse = result => {
     return {
-        type : LIST_USERS,
-        url : USER_API_URL + `/list/${pageNum}`,
+        type : LIST_USERS_RESPONSE,
+        users : result.entity
     }
 };
 
-export const deleteUser = (id) => {
+export const deleteUser = id => dispatch => {
+    const url =  USER_API_URL + `/${id}`;
+    return _delete(url)
+        .then(result => dispatch(deleteUserResponse(result)))
+};
+
+const deleteUserResponse = result => {
     return {
-        type : DELETE_USER,
-        url : USER_API_URL + `/${id}`,
+        type : DELETE_USER_RESPONSE,
+        result : result
     }
 };
 
-export const getUserInfo = (id) => {
+export const getUserInfo = id => dispatch => {
+    const url = USER_API_URL + `/${id}`;
+    return _get(url)
+        .then(result => dispatch(getUserInfoResponse(result)))
+};
+
+const getUserInfoResponse = result => {
     return {
-        type : GET_USER_INFO,
-        url : USER_API_URL + `/${id}`,
+        type : GET_USER_INFO_RESPONSE,
+        user : result.entity
     }
 };
 
