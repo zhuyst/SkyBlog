@@ -76,6 +76,18 @@ public class Article extends BaseEntity {
 
     public Article(Integer id,String title, String subTitle,
                    Integer classifyId, Integer authorId,
+                   Date createDate, Date updateDate) {
+        this.id = id;
+        this.title = title;
+        this.subTitle = subTitle;
+        this.classifyId = classifyId;
+        this.authorId = authorId;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
+
+    public Article(Integer id,String title, String subTitle,
+                   Integer classifyId, Integer authorId,
                    Date createDate, Date updateDate,
                    String content) {
         this.id = id;
