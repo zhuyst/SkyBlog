@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ClassifyService {
 
+    int NOT_CLASSIFY_KEY = 1;
+
     Classify getById(int id);
 
     List<Classify> listClassify();

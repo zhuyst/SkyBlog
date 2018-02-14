@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public interface MsgBoardService{
 
+    int MSG_BOARD_KEY = 1;
+
     CommentDTO getMsg(int id);
 
     PageInfo<CommentDTO> listMsg(Query<Comment> query);
