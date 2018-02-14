@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import {PageHeader} from "react-bootstrap";
 import {connect} from "react-redux";
 
 import ArticleEditor from "./ArticleEditor";
-import Article from "../Article";
+import ArticleTitle from "../ArticleTitle";
+import Article from "../../Article";
 
-import {initialArticle} from "../../../reducer/article/ContentReducer";
-import {deleteArticle, getArticleInfo} from "../../../action/ArticlesAction";
-import {setArticle} from "../../../action/article/ContentAction";
+import {initialArticle} from "../../../../reducer/article/ContentReducer";
+import {deleteArticle, getArticleInfo} from "../../../../action/ArticlesAction";
+import {setArticle} from "../../../../action/article/ContentAction";
 
 class EditContent extends React.Component{
     componentWillMount(){
@@ -28,16 +28,15 @@ class EditContent extends React.Component{
     }
 
     render(){
-        const {article} = this.props;
-        const {title,sub_title,content} = article;
+        const article = this.props.article;
 
         const contentArea = (
             <ArticleEditor article={article} />
         );
         const right = (
             <div>
-                <PageHeader>{title}  <small>{sub_title}</small></PageHeader>
-                <ReactMarkdown source={content.text}/>
+                <ArticleTitle article={article}/>
+                <ReactMarkdown source={article.content.text}/>
             </div>
         );
 
