@@ -10,7 +10,7 @@ import {initialArticle} from "../../../reducer/article/ContentReducer";
 
 import CommentSender from './CommentSender'
 import CommentList from './CommentList'
-import Article from "../Article";
+import Article from "./Article";
 import ArticleTitle from "./ArticleTitle";
 
 import '../../../static/css/article/content.css'
