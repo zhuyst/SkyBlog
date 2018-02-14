@@ -12,7 +12,7 @@ class LoginModel extends React.Component{
     render(){
         const {show,onHide,
             submitting,handleSubmit,
-            login_state,loginClear} = this.props;
+            login,loginClear} = this.props;
 
         return (
             <Modal show={show} onHide={onHide}
@@ -22,9 +22,9 @@ class LoginModel extends React.Component{
                 </Modal.Header>
                 <form onSubmit={handleSubmit}>
                     <Modal.Body>
-                        {login_state.ok === false &&
+                        {login.ok === false &&
                         <Alert bsStyle="danger" onDismiss={loginClear}>
-                            <p>{login_state.message}</p>
+                            <p>{login.message}</p>
                         </Alert>
                         }
                         <FieldGroup
@@ -33,14 +33,14 @@ class LoginModel extends React.Component{
                             label="用户名"
                             placeholder="请输入用户名"
                             mode={MODE_NULL}
-                            error={login_state.ok}/>
+                            error={login.ok}/>
                         <FieldGroup
                             name="password"
                             type="password"
                             label="密码"
                             placeholder="请输入密码"
                             mode={MODE_NULL}
-                            error={login_state.ok}/>
+                            error={login.ok}/>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button disabled={submitting} onClick={onHide}> 关闭 </Button>
@@ -54,7 +54,7 @@ class LoginModel extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        login_state : state.login.login_state
+        login : state.login
     }
 };
 

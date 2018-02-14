@@ -9,10 +9,8 @@ const initialUser = {
 };
 
 const initialState = {
-    login_state : {
-        ok : null,
-        message : null
-    },
+    ok : null,
+    message : null,
     user : initialUser
 };
 
@@ -23,32 +21,29 @@ const LoginReducer = (state = initialState,action) => {
         case LOGIN_CLEAR:{
             return {
                 ...state,
-                login_state : {
-                    ok : null
-                },
+                ok : null,
                 user : initialUser
             }
         }
         case LOGIN_RESPONSE:{
-            let login_state = {
-                ok : false,
-                message : null
-            };
+            let ok = false;
+            let message = null;
 
             if(result.code === 200){
-                login_state.ok = true;
+                ok = true;
             }
             else if(result.code === 403){
-                login_state.ok = null;
+                ok = null;
             }
             else {
-                login_state.ok = false;
-                login_state.message = result.message
+                ok = false;
+                message = result.message
             }
 
             return {
                 ...state,
-                login_state : login_state
+                ok : ok,
+                message : message
             }
         }
 
