@@ -3,8 +3,12 @@ package indi.zhuyst.skyblog.controller;
 import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.enums.CodeEnum;
+import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.R;
+import indi.zhuyst.security.pojo.AccessToken;
+import indi.zhuyst.security.pojo.SecurityUser;
+import indi.zhuyst.security.service.SecurityService;
 import indi.zhuyst.skyblog.entity.User;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.UserService;
@@ -26,6 +30,9 @@ public class UserController extends BaseController{
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private SecurityService securityService;
+
     @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
     @ApiOperation(value = "更新用户信息")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN') or #id == authentication.principal.id")
@@ -46,10 +53,17 @@ public class UserController extends BaseController{
 
     @RequestMapping(value = "/public/",method = RequestMethod.POST)
     @ApiOperation(value = "注册新用户")
-    public R<UserDTO> register(@ApiParam("用户对象") @Valid @RequestBody User newUser){
+    public R<AccessToken> register(@ApiParam("用户对象") @Valid @RequestBody User newUser){
         newUser.setId(null);
-        UserDTO pojo = userService.saveUser(newUser);
-        return produceResult(pojo,"用户注册失败");
+
+        User user = userService.save(newUser);
+        if(user == null){
+            throw new CommonException("用户注册失败");
+        }
+
+        SecurityUser securityUser = new SecurityUser(user);
+        AccessToken accessToken = securityService.generateToken(securityUser);
+        return R.ok(accessToken);
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
