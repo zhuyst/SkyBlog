@@ -14,6 +14,7 @@ import indi.zhuyst.skyblog.pojo.ArticleDTO;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.ArticleService;
 import indi.zhuyst.skyblog.service.ClassifyService;
+import indi.zhuyst.skyblog.service.MsgBoardService;
 import indi.zhuyst.skyblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
 
     @Override
     public Article getByID(int id) {
-        if(id == MsgBoardServiceImpl.MSG_BOARD_KEY){
+        if(id == MsgBoardService.MSG_BOARD_KEY){
             return null;
         }
 
@@ -47,6 +48,10 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
             article.setCreateDate(new Date());
         }
         article.setUpdateDate(new Date());
+
+        if(article.getClassifyId() == null){
+            article.setClassifyId(ClassifyService.NOT_CLASSIFY_KEY);
+        }
 
         User user = SecurityUtils.getUser();
         article.setAuthorId(user.getId());

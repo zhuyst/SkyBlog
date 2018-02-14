@@ -4,16 +4,30 @@ import indi.zhuyst.skyblog.dao.ClassifyDao;
 import indi.zhuyst.skyblog.entity.Classify;
 import indi.zhuyst.skyblog.service.ClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class ClassifyServiceImpl implements ClassifyService{
+public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
 
     @Autowired
     private ClassifyDao dao;
+
+    @Override
+    public void run(String... args) throws Exception {
+        Classify classify = this.getById(NOT_CLASSIFY_KEY);
+        if(classify == null){
+            classify = new Classify();
+
+            classify.setId(NOT_CLASSIFY_KEY);
+            classify.setName("未分类");
+
+            dao.insertSelective(classify);
+        }
+    }
 
     @Override
     public Classify getById(int id){
