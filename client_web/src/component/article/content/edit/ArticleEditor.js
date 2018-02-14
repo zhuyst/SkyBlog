@@ -32,14 +32,10 @@ class ArticleEditor extends React.Component{
     };
 
     submit = (data,back) => {
-        const {id,title,sub_title,content} = data;
         const article = {
-            id : id,
-            title : title,
-            sub_title : sub_title,
-            content : content.text
+            ...data,
+            content : data.content.text
         };
-
         if(data.id === 0){
             this.props.insertArticle(article,back);
         }
@@ -49,12 +45,22 @@ class ArticleEditor extends React.Component{
     };
 
     render(){
-        const {submitting,handleSubmit,goBack,
+        const {classifyList,submitting,handleSubmit,goBack,
             deleteArticle} = this.props;
 
         const id = this.props.article.id;
         const isNew = (id === 0);
         const action = isNew ? "新增" : "修改";
+
+        const classifyOptions = [];
+        classifyList.forEach(classify => {
+            classifyOptions.push(
+                <option key={classify.id}
+                        value={classify.id}>
+                    {classify.name}</option>
+            )
+        });
+
         return (
             <div>
                 <ButtonGroup>
@@ -93,13 +99,11 @@ class ArticleEditor extends React.Component{
                         />
                         <Row>
                             <Col md={8} sm={12}>
-                                <FormGroup controlId="classify">
+                                <FormGroup controlId="classify_id">
                                     <ControlLabel>文章分类</ControlLabel>
-                                    <Field name="classify" component="select" className="form-control">
+                                    <Field name="classify_id" component="select" className="form-control">
                                         <option value="">未分类</option>
-                                        <option value={1}>分类1</option>
-                                        <option value={2}>分类2</option>
-                                        <option value={3}>分类3</option>
+                                        {classifyOptions}
                                     </Field>
                                 </FormGroup>
                             </Col>
@@ -150,7 +154,8 @@ const ArticleEditorForm = reduxForm({
 
 const mapStateToProps = state => {
     return {
-        article : state.article
+        article : state.article,
+        classifyList : state.classify.list
     }
 };
 

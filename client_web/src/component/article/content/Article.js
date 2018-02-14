@@ -5,7 +5,9 @@ import {LinkContainer} from "react-router-bootstrap";
 class Article extends React.Component{
     render(){
         const {article,contentArea,right} = this.props;
-        const title = article.title;
+        const {classify,title} = article;
+
+        const classifyName = classify === null ? "未分类" : classify.name;
 
         return (
             <Row>
@@ -18,7 +20,7 @@ class Article extends React.Component{
                         </LinkContainer>
                         <LinkContainer to="#">
                             <Breadcrumb.Item>
-                                分类
+                                {classifyName}
                             </Breadcrumb.Item>
                         </LinkContainer>
                         <Breadcrumb.Item active>
