@@ -1,8 +1,7 @@
-import * as Cookies from 'js-cookie'
 import fetch from 'isomorphic-fetch'
 import {startSubmit,stopSubmit} from 'redux-form'
 
-import {LOGIN_URL, HttpMethod, ContentType, FAIL_RESULT, checkStatus, COOKIE_TOKEN} from "../../Api";
+import {LOGIN_URL, HttpMethod, ContentType, FAIL_RESULT, checkStatus, removeToken} from "../../Api";
 import {FORM_LOGIN} from "../../Constant";
 import {info} from "./NotifyAction";
 import {afterLogin} from "../user/UsersAction";
@@ -52,19 +51,20 @@ export const login = (user) => (dispatch) => {
     }).then(response => checkStatus(response))
         .then(result => {
             dispatch(stopSubmit(FORM_LOGIN));
-            afterLogin(result,dispatch);
-        }).catch(() => dispatch(afterLogin(FAIL_RESULT,dispatch)));
+            afterLogin(result,dispatch,true);
+        }).catch(() => afterLogin(FAIL_RESULT,dispatch,true));
 };
 
-export const loginResponse = (result) => {
+export const loginResponse = (ok,message) => {
     return {
         type : LOGIN_RESPONSE,
-        result : result
+        ok : ok,
+        message : message
     }
 };
 
 export const logout = () => (dispatch) =>{
-    Cookies.remove(COOKIE_TOKEN);
+    removeToken();
 
     dispatch(info("登出成功"));
     dispatch(loginClear());

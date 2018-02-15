@@ -15,9 +15,7 @@ const initialState = {
 };
 
 const LoginReducer = (state = initialState,action) => {
-    const {type,result} = action;
-
-    switch (type){
+    switch (action.type){
         case LOGIN_CLEAR:{
             return {
                 ...state,
@@ -26,19 +24,8 @@ const LoginReducer = (state = initialState,action) => {
             }
         }
         case LOGIN_RESPONSE:{
-            let ok = false;
-            let message = null;
-
-            if(result.code === 200){
-                ok = true;
-            }
-            else if(result.code === 403){
-                ok = null;
-            }
-            else {
-                ok = false;
-                message = result.message
-            }
+            let ok = action.ok;
+            let message = action.message;
 
             return {
                 ...state,

@@ -15,7 +15,23 @@ export const ARTICLE_API_URL = API_URL + "/articles";
 export const CLASSIFY_API_URL = API_URL + "/classifies";
 export const MSG_BOARD_API_URL = API_URL + "/msg_board";
 
-export const COOKIE_TOKEN = "Token";
+const COOKIE_TOKEN = "Token";
+
+export const removeToken = () => {
+    Cookies.remove(COOKIE_TOKEN);
+};
+
+export const setToken = entity => {
+    Cookies.set(COOKIE_TOKEN,entity.token,{ expires: entity.expire });
+};
+
+export const getToken = () => {
+    let token = Cookies.get(COOKIE_TOKEN);
+    if(typeof(token) === "undefined"){
+        token = "";
+    }
+    return token;
+};
 
 export const ContentType = {
     JSON : "application/json;charset=UTF-8",
