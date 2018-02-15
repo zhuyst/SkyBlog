@@ -1,10 +1,10 @@
 import React from 'react'
-import {FormControl,ControlLabel,FormGroup,Row,Col,Button} from 'react-bootstrap'
-import {Field, reduxForm} from "redux-form";
-import {FORM_COMMENT} from "../../../Constant";
 import {connect} from "react-redux";
+import {FormControl,ControlLabel,FormGroup,Row,Col,Button,HelpBlock} from 'react-bootstrap'
+import {Field, reduxForm} from "redux-form";
+
+import {FORM_COMMENT} from "../../../Constant";
 import {insertComment} from "../../../action/article/ContentAction";
-import HelpBlock from "react-bootstrap/es/HelpBlock";
 
 class CommentSender extends React.Component{
 
@@ -28,26 +28,26 @@ class CommentSender extends React.Component{
                 <form>
                     <Field name="article_id" component="input" type="hidden"/>
                     <Field name="previous_comment_id" component="input" type="hidden"/>
-                        <Row>
-                            <Col md={10} sm={12}>
-                                <Field name="content" component={textArea}/>
-                            </Col>
-                            <Col md={2} smHidden xsHidden>
-                                <Button bsStyle="primary"
-                                        block
-                                        style={{
-                                            height : '60px',
-                                            marginTop : '24px'
-                                        }}
-                                        onClick={handleSubmit(data => this.submit(data))}>
-                                    提交</Button>
-                            </Col>
-                            <Col sm={12} lgHidden mdHidden>
-                                <Button bsStyle="primary" block style={{
-                                    marginTop: '10px'
-                                }} onClick={handleSubmit(data => this.submit(data))}>提交</Button>
-                            </Col>
-                        </Row>
+                    <Row>
+                        <Col md={10} sm={12}>
+                            <Field name="content" component={textArea}/>
+                        </Col>
+                        <Col md={2} smHidden xsHidden>
+                            <Button bsStyle="primary"
+                                    block
+                                    style={{
+                                        height : '60px',
+                                        marginTop : '24px'
+                                    }}
+                                    onClick={handleSubmit(data => this.submit(data))}>
+                                提交</Button>
+                        </Col>
+                        <Col sm={12} lgHidden mdHidden>
+                            <Button bsStyle="primary" block style={{
+                                marginTop: '10px'
+                            }} onClick={handleSubmit(data => this.submit(data))}>提交</Button>
+                        </Col>
+                    </Row>
                 </form>
             </div>
         )

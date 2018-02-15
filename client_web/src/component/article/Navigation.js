@@ -14,14 +14,14 @@ class Navigation extends React.Component{
             const articleList = [];
             articles.forEach(article => {
                 articleList.push(
-                    <LinkContainer to={`/article/${article.id}`}>
+                    <LinkContainer key={article.id} to={`/article/${article.id}`}>
                         <ListGroupItem>{article.title}</ListGroupItem>
                     </LinkContainer>
                 )
             });
 
             list.push(
-                <ListGroup>
+                <ListGroup key={classify.id}>
                     <LinkContainer to="/article">
                         <ListGroupItem href="#" active>
                             {classify.name}
