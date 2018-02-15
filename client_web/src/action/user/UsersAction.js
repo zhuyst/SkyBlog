@@ -6,7 +6,7 @@ import {
      _get, _delete, setToken, getToken
 } from "../../Api";
 import {FORM_REGISTER,FORM_USERINFO} from "../../Constant";
-import {setLoginModelShow, setUserInfoModelShow} from "../common/ModelAction";
+import {setLoginModelShow, setRegisterModelShow, setUserInfoModelShow} from "../common/ModelAction";
 import {loginResponse} from  "../common/LoginAction"
 import {success, error} from "../common/NotifyAction";
 
@@ -28,7 +28,7 @@ export const registerUser = (user) => (dispatch) => {
             dispatch(stopSubmit(FORM_REGISTER,result.errors));
 
             if(result.code === 200){
-                dispatch(setLoginModelShow(false));
+                dispatch(setRegisterModelShow(false));
                 dispatch(success("注册成功，开始登陆"));
                 dispatch(registerUserResponse(result));
                 afterLogin(result,dispatch,true);
