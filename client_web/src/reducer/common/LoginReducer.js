@@ -1,4 +1,4 @@
-import {LOGIN_CLEAR, LOGIN_RESPONSE} from "../../action/common/ModelAction";
+import {LOGIN_CLEAR, LOGIN_RESPONSE} from "../../action/common/LoginAction";
 import {SET_LOGIN_USER, UPDATE_USER_INFO_RESPONSE} from "../../action/user/UsersAction";
 
 const initialUser = {

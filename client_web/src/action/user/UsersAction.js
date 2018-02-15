@@ -6,7 +6,8 @@ import {
      _get, _delete, setToken, getToken
 } from "../../Api";
 import {FORM_REGISTER,FORM_USERINFO} from "../../Constant";
-import {loginResponse, setLoginModelShow, setUserInfoModelShow} from "../common/ModelAction";
+import {setLoginModelShow, setUserInfoModelShow} from "../common/ModelAction";
+import {loginResponse} from  "../common/LoginAction"
 import {success, error} from "../common/NotifyAction";
 
 export const LIST_USERS_RESPONSE = "LIST_USERS_RESPONSE";
