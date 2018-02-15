@@ -1,5 +1,7 @@
 package indi.zhuyst.skyblog.service.impl;
 
+import indi.zhuyst.common.exception.FieldErrorException;
+import indi.zhuyst.common.pojo.Error;
 import indi.zhuyst.skyblog.dao.ArticleDao;
 import indi.zhuyst.skyblog.dao.ClassifyDao;
 import indi.zhuyst.skyblog.entity.Article;
@@ -43,6 +45,15 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     }
 
     @Override
+    public ClassifyDTO getByName(String name) {
+        Classify classify = new Classify();
+        classify.setName(name);
+
+        classify = dao.selectOne(classify);
+        return this.produceDTO(classify);
+    }
+
+    @Override
     public List<ClassifyDTO> listClassify(){
         List<Classify> list = dao.selectAll();
         List<ClassifyDTO> dtoList = new ArrayList<>();
@@ -58,6 +69,8 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     @Override
     @Transactional
     public List<ClassifyDTO> saveClassify(Classify classify){
+        checkClassify(classify);
+
         boolean isSuccess;
         if(classify.getId() == null){
             isSuccess = dao.insertUseGeneratedKeys(classify) > 0;
@@ -85,6 +98,18 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
         }
 
         return this.produceDTOList(isSuccess);
+    }
+
+    private void checkClassify(Classify classify){
+        final String fieldName = "name";
+        Classify oldClassify = this.getByName(classify.getName());
+
+        if(oldClassify != null){
+            Error error = new Error();
+            error.setField(fieldName);
+            error.setMessage("该分类名已存在");
+            throw new FieldErrorException(error);
+        }
     }
 
     private ClassifyDTO produceDTO(Classify classify){

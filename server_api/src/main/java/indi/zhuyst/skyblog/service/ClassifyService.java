@@ -11,6 +11,8 @@ public interface ClassifyService {
 
     ClassifyDTO getById(int id);
 
+    ClassifyDTO getByName(String name);
+
     List<ClassifyDTO> listClassify();
 
     List<ClassifyDTO> saveClassify(Classify classify);
