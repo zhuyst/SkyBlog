@@ -14,6 +14,7 @@ export const USER_API_URL = API_URL + "/users";
 export const ARTICLE_API_URL = API_URL + "/articles";
 export const CLASSIFY_API_URL = API_URL + "/classifies";
 export const MSG_BOARD_API_URL = API_URL + "/msg_board";
+export const ABOUT_API_URL = API_URL + "/about";
 
 const COOKIE_TOKEN = "Token";
 
