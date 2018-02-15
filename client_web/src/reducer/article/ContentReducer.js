@@ -30,6 +30,20 @@ const initialState = () => {
     },initialArticle)
 };
 
+const convert = (action,state) => {
+    const article = action.article;
+    const convertArticle = {
+        ...article,
+        content: {
+            text : article.content,
+            selection: null
+        }
+    };
+    return Object.assign({},state,convertArticle,{
+        comments : initialComments
+    });
+};
+
 const ContentReducer = (state = initialState(),action) => {
     let newList;
     let comments;
@@ -38,18 +52,14 @@ const ContentReducer = (state = initialState(),action) => {
         case SET_ARTICLE:
             return Object.assign({},state,action.article);
 
-        case GET_ARTICLE_INFO_RESPONSE || INSERT_ARTICLE_RESPONSE || UPDATE_ARTICLE_RESPONSE:
-            const article = action.article;
-            const convertArticle = {
-                ...article,
-                content: {
-                    text : article.content,
-                    selection: null
-                }
-            };
-            return Object.assign({},state,convertArticle,{
-                comments : initialComments
-            });
+        case GET_ARTICLE_INFO_RESPONSE:
+            return convert(action,state);
+
+        case INSERT_ARTICLE_RESPONSE:
+            return convert(action,state);
+
+        case UPDATE_ARTICLE_RESPONSE:
+            return convert(action,state);
 
         case LIST_COMMENTS_RESPONSE:
             comments = action.comments;

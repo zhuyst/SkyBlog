@@ -10,7 +10,17 @@ const initialState = {
 
 const ClassifyReducer = (state = initialState,action) => {
     switch(action.type){
-        case LIST_CLASSIFY_RESPONSE || INSERT_CLASSIFY_RESPONSE || DELETE_CLASSIFY_RESPONSE:
+        case LIST_CLASSIFY_RESPONSE:
+            return {
+                ...state,
+                list : action.list
+            };
+        case INSERT_CLASSIFY_RESPONSE:
+            return {
+                ...state,
+                list : action.list
+            };
+        case DELETE_CLASSIFY_RESPONSE:
             return {
                 ...state,
                 list : action.list
