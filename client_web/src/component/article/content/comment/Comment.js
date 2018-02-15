@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from "react-redux";
-import {deleteComment} from "../../../action/article/ContentAction";
+import {deleteComment} from "../../../../action/article/ContentAction";
 
 class Comment extends React.Component{
     render(){

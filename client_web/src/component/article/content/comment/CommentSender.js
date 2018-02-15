@@ -3,8 +3,8 @@ import {connect} from "react-redux";
 import {FormControl,ControlLabel,FormGroup,Row,Col,Button,HelpBlock} from 'react-bootstrap'
 import {Field, reduxForm} from "redux-form";
 
-import {FORM_COMMENT} from "../../../Constant";
-import {insertComment} from "../../../action/article/ContentAction";
+import {FORM_COMMENT} from "../../../../Constant";
+import {insertComment} from "../../../../action/article/ContentAction";
 
 class CommentSender extends React.Component{
 
