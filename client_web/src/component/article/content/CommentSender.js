@@ -4,19 +4,30 @@ import {Field, reduxForm} from "redux-form";
 import {FORM_COMMENT} from "../../../Constant";
 import {connect} from "react-redux";
 import {insertComment} from "../../../action/article/ContentAction";
+import HelpBlock from "react-bootstrap/es/HelpBlock";
 
 class CommentSender extends React.Component{
-    render(){
+
+    submit = data => {
         const {article,comments,
-            insertComment,handleSubmit} = this.props;
+            insertComment} = this.props;
+
+        const comment = {
+            article_id : data.article_id,
+            previous_comment_id : data.previous_comment_id,
+            content : data.content
+        };
+        insertComment(article.id,comment,comments.page_num)
+    };
+
+    render(){
+        const {handleSubmit} = this.props;
 
         return (
             <div className="comment_send">
                 <form>
                     <Field name="article_id" component="input" type="hidden"/>
                     <Field name="previous_comment_id" component="input" type="hidden"/>
-                    <FormGroup controlId="comment">
-                        <ControlLabel>发表评论</ControlLabel>
                         <Row>
                             <Col md={10} sm={12}>
                                 <Field name="content" component={textArea}/>
@@ -25,26 +36,18 @@ class CommentSender extends React.Component{
                                 <Button bsStyle="primary"
                                         block
                                         style={{
-                                            height : '60px'
-                                        }}>
+                                            height : '60px',
+                                            marginTop : '24px'
+                                        }}
+                                        onClick={handleSubmit(data => this.submit(data))}>
                                     提交</Button>
                             </Col>
                             <Col sm={12} lgHidden mdHidden>
                                 <Button bsStyle="primary" block style={{
-                                    marginTop: 10
-                                }} onClick={handleSubmit(
-                                    data => {
-                                        const comment = {
-                                            article_id : data.article_id,
-                                            previous_comment_id : data.previous_comment_id,
-                                            content : data.content
-                                        };
-                                        insertComment(article.id,comment,comments.page_num)
-                                    }
-                                )}>提交</Button>
+                                    marginTop: '10px'
+                                }} onClick={handleSubmit(data => this.submit(data))}>提交</Button>
                             </Col>
                         </Row>
-                    </FormGroup>
                 </form>
             </div>
         )
@@ -52,13 +55,28 @@ class CommentSender extends React.Component{
 }
 
 const textArea = (field) => {
+    const error = field.meta.touched && field.meta.error;
+
+    let state = null;
+    if(error){
+        state = "error";
+    }
+
     return (
-        <FormControl componentClass="textarea" placeholder="请输入评论......"
-                     style={{
-                         height : '60px'
-                     }}
-                     {...field.input}
-        />
+        <FormGroup controlId="comment" validationState={state}>
+            <ControlLabel>发表评论</ControlLabel>
+            <FormControl componentClass="textarea" placeholder="请输入评论......"
+                         style={{
+                             height : '60px'
+                         }}
+                         {...field.input}
+            />
+            <FormControl.Feedback/>
+            {
+                error &&
+                <HelpBlock>{field.meta.error}</HelpBlock>
+            }
+        </FormGroup>
     )
 };
 
