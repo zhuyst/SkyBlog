@@ -9,6 +9,7 @@ import ContentReducer from "./article/ContentReducer";
 import LoginReducer from './common/LoginReducer'
 import UserReducer from './user/UsersReducer'
 import ClassifyReducer from './article/ClassifyReducer'
+import AboutReducer from './about/AboutReducer'
 
 const AppReducer = combineReducers({
     navigation : NavigationReducer,
@@ -17,6 +18,7 @@ const AppReducer = combineReducers({
     login : LoginReducer,
     user : UserReducer,
     classify : ClassifyReducer,
+    about : AboutReducer,
     form : formReducer,
     router: routerReducer,
     notifications: notificationsReducer()
