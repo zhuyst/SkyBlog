@@ -6,7 +6,8 @@ import { Nav,NavItem,Navbar,NavDropdown,MenuItem,
     Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
-import {setLoginModelShow, setRegisterModelShow, logout, setUserInfoModelShow} from "../../action/common/ModelAction";
+import {setLoginModelShow, setRegisterModelShow, setUserInfoModelShow} from "../../action/common/ModelAction";
+import {logout} from "../../action/common/LoginAction"
 
 import LoginModel from './LoginModel'
 import RegisterModel from './RegisterModel'

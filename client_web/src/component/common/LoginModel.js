@@ -3,7 +3,7 @@ import {Alert, Button, Modal} from "react-bootstrap";
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 
-import {login,loginClear} from "../../action/common/ModelAction";
+import {login,loginClear} from "../../action/common/LoginAction";
 
 import {FORM_LOGIN} from "../../Constant";
 import FieldGroup,{MODE_NULL} from './FieldGroup'
