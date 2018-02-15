@@ -8,8 +8,8 @@ import {setArticle} from "../../../action/article/ContentAction";
 import {deleteArticle, getArticleInfo} from "../../../action/article/ArticlesAction";
 import {initialArticle} from "../../../reducer/article/ContentReducer";
 
-import CommentSender from './CommentSender'
-import CommentList from './CommentList'
+import CommentSender from './comment/CommentSender'
+import CommentList from './comment/CommentList'
 import Article from "./Article";
 import ArticleTitle from "./ArticleTitle";
 

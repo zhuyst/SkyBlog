@@ -3,8 +3,8 @@ import {Alert, Badge,Panel} from 'react-bootstrap'
 
 import Comment from './Comment'
 import {connect} from "react-redux";
-import {listComments} from "../../../action/article/ContentAction";
-import {COMMENT_PAGE_SIZE} from "../../../Constant";
+import {listComments} from "../../../../action/article/ContentAction";
+import {COMMENT_PAGE_SIZE} from "../../../../Constant";
 
 class CommentList extends React.Component{
 
