@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.OrderBy;
 import java.util.Date;
 
 /**
@@ -57,5 +58,6 @@ public class Comment extends BaseEntity {
     @ApiModelProperty("创建时间")
     @Column(name = "create_date")
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
+    @OrderBy("DESC")
     private Date createDate;
 }
