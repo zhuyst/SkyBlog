@@ -118,10 +118,10 @@ class ArticleEditor extends React.Component{
                             </Col>
                             <Col md={4} sm={12}>
                                 <Button
-                                    bsStyle="success" block style={{
-                                    marginTop : '25px',
-                                    marginBottom : '15px'
-                                }} onClick={() => setClassifyShow(!classifyShow)}>
+                                    bsStyle="success" block
+                                    className="classify_button"
+                                    style={{marginBottom : 0}}
+                                    onClick={() => setClassifyShow(!classifyShow)}>
                                     <span>
                                         <span className="more_left">
                                             {classifyIcon}
