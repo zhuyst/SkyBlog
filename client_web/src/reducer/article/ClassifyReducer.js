@@ -1,10 +1,11 @@
 import {
     DELETE_CLASSIFY_RESPONSE, INSERT_CLASSIFY_RESPONSE,
-    LIST_CLASSIFY_RESPONSE
+    LIST_CLASSIFY_RESPONSE, SET_CLASSIFY_SHOW
 } from "../../action/article/ClassifyAction";
 
 const initialState = {
-    list : []
+    list : [],
+    show : false
 };
 
 const ClassifyReducer = (state = initialState,action) => {
@@ -13,6 +14,11 @@ const ClassifyReducer = (state = initialState,action) => {
             return {
                 ...state,
                 list : action.list
+            };
+        case SET_CLASSIFY_SHOW:
+            return {
+                ...state,
+                show : action.show
             };
         default:
             return state;
