@@ -33,19 +33,10 @@ class CommentSender extends React.Component{
                             <Field name="content" component={textArea}/>
                         </Col>
                         <Col md={2} smHidden xsHidden>
-                            <Button bsStyle="primary"
-                                    block
-                                    style={{
-                                        height : '60px',
-                                        marginTop : '24px'
-                                    }}
-                                    onClick={handleSubmit(data => this.submit(data))}>
-                                提交</Button>
+                            {submitButton(handleSubmit,this.submit,false)}
                         </Col>
                         <Col sm={12} lgHidden mdHidden>
-                            <Button bsStyle="primary" block style={{
-                                marginTop: '10px'
-                            }} onClick={handleSubmit(data => this.submit(data))}>提交</Button>
+                            {submitButton(handleSubmit,this.submit,true)}
                         </Col>
                     </Row>
                 </form>
@@ -77,6 +68,28 @@ const textArea = (field) => {
                 <HelpBlock>{field.meta.error}</HelpBlock>
             }
         </FormGroup>
+    )
+};
+
+const submitButton = (handleSubmit,submit,sm) => {
+    let props = {
+        bsStyle : "primary",
+        block : true,
+        onClick : handleSubmit(data => submit(data))
+    };
+
+    if(!sm) {
+        props = {
+            ...props,
+            style : {
+                height : '60px',
+                marginTop : '24px'
+            }
+        }
+    }
+
+    return (
+        <Button {...props}>提交</Button>
     )
 };
 
