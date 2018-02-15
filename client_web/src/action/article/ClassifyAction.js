@@ -1,9 +1,17 @@
 import {_delete, _get, _post, CLASSIFY_API_URL} from "../../Api";
 import {error, success} from "../common/NotifyAction";
 
+export const SET_CLASSIFY_SHOW = "SET_CLASSIFY_SHOW";
 export const LIST_CLASSIFY_RESPONSE = "LIST_CLASSIFY_RESPONSE";
 export const INSERT_CLASSIFY_RESPONSE = "INSERT_CLASSIFY_RESPONSE";
 export const DELETE_CLASSIFY_RESPONSE = "DELETE_CLASSIFY_RESPONSE";
+
+export const setClassifyShow = show => {
+    return {
+        type : SET_CLASSIFY_SHOW,
+        show : show
+    }
+};
 
 export const listClassify = () => dispatch => {
     const url = CLASSIFY_API_URL + "/public/";

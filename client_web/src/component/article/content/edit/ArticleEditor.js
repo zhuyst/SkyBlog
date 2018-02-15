@@ -7,14 +7,17 @@ import {Button, ButtonGroup, Col, ControlLabel, FormGroup, Row} from "react-boot
 
 import {FORM_ARTICLE} from "../../../../Constant";
 import FieldGroup from "../../../common/FieldGroup";
+import NewClassify from "./NewClassify";
 
-import '../../../../static/css/article/editor.css'
 import {setArticle} from "../../../../action/article/ContentAction";
 import {deleteArticle, insertArticle, updateArticle} from "../../../../action/article/ArticlesAction";
 
 import 'react-mde/lib/styles/css/react-mde.css';
 import 'react-mde/lib/styles/css/react-mde-toolbar.css';
 import 'react-mde/lib/styles/css/react-mde-textarea.css';
+
+import '../../../../static/css/article/editor.css'
+import {setClassifyShow} from "../../../../action/article/ClassifyAction";
 
 class ArticleEditor extends React.Component{
 
@@ -45,8 +48,9 @@ class ArticleEditor extends React.Component{
     };
 
     render(){
-        const {classifyList,submitting,handleSubmit,goBack,
-            deleteArticle} = this.props;
+        const {classifyList,classifyShow,submitting,
+            handleSubmit,goBack,
+            deleteArticle,setClassifyShow} = this.props;
 
         const id = this.props.article.id;
         const isNew = (id === 0);
@@ -60,6 +64,12 @@ class ArticleEditor extends React.Component{
                     {classify.name}</option>
             )
         });
+
+        const classifyIcon = classifyShow ? (
+            <i className="fa fa-arrow-circle-up" />
+        ) : (
+            <i className="fa fa-arrow-circle-down" />
+        );
 
         return (
             <div>
@@ -106,7 +116,28 @@ class ArticleEditor extends React.Component{
                                     </Field>
                                 </FormGroup>
                             </Col>
+                            <Col md={4} sm={12}>
+                                <Button
+                                    bsStyle="success" block style={{
+                                    marginTop : '25px',
+                                    marginBottom : '15px'
+                                }} onClick={() => setClassifyShow(!classifyShow)}>
+                                    <span>
+                                        <span className="more_left">
+                                            {classifyIcon}
+                                        </span>
+                                        新增分类
+                                        <span className="more_right">
+                                            {classifyIcon}
+                                        </span>
+                                    </span>
+                                </Button>
+                            </Col>
                         </Row>
+                        <Row>
+                            <NewClassify/>
+                        </Row>
+
                         <Field name="content" component={editor}/>
                     </form>
                 </div>
@@ -154,7 +185,8 @@ const ArticleEditorForm = reduxForm({
 const mapStateToProps = state => {
     return {
         article : state.article,
-        classifyList : state.classify.list
+        classifyList : state.classify.list,
+        classifyShow : state.classify.show
     }
 };
 
@@ -182,6 +214,10 @@ const mapDispatchToProps = dispatch => {
             else {
                 dispatch(push(`/article/${id}`))
             }
+        },
+
+        setClassifyShow : show => {
+            dispatch(setClassifyShow(show));
         }
     }
 };
