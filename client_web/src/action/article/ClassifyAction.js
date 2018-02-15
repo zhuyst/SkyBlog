@@ -32,7 +32,8 @@ export const insertClassify = classify => dispatch => {
         .then(result => {
             if(result.code === 200){
                 dispatch(success("新增文章分类成功"));
-                dispatch(insertClassifyResponse(result))
+                dispatch(insertClassifyResponse(result));
+                dispatch(setClassifyShow(false))
             }
             else {
                 dispatch(error(result.message));

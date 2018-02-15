@@ -5,11 +5,12 @@ import {Button, Col, Well} from "react-bootstrap";
 
 import FieldGroup from "../../../common/FieldGroup";
 import {FORM_CLASSIFY} from "../../../../Constant";
+import {insertClassify} from "../../../../action/article/ClassifyAction";
 
 class NewClassify extends React.Component{
 
     render(){
-        const show = this.props.show;
+        const {show,handleSubmit} = this.props;
         const className = show ? "classify_content" : "classify_content collapse";
 
         return (
@@ -23,17 +24,41 @@ class NewClassify extends React.Component{
                             placeholder="请输入分类名"
                         />
                     </Col>
-                    <Col md={2} sm={12}>
-                        <Button bsStyle="success" block
-                                className="classify_button">
-                            新增
-                        </Button>
+                    <Col md={2} smHidden xsHidden>
+                        {classifyButton(handleSubmit,false)}
+                    </Col>
+                    <Col sm={12} lgHidden mdHidden>
+                        {classifyButton(handleSubmit,true)}
                     </Col>
                 </Well>
             </div>
         )
     }
 }
+
+const classifyButton = (handleSubmit,sm) => {
+    let props = {
+        bsStyle : "success",
+        block : true,
+        className : "classify_button",
+        onClick : handleSubmit
+    };
+
+    if(sm){
+        props = {
+            ...props,
+            style : {
+                marginTop:0
+            }
+        }
+    }
+
+    return (
+        <Button {...props}>
+            新增
+        </Button>
+    )
+};
 
 const validate = values => {
     const errors = {};
@@ -46,8 +71,18 @@ const validate = values => {
     return errors;
 };
 
+const onSubmit = (values,dispatch) => {
+    const {name} = values;
+    const classify = {
+        name : name
+    };
+
+    dispatch(insertClassify(classify))
+};
+
 const NewClassifyForm = reduxForm({
     form : FORM_CLASSIFY,
+    onSubmit : onSubmit,
     validate : validate
 })(NewClassify);
 

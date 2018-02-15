@@ -65,12 +65,6 @@ class ArticleEditor extends React.Component{
             )
         });
 
-        const classifyIcon = classifyShow ? (
-            <i className="fa fa-arrow-circle-up" />
-        ) : (
-            <i className="fa fa-arrow-circle-down" />
-        );
-
         return (
             <div>
                 <ButtonGroup>
@@ -116,22 +110,11 @@ class ArticleEditor extends React.Component{
                                     </Field>
                                 </FormGroup>
                             </Col>
-                            <Col md={4} sm={12}>
-                                <Button
-                                    bsStyle="success" block
-                                    className="classify_button"
-                                    style={{marginBottom : 0}}
-                                    onClick={() => setClassifyShow(!classifyShow)}>
-                                    <span>
-                                        <span className="more_left">
-                                            {classifyIcon}
-                                        </span>
-                                        新增分类
-                                        <span className="more_right">
-                                            {classifyIcon}
-                                        </span>
-                                    </span>
-                                </Button>
+                            <Col md={4} smHidden xsHidden>
+                                {classifyButton(classifyShow,setClassifyShow,false)}
+                            </Col>
+                            <Col sm={12} lgHidden mdHidden>
+                                {classifyButton(classifyShow,setClassifyShow,true)}
                             </Col>
                         </Row>
                         <Row>
@@ -154,6 +137,49 @@ const editor = ({ input: { value, onChange }}) => {
                       onChange={onChange}
                       commands={ReactMdeCommands.getDefaultCommands()}/>
         </FormGroup>
+    )
+};
+
+const classifyButton = (classifyShow,setClassifyShow,sm) => {
+    let classifyIcon;
+    let classifyClass;
+    if(classifyShow) {
+        classifyIcon = (
+            <i className="fa fa-arrow-circle-up" />
+        );
+        classifyClass = "classify_button classify_button_not_show";
+    }
+    else {
+        classifyIcon = (
+            <i className="fa fa-arrow-circle-down" />
+        );
+        classifyClass = "classify_button"
+    }
+
+    let props = {
+        bsStyle:"success",
+        block : true,
+        className : classifyClass,
+        onClick : () => setClassifyShow(!classifyShow)
+    };
+
+    if(sm){
+        props = {
+            ...props,
+            style : {
+                marginTop:0
+            }
+        }
+    }
+
+    return (
+        <Button {...props}>
+            <span>
+                <span className="more_left">{classifyIcon}</span>
+                新增分类
+                <span className="more_right">{classifyIcon}</span>
+            </span>
+        </Button>
     )
 };
 
