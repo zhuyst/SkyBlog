@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface ArticleDao extends BaseDao<Article> {
 
-    List<Article> selectAllWithoutID(int id);
+    List<Article> selectAllWithoutIDs(List<Integer> ids);
 
     List<Article> selectBaseInfoByClassify(int classifyId);
 }

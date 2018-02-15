@@ -23,6 +23,7 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
     private CommentService commentService;
 
     @Override
+    @Transactional
     public void run(String... strings) throws Exception {
         Article article = articleDao.selectByPrimaryKey(MSG_BOARD_KEY);
 

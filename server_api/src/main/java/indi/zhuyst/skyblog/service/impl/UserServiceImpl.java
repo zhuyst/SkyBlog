@@ -39,6 +39,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     private PasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional
     public void run(String... strings) throws Exception {
         User user = super.getByID(ADMIN_KEY);
         if(user == null){
@@ -50,7 +51,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
             user.setNickname(ADMIN_DEFAULT_NICKNAME);
             user.setRole(RoleEnum.SYS_ADMIN.getId());
 
-            userDao.insert(user);
+            userDao.insertSelective(user);
         }
     }
 

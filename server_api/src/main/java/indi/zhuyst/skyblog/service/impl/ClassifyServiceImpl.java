@@ -26,6 +26,7 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     private ArticleDao articleDao;
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         Classify classify = this.getById(NOT_CLASSIFY_KEY);
         if(classify == null){

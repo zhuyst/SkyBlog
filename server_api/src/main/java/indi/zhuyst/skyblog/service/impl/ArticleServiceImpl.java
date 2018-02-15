@@ -2,6 +2,8 @@ package indi.zhuyst.skyblog.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import indi.zhuyst.common.enums.CodeEnum;
+import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.BaseCrudServiceImpl;
 import indi.zhuyst.common.util.PageUtils;
@@ -34,16 +36,15 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
 
     @Override
     public Article getByID(int id) {
-        if(id == MsgBoardService.MSG_BOARD_KEY){
-            return null;
-        }
-
+        checkExcept(id);
         return super.getByID(id);
     }
 
     @Override
     @Transactional
     public Article save(Article article) {
+        checkExcept(article.getId());
+
         if(article.getId() == null){
             article.setCreateDate(new Date());
         }
@@ -69,7 +70,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
         PageInfo<Article> pageInfo =
                 PageHelper.startPage(query.getPageNum(),query.getPageSize())
                         .setOrderBy("update_date desc")
-                        .doSelectPageInfo(() -> dao.selectAllWithoutID(MsgBoardServiceImpl.MSG_BOARD_KEY));
+                        .doSelectPageInfo(() -> dao.selectAllWithoutIDs(EXCEPT_IDS));
         return this.produceDTOPageInfo(pageInfo);
     }
 
@@ -84,6 +85,14 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
         }
 
         return pojo;
+    }
+
+    private void checkExcept(int id){
+        for(Integer exceptId : EXCEPT_IDS){
+            if(id == exceptId){
+                throw new CommonException(CodeEnum.NOT_FOUND.getCode(),"未找到该文章");
+            }
+        }
     }
 
     private ArticleDTO produceDTO(Article article){
