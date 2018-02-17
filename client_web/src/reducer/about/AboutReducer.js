@@ -1,16 +1,34 @@
-import {GET_ABOUT_RESPONSE, UPDATE_ABOUT_RESPONSE} from "../../action/about/AboutAction";
+import {GET_ABOUT_RESPONSE, SET_ABOUT, UPDATE_ABOUT_RESPONSE} from "../../action/about/AboutAction";
 
 const initialState = {
-    content : ""
+    content : {
+        text: "## 关于SkyBlog",
+        selection: null
+    }
+};
+
+const convert = (action,state) => {
+    const about = action.about;
+    const convertAbout = {
+        ...about,
+        content: {
+            text : about.content,
+            selection: null
+        }
+    };
+    return Object.assign({},state,convertAbout);
 };
 
 const AboutReducer = (state = initialState,action) => {
     switch (action.type){
-        case GET_ABOUT_RESPONSE:
+        case SET_ABOUT:
             return Object.assign({},state,action.about);
 
+        case GET_ABOUT_RESPONSE:
+            return convert(action,state);
+
         case UPDATE_ABOUT_RESPONSE:
-            return Object.assign({},state,action.about);
+            return convert(action,state);
 
         default:
             return state;

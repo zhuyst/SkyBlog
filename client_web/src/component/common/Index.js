@@ -13,6 +13,7 @@ import Footer from './Footer'
 import Home from '../home/Index'
 import Article from '../article/Index'
 import MsgBoard from '../msgboard/Index'
+import About from '../about/Index'
 
 import {checkUserLoginState} from "../../action/user/UsersAction";
 
@@ -46,7 +47,7 @@ class Index extends React.Component{
                             <Route exact strict path="/home" component={Home}/>
                             <Route path="/article" component={Article} />
                             <Route path="/msg_board" component={MsgBoard} />
-                            {/*<Route path="/about" component={Article} />*/}
+                            <Route path="/about" component={About} />
                         </div>
 
                         <footer>
