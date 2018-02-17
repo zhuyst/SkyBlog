@@ -18,7 +18,7 @@ public class AboutServiceImpl extends BaseService implements AboutService,
     private ArticleDao articleDao;
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... args) throws Exception {
         Article about = articleDao.selectByPrimaryKey(ABOUT_KEY);
         if(about == null){
@@ -39,7 +39,7 @@ public class AboutServiceImpl extends BaseService implements AboutService,
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public About updateAbout(About about) {
         Article article = this.getAboutArticle();
         article.setContent(about.getContent());

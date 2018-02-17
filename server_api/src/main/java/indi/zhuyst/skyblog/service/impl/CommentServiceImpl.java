@@ -29,7 +29,7 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
     private UserService userService;
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public Comment save(Comment comment) {
         String content = comment.getContent();
 
@@ -51,7 +51,7 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public CommentDTO saveComment(Comment comment){
         CommentDTO pojo = null;
 

@@ -1,9 +1,10 @@
 package indi.zhuyst.skyblog.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import indi.zhuyst.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Pattern;

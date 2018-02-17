@@ -16,7 +16,6 @@ import indi.zhuyst.skyblog.pojo.ArticleDTO;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.ArticleService;
 import indi.zhuyst.skyblog.service.ClassifyService;
-import indi.zhuyst.skyblog.service.MsgBoardService;
 import indi.zhuyst.skyblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +40,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public Article save(Article article) {
         checkExcept(article.getId());
 
@@ -75,7 +74,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public ArticleDTO saveArticle(Article article){
         ArticleDTO pojo = null;
 

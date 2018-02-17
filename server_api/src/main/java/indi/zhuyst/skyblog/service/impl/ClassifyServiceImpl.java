@@ -26,7 +26,7 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     private ArticleDao articleDao;
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... args) throws Exception {
         Classify classify = this.getById(NOT_CLASSIFY_KEY);
         if(classify == null){
@@ -68,7 +68,7 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public List<ClassifyDTO> saveClassify(Classify classify){
         checkClassify(classify);
 
@@ -84,8 +84,8 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     }
 
     @Override
-    @Transactional
-    public List<ClassifyDTO> deleteClassify(Integer id){
+    @Transactional(rollbackFor = RuntimeException.class)
+    public List<ClassifyDTO> deleteClassify(int id){
         boolean isSuccess = dao.deleteByPrimaryKey(id) > 0;
 
         if(isSuccess){

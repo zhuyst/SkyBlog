@@ -1,6 +1,8 @@
 package indi.zhuyst.skyblog.service.impl;
 
 import com.github.pagehelper.PageInfo;
+import indi.zhuyst.common.enums.CodeEnum;
+import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.skyblog.dao.ArticleDao;
 import indi.zhuyst.skyblog.entity.Article;
@@ -23,7 +25,7 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
     private CommentService commentService;
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... strings) throws Exception {
         Article article = articleDao.selectByPrimaryKey(MSG_BOARD_KEY);
 
@@ -53,15 +55,21 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public CommentDTO insertMsg(Comment comment){
         comment.setArticleId(MSG_BOARD_KEY);
         return commentService.saveComment(comment);
     }
 
     @Override
-    @Transactional
-    public boolean deleteMsg(Integer id){
+    @Transactional(rollbackFor = RuntimeException.class)
+    public boolean deleteMsg(int id){
+        Comment comment = this.getMsg(id);
+        if(comment.getArticleId() != MSG_BOARD_KEY){
+            throw new CommonException(CodeEnum.NOT_FOUND.getCode(),
+                    "找不到该留言");
+        }
+
         return commentService.delete(id);
     }
 }
