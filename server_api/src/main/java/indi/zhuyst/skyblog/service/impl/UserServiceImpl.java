@@ -39,7 +39,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     private PasswordEncoder passwordEncoder;
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... strings) throws Exception {
         User user = super.getByID(ADMIN_KEY);
         if(user == null){
@@ -56,7 +56,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public User save(User user) {
         if(user.getId() == null){
             user.setRole(RoleEnum.VISITOR.getId());
@@ -106,7 +106,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public UserDTO saveUser(User user){
         UserDTO dto = null;
 

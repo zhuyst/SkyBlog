@@ -17,6 +17,6 @@ public interface ClassifyService {
 
     List<ClassifyDTO> saveClassify(Classify classify);
 
-    List<ClassifyDTO> deleteClassify(Integer id);
+    List<ClassifyDTO> deleteClassify(int id);
 
 }

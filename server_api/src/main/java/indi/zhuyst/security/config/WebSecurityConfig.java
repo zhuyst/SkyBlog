@@ -116,7 +116,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     public AccessDeniedHandler accessDeniedHandler(){
         return (request, response, accessDeniedException) -> {
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-            response.getWriter().write(R.error(CodeEnum.FORBIDDEN.getCode(),
+            response.getWriter().write(R.error(CodeEnum.UNAUTHORIZED.getCode(),
                     "未授权或没有权限访问该接口").toJsonStr());
         };
     }

@@ -14,6 +14,11 @@ public enum CodeEnum{
     SUCCESS(200,"OK"),
 
     /**
+     * 未经授权
+     */
+    UNAUTHORIZED(401,"未经授权，请先获取Token"),
+
+    /**
      * 没有权限
      */
     FORBIDDEN(403,"您没有权限访问这个资源"),

@@ -17,5 +17,5 @@ public interface MsgBoardService{
 
     CommentDTO insertMsg(Comment comment);
 
-    boolean deleteMsg(Integer id);
+    boolean deleteMsg(int id);
 }

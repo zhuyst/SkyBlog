@@ -1,5 +1,7 @@
 package indi.zhuyst.security.service.impl;
 
+import indi.zhuyst.common.enums.CodeEnum;
+import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.service.BaseService;
 import indi.zhuyst.common.util.ServletUtils;
 import indi.zhuyst.security.pojo.AccessToken;
@@ -13,7 +15,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -80,7 +81,7 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
 
             return generateToken(user);
         }catch (Exception e){
-            throw new AccessDeniedException("用户名/密码不正确");
+            throw new CommonException("用户名/密码不正确");
         }
     }
 
@@ -153,14 +154,16 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
 
             // 如果Token不可用，抛出异常
             if(this.isTokenValid(claims)){
-                throw new AccessDeniedException("token失效，请重新登录");
+                throw new CommonException(CodeEnum.UNAUTHORIZED.getCode(),
+                        "token失效，请重新登录");
             }
 
             return claims;
         }catch (Exception e){
 
             // Token转换异常，表示不合法，抛出异常
-            throw new AccessDeniedException("invalid token");
+            throw new CommonException(CodeEnum.UNAUTHORIZED.getCode(),
+                    "invalid token");
         }
     }
 
