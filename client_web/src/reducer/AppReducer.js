@@ -10,6 +10,7 @@ import LoginReducer from './common/LoginReducer'
 import UserReducer from './user/UsersReducer'
 import ClassifyReducer from './article/ClassifyReducer'
 import AboutReducer from './about/AboutReducer'
+import MsgBoardReducer from './msgboard/MsgBoardReducer'
 
 const AppReducer = combineReducers({
     navigation : NavigationReducer,
@@ -19,6 +20,7 @@ const AppReducer = combineReducers({
     user : UserReducer,
     classify : ClassifyReducer,
     about : AboutReducer,
+    msg : MsgBoardReducer,
     form : formReducer,
     router: routerReducer,
     notifications: notificationsReducer()
