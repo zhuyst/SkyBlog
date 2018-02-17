@@ -15,12 +15,14 @@ import Article from '../article/Index'
 import MsgBoard from '../msgboard/Index'
 import About from '../about/Index'
 
+import {ARTICLE_PAGE_SIZE} from "../../Constant";
+
+import {listArticles} from "../../action/article/ArticlesAction";
+import {listClassify} from "../../action/article/ClassifyAction";
+import {getAbout} from "../../action/about/AboutAction";
 import {checkUserLoginState} from "../../action/user/UsersAction";
 
 import '../../static/css/common/common.css'
-import {listArticles} from "../../action/article/ArticlesAction";
-import {ARTICLE_PAGE_SIZE} from "../../Constant";
-import {listClassify} from "../../action/article/ClassifyAction";
 
 class Index extends React.Component{
     componentWillMount(){
@@ -28,8 +30,7 @@ class Index extends React.Component{
     }
 
     componentDidMount(){
-        this.props.initArticles();
-        this.props.initClassify();
+        this.props.initFetch();
     }
 
     render(){
@@ -65,11 +66,10 @@ const mapDispatchToProps = dispatch => {
         checkUserLoginState : () => {
             dispatch(checkUserLoginState());
         },
-        initArticles : () => {
-            dispatch(listArticles(1,ARTICLE_PAGE_SIZE))
-        },
-        initClassify : () => {
-            dispatch(listClassify())
+        initFetch : () => {
+            dispatch(listArticles(1,ARTICLE_PAGE_SIZE));
+            dispatch(listClassify());
+            dispatch(getAbout())
         }
     }
 };
