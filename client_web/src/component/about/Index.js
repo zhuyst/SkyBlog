@@ -3,13 +3,18 @@ import ReactMarkdown from 'react-markdown'
 import {Button, Col, Panel, Row} from "react-bootstrap";
 import {connect} from "react-redux";
 import {push} from 'react-router-redux'
+import {Route} from "react-router-dom";
 
+import {getAbout} from "../../action/about/AboutAction";
 import AboutEditor from "./AboutEditor";
 
 import '../../static/css/about/about.css'
-import {Route} from "react-router-dom";
 
 class Index extends React.Component{
+
+    componentWillMount(){
+        this.props.getAbout();
+    }
 
     render(){
         const {about,admin,pathname,editAbout} = this.props;
@@ -66,6 +71,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        getAbout : () => {
+            dispatch(getAbout())
+        },
         editAbout : () => {
             dispatch(push("/about/edit"))
         }
