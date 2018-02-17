@@ -71,7 +71,7 @@ class Navigation extends React.Component{
                         </LinkContainer>
 
                         <LinkContainer to="/about">
-                            <NavItem>关于我</NavItem>
+                            <NavItem>关于</NavItem>
                         </LinkContainer>
                     </Nav>
 

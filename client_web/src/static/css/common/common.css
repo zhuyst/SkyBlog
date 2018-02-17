@@ -16,7 +16,7 @@ header{
 
 .main{
     flex: 1 0 auto;
-    margin-bottom: 50px;
+    background-color: #fbfbfb;
 }
 
 footer{

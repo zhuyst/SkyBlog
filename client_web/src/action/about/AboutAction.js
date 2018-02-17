@@ -1,8 +1,16 @@
 import {_get, _post, ABOUT_API_URL} from "../../Api";
 import {error, success} from "../common/NotifyAction";
 
+export const SET_ABOUT = "SET_ABOUT";
 export const GET_ABOUT_RESPONSE = "GET_ABOUT_RESPONSE";
 export const UPDATE_ABOUT_RESPONSE = "UPDATE_ABOUT_RESPONSE";
+
+export const setAbout = about => {
+    return {
+        type : SET_ABOUT,
+        about : about
+    }
+};
 
 export const getAbout = about => dispatch => {
     const url = ABOUT_API_URL + "/public/";
