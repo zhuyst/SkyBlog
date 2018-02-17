@@ -1,11 +1,12 @@
 import React from 'react'
 import {connect} from "react-redux";
 import ReactMde, { ReactMdeCommands } from 'react-mde';
-import {ControlLabel, FormGroup} from "react-bootstrap";
+import {Button, ButtonGroup, Col, ControlLabel, FormGroup, Row} from "react-bootstrap";
 import {change, Field, reduxForm} from "redux-form";
+import {push} from 'react-router-redux'
 
 import {FORM_ABOUT} from "../../Constant";
-import {setAbout} from "../../action/about/AboutAction";
+import {setAbout, updateAbout} from "../../action/about/AboutAction";
 
 class AboutEditor extends React.Component{
 
@@ -22,10 +23,39 @@ class AboutEditor extends React.Component{
         setAboutForm(about);
     };
 
+    submit = (data,back) => {
+        const about = {
+            ...data,
+            content : data.content.text
+        };
+        this.props.updateAbout(about,back);
+    };
+
     render(){
+        const {submitting,handleSubmit,
+            goBack} = this.props;
+
         return (
             <form>
                 <Field name="content" component={editor}/>
+                <Row className="about_button">
+                    <Col>
+                        <ButtonGroup>
+                            <Button disabled={submitting} bsStyle="success"
+                                    onClick={handleSubmit(data => this.submit(data,false))}>
+                                保存
+                            </Button>
+                            <Button disabled={submitting} bsStyle="success"
+                                    onClick={handleSubmit(data => this.submit(data,true))}>
+                                保存并退出编辑
+                            </Button>
+                            <Button disabled={submitting} bsStyle="primary"
+                                    onClick={goBack}>
+                                放弃编辑并返回
+                            </Button>
+                        </ButtonGroup>
+                    </Col>
+                </Row>
             </form>
         )
     }
@@ -73,6 +103,12 @@ const mapDispatchToProps = dispatch => {
     return {
         setAboutForm : about => {
             dispatch(change(FORM_ABOUT,"content",about.content))
+        },
+        goBack : () => {
+            dispatch(push("/about"));
+        },
+        updateAbout : (about,back) => {
+            dispatch(updateAbout(about,back))
         }
     }
 };

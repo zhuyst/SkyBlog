@@ -1,30 +1,41 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import {Col, Panel, Row} from "react-bootstrap";
-import {change} from "redux-form";
+import {Button, Col, Panel, Row} from "react-bootstrap";
 import {connect} from "react-redux";
+import {push} from 'react-router-redux'
 
-import {FORM_ABOUT} from "../../Constant";
 import AboutEditor from "./AboutEditor";
 
 import '../../static/css/about/about.css'
+import {Route} from "react-router-dom";
 
 class Index extends React.Component{
 
     render(){
-        const {content} = this.props.about;
+        const {about,admin,pathname,editAbout} = this.props;
+        const {content} = about;
+        const path = this.props.match.path;
+
+        const editing = pathname === "/about/edit";
 
         return (
-            <div className="about_content">
-                <Row>
-                    <Col md={8} mdOffset={2} sm={12}>
-                        <AboutEditor/>
-                    </Col>
-                </Row>
+            <div className="about_main">
+                {
+                    admin &&
+                    <Route exact strict path={`${path}/edit`} component={editor}/>
+                }
                 <Row>
                     <Col md={8} mdOffset={2} sm={12}>
                         <Panel>
                             <Panel.Body>
+                                {
+                                    admin && !editing &&
+                                    <Button bsStyle="primary"
+                                            className="about_edit_button"
+                                            onClick={editAbout}>
+                                        编辑
+                                    </Button>
+                                }
                                 <ReactMarkdown source={content.text}/>
                             </Panel.Body>
                         </Panel>
@@ -35,14 +46,29 @@ class Index extends React.Component{
     }
 }
 
+const editor = () => {
+    return (
+        <Row>
+            <Col md={8} mdOffset={2} sm={12}>
+                <AboutEditor/>
+            </Col>
+        </Row>
+    )
+};
+
 const mapStateToProps = state => {
     return {
-        about : state.about
+        about : state.about,
+        admin : state.login.user.admin,
+        pathname : state.router.location.pathname
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        editAbout : () => {
+            dispatch(push("/about/edit"))
+        }
     }
 };
 

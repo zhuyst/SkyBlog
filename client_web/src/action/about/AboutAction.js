@@ -1,4 +1,5 @@
-import {_get, _post, ABOUT_API_URL} from "../../Api";
+import {_get, _put, ABOUT_API_URL} from "../../Api";
+import {push} from 'react-router-redux'
 import {error, success} from "../common/NotifyAction";
 
 export const SET_ABOUT = "SET_ABOUT";
@@ -25,13 +26,16 @@ const getAboutResponse = result => {
     }
 };
 
-export const updateAbout = about => dispatch => {
+export const updateAbout = (about,back) => dispatch => {
     const url = ABOUT_API_URL + "/";
-    return _post(url,about)
+    return _put(url,about)
         .then(result => {
             if(result.code === 200){
                 dispatch(success("更新关于成功"));
                 dispatch(updateAboutResponse(result));
+                if(back){
+                    dispatch(push("/about"))
+                }
             }
             else {
                 dispatch(error(result.message))
