@@ -40,13 +40,13 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     }
 
     @Override
-    public ClassifyDTO getById(int id){
+    public Classify getById(int id){
         Classify classify = dao.selectByPrimaryKey(id);
         return this.produceDTO(classify);
     }
 
     @Override
-    public ClassifyDTO getByName(String name) {
+    public Classify getByName(String name) {
         Classify classify = new Classify();
         classify.setName(name);
 

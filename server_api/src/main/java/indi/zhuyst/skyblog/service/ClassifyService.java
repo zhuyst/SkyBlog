@@ -9,9 +9,9 @@ public interface ClassifyService {
 
     int NOT_CLASSIFY_KEY = 1;
 
-    ClassifyDTO getById(int id);
+    Classify getById(int id);
 
-    ClassifyDTO getByName(String name);
+    Classify getByName(String name);
 
     List<ClassifyDTO> listClassify();
 

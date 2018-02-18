@@ -6,10 +6,13 @@ import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.R;
 import indi.zhuyst.skyblog.entity.Article;
+import indi.zhuyst.skyblog.entity.Classify;
 import indi.zhuyst.skyblog.entity.Comment;
 import indi.zhuyst.skyblog.pojo.ArticleDTO;
+import indi.zhuyst.skyblog.pojo.ArticlesAndClassifyVO;
 import indi.zhuyst.skyblog.pojo.CommentDTO;
 import indi.zhuyst.skyblog.service.ArticleService;
+import indi.zhuyst.skyblog.service.ClassifyService;
 import indi.zhuyst.skyblog.service.CommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,6 +33,9 @@ public class ArticleController extends BaseController{
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private ClassifyService classifyService;
 
     @RequestMapping(value = "/public/{id}",method = RequestMethod.GET)
     @ApiOperation(value = "根据id查询文章")
@@ -73,15 +79,22 @@ public class ArticleController extends BaseController{
 
     @RequestMapping(value = "/public/classify/{id}/",method = RequestMethod.GET)
     @ApiOperation(value = "根据分类id查询文章列表")
-    public R<PageInfo<ArticleDTO>> listArticleByClassify(@ApiParam("分类ID")
+    public R<ArticlesAndClassifyVO> listArticleByClassify(@ApiParam("分类ID")
                                                              @PathVariable("id")Integer classifyId,
                                                          Query query){
+        ArticlesAndClassifyVO vo = new ArticlesAndClassifyVO();
+
         Article article = new Article();
         article.setClassifyId(classifyId);
         Query<Article> articleQuery = new Query<>(query,article);
 
         PageInfo<ArticleDTO> pageInfo = articleService.listArticle(articleQuery);
-        return R.ok(pageInfo);
+        vo.setArticles(pageInfo);
+
+        Classify classify = classifyService.getById(classifyId);
+        vo.setClassify(classify);
+
+        return R.ok(vo);
     }
 
     @RequestMapping(value = "/public/{id}/comment/",method = RequestMethod.GET)
