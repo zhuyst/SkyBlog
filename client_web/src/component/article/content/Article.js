@@ -7,8 +7,6 @@ class Article extends React.Component{
         const {article,contentArea,right} = this.props;
         const {classify,title} = article;
 
-        const classifyName = classify === null ? "未分类" : classify.name;
-
         return (
             <Row>
                 <Col mdOffset={1} md={5}>
@@ -18,9 +16,9 @@ class Article extends React.Component{
                                 博客文章
                             </Breadcrumb.Item>
                         </LinkContainer>
-                        <LinkContainer to="#">
+                        <LinkContainer to={`/article/classify/${classify.id}`}>
                             <Breadcrumb.Item>
-                                {classifyName}
+                                {classify.name}
                             </Breadcrumb.Item>
                         </LinkContainer>
                         <Breadcrumb.Item active>
