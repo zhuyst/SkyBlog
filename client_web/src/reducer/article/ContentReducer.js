@@ -24,11 +24,9 @@ export const initialComments = {
     total : 0
 };
 
-const initialState = () => {
-    return Object.assign({
-        comments : initialComments
-    },initialArticle)
-};
+const initialState = Object.assign(
+    {comments : initialComments},
+    initialArticle);
 
 const convert = (action,state) => {
     const article = action.article;
@@ -44,7 +42,7 @@ const convert = (action,state) => {
     });
 };
 
-const ContentReducer = (state = initialState(),action) => {
+const ContentReducer = (state = initialState,action) => {
     let newList;
     let comments;
 

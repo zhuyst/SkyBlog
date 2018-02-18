@@ -9,6 +9,7 @@ import Content from './content/Content'
 import EditContent from "./content/edit/EditContent"
 
 import '../../static/css/article/article.css'
+import ClassifyArticles from "./ClassifyArticles";
 
 class Index extends React.Component{
     componentWillMount(){
@@ -21,8 +22,8 @@ class Index extends React.Component{
 
         return(
             <div className="articles_main">
-                <Route exact strict path={path} component={RouteIndex}/>
-                <Route exact strict path={`${path}/classify/:id`} component={RouteIndex}/>
+                <Route exact strict path={path} component={ArticleIndex}/>
+                <Route exact strict path={`${path}/classify/:id`} component={ClassifyIndex}/>
                 <Route exact strict path={`${path}/content/:id`} component={Content}/>
                 {
                     login.ok &&
@@ -33,7 +34,18 @@ class Index extends React.Component{
     }
 }
 
-const RouteIndex = () => (
+const ClassifyIndex = () => (
+    <Row>
+        <Col className="articles_left" mdOffset={1} md={7}>
+            <ClassifyArticles/>
+        </Col>
+        <Col md={3}>
+            <Navigation/>
+        </Col>
+    </Row>
+);
+
+const ArticleIndex = () => (
     <Row>
         <Col className="articles_left" mdOffset={1} md={7}>
             <Articles/>

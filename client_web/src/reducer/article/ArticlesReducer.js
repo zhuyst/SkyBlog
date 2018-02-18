@@ -3,7 +3,13 @@ import {concatList} from "../Util";
 
 const initialClassify = {
     id : 0,
-    name : ""
+    name : "",
+    page : {
+        list : [],
+        page_num : 1,
+        pages : 0,
+        total : 0,
+    }
 };
 
 const initialState = {
@@ -32,24 +38,28 @@ const ArticlesReducer = (state = initialState,action) => {
                     page_num : page.page_num,
                     pages : page.pages,
                     total : page.total
-                },
-                classify : initialClassify
+                }
             };
 
         case LIST_ARTICLES_BY_CLASSIFY_RESPONSE:
             const vo = action.vo;
+            const classify = vo.classify;
             page = vo.articles;
-            newList = concatList(page,state.page.list);
+
+            newList = concatList(page,state.classify.page.list);
 
             return {
                 ...state,
-                page :{
-                    list : newList,
-                    page_num : page.page_num,
-                    pages : page.pages,
-                    total : page.total,
-                },
-                classify : vo.classify
+                classify :{
+                    id : classify.id,
+                    name : classify.name,
+                    page : {
+                        list : newList,
+                        page_num : page.page_num,
+                        pages : page.pages,
+                        total : page.total,
+                    }
+                }
             };
 
         default :
