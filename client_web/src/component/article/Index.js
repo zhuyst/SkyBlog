@@ -1,15 +1,14 @@
 import React from 'react'
-import { Route,withRouter } from 'react-router-dom'
+import {Route,withRouter} from 'react-router-dom'
 import {Row, Col} from 'react-bootstrap'
+import {connect} from "react-redux";
 
 import Articles from './Articles'
 import Navigation from './Navigation'
 import Content from './content/Content'
+import EditContent from "./content/edit/EditContent"
 
 import '../../static/css/article/article.css'
-import EditContent from "./content/edit/EditContent";
-import {connect} from "react-redux";
-import ClassifyArticles from "./ClassifyArticles";
 
 class Index extends React.Component{
     componentWillMount(){
@@ -22,8 +21,8 @@ class Index extends React.Component{
 
         return(
             <div className="articles_main">
-                <Route exact strict path={path} component={ArticleIndex}/>
-                <Route exact strict path={`${path}/classify/:id`} component={ClassifyIndex}/>
+                <Route exact strict path={path} component={RouteIndex}/>
+                <Route exact strict path={`${path}/classify/:id`} component={RouteIndex}/>
                 <Route exact strict path={`${path}/content/:id`} component={Content}/>
                 {
                     login.ok &&
@@ -34,26 +33,16 @@ class Index extends React.Component{
     }
 }
 
-const ArticleIndex = () => (
-    <RouteIndex readClassify={false}/>
+const RouteIndex = () => (
+    <Row>
+        <Col className="articles_left" mdOffset={1} md={7}>
+            <Articles/>
+        </Col>
+        <Col md={3}>
+            <Navigation/>
+        </Col>
+    </Row>
 );
-
-const ClassifyIndex = () => (
-    <RouteIndex readClassify={true} />
-);
-
-const RouteIndex = readClassify => {
-    return(
-        <Row>
-            <Col className="articles_left" mdOffset={1} md={7}>
-                {readClassify ? <Articles/> : <ClassifyArticles/>}
-            </Col>
-            <Col md={3}>
-                <Navigation/>
-            </Col>
-        </Row>
-    )
-};
 
 const mapStateToProps = state => {
     return {

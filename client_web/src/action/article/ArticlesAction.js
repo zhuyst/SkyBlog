@@ -66,7 +66,7 @@ const listArticlesResponse = result => {
 };
 
 export const listArticlesByClassify = (classifyId,pageNum,pageSize) => dispatch => {
-    const url = ARTICLE_API_URL + `/public/classify/${classifyId}`;
+    const url = ARTICLE_API_URL + `/public/classify/${classifyId}/`;
     return _get(url,{
         pageNum : pageNum,
         pageSize : pageSize

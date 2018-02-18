@@ -39,7 +39,7 @@ const ArticlesReducer = (state = initialState,action) => {
         case LIST_ARTICLES_BY_CLASSIFY_RESPONSE:
             const vo = action.vo;
             page = vo.articles;
-            newList = concatList(page,state.list);
+            newList = concatList(page,state.page.list);
 
             return {
                 ...state,
