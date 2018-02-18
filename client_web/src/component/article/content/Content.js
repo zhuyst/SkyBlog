@@ -110,7 +110,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(deleteArticle(id))
         },
         editContent : id => {
-            dispatch(push(`/article/${id}/edit`))
+            dispatch(push(`/article/content/${id}/edit`))
         }
     }
 };

@@ -22,10 +22,10 @@ class Index extends React.Component{
         return(
             <div className="articles_main">
                 <Route exact strict path={path} component={index}/>
-                <Route exact strict path={`${path}/:id`} component={Content}/>
+                <Route exact strict path={`${path}/content/:id`} component={Content}/>
                 {
                     login.ok &&
-                    <Route path={`${path}/:id/edit`} component={EditContent} />
+                    <Route path={`${path}/content/:id/edit`} component={EditContent} />
                 }
             </div>
         )

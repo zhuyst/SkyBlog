@@ -242,7 +242,7 @@ const mapDispatchToProps = dispatch => {
                 dispatch(push("/article"))
             }
             else {
-                dispatch(push(`/article/${id}`))
+                dispatch(push(`/article/content/${id}`))
             }
         },
 

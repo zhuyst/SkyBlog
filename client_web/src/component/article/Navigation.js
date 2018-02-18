@@ -14,7 +14,7 @@ class Navigation extends React.Component{
             const articleList = [];
             articles.forEach(article => {
                 articleList.push(
-                    <LinkContainer key={article.id} to={`/article/${article.id}`}>
+                    <LinkContainer key={article.id} to={`/article/content/${article.id}`}>
                         <ListGroupItem>{article.title}</ListGroupItem>
                     </LinkContainer>
                 )
@@ -43,7 +43,7 @@ class Navigation extends React.Component{
 
                 {
                     admin &&
-                    <LinkContainer to="/article/new/edit">
+                    <LinkContainer to="/article/content/new/edit">
                         <Button bsStyle="success" bsSize="large" block
                                 className="navigation_button">新增文章</Button>
                     </LinkContainer>
