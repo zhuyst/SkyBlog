@@ -73,13 +73,14 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
             user.setUsername(null);
         }
 
+        this.checkUserInfo(user);
+
         String password = user.getPassword();
         if(password != null){
             password = passwordEncoder.encode(user.getPassword());
             user.setPassword(password);
         }
 
-        this.checkUserInfo(user);
         return super.save(user);
     }
 
