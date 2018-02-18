@@ -69,7 +69,8 @@ class Content extends React.Component{
                         <Button bsStyle="danger"
                                 onClick={() => deleteArticle(id)}>
                             <Glyphicon glyph="remove-sign" />
-                            &nbsp;&nbsp;删除&nbsp;</Button>
+                            &nbsp;&nbsp;删除&nbsp;
+                        </Button>
                     </ButtonGroup>
                 }
                 <ReactMarkdown source={content.text}/>
