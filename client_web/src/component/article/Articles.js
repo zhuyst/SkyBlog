@@ -1,14 +1,22 @@
 import React from 'react'
-import {Alert, PanelGroup} from 'react-bootstrap'
+import {PanelGroup} from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import Preview from './Preview'
+import Pager from "./Pager";
+
 import {listArticles} from "../../action/article/ArticlesAction";
+import {ARTICLE_PAGE_SIZE} from "../../Constant";
 
 class Articles extends React.Component{
 
+    componentWillMount(){
+        this.props.listArticles(1);
+    }
+
     render(){
-        const {list,page_num,pages} = this.props;
+        const {page, listArticles} = this.props;
+        const {list,page_num} = page;
 
         const articles = [];
         list.forEach((article,i) => {
@@ -24,45 +32,13 @@ class Articles extends React.Component{
             }
         });
 
-        let pager;
-        if(page_num === pages){
-            pager = (
-                <Alert bsStyle="info">
-                    &nbsp;&nbsp;已经没有更多文章啦！&nbsp;&nbsp;
-                </Alert>
-            )
-        }
-        else {
-            pager = (
-                <div className="more">
-                    <div onClick={() => this.props.listArticles(page_num + 1)}>
-                        <Alert bsStyle="warning">
-                            <p>
-                            <span className="more_left">
-                                <i className="fa fa-angle-double-down fa-lg"/>
-                            </span>
-
-                                <i className="fa fa-toggle-down" />
-                                &nbsp;&nbsp;点击查看更多文章&nbsp;&nbsp;
-                                <i className="fa fa-toggle-down" />
-
-                                <span className="more_right">
-                                <i className="fa fa-angle-double-down fa-lg"/>
-                            </span>
-                            </p>
-                        </Alert>
-                    </div>
-                </div>
-            )
-        }
-
         return(
             <div>
                 <PanelGroup id="articles">
                     {articles}
                 </PanelGroup>
                 <div className="pager">
-                    {pager}
+                    <Pager page={page} onClick={() => listArticles(page_num + 1)} />
                 </div>
             </div>
         )
@@ -71,16 +47,14 @@ class Articles extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        list : state.articles.list,
-        page_num : state.articles.page_num,
-        pages : state.articles.pages
+        page : state.articles.page
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         listArticles : pageNum => {
-            dispatch(listArticles(pageNum,5))
+            dispatch(listArticles(pageNum,ARTICLE_PAGE_SIZE))
         }
     }
 };

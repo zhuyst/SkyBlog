@@ -47,7 +47,7 @@ class Article extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        list : state.articles.list
+        list : state.articles.page.list
     }
 };
 
