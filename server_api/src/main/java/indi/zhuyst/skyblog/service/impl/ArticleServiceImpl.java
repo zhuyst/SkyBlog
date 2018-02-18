@@ -42,11 +42,13 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public Article save(Article article) {
-        checkExcept(article.getId());
-
         if(article.getId() == null){
             article.setCreateDate(new Date());
         }
+        else {
+            checkExcept(article.getId());
+        }
+
         article.setUpdateDate(new Date());
 
         if(article.getClassifyId() == null){
