@@ -6,6 +6,7 @@ import {_delete, _post, _get, _put, ARTICLE_API_URL} from "../../Api";
 import {error, success} from "../common/NotifyAction";
 import {ARTICLE_PAGE_SIZE, FORM_ARTICLE, FORM_COMMENT} from "../../Constant";
 import {listComments} from "./ContentAction";
+import {listClassify} from "./ClassifyAction";
 
 export const LIST_ARTICLES_RESPONSE = "LIST_ARTICLES_RESPONSE";
 export const GET_ARTICLE_INFO_RESPONSE = "GET_ARTICLE_INFO_RESPONSE";
@@ -26,7 +27,7 @@ export const insertArticle = (article,back) => dispatch => {
                 dispatch(success("新增文章成功"));
                 dispatch(insertArticleResponse(result));
 
-                dispatch(listArticles(1,ARTICLE_PAGE_SIZE));
+                afterHandle(dispatch);
 
                 if(back){
                     dispatch(replace(`/article/${result.entity.id}`))
@@ -93,7 +94,7 @@ export const updateArticle = (article,back) => dispatch =>{
                 dispatch(success("更新文章成功"));
                 dispatch(updateArticleResponse(result));
 
-                dispatch(listArticles(1, 5));
+                afterHandle(dispatch);
 
                 if(back){
                     dispatch(replace(`/article/${result.entity.id}`))
@@ -124,7 +125,7 @@ export const deleteArticle = id => dispatch => {
                 dispatch(success("删除文章成功"));
                 dispatch(deleteArticleResponse(result));
 
-                dispatch(listArticles(1,ARTICLE_PAGE_SIZE));
+                afterHandle(dispatch);
                 dispatch(replace("/article"));
             }
             else {
@@ -138,4 +139,9 @@ const deleteArticleResponse = result => {
         type : DELETE_ARTICLE_RESPONSE,
         result : result
     }
+};
+
+const afterHandle = dispatch => {
+    dispatch(listArticles(1,ARTICLE_PAGE_SIZE));
+    dispatch(listClassify());
 };
