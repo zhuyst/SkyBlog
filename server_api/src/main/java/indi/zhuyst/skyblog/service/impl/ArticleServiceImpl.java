@@ -71,7 +71,8 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
         PageInfo<Article> pageInfo =
                 PageHelper.startPage(query.getPageNum(),query.getPageSize())
                         .setOrderBy("update_date desc")
-                        .doSelectPageInfo(() -> dao.selectAllWithoutIDs(EXCEPT_IDS));
+                        .doSelectPageInfo(() -> dao.selectWithoutIDs(
+                                query.getEntity(), EXCEPT_IDS));
         return this.produceDTOPageInfo(pageInfo);
     }
 

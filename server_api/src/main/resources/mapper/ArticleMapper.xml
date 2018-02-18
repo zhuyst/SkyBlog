@@ -42,16 +42,26 @@
     -->
     content
   </sql>
-  <select id="selectAllWithoutIDs" resultMap="ResultMapWithBLOBs">
+  <select id="selectWithoutIDs" resultMap="ResultMapWithBLOBs">
     SELECT
       <include refid="Base_Column_List"/>,
       <include refid="Blob_Column_List"/>
     FROM article
-    WHERE id NOT IN
-    <foreach collection="list" item="id"
-             open="(" close=")" separator=",">
-      #{id}
-    </foreach>
+    <where>
+      <if test="article != null">
+        <if test="article.classifyId != null">
+          classify_id = #{article.classifyId} AND
+        </if>
+        <if test="article.authorId != null">
+          author_id = #{article.authorId} AND
+        </if>
+      </if>
+      id NOT IN
+      <foreach collection="list" item="id"
+               open="(" close=")" separator=",">
+        #{id}
+      </foreach>
+    </where>
   </select>
   <select id="selectBaseInfoByClassify" resultMap="BaseResultMap">
     SELECT
