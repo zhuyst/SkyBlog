@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link,withRouter } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Nav,NavItem,Navbar,NavDropdown,MenuItem,
     FormGroup,FormControl,
@@ -16,9 +16,10 @@ import UserInfoModel from "./UserInfoModel";
 class Navigation extends React.Component{
 
     render(){
-        const { setLoginModelShow,setRegisterModelShow,logout,setUserInfoModelShow,
-            loginModel_show,registerModel_show,userInfoModel_show,
+        const { logout,model,initArticle,
+            setLoginModelShow,setRegisterModelShow,setUserInfoModelShow,
             login } = this.props;
+        const {loginModel_show,registerModel_show,userInfoModel_show} = model;
         const user = login.user;
 
         let right;
@@ -91,10 +92,7 @@ class Navigation extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        location : state.router.location,
-        loginModel_show : state.navigation.loginModel_show,
-        registerModel_show : state.navigation.registerModel_show,
-        userInfoModel_show : state.navigation.userInfoModel_show,
+        model : state.navigation.model,
         login : state.login
     }
 };
@@ -118,4 +116,4 @@ const mapDispatchToProps = dispatch => {
 
 const NavigationContainer = connect(mapStateToProps,mapDispatchToProps)(Navigation);
 
-export default NavigationContainer
+export default withRouter(NavigationContainer)
