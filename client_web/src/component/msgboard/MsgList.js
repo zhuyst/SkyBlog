@@ -8,6 +8,11 @@ import {MSG_PAGE_SIZE} from "../../Constant";
 import {listMsg} from "../../action/msgboard/MsgBoardAction";
 
 class MsgList extends React.Component{
+
+    componentWillMount(){
+        this.props.listMsg(1);
+    }
+
     render(){
         const {listMsg,page} = this.props;
         const {list,page_num,pages,total} = page;
