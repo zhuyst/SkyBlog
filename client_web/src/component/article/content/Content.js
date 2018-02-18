@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, ButtonGroup} from "react-bootstrap";
+import {Alert, Button, ButtonGroup} from "react-bootstrap";
 import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 import {push} from 'react-router-redux'
@@ -34,6 +34,28 @@ class Content extends React.Component{
         const user = login.user;
         const {id,content} = article;
 
+        let sender;
+        if(login.ok){
+            sender = (
+                <CommentSender/>
+            )
+        }
+        else {
+            sender = (
+                <div className="pager">
+                    <Alert bsStyle="info">
+                        <span className="more_left">
+                            <i className="fa fa-warning fa-lg"/>
+                        </span>
+                        需要登录后才能进行评论
+                        <span className="more_right">
+                            <i className="fa fa-warning fa-lg"/>
+                        </span>
+                    </Alert>
+                </div>
+            )
+        }
+
         const contentArea = (
             <div>
                 <ArticleTitle article={article}/>
@@ -53,10 +75,7 @@ class Content extends React.Component{
         const right = (
             <div>
                 <CommentList/>
-                {
-                    login.ok &&
-                    <CommentSender/>
-                }
+                {sender}
             </div>
         );
 

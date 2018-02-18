@@ -54,7 +54,7 @@ class CommentList extends React.Component{
             pager = (
                 <div className="pager">
                     <div className="more">
-                        <div onClick={() => listComments(id,page_num + 1,COMMENT_PAGE_SIZE)}>
+                        <div onClick={() => listComments(id,page_num + 1)}>
                             <Alert bsStyle="warning" className="comment_pager">
                                 <p>
                             <span className="more_left">
