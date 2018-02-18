@@ -1,15 +1,12 @@
 import React from 'react'
-import {Route,withRouter} from 'react-router-dom'
-import {Row, Col} from 'react-bootstrap'
+import {Route, Switch, withRouter} from 'react-router-dom'
 import {connect} from "react-redux";
 
-import Articles from './Articles'
-import Navigation from './Navigation'
+import RouteIndex from "./RouteIndex";
 import Content from './content/Content'
 import EditContent from "./content/edit/EditContent"
 
 import '../../static/css/article/article.css'
-import ClassifyArticles from "./ClassifyArticles";
 
 class Index extends React.Component{
     componentWillMount(){
@@ -17,48 +14,26 @@ class Index extends React.Component{
     }
 
     render(){
-        const login = this.props.login;
         const path = this.props.match.path;
 
         return(
             <div className="articles_main">
-                <Route exact strict path={path} component={ArticleIndex}/>
-                <Route exact strict path={`${path}/classify/:id`} component={ClassifyIndex}/>
-                <Route exact strict path={`${path}/content/:id`} component={Content}/>
-                {
-                    login.ok &&
-                    <Route path={`${path}/content/:id/edit`} component={EditContent} />
-                }
+                <Switch>
+                    <Route exact strict path={`${path}/content/:id`} component={Content}/>
+                    {
+                        this.props.admin &&
+                        <Route path={`${path}/content/:id/edit`} component={EditContent} />
+                    }
+                    <Route component={RouteIndex}/>
+                </Switch>
             </div>
         )
     }
 }
 
-const ClassifyIndex = () => (
-    <Row>
-        <Col className="articles_left" mdOffset={1} md={7}>
-            <ClassifyArticles/>
-        </Col>
-        <Col md={3}>
-            <Navigation/>
-        </Col>
-    </Row>
-);
-
-const ArticleIndex = () => (
-    <Row>
-        <Col className="articles_left" mdOffset={1} md={7}>
-            <Articles/>
-        </Col>
-        <Col md={3}>
-            <Navigation/>
-        </Col>
-    </Row>
-);
-
 const mapStateToProps = state => {
     return {
-        login: state.login
+        admin : state.login.user.admin,
     }
 };
 

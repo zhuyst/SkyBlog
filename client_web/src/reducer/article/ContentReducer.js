@@ -8,7 +8,10 @@ export const initialArticle = {
     title : "文章标题",
     sub_title : "文章副标题",
 
-    classify : null,
+    classify : {
+        id : 1,
+        name : "未分类"
+    },
     classify_id : 0,
 
     content : {
