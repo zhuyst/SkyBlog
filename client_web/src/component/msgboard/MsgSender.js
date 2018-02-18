@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button, ControlLabel, FormControl, FormGroup, HelpBlock} from "react-bootstrap";
-import {Field, reduxForm} from "redux-form";
+import {change, untouch ,Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
 
 import {FORM_MSG} from "../../Constant";
@@ -9,13 +9,14 @@ import {insertMsg} from "../../action/msgboard/MsgBoardAction";
 class MsgSender extends React.Component{
 
     submit = data => {
-        const {page, insertMsg} = this.props;
+        const {page, insertMsg,clear} = this.props;
 
         const msg = {
             previous_comment_id : data.previous_comment_id,
             content : data.content
         };
-        insertMsg(msg,page.page_num)
+        insertMsg(msg,page.page_num);
+        clear();
     };
 
     render(){
@@ -84,6 +85,10 @@ const mapDispatchToProps = dispatch => {
     return {
         insertMsg : (msg,pageNum) => {
             dispatch(insertMsg(msg,pageNum))
+        },
+        clear : () => {
+            dispatch(untouch(FORM_MSG,"content"));
+            dispatch(change(FORM_MSG,"content",""));
         }
     }
 };

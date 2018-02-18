@@ -15,7 +15,7 @@ import Article from '../article/Index'
 import MsgBoard from '../msgboard/Index'
 import About from '../about/Index'
 
-import {ARTICLE_PAGE_SIZE} from "../../Constant";
+import {ARTICLE_PAGE_SIZE, MSG_PAGE_SIZE} from "../../Constant";
 
 import {listArticles} from "../../action/article/ArticlesAction";
 import {listClassify} from "../../action/article/ClassifyAction";
@@ -23,6 +23,7 @@ import {getAbout} from "../../action/about/AboutAction";
 import {checkUserLoginState} from "../../action/user/UsersAction";
 
 import '../../static/css/common/common.css'
+import {listMsg} from "../../action/msgboard/MsgBoardAction";
 
 class Index extends React.Component{
     componentWillMount(){
@@ -69,6 +70,7 @@ const mapDispatchToProps = dispatch => {
         initFetch : () => {
             dispatch(listArticles(1,ARTICLE_PAGE_SIZE));
             dispatch(listClassify());
+            dispatch(listMsg(1,MSG_PAGE_SIZE));
             dispatch(getAbout())
         }
     }

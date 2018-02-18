@@ -31,7 +31,7 @@ const insertMsgResponse = result => {
 };
 
 export const listMsg = (pageNum,pageSize) => dispatch => {
-    const url = MSG_BOARD_API_URL + "/public/list";
+    const url = MSG_BOARD_API_URL + "/public/list/";
     return _get(url,{
         pageNum : pageNum,
         pageSize: pageSize

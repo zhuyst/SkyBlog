@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from "react-redux";
 import {FormControl,ControlLabel,FormGroup,Row,Col,Button,HelpBlock} from 'react-bootstrap'
-import {Field, reduxForm} from "redux-form";
+import {change,untouch, Field, reduxForm} from "redux-form";
 
 import {FORM_COMMENT} from "../../../../Constant";
 import {insertComment} from "../../../../action/article/ContentAction";
@@ -10,14 +10,15 @@ class CommentSender extends React.Component{
 
     submit = data => {
         const {article,comments,
-            insertComment} = this.props;
+            insertComment,clear} = this.props;
 
         const comment = {
             article_id : data.article_id,
             previous_comment_id : data.previous_comment_id,
             content : data.content
         };
-        insertComment(article.id,comment,comments.page_num)
+        insertComment(article.id,comment,comments.page_num);
+        clear();
     };
 
     render(){
@@ -120,6 +121,10 @@ const mapDispatchToProps = dispatch => {
     return {
         insertComment : (articleId,comment,pageNum) => {
             dispatch(insertComment(articleId,comment,pageNum))
+        },
+        clear : () => {
+            dispatch(untouch(FORM_COMMENT,"content"));
+            dispatch(change(FORM_COMMENT,"content",""));
         }
     }
 };
