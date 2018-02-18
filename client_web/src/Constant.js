@@ -5,6 +5,7 @@ export const FORM_ARTICLE = "article";
 export const FORM_COMMENT = "comment";
 export const FORM_CLASSIFY = "classify";
 export const FORM_ABOUT = "about";
+export const FORM_MSG = "msg";
 
 export const COMMENT_PAGE_SIZE = 10;
 export const ARTICLE_PAGE_SIZE = 5;

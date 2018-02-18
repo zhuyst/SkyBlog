@@ -153,7 +153,7 @@ export const afterLogin = (result,dispatch,alert) => {
 
         ok = true;
     }
-    else if(result.code === 403){
+    else if(result.code === 401){
         ok = null;
     }
     else {
