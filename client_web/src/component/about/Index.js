@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import {Button, Col, Panel, Row} from "react-bootstrap";
+import {Button, Col, Glyphicon, Panel, Row} from "react-bootstrap";
 import {connect} from "react-redux";
 import {push} from 'react-router-redux'
 import {Route} from "react-router-dom";
@@ -38,7 +38,8 @@ class Index extends React.Component{
                                     <Button bsStyle="primary"
                                             className="about_edit_button"
                                             onClick={editAbout}>
-                                        编辑
+                                        <Glyphicon glyph="edit" />
+                                        &nbsp;&nbsp;编辑&nbsp;
                                     </Button>
                                 }
                                 <ReactMarkdown source={content.text}/>
