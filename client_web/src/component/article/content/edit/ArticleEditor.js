@@ -90,7 +90,7 @@ class ArticleEditor extends React.Component{
                         &nbsp;&nbsp;删除&nbsp;
                     </Button>}
                 </ButtonGroup>
-                <div className="editor">sh
+                <div className="editor">
                     <form>
                         <Field name="id" component="input" type="hidden"/>
                         <FieldGroup
