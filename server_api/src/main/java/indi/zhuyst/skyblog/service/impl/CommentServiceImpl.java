@@ -23,7 +23,6 @@ import java.util.List;
 
 @Service
 public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> implements CommentService{
-    private static final int COMMENT_PAGE_SIZE = 5;
 
     @Autowired
     private UserService userService;

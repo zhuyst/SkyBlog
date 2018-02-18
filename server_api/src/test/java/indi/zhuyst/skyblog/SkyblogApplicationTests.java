@@ -2,8 +2,10 @@ package indi.zhuyst.skyblog;
 
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.skyblog.entity.Classify;
+import indi.zhuyst.skyblog.entity.Comment;
 import indi.zhuyst.skyblog.entity.User;
 import indi.zhuyst.skyblog.service.ClassifyService;
+import indi.zhuyst.skyblog.service.MsgBoardService;
 import indi.zhuyst.skyblog.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,15 +23,15 @@ public class SkyblogApplicationTests {
 	private UserService userService;
 
 	@Autowired
-	private ClassifyService classifyService;
+	private MsgBoardService msgBoardService;
 
 	@Test
 	public void contextLoads() {
 		fakeLogin();
-		for(int i = 1;i <= 5;i++){
-			Classify classify = new Classify();
-			classify.setName("分类 - " + i);
-			classifyService.saveClassify(classify);
+		for(int i = 1;i <= 60;i++){
+			Comment comment = new Comment();
+			comment.setContent("测试留言" + i);
+			msgBoardService.insertMsg(comment);
 		}
 	}
 
