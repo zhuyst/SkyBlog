@@ -156,10 +156,8 @@ export const afterLogin = (result,dispatch,alert) => {
     else if(result.code === 403){
         ok = null;
     }
-    else if(result.code !== 403){
-        dispatch(error(result.message));
-    }
     else {
+        dispatch(error(result.message));
         message = result.message
     }
 
