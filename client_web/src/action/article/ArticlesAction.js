@@ -30,10 +30,10 @@ export const insertArticle = (article,back) => dispatch => {
                 afterHandle(dispatch);
 
                 if(back){
-                    dispatch(replace(`/article/${result.entity.id}`))
+                    dispatch(replace(`/article/content/${result.entity.id}`))
                 }
                 else {
-                    dispatch(replace(`/article/${result.entity.id}/edit`))
+                    dispatch(replace(`/article/content/${result.entity.id}/edit`))
                 }
             }
             else {
@@ -97,7 +97,7 @@ export const updateArticle = (article,back) => dispatch =>{
                 afterHandle(dispatch);
 
                 if(back){
-                    dispatch(replace(`/article/${result.entity.id}`))
+                    dispatch(replace(`/article/content/${result.entity.id}`))
                 }
             }
             else {
