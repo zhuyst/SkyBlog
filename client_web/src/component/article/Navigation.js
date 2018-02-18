@@ -22,8 +22,8 @@ class Navigation extends React.Component{
 
             list.push(
                 <ListGroup key={classify.id}>
-                    <LinkContainer to="/article">
-                        <ListGroupItem href="#" active>
+                    <LinkContainer to={`/article/classify/${classify.id}`}>
+                        <ListGroupItem active>
                             {classify.name}
                             <Badge>{articles.length}</Badge>
                         </ListGroupItem>
@@ -45,7 +45,7 @@ class Navigation extends React.Component{
                     admin &&
                     <LinkContainer to="/article/content/new/edit">
                         <Button bsStyle="success" bsSize="large" block
-                                className="navigation_button">新增文章</Button>
+                                className="navigation_button">发布文章</Button>
                     </LinkContainer>
                 }
 

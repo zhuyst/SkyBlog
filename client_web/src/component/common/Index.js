@@ -1,11 +1,6 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
-import { ConnectedRouter as Router } from 'react-router-redux'
-import NotificationsSystem from 'reapop';
-import theme from 'reapop-theme-wybo';
+import {Route, withRouter} from 'react-router-dom'
 import { connect } from 'react-redux'
-
-import { history } from "../../store/Store";
 
 import Navigation from './Navigation'
 import Footer from './Footer'
@@ -36,27 +31,22 @@ class Index extends React.Component{
 
     render(){
         return (
-            <div>
-                <NotificationsSystem theme={theme}/>
-                <Router history={history}>
-                    <div className="website">
-                        <header>
-                            <Navigation/>
-                        </header>
+            <div className="website">
+                <header>
+                    <Navigation/>
+                </header>
 
-                        <div className="main">
-                            <Route exact strict path="/" component={Home} />
-                            <Route exact strict path="/home" component={Home}/>
-                            <Route path="/article" component={Article} />
-                            <Route path="/msg_board" component={MsgBoard} />
-                            <Route path="/about" component={About} />
-                        </div>
+                <div className="main">
+                    <Route exact strict path="/" component={Home} />
+                    <Route exact strict path="/home" component={Home}/>
+                    <Route path="/article" component={Article} />
+                    <Route path="/msg_board" component={MsgBoard} />
+                    <Route path="/about" component={About} />
+                </div>
 
-                        <footer>
-                            <Footer/>
-                        </footer>
-                    </div>
-                </Router>
+                <footer>
+                    <Footer/>
+                </footer>
             </div>
         )
     }
@@ -76,6 +66,9 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-const IndexContainer = connect(null,mapDispatchToProps)(Index);
+const IndexContainer = connect(
+    null,
+    mapDispatchToProps
+)(Index);
 
-export default IndexContainer
+export default withRouter(IndexContainer)

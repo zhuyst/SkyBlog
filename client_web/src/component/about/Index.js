@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import {Button, Col, Glyphicon, Panel, Row} from "react-bootstrap";
 import {connect} from "react-redux";
 import {push} from 'react-router-redux'
-import {Route} from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 
 import {getAbout} from "../../action/about/AboutAction";
 import AboutEditor from "./AboutEditor";
@@ -17,11 +17,9 @@ class Index extends React.Component{
     }
 
     render(){
-        const {about,admin,pathname,editAbout} = this.props;
+        const {about,admin,editing,editAbout} = this.props;
         const {content} = about;
         const path = this.props.match.path;
-
-        const editing = pathname === "/about/edit";
 
         return (
             <div className="about_main">
@@ -63,10 +61,14 @@ const editor = () => {
 };
 
 const mapStateToProps = state => {
+    const pathname = state.router.location.pathname;
+    const editing = pathname === "/about/edit";
+
     return {
         about : state.about,
         admin : state.login.user.admin,
-        pathname : state.router.location.pathname
+        pathname : pathname,
+        editing : editing
     }
 };
 
@@ -86,4 +88,4 @@ const IndexContainer = connect(
     mapDispatchToProps
 )(Index);
 
-export default IndexContainer
+export default withRouter(IndexContainer)

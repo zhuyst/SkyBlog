@@ -9,6 +9,7 @@ import {listComments} from "./ContentAction";
 import {listClassify} from "./ClassifyAction";
 
 export const LIST_ARTICLES_RESPONSE = "LIST_ARTICLES_RESPONSE";
+export const LIST_ARTICLES_BY_CLASSIFY_RESPONSE = "LIST_ARTICLES_BY_CLASSIFY_RESPONSE";
 export const GET_ARTICLE_INFO_RESPONSE = "GET_ARTICLE_INFO_RESPONSE";
 
 export const INSERT_ARTICLE_RESPONSE = "INSERT_ARTICLE_RESPONSE";
@@ -24,7 +25,7 @@ export const insertArticle = (article,back) => dispatch => {
             dispatch(stopSubmit(FORM_ARTICLE,result.errors));
 
             if(result.code === 200){
-                dispatch(success("新增文章成功"));
+                dispatch(success("发布文章成功"));
                 dispatch(insertArticleResponse(result));
 
                 afterHandle(dispatch);
@@ -50,7 +51,8 @@ const insertArticleResponse = result => {
 };
 
 export const listArticles = (pageNum,pageSize) => dispatch => {
-    return _get(ARTICLE_API_URL + "/public/list/", {
+    const url = ARTICLE_API_URL + "/public/list/";
+    return _get(url, {
             pageNum : pageNum,
             pageSize : pageSize
         }).then(result => dispatch(listArticlesResponse(result)))
@@ -60,6 +62,21 @@ const listArticlesResponse = result => {
     return {
         type : LIST_ARTICLES_RESPONSE,
         page : result.entity
+    }
+};
+
+export const listArticlesByClassify = (classifyId,pageNum,pageSize) => dispatch => {
+    const url = ARTICLE_API_URL + `/public/classify/${classifyId}`;
+    return _get(url,{
+        pageNum : pageNum,
+        pageSize : pageSize
+    }).then(result => dispatch(listArticlesByClassifyResponse(result)))
+};
+
+const listArticlesByClassifyResponse = result => {
+    return {
+        type : LIST_ARTICLES_BY_CLASSIFY_RESPONSE,
+        vo : result.entity
     }
 };
 
