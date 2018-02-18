@@ -3,10 +3,15 @@ import { connect } from 'react-redux'
 import {Badge, Button, Col, ListGroup,
     ListGroupItem, Well} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
+import {push} from 'react-router-redux'
+
+import {listArticlesByClassify} from "../../action/article/ArticlesAction";
+import {ARTICLE_PAGE_SIZE} from "../../Constant";
 
 class Navigation extends React.Component{
     render(){
-        const {admin,total,classifyList} = this.props;
+        const {admin,total,classifyList,
+            goClassify} = this.props;
 
         let list = [];
         classifyList.forEach(classify => {
@@ -22,12 +27,10 @@ class Navigation extends React.Component{
 
             list.push(
                 <ListGroup key={classify.id}>
-                    <LinkContainer to={`/article/classify/${classify.id}`}>
-                        <ListGroupItem active>
-                            {classify.name}
-                            <Badge>{articles.length}</Badge>
-                        </ListGroupItem>
-                    </LinkContainer>
+                    <ListGroupItem active onClick={() => goClassify(classify.id)}>
+                        {classify.name}
+                        <Badge>{articles.length}</Badge>
+                    </ListGroupItem>
                     {articleList}
                 </ListGroup>
             )
@@ -72,9 +75,18 @@ const mapStateToProps = state => {
     }
 };
 
+const mapDispatchToProps = dispatch => {
+    return {
+        goClassify : id => {
+            dispatch(listArticlesByClassify(id,1,ARTICLE_PAGE_SIZE));
+            dispatch(push(`/article/classify/${id}`));
+        }
+    }
+};
+
 const NavigationContainer = connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(Navigation);
 
 export default NavigationContainer

@@ -93,3 +93,7 @@
 .navigation_button{
     margin-bottom: 20px;
 }
+
+#articles .alert{
+    font-size: 16px;
+}
