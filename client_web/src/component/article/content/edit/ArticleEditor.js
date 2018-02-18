@@ -3,7 +3,7 @@ import ReactMde, { ReactMdeCommands } from 'react-mde';
 import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 import { Field,reduxForm,change } from 'redux-form'
-import {Button, ButtonGroup, Col, ControlLabel, FormGroup, Row} from "react-bootstrap";
+import {Button, ButtonGroup, Col, ControlLabel, FormGroup, Glyphicon, Row} from "react-bootstrap";
 
 import {FORM_ARTICLE} from "../../../../Constant";
 import FieldGroup from "../../../common/FieldGroup";
@@ -70,23 +70,27 @@ class ArticleEditor extends React.Component{
                 <ButtonGroup>
                     <Button disabled={submitting} bsStyle="success"
                             onClick={handleSubmit(data => this.submit(data,false))}>
-                        保存
+                        <Glyphicon glyph="floppy-disk" />
+                        &nbsp;&nbsp;保存&nbsp;
                     </Button>
                     <Button disabled={submitting} bsStyle="success"
                             onClick={handleSubmit(data => this.submit(data,true))}>
-                        保存并返回
+                        <Glyphicon glyph="floppy-saved" />
+                        &nbsp;&nbsp;保存并退出编辑&nbsp;
                     </Button>
                     <Button disabled={submitting} bsStyle="primary"
                             onClick={() => goBack(isNew,id)}>
-                        放弃{action}并返回
+                        <Glyphicon glyph="circle-arrow-left" />
+                        &nbsp;&nbsp;放弃{action}并返回&nbsp;
                     </Button>
                     {!isNew &&
                     <Button disabled={submitting} bsStyle="danger"
                             onClick={() => deleteArticle(id)}>
-                        删除
+                        <Glyphicon glyph="remove-sign" />
+                        &nbsp;&nbsp;删除&nbsp;
                     </Button>}
                 </ButtonGroup>
-                <div className="editor">
+                <div className="editor">sh
                     <form>
                         <Field name="id" component="input" type="hidden"/>
                         <FieldGroup

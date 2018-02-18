@@ -1,5 +1,5 @@
 import React from 'react'
-import {Alert, Button, ButtonGroup} from "react-bootstrap";
+import {Alert, Button, ButtonGroup, Glyphicon} from "react-bootstrap";
 import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 import {push} from 'react-router-redux'
@@ -63,9 +63,13 @@ class Content extends React.Component{
                     user.admin &&
                     <ButtonGroup>
                         <Button bsStyle="primary" className="edit_button"
-                                onClick={() => editContent(id)}>编辑</Button>
+                                onClick={() => editContent(id)}>
+                            <Glyphicon glyph="edit" />&nbsp;&nbsp;编辑&nbsp;
+                        </Button>
                         <Button bsStyle="danger"
-                                onClick={() => deleteArticle(id)}>删除</Button>
+                                onClick={() => deleteArticle(id)}>
+                            <Glyphicon glyph="remove-sign" />
+                            &nbsp;&nbsp;删除&nbsp;</Button>
                     </ButtonGroup>
                 }
                 <ReactMarkdown source={content.text}/>

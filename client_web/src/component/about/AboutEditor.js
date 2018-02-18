@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from "react-redux";
 import ReactMde, { ReactMdeCommands } from 'react-mde';
-import {Button, ButtonGroup, Col, ControlLabel, FormGroup, Row} from "react-bootstrap";
+import {Button, ButtonGroup, Col, ControlLabel, FormGroup, Glyphicon, Row} from "react-bootstrap";
 import {change, Field, reduxForm} from "redux-form";
 import {push} from 'react-router-redux'
 
@@ -43,15 +43,18 @@ class AboutEditor extends React.Component{
                         <ButtonGroup>
                             <Button disabled={submitting} bsStyle="success"
                                     onClick={handleSubmit(data => this.submit(data,false))}>
-                                保存
+                                <Glyphicon glyph="floppy-disk" />
+                                &nbsp;&nbsp;保存&nbsp;
                             </Button>
                             <Button disabled={submitting} bsStyle="success"
                                     onClick={handleSubmit(data => this.submit(data,true))}>
-                                保存并退出编辑
+                                <Glyphicon glyph="floppy-saved" />
+                                &nbsp;&nbsp;保存并退出编辑&nbsp;
                             </Button>
                             <Button disabled={submitting} bsStyle="primary"
                                     onClick={goBack}>
-                                放弃编辑并返回
+                                <Glyphicon glyph="circle-arrow-left" />
+                                &nbsp;&nbsp;放弃编辑并返回&nbsp;
                             </Button>
                         </ButtonGroup>
                     </Col>
