@@ -50,6 +50,9 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
     @Override
     public PageInfo<CommentDTO> listMsg(Query<Comment> query){
         Comment comment = query.getEntity();
+        if(comment == null){
+            comment = new Comment();
+        }
         comment.setArticleId(MSG_BOARD_KEY);
 
         query.setEntity(comment);
