@@ -1,21 +1,18 @@
 import React from 'react'
 import {connect} from "react-redux";
-import { Panel } from 'react-bootstrap'
+import {Badge, Panel} from 'react-bootstrap'
+import {Link} from "react-router-dom";
 
 import Preview from './ArticlePreview'
+import {getLength} from "./Util";
 
 class Article extends React.Component{
     render(){
-        const list = this.props.list;
+        const page = this.props.page;
+        const {total,list} = page;
 
         const MAX_LENGTH = 3;
-        let length;
-        if(list.length >= MAX_LENGTH){
-            length = MAX_LENGTH;
-        }
-        else {
-            length = list.length;
-        }
+        const length = getLength(list,MAX_LENGTH);
 
         const articles = [];
         for(let i = 0;i < length;i++){
@@ -35,10 +32,16 @@ class Article extends React.Component{
         return(
             <Panel bsStyle="primary">
                 <Panel.Heading>
-                    <Panel.Title componentClass="h3">最近更新的文章</Panel.Title>
+                    <Panel.Title componentClass="h3">
+                        最近更新的文章&nbsp;&nbsp;<Badge>{total}</Badge>
+                    </Panel.Title>
                 </Panel.Heading>
                 <Panel.Body>
                     {articles}
+                    <Link className="more_link"
+                          to="/article">
+                        查看更多文章
+                    </Link>
                 </Panel.Body>
             </Panel>
         )
@@ -47,7 +50,7 @@ class Article extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        list : state.articles.page.list
+        page : state.articles.page
     }
 };
 

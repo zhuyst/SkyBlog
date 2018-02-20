@@ -4,8 +4,7 @@
 }
 
 .home_article_last{
-    margin-bottom: 0;
-    border-bottom: 0;
+    margin-bottom: 15px !important;
 }
 
 .home_article_title{
