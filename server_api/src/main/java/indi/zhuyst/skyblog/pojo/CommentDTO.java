@@ -30,7 +30,7 @@ public class CommentDTO extends Comment{
      * @see #previousCommentId
      */
     @ApiModelProperty("上级评论对象")
-    private Comment previousComment;
+    private CommentDTO previousComment;
 
     public CommentDTO(Comment comment){
         BeanUtils.copyProperties(comment,this);

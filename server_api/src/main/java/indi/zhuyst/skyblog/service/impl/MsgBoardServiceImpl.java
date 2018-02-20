@@ -42,12 +42,14 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
 
     @Override
     public CommentDTO getMsg(int id){
+        CommentDTO comment = this.commentService.getCommentDTO(id);
+        checkArticleId(comment.getArticleId());
         return this.commentService.getCommentDTO(id);
     }
 
     @Override
     public PageInfo<CommentDTO> listMsg(Query<Comment> query){
-        Comment comment = new Comment();
+        Comment comment = query.getEntity();
         comment.setArticleId(MSG_BOARD_KEY);
 
         query.setEntity(comment);
@@ -64,12 +66,14 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean deleteMsg(int id){
-        Comment comment = this.getMsg(id);
-        if(comment.getArticleId() != MSG_BOARD_KEY){
+        this.getMsg(id);
+        return commentService.delete(id);
+    }
+
+    private void checkArticleId(int articleId){
+        if(articleId != MSG_BOARD_KEY){
             throw new CommonException(CodeEnum.NOT_FOUND.getCode(),
                     "找不到该留言");
         }
-
-        return commentService.delete(id);
     }
 }
