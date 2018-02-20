@@ -61,6 +61,12 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
     }
 
     @Override
+    public boolean delete(int id) {
+        checkExcept(id);
+        return super.delete(id);
+    }
+
+    @Override
     public ArticleDTO getArticleDTO(int id){
         Article article = getByID(id);
         return this.produceDTO(article);

@@ -1,5 +1,6 @@
 package indi.zhuyst.skyblog.service.impl;
 
+import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.exception.FieldErrorException;
 import indi.zhuyst.common.pojo.Error;
 import indi.zhuyst.skyblog.dao.ArticleDao;
@@ -86,6 +87,10 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public List<ClassifyDTO> deleteClassify(int id){
+        if(id == NOT_CLASSIFY_KEY){
+            throw new CommonException("未分类不能被删除");
+        }
+
         boolean isSuccess = dao.deleteByPrimaryKey(id) > 0;
 
         if(isSuccess){
