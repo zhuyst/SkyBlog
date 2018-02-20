@@ -1,9 +1,9 @@
 import React from 'react'
 import {connect} from "react-redux";
 import {LinkContainer} from "react-router-bootstrap";
-import {Badge, Button, ButtonGroup, Glyphicon, ListGroup, ListGroupItem} from "react-bootstrap";
+import {Badge, ListGroup, ListGroupItem} from "react-bootstrap";
 
-import {deleteClassify, updateClassify} from "../../../action/article/ClassifyAction";
+import ClassifyButtonGroup from "./ClassifyButtonGroup";
 
 class ClassifyListGroup extends React.Component{
     render(){
@@ -29,18 +29,7 @@ class ClassifyListGroup extends React.Component{
                 </LinkContainer>
                 {
                     admin &&
-                    <ButtonGroup className="btn-block">
-                        <Button className="navigation_classify_button">
-                            <Glyphicon glyph="edit" />
-                            &nbsp;&nbsp;编辑分类名&nbsp;
-                        </Button>
-                        <Button bsStyle="danger"
-                                className="navigation_classify_button"
-                                onClick={() => deleteClassify(classify.id)}>
-                            <Glyphicon glyph="trash" />
-                            &nbsp;&nbsp;删除分类&nbsp;
-                        </Button>
-                    </ButtonGroup>
+                    <ClassifyButtonGroup classify={classify}/>
                 }
                 {articleList}
             </ListGroup>
@@ -54,20 +43,9 @@ const mapStateToProps = state => {
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        updateClassify : classify => {
-            dispatch(updateClassify(classify))
-        },
-        deleteClassify : id => {
-            dispatch(deleteClassify(id))
-        }
-    }
-};
-
 const ClassifyListGroupContainer = connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(ClassifyListGroup);
 
 export default ClassifyListGroupContainer

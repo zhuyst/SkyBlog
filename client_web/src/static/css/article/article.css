@@ -96,7 +96,10 @@
 
 .navigation_classify_button{
     width: 50%;
-    border-radius: 0;
+}
+
+.navigation_classify_edit .navigation_classify_button{
+    border-radius: 0 !important;
 }
 
 #articles .alert{
