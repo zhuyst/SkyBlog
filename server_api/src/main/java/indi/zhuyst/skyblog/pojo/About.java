@@ -7,6 +7,11 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * 关于 - 该实体存于{@link Article}中
+ * @see indi.zhuyst.skyblog.service.AboutService#ABOUT_KEY
+ * @author zhuyst
+ */
 @Data
 @NoArgsConstructor
 public class About implements Serializable{

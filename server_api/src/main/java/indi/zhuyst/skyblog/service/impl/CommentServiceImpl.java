@@ -81,15 +81,22 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
         }
 
         CommentDTO pojo = new CommentDTO(comment);
-
-        UserDTO user = userService.getUserDTO(comment.getAuthorId());
-        pojo.setAuthor(user);
+        setAuthor(pojo);
 
         if(comment.getPreviousCommentId() != null){
             Comment previousComment = super.getByID(comment.getPreviousCommentId());
-            pojo.setPreviousComment(previousComment);
+
+            CommentDTO previousDTO = new CommentDTO(previousComment);
+            setAuthor(previousDTO);
+
+            pojo.setPreviousComment(previousDTO);
         }
 
         return pojo;
+    }
+
+    private void setAuthor(CommentDTO dto){
+        UserDTO user = userService.getUserDTO(dto.getAuthorId());
+        dto.setAuthor(user);
     }
 }
