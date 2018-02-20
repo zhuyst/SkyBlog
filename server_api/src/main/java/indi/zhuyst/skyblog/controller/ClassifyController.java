@@ -35,7 +35,8 @@ public class ClassifyController extends BaseController{
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R<List<ClassifyDTO>> insertClassify(@ApiParam("分类对象") @Valid @RequestBody Classify classify){
         classify.setId(null);
-        List<ClassifyDTO> list = classifyService.saveClassify(classify);
+        classify = classifyService.saveClassify(classify);
+        List<ClassifyDTO> list = this.produceDTOList(classify != null);
         return produceResult(list,"新增分类失败");
     }
 
@@ -45,7 +46,8 @@ public class ClassifyController extends BaseController{
     public R<List<ClassifyDTO>> updateClassify(@ApiParam("分类ID") @PathVariable("id")Integer id,
                                             @ApiParam("分类对象") @Valid @RequestBody Classify classify){
         classify.setId(id);
-        List<ClassifyDTO> list = classifyService.saveClassify(classify);
+        classify = classifyService.saveClassify(classify);
+        List<ClassifyDTO> list = this.produceDTOList(classify != null);
         return produceResult(list,"更新分类失败");
     }
 
@@ -53,7 +55,17 @@ public class ClassifyController extends BaseController{
     @ApiOperation(value = "根据id删除分类")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R<List<ClassifyDTO>> deleteClassify(@ApiParam("分类ID") @PathVariable("id")Integer id){
-        List<ClassifyDTO> list = classifyService.deleteClassify(id);
+        List<ClassifyDTO> list = this.produceDTOList(classifyService.deleteClassify(id));
         return produceResult(list,"删除分类成功");
+    }
+
+    private List<ClassifyDTO> produceDTOList(boolean isSuccess){
+        List<ClassifyDTO> list = null;
+
+        if(isSuccess){
+            list = classifyService.listClassify();
+        }
+
+        return list;
     }
 }
