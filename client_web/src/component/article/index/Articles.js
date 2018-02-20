@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import Preview from './Preview'
 import Pager from "./Pager";
 
-import {listArticles} from "../../action/article/ArticlesAction";
-import {ARTICLE_PAGE_SIZE} from "../../Constant";
+import {listArticles} from "../../../action/article/ArticlesAction";
+import {ARTICLE_PAGE_SIZE} from "../../../Constant";
 
 class Articles extends React.Component{
 
