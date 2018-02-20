@@ -1,9 +1,9 @@
 import React from 'react'
 import {Button, ButtonGroup, Glyphicon, ListGroupItem} from "react-bootstrap";
-import {deleteClassify, updateClassify} from "../../../action/article/ClassifyAction";
+import {deleteClassify, updateClassify} from "../../../../action/article/ClassifyAction";
 import {connect} from "react-redux";
-import FieldGroup from "../../common/FieldGroup";
-import {FORM_CLASSIFY} from "../../../Constant";
+import FieldGroup from "../../../common/FieldGroup";
+import {FORM_CLASSIFY} from "../../../../Constant";
 import {change, Field, reduxForm} from "redux-form";
 
 class ClassifyButtonGroup extends React.Component{

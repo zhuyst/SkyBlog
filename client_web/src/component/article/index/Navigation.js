@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {Badge, Button, Col, ListGroup,
     ListGroupItem, Well} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
-import ClassifyListGroup from "./ClassifyListGroup";
+import ClassifyListGroup from "./classify/ClassifyListGroup";
 
 class Navigation extends React.Component{
     render(){
