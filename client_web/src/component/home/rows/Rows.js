@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row,Col } from 'react-bootstrap'
+import { Row,Col} from 'react-bootstrap'
 
 import Article from './Article'
 import MsgBoard from './MsgBoard'

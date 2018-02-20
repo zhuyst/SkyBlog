@@ -43,3 +43,14 @@ footer{
 .navBrand{
     font-size: 22px;
 }
+
+.badge{
+    float: right;
+}
+
+.more_link{
+    text-align: right;
+    float: right;
+    color: #f16c20;
+    padding-right: 10px;
+}
