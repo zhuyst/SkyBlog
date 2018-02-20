@@ -26,11 +26,6 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
         implements UserService,CommandLineRunner{
-    private static final int ADMIN_KEY = 1;
-
-    private static final String ADMIN_DEFAULT_USERNAME = "admin";
-    private static final String ADMIN_DEFAULT_PASSWORD = "admin123";
-    private static final String ADMIN_DEFAULT_NICKNAME = "系统管理员";
 
     @Autowired
     private UserDao userDao;

@@ -9,6 +9,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends BaseCrudService<User>,UserDetailsService{
 
+    int ADMIN_KEY = 1;
+
+    String ADMIN_DEFAULT_USERNAME = "admin";
+    String ADMIN_DEFAULT_PASSWORD = "admin123";
+    String ADMIN_DEFAULT_NICKNAME = "系统管理员";
+
     UserDTO getUserDTO(int id);
 
     User getByUsername(String username);
