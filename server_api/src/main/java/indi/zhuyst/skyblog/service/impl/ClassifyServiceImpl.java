@@ -87,22 +87,18 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public List<ClassifyDTO> deleteClassify(int id){
+        // 将分类下的文章归为未分类
+        List<Article> articles = articleDao.selectBaseInfoByClassify(id);
+        for(Article article : articles){
+            article.setClassifyId(NOT_CLASSIFY_KEY);
+            articleDao.updateByPrimaryKeySelective(article);
+        }
+
         if(id == NOT_CLASSIFY_KEY){
             throw new CommonException("未分类不能被删除");
         }
 
         boolean isSuccess = dao.deleteByPrimaryKey(id) > 0;
-
-        if(isSuccess){
-
-            // 删除分类后，将分类下的文章归为未分类
-            List<Article> articles = articleDao.selectBaseInfoByClassify(id);
-            for(Article article : articles){
-                article.setClassifyId(NOT_CLASSIFY_KEY);
-                articleDao.updateByPrimaryKeySelective(article);
-            }
-        }
-
         return this.produceDTOList(isSuccess);
     }
 
