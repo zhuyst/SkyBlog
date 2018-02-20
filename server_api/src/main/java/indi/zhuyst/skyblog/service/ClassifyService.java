@@ -11,12 +11,14 @@ public interface ClassifyService {
 
     Classify getById(int id);
 
+    ClassifyDTO getClassifyDTO(int id);
+
     Classify getByName(String name);
 
     List<ClassifyDTO> listClassify();
 
-    List<ClassifyDTO> saveClassify(Classify classify);
+    ClassifyDTO saveClassify(Classify classify);
 
-    List<ClassifyDTO> deleteClassify(int id);
+    boolean deleteClassify(int id);
 
 }

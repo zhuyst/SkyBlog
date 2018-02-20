@@ -47,6 +47,12 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     }
 
     @Override
+    public ClassifyDTO getClassifyDTO(int id) {
+        Classify classify = this.getById(id);
+        return this.produceDTO(classify);
+    }
+
+    @Override
     public Classify getByName(String name) {
         Classify classify = new Classify();
         classify.setName(name);
@@ -70,7 +76,7 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public List<ClassifyDTO> saveClassify(Classify classify){
+    public ClassifyDTO saveClassify(Classify classify){
         checkClassify(classify);
 
         boolean isSuccess;
@@ -81,12 +87,14 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
             isSuccess = dao.updateByPrimaryKeySelective(classify) > 0;
         }
 
-        return this.produceDTOList(isSuccess);
+        return isSuccess ? this.getClassifyDTO(classify.getId()) : null;
     }
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public List<ClassifyDTO> deleteClassify(int id){
+    public boolean deleteClassify(int id){
+
+
         // 将分类下的文章归为未分类
         List<Article> articles = articleDao.selectBaseInfoByClassify(id);
         for(Article article : articles){
@@ -98,8 +106,7 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
             throw new CommonException("未分类不能被删除");
         }
 
-        boolean isSuccess = dao.deleteByPrimaryKey(id) > 0;
-        return this.produceDTOList(isSuccess);
+        return dao.deleteByPrimaryKey(id) > 0;
     }
 
     private void checkClassify(Classify classify){
@@ -125,15 +132,5 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
         dto.setArticles(articles);
 
         return dto;
-    }
-
-    private List<ClassifyDTO> produceDTOList(boolean isSuccess){
-        List<ClassifyDTO> list = null;
-
-        if(isSuccess){
-            list = this.listClassify();
-        }
-
-        return list;
     }
 }
