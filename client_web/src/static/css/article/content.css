@@ -1,5 +1,5 @@
 .content_main{
-    margin: 3%;
+    word-wrap: break-word;
 }
 
 .editor{
@@ -7,7 +7,11 @@
 }
 
 .edit_button{
-    margin-bottom: 15px;
+    height: 25px;
+}
+
+.edit_button_group{
+    float: right;
 }
 
 .comment_send{
