@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {Badge, Button, Col, ListGroup,
     ListGroupItem, Well} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
+import ClassifyListGroup from "./ClassifyListGroup";
 
 class Navigation extends React.Component{
     render(){
@@ -10,26 +11,8 @@ class Navigation extends React.Component{
 
         let list = [];
         classifyList.forEach(classify => {
-            const articles = classify.articles;
-            const articleList = [];
-            articles.forEach(article => {
-                articleList.push(
-                    <LinkContainer key={article.id} to={`/article/content/${article.id}`}>
-                        <ListGroupItem>{article.title}</ListGroupItem>
-                    </LinkContainer>
-                )
-            });
-
             list.push(
-                <ListGroup key={classify.id}>
-                    <LinkContainer to={`/article/classify/${classify.id}`}>
-                        <ListGroupItem active>
-                            {classify.name}
-                            <Badge>{articles.length}</Badge>
-                        </ListGroupItem>
-                    </LinkContainer>
-                    {articleList}
-                </ListGroup>
+                <ClassifyListGroup classify={classify}/>
             )
         });
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import {Row, Col} from 'react-bootstrap'
 
-import Articles from './Articles'
-import Navigation from './Navigation'
-import ClassifyArticles from "./ClassifyArticles";
+import Articles from './index/Articles'
+import Navigation from './index/Navigation'
+import ClassifyArticles from "./index/ClassifyArticles";
 import {Route} from "react-router-dom";
 
 class RouteIndex extends React.Component{

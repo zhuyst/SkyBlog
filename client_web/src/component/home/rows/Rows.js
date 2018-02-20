@@ -11,14 +11,10 @@ class Rows extends React.Component{
         return (
             <Row className="rows">
                 <Col md={6} mdOffset={1} sm={12}>
-                    <div>
-                        <Article/>
-                    </div>
+                    <Article/>
                 </Col>
                 <Col md={4} sm={12}>
-                    <div>
-                        <MsgBoard/>
-                    </div>
+                    <MsgBoard/>
                 </Col>
             </Row>
         )
