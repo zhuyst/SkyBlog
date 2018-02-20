@@ -57,21 +57,23 @@ class Content extends React.Component{
         }
 
         const contentArea = (
-            <div>
+            <div className="content_main">
                 <ArticleTitle article={article}/>
                 {
                     user.admin &&
-                    <ButtonGroup>
-                        <Button bsStyle="primary" className="edit_button"
-                                onClick={() => editContent(id)}>
-                            <Glyphicon glyph="edit" />&nbsp;&nbsp;编辑&nbsp;
-                        </Button>
-                        <Button bsStyle="danger"
-                                onClick={() => deleteArticle(id)}>
-                            <Glyphicon glyph="remove-sign" />
-                            &nbsp;&nbsp;删除&nbsp;
-                        </Button>
-                    </ButtonGroup>
+                    <div className="edit_button">
+                        <ButtonGroup className="edit_button_group">
+                            <Button bsStyle="primary"
+                                    onClick={() => editContent(id)}>
+                                <Glyphicon glyph="edit" />&nbsp;&nbsp;编辑&nbsp;
+                            </Button>
+                            <Button bsStyle="danger"
+                                    onClick={() => deleteArticle(id)}>
+                                <Glyphicon glyph="remove-sign" />
+                                &nbsp;&nbsp;删除&nbsp;
+                            </Button>
+                        </ButtonGroup>
+                    </div>
                 }
                 <ReactMarkdown source={content.text}/>
             </div>

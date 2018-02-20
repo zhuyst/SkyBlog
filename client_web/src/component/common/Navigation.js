@@ -16,7 +16,7 @@ import UserInfoModel from "./UserInfoModel";
 class Navigation extends React.Component{
 
     render(){
-        const { logout,model,initArticle,
+        const { logout,model,
             setLoginModelShow,setRegisterModelShow,setUserInfoModelShow,
             login } = this.props;
         const {loginModel_show,registerModel_show,userInfoModel_show} = model;

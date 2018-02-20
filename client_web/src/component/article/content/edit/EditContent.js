@@ -34,7 +34,7 @@ class EditContent extends React.Component{
             <ArticleEditor article={article} />
         );
         const right = (
-            <div>
+            <div className="content_main">
                 <ArticleTitle article={article}/>
                 <ReactMarkdown source={article.content.text}/>
             </div>
