@@ -1,9 +1,12 @@
-import {_delete, _get, _post, CLASSIFY_API_URL} from "../../Api";
+import {_delete, _get, _post, _put, CLASSIFY_API_URL} from "../../Api";
 import {error, success} from "../common/NotifyAction";
 
 export const SET_CLASSIFY_SHOW = "SET_CLASSIFY_SHOW";
+
 export const LIST_CLASSIFY_RESPONSE = "LIST_CLASSIFY_RESPONSE";
+
 export const INSERT_CLASSIFY_RESPONSE = "INSERT_CLASSIFY_RESPONSE";
+export const UPDATE_CLASSIFY_RESPONSE = "UPDATE_CLASSIFY_RESPONSE";
 export const DELETE_CLASSIFY_RESPONSE = "DELETE_CLASSIFY_RESPONSE";
 
 export const setClassifyShow = show => {
@@ -44,6 +47,27 @@ export const insertClassify = classify => dispatch => {
 const insertClassifyResponse = result => {
     return {
         type : INSERT_CLASSIFY_RESPONSE,
+        list : result.entity
+    }
+};
+
+export const updateClassify = classify => dispatch => {
+    const url = CLASSIFY_API_URL + `/${classify.id}`;
+    return _put(url,classify)
+        .then(result => {
+            if(result.code === 200){
+                dispatch(success("更新文章分类成功"));
+                dispatch(updateClassifyResponse(result));
+            }
+            else {
+                dispatch(error(result.message));
+            }
+        })
+};
+
+const updateClassifyResponse = result => {
+    return {
+        type : UPDATE_CLASSIFY_RESPONSE,
         list : result.entity
     }
 };

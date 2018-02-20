@@ -94,6 +94,11 @@
     margin-bottom: 20px;
 }
 
+.navigation_classify_button{
+    width: 50%;
+    border-radius: 0;
+}
+
 #articles .alert{
     font-size: 16px;
 }

@@ -1,10 +1,13 @@
 import React from 'react'
+import {connect} from "react-redux";
 import {LinkContainer} from "react-router-bootstrap";
-import {Badge, Button, ListGroup, ListGroupItem} from "react-bootstrap";
+import {Badge, Button, ButtonGroup, Glyphicon, ListGroup, ListGroupItem} from "react-bootstrap";
+
+import {deleteClassify, updateClassify} from "../../../action/article/ClassifyAction";
 
 class ClassifyListGroup extends React.Component{
     render(){
-        const classify = this.props.classify;
+        const {admin,classify,deleteClassify} = this.props;
         const articles = classify.articles;
 
         const articleList = [];
@@ -24,10 +27,47 @@ class ClassifyListGroup extends React.Component{
                         <Badge>{articles.length}</Badge>
                     </ListGroupItem>
                 </LinkContainer>
+                {
+                    admin &&
+                    <ButtonGroup className="btn-block">
+                        <Button className="navigation_classify_button">
+                            <Glyphicon glyph="edit" />
+                            &nbsp;&nbsp;编辑分类名&nbsp;
+                        </Button>
+                        <Button bsStyle="danger"
+                                className="navigation_classify_button"
+                                onClick={() => deleteClassify(classify.id)}>
+                            <Glyphicon glyph="trash" />
+                            &nbsp;&nbsp;删除分类&nbsp;
+                        </Button>
+                    </ButtonGroup>
+                }
                 {articleList}
             </ListGroup>
         )
     }
 }
 
-export default ClassifyListGroup
+const mapStateToProps = state => {
+    return {
+        admin : state.login.user.admin
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        updateClassify : classify => {
+            dispatch(updateClassify(classify))
+        },
+        deleteClassify : id => {
+            dispatch(deleteClassify(id))
+        }
+    }
+};
+
+const ClassifyListGroupContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ClassifyListGroup);
+
+export default ClassifyListGroupContainer

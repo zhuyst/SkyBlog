@@ -86,7 +86,7 @@ class ArticleEditor extends React.Component{
                     {!isNew &&
                     <Button disabled={submitting} bsStyle="danger"
                             onClick={() => deleteArticle(id)}>
-                        <Glyphicon glyph="remove-sign" />
+                        <Glyphicon glyph="trash" />
                         &nbsp;&nbsp;删除&nbsp;
                     </Button>}
                 </ButtonGroup>
