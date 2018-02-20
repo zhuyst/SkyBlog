@@ -7,7 +7,7 @@ import ClassifyButtonGroup from "./ClassifyButtonGroup";
 
 class ClassifyListGroup extends React.Component{
     render(){
-        const {admin,classify,deleteClassify} = this.props;
+        const {admin,classify} = this.props;
         const articles = classify.articles;
 
         const articleList = [];

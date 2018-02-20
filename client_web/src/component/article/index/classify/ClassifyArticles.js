@@ -3,11 +3,11 @@ import {connect} from "react-redux";
 import {Alert, PanelGroup} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 
-import {listArticlesByClassify} from "../../../action/article/ArticlesAction";
-import {ARTICLE_PAGE_SIZE} from "../../../Constant";
+import {listArticlesByClassify} from "../../../../action/article/ArticlesAction";
+import {ARTICLE_PAGE_SIZE} from "../../../../Constant";
 
-import Preview from "./Preview";
-import Pager from "./Pager";
+import Preview from "../Preview";
+import Pager from "../Pager";
 
 class ClassifyArticles extends React.Component{
 

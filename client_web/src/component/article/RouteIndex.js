@@ -3,7 +3,7 @@ import {Row, Col} from 'react-bootstrap'
 
 import Articles from './index/Articles'
 import Navigation from './index/Navigation'
-import ClassifyArticles from "./index/ClassifyArticles";
+import ClassifyArticles from "./index/classify/ClassifyArticles";
 import {Route} from "react-router-dom";
 
 class RouteIndex extends React.Component{
