@@ -12,7 +12,7 @@ class Navigation extends React.Component{
         let list = [];
         classifyList.forEach(classify => {
             list.push(
-                <ClassifyListGroup classify={classify}/>
+                <ClassifyListGroup key={classify.id} classify={classify}/>
             )
         });
 

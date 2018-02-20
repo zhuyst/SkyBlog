@@ -34,7 +34,7 @@ class Index extends React.Component{
                                 {
                                     admin && !editing &&
                                     <Button bsStyle="primary"
-                                            className="edit_button"
+                                            className="about_edit_button"
                                             onClick={editAbout}>
                                         <Glyphicon glyph="edit" />
                                         &nbsp;&nbsp;编辑&nbsp;
