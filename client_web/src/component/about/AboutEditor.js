@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import ReactMde, { ReactMdeCommands } from 'react-mde';
 import {Button, ButtonGroup, Col, ControlLabel, FormGroup, Glyphicon, Row} from "react-bootstrap";
 import {change, Field, reduxForm} from "redux-form";
-import {push} from 'react-router-redux'
 
 import {FORM_ABOUT} from "../../Constant";
 import {setAbout, updateAbout} from "../../action/about/AboutAction";

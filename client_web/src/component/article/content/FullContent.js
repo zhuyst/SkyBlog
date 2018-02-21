@@ -13,8 +13,6 @@ import {setArticle} from "../../../action/article/ContentAction";
 
 class FullContent extends React.Component{
     componentWillMount(){
-        document.title = `${this.props.article.title} - 博客文章 - 青云的小窝`;
-
         const id = this.props.match.params.id;
         if(id === "new"){
             this.props.setArticle(initialArticle);
@@ -25,8 +23,6 @@ class FullContent extends React.Component{
     }
 
     render(){
-        const article = this.props.article;
-
         const contentArea = (
             <div>
                 <div className="full_content">
@@ -44,12 +40,6 @@ class FullContent extends React.Component{
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        article : state.content.article
-    }
-};
-
 const mapDispatchToProps = dispatch => {
     return {
         getArticle : id =>{
@@ -62,7 +52,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 const FullContentContainer = connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(FullContent);
 

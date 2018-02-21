@@ -17,7 +17,7 @@ class EditContent extends React.Component{
         const id = this.props.match.params.id;
         if(id === "new"){
             this.props.setArticle(initialArticle);
-            action = "新增"
+            action = "发布"
         }
         else {
             this.props.getArticle(id);

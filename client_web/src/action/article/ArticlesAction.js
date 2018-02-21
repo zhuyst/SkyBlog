@@ -70,7 +70,10 @@ export const listArticlesByClassify = (classifyId,pageNum,pageSize) => dispatch 
     return _get(url,{
         pageNum : pageNum,
         pageSize : pageSize
-    }).then(result => dispatch(listArticlesByClassifyResponse(result)))
+    }).then(result => {
+        dispatch(listArticlesByClassifyResponse(result));
+        document.title = `${result.entity.classify.name} - 博客文章 - 青云的小窝`;
+    })
 };
 
 const listArticlesByClassifyResponse = result => {
@@ -86,9 +89,12 @@ export const getArticleInfo = id => dispatch => {
         .then(result => {
             dispatch(getArticleInfoResponse(result));
 
-            const id = result.entity.id;
+            const article = result.entity;
+            const id = article.id;
             dispatch(change(FORM_COMMENT,"article_id",id));
-            dispatch(listComments(id,1,10))
+            dispatch(listComments(id,1,10));
+
+            document.title = `${article.title} - 博客文章 - 青云的小窝`;
         })
 };
 
