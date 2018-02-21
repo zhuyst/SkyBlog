@@ -6,20 +6,20 @@ import { Nav,NavItem,Navbar,NavDropdown,MenuItem,
     Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
-import {setLoginModelShow, setRegisterModelShow, setUserInfoModelShow} from "../../action/common/ModelAction";
+import {setLoginModalShow, setRegisterModalShow, setUserInfoModalShow} from "../../action/common/ModalAction";
 import {logout} from "../../action/common/LoginAction"
 
-import LoginModel from './LoginModel'
-import RegisterModel from './RegisterModel'
-import UserInfoModel from "./UserInfoModel";
+import LoginModal from './modal/LoginModal'
+import RegisterModal from './modal/RegisterModal'
+import UserInfoModal from "./modal/UserInfoModal";
 
 class Navigation extends React.Component{
 
     render(){
-        const { logout,model,
-            setLoginModelShow,setRegisterModelShow,setUserInfoModelShow,
+        const { logout,modal,
+            setLoginModalShow,setRegisterModalShow,setUserInfoModalShow,
             login } = this.props;
-        const {loginModel_show,registerModel_show,userInfoModel_show} = model;
+        const {loginModal_show,registerModal_show,userInfoModal_show} = modal;
         const user = login.user;
 
         let right;
@@ -27,8 +27,8 @@ class Navigation extends React.Component{
             right = (
                 <Nav pullRight>
                     <NavDropdown title={user.nickname} id={user.id}>
-                        <MenuItem onClick={() => setUserInfoModelShow(true)}>修改个人信息</MenuItem>
-                        <UserInfoModel show={userInfoModel_show} onHide={() => setUserInfoModelShow(false)}/>
+                        <MenuItem onClick={() => setUserInfoModalShow(true)}>修改个人信息</MenuItem>
+                        <UserInfoModal show={userInfoModal_show} onHide={() => setUserInfoModalShow(false)}/>
 
                         <MenuItem onClick={logout}>登出</MenuItem>
                     </NavDropdown>
@@ -38,11 +38,11 @@ class Navigation extends React.Component{
         else {
             right = (
                 <Nav pullRight>
-                    <NavItem onClick={() => setLoginModelShow(true)}>登陆</NavItem>
-                    <LoginModel show={loginModel_show} onHide={() => setLoginModelShow(false)}/>
+                    <NavItem onClick={() => setLoginModalShow(true)}>登陆</NavItem>
+                    <LoginModal show={loginModal_show} onHide={() => setLoginModalShow(false)}/>
 
-                    <NavItem onClick={() => setRegisterModelShow(true)}>注册</NavItem>
-                    <RegisterModel show={registerModel_show} onHide={() => setRegisterModelShow(false)}/>
+                    <NavItem onClick={() => setRegisterModalShow(true)}>注册</NavItem>
+                    <RegisterModal show={registerModal_show} onHide={() => setRegisterModalShow(false)}/>
                 </Nav>
             )
         }
@@ -92,21 +92,21 @@ class Navigation extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        model : state.navigation.model,
+        modal : state.navigation.modal,
         login : state.login
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        setLoginModelShow : loginModel_show => {
-            dispatch(setLoginModelShow(loginModel_show))
+        setLoginModalShow : loginModal_show => {
+            dispatch(setLoginModalShow(loginModal_show))
         },
-        setRegisterModelShow : registerModel_show => {
-            dispatch(setRegisterModelShow(registerModel_show))
+        setRegisterModalShow : registerModal_show => {
+            dispatch(setRegisterModalShow(registerModal_show))
         },
-        setUserInfoModelShow : userInfoModel_show => {
-            dispatch(setUserInfoModelShow(userInfoModel_show))
+        setUserInfoModalShow : userInfoModal_show => {
+            dispatch(setUserInfoModalShow(userInfoModal_show))
         },
         logout : () => {
             dispatch(logout())

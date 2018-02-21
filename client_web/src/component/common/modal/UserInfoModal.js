@@ -1,13 +1,13 @@
 import React from 'react'
 import {Button, Modal} from "react-bootstrap";
-import FieldGroup, {MODE_SUCCESS} from "./FieldGroup";
+import FieldGroup, {MODE_SUCCESS} from "../FieldGroup";
 import { Field,reduxForm } from 'redux-form'
 
-import {FORM_USERINFO} from "../../Constant";
-import {validate as validateInfo} from "./RegisterModel";
-import {updateUserInfo} from "../../action/user/UsersAction";
+import {FORM_USERINFO} from "../../../Constant";
+import {validate as validateInfo} from "./RegisterModal";
+import {updateUserInfo} from "../../../action/user/UsersAction";
 
-class UserInfoModel extends React.Component{
+class UserInfoModal extends React.Component{
     render(){
         const {show,submitting,
             onHide,handleSubmit} = this.props;
@@ -79,10 +79,10 @@ const onSubmit = (values,dispatch) => {
     dispatch(updateUserInfo(user));
 };
 
-const UserInfoModelForm = reduxForm({
+const UserInfoModalForm = reduxForm({
     form : FORM_USERINFO,
     validate : validate,
     onSubmit : onSubmit
-})(UserInfoModel);
+})(UserInfoModal);
 
-export default UserInfoModelForm
+export default UserInfoModalForm
