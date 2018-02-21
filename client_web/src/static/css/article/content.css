@@ -7,11 +7,9 @@
 }
 
 .edit_button{
-    height: 25px;
-}
-
-.edit_button_group{
-    float: right;
+    float: right !important;
+    position: relative;
+    bottom: 60px;
 }
 
 .comment_send{
@@ -52,4 +50,8 @@
     margin-bottom: 50px;
     padding-bottom: 50px;
     border-bottom: 2px solid #ddd;
+}
+
+.page-header{
+    padding-bottom: 40px !important;
 }
