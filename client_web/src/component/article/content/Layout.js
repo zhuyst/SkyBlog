@@ -7,7 +7,7 @@ export const LAYOUT_FULL = "full";
 
 class Layout extends React.Component{
     render(){
-        const {article,contentArea,right,type} = this.props;
+        const {contentArea,right,type} = this.props;
 
         const isJustify = (type === LAYOUT_JUSTIFY);
         const mdOffset = isJustify ? 1 : 3;
@@ -16,13 +16,13 @@ class Layout extends React.Component{
         return (
             <div>
                 <Row>
-                    <Col mdOffset={mdOffset} md={md}>
-                        <ArticleBreadcrumb article={article}/>
+                    <Col mdOffset={mdOffset} md={md} id="left">
+                        <ArticleBreadcrumb/>
                         {contentArea}
                     </Col>
                     {
                         isJustify &&
-                        <Col md={5}>
+                        <Col md={5} id="right">
                             {right}
                         </Col>
                     }

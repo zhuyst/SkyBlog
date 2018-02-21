@@ -16,7 +16,12 @@
     padding-right: 15px;
 }
 
-.classify_well{
+.classify_well {
     display: flow-root;
     padding-bottom: 4px;
+}
+
+.edit_content{
+    overflow-y: scroll;
+    height: 100%;
 }

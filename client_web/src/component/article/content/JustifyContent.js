@@ -37,8 +37,7 @@ class JustifyContent extends React.Component{
         return (
             <Layout type={LAYOUT_JUSTIFY}
                     contentArea={<ContentArea/>}
-                    right={right}
-                    article={article}/>
+                    right={right}/>
         )
     }
 }
