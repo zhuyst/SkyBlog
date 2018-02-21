@@ -7,6 +7,7 @@ import {push} from 'react-router-redux'
 
 import {FORM_ABOUT} from "../../Constant";
 import {setAbout, updateAbout} from "../../action/about/AboutAction";
+import {LinkContainer} from "react-router-bootstrap";
 
 class AboutEditor extends React.Component{
 
@@ -32,8 +33,7 @@ class AboutEditor extends React.Component{
     };
 
     render(){
-        const {submitting,handleSubmit,
-            goBack} = this.props;
+        const {submitting,handleSubmit} = this.props;
 
         return (
             <form>
@@ -51,11 +51,12 @@ class AboutEditor extends React.Component{
                                 <Glyphicon glyph="floppy-saved" />
                                 &nbsp;&nbsp;保存并退出编辑&nbsp;
                             </Button>
-                            <Button disabled={submitting} bsStyle="primary"
-                                    onClick={goBack}>
-                                <Glyphicon glyph="circle-arrow-left" />
-                                &nbsp;&nbsp;放弃编辑并返回&nbsp;
-                            </Button>
+                            <LinkContainer to="/about">
+                                <Button disabled={submitting} bsStyle="primary">
+                                    <Glyphicon glyph="circle-arrow-left" />
+                                    &nbsp;&nbsp;放弃编辑并返回&nbsp;
+                                </Button>
+                            </LinkContainer>
                         </ButtonGroup>
                     </Col>
                 </Row>
@@ -106,9 +107,6 @@ const mapDispatchToProps = dispatch => {
     return {
         setAboutForm : about => {
             dispatch(change(FORM_ABOUT,"content",about.content))
-        },
-        goBack : () => {
-            dispatch(push("/about"));
         },
         updateAbout : (about,back) => {
             dispatch(updateAbout(about,back))

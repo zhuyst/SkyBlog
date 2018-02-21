@@ -7,12 +7,14 @@ class FullLayout extends React.Component{
         const {article,contentArea} = this.props;
 
         return (
-            <Row>
-                <Col mdOffset={3} md={6}>
-                    <ArticleBreadcrumb article={article}/>
-                    {contentArea}
-                </Col>
-            </Row>
+            <div>
+                <Row>
+                    <Col mdOffset={3} md={6}>
+                        <ArticleBreadcrumb article={article}/>
+                        {contentArea}
+                    </Col>
+                </Row>
+            </div>
         )
     }
 }

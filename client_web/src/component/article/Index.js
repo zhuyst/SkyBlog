@@ -20,7 +20,7 @@ class Index extends React.Component{
         return(
             <div className="articles_main">
                 <Switch>
-                    <Route exact strict path={`${path}/content/:id`} component={FullContent}/>
+                    <Route exact strict path={`${path}/content/:id/full`} component={FullContent}/>
                     <Route exact strict path={`${path}/content/:id/justify`} component={JustifyContent} />
                     {
                         this.props.admin &&

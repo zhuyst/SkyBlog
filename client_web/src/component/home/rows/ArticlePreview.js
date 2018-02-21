@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class ArticlePreview extends React.Component{
     render(){
         const article = this.props.article;
-        const path = `/article/content/${article.id}`;
+        const path = `/article/content/${article.id}/full`;
         let className = this.props.isLast ? "home_article home_article_last" : "home_article";
 
         return (

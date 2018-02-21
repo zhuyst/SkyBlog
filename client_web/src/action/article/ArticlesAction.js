@@ -31,7 +31,7 @@ export const insertArticle = (article,back) => dispatch => {
                 afterHandle(dispatch);
 
                 if(back){
-                    dispatch(replace(`/article/content/${result.entity.id}`))
+                    dispatch(replace(`/article/content/${result.entity.id}/justify`))
                 }
                 else {
                     dispatch(replace(`/article/content/${result.entity.id}/edit`))
@@ -114,7 +114,7 @@ export const updateArticle = (article,back) => dispatch =>{
                 afterHandle(dispatch);
 
                 if(back){
-                    dispatch(replace(`/article/content/${result.entity.id}`))
+                    dispatch(replace(`/article/content/${result.entity.id}/justify`))
                 }
             }
             else {

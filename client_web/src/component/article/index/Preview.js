@@ -8,7 +8,7 @@ class Preview extends React.Component{
         const article = this.props.article;
         const id = article.id;
 
-        const path = `/article/content/${id}`;
+        const path = `/article/content/${id}/full`;
 
         let className = this.props.isFirst ? "preview preview_first" : "preview";
 

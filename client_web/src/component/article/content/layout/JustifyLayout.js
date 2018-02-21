@@ -7,15 +7,17 @@ class JustifyLayout extends React.Component{
         const {article,contentArea,right} = this.props;
 
         return (
-            <Row>
-                <Col mdOffset={1} md={5}>
-                    <ArticleBreadcrumb article={article}/>
-                    {contentArea}
-                </Col>
-                <Col md={5}>
-                    {right}
-                </Col>
-            </Row>
+            <div>
+                <Row>
+                    <Col mdOffset={1} md={5}>
+                        <ArticleBreadcrumb article={article}/>
+                        {contentArea}
+                    </Col>
+                    <Col md={5}>
+                        {right}
+                    </Col>
+                </Row>
+            </div>
         )
     }
 }
