@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 import ArticleEditor from "./ArticleEditor";
 import ArticleTitle from "../ArticleTitle";
-import JustifyLayout from "../layout/JustifyLayout";
+import Layout, {LAYOUT_JUSTIFY} from "../Layout";
 
 import {initialArticle} from "../../../../reducer/article/ContentReducer";
 import {deleteArticle, getArticleInfo} from "../../../../action/article/ArticlesAction";
@@ -41,8 +41,10 @@ class EditContent extends React.Component{
         );
 
         return (
-            <JustifyLayout contentArea={contentArea}
-                     right={right} article={article}/>
+            <Layout type={LAYOUT_JUSTIFY}
+                    contentArea={contentArea}
+                    right={right}
+                    article={article}/>
         )
     }
 }

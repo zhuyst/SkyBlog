@@ -1,12 +1,15 @@
 import React from 'react'
-import {initialArticle} from "../../../reducer/article/ContentReducer";
+import {connect} from "react-redux";
+
 import ContentArea from "./ContentArea";
 import CommentList from "./comment/CommentList";
 import CommentSender from "./comment/CommentSender";
-import FullLayout from "./layout/FullLayout";
+import Layout, {LAYOUT_FULL} from "./Layout";
+
+import {initialArticle} from "../../../reducer/article/ContentReducer";
+
 import {getArticleInfo} from "../../../action/article/ArticlesAction";
 import {setArticle} from "../../../action/article/ContentAction";
-import {connect} from "react-redux";
 
 class FullContent extends React.Component{
     componentWillMount(){
@@ -35,8 +38,8 @@ class FullContent extends React.Component{
         );
 
         return (
-            <FullLayout contentArea={contentArea}
-                        article={article}/>
+            <Layout type={LAYOUT_FULL} contentArea={contentArea}
+                    article={article}/>
         )
     }
 }

@@ -7,7 +7,7 @@ import {initialArticle} from "../../../reducer/article/ContentReducer";
 
 import CommentSender from './comment/CommentSender'
 import CommentList from './comment/CommentList'
-import JustifyLayout from "./layout/JustifyLayout";
+import Layout, {LAYOUT_JUSTIFY} from "./Layout";
 import ContentArea from "./ContentArea";
 
 import '../../../static/css/article/content.css'
@@ -35,8 +35,10 @@ class JustifyContent extends React.Component{
         );
 
         return (
-            <JustifyLayout contentArea={<ContentArea/>}
-                     right={right} article={article}/>
+            <Layout type={LAYOUT_JUSTIFY}
+                    contentArea={<ContentArea/>}
+                    right={right}
+                    article={article}/>
         )
     }
 }
