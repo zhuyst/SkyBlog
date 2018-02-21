@@ -2,12 +2,12 @@ import React from 'react'
 import {Button,Modal} from "react-bootstrap";
 import { reduxForm } from 'redux-form'
 
-import {registerUser} from "../../action/user/UsersAction";
+import {registerUser} from "../../../action/user/UsersAction";
 
-import {FORM_REGISTER} from "../../Constant";
-import FieldGroup,{MODE_SUCCESS} from './FieldGroup'
+import {FORM_REGISTER} from "../../../Constant";
+import FieldGroup,{MODE_SUCCESS} from '../FieldGroup'
 
-class RegisterModel extends React.Component{
+class RegisterModal extends React.Component{
     render(){
         const {show,submitting,
             onHide,handleSubmit} = this.props;
@@ -129,10 +129,10 @@ const onSubmit = (values,dispatch) => {
     dispatch(registerUser(user));
 };
 
-const RegisterModelForm = reduxForm({
+const RegisterModalForm = reduxForm({
     form : FORM_REGISTER,
     validate : validate,
     onSubmit : onSubmit
-})(RegisterModel);
+})(RegisterModal);
 
-export default RegisterModelForm;
+export default RegisterModalForm;

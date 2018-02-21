@@ -6,7 +6,7 @@ import {
      _get, _delete, setToken, getToken
 } from "../../Api";
 import {FORM_REGISTER,FORM_USERINFO} from "../../Constant";
-import {setLoginModelShow, setRegisterModelShow, setUserInfoModelShow} from "../common/ModelAction";
+import {setLoginModalShow, setRegisterModalShow, setUserInfoModalShow} from "../common/ModalAction";
 import {loginResponse} from  "../common/LoginAction"
 import {success, error} from "../common/NotifyAction";
 
@@ -28,7 +28,7 @@ export const registerUser = (user) => (dispatch) => {
             dispatch(stopSubmit(FORM_REGISTER,result.errors));
 
             if(result.code === 200){
-                dispatch(setRegisterModelShow(false));
+                dispatch(setRegisterModalShow(false));
                 dispatch(success("注册成功，开始登陆"));
                 dispatch(registerUserResponse(result));
                 afterLogin(result,dispatch,true);
@@ -96,7 +96,7 @@ export const updateUserInfo = user => dispatch => {
             dispatch(stopSubmit(FORM_USERINFO,result.errors));
 
             if(result.code === 200){
-                dispatch(setUserInfoModelShow(false));
+                dispatch(setUserInfoModalShow(false));
                 dispatch(setLoginUser(result.entity));
                 dispatch(success("修改个人信息成功"));
                 dispatch(updateUserInfoResponse(result))
@@ -134,7 +134,7 @@ export const afterLogin = (result,dispatch,alert) => {
     let message = null;
 
     if(result.code === 200){
-        dispatch(setLoginModelShow(false));
+        dispatch(setLoginModalShow(false));
 
         const entity = result.entity;
 

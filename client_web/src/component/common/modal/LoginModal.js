@@ -3,12 +3,12 @@ import {Alert, Button, Modal} from "react-bootstrap";
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 
-import {login,loginClear} from "../../action/common/LoginAction";
+import {login,loginClear} from "../../../action/common/LoginAction";
 
-import {FORM_LOGIN} from "../../Constant";
-import FieldGroup,{MODE_NULL} from './FieldGroup'
+import {FORM_LOGIN} from "../../../Constant";
+import FieldGroup,{MODE_NULL} from '../FieldGroup'
 
-class LoginModel extends React.Component{
+class LoginModal extends React.Component{
     render(){
         const {show,onHide,
             submitting,handleSubmit,
@@ -89,12 +89,12 @@ const onSubmit = (values,dispatch) => {
     dispatch(login(user))
 };
 
-const LoginModelForm = reduxForm({
+const LoginModalForm = reduxForm({
     form : FORM_LOGIN,
     validate : validate,
     onSubmit : onSubmit
-})(LoginModel);
+})(LoginModal);
 
-const LoginModelContainer = connect(mapStateToProps,mapDispatchToProps)(LoginModelForm);
+const LoginModalContainer = connect(mapStateToProps,mapDispatchToProps)(LoginModalForm);
 
-export default LoginModelContainer;
+export default LoginModalContainer;
