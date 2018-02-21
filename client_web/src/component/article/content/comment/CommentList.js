@@ -92,8 +92,8 @@ class CommentList extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        article : state.article,
-        comments : state.article.comments
+        article : state.content.article,
+        comments : state.content.comments
     }
 };
 

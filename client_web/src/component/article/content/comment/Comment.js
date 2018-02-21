@@ -34,8 +34,8 @@ class Comment extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        articleId : state.article.id,
-        pageNum : state.article.comments.page_num,
+        articleId : state.content.article.id,
+        pageNum : state.content.comments.page_num,
         login : state.login
     }
 };
