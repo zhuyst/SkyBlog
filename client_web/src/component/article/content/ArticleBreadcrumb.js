@@ -1,6 +1,7 @@
 import React from 'react'
 import {Breadcrumb} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
+import {connect} from "react-redux";
 
 class ArticleBreadcrumb extends React.Component{
     render(){
@@ -26,4 +27,15 @@ class ArticleBreadcrumb extends React.Component{
     }
 }
 
-export default ArticleBreadcrumb
+const mapStateToProps = state => {
+    return {
+        article : state.content.article
+    }
+};
+
+const ArticleBreadcrumbContainer = connect(
+    mapStateToProps,
+    null
+)(ArticleBreadcrumb);
+
+export default ArticleBreadcrumbContainer

@@ -27,6 +27,13 @@ class EditContent extends React.Component{
         document.title = `${action} - ${this.props.article.title} - 博客文章 - 青云的小窝`;
     }
 
+    componentDidMount(){
+        // 获取左侧编辑器高度，设置在右侧显示框中
+        const left = document.getElementById("left");
+        const right = document.getElementById("right");
+        right.style.height = left.offsetHeight + "px";
+    }
+
     render(){
         const article = this.props.article;
 
@@ -34,7 +41,7 @@ class EditContent extends React.Component{
             <ArticleEditor article={article} />
         );
         const right = (
-            <div className="content_main">
+            <div className="content_main edit_content">
                 <ArticleTitle article={article}/>
                 <ReactMarkdown source={article.content.text}/>
             </div>
@@ -43,8 +50,7 @@ class EditContent extends React.Component{
         return (
             <Layout type={LAYOUT_JUSTIFY}
                     contentArea={contentArea}
-                    right={right}
-                    article={article}/>
+                    right={right}/>
         )
     }
 }

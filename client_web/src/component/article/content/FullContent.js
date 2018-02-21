@@ -38,8 +38,8 @@ class FullContent extends React.Component{
         );
 
         return (
-            <Layout type={LAYOUT_FULL} contentArea={contentArea}
-                    article={article}/>
+            <Layout type={LAYOUT_FULL}
+                    contentArea={contentArea}/>
         )
     }
 }

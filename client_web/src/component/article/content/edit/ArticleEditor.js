@@ -234,6 +234,7 @@ const mapDispatchToProps = dispatch => {
         setArticleForm : article => {
             dispatch(change(FORM_ARTICLE,"id",article.id));
             dispatch(change(FORM_ARTICLE,"title",article.title));
+            dispatch(change(FORM_ARTICLE,"classify_id",article.classify_id));
             dispatch(change(FORM_ARTICLE,"sub_title",article.sub_title));
             dispatch(change(FORM_ARTICLE,"content",article.content));
         },
