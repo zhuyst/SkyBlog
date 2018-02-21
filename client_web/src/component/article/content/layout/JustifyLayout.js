@@ -1,6 +1,6 @@
 import React from 'react'
 import {Col, Row} from "react-bootstrap";
-import ArticleBreadcrumb from "./ArticleBreadcrumb";
+import ArticleBreadcrumb from "../ArticleBreadcrumb";
 
 class JustifyLayout extends React.Component{
     render(){

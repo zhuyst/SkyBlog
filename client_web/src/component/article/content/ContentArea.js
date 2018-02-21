@@ -8,6 +8,7 @@ import ArticleTitle from "./ArticleTitle";
 import {deleteArticle} from "../../../action/article/ArticlesAction";
 
 class ContentArea extends React.Component{
+
     render(){
         const {article,login,
             editContent, deleteArticle} = this.props;

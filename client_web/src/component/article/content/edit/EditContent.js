@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 import ArticleEditor from "./ArticleEditor";
 import ArticleTitle from "../ArticleTitle";
-import JustifyLayout from "../JustifyLayout";
+import JustifyLayout from "../layout/JustifyLayout";
 
 import {initialArticle} from "../../../../reducer/article/ContentReducer";
 import {deleteArticle, getArticleInfo} from "../../../../action/article/ArticlesAction";
