@@ -13,6 +13,7 @@ import '../../static/css/about/about.css'
 class Index extends React.Component{
 
     componentWillMount(){
+        document.title = "关于 - 青云的小窝";
         this.props.getAbout();
     }
 

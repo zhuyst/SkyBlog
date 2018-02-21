@@ -14,8 +14,6 @@ import '../../../static/css/article/content.css'
 
 class JustifyContent extends React.Component{
     componentWillMount(){
-        document.title = `${this.props.article.title} - 博客文章 - 青云的小窝`;
-
         const id = this.props.match.params.id;
         if(id === "new"){
             this.props.setArticle(initialArticle);
@@ -26,7 +24,6 @@ class JustifyContent extends React.Component{
     }
 
     render(){
-        const article = this.props.article;
         const right = (
             <div>
                 <CommentList/>
@@ -42,12 +39,6 @@ class JustifyContent extends React.Component{
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        article : state.content.article
-    }
-};
-
 const mapDispatchToProps = dispatch => {
     return {
         getArticle : id =>{
@@ -60,7 +51,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 const JustifyContentContainer = connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(JustifyContent);
 
