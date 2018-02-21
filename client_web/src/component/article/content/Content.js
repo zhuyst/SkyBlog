@@ -1,6 +1,5 @@
 import React from 'react'
-import {Alert, Button, ButtonGroup, Glyphicon} from "react-bootstrap";
-import ReactMarkdown from 'react-markdown'
+import {Alert} from "react-bootstrap";
 import { connect } from 'react-redux'
 import {push} from 'react-router-redux'
 
@@ -11,7 +10,7 @@ import {initialArticle} from "../../../reducer/article/ContentReducer";
 import CommentSender from './comment/CommentSender'
 import CommentList from './comment/CommentList'
 import Article from "./Article";
-import ArticleTitle from "./ArticleTitle";
+import ContentArea from "./ContentArea";
 
 import '../../../static/css/article/content.css'
 
@@ -56,29 +55,6 @@ class Content extends React.Component{
             )
         }
 
-        const contentArea = (
-            <div className="content_main">
-                <ArticleTitle article={article}/>
-                {
-                    user.admin &&
-                    <div className="edit_button">
-                        <ButtonGroup className="edit_button_group">
-                            <Button bsStyle="primary"
-                                    onClick={() => editContent(id)}>
-                                <Glyphicon glyph="edit" />&nbsp;&nbsp;编辑&nbsp;
-                            </Button>
-                            <Button bsStyle="danger"
-                                    onClick={() => deleteArticle(id)}>
-                                <Glyphicon glyph="trash" />
-                                &nbsp;&nbsp;删除&nbsp;
-                            </Button>
-                        </ButtonGroup>
-                    </div>
-                }
-                <ReactMarkdown source={content.text}/>
-            </div>
-        );
-
         const right = (
             <div>
                 <CommentList/>
@@ -87,7 +63,7 @@ class Content extends React.Component{
         );
 
         return (
-            <Article contentArea={contentArea}
+            <Article contentArea={<ContentArea/>}
                      right={right} article={article}/>
         )
     }
