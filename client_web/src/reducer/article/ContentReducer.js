@@ -27,9 +27,10 @@ export const initialComments = {
     total : 0
 };
 
-const initialState = Object.assign(
-    {comments : initialComments},
-    initialArticle);
+const initialState = {
+    comments : initialComments,
+    article : initialArticle
+};
 
 const convert = (action,state) => {
     const article = action.article;
@@ -40,7 +41,8 @@ const convert = (action,state) => {
             selection: null
         }
     };
-    return Object.assign({},state,convertArticle,{
+    return Object.assign({},state,{
+        article : convertArticle,
         comments : initialComments
     });
 };

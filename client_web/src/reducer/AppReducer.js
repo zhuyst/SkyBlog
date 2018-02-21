@@ -15,7 +15,7 @@ import MsgBoardReducer from './msgboard/MsgBoardReducer'
 const AppReducer = combineReducers({
     navigation : NavigationReducer,
     articles : ArticlesReducer,
-    article : ContentReducer,
+    content : ContentReducer,
     login : LoginReducer,
     user : UserReducer,
     classify : ClassifyReducer,

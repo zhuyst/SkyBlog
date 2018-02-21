@@ -214,7 +214,7 @@ const ArticleEditorForm = reduxForm({
 
 const mapStateToProps = state => {
     return {
-        article : state.article,
+        article : state.content.article,
         classifyList : state.classify.list,
         classifyShow : state.classify.show
     }
