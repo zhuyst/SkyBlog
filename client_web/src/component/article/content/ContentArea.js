@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import {Button, ButtonGroup, ButtonToolbar, Glyphicon} from "react-bootstrap";
+import {Button, ButtonGroup, ButtonToolbar, Clearfix, Glyphicon} from "react-bootstrap";
 import {connect} from "react-redux";
 
 import ArticleTitle from "./ArticleTitle";
@@ -20,7 +20,7 @@ class ContentArea extends React.Component{
                 <ArticleTitle article={article}/>
                 <div className="edit_button">
                     <ButtonToolbar>
-                        <ButtonGroup>
+                        <ButtonGroup className="hidden-sm hidden-xs">
                             <LinkContainer to={`/article/content/${id}/justify`}>
                                 <Button>
                                     <Glyphicon glyph="align-left" />
@@ -51,7 +51,9 @@ class ContentArea extends React.Component{
                 }
                     </ButtonToolbar>
                 </div>
-                <ReactMarkdown source={content.text}/>
+                <Clearfix>
+                    <ReactMarkdown source={content.text}/>
+                </Clearfix>
             </div>
         )
     }
