@@ -1,15 +1,14 @@
 import React from 'react'
 import {Alert} from "react-bootstrap";
 import { connect } from 'react-redux'
-import {push} from 'react-router-redux'
 
 import {setArticle} from "../../../action/article/ContentAction";
-import {deleteArticle, getArticleInfo} from "../../../action/article/ArticlesAction";
+import {getArticleInfo} from "../../../action/article/ArticlesAction";
 import {initialArticle} from "../../../reducer/article/ContentReducer";
 
 import CommentSender from './comment/CommentSender'
 import CommentList from './comment/CommentList'
-import Article from "./Article";
+import JustifyLayout from "./JustifyLayout";
 import ContentArea from "./ContentArea";
 
 import '../../../static/css/article/content.css'
@@ -28,10 +27,7 @@ class Content extends React.Component{
     }
 
     render(){
-        const {article,login,
-            editContent, deleteArticle} = this.props;
-        const user = login.user;
-        const {id,content} = article;
+        const {article,login} = this.props;
 
         let sender;
         if(login.ok){
@@ -63,7 +59,7 @@ class Content extends React.Component{
         );
 
         return (
-            <Article contentArea={<ContentArea/>}
+            <JustifyLayout contentArea={<ContentArea/>}
                      right={right} article={article}/>
         )
     }
@@ -83,12 +79,6 @@ const mapDispatchToProps = dispatch => {
         },
         setArticle : article =>{
             dispatch(setArticle(article))
-        },
-        deleteArticle : id => {
-            dispatch(deleteArticle(id))
-        },
-        editContent : id => {
-            dispatch(push(`/article/content/${id}/edit`))
         }
     }
 };

@@ -2,7 +2,7 @@ import React from 'react'
 import {Col, Row} from "react-bootstrap";
 import ArticleBreadcrumb from "./ArticleBreadcrumb";
 
-class Article extends React.Component{
+class JustifyLayout extends React.Component{
     render(){
         const {article,contentArea,right} = this.props;
 
@@ -20,4 +20,4 @@ class Article extends React.Component{
     }
 }
 
-export default Article
+export default JustifyLayout
