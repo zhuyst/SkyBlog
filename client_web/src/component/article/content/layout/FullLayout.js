@@ -1,6 +1,6 @@
 import React from 'react'
 import {Col, Row} from "react-bootstrap";
-import ArticleBreadcrumb from "./ArticleBreadcrumb";
+import ArticleBreadcrumb from "../ArticleBreadcrumb";
 
 class FullLayout extends React.Component{
     render(){
@@ -8,7 +8,7 @@ class FullLayout extends React.Component{
 
         return (
             <Row>
-                <Col mdOffset={2} md={8}>
+                <Col mdOffset={3} md={6}>
                     <ArticleBreadcrumb article={article}/>
                     {contentArea}
                 </Col>

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from "react-redux";
-import {FormControl,ControlLabel,FormGroup,Row,Col,Button,HelpBlock} from 'react-bootstrap'
+import {FormControl, ControlLabel, FormGroup, Row, Col, Button, HelpBlock, Alert} from 'react-bootstrap'
 import {change,untouch, Field, reduxForm} from "redux-form";
 
 import {FORM_COMMENT} from "../../../../Constant";
@@ -22,27 +22,44 @@ class CommentSender extends React.Component{
     };
 
     render(){
-        const {handleSubmit} = this.props;
+        const {handleSubmit,login} = this.props;
 
-        return (
-            <div className="comment_send">
-                <form>
-                    <Field name="article_id" component="input" type="hidden"/>
-                    <Field name="previous_comment_id" component="input" type="hidden"/>
-                    <Row>
-                        <Col md={10} sm={12}>
-                            <Field name="content" component={textArea}/>
-                        </Col>
-                        <Col md={2} smHidden xsHidden>
-                            {submitButton(handleSubmit,this.submit,false)}
-                        </Col>
-                        <Col sm={12} lgHidden mdHidden>
-                            {submitButton(handleSubmit,this.submit,true)}
-                        </Col>
-                    </Row>
-                </form>
-            </div>
-        )
+        if(login.ok){
+            return (
+                <div className="comment_send">
+                    <form>
+                        <Field name="article_id" component="input" type="hidden"/>
+                        <Field name="previous_comment_id" component="input" type="hidden"/>
+                        <Row>
+                            <Col md={10} sm={12}>
+                                <Field name="content" component={textArea}/>
+                            </Col>
+                            <Col md={2} smHidden xsHidden>
+                                {submitButton(handleSubmit,this.submit,false)}
+                            </Col>
+                            <Col sm={12} lgHidden mdHidden>
+                                {submitButton(handleSubmit,this.submit,true)}
+                            </Col>
+                        </Row>
+                    </form>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div className="pager">
+                    <Alert bsStyle="info">
+                        <span className="more_left">
+                            <i className="fa fa-warning fa-lg"/>
+                        </span>
+                        需要登录后才能进行评论
+                        <span className="more_right">
+                            <i className="fa fa-warning fa-lg"/>
+                        </span>
+                    </Alert>
+                </div>
+            )
+        }
     }
 }
 
@@ -113,7 +130,8 @@ const CommentSenderForm = reduxForm({
 const mapStateToProps = state => {
     return {
         article : state.content.article,
-        comments : state.content.comments
+        comments : state.content.comments,
+        login : state.login
     }
 };
 

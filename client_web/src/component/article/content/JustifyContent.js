@@ -1,5 +1,4 @@
 import React from 'react'
-import {Alert} from "react-bootstrap";
 import { connect } from 'react-redux'
 
 import {setArticle} from "../../../action/article/ContentAction";
@@ -8,12 +7,12 @@ import {initialArticle} from "../../../reducer/article/ContentReducer";
 
 import CommentSender from './comment/CommentSender'
 import CommentList from './comment/CommentList'
-import JustifyLayout from "./JustifyLayout";
+import JustifyLayout from "./layout/JustifyLayout";
 import ContentArea from "./ContentArea";
 
 import '../../../static/css/article/content.css'
 
-class Content extends React.Component{
+class JustifyContent extends React.Component{
     componentWillMount(){
         document.title = `${this.props.article.title} - 博客文章 - 青云的小窝`;
 
@@ -27,34 +26,11 @@ class Content extends React.Component{
     }
 
     render(){
-        const {article,login} = this.props;
-
-        let sender;
-        if(login.ok){
-            sender = (
-                <CommentSender/>
-            )
-        }
-        else {
-            sender = (
-                <div className="pager">
-                    <Alert bsStyle="info">
-                        <span className="more_left">
-                            <i className="fa fa-warning fa-lg"/>
-                        </span>
-                        需要登录后才能进行评论
-                        <span className="more_right">
-                            <i className="fa fa-warning fa-lg"/>
-                        </span>
-                    </Alert>
-                </div>
-            )
-        }
-
+        const article = this.props.article;
         const right = (
             <div>
                 <CommentList/>
-                {sender}
+                <CommentSender/>
             </div>
         );
 
@@ -67,8 +43,7 @@ class Content extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        article : state.content.article,
-        login : state.login
+        article : state.content.article
     }
 };
 
@@ -83,9 +58,9 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-const ContentContainer = connect(
+const JustifyContentContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Content);
+)(JustifyContent);
 
-export default ContentContainer
+export default JustifyContentContainer

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, ControlLabel, FormControl, FormGroup, HelpBlock} from "react-bootstrap";
+import {Alert, Button, ControlLabel, FormControl, FormGroup, HelpBlock} from "react-bootstrap";
 import {change, untouch ,Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
 
@@ -20,18 +20,36 @@ class MsgSender extends React.Component{
     };
 
     render(){
-        const {handleSubmit} = this.props;
+        const {handleSubmit,login} = this.props;
 
-        return (
-            <form>
-                <Field name="previous_comment_id" component="input" type="hidden"/>
-                <Field name="content" component={textArea}/>
-                <Button bsStyle="primary" bsSize="large" block
-                        onClick={handleSubmit(data => this.submit(data))}>
-                    发表留言
-                </Button>
-            </form>
-        )
+        if(login.ok){
+            return (
+                <form>
+                    <Field name="previous_comment_id" component="input" type="hidden"/>
+                    <Field name="content" component={textArea}/>
+                    <Button bsStyle="primary" bsSize="large" block
+                            onClick={handleSubmit(data => this.submit(data))}>
+                        发表留言
+                    </Button>
+                </form>
+            )
+        }
+        else {
+            return (
+                <div className="pager">
+                    <Alert bsStyle="info">
+                        <span className="more_left">
+                            <i className="fa fa-warning fa-lg"/>
+                        </span>
+                        需要登录后才能进行留言
+                        <span className="more_right">
+                            <i className="fa fa-warning fa-lg"/>
+                        </span>
+                    </Alert>
+                </div>
+            )
+        }
+
     }
 }
 
@@ -77,7 +95,8 @@ const MsgSenderForm = reduxForm({
 
 const mapStateToProps = state => {
     return {
-        page : state.msg
+        page : state.msg,
+        login : state.login
     }
 };
 
