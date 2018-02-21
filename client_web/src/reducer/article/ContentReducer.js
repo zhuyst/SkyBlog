@@ -53,7 +53,7 @@ const ContentReducer = (state = initialState,action) => {
 
     switch(action.type){
         case SET_ARTICLE:
-            const article = Object.assign(state.article,action.article);
+            const article = Object.assign({},state.article,action.article);
 
             return Object.assign({},state, {
                     article : article
