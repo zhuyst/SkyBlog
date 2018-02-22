@@ -47,14 +47,52 @@ class ArticleEditor extends React.Component{
         }
     };
 
-    render(){
-        const {submitting, classifyList,classifyShow,
-            setClassifyShow, handleSubmit,goBack,
+    toolbar = () => {
+        const {submitting, handleSubmit,goBack,
             deleteArticle} = this.props;
 
         const id = this.props.article.id;
         const isNew = (id === 0);
-        const action = isNew ? "新增" : "修改";
+        const action = isNew ? "发布" : "修改";
+
+        return (
+            <ButtonToolbar>
+                <ButtonGroup>
+                    <Button disabled={submitting} bsStyle="success"
+                            onClick={handleSubmit(data => this.submit(data,false))}>
+                        <Glyphicon glyph="floppy-disk" />
+                        &nbsp;&nbsp;发布&nbsp;
+                    </Button>
+                    <Button disabled={submitting} bsStyle="success"
+                            onClick={handleSubmit(data => this.submit(data,true))}>
+                        <Glyphicon glyph="floppy-saved" />
+                        &nbsp;&nbsp;发布并退出编辑&nbsp;
+                    </Button>
+                </ButtonGroup>
+                <ButtonGroup>
+                    <Button disabled={submitting} bsStyle="primary"
+                            onClick={() => goBack(isNew,id)}>
+                        <Glyphicon glyph="circle-arrow-left" />
+                        &nbsp;&nbsp;放弃{action}并返回&nbsp;
+                    </Button>
+                </ButtonGroup>
+                {
+                    !isNew &&
+                    <ButtonGroup>
+                        <Button disabled={submitting} bsStyle="danger"
+                                onClick={() => deleteArticle(id)}>
+                            <Glyphicon glyph="trash" />
+                            &nbsp;&nbsp;删除&nbsp;
+                        </Button>
+                    </ButtonGroup>
+                }
+            </ButtonToolbar>
+        )
+    };
+
+    render(){
+        const {classifyList,classifyShow,
+            setClassifyShow} = this.props;
 
         const classifyOptions = [];
         classifyList.forEach(classify => {
@@ -67,38 +105,7 @@ class ArticleEditor extends React.Component{
 
         return (
             <div>
-                <ButtonToolbar>
-                    <ButtonGroup>
-                        <Button disabled={submitting} bsStyle="success"
-                                onClick={handleSubmit(data => this.submit(data,false))}>
-                            <Glyphicon glyph="floppy-disk" />
-                            &nbsp;&nbsp;保存&nbsp;
-                        </Button>
-                        <Button disabled={submitting} bsStyle="success"
-                                onClick={handleSubmit(data => this.submit(data,true))}>
-                            <Glyphicon glyph="floppy-saved" />
-                            &nbsp;&nbsp;保存并退出编辑&nbsp;
-                        </Button>
-                    </ButtonGroup>
-                    <ButtonGroup>
-                        <Button disabled={submitting} bsStyle="primary"
-                                onClick={() => goBack(isNew,id)}>
-                            <Glyphicon glyph="circle-arrow-left" />
-                            &nbsp;&nbsp;放弃{action}并返回&nbsp;
-                        </Button>
-                    </ButtonGroup>
-                    {
-                        !isNew &&
-                        <ButtonGroup>
-                            <Button disabled={submitting} bsStyle="danger"
-                                    onClick={() => deleteArticle(id)}>
-                                <Glyphicon glyph="trash" />
-                                &nbsp;&nbsp;删除&nbsp;
-                            </Button>
-                        </ButtonGroup>
-                    }
-                </ButtonToolbar>
-
+                {this.toolbar()}
                 <div className="editor">
                     <form>
                         <Field name="id" component="input" type="hidden"/>
