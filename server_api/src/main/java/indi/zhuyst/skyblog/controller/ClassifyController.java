@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @Api(value = "ClassifyApi",description = "文章分类相关API")
-@RequestMapping("/api/classifies")
+@RequestMapping("/classifies")
 public class ClassifyController extends BaseController{
 
     @Autowired

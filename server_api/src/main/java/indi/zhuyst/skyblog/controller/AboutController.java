@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Api(value = "AboutApi",description = "关于相关Api")
-@RequestMapping("/api/about")
+@RequestMapping("/about")
 public class AboutController extends BaseController{
 
     @Autowired
