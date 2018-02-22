@@ -37,14 +37,14 @@ public class ArticleController extends BaseController{
     @Autowired
     private ClassifyService classifyService;
 
-    @RequestMapping(value = "/public/{id}",method = RequestMethod.GET)
+    @GetMapping("/public/{id}")
     @ApiOperation("根据id查询文章")
     public R<ArticleDTO> getArticle(@ApiParam("文章ID") @PathVariable("id")Integer id){
         ArticleDTO pojo = articleService.getArticleDTO(id);
         return produceResult(pojo, CodeEnum.NOT_FOUND.getCode(),"未找到该文章");
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    @PutMapping("/{id}")
     @ApiOperation("更新文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R<ArticleDTO> updateArticle(@ApiParam("文章ID") @PathVariable("id")Integer id,
@@ -54,7 +54,7 @@ public class ArticleController extends BaseController{
         return produceResult(pojo,"更新文章失败");
     }
 
-    @RequestMapping(value = "/",method = RequestMethod.POST)
+    @PostMapping("/")
     @ApiOperation("新增文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R<ArticleDTO> insertArticle(@ApiParam("文章对象") @Valid @RequestBody Article article){
@@ -63,21 +63,21 @@ public class ArticleController extends BaseController{
         return produceResult(pojo,"新增文章失败");
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     @ApiOperation("根据id删除文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R deleteArticle(@ApiParam("文章ID") @PathVariable("id")Integer id){
         return produceResult(articleService.delete(id),"删除文章失败");
     }
 
-    @RequestMapping(value = "/public/list/",method = RequestMethod.GET)
+    @GetMapping("/public/list/")
     @ApiOperation("查询文章列表")
     public R<PageInfo<ArticleDTO>> listArticle(Query query){
         PageInfo<ArticleDTO> pageInfo = articleService.listArticle(new Query<>(query));
         return R.ok(pageInfo);
     }
 
-    @RequestMapping(value = "/public/classify/{id}/",method = RequestMethod.GET)
+    @GetMapping("/public/classify/{id}/")
     @ApiOperation("根据分类id查询文章列表")
     public R<ArticlesAndClassifyVO> listArticleByClassify(@ApiParam("分类ID")
                                                              @PathVariable("id")Integer classifyId,
@@ -97,7 +97,7 @@ public class ArticleController extends BaseController{
         return R.ok(vo);
     }
 
-    @RequestMapping(value = "/public/{id}/comment/",method = RequestMethod.GET)
+    @GetMapping("/public/{id}/comment/")
     @ApiOperation("查询文章下的评论列表")
     public R<PageInfo<CommentDTO>> listComment(@ApiParam("文章ID") @PathVariable("id")Integer articleId,
                                                Query query){
@@ -109,7 +109,7 @@ public class ArticleController extends BaseController{
         return R.ok(pageInfo);
     }
 
-    @RequestMapping(value = "/{id}/comment/",method = RequestMethod.POST)
+    @PostMapping("/{id}/comment/")
     @ApiOperation("新增该id的文章下的评论")
     @PreAuthorize("isAuthenticated()")
     public R<CommentDTO> insertComment(@ApiParam("文章ID") @PathVariable("id") Integer articleId,
@@ -121,7 +121,7 @@ public class ArticleController extends BaseController{
         return produceResult(pojo,"新增评论失败");
     }
 
-    @RequestMapping(value = "/comment/{id}",method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/comment/{id}")
     @ApiOperation("根据id删除评论")
     @PreAuthorize("isAuthenticated()")
     public R deleteComment(@ApiParam("评论ID") @PathVariable("id") Integer id){

@@ -9,10 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(value = "AboutApi",description = "关于相关Api")
@@ -22,13 +19,13 @@ public class AboutController extends BaseController{
     @Autowired
     private AboutService aboutService;
 
-    @RequestMapping(value = "/public/",method = RequestMethod.GET)
+    @GetMapping("/public/")
     @ApiOperation("获取关于")
     public R<About> getAbout(){
         return produceResult(aboutService.getAbout(),"获取关于失败");
     }
 
-    @RequestMapping(value = "/",method = RequestMethod.PUT)
+    @PutMapping("/")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     @ApiOperation("更新关于")
     public R<About> updateAbout(@ApiParam("关于对象") @RequestBody About about){

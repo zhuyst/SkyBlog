@@ -34,7 +34,7 @@ public class UserController extends BaseController{
     @Autowired
     private SecurityService securityService;
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    @PutMapping("/{id}")
     @ApiOperation("更新用户信息")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN') or #id == authentication.principal.id")
     public R<UserDTO> updateUser(@ApiParam("用户ID") @PathVariable("id") @P("id") Integer id,
@@ -44,7 +44,7 @@ public class UserController extends BaseController{
         return produceResult(pojo,"用户信息更新失败");
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    @GetMapping("/{id}")
     @ApiOperation("根据id获取用户信息")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN') or #id == authentication.principal.id")
     public R<UserDTO> getUser(@ApiParam("用户ID") @PathVariable("id") @P("id") Integer id){
@@ -52,7 +52,7 @@ public class UserController extends BaseController{
         return produceResult(user, CodeEnum.NOT_FOUND.getCode(),"未找到该用户");
     }
 
-    @RequestMapping(value = "/public/",method = RequestMethod.POST)
+    @PostMapping("/public/")
     @ApiOperation("注册新用户")
     public R<AccessToken> register(@ApiParam("用户对象") @Valid @RequestBody User newUser){
         newUser.setId(null);
@@ -67,14 +67,14 @@ public class UserController extends BaseController{
         return R.ok(accessToken);
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     @ApiOperation("根据id删除用户")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R deleteUser(@ApiParam("用户ID") @PathVariable("id")Integer id){
         return produceResult(userService.delete(id),"不存在该用户");
     }
 
-    @RequestMapping(value = "/list/",method = RequestMethod.GET)
+    @GetMapping("/list/")
     @ApiOperation("查询用户列表")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R<PageInfo<UserDTO>> listUser(Query query){
@@ -82,7 +82,7 @@ public class UserController extends BaseController{
         return R.ok(pageInfo);
     }
 
-    @RequestMapping(value = "/role/{id}/{roleId}",method = RequestMethod.PATCH)
+    @PatchMapping("/role/{id}/{roleId}")
     @ApiOperation("更新用户角色")
     @PreAuthorize("hasRole('SYS_ADMIN')")
     public R updateUserRole(@ApiParam("用户ID") @PathVariable("id")Integer id,

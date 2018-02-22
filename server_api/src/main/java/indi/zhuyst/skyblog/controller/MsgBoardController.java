@@ -26,14 +26,14 @@ public class MsgBoardController extends BaseController{
     @Autowired
     private MsgBoardService msgBoardService;
 
-    @RequestMapping(value = "/public/list/",method = RequestMethod.GET)
+    @GetMapping("/public/list/")
     @ApiOperation("查询留言列表")
     public R<PageInfo<CommentDTO>> listMsg(Query query){
         PageInfo<CommentDTO> pageInfo = msgBoardService.listMsg(new Query<>(query));
         return R.ok(pageInfo);
     }
 
-    @RequestMapping(value = "/",method = RequestMethod.POST)
+    @PostMapping("/")
     @ApiOperation("新增留言")
     @PreAuthorize("isAuthenticated()")
     public R<CommentDTO> insertMsg(@ApiParam("留言对象") @Valid @RequestBody Comment comment){
@@ -46,7 +46,7 @@ public class MsgBoardController extends BaseController{
         return produceResult(pojo,"新增留言失败");
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     @ApiOperation("根据id删除留言")
     @PreAuthorize("isAuthenticated()")
     public R deleteMsg(@ApiParam("留言ID") @PathVariable("id")Integer id){
