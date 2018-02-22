@@ -4,17 +4,16 @@ import fetch from 'isomorphic-fetch'
 import {dispatch} from "./store/Store";
 import {error} from "./action/common/NotifyAction";
 
-const SERVER_BASE_URL = "http://localhost:8080";
-const API_URL = SERVER_BASE_URL + "/api";
+const API_BASE_URL = "http://localhost:8080";
 
-export const LOGIN_URL = SERVER_BASE_URL + "/auth/login";
-export const REFRESH_URL = SERVER_BASE_URL + "/auth/refresh";
+export const LOGIN_URL = API_BASE_URL + "/auth/login";
+export const REFRESH_URL = API_BASE_URL + "/auth/refresh";
 
-export const USER_API_URL = API_URL + "/users";
-export const ARTICLE_API_URL = API_URL + "/articles";
-export const CLASSIFY_API_URL = API_URL + "/classifies";
-export const MSG_BOARD_API_URL = API_URL + "/msg_board";
-export const ABOUT_API_URL = API_URL + "/about";
+export const USER_API_URL = API_BASE_URL + "/users";
+export const ARTICLE_API_URL = API_BASE_URL + "/articles";
+export const CLASSIFY_API_URL = API_BASE_URL + "/classifies";
+export const MSG_BOARD_API_URL = API_BASE_URL + "/msg_board";
+export const ABOUT_API_URL = API_BASE_URL + "/about";
 
 const COOKIE_TOKEN = "Token";
 
