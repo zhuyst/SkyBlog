@@ -26,3 +26,14 @@ export const UserRole = {
         name : "访客"
     }
 };
+
+export const UserStatus = {
+    NORMAL : {
+        id : 0,
+        name : "正常"
+    },
+    LOCKED : {
+        id : 1,
+        name : "锁定"
+    }
+};

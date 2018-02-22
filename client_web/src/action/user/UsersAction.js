@@ -5,7 +5,7 @@ import {
     USER_API_URL, FAIL_RESULT, _post, checkStatus, _put, REFRESH_URL, ContentType, HttpMethod,
     _get, _delete, setToken, getToken, _patch
 } from "../../Api";
-import {FORM_REGISTER, FORM_USERINFO, USER_PAGE_SIZE, UserRole} from "../../Constant";
+import {FORM_REGISTER, FORM_USERINFO, USER_PAGE_SIZE, UserRole, UserStatus} from "../../Constant";
 import {setLoginModalShow, setRegisterModalShow, setUserInfoModalShow} from "../common/ModalAction";
 import {loginResponse} from  "../common/LoginAction"
 import {success, error} from "../common/NotifyAction";
@@ -15,8 +15,10 @@ export const GET_USER_INFO_RESPONSE = "GET_USER_INFO_RESPONSE";
 
 export const REGISTER_USER_RESPONSE = "REGISTER_USER_RESPONSE";
 export const DELETE_USER_RESPONSE = "DELETE_USER_RESPONSE";
+
 export const UPDATE_USER_INFO_RESPONSE = "UPDATE_USER_INFO_RESPONSE";
 export const UPDATE_USER_ROLE_RESPONSE = "UPDATE_USER_ROLE_RESPONSE";
+export const UPDATE_USER_STATUS_RESPONSE = "UPDATE_USER_STATUS_RESPONSE";
 
 export const SET_LOGIN_USER = "SET_LOGIN_USER";
 
@@ -117,29 +119,58 @@ const updateUserInfoResponse = result =>{
 };
 
 export const updateUserRole = (id,roleId,pageNum) => dispatch => {
-    const url = USER_API_URL + `/role/${id}/${roleId}`;
-    return _patch(url)
-        .then(result => {
-            if(result.code === 200){
-                dispatch(updateUserRoleResponse(result));
-                if(roleId === UserRole.ADMIN.id){
-                    dispatch(success("提升为管理员成功"))
-                }
-                else if(roleId === UserRole.VISITOR.id){
-                    dispatch(success("降低为访客成功"))
-                }
+    const url = USER_API_URL + `/role/${id}`;
+    return _patch(url,{
+        role_id : roleId
+    }).then(result => {
+        if(result.code === 200){
+            dispatch(updateUserRoleResponse(result));
+            if(roleId === UserRole.ADMIN.id){
+                dispatch(success("提升为管理员成功"))
+            }
+            else if(roleId === UserRole.VISITOR.id){
+                dispatch(success("降低为访客成功"))
+            }
 
-                dispatch(listUsers(pageNum,USER_PAGE_SIZE))
-            }
-            else {
-                dispatch(error(result.message))
-            }
-        })
+            dispatch(listUsers(pageNum,USER_PAGE_SIZE))
+        }
+        else {
+            dispatch(error(result.message))
+        }})
 };
 
 const updateUserRoleResponse = result => {
     return {
         type : UPDATE_USER_ROLE_RESPONSE,
+        result : result
+    }
+};
+
+export const updateUserStatus = (id,statusId,pageNum) => dispatch => {
+    const url = USER_API_URL + `/status/${id}`;
+    return _patch(url,{
+        status_id : statusId
+    }).then(result => {
+        if(result.code === 200){
+            dispatch(updateUserStatusResponse(result));
+            if(statusId === UserStatus.NORMAL.id){
+                dispatch(success("解除锁定成功"))
+            }
+            else if(statusId === UserStatus.LOCKED.id){
+                dispatch(success("锁定账户成功"))
+            }
+
+            dispatch(listUsers(pageNum,USER_PAGE_SIZE))
+        }
+        else {
+            dispatch(error(result.message))
+        }
+    })
+};
+
+const updateUserStatusResponse = result => {
+    return {
+        type : UPDATE_USER_STATUS_RESPONSE,
         result : result
     }
 };
