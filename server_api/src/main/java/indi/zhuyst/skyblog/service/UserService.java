@@ -23,6 +23,10 @@ public interface UserService extends BaseCrudService<User>,UserDetailsService{
 
     UserDTO saveUser(User user);
 
+    boolean promoteAdmin(int id);
+
+    boolean demoteAdmin(int id);
+
     PageInfo<UserDTO> listUser(Query<User> query);
 
 }

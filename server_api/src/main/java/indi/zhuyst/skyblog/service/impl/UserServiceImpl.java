@@ -1,6 +1,7 @@
 package indi.zhuyst.skyblog.service.impl;
 
 import com.github.pagehelper.PageInfo;
+import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.exception.FieldErrorException;
 import indi.zhuyst.common.pojo.Error;
 import indi.zhuyst.common.pojo.Query;
@@ -28,9 +29,6 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
         implements UserService,CommandLineRunner{
 
     @Autowired
-    private UserDao userDao;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -46,7 +44,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
             user.setNickname(ADMIN_DEFAULT_NICKNAME);
             user.setRole(RoleEnum.SYS_ADMIN.getId());
 
-            userDao.insertSelective(user);
+            dao.insertSelective(user);
         }
     }
 
@@ -90,7 +88,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
         User user = new User();
         user.setUsername(username);
 
-        return userDao.selectOne(user);
+        return dao.selectOne(user);
     }
 
     @Override
@@ -98,7 +96,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
         User user = new User();
         user.setNickname(nickname);
 
-        return userDao.selectOne(user);
+        return dao.selectOne(user);
     }
 
     @Override
@@ -112,6 +110,28 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
         }
 
         return dto;
+    }
+
+    @Override
+    public boolean promoteAdmin(int id) {
+        User user = super.getByID(id);
+        if(user.getRole() == RoleEnum.ADMIN.getId()){
+            throw new CommonException("该用户已经是管理员了！");
+        }
+        
+        user.setRole(RoleEnum.ADMIN.getId());
+        return dao.updateByPrimaryKeySelective(user) > 0;
+    }
+
+    @Override
+    public boolean demoteAdmin(int id) {
+        User user = super.getByID(id);
+        if(user.getRole() == RoleEnum.VISITOR.getId()){
+            throw new CommonException("该用户已经是访客了！");
+        }
+
+        user.setRole(RoleEnum.VISITOR.getId());
+        return dao.updateByPrimaryKeySelective(user) > 0;
     }
 
     @Override

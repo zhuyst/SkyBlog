@@ -35,6 +35,8 @@ public class CacheConfig implements CommandLineRunner{
                 .getConnectionFactory().getConnection();
 
         Set<byte[]> caches = connection.keys(pattern.getBytes());
-        connection.del(caches.toArray(new byte[][]{}));
+        if(!caches.isEmpty()){
+            connection.del(caches.toArray(new byte[][]{}));
+        }
     }
 }

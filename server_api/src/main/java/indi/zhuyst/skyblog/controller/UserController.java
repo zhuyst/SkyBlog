@@ -6,6 +6,7 @@ import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.R;
+import indi.zhuyst.security.enums.RoleEnum;
 import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.service.SecurityService;
@@ -34,7 +35,7 @@ public class UserController extends BaseController{
     private SecurityService securityService;
 
     @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
-    @ApiOperation(value = "更新用户信息")
+    @ApiOperation("更新用户信息")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN') or #id == authentication.principal.id")
     public R<UserDTO> updateUser(@ApiParam("用户ID") @PathVariable("id") @P("id") Integer id,
                                  @ApiParam("用户对象") @Valid @RequestBody User user){
@@ -44,7 +45,7 @@ public class UserController extends BaseController{
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    @ApiOperation(value = "根据id获取用户信息")
+    @ApiOperation("根据id获取用户信息")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN') or #id == authentication.principal.id")
     public R<UserDTO> getUser(@ApiParam("用户ID") @PathVariable("id") @P("id") Integer id){
         UserDTO user = userService.getUserDTO(id);
@@ -52,7 +53,7 @@ public class UserController extends BaseController{
     }
 
     @RequestMapping(value = "/public/",method = RequestMethod.POST)
-    @ApiOperation(value = "注册新用户")
+    @ApiOperation("注册新用户")
     public R<AccessToken> register(@ApiParam("用户对象") @Valid @RequestBody User newUser){
         newUser.setId(null);
 
@@ -67,17 +68,33 @@ public class UserController extends BaseController{
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    @ApiOperation(value = "根据id删除用户")
+    @ApiOperation("根据id删除用户")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R deleteUser(@ApiParam("用户ID") @PathVariable("id")Integer id){
         return produceResult(userService.delete(id),"不存在该用户");
     }
 
     @RequestMapping(value = "/list/",method = RequestMethod.GET)
-    @ApiOperation(value = "查询用户列表")
+    @ApiOperation("查询用户列表")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R<PageInfo<UserDTO>> listUser(Query query){
         PageInfo<UserDTO> pageInfo = userService.listUser(new Query<>(query));
         return R.ok(pageInfo);
+    }
+
+    @RequestMapping(value = "/role/{id}/{roleId}",method = RequestMethod.PATCH)
+    @ApiOperation("更新用户角色")
+    @PreAuthorize("hasRole('SYS_ADMIN')")
+    public R updateUserRole(@ApiParam("用户ID") @PathVariable("id")Integer id,
+                            @ApiParam("角色ID") @PathVariable("roleId")Integer roleId){
+        boolean isSuccess = false;
+        if(roleId == RoleEnum.ADMIN.getId()){
+            isSuccess = userService.promoteAdmin(id);
+        }
+        else if(roleId == RoleEnum.VISITOR.getId()){
+            isSuccess = userService.demoteAdmin(id);
+        }
+
+        return produceResult(isSuccess,"更新用户角色失败");
     }
 }
