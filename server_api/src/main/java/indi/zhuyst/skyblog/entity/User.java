@@ -49,4 +49,11 @@ public class User extends BaseEntity {
      */
     @ApiModelProperty("角色ID")
     private Integer role;
+
+    /**
+     * 状态ID
+     * @see indi.zhuyst.security.enums.StatusEnum
+     */
+    @ApiModelProperty("状态ID")
+    private Integer status;
 }

@@ -74,7 +74,7 @@ public abstract class BaseController {
         SecurityUser user = getUser();
 
         // 不是管理员或者作者ID不等于当前用于ID，则为越权
-        if(!user.isAdmin() && authorId != user.getId()){
+        if(!user.getAdmin() && authorId != user.getId()){
             throw new AccessDeniedException("您没有权限进行该操作");
         }
     }

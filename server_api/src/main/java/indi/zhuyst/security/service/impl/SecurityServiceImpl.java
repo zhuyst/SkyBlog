@@ -16,6 +16,8 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
@@ -80,8 +82,10 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
             SecurityUser user = (SecurityUser) authentication.getPrincipal();
 
             return generateToken(user);
-        }catch (Exception e){
+        }catch (BadCredentialsException e){
             throw new CommonException("用户名/密码不正确");
+        }catch (LockedException e){
+            throw new CommonException("账号被锁定，请联系管理员");
         }
     }
 
