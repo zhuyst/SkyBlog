@@ -1,5 +1,5 @@
 import {
-    SET_LOGIN_MODAL_SHOW, SET_REGISTER_MODAL_SHOW, SET_USER_MANAGEMENT_SHOW,
+    SET_LOGIN_MODAL_SHOW, SET_REGISTER_MODAL_SHOW, SET_USER_MANAGEMENT_MODAL_SHOW,
     SET_USERINFO_MODAL_SHOW
 } from '../../action/common/ModalAction'
 
@@ -43,7 +43,7 @@ const NavigationReducer = (state = initialState,action) => {
                     userInfoModal_show : show
                 }
             };
-        case SET_USER_MANAGEMENT_SHOW:
+        case SET_USER_MANAGEMENT_MODAL_SHOW:
             return {
                 ...state,
                 modal : {

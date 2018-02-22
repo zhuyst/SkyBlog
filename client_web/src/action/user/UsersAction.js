@@ -47,7 +47,7 @@ const registerUserResponse = (result) => {
 };
 
 export const listUsers = (pageNum,pageSize) => dispatch => {
-    const url = USER_API_URL + `/list/${pageNum}`;
+    const url = USER_API_URL + "/list/";
     return _get(url,{
         pageNum : pageNum,
         pageSize : pageSize
@@ -57,7 +57,7 @@ export const listUsers = (pageNum,pageSize) => dispatch => {
 const listUsersResponse = result => {
     return {
         type : LIST_USERS_RESPONSE,
-        users : result.entity
+        page : result.entity
     }
 };
 

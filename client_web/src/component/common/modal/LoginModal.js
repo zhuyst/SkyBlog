@@ -44,8 +44,8 @@ class LoginModal extends React.Component{
                             error={login.ok}/>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button disabled={submitting} onClick={onHide}> 关闭 </Button>
-                        <Button disabled={submitting} type="submit" bsStyle="primary"> 登陆 </Button>
+                        <Button disabled={submitting} onClick={onHide}>&nbsp;关闭&nbsp;</Button>
+                        <Button disabled={submitting} type="submit" bsStyle="primary">&nbsp;登陆&nbsp;</Button>
                     </Modal.Footer>
                 </form>
             </Modal>
@@ -100,6 +100,9 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-const LoginModalContainer = connect(mapStateToProps,mapDispatchToProps)(LoginModalForm);
+const LoginModalContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(LoginModalForm);
 
 export default LoginModalContainer;

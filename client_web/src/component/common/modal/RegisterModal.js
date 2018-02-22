@@ -47,8 +47,8 @@ class RegisterModal extends React.Component{
                             mode={MODE_SUCCESS}/>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button disabled={submitting} onClick={onHide}> 关闭 </Button>
-                        <Button disabled={submitting} type="submit" bsStyle="primary"> 注册 </Button>
+                        <Button disabled={submitting} onClick={onHide}>&nbsp;关闭&nbsp;</Button>
+                        <Button disabled={submitting} type="submit" bsStyle="primary">&nbsp;注册&nbsp;</Button>
                     </Modal.Footer>
                 </form>
             </Modal>
