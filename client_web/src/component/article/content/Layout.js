@@ -1,6 +1,5 @@
 import React from 'react'
 import {Col, Row} from "react-bootstrap";
-import ArticleBreadcrumb from "./ArticleBreadcrumb";
 
 export const LAYOUT_JUSTIFY = "justify";
 export const LAYOUT_FULL = "full";
@@ -21,7 +20,7 @@ class Layout extends React.Component{
                     </Col>
                     {
                         isJustify &&
-                        <Col md={5} id="right">
+                        <Col md={5} sm={12} id="right">
                             {right}
                         </Col>
                     }
