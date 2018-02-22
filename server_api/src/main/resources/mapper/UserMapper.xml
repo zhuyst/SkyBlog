@@ -11,12 +11,13 @@
       <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="nickname" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="role" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    id, username, password, nickname, role
+    id, username, password, nickname, role, status
   </sql>
 </mapper>

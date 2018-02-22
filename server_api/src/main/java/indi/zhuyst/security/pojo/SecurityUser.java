@@ -54,7 +54,7 @@ public class SecurityUser extends UserDTO implements UserDetails, CredentialsCon
     @Override
     @JsonIgnore
     public boolean isAccountNonLocked() {
-        return true;
+        return getLocked();
     }
 
     @Override

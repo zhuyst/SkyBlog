@@ -5,6 +5,7 @@ import lombok.Getter;
 
 /**
  * 用户角色枚举类
+ * @see indi.zhuyst.skyblog.entity.User#role
  * @author zhuyst
  */
 public enum RoleEnum {
@@ -60,7 +61,7 @@ public enum RoleEnum {
      * 判断是否为管理员角色
      * @return 是否为管理员
      */
-    public boolean checkAdmin(){
+    public boolean isAdmin(){
         return id == 1 || id == 2;
     }
 
