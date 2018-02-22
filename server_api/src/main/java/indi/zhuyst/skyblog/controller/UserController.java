@@ -12,6 +12,8 @@ import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.service.SecurityService;
 import indi.zhuyst.skyblog.entity.User;
+import indi.zhuyst.skyblog.pojo.UpdateRole;
+import indi.zhuyst.skyblog.pojo.UpdateStatus;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.UserService;
 import io.swagger.annotations.Api;
@@ -83,11 +85,13 @@ public class UserController extends BaseController{
         return R.ok(pageInfo);
     }
 
-    @PatchMapping("/role/{id}/{roleId}")
+    @PatchMapping("/role/{id}")
     @ApiOperation("更新用户角色")
     @PreAuthorize("hasRole('SYS_ADMIN')")
     public R updateUserRole(@ApiParam("用户ID") @PathVariable("id")Integer id,
-                            @ApiParam("角色ID") @PathVariable("roleId")Integer roleId){
+                            @ApiParam("角色ID") @RequestBody UpdateRole update){
+        Integer roleId = update.getRoleId();
+
         boolean isSuccess = false;
         if(roleId == RoleEnum.ADMIN.getId()){
             isSuccess = userService.promoteAdmin(id);
@@ -100,14 +104,16 @@ public class UserController extends BaseController{
     }
 
     @ApiOperation("更新用户状态")
-    @PatchMapping("/status/{id}/{statusId}")
+    @PatchMapping("/status/{id}")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R updateUserStatus(@ApiParam("角色ID") @PathVariable("id") Integer id,
-                              @ApiParam("状态ID") @PathVariable("statusId")Integer statusId){
+                              @ApiParam("状态ID") @RequestBody UpdateStatus update){
         UserDTO user = userService.getUserDTO(id);
         if(user.getAdmin()){
             throw new CommonException("管理员不能被锁定");
         }
+
+        Integer statusId = update.getStatusId();
 
         boolean isSuccess = false;
         if(statusId == StatusEnum.NORMAL.getId()){

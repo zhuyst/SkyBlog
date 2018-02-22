@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.OrderBy;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -48,6 +49,7 @@ public class User extends BaseEntity {
      * @see indi.zhuyst.security.enums.RoleEnum
      */
     @ApiModelProperty("角色ID")
+    @OrderBy
     private Integer role;
 
     /**
