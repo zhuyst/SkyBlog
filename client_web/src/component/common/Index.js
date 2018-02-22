@@ -29,6 +29,13 @@ class Index extends React.Component{
         this.props.initFetch();
     }
 
+    componentDidUpdate(prevProps){
+        // react router - 地址更新后将窗口移至顶部
+        if (this.props.location !== prevProps.location) {
+            window.scrollTo(0, 0)
+        }
+    }
+
     render(){
         return (
             <div className="website">
