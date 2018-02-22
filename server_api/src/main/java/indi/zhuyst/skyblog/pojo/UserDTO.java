@@ -20,7 +20,7 @@ import org.springframework.beans.BeanUtils;
 @NoArgsConstructor
 public class UserDTO extends User {
 
-    private static final long serialVersionUID = -733620414805243891L;
+    private static final long serialVersionUID = -9051994604875275894L;
 
     /**
      * 角色枚举类，通过{@link #role}获取
@@ -53,15 +53,15 @@ public class UserDTO extends User {
     private Boolean locked;
 
     public UserDTO(User user){
-        BeanUtils.copyProperties(user,this);
+        BeanUtils.copyProperties(user,this,
+                "role","status");
 
-        // 设置RoleEnum
-        roleEnum = RoleEnum.getById(user.getRole());
-        admin = roleEnum.isAdmin();
+        this.setRole(user.getRole());
 
-        // 设置StatusEnum
-        statusEnum = StatusEnum.getById(user.getStatus());
-        locked = statusEnum.isLocked();
+        Integer status = user.getStatus();
+        if(status != null){
+            this.setStatus(status);
+        }
     }
 
     @Override

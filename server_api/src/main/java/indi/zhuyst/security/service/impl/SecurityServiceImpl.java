@@ -91,6 +91,10 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
 
     @Override
     public AccessToken generateToken(SecurityUser user) {
+        if(user.getLocked()){
+            throw new CommonException("账号被锁定，请联系管理员");
+        }
+
         AccessToken accessToken = new AccessToken();
 
         Date nowDate = new Date();

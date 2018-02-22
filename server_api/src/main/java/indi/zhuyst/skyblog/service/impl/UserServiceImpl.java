@@ -8,6 +8,7 @@ import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.BaseCrudServiceImpl;
 import indi.zhuyst.common.util.PageUtils;
 import indi.zhuyst.security.enums.RoleEnum;
+import indi.zhuyst.security.enums.StatusEnum;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.skyblog.dao.UserDao;
 import indi.zhuyst.skyblog.entity.User;
@@ -52,17 +53,24 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     @Transactional(rollbackFor = RuntimeException.class)
     public User save(User user) {
         if(user.getId() == null){
+
+            // 设置初始角色及状态
             user.setRole(RoleEnum.VISITOR.getId());
+            user.setStatus(StatusEnum.NORMAL.getId());
         }
         else {
             User oldUser = super.getByID(user.getId());
 
+            // 如果两者相等，则表示nickname不需要修改
             if(oldUser.getNickname().equals(user.getNickname())){
                 user.setNickname(null);
             }
 
+            // 保证角色及状态不被修改
             user.setRole(oldUser.getRole());
+            user.setStatus(oldUser.getStatus());
 
+            // 保证username不被修改
             user.setUsername(null);
         }
 
@@ -115,24 +123,56 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean promoteAdmin(int id) {
+        final RoleEnum admin = RoleEnum.ADMIN;
+
         User user = super.getByID(id);
-        if(user.getRole() == RoleEnum.ADMIN.getId()){
+        if(user.getRole() == admin.getId()){
             throw new CommonException("该用户已经是管理员了！");
         }
         
-        user.setRole(RoleEnum.ADMIN.getId());
+        user.setRole(admin.getId());
         return dao.updateByPrimaryKeySelective(user) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean demoteAdmin(int id) {
+        final RoleEnum visitor = RoleEnum.VISITOR;
+
         User user = super.getByID(id);
-        if(user.getRole() == RoleEnum.VISITOR.getId()){
+        if(user.getRole() == visitor.getId()){
             throw new CommonException("该用户已经是访客了！");
         }
 
-        user.setRole(RoleEnum.VISITOR.getId());
+        user.setRole(visitor.getId());
+        return dao.updateByPrimaryKeySelective(user) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public boolean lockUser(int id) {
+        final StatusEnum locked = StatusEnum.LOCKED;
+
+        User user = super.getByID(id);
+        if(user.getStatus() == locked.getId()){
+            throw new CommonException("该用户已经被锁定了！");
+        }
+
+        user.setStatus(locked.getId());
+        return dao.updateByPrimaryKeySelective(user) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public boolean unlockUser(int id) {
+        final StatusEnum normal = StatusEnum.NORMAL;
+
+        User user = super.getByID(id);
+        if(user.getStatus() == normal.getId()){
+            throw new CommonException("该用户没有被锁定");
+        }
+
+        user.setStatus(normal.getId());
         return dao.updateByPrimaryKeySelective(user) > 0;
     }
 
