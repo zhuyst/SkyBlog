@@ -14,6 +14,8 @@ import indi.zhuyst.skyblog.service.CommentService;
 import indi.zhuyst.skyblog.service.UserService;
 import indi.zhuyst.skyblog.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +46,13 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
     }
 
     @Override
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
+    public boolean delete(int id) {
+        return super.delete(id);
+    }
+
+    @Override
+    @Cacheable(cacheNames = CACHE_OBJECT,key = "#id")
     public CommentDTO getCommentDTO(int id){
         Comment comment = super.getByID(id);
         return this.produceDTO(comment);
@@ -51,6 +60,7 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
     public CommentDTO saveComment(Comment comment){
         CommentDTO pojo = null;
 
@@ -63,6 +73,7 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
     }
 
     @Override
+    @Cacheable(cacheNames = CACHE_PAGE)
     public PageInfo<CommentDTO> listComment(Query<Comment> query){
         PageInfo<Comment> pageInfo = super.listByCondition(query);
 

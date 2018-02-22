@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.util.Set;
 
@@ -27,19 +26,15 @@ public class CacheConfig implements CommandLineRunner{
     private RedisTemplate<Object,Object> redisTemplate;
 
     /**
-     * 设置{@link #redisTemplate}的序列化方式，并且清除缓存
+     * 清空缓存
      */
     @Override
     public void run(String... args) {
+        String pattern = CACHE_KEY_PREFIX + "*";
+        RedisConnection connection = redisTemplate
+                .getConnectionFactory().getConnection();
 
-        // 将Key值的序列化方式改为使用StringRedisSerializer
-        RedisSerializer<String> serializer = new StringRedisSerializer();
-        redisTemplate.setKeySerializer(serializer);
-        redisTemplate.setHashKeySerializer(serializer);
-        redisTemplate.afterPropertiesSet();
-
-        // 清除缓存
-        Set<Object> caches = redisTemplate.keys(CACHE_KEY_PREFIX + "*");
-        redisTemplate.delete(caches);
+        Set<byte[]> caches = connection.keys(pattern.getBytes());
+        connection.del(caches.toArray(new byte[][]{}));
     }
 }

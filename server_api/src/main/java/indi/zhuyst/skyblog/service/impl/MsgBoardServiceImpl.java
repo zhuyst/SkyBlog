@@ -12,6 +12,7 @@ import indi.zhuyst.skyblog.service.CommentService;
 import indi.zhuyst.skyblog.service.MsgBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +49,7 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
     }
 
     @Override
+    @CacheEvict(cacheNames = CACHE_PAGE,allEntries = true)
     public PageInfo<CommentDTO> listMsg(Query<Comment> query){
         Comment comment = query.getEntity();
         if(comment == null){
@@ -61,6 +63,7 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = CACHE_PAGE,allEntries = true)
     public CommentDTO insertMsg(Comment comment){
         comment.setArticleId(MSG_BOARD_KEY);
         return commentService.saveComment(comment);
@@ -68,6 +71,7 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = CACHE_PAGE,allEntries = true)
     public boolean deleteMsg(int id){
         this.getMsg(id);
         return commentService.delete(id);

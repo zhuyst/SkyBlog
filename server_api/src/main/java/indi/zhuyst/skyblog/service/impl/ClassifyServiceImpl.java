@@ -11,6 +11,8 @@ import indi.zhuyst.skyblog.pojo.ClassifyDTO;
 import indi.zhuyst.skyblog.service.ClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,6 +43,7 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     }
 
     @Override
+    @Cacheable(cacheNames = CACHE_OBJECT,key = "#id")
     public Classify getById(int id){
         Classify classify = dao.selectByPrimaryKey(id);
         return this.produceDTO(classify);
@@ -62,6 +65,7 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     }
 
     @Override
+    @Cacheable(CACHE_LIST)
     public List<ClassifyDTO> listClassify(){
         List<Classify> list = dao.selectAll();
         List<ClassifyDTO> dtoList = new ArrayList<>();
@@ -76,6 +80,7 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_LIST},allEntries = true)
     public ClassifyDTO saveClassify(Classify classify){
         checkClassify(classify);
 
@@ -92,6 +97,7 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_LIST},allEntries = true)
     public boolean deleteClassify(int id){
 
 
