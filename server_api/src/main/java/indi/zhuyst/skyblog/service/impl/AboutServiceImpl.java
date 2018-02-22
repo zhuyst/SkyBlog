@@ -7,6 +7,8 @@ import indi.zhuyst.skyblog.pojo.About;
 import indi.zhuyst.skyblog.service.AboutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +35,7 @@ public class AboutServiceImpl extends BaseService implements AboutService,
     }
 
     @Override
+    @Cacheable(CACHE_OBJECT)
     public About getAbout() {
         Article article = this.getAboutArticle();
         return new About(article);
@@ -40,6 +43,7 @@ public class AboutServiceImpl extends BaseService implements AboutService,
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = CACHE_OBJECT,allEntries = true)
     public About updateAbout(About about) {
         Article article = this.getAboutArticle();
         article.setContent(about.getContent());

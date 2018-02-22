@@ -18,6 +18,8 @@ import indi.zhuyst.skyblog.service.ArticleService;
 import indi.zhuyst.skyblog.service.ClassifyService;
 import indi.zhuyst.skyblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,18 +63,21 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
     }
 
     @Override
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
     public boolean delete(int id) {
         checkExcept(id);
         return super.delete(id);
     }
 
     @Override
+    @Cacheable(cacheNames = CACHE_OBJECT,key = "#id")
     public ArticleDTO getArticleDTO(int id){
         Article article = getByID(id);
         return this.produceDTO(article);
     }
 
     @Override
+    @Cacheable(CACHE_PAGE)
     public PageInfo<ArticleDTO> listArticle(Query<Article> query){
         PageInfo<Article> pageInfo =
                 PageHelper.startPage(query.getPageNum(),query.getPageSize())
@@ -84,6 +89,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
     public ArticleDTO saveArticle(Article article){
         ArticleDTO pojo = null;
 

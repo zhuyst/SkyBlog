@@ -125,7 +125,7 @@ public class ArticleController extends BaseController{
     @ApiOperation(value = "根据id删除评论")
     @PreAuthorize("isAuthenticated()")
     public R deleteComment(@ApiParam("评论ID") @PathVariable("id") Integer id){
-        Comment comment = commentService.getByID(id);
+        Comment comment = commentService.getCommentDTO(id);
         checkPerms(comment.getAuthorId());
         return produceResult(commentService.delete(id),"评论删除失败");
     }
