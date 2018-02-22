@@ -25,7 +25,7 @@ import javax.validation.Valid;
 
 @RestController
 @Api(value = "ArticleApi",description = "文章相关Api")
-@RequestMapping("/api/articles")
+@RequestMapping("/articles")
 public class ArticleController extends BaseController{
 
     @Autowired

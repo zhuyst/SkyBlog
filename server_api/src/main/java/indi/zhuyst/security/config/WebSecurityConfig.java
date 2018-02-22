@@ -98,8 +98,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
 
                 // SwaggerUI、公共接口、授权接口放行
-                .antMatchers("/api/",
-                        "/api/**/public/**",
+                .antMatchers("/",
+                        "/**/public/**",
                         "/auth/**")
                     .permitAll()
 

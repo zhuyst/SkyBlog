@@ -24,7 +24,7 @@ import javax.validation.Valid;
 
 @RestController
 @Api(value = "UserApi",description = "用户相关API")
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController extends BaseController{
 
     @Autowired

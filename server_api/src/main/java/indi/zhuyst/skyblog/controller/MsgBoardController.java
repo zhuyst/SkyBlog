@@ -20,7 +20,7 @@ import javax.validation.Valid;
 
 @RestController
 @Api(value = "MsgBoardApi",description = "留言板相关API")
-@RequestMapping("/api/msg_board")
+@RequestMapping("/msg_board")
 public class MsgBoardController extends BaseController{
 
     @Autowired

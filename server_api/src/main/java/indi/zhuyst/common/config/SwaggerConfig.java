@@ -36,12 +36,12 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
     private SecurityService securityService;
 
     /**
-     * 将路径/api/映射到SwaggerUI主界面
+     * 将路径/映射到SwaggerUI主界面
      * @param registry 映射记录
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addRedirectViewController("/api/","/swagger-ui.html");
+        registry.addRedirectViewController("/","/swagger-ui.html");
     }
 
     /**

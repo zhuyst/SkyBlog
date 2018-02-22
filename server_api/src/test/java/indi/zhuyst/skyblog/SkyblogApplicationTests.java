@@ -1,10 +1,8 @@
 package indi.zhuyst.skyblog;
 
 import indi.zhuyst.security.pojo.SecurityUser;
-import indi.zhuyst.skyblog.entity.Classify;
 import indi.zhuyst.skyblog.entity.Comment;
 import indi.zhuyst.skyblog.entity.User;
-import indi.zhuyst.skyblog.service.ClassifyService;
 import indi.zhuyst.skyblog.service.MsgBoardService;
 import indi.zhuyst.skyblog.service.UserService;
 import org.junit.Test;
