@@ -8,8 +8,7 @@
 
 .edit_button{
     float: right !important;
-    position: relative;
-    bottom: 60px;
+    margin-top: 10px;
 }
 
 .comment_send{
@@ -51,5 +50,5 @@
 }
 
 .page-header{
-    padding-bottom: 40px !important;
+    padding-bottom: 35px !important;
 }
