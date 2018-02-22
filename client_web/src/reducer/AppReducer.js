@@ -7,7 +7,7 @@ import ArticlesReducer from './article/ArticlesReducer'
 import NavigationReducer from './common/NavigationReducer'
 import ContentReducer from "./article/ContentReducer";
 import LoginReducer from './common/LoginReducer'
-import UserReducer from './user/UsersReducer'
+import UsersReducer from './user/UsersReducer'
 import ClassifyReducer from './article/ClassifyReducer'
 import AboutReducer from './about/AboutReducer'
 import MsgBoardReducer from './msgboard/MsgBoardReducer'
@@ -17,7 +17,7 @@ const AppReducer = combineReducers({
     articles : ArticlesReducer,
     content : ContentReducer,
     login : LoginReducer,
-    user : UserReducer,
+    users : UsersReducer,
     classify : ClassifyReducer,
     about : AboutReducer,
     msg : MsgBoardReducer,

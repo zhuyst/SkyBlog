@@ -48,8 +48,8 @@ class UserInfoModal extends React.Component{
                             mode={MODE_SUCCESS}/>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button disabled={submitting} onClick={onHide}> 关闭 </Button>
-                        <Button disabled={submitting} type="submit" bsStyle="primary"> 修改 </Button>
+                        <Button disabled={submitting} onClick={onHide}>&nbsp;关闭&nbsp;</Button>
+                        <Button disabled={submitting} type="submit" bsStyle="primary">&nbsp;修改&nbsp;</Button>
                     </Modal.Footer>
                 </form>
             </Modal>
