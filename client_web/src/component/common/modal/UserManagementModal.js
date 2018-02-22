@@ -2,8 +2,8 @@ import React from 'react'
 import {Button, ButtonGroup, Label, Modal, Pager, Table} from "react-bootstrap";
 import {setUserManagementModalShow} from "../../../action/common/ModalAction";
 import {connect} from "react-redux";
-import {listUsers, updateUserRole} from "../../../action/user/UsersAction";
-import {USER_PAGE_SIZE, UserRole} from "../../../Constant";
+import {listUsers, updateUserRole, updateUserStatus} from "../../../action/user/UsersAction";
+import {USER_PAGE_SIZE, UserRole, UserStatus} from "../../../Constant";
 
 class UserManagementModal extends React.Component{
 
@@ -13,7 +13,8 @@ class UserManagementModal extends React.Component{
 
     render(){
         const {admin,page,show, onHide,
-            listUsers,promote,demote} = this.props;
+            listUsers,promote,demote,
+            lock,unlock} = this.props;
         const {total,page_num,pages} = page;
 
         let users = [];
@@ -36,9 +37,26 @@ class UserManagementModal extends React.Component{
                 )
             }
 
+            let lockButton;
+            if(user.status === UserStatus.NORMAL.id){
+                lockButton = (
+                    <Button bsSize="small" bsStyle="danger"
+                            onClick={() => lock(user.id,page_num)}>锁定账户</Button>
+                )
+            }
+            else if(user.status === UserStatus.LOCKED.id){
+                lockButton = (
+                    <Button bsSize="small" bsStyle="info"
+                            onClick={() => unlock(user.id,page_num)}>解除锁定</Button>
+                )
+            }
+
             const button = (
                 <ButtonGroup>
-                    <Button bsSize="small" bsStyle="danger">锁定账户</Button>
+                    {
+                        !user.admin &&
+                        lockButton
+                    }
                     {
                         admin.role === 1 &&
                         roleButton
@@ -145,6 +163,12 @@ const mapDispatchToProps = dispatch => {
         },
         demote : (id,pageNum) => {
             dispatch(updateUserRole(id,UserRole.VISITOR.id,pageNum))
+        },
+        lock : (id,pageNum) => {
+            dispatch(updateUserStatus(id,UserStatus.LOCKED.id,pageNum))
+        },
+        unlock : (id,pageNum) => {
+            dispatch(updateUserStatus(id,UserStatus.NORMAL.id,pageNum))
         }
     }
 };
