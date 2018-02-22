@@ -113,6 +113,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     }
 
     @Override
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean promoteAdmin(int id) {
         User user = super.getByID(id);
         if(user.getRole() == RoleEnum.ADMIN.getId()){
@@ -124,6 +125,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     }
 
     @Override
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean demoteAdmin(int id) {
         User user = super.getByID(id);
         if(user.getRole() == RoleEnum.VISITOR.getId()){
