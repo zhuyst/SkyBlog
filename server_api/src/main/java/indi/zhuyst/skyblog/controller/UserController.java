@@ -7,6 +7,7 @@ import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.R;
 import indi.zhuyst.security.enums.RoleEnum;
+import indi.zhuyst.security.enums.StatusEnum;
 import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.service.SecurityService;
@@ -96,5 +97,26 @@ public class UserController extends BaseController{
         }
 
         return produceResult(isSuccess,"更新用户角色失败");
+    }
+
+    @ApiOperation("更新用户状态")
+    @PatchMapping("/status/{id}/{statusId}")
+    @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    public R updateUserStatus(@ApiParam("角色ID") @PathVariable("id") Integer id,
+                              @ApiParam("状态ID") @PathVariable("statusId")Integer statusId){
+        UserDTO user = userService.getUserDTO(id);
+        if(user.getAdmin()){
+            throw new CommonException("管理员不能被锁定");
+        }
+
+        boolean isSuccess = false;
+        if(statusId == StatusEnum.NORMAL.getId()){
+            isSuccess = userService.unlockUser(id);
+        }
+        else if(statusId == StatusEnum.LOCKED.getId()){
+            isSuccess = userService.lockUser(id);
+        }
+
+        return produceResult(isSuccess,"更新用户状态失败");
     }
 }

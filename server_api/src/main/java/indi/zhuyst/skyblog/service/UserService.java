@@ -27,6 +27,10 @@ public interface UserService extends BaseCrudService<User>,UserDetailsService{
 
     boolean demoteAdmin(int id);
 
+    boolean lockUser(int id);
+
+    boolean unlockUser(int id);
+
     PageInfo<UserDTO> listUser(Query<User> query);
 
 }
