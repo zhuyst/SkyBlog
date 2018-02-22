@@ -1,14 +1,19 @@
-import {SET_LOGIN_MODAL_SHOW,SET_REGISTER_MODAL_SHOW,SET_USERINFO_MODAL_SHOW} from '../../action/common/ModalAction'
+import {
+    SET_LOGIN_MODAL_SHOW, SET_REGISTER_MODAL_SHOW, SET_USER_MANAGEMENT_SHOW,
+    SET_USERINFO_MODAL_SHOW
+} from '../../action/common/ModalAction'
 
 const initialState = {
     modal : {
         loginModal_show : false,
         registerModal_show : false,
-        userInfoModal_show : false
+        userInfoModal_show : false,
+        userManagementModal_show : false
     }
 };
 
 const NavigationReducer = (state = initialState,action) => {
+    const show = action.show;
     let modal = state.modal;
 
     switch (action.type){
@@ -17,7 +22,7 @@ const NavigationReducer = (state = initialState,action) => {
                 ...state,
                 modal : {
                     ...modal,
-                    loginModal_show: action.loginModal_show
+                    loginModal_show: show
                 }
             };
 
@@ -26,7 +31,7 @@ const NavigationReducer = (state = initialState,action) => {
                 ...state,
                 modal : {
                     ...modal,
-                    registerModal_show: action.registerModal_show
+                    registerModal_show: show
                 }
             };
 
@@ -35,7 +40,15 @@ const NavigationReducer = (state = initialState,action) => {
                 ...state,
                 modal : {
                     ...modal,
-                    userInfoModal_show : action.userInfoModal_show
+                    userInfoModal_show : show
+                }
+            };
+        case SET_USER_MANAGEMENT_SHOW:
+            return {
+                ...state,
+                modal : {
+                    ...modal,
+                    userManagementModal_show : show
                 }
             };
 

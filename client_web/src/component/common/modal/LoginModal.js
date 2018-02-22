@@ -3,10 +3,11 @@ import {Alert, Button, Modal} from "react-bootstrap";
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 
-import {login,loginClear} from "../../../action/common/LoginAction";
+import {login, loginClear} from "../../../action/common/LoginAction";
 
 import {FORM_LOGIN} from "../../../Constant";
 import FieldGroup,{MODE_NULL} from '../FieldGroup'
+import {setLoginModalShow} from "../../../action/common/ModalAction";
 
 class LoginModal extends React.Component{
     render(){
@@ -52,20 +53,6 @@ class LoginModal extends React.Component{
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        login : state.login
-    }
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        loginClear : () => {
-            dispatch(loginClear())
-        },
-    }
-};
-
 const validate = values => {
     const errors = {};
     const {username,password} = values;
@@ -94,6 +81,24 @@ const LoginModalForm = reduxForm({
     validate : validate,
     onSubmit : onSubmit
 })(LoginModal);
+
+const mapStateToProps = state => {
+    return {
+        show : state.navigation.modal.loginModal_show,
+        login : state.login
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        loginClear: () => {
+            dispatch(loginClear())
+        },
+        onHide: () => {
+            dispatch(setLoginModalShow(false))
+        },
+    }
+};
 
 const LoginModalContainer = connect(mapStateToProps,mapDispatchToProps)(LoginModalForm);
 
