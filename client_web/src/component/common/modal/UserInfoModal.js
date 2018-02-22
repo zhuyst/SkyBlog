@@ -6,6 +6,8 @@ import { Field,reduxForm } from 'redux-form'
 import {FORM_USERINFO} from "../../../Constant";
 import {validate as validateInfo} from "./RegisterModal";
 import {updateUserInfo} from "../../../action/user/UsersAction";
+import {setUserInfoModalShow} from "../../../action/common/ModalAction";
+import {connect} from "react-redux";
 
 class UserInfoModal extends React.Component{
     render(){
@@ -85,4 +87,24 @@ const UserInfoModalForm = reduxForm({
     onSubmit : onSubmit
 })(UserInfoModal);
 
-export default UserInfoModalForm
+const mapStateToProps = state => {
+    return {
+        show : state.navigation.modal.userInfoModal_show,
+        login : state.login
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onHide : () => {
+            dispatch(setUserInfoModalShow(false))
+        }
+    }
+};
+
+const UserInfoModalContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(UserInfoModalForm);
+
+export default UserInfoModalContainer

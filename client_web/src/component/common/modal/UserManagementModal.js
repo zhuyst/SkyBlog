@@ -10,3 +10,5 @@ class UserManagementModal extends React.Component{
         )
     }
 }
+
+export default UserManagementModal

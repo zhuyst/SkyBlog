@@ -6,6 +6,8 @@ import {registerUser} from "../../../action/user/UsersAction";
 
 import {FORM_REGISTER} from "../../../Constant";
 import FieldGroup,{MODE_SUCCESS} from '../FieldGroup'
+import {setRegisterModalShow} from "../../../action/common/ModalAction";
+import {connect} from "react-redux";
 
 class RegisterModal extends React.Component{
     render(){
@@ -135,4 +137,24 @@ const RegisterModalForm = reduxForm({
     onSubmit : onSubmit
 })(RegisterModal);
 
-export default RegisterModalForm;
+const mapStateToProps = state => {
+    return {
+        show : state.navigation.modal.registerModal_show,
+        login : state.login
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onHide : () => {
+            dispatch(setRegisterModalShow(false))
+        }
+    }
+};
+
+const RegisterModalContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(RegisterModalForm);
+
+export default RegisterModalContainer

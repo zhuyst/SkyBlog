@@ -28,7 +28,7 @@ class Navigation extends React.Component{
                 <Nav pullRight>
                     <NavDropdown title={user.nickname} id={user.id}>
                         <MenuItem onClick={() => setUserInfoModalShow(true)}>修改个人信息</MenuItem>
-                        <UserInfoModal show={userInfoModal_show} onHide={() => setUserInfoModalShow(false)}/>
+                        <UserInfoModal/>
 
                         <MenuItem onClick={logout}>登出</MenuItem>
                     </NavDropdown>
@@ -39,10 +39,10 @@ class Navigation extends React.Component{
             right = (
                 <Nav pullRight>
                     <NavItem onClick={() => setLoginModalShow(true)}>登陆</NavItem>
-                    <LoginModal show={loginModal_show} onHide={() => setLoginModalShow(false)}/>
+                    <LoginModal/>
 
                     <NavItem onClick={() => setRegisterModalShow(true)}>注册</NavItem>
-                    <RegisterModal show={registerModal_show} onHide={() => setRegisterModalShow(false)}/>
+                    <RegisterModal/>
                 </Nav>
             )
         }
@@ -114,6 +114,9 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-const NavigationContainer = connect(mapStateToProps,mapDispatchToProps)(Navigation);
+const NavigationContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Navigation);
 
 export default withRouter(NavigationContainer)
