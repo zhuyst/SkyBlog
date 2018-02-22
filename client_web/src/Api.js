@@ -42,6 +42,7 @@ export const HttpMethod = {
     GET : "GET",
     POST : "POST",
     PUT : "PUT",
+    PATCH : "PATCH",
     DELETE : "DELETE"
 };
 
@@ -84,6 +85,15 @@ export const _put = (url,body) => {
     return handleFetch(promise);
 };
 
+export const _patch = (url,body) => {
+    const promise = fetch(url,{
+        method : HttpMethod.PATCH,
+        headers: getHeaders(),
+        body : JSON.stringify(body)
+    });
+    return handleFetch(promise);
+};
+
 export const _delete = (url,body) => {
     const promise = fetch(url,{
         method : HttpMethod.DELETE,
@@ -105,10 +115,10 @@ export const checkStatus = response => {
 const handleFetch = promise => {
     return promise
         .then(response => checkStatus(response))
-        .catch(() => dispatch(error("未知错误，请联系管理员")))
+        .catch(() => dispatch(error(FAIL_RESULT.message)))
 };
 
 export const FAIL_RESULT = {
     code: 500,
-    message: "网络请求失败"
+    message: "网络请求失败，请检查网络状态"
 };

@@ -1,9 +1,9 @@
 import React from 'react'
-import {Button, Label, Modal, Pager, Table} from "react-bootstrap";
+import {Button, ButtonGroup, Label, Modal, Pager, Table} from "react-bootstrap";
 import {setUserManagementModalShow} from "../../../action/common/ModalAction";
 import {connect} from "react-redux";
-import {listUsers} from "../../../action/user/UsersAction";
-import {USER_PAGE_SIZE} from "../../../Constant";
+import {listUsers, updateUserRole} from "../../../action/user/UsersAction";
+import {USER_PAGE_SIZE, UserRole} from "../../../Constant";
 
 class UserManagementModal extends React.Component{
 
@@ -12,17 +12,47 @@ class UserManagementModal extends React.Component{
     }
 
     render(){
-        const {page,show,onHide,listUsers} = this.props;
+        const {admin,page,show, onHide,
+            listUsers,promote,demote} = this.props;
         const {total,page_num,pages} = page;
 
         let users = [];
         page.list.forEach(user => {
+            let roleButton;
+            if(user.role === UserRole.ADMIN.id){
+                roleButton = (
+                    <Button bsSize="small" bsStyle="warning"
+                            onClick={() => demote(user.id,page_num)}>
+                        降低为访客
+                    </Button>
+                )
+            }
+            else if(user.role === UserRole.VISITOR.id){
+                roleButton = (
+                    <Button bsSize="small" bsStyle="success"
+                            onClick={() => promote(user.id,page_num)}>
+                        提升为管理员
+                    </Button>
+                )
+            }
+
+            const button = (
+                <ButtonGroup>
+                    <Button bsSize="small" bsStyle="danger">锁定账户</Button>
+                    {
+                        admin.role === 1 &&
+                        roleButton
+                    }
+                </ButtonGroup>
+            );
+
             users.push(
                 <tr key={user.id}>
                     <td>{user.id}</td>
                     <td>{user.username}</td>
                     <td>{user.nickname}</td>
                     <td>{getRole(user.role)}</td>
+                    <td>{button}</td>
                 </tr>
             )
         });
@@ -46,6 +76,7 @@ class UserManagementModal extends React.Component{
                             <th>用户名</th>
                             <th>昵称</th>
                             <th>角色</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -82,21 +113,22 @@ class UserManagementModal extends React.Component{
 
 const getRole = role => {
     switch (role) {
-        case 1:
-            return "系统管理员";
-        case 2:
-            return "管理员";
-        case 3:
-            return "访客";
+        case UserRole.SYS_ADMIN.id:
+            return UserRole.SYS_ADMIN.name;
+        case UserRole.ADMIN.id:
+            return UserRole.ADMIN.name;
+        case UserRole.VISITOR.id:
+            return UserRole.VISITOR.name;
         default:
-            return "访客";
+            return UserRole.VISITOR.name;
     }
 };
 
 const mapStateToProps = state => {
     return {
         show : state.navigation.modal.userManagementModal_show,
-        page : state.users
+        page : state.users,
+        admin : state.login.user
     }
 };
 
@@ -107,6 +139,12 @@ const mapDispatchToProps = dispatch => {
         },
         listUsers : pageNum => {
             dispatch(listUsers(pageNum,USER_PAGE_SIZE));
+        },
+        promote : (id,pageNum) => {
+            dispatch(updateUserRole(id,UserRole.ADMIN.id,pageNum));
+        },
+        demote : (id,pageNum) => {
+            dispatch(updateUserRole(id,UserRole.VISITOR.id,pageNum))
         }
     }
 };
