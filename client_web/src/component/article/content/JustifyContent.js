@@ -11,6 +11,7 @@ import Layout, {LAYOUT_JUSTIFY} from "./Layout";
 import ContentArea from "./ContentArea";
 
 import '../../../static/css/article/content.css'
+import ArticleBreadcrumb from "./ArticleBreadcrumb";
 
 class JustifyContent extends React.Component{
     componentWillMount(){
@@ -24,6 +25,13 @@ class JustifyContent extends React.Component{
     }
 
     render(){
+        const left = (
+            <div>
+                <ArticleBreadcrumb/>
+                <ContentArea/>
+            </div>
+        );
+
         const right = (
             <div>
                 <CommentList/>
@@ -33,7 +41,7 @@ class JustifyContent extends React.Component{
 
         return (
             <Layout type={LAYOUT_JUSTIFY}
-                    contentArea={<ContentArea/>}
+                    contentArea={left}
                     right={right}/>
         )
     }

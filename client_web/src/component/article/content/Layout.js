@@ -10,14 +10,13 @@ class Layout extends React.Component{
         const {contentArea,right,type} = this.props;
 
         const isJustify = (type === LAYOUT_JUSTIFY);
-        const mdOffset = isJustify ? 1 : 3;
-        const md = isJustify ? 5 : 6;
+        const mdOffset = isJustify ? 1 : 2;
+        const md = isJustify ? 5 : 8;
 
         return (
             <div>
                 <Row>
-                    <Col mdOffset={mdOffset} md={md} id="left">
-                        <ArticleBreadcrumb/>
+                    <Col mdOffset={mdOffset} md={md} sm={12} id="left">
                         {contentArea}
                     </Col>
                     {

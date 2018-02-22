@@ -10,6 +10,8 @@ import {initialArticle} from "../../../reducer/article/ContentReducer";
 
 import {getArticleInfo} from "../../../action/article/ArticlesAction";
 import {setArticle} from "../../../action/article/ContentAction";
+import ArticleBreadcrumb from "./ArticleBreadcrumb";
+import {Panel} from "react-bootstrap";
 
 class FullContent extends React.Component{
     componentWillMount(){
@@ -25,9 +27,14 @@ class FullContent extends React.Component{
     render(){
         const contentArea = (
             <div>
-                <div className="full_content">
-                    <ContentArea/>
-                </div>
+                <ArticleBreadcrumb/>
+                <Panel>
+                    <Panel.Body>
+                        <div className="full_content">
+                            <ContentArea/>
+                        </div>
+                    </Panel.Body>
+                </Panel>
                 <CommentList/>
                 <CommentSender/>
             </div>
