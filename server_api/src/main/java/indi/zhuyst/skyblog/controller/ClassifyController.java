@@ -24,14 +24,14 @@ public class ClassifyController extends BaseController{
     private ClassifyService classifyService;
 
     @RequestMapping(value = "/public/",method = RequestMethod.GET)
-    @ApiOperation(value = "查询分类列表")
+    @ApiOperation("查询分类列表")
     public R<List<ClassifyDTO>> listClassify(){
         List<ClassifyDTO> list = classifyService.listClassify();
         return R.ok(list);
     }
 
     @RequestMapping(value = "/",method = RequestMethod.POST)
-    @ApiOperation(value = "新增分类")
+    @ApiOperation("新增分类")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R<List<ClassifyDTO>> insertClassify(@ApiParam("分类对象") @Valid @RequestBody Classify classify){
         classify.setId(null);
@@ -41,7 +41,7 @@ public class ClassifyController extends BaseController{
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
-    @ApiOperation(value = "根据id更新分类")
+    @ApiOperation("根据id更新分类")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R<List<ClassifyDTO>> updateClassify(@ApiParam("分类ID") @PathVariable("id")Integer id,
                                             @ApiParam("分类对象") @Valid @RequestBody Classify classify){
@@ -52,7 +52,7 @@ public class ClassifyController extends BaseController{
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    @ApiOperation(value = "根据id删除分类")
+    @ApiOperation("根据id删除分类")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R<List<ClassifyDTO>> deleteClassify(@ApiParam("分类ID") @PathVariable("id")Integer id){
         List<ClassifyDTO> list = this.produceDTOList(classifyService.deleteClassify(id));
