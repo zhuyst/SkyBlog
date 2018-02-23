@@ -1,6 +1,8 @@
+import {startSubmit,stopSubmit} from 'redux-form'
+
 import {error, success} from "../common/NotifyAction";
 import {_delete, _get, _post, MSG_BOARD_API_URL} from "../../Api";
-import {MSG_PAGE_SIZE} from "../../Constant";
+import {FORM_MSG, MSG_PAGE_SIZE} from "../../Constant";
 
 export const LIST_MSG_RESPONSE = "LIST_MSG_RESPONSE";
 
@@ -8,9 +10,13 @@ export const INSERT_MSG_RESPONSE = "INSERT_MSG_RESPONSE";
 export const DELETE_MSG_RESPONSE = "DELETE_MSG_RESPONSE";
 
 export const insertMsg = (msg, pageNum) => dispatch => {
+    dispatch(startSubmit(FORM_MSG));
+
     const url = MSG_BOARD_API_URL + "/";
     return _post(url,msg)
         .then(result => {
+            dispatch(stopSubmit(FORM_MSG,result.errors));
+
             if(result.code === 200){
                 dispatch(success("新增留言成功"));
                 dispatch(insertMsgResponse(result));
@@ -46,9 +52,13 @@ const listMsgResponse = result => {
 };
 
 export const deleteMsg = (id,pageNum) => dispatch => {
+    dispatch(startSubmit(FORM_MSG));
+
     const url = MSG_BOARD_API_URL + `/${id}`;
     return _delete(url)
         .then(result => {
+            dispatch(stopSubmit(FORM_MSG,result.errors));
+
             if(result.code === 200){
                 dispatch(success("删除评论成功"));
                 dispatch(deleteMsgResponse(id));

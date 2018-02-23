@@ -1,5 +1,8 @@
+import {startSubmit,stopSubmit} from 'redux-form'
+
 import {_delete, _get, _post, _put, CLASSIFY_API_URL} from "../../Api";
 import {error, success} from "../common/NotifyAction";
+import {FORM_CLASSIFY} from "../../Constant";
 
 export const SET_CLASSIFY_SHOW = "SET_CLASSIFY_SHOW";
 
@@ -30,9 +33,13 @@ const listClassifyResponse = result => {
 };
 
 export const insertClassify = classify => dispatch => {
+    dispatch(startSubmit(FORM_CLASSIFY));
+
     const url = CLASSIFY_API_URL + "/";
     return _post(url,classify)
         .then(result => {
+            dispatch(stopSubmit(FORM_CLASSIFY,result.errors));
+
             if(result.code === 200){
                 dispatch(success("新增文章分类成功"));
                 dispatch(insertClassifyResponse(result));
@@ -52,9 +59,13 @@ const insertClassifyResponse = result => {
 };
 
 export const updateClassify = classify => dispatch => {
+    dispatch(startSubmit(FORM_CLASSIFY));
+
     const url = CLASSIFY_API_URL + `/${classify.id}`;
     return _put(url,classify)
         .then(result => {
+            dispatch(stopSubmit(FORM_CLASSIFY,result.errors));
+
             if(result.code === 200){
                 dispatch(success("更新文章分类成功"));
                 dispatch(updateClassifyResponse(result));
@@ -73,9 +84,13 @@ const updateClassifyResponse = result => {
 };
 
 export const deleteClassify = id => dispatch => {
+    dispatch(startSubmit(FORM_CLASSIFY));
+
     const url = CLASSIFY_API_URL + `/${id}`;
     return _delete(url)
         .then(result => {
+            dispatch(stopSubmit(FORM_CLASSIFY,result.errors));
+
             if(result.code === 200){
                 dispatch(success("删除文章分类成功"));
                 dispatch(deleteClassifyResponse(result))
