@@ -2,12 +2,14 @@ package indi.zhuyst.security.setting;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * JWT相关设置
  * @author zhuyst
  */
 @Data
+@Component
 @ConfigurationProperties(prefix = "skyblog.jwt")
 public class JwtSettings {
 

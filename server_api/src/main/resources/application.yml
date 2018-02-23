@@ -98,5 +98,9 @@ skyblog:
     header: Token
   oss:
     end-point: http://oss-cn-shenzhen.aliyuncs.com
+    access-domain: http://zhuyst.oss-cn-shenzhen.aliyuncs.com
+
     access-key-id: LTAIDQn100ds3Zuh
     access-key-secret : 7XWvmA5okuxlOiJXhfetgUDMQmGr1D
+    
+    bucket-name: zhuyst
