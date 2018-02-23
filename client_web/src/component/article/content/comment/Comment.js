@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from "react-redux";
-import {change} from "redux-form";
+import {change, untouch} from "redux-form";
 
 import {deleteComment, setPreviousComment} from "../../../../action/article/ContentAction";
 import {FORM_COMMENT} from "../../../../Constant";
@@ -15,7 +15,6 @@ class Comment extends React.Component{
         const user = login.user;
 
         const previous_comment = comment.previous_comment;
-
         const content = {
             __html : convertBr(comment.content)
         };
@@ -70,6 +69,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(deleteComment(id))
         },
         reply : comment => {
+            dispatch(untouch(FORM_COMMENT,"content"));
             dispatch(change(FORM_COMMENT,"previous_comment_id",comment.id));
             dispatch(setPreviousComment(comment));
         }

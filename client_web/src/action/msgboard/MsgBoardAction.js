@@ -3,11 +3,21 @@ import {startSubmit,stopSubmit} from 'redux-form'
 import {error, success} from "../common/NotifyAction";
 import {_delete, _get, _post, MSG_BOARD_API_URL} from "../../Api";
 import {FORM_MSG, MSG_PAGE_SIZE} from "../../Constant";
+import {initialPreviousComment} from "../../reducer/article/ContentReducer";
+
+export const SET_PREVIOUS_MSG = "SET_PREVIOUS_MSG";
 
 export const LIST_MSG_RESPONSE = "LIST_MSG_RESPONSE";
 
 export const INSERT_MSG_RESPONSE = "INSERT_MSG_RESPONSE";
 export const DELETE_MSG_RESPONSE = "DELETE_MSG_RESPONSE";
+
+export const setPreviousMsg = msg => {
+    return {
+        type : SET_PREVIOUS_MSG,
+        previous_comment : msg
+    }
+};
 
 export const insertMsg = msg => (dispatch,getState) => {
     dispatch(startSubmit(FORM_MSG));
@@ -15,6 +25,7 @@ export const insertMsg = msg => (dispatch,getState) => {
     const url = MSG_BOARD_API_URL + "/";
     return _post(url,msg)
         .then(result => {
+            dispatch(setPreviousMsg(initialPreviousComment));
             dispatch(stopSubmit(FORM_MSG,result.errors));
 
             if(result.code === 200){

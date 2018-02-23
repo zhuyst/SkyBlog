@@ -4,7 +4,9 @@ import {change, untouch ,Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
 
 import {FORM_MSG} from "../../Constant";
-import {insertMsg} from "../../action/msgboard/MsgBoardAction";
+import {insertMsg, setPreviousMsg} from "../../action/msgboard/MsgBoardAction";
+import {initialPreviousComment} from "../../reducer/article/ContentReducer";
+import {convertBr} from "../Util";
 
 class MsgSender extends React.Component{
 
@@ -20,11 +22,25 @@ class MsgSender extends React.Component{
     };
 
     render(){
-        const {handleSubmit,login} = this.props;
+        const {handleSubmit,cancelReply,
+            previous_comment, login} = this.props;
 
         if(login.ok){
             return (
                 <form>
+                    {
+                        previous_comment.id !== 0 &&
+                        <Alert bsStyle="info" onDismiss={cancelReply}>
+                            <p>
+                                您正在回复&nbsp;
+                                <strong>{previous_comment.author.nickname}</strong>
+                                &nbsp;的回复：
+                            </p>
+                            <p dangerouslySetInnerHTML={{
+                                __html : convertBr(previous_comment.content)
+                            }} />
+                        </Alert>
+                    }
                     <Field name="previous_comment_id" component="input" type="hidden"/>
                     <Field name="content" component={textArea}/>
                     <Button bsStyle="primary" bsSize="large" block
@@ -95,6 +111,7 @@ const MsgSenderForm = reduxForm({
 
 const mapStateToProps = state => {
     return {
+        previous_comment : state.msg.previous_comment,
         login : state.login
     }
 };
@@ -107,6 +124,11 @@ const mapDispatchToProps = dispatch => {
         clear : () => {
             dispatch(untouch(FORM_MSG,"content"));
             dispatch(change(FORM_MSG,"content",""));
+            dispatch(change(FORM_MSG,"previous_comment_id",""))
+        },
+        cancelReply : () => {
+            dispatch(setPreviousMsg(initialPreviousComment));
+            dispatch(change(FORM_MSG,"previous_comment_id",""))
         }
     }
 };
