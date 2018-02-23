@@ -5,6 +5,7 @@ import {FORM_MSG} from "../../Constant";
 import {change, untouch} from "redux-form";
 import {convertBr} from "../Util";
 import {Alert} from "react-bootstrap";
+import UserInfoPopover from "../common/UserInfoPopover";
 
 class Msg extends React.Component{
     render(){
@@ -23,7 +24,9 @@ class Msg extends React.Component{
         return (
             <div className={className}>
                 <div className="comment_content">
-                    <strong>{msg.author.nickname}&nbsp;:&nbsp;</strong>
+                    <UserInfoPopover user={msg.author} content={
+                        <strong>{msg.author.nickname}&nbsp;:&nbsp;</strong>
+                    }/>
                     {
                         previous_comment &&
                         <span>
@@ -33,7 +36,9 @@ class Msg extends React.Component{
                     {
                         previous_comment &&
                         <Alert bsStyle="info" className="previous_comment">
-                            <strong>{msg.author.nickname}&nbsp;:&nbsp;</strong>
+                            <UserInfoPopover user={previous_comment.author} content={
+                                <strong>{previous_comment.author.nickname}&nbsp;:&nbsp;</strong>
+                            }/>
                             <span dangerouslySetInnerHTML={{
                                 __html : convertBr(previous_comment.content)
                             }}/>
