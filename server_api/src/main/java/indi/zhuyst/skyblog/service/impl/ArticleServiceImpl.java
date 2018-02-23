@@ -64,6 +64,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
 
     @Override
     @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(int id) {
         checkExcept(id);
         return super.delete(id);
