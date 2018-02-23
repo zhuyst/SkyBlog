@@ -11,15 +11,14 @@ import {convertBr} from "../../../Util";
 class CommentSender extends React.Component{
 
     submit = data => {
-        const {article,comments,
-            insertComment,clear} = this.props;
+        const {insertComment,clear} = this.props;
 
         const comment = {
             article_id : data.article_id,
             previous_comment_id : data.previous_comment_id,
             content : data.content
         };
-        insertComment(article.id,comment,comments.page_num);
+        insertComment(comment);
         clear();
     };
 
@@ -145,8 +144,6 @@ const CommentSenderForm = reduxForm({
 
 const mapStateToProps = state => {
     return {
-        article : state.content.article,
-        comments : state.content.comments,
         previous_comment : state.content.previous_comment,
         login : state.login
     }
@@ -154,8 +151,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        insertComment : (articleId,comment,pageNum) => {
-            dispatch(insertComment(articleId,comment,pageNum))
+        insertComment : comment => {
+            dispatch(insertComment(comment))
         },
         clear : () => {
             dispatch(untouch(FORM_COMMENT,"content"));

@@ -9,7 +9,7 @@ import {Alert} from "react-bootstrap";
 
 class Comment extends React.Component{
     render(){
-        const {comment, pageNum,articleId,login,
+        const {comment,login,
             reply,deleteComment} = this.props;
         const id = comment.id;
         const user = login.user;
@@ -48,7 +48,7 @@ class Comment extends React.Component{
                     <div className="comment_footer">
                         {
                             (user.admin || user.id === comment.author_id) &&
-                            <a onClick={() => deleteComment(id,articleId,pageNum)}>删除</a>
+                            <a onClick={() => deleteComment(id)}>删除</a>
                         }
                         <a onClick={() => reply(comment)}>回复</a>
                     </div>
@@ -60,16 +60,14 @@ class Comment extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        articleId : state.content.article.id,
-        pageNum : state.content.comments.page_num,
         login : state.login
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        deleteComment : (id,articleId,pageNum) => {
-            dispatch(deleteComment(id,articleId,pageNum))
+        deleteComment : id => {
+            dispatch(deleteComment(id))
         },
         reply : comment => {
             dispatch(change(FORM_COMMENT,"previous_comment_id",comment.id));

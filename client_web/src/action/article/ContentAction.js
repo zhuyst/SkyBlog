@@ -25,10 +25,12 @@ export const setPreviousComment = comment => {
     }
 };
 
-export const insertComment = (articleId, comment, pageNum) => dispatch => {
+export const insertComment = comment => (dispatch,getState) => {
     dispatch(startSubmit(FORM_COMMENT));
 
+    const articleId = getState().content.article.id;
     const url = ARTICLE_API_URL + `/${articleId}/comment/`;
+
     return _post(url,comment)
         .then(result => {
             dispatch(stopSubmit(FORM_COMMENT,result.errors));
@@ -37,7 +39,7 @@ export const insertComment = (articleId, comment, pageNum) => dispatch => {
                 dispatch(success("新增评论成功"));
                 dispatch(insertCommentResponse(result));
 
-                reloadComments(pageNum,articleId,dispatch);
+                reloadComments(dispatch,getState);
             }
             else {
                 dispatch(error(result.message));
@@ -67,7 +69,7 @@ const listCommentsResponse = result => {
     }
 };
 
-export const deleteComment = (id,articleId,pageNum) => dispatch => {
+export const deleteComment = id => (dispatch,getState) => {
     dispatch(startSubmit(FORM_COMMENT));
 
     const url = ARTICLE_API_URL + `/comment/${id}`;
@@ -79,7 +81,7 @@ export const deleteComment = (id,articleId,pageNum) => dispatch => {
                 dispatch(success("删除评论成功"));
                 dispatch(deleteCommentResponse(id));
 
-                reloadComments(pageNum,articleId,dispatch);
+                reloadComments(dispatch,getState);
             }
             else {
                 dispatch(error(result.message));
@@ -94,8 +96,11 @@ const deleteCommentResponse = result => {
     }
 };
 
-const reloadComments = (pageNum,articleId,dispatch) => {
-    // 重新加载大小为 pageNum*pageSize 的评论列表
+// 重新加载大小为 pageNum*pageSize 的评论列表
+const reloadComments = (dispatch,getState) => {
+    const pageNum = getState().content.comments.page_num;
+    const articleId = getState().content.article.id;
+
     const pageSize = pageNum * COMMENT_PAGE_SIZE;
     dispatch(listComments(articleId,1,pageSize))
 };
