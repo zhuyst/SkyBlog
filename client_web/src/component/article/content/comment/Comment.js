@@ -6,6 +6,7 @@ import {deleteComment, setPreviousComment} from "../../../../action/article/Cont
 import {FORM_COMMENT} from "../../../../Constant";
 import {convertBr} from "../../../Util";
 import {Alert} from "react-bootstrap";
+import UserInfoPopover from "../../../common/UserInfoPopover";
 
 class Comment extends React.Component{
     render(){
@@ -24,7 +25,9 @@ class Comment extends React.Component{
         return (
             <div className={className}>
                 <div className="comment_content">
-                    <strong>{comment.author.nickname}&nbsp;:&nbsp;</strong>
+                    <UserInfoPopover user={comment.author} content={
+                        <strong>{comment.author.nickname}&nbsp;:&nbsp;</strong>
+                    }/>
                     {
                         previous_comment &&
                         <span>
@@ -34,7 +37,9 @@ class Comment extends React.Component{
                     {
                         previous_comment &&
                             <Alert bsStyle="info" className="previous_comment">
-                                <strong>{comment.author.nickname}&nbsp;:&nbsp;</strong>
+                                <UserInfoPopover user={previous_comment.author} content={
+                                    <strong>{previous_comment.author.nickname}&nbsp;:&nbsp;</strong>
+                                }/>
                                 <span dangerouslySetInnerHTML={{
                                     __html : convertBr(previous_comment.content)
                                 }}/>
