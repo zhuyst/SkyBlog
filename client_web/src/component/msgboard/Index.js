@@ -22,18 +22,21 @@ class Index extends React.Component{
                     <MsgList/>
                 </Col>
                 <Col md={4} sm={12}>
-                    <Col lgOffset={3} lg={6} mdOffset={2} md={8} sm={12}>
-                        <Panel bsStyle="primary">
-                            <Panel.Heading>
-                                <Panel.Title componentClass="h3">
-                                    当前登录用户信息
-                                </Panel.Title>
-                            </Panel.Heading>
-                            <Panel.Body>
-                                <UserInfoTable user={login.user}/>
-                            </Panel.Body>
-                        </Panel>
-                    </Col>
+                    {
+                        login.ok &&
+                        <Col lgOffset={3} lg={6} mdOffset={2} md={8} sm={12}>
+                            <Panel bsStyle="primary">
+                                <Panel.Heading>
+                                    <Panel.Title componentClass="h3">
+                                        当前登录用户信息
+                                    </Panel.Title>
+                                </Panel.Heading>
+                                <Panel.Body>
+                                    <UserInfoTable user={login.user}/>
+                                </Panel.Body>
+                            </Panel>
+                        </Col>
+                    }
                     <Col md={12} sm={12}>
                         <MsgSender/>
                     </Col>
