@@ -95,7 +95,7 @@ const MsgSenderForm = reduxForm({
 
 const mapStateToProps = state => {
     return {
-        page : state.msg,
+        page : state.msg.page,
         login : state.login
     }
 };

@@ -95,7 +95,7 @@ class MsgList extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        page : state.msg
+        page : state.msg.page
     }
 };
 
