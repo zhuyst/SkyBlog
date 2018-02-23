@@ -25,9 +25,18 @@
     margin-bottom: 0 !important;
 }
 
+.comment_content{
+    margin-bottom: 10px;
+}
+
 .comment_footer{
     text-align: right;
     font-size: 12px;
+}
+
+.previous_comment{
+    margin-top: 10px;
+    margin-bottom: 10px !important;
 }
 
 .comment_footer a{
