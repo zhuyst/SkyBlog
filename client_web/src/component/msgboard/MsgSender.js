@@ -9,13 +9,13 @@ import {insertMsg} from "../../action/msgboard/MsgBoardAction";
 class MsgSender extends React.Component{
 
     submit = data => {
-        const {page, insertMsg,clear} = this.props;
+        const {insertMsg,clear} = this.props;
 
         const msg = {
             previous_comment_id : data.previous_comment_id,
             content : data.content
         };
-        insertMsg(msg,page.page_num);
+        insertMsg(msg);
         clear();
     };
 
@@ -95,15 +95,14 @@ const MsgSenderForm = reduxForm({
 
 const mapStateToProps = state => {
     return {
-        page : state.msg.page,
         login : state.login
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        insertMsg : (msg,pageNum) => {
-            dispatch(insertMsg(msg,pageNum))
+        insertMsg : msg => {
+            dispatch(insertMsg(msg))
         },
         clear : () => {
             dispatch(untouch(FORM_MSG,"content"));
