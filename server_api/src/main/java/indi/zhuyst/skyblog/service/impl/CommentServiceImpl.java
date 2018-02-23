@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Service
+@Service("commentService")
 public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> implements CommentService{
 
     @Autowired

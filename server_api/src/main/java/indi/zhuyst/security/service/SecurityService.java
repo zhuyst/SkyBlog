@@ -50,10 +50,4 @@ public interface SecurityService{
      * @return Token在Header中的Name
      */
     String getHeader();
-
-    /**
-     * 获取Token过期时间
-     * @return Token过期时间
-     */
-    Long getExpire();
 }

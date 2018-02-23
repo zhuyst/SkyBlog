@@ -96,3 +96,7 @@ skyblog:
     secret: zojoKieDTQYZXVi4dGKIn4qTkQA=
     expire: 604800
     header: Token
+  oss:
+    end-point: http://oss-cn-shenzhen.aliyuncs.com
+    access-key-id: LTAIDQn100ds3Zuh
+    access-key-secret : 7XWvmA5okuxlOiJXhfetgUDMQmGr1D

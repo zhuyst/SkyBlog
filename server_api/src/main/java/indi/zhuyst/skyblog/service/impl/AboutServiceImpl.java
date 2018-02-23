@@ -12,7 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Service("aboutService")
 public class AboutServiceImpl extends BaseService implements AboutService,
         CommandLineRunner{
 

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Service
+@Service("articleService")
 public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> implements ArticleService{
     @Autowired
     private UserService userService;
@@ -44,14 +44,16 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public Article save(Article article) {
+        Date date = new Date();
+
         if(article.getId() == null){
-            article.setCreateDate(new Date());
+            article.setCreateDate(date);
         }
         else {
             checkExcept(article.getId());
         }
 
-        article.setUpdateDate(new Date());
+        article.setUpdateDate(date);
 
         if(article.getClassifyId() == null){
             article.setClassifyId(ClassifyService.NOT_CLASSIFY_KEY);

@@ -7,6 +7,7 @@ import indi.zhuyst.common.util.ServletUtils;
 import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.service.SecurityService;
+import indi.zhuyst.security.setting.JwtSettings;
 import indi.zhuyst.skyblog.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -31,12 +32,13 @@ import java.util.Date;
  * @author zhuyst
  */
 @Service
-@ConfigurationProperties(prefix = "skyblog.jwt")
 public class SecurityServiceImpl extends BaseService implements SecurityService{
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private JwtSettings jwtSettings;
 
     /**
      * {@link SecurityUser#username}在Claims中的name
@@ -47,27 +49,6 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
      * {@link SecurityUser#role}在Claims中的name
      */
     private static final String CLAIM_ROLE = "role";
-
-    /**
-     * 密钥
-     */
-    @Getter
-    @Setter
-    private String secret;
-
-    /**
-     * Token在Header中的Name
-     */
-    @Getter
-    @Setter
-    private String header;
-
-    /**
-     * Token过期时间
-     */
-    @Getter
-    @Setter
-    private Long expire;
 
     @Override
     public AccessToken login(String username, String password) {
@@ -96,6 +77,7 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
         }
 
         AccessToken accessToken = new AccessToken();
+        long expire = jwtSettings.getExpire();
 
         Date nowDate = new Date();
         Date expireDate = new Date(nowDate.getTime() + expire * 1000);
@@ -113,7 +95,8 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
                 .setExpiration(expireDate)
 
                 // 设置加密方式
-                .signWith(SignatureAlgorithm.HS512, secret)
+                .signWith(SignatureAlgorithm.HS512,
+                        jwtSettings.getSecret())
                 .compact();
 
         accessToken.setToken(token);
@@ -148,6 +131,11 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
         return isTokenValid(claims);
     }
 
+    @Override
+    public String getHeader() {
+        return jwtSettings.getHeader();
+    }
+
     /**
      * 获取JWT的Claims
      * @param token JWT
@@ -156,7 +144,7 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
     private Claims getClaimByToken(String token) {
         try {
             Claims claims = Jwts.parser()
-                    .setSigningKey(secret)
+                    .setSigningKey(jwtSettings.getSecret())
                     .parseClaimsJws(token)
                     .getBody();
 
