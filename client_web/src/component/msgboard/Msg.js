@@ -4,7 +4,7 @@ import {deleteMsg} from "../../action/msgboard/MsgBoardAction";
 
 class Msg extends React.Component{
     render(){
-        const {msg, pageNum,login,
+        const {msg, login,
             deleteMsg} = this.props;
         const id = msg.id;
         const user = login.user;
@@ -22,7 +22,7 @@ class Msg extends React.Component{
                     <div className="comment_footer">
                         {
                             (user.admin || user.id === msg.author_id) &&
-                            <a onClick={() => deleteMsg(id,pageNum)}>删除</a>
+                            <a onClick={() => deleteMsg(id)}>删除</a>
                         }
                         <a>回复</a>
                     </div>
@@ -34,15 +34,14 @@ class Msg extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        pageNum : state.msg.page.page_num,
         login : state.login
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        deleteMsg : (id,pageNum) => {
-            dispatch(deleteMsg(id,pageNum))
+        deleteMsg : id => {
+            dispatch(deleteMsg(id))
         }
     }
 };

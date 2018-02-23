@@ -29,7 +29,7 @@ class Comment extends React.Component{
                     {
                         previous_comment &&
                         <span>
-                            回复&nbsp;{previous_comment.author.nickname}&nbsp;
+                            回复&nbsp;<i className="fa fa-hand-o-down"/>
                         </span>
                     }
                     {

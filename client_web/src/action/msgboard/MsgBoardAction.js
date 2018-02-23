@@ -9,7 +9,7 @@ export const LIST_MSG_RESPONSE = "LIST_MSG_RESPONSE";
 export const INSERT_MSG_RESPONSE = "INSERT_MSG_RESPONSE";
 export const DELETE_MSG_RESPONSE = "DELETE_MSG_RESPONSE";
 
-export const insertMsg = (msg, pageNum) => dispatch => {
+export const insertMsg = msg => (dispatch,getState) => {
     dispatch(startSubmit(FORM_MSG));
 
     const url = MSG_BOARD_API_URL + "/";
@@ -21,7 +21,7 @@ export const insertMsg = (msg, pageNum) => dispatch => {
                 dispatch(success("新增留言成功"));
                 dispatch(insertMsgResponse(result));
 
-                reloadMsg(pageNum,dispatch);
+                reloadMsg(dispatch,getState);
             }
             else {
                 dispatch(error(result.message));
@@ -51,7 +51,7 @@ const listMsgResponse = result => {
     }
 };
 
-export const deleteMsg = (id,pageNum) => dispatch => {
+export const deleteMsg = id => (dispatch,getState) => {
     dispatch(startSubmit(FORM_MSG));
 
     const url = MSG_BOARD_API_URL + `/${id}`;
@@ -63,7 +63,7 @@ export const deleteMsg = (id,pageNum) => dispatch => {
                 dispatch(success("删除评论成功"));
                 dispatch(deleteMsgResponse(id));
 
-                reloadMsg(pageNum,dispatch);
+                reloadMsg(dispatch,getState);
             }
             else {
                 dispatch(error(result.message));
@@ -78,8 +78,10 @@ const deleteMsgResponse = result => {
     }
 };
 
-const reloadMsg = (pageNum,dispatch) => {
-    // 重新加载大小为 pageNum*pageSize 的评论列表
+// 重新加载大小为 pageNum*pageSize 的评论列表
+const reloadMsg = (dispatch,getState) => {
+    const pageNum = getState().msg.page.page_num;
     const pageSize = pageNum * MSG_PAGE_SIZE;
+
     dispatch(listMsg(1,pageSize))
 };
