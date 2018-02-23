@@ -3,6 +3,7 @@ import {startSubmit,stopSubmit} from 'redux-form'
 import {_delete, _get, _post, ARTICLE_API_URL} from "../../Api";
 import {error, success} from "../common/NotifyAction";
 import {COMMENT_PAGE_SIZE, FORM_COMMENT} from "../../Constant";
+import {initialPreviousComment} from "../../reducer/article/ContentReducer";
 
 export const SET_ARTICLE = "SET_ARTICLE";
 export const SET_PREVIOUS_COMMENT = "SET_PREVIOUS_COMMENT";
@@ -33,6 +34,7 @@ export const insertComment = comment => (dispatch,getState) => {
 
     return _post(url,comment)
         .then(result => {
+            dispatch(setPreviousComment(initialPreviousComment));
             dispatch(stopSubmit(FORM_COMMENT,result.errors));
 
             if(result.code === 200){
