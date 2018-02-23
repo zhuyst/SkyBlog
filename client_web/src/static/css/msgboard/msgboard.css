@@ -1,3 +1,9 @@
 .msg_board_main{
     margin-top: 20px;
 }
+
+.msg_sender{
+    padding-top: 25px;
+    margin-top: 25px;
+    border-top: 2px solid #ddd;
+}
