@@ -98,10 +98,12 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
         if(comment.getPreviousCommentId() != null){
             Comment previousComment = super.getByID(comment.getPreviousCommentId());
 
-            CommentDTO previousDTO = new CommentDTO(previousComment);
-            setAuthor(previousDTO);
-
-            pojo.setPreviousComment(previousDTO);
+            // 有可能出现回复的评论已被删除的情况
+            if(previousComment != null){
+                CommentDTO previousDTO = new CommentDTO(previousComment);
+                setAuthor(previousDTO);
+                pojo.setPreviousComment(previousDTO);
+            }
         }
 
         return pojo;
