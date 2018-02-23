@@ -82,7 +82,9 @@ class MsgList extends React.Component{
         return (
             <Panel bsStyle="primary">
                 <Panel.Heading>
-                    <span>留言列表&nbsp;&nbsp;<Badge>{total}</Badge></span>
+                    <Panel.Title componentClass="h3">
+                        留言列表&nbsp;&nbsp;<Badge>{total}</Badge>
+                    </Panel.Title>
                 </Panel.Heading>
                 <Panel.Body>
                     {msgList}

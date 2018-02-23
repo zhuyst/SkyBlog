@@ -27,7 +27,7 @@ class MsgSender extends React.Component{
 
         if(login.ok){
             return (
-                <form>
+                <div className="msg_sender">
                     {
                         previous_comment.id !== 0 &&
                         <Alert bsStyle="info" onDismiss={cancelReply}>
@@ -47,7 +47,7 @@ class MsgSender extends React.Component{
                             onClick={handleSubmit(data => this.submit(data))}>
                         发表留言
                     </Button>
-                </form>
+                </div>
             )
         }
         else {
