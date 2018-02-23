@@ -65,7 +65,7 @@ public abstract class BaseCrudServiceImpl<D extends BaseDao<E>,E extends BaseEnt
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public E save(E entity){
         boolean isSuccess;
 
@@ -84,7 +84,7 @@ public abstract class BaseCrudServiceImpl<D extends BaseDao<E>,E extends BaseEnt
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(int id){
         return dao.deleteByPrimaryKey(id) > 0;
     }

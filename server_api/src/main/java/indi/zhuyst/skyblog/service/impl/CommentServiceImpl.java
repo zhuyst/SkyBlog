@@ -47,6 +47,7 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
 
     @Override
     @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
+    @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(int id) {
         return super.delete(id);
     }
