@@ -16,7 +16,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Service("msgBoardService")
 public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
 
     @Autowired
