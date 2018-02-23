@@ -4,7 +4,9 @@ import {FormControl, ControlLabel, FormGroup, Row, Col, Button, HelpBlock, Alert
 import {change,untouch, Field, reduxForm} from "redux-form";
 
 import {FORM_COMMENT} from "../../../../Constant";
-import {insertComment} from "../../../../action/article/ContentAction";
+import {insertComment, setPreviousComment} from "../../../../action/article/ContentAction";
+import {initialPreviousComment} from "../../../../reducer/article/ContentReducer";
+import {convertBr} from "../../../Util";
 
 class CommentSender extends React.Component{
 
@@ -22,11 +24,25 @@ class CommentSender extends React.Component{
     };
 
     render(){
-        const {handleSubmit,login} = this.props;
+        const {handleSubmit,submitting, login,
+            cancelReply,previous_comment} = this.props;
 
         if(login.ok){
             return (
                 <div className="comment_send">
+                    {
+                        previous_comment.id !== 0 &&
+                        <Alert bsStyle="info" onDismiss={cancelReply}>
+                            <p>
+                                您正在回复&nbsp;
+                                <strong>{previous_comment.author.nickname}</strong>
+                                &nbsp;的回复：
+                            </p>
+                            <p dangerouslySetInnerHTML={{
+                                __html : convertBr(previous_comment.content)
+                            }} />
+                        </Alert>
+                    }
                     <form>
                         <Field name="article_id" component="input" type="hidden"/>
                         <Field name="previous_comment_id" component="input" type="hidden"/>
@@ -35,10 +51,10 @@ class CommentSender extends React.Component{
                                 <Field name="content" component={textArea}/>
                             </Col>
                             <Col md={2} smHidden xsHidden>
-                                {submitButton(handleSubmit,this.submit,false)}
+                                {submitButton(handleSubmit,submitting,this.submit,false)}
                             </Col>
                             <Col sm={12} lgHidden mdHidden>
-                                {submitButton(handleSubmit,this.submit,true)}
+                                {submitButton(handleSubmit,submitting,this.submit,true)}
                             </Col>
                         </Row>
                     </form>
@@ -89,7 +105,7 @@ const textArea = (field) => {
     )
 };
 
-const submitButton = (handleSubmit,submit,sm) => {
+const submitButton = (handleSubmit,submitting,submit,sm) => {
     let props = {
         bsStyle : "primary",
         block : true,
@@ -107,7 +123,7 @@ const submitButton = (handleSubmit,submit,sm) => {
     }
 
     return (
-        <Button {...props}>提交</Button>
+        <Button {...props} disabled={submitting}>提交</Button>
     )
 };
 
@@ -131,6 +147,7 @@ const mapStateToProps = state => {
     return {
         article : state.content.article,
         comments : state.content.comments,
+        previous_comment : state.content.previous_comment,
         login : state.login
     }
 };
@@ -143,6 +160,11 @@ const mapDispatchToProps = dispatch => {
         clear : () => {
             dispatch(untouch(FORM_COMMENT,"content"));
             dispatch(change(FORM_COMMENT,"content",""));
+            dispatch(change(FORM_COMMENT,"previous_comment_id",""))
+        },
+        cancelReply : () => {
+            dispatch(setPreviousComment(initialPreviousComment));
+            dispatch(change(FORM_COMMENT,"previous_comment_id",""))
         }
     }
 };

@@ -5,6 +5,7 @@ import {error, success} from "../common/NotifyAction";
 import {COMMENT_PAGE_SIZE, FORM_COMMENT} from "../../Constant";
 
 export const SET_ARTICLE = "SET_ARTICLE";
+export const SET_PREVIOUS_COMMENT = "SET_PREVIOUS_COMMENT";
 
 export const INSERT_COMMENT_RESPONSE = "INSERT_COMMENT_RESPONSE";
 export const LIST_COMMENTS_RESPONSE = "LIST_COMMENTS_RESPONSE";
@@ -14,6 +15,13 @@ export const setArticle = article => {
     return {
         type : SET_ARTICLE,
         article : article
+    }
+};
+
+export const setPreviousComment = comment => {
+    return {
+        type : SET_PREVIOUS_COMMENT,
+        previous_comment : comment
     }
 };
 

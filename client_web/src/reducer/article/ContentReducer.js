@@ -1,4 +1,4 @@
-import {SET_ARTICLE} from "../../action/article/ContentAction";
+import {SET_ARTICLE, SET_PREVIOUS_COMMENT} from "../../action/article/ContentAction";
 import {GET_ARTICLE_INFO_RESPONSE, INSERT_ARTICLE_RESPONSE, UPDATE_ARTICLE_RESPONSE} from "../../action/article/ArticlesAction";
 import {LIST_COMMENTS_RESPONSE} from "../../action/article/ContentAction";
 import {concatList} from "../Util";
@@ -20,31 +20,26 @@ export const initialArticle = {
     }
 };
 
-export const initialComments = {
+const initialComments = {
     list : [],
     page_num : 1,
     pages : 0,
     total : 0
 };
 
-const initialState = {
-    comments : initialComments,
-    article : initialArticle
+export const initialPreviousComment = {
+    id : 0,
+    author : {
+        id : 0,
+        nickname : ""
+    },
+    content : ""
 };
 
-const convert = (action,state) => {
-    const article = action.article;
-    const convertArticle = {
-        ...article,
-        content: {
-            text : article.content,
-            selection: null
-        }
-    };
-    return Object.assign({},state,{
-        article : convertArticle,
-        comments : initialComments
-    });
+const initialState = {
+    comments : initialComments,
+    article : initialArticle,
+    previous_comment : initialPreviousComment
 };
 
 const ContentReducer = (state = initialState,action) => {
@@ -55,9 +50,16 @@ const ContentReducer = (state = initialState,action) => {
         case SET_ARTICLE:
             const article = Object.assign({},state.article,action.article);
 
-            return Object.assign({},state, {
-                    article : article
-                });
+            return {
+                ...state,
+                article : article
+            };
+
+        case SET_PREVIOUS_COMMENT:
+            return {
+                ...state,
+                previous_comment : action.previous_comment
+            };
 
         case GET_ARTICLE_INFO_RESPONSE:
             return convert(action,state);
@@ -84,6 +86,23 @@ const ContentReducer = (state = initialState,action) => {
         default :
             return state;
     }
+};
+
+const convert = (action,state) => {
+    const article = action.article;
+    const convertArticle = {
+        ...article,
+        content: {
+            text : article.content,
+            selection: null
+        }
+    };
+    return {
+        ...state,
+        article : convertArticle,
+        comments : initialComments,
+        previous_comment : initialPreviousComment
+    };
 };
 
 export default ContentReducer
