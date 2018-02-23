@@ -1,6 +1,8 @@
+import {startSubmit,stopSubmit} from 'redux-form'
+
 import {_delete, _get, _post, ARTICLE_API_URL} from "../../Api";
 import {error, success} from "../common/NotifyAction";
-import {COMMENT_PAGE_SIZE} from "../../Constant";
+import {COMMENT_PAGE_SIZE, FORM_COMMENT} from "../../Constant";
 
 export const SET_ARTICLE = "SET_ARTICLE";
 
@@ -16,9 +18,13 @@ export const setArticle = article => {
 };
 
 export const insertComment = (articleId, comment, pageNum) => dispatch => {
+    dispatch(startSubmit(FORM_COMMENT));
+
     const url = ARTICLE_API_URL + `/${articleId}/comment/`;
     return _post(url,comment)
         .then(result => {
+            dispatch(stopSubmit(FORM_COMMENT,result.errors));
+
             if(result.code === 200){
                 dispatch(success("新增评论成功"));
                 dispatch(insertCommentResponse(result));
@@ -54,9 +60,13 @@ const listCommentsResponse = result => {
 };
 
 export const deleteComment = (id,articleId,pageNum) => dispatch => {
+    dispatch(startSubmit(FORM_COMMENT));
+
     const url = ARTICLE_API_URL + `/comment/${id}`;
     return _delete(url)
         .then(result => {
+            dispatch(stopSubmit(FORM_COMMENT,result.errors));
+
             if(result.code === 200){
                 dispatch(success("删除评论成功"));
                 dispatch(deleteCommentResponse(id));

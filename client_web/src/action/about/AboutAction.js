@@ -1,6 +1,9 @@
 import {_get, _put, ABOUT_API_URL} from "../../Api";
 import {push} from 'react-router-redux'
+import {startSubmit,stopSubmit} from 'redux-form'
+
 import {error, success} from "../common/NotifyAction";
+import {FORM_ABOUT} from "../../Constant";
 
 export const SET_ABOUT = "SET_ABOUT";
 export const GET_ABOUT_RESPONSE = "GET_ABOUT_RESPONSE";
@@ -27,9 +30,13 @@ const getAboutResponse = result => {
 };
 
 export const updateAbout = (about,back) => dispatch => {
+    dispatch(startSubmit(FORM_ABOUT));
+
     const url = ABOUT_API_URL + "/";
     return _put(url,about)
         .then(result => {
+            dispatch(stopSubmit(FORM_ABOUT,result.errors));
+
             if(result.code === 200){
                 dispatch(success("更新关于成功"));
                 dispatch(updateAboutResponse(result));
