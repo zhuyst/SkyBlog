@@ -34,7 +34,7 @@ class Msg extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        pageNum : state.msg.page_num,
+        pageNum : state.msg.page.page_num,
         login : state.login
     }
 };
