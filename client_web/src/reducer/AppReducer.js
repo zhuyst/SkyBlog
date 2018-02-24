@@ -6,6 +6,7 @@ import { reducer as notificationsReducer } from 'reapop';
 import ArticlesReducer from './article/ArticlesReducer'
 import NavigationReducer from './common/NavigationReducer'
 import ContentReducer from "./article/ContentReducer";
+import UploadReducer from './article/UploadReducer'
 import LoginReducer from './common/LoginReducer'
 import UsersReducer from './user/UsersReducer'
 import ClassifyReducer from './article/ClassifyReducer'
@@ -16,6 +17,7 @@ const AppReducer = combineReducers({
     navigation : NavigationReducer,
     articles : ArticlesReducer,
     content : ContentReducer,
+    upload : UploadReducer,
     login : LoginReducer,
     users : UsersReducer,
     classify : ClassifyReducer,
