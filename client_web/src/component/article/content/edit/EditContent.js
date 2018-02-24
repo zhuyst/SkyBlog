@@ -42,7 +42,7 @@ class EditContent extends React.Component{
         );
         const right = (
             <div className="content_main edit_content">
-                <ArticleTitle article={article}/>
+                <ArticleTitle hasButton={false}/>
                 <ReactMarkdown source={article.content.text}/>
             </div>
         );

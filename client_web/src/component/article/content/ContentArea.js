@@ -13,7 +13,7 @@ class ContentArea extends React.Component{
 
         return (
             <div className="content_main">
-                <ArticleTitle/>
+                <ArticleTitle hasButton={true}/>
                 <Clearfix>
                     <ReactMarkdown source={article.content.text}/>
                 </Clearfix>
