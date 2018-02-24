@@ -5,21 +5,12 @@ import {error, success} from "../common/NotifyAction";
 import {COMMENT_PAGE_SIZE, FORM_COMMENT} from "../../Constant";
 import {initialPreviousComment} from "../../reducer/article/ContentReducer";
 
-export const SET_UPLOAD_MODAL_SHOW = "SET_UPLOAD_MODAL_SHOW";
-
 export const SET_ARTICLE = "SET_ARTICLE";
 export const SET_PREVIOUS_COMMENT = "SET_PREVIOUS_COMMENT";
 
 export const INSERT_COMMENT_RESPONSE = "INSERT_COMMENT_RESPONSE";
 export const LIST_COMMENTS_RESPONSE = "LIST_COMMENTS_RESPONSE";
 export const DELETE_COMMENT_RESPONSE = "DELETE_COMMENT_RESPONSE";
-
-export const setUploadModalShow = show => {
-    return {
-        type : SET_UPLOAD_MODAL_SHOW,
-        show : show
-    }
-};
 
 export const setArticle = article => {
     return {

@@ -10,7 +10,7 @@ import FieldGroup from "../../../common/FieldGroup";
 import NewClassify from "./NewClassify";
 import UploadModal from "./UploadModal";
 
-import {setArticle, setUploadModalShow} from "../../../../action/article/ContentAction";
+import {setArticle} from "../../../../action/article/ContentAction";
 import {deleteArticle, insertArticle, updateArticle} from "../../../../action/article/ArticlesAction";
 
 import 'react-mde/lib/styles/css/react-mde.css';
@@ -19,6 +19,7 @@ import 'react-mde/lib/styles/css/react-mde-textarea.css';
 
 import '../../../../static/css/article/editor.css'
 import {setClassifyShow} from "../../../../action/article/ClassifyAction";
+import {setUploadModalShow} from "../../../../action/article/UploadAction";
 
 class ArticleEditor extends React.Component{
 
