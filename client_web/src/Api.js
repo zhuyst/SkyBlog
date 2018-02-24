@@ -54,8 +54,8 @@ const getHeaders = () => {
     }
 };
 
-export const _get = (url,body) => {
-    if(typeof(body) != "undefined" || body != null){
+export const _get = (url,body = null) => {
+    if(body !== null){
         url = new URL(url);
         Object.keys(body).forEach(key => url.searchParams.append(key, body[key]));
     }
