@@ -20,7 +20,7 @@ export const login = (user) => (dispatch) => {
     return fetch(LOGIN_URL,{
         method: HttpMethod.POST,
         headers: {
-            "Content-type": ContentType.FORM
+            "Content-Type": ContentType.FORM
         },
         body: `username=${user.username}&password=${user.password}`
     }).then(response => checkStatus(response))

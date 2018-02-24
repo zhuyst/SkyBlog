@@ -181,7 +181,7 @@ export const checkUserLoginState = () => dispatch => {
     return fetch(REFRESH_URL,{
             method: HttpMethod.POST,
             headers: {
-                "Content-type": ContentType.FORM
+                "Content-Type": ContentType.FORM
             },
             body: `token=${token}`
         }).then(response => checkStatus(response))

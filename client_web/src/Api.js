@@ -49,7 +49,7 @@ export const HttpMethod = {
 const getHeaders = () => {
     const token = Cookies.get(COOKIE_TOKEN);
     return {
-        "Content-type": ContentType.JSON,
+        "Content-Type": ContentType.JSON,
         "Token": token
     }
 };
