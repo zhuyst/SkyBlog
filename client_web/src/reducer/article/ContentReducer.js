@@ -1,4 +1,4 @@
-import {SET_ARTICLE, SET_PREVIOUS_COMMENT} from "../../action/article/ContentAction";
+import {SET_ARTICLE, SET_PREVIOUS_COMMENT, SET_UPLOAD_MODAL_SHOW} from "../../action/article/ContentAction";
 import {GET_ARTICLE_INFO_RESPONSE, INSERT_ARTICLE_RESPONSE, UPDATE_ARTICLE_RESPONSE} from "../../action/article/ArticlesAction";
 import {LIST_COMMENTS_RESPONSE} from "../../action/article/ContentAction";
 import {concatList} from "../Util";
@@ -39,7 +39,8 @@ export const initialPreviousComment = {
 const initialState = {
     comments : initialComments,
     article : initialArticle,
-    previous_comment : initialPreviousComment
+    previous_comment : initialPreviousComment,
+    uploadModal_show : false
 };
 
 const ContentReducer = (state = initialState,action) => {
@@ -47,6 +48,12 @@ const ContentReducer = (state = initialState,action) => {
     let comments;
 
     switch(action.type){
+        case SET_UPLOAD_MODAL_SHOW:
+            return {
+                ...state,
+                uploadModal_show: action.show
+            };
+
         case SET_ARTICLE:
             const article = Object.assign({},state.article,action.article);
 

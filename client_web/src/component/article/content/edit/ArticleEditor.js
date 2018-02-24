@@ -8,8 +8,9 @@ import {Button, ButtonGroup, ButtonToolbar, Col, ControlLabel, FormGroup, Glyphi
 import {FORM_ARTICLE} from "../../../../Constant";
 import FieldGroup from "../../../common/FieldGroup";
 import NewClassify from "./NewClassify";
+import UploadModal from "./UploadModal";
 
-import {setArticle} from "../../../../action/article/ContentAction";
+import {setArticle, setUploadModalShow} from "../../../../action/article/ContentAction";
 import {deleteArticle, insertArticle, updateArticle} from "../../../../action/article/ArticlesAction";
 
 import 'react-mde/lib/styles/css/react-mde.css';
@@ -92,7 +93,7 @@ class ArticleEditor extends React.Component{
 
     render(){
         const {classifyList,classifyShow,
-            setClassifyShow} = this.props;
+            setClassifyShow,showUploadModal} = this.props;
 
         const classifyOptions = [];
         classifyList.forEach(classify => {
@@ -141,7 +142,8 @@ class ArticleEditor extends React.Component{
                             <NewClassify/>
                         </Row>
 
-                        <Field name="content" component={editor}/>
+                        <Field name="content" component={editor} showUploadModal={showUploadModal}/>
+                        <UploadModal/>
                     </form>
                 </div>
             </div>
@@ -149,16 +151,40 @@ class ArticleEditor extends React.Component{
     }
 }
 
-const editor = ({ input: { value, onChange }}) => {
-    return (
-        <FormGroup>
-            <ControlLabel>文章内容</ControlLabel>
-            <ReactMde value={value}
-                      onChange={onChange}
-                      commands={ReactMdeCommands.getDefaultCommands()}/>
-        </FormGroup>
-    )
-};
+class editor extends React.Component{
+
+    render(){
+        const { input: { value, onChange },showUploadModal} = this.props;
+
+        let commands = ReactMdeCommands.getDefaultCommands();
+
+        const uploadCommand = {
+            icon: 'upload',
+            tooltip:
+                '上传文件',
+            execute: (text, selection) => {
+                showUploadModal();
+
+                return {
+                    text: text,
+                    selection: selection
+                };
+            },
+        };
+
+        commands.push([uploadCommand]);
+
+        return (
+            <FormGroup>
+                <ControlLabel>文章内容</ControlLabel>
+                <ReactMde value={value}
+                          onChange={onChange}
+                          commands={commands}/>
+            </FormGroup>
+        )
+    }
+
+}
 
 const classifyButton = (classifyShow,setClassifyShow,sm) => {
     let classifyIcon;
@@ -265,6 +291,9 @@ const mapDispatchToProps = dispatch => {
 
         setClassifyShow : show => {
             dispatch(setClassifyShow(show));
+        },
+        showUploadModal : () => {
+            dispatch(setUploadModalShow(true))
         }
     }
 };
