@@ -51,6 +51,9 @@ spring:
     proxy-target-class: true
 
   http:
+    multipart:
+      max-request-size: 5MB
+      max-file-size: 5MB
     encoding:
       force: true
       charset: UTF-8
