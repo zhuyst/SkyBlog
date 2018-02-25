@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route, withRouter} from 'react-router-dom'
+import {Route, Switch, withRouter} from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Navigation from './Navigation'
@@ -20,6 +20,7 @@ import {checkUserLoginState} from "../../action/user/UsersAction";
 import '../../static/css/common/common.css'
 import {listMsg} from "../../action/msgboard/MsgBoardAction";
 import {listCommits} from "../../action/github/GithubAction";
+import NotFound from "../error/NotFound";
 
 class Index extends React.Component{
     componentWillMount(){
@@ -45,11 +46,14 @@ class Index extends React.Component{
                 </header>
 
                 <div className="main">
-                    <Route exact strict path="/" component={Home} />
-                    <Route exact strict path="/home" component={Home}/>
-                    <Route path="/article" component={Article} />
-                    <Route path="/msg_board" component={MsgBoard} />
-                    <Route path="/about" component={About} />
+                    <Switch>
+                        <Route exact strict path="/" component={Home} />
+                        <Route exact strict path="/home" component={Home}/>
+                        <Route path="/article" component={Article} />
+                        <Route path="/msg_board" component={MsgBoard} />
+                        <Route path="/about" component={About} />
+                        <Route component={NotFound} />
+                    </Switch>
                 </div>
 
                 <footer>
