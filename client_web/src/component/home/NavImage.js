@@ -5,6 +5,9 @@ import home from '../../static/images/home.jpg'
 
 class NavImage extends React.Component{
     render(){
+        const skyblog_url = "https://github.com/zhuyst/SkyBlog";
+        const github_url = "https://github.com/zhuyst";
+
         return (
             <Carousel className="nav_image">
                 <Carousel.Item className="nav_image">
@@ -16,10 +19,20 @@ class NavImage extends React.Component{
                         </div>
                     </div>
                     <div className="nav_image_button_group">
-                        <Button bsSize="large" target="_blank"
-                                href="https://github.com/zhuyst/SkyBlog">查看SkyBlog源码</Button>
-                        <Button bsSize="large" target="_blank"
-                                href="https://github.com/zhuyst">查看作者Github</Button>
+                        <div className="hidden-xs">
+                            <Button bsSize="large" target="_blank"
+                                    href={skyblog_url}>查看SkyBlog源码</Button>
+                            <Button bsSize="large" target="_blank"
+                                    href={github_url}>查看作者Github</Button>
+                        </div>
+                        <div>
+                            <div className="hidden-sm hidden-md hidden-lg">
+                                <Button bsSize="small" target="_blank"
+                                        href={skyblog_url}>查看SkyBlog源码</Button>
+                                <Button bsSize="small" target="_blank"
+                                        href={github_url}>查看作者Github</Button>
+                            </div>
+                        </div>
                     </div>
                     <img height={300} alt="" src={home}/>
                 </Carousel.Item>
