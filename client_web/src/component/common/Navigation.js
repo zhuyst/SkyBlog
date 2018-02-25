@@ -63,13 +63,13 @@ class Navigation extends React.Component{
                 collapseOnSelect
                 className="navigation">
                 <Navbar.Header>
-                    <Navbar.Brand className="navBrand">
+                    <Navbar.Brand className="nav_brand">
                         <Link to="/">SkyBlog</Link>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
-                    <Nav className="navButton">
+                    <Nav className="nav_button">
                         <LinkContainer to="/home">
                             <NavItem>首页</NavItem>
                         </LinkContainer>
