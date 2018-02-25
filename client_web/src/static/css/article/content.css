@@ -21,7 +21,7 @@
     margin-bottom: 15px;
 }
 
-.comment_last{
+.comment:last-of-type{
     margin-bottom: 0 !important;
 }
 

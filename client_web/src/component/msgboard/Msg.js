@@ -19,10 +19,8 @@ class Msg extends React.Component{
             __html : convertBr(msg.content)
         };
 
-        const className = this.props.isLast ? "comment comment_last" : "comment";
-
         return (
-            <div className={className}>
+            <div className="comment">
                 <div className="comment_content">
                     <UserInfoPopover user={msg.author} content={
                         <strong>{msg.author.nickname}&nbsp;:&nbsp;</strong>

@@ -17,16 +17,9 @@ class Article extends React.Component{
         const articles = [];
         for(let i = 0;i < length;i++){
             const article = list[i];
-            if(i === length - 1){
-                articles.push(
-                    <Preview key={article.id} article={article} isLast={true}/>
-                )
-            }
-            else {
-                articles.push(
-                    <Preview key={article.id} article={article}/>
-                )
-            }
+            articles.push(
+                <Preview key={article.id} article={article}/>
+            )
         }
 
         return(

@@ -10,10 +10,8 @@ class Preview extends React.Component{
 
         const path = `/article/content/${id}/full`;
 
-        let className = this.props.isFirst ? "preview preview_first" : "preview";
-
         return (
-                <div className={className}>
+                <div className="preview">
                     <Panel defaultExpanded>
                         <Panel.Heading>
                             <Panel.Title toggle>

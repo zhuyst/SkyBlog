@@ -19,17 +19,10 @@ class Articles extends React.Component{
         const {list,page_num} = page;
 
         const articles = [];
-        list.forEach((article,i) => {
-            if(i === 0){
-                articles.push(
-                    <Preview key={article.id} article={article} isFirst={true}/>
-                )
-            }
-            else{
-                articles.push (
-                    <Preview key={article.id} article={article}/>
-                )
-            }
+        list.forEach(article => {
+            articles.push (
+                <Preview key={article.id} article={article}/>
+            )
         });
 
         return(
