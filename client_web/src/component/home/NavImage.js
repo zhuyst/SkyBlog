@@ -16,8 +16,10 @@ class NavImage extends React.Component{
                         </div>
                     </div>
                     <div className="nav_image_button_group">
-                        <Button bsSize="large">查看SkyBlog源码</Button>
-                        <Button bsSize="large">查看作者Github</Button>
+                        <Button bsSize="large" target="_blank"
+                                href="https://github.com/zhuyst/SkyBlog">查看SkyBlog源码</Button>
+                        <Button bsSize="large" target="_blank"
+                                href="https://github.com/zhuyst">查看作者Github</Button>
                     </div>
                     <img height={300} alt="" src={home}/>
                 </Carousel.Item>
