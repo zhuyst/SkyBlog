@@ -1,9 +1,7 @@
 import React from 'react'
 import { Link,withRouter } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Nav,NavItem,Navbar,NavDropdown,MenuItem,
-    FormGroup,FormControl,
-    Button } from 'react-bootstrap'
+import { Nav,NavItem,Navbar,NavDropdown,MenuItem} from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import {
@@ -87,12 +85,12 @@ class Navigation extends React.Component{
                         </LinkContainer>
                     </Nav>
 
-                    <Navbar.Form pullRight>
-                        <FormGroup>
-                            <FormControl type="text" placeholder="搜索文章..." />
-                        </FormGroup>
-                        <Button type="submit">搜索</Button>
-                    </Navbar.Form>
+                    {/*<Navbar.Form pullRight>*/}
+                        {/*<FormGroup>*/}
+                            {/*<FormControl type="text" placeholder="搜索文章..." />*/}
+                        {/*</FormGroup>*/}
+                        {/*<Button type="submit">搜索</Button>*/}
+                    {/*</Navbar.Form>*/}
 
                     {right}
                 </Navbar.Collapse>

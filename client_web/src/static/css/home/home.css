@@ -68,3 +68,7 @@
 .carousel-control.right{
     display: none;
 }
+
+.star_button{
+    padding: 3px 5px;
+}
