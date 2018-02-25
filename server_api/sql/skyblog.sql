@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-02-22 21:56:51
+Date: 2018-02-25 17:28:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -53,7 +53,7 @@ INSERT INTO `article` VALUES ('19', '文章标题 - 18', '文章副标题 - 18',
 INSERT INTO `article` VALUES ('20', '文章标题 - 19', '文章副标题 - 19', '# Markdown', '1', '1', '2018-02-08 15:32:00', '2018-02-08 15:32:00');
 INSERT INTO `article` VALUES ('21', '文章标题 - 20', '文章副标题 - 20', '# Markdown', '1', '1', '2018-02-08 15:32:00', '2018-02-08 15:32:00');
 INSERT INTO `article` VALUES ('24', '文章标题 - 23', '文章副标题 - 23', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-18 15:17:31');
-INSERT INTO `article` VALUES ('25', '文章标题 - 24123', '文章副标题 - 24', 'MarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown', '3', '1', '2018-02-08 15:32:01', '2018-02-22 14:20:14');
+INSERT INTO `article` VALUES ('25', '文章标题 - 24123', '文章副标题 - 24', 'Markdown', '3', '1', '2018-02-08 15:32:01', '2018-02-25 15:47:33');
 INSERT INTO `article` VALUES ('26', '文章标题 - 25', '文章副标题 - 25', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-08 15:32:01');
 INSERT INTO `article` VALUES ('27', '文章标题 - 26', '文章副标题 - 26', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-08 15:32:01');
 INSERT INTO `article` VALUES ('28', '文章标题 - 27', '文章副标题 - 27', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-08 15:32:01');
@@ -93,19 +93,16 @@ CREATE TABLE `comment` (
   KEY `author_id` (`author_id`),
   KEY `previous_comment_id` (`previous_comment_id`),
   CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
-  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `comment_ibfk_3` FOREIGN KEY (`previous_comment_id`) REFERENCES `comment` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
+  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
 INSERT INTO `comment` VALUES ('11', '评论 - 11', '24', '1', null, '2018-02-13 13:30:19');
-INSERT INTO `comment` VALUES ('15', '评论 - 15', '24', '1', null, '2018-02-13 13:30:19');
 INSERT INTO `comment` VALUES ('16', '评论 - 16', '24', '1', null, '2018-02-13 13:30:19');
 INSERT INTO `comment` VALUES ('17', '评论 - 17', '24', '1', null, '2018-02-13 13:30:19');
 INSERT INTO `comment` VALUES ('18', '评论 - 18', '24', '1', null, '2018-02-13 13:30:19');
-INSERT INTO `comment` VALUES ('19', '评论 - 19', '24', '1', null, '2018-02-13 13:30:19');
 INSERT INTO `comment` VALUES ('21', '评论 - 21', '24', '1', null, '2018-02-13 13:30:19');
 INSERT INTO `comment` VALUES ('22', '评论 - 22', '24', '1', null, '2018-02-13 13:30:19');
 INSERT INTO `comment` VALUES ('23', '评论 - 23', '24', '1', null, '2018-02-13 13:30:19');
@@ -115,8 +112,6 @@ INSERT INTO `comment` VALUES ('26', '评论 - 26', '24', '1', null, '2018-02-13 
 INSERT INTO `comment` VALUES ('27', '评论 - 27', '24', '1', null, '2018-02-13 13:30:19');
 INSERT INTO `comment` VALUES ('28', '评论 - 28', '24', '1', null, '2018-02-13 13:30:19');
 INSERT INTO `comment` VALUES ('29', '评论 - 29', '24', '1', null, '2018-02-13 13:30:19');
-INSERT INTO `comment` VALUES ('31', '123123', '24', '8', null, '2018-02-15 13:26:15');
-INSERT INTO `comment` VALUES ('32', '123312123', '24', '8', null, '2018-02-15 13:31:02');
 INSERT INTO `comment` VALUES ('33', '测试留言1', '1', '1', null, '2018-02-18 14:39:14');
 INSERT INTO `comment` VALUES ('34', '测试留言2', '1', '1', null, '2018-02-18 14:39:14');
 INSERT INTO `comment` VALUES ('35', '测试留言3', '1', '1', null, '2018-02-18 14:39:14');
@@ -185,6 +180,18 @@ INSERT INTO `comment` VALUES ('103', '12312321\n3123213\n3123123   12\n312', '1'
 INSERT INTO `comment` VALUES ('106', '12312312', '1', '1', null, '2018-02-18 15:36:32');
 INSERT INTO `comment` VALUES ('107', '32131\n31hkhdsa\ndaj', '1', '1', null, '2018-02-18 15:36:38');
 INSERT INTO `comment` VALUES ('108', 'a\na\na\na', '1', '1', null, '2018-02-18 15:52:07');
+INSERT INTO `comment` VALUES ('112', '回复再回复', '24', '1', '111', '2018-02-23 14:18:26');
+INSERT INTO `comment` VALUES ('114', '换行测试\n换行测试\n换行测试', '24', '1', null, '2018-02-23 14:24:54');
+INSERT INTO `comment` VALUES ('115', '换行回复', '24', '1', '114', '2018-02-23 14:30:04');
+INSERT INTO `comment` VALUES ('117', '12312312', '25', '1', null, '2018-02-23 14:40:52');
+INSERT INTO `comment` VALUES ('118', 'qweqweqweq', '25', '1', null, '2018-02-23 14:41:00');
+INSERT INTO `comment` VALUES ('119', '1231231', '25', '1', null, '2018-02-23 14:41:09');
+INSERT INTO `comment` VALUES ('120', '123123123', '25', '1', null, '2018-02-23 14:41:12');
+INSERT INTO `comment` VALUES ('124', '回复测试', '24', '1', '112', '2018-02-23 14:59:00');
+INSERT INTO `comment` VALUES ('125', '回复测试', '1', '1', '108', '2018-02-23 15:31:55');
+INSERT INTO `comment` VALUES ('126', '回复测试', '25', '1', '119', '2018-02-23 15:33:04');
+INSERT INTO `comment` VALUES ('127', '123123', '25', '1', '126', '2018-02-23 15:35:22');
+INSERT INTO `comment` VALUES ('128', '123213213', '1', '1', '108', '2018-02-23 15:35:31');
 
 -- ----------------------------
 -- Table structure for msg_board
@@ -233,6 +240,7 @@ CREATE TABLE `user` (
   `nickname` varchar(255) DEFAULT NULL,
   `role` int(1) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `role` (`role`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role`) REFERENCES `role` (`role`)
@@ -241,36 +249,36 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', '$2a$04$jwLLNF6YQxzEmU39QSc5J.PanHIjUgPBcBqrLDeMDdXcom2THr74a', '系统管理员', '1', '0');
-INSERT INTO `user` VALUES ('2', 'zhuyst', '$2a$04$XVjp1cEekxXdkAx/ipVjcebE03/mXhQxhiRp.d48lIjiuCMd74gqG', '青云桑', '3', '0');
-INSERT INTO `user` VALUES ('8', 'zhuyst123', '$2a$04$IGzXKzXW/nrnldQMGbX/6ODopFaaAmI7XWLF7t6Hfng8dyNlviLdq', '青云桑2', '3', '0');
-INSERT INTO `user` VALUES ('9', 'username1', '$2a$04$BWc5xJ3oJB47H2J/KsOQFOdg2fYQQhp2JISrX8WmhVu6057OKSTgC', '用户1', '3', '0');
-INSERT INTO `user` VALUES ('10', 'username2', '$2a$04$H6loxJH4NiJOiu9jUoWOW.RQW5kHKByHvm0P5dvrk8erTHTKm.ZsG', '用户2', '3', '0');
-INSERT INTO `user` VALUES ('11', 'username3', '$2a$04$e63vuvIPVzu2NMWcwcBVi.Ygo7Zjiyg4apPI8G2jSlqAw2lJ2auQ6', '用户3', '3', '0');
-INSERT INTO `user` VALUES ('12', 'username4', '$2a$04$xOzq0sn5wvFZYmVdtm/rJ..lsK4tNkc95Ooa46zqoZEhOo3glvNou', '用户4', '3', '0');
-INSERT INTO `user` VALUES ('13', 'username5', '$2a$04$QenhGk6dRPDhDREgLex48OItBeo40KskHa8gKIlHZ2O1.1v69zCM.', '用户5', '3', '0');
-INSERT INTO `user` VALUES ('14', 'username6', '$2a$04$tktdPZb3WwX43e94KdP4R.BS2I0hkKu4fpNwGmVGj2mdlMtNXMdce', '用户6', '3', '0');
-INSERT INTO `user` VALUES ('15', 'username7', '$2a$04$vqtRpRSewwjARJ1YcqRrqOssAJuCc05v6gj/SlkFZIszRxsPvIAg2', '用户7', '3', '0');
-INSERT INTO `user` VALUES ('16', 'username8', '$2a$04$j3DSfRJGRwWGwEfnaVViguP522iftN1XxOoDAPg2UUzrs0KyUpVJ.', '用户8', '3', '0');
-INSERT INTO `user` VALUES ('17', 'username9', '$2a$04$7Xr3b3yPmdVACOURKtsOEuQqwaqk1V3KDdrHebwVxUahBnwKhdqPG', '用户9', '3', '0');
-INSERT INTO `user` VALUES ('18', 'username10', '$2a$04$rdBZferzS8G1qJWSbmCDw.YX0Dr5roBP6LDrPE6P5IATNKu6OLT1m', '用户10', '3', '0');
-INSERT INTO `user` VALUES ('19', 'username11', '$2a$04$HgjqSQFZLSP.5Gpog9R3ouJK/hhXFbVNS4BMwU2Shy27UmHBSJgL6', '用户11', '3', '0');
-INSERT INTO `user` VALUES ('20', 'username12', '$2a$04$5IFu7vMrrAtCJ.J.So3wWu9eEEOeLhTvzy9XYa.tLlx6KVnriJHA6', '用户12', '3', '0');
-INSERT INTO `user` VALUES ('21', 'username13', '$2a$04$fknw.lK4CpfGFgl1.59yWuNKkm1nbMllcPExjnFBKLz1Lm38hPQgS', '用户13', '3', '0');
-INSERT INTO `user` VALUES ('22', 'username14', '$2a$04$Pd/JhEyoKUitPXhes6/L4.XSMy9QKkTxa.bxg5Ctx6X1rCoqrb6ay', '用户14', '3', '0');
-INSERT INTO `user` VALUES ('23', 'username15', '$2a$04$V93UfT6GZkDwKvvUql8g9uqmjUcaZsmGoVKvKIb35BNnP/FMbOUUm', '用户15', '3', '0');
-INSERT INTO `user` VALUES ('24', 'username16', '$2a$04$wbuP/4Dnbj12ILvq/2FxWOHyMGU4HbCW90X.WNrN8qPIbSzp3haUm', '用户16', '3', '0');
-INSERT INTO `user` VALUES ('25', 'username17', '$2a$04$ZnUNW6auCBw0A5x/9lDGtu9tt1Mr0srmA7EE/VYPLFYt.MKu2CSKC', '用户17', '3', '0');
-INSERT INTO `user` VALUES ('26', 'username18', '$2a$04$yakiX1nVPn2jj4Z9rr.6ye5m04QWK7ufa8KA2E5eAcRExnHVOD3dG', '用户18', '3', '0');
-INSERT INTO `user` VALUES ('27', 'username19', '$2a$04$x0LKKqF6yW6DTFX2qeDdOeOuon4o8dVoP48bdLmZRsnmGiASvtvzm', '用户19', '3', '0');
-INSERT INTO `user` VALUES ('28', 'username20', '$2a$04$QnbZmo3hGBFMpnjNbfy3m.f64hA9GTTpnFqMwyfH9HJdB8bLMTcGW', '用户20', '3', '0');
-INSERT INTO `user` VALUES ('29', 'username21', '$2a$04$ssw4IZbiakjU7O0tCh6oNOboZNg2unPR1vB2X7LPFTObsVzNP1Cgy', '用户21', '3', '0');
-INSERT INTO `user` VALUES ('30', 'username22', '$2a$04$N4UJVfoHVuQvgVshwjn6yuw6RQ3tHDf3TfrTffIg0Y700OpF89ZOS', '用户22', '3', '0');
-INSERT INTO `user` VALUES ('31', 'username23', '$2a$04$XPCQb8I1bnGF18EZIbJph.EsGXztYVMOUUmq6kMAUlk6aoo1GSbk.', '用户23', '3', '0');
-INSERT INTO `user` VALUES ('32', 'username24', '$2a$04$8Ghj/Rnqw3Jonvr0JUcQHO.BsIiRWC2kBP6rh9LXn0foCyJSMbTuK', '用户24', '3', '0');
-INSERT INTO `user` VALUES ('33', 'username25', '$2a$04$yFAH0XcKkLhB96zDAN0hMuaUuplH1RuFIu48uC3JXGAvuM/ZVGT/i', '用户25', '3', '0');
-INSERT INTO `user` VALUES ('34', 'username26', '$2a$04$RAUVvt97blloCudk1ExeR.38KALpCy.C4XFjxJQ0tvpVZC/jLWaX2', '用户26', '3', '0');
-INSERT INTO `user` VALUES ('35', 'username27', '$2a$04$IV72YvigGdM/0Jt6jLFXoeQ01NGBQRtucfQvc0NnXbHnwye9TUA1O', '用户27', '3', '0');
-INSERT INTO `user` VALUES ('36', 'username28', '$2a$04$Cd5mKWhu1hgwA0spRPvnEOXD9jHkLWJH8Qz0RDbxkF7UucCqFQYVO', '用户28', '3', '0');
-INSERT INTO `user` VALUES ('37', 'username29', '$2a$04$QQvNu3OokbvVtg2oSoJKQulpSjAlSSjsoem5Z1nGpR.b62oJLz2bm', '用户29', '3', '0');
-INSERT INTO `user` VALUES ('38', 'username30', '$2a$04$GuwCbWfoDQyleOzrI9l3wuBnLt4P31dhllQAw3zM4MOeus/9TJrPW', '用户30', '3', '0');
+INSERT INTO `user` VALUES ('1', 'admin', '$2a$04$jwLLNF6YQxzEmU39QSc5J.PanHIjUgPBcBqrLDeMDdXcom2THr74a', '系统管理员', '1', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('2', 'zhuyst', '$2a$04$XVjp1cEekxXdkAx/ipVjcebE03/mXhQxhiRp.d48lIjiuCMd74gqG', '青云桑', '2', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('8', 'zhuyst123', '$2a$04$IGzXKzXW/nrnldQMGbX/6ODopFaaAmI7XWLF7t6Hfng8dyNlviLdq', '青云桑2', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('9', 'username1', '$2a$04$BWc5xJ3oJB47H2J/KsOQFOdg2fYQQhp2JISrX8WmhVu6057OKSTgC', '用户1', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('10', 'username2', '$2a$04$H6loxJH4NiJOiu9jUoWOW.RQW5kHKByHvm0P5dvrk8erTHTKm.ZsG', '用户2', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('11', 'username3', '$2a$04$e63vuvIPVzu2NMWcwcBVi.Ygo7Zjiyg4apPI8G2jSlqAw2lJ2auQ6', '用户3', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('12', 'username4', '$2a$04$xOzq0sn5wvFZYmVdtm/rJ..lsK4tNkc95Ooa46zqoZEhOo3glvNou', '用户4', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('13', 'username5', '$2a$04$QenhGk6dRPDhDREgLex48OItBeo40KskHa8gKIlHZ2O1.1v69zCM.', '用户5', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('14', 'username6', '$2a$04$tktdPZb3WwX43e94KdP4R.BS2I0hkKu4fpNwGmVGj2mdlMtNXMdce', '用户6', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('15', 'username7', '$2a$04$vqtRpRSewwjARJ1YcqRrqOssAJuCc05v6gj/SlkFZIszRxsPvIAg2', '用户7', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('16', 'username8', '$2a$04$j3DSfRJGRwWGwEfnaVViguP522iftN1XxOoDAPg2UUzrs0KyUpVJ.', '用户8', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('17', 'username9', '$2a$04$7Xr3b3yPmdVACOURKtsOEuQqwaqk1V3KDdrHebwVxUahBnwKhdqPG', '用户9', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('18', 'username10', '$2a$04$rdBZferzS8G1qJWSbmCDw.YX0Dr5roBP6LDrPE6P5IATNKu6OLT1m', '用户10', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('19', 'username11', '$2a$04$HgjqSQFZLSP.5Gpog9R3ouJK/hhXFbVNS4BMwU2Shy27UmHBSJgL6', '用户11', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('20', 'username12', '$2a$04$5IFu7vMrrAtCJ.J.So3wWu9eEEOeLhTvzy9XYa.tLlx6KVnriJHA6', '用户12', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('21', 'username13', '$2a$04$fknw.lK4CpfGFgl1.59yWuNKkm1nbMllcPExjnFBKLz1Lm38hPQgS', '用户13', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('22', 'username14', '$2a$04$Pd/JhEyoKUitPXhes6/L4.XSMy9QKkTxa.bxg5Ctx6X1rCoqrb6ay', '用户14', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('23', 'username15', '$2a$04$V93UfT6GZkDwKvvUql8g9uqmjUcaZsmGoVKvKIb35BNnP/FMbOUUm', '用户15', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('24', 'username16', '$2a$04$wbuP/4Dnbj12ILvq/2FxWOHyMGU4HbCW90X.WNrN8qPIbSzp3haUm', '用户16', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('25', 'username17', '$2a$04$ZnUNW6auCBw0A5x/9lDGtu9tt1Mr0srmA7EE/VYPLFYt.MKu2CSKC', '用户17', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('26', 'username18', '$2a$04$yakiX1nVPn2jj4Z9rr.6ye5m04QWK7ufa8KA2E5eAcRExnHVOD3dG', '用户18', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('27', 'username19', '$2a$04$x0LKKqF6yW6DTFX2qeDdOeOuon4o8dVoP48bdLmZRsnmGiASvtvzm', '用户19', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('28', 'username20', '$2a$04$QnbZmo3hGBFMpnjNbfy3m.f64hA9GTTpnFqMwyfH9HJdB8bLMTcGW', '用户20', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('29', 'username21', '$2a$04$ssw4IZbiakjU7O0tCh6oNOboZNg2unPR1vB2X7LPFTObsVzNP1Cgy', '用户21', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('30', 'username22', '$2a$04$N4UJVfoHVuQvgVshwjn6yuw6RQ3tHDf3TfrTffIg0Y700OpF89ZOS', '用户22', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('31', 'username23', '$2a$04$XPCQb8I1bnGF18EZIbJph.EsGXztYVMOUUmq6kMAUlk6aoo1GSbk.', '用户23', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('32', 'username24', '$2a$04$8Ghj/Rnqw3Jonvr0JUcQHO.BsIiRWC2kBP6rh9LXn0foCyJSMbTuK', '用户24', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('33', 'username25', '$2a$04$yFAH0XcKkLhB96zDAN0hMuaUuplH1RuFIu48uC3JXGAvuM/ZVGT/i', '用户25', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('34', 'username26', '$2a$04$RAUVvt97blloCudk1ExeR.38KALpCy.C4XFjxJQ0tvpVZC/jLWaX2', '用户26', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('35', 'username27', '$2a$04$IV72YvigGdM/0Jt6jLFXoeQ01NGBQRtucfQvc0NnXbHnwye9TUA1O', '用户27', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('36', 'username28', '$2a$04$Cd5mKWhu1hgwA0spRPvnEOXD9jHkLWJH8Qz0RDbxkF7UucCqFQYVO', '用户28', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('37', 'username29', '$2a$04$QQvNu3OokbvVtg2oSoJKQulpSjAlSSjsoem5Z1nGpR.b62oJLz2bm', '用户29', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('38', 'username30', '$2a$04$GuwCbWfoDQyleOzrI9l3wuBnLt4P31dhllQAw3zM4MOeus/9TJrPW', '用户30', '3', '0', '2018-02-25 17:21:25');
