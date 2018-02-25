@@ -47,6 +47,11 @@
     border-bottom: 2px solid #f16c20;
 }
 
+.preview_classify{
+    font-size: 14px !important;
+    float: right;
+}
+
 .preview_preview{
     color: #999;
     font-size: 12px;

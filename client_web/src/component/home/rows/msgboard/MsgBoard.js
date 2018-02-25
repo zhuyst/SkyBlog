@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {Badge, Panel} from 'react-bootstrap'
 import {connect} from "react-redux";
 
-import {getLength} from "./Util";
+import {getLength} from "../Util";
 import Msg from "./Msg";
 
 class MsgBoard extends React.Component{

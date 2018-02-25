@@ -2,11 +2,12 @@ import React from 'react'
 import {Button, Carousel} from 'react-bootstrap'
 
 import home from '../../static/images/home.jpg'
+import {GITHUB_URL, SKY_BLOG_URL} from "../../Constant";
 
 class NavImage extends React.Component{
     render(){
-        const skyblog_url = "https://github.com/zhuyst/SkyBlog";
-        const github_url = "https://github.com/zhuyst";
+        const skyblog_url = SKY_BLOG_URL;
+        const github_url = GITHUB_URL;
 
         return (
             <Carousel className="nav_image">

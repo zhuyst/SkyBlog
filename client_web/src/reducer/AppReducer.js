@@ -12,6 +12,7 @@ import UsersReducer from './user/UsersReducer'
 import ClassifyReducer from './article/ClassifyReducer'
 import AboutReducer from './about/AboutReducer'
 import MsgBoardReducer from './msgboard/MsgBoardReducer'
+import GithubReducer from './github/GithubReducer'
 
 const AppReducer = combineReducers({
     navigation : NavigationReducer,
@@ -23,6 +24,7 @@ const AppReducer = combineReducers({
     classify : ClassifyReducer,
     about : AboutReducer,
     msg : MsgBoardReducer,
+    github : GithubReducer,
     form : formReducer,
     router: routerReducer,
     notifications: notificationsReducer()

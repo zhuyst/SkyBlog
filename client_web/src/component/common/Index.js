@@ -10,7 +10,7 @@ import Article from '../article/Index'
 import MsgBoard from '../msgboard/Index'
 import About from '../about/Index'
 
-import {ARTICLE_PAGE_SIZE, MSG_PAGE_SIZE} from "../../Constant";
+import {ARTICLE_PAGE_SIZE, GITHUB_PAGE_SIZE, MSG_PAGE_SIZE} from "../../Constant";
 
 import {listArticles} from "../../action/article/ArticlesAction";
 import {listClassify} from "../../action/article/ClassifyAction";
@@ -19,6 +19,7 @@ import {checkUserLoginState} from "../../action/user/UsersAction";
 
 import '../../static/css/common/common.css'
 import {listMsg} from "../../action/msgboard/MsgBoardAction";
+import {listCommits} from "../../action/github/GithubAction";
 
 class Index extends React.Component{
     componentWillMount(){
@@ -68,7 +69,8 @@ const mapDispatchToProps = dispatch => {
             dispatch(listArticles(1,ARTICLE_PAGE_SIZE));
             dispatch(listClassify());
             dispatch(listMsg(1,MSG_PAGE_SIZE));
-            dispatch(getAbout())
+            dispatch(getAbout());
+            dispatch(listCommits(GITHUB_PAGE_SIZE))
         }
     }
 };
