@@ -30,17 +30,17 @@ footer{
     margin-bottom: 0;
 }
 
-.navButton{
+.nav_button{
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.navButton li{
+.nav_button li{
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.navBrand{
+.nav_brand{
     font-size: 22px;
 }
 
