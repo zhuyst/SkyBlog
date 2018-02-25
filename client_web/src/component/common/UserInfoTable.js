@@ -19,6 +19,10 @@ class UserInfoTable extends React.Component{
                     <td><strong>昵称：</strong></td>
                     <td>{user.nickname}</td>
                 </tr>
+                <tr>
+                    <td><strong>注册时间：</strong></td>
+                    <td>{user.create_date}</td>
+                </tr>
                 </tbody>
             </table>
         )

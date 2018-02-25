@@ -70,6 +70,7 @@ class UserManagementModal extends React.Component{
                     <td>{user.username}</td>
                     <td>{user.nickname}</td>
                     <td>{getRole(user.role)}</td>
+                    <td>{user.create_date}</td>
                     <td>{button}</td>
                 </tr>
             )
@@ -93,6 +94,7 @@ class UserManagementModal extends React.Component{
                             <th>UID</th>
                             <th>用户名</th>
                             <th>昵称</th>
+                            <th>注册时间</th>
                             <th>角色</th>
                             <th>操作</th>
                         </tr>
