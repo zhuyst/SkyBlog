@@ -1,13 +1,21 @@
 import React from 'react'
+import {Button, Glyphicon} from "react-bootstrap";
 
 class Footer extends React.Component{
     render(){
+        const url = "https://github.com/zhuyst/SkyBlog";
+
         return (
             <div className="footer">
-                <p>Powered by <a href="https://github.com/zhuyst">SkyBlog</a></p>
-                <p>麻烦各位大爷<strong>star</strong>一个吧</p>
-                <hr/>
-                <p>互联网ICP备案：粤ICP备16113942-1号</p>
+                <p>Powered by <a href={url}>SkyBlog</a></p>
+                <p>麻烦各位大爷&nbsp;&nbsp;
+                    <Button bsSize="small" className="star_button"
+                            href={url} target="_blank">
+                        <Glyphicon glyph="star" />
+                        Star
+                    </Button>
+                    &nbsp;&nbsp;一个吧
+                </p>
             </div>
         )
     }
