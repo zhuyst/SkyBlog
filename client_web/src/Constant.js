@@ -11,6 +11,10 @@ export const COMMENT_PAGE_SIZE = 10;
 export const ARTICLE_PAGE_SIZE = 5;
 export const MSG_PAGE_SIZE = 20;
 export const USER_PAGE_SIZE = 10;
+export const GITHUB_PAGE_SIZE = 7;
+
+export const SKY_BLOG_URL = "https://github.com/zhuyst/SkyBlog";
+export const GITHUB_URL = "https://github.com/zhuyst";
 
 export const UserRole = {
     SYS_ADMIN : {

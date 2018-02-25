@@ -4,7 +4,7 @@ import {Badge, Panel} from 'react-bootstrap'
 import {Link} from "react-router-dom";
 
 import Preview from './ArticlePreview'
-import {getLength} from "./Util";
+import {getLength} from "../Util";
 
 class Article extends React.Component{
     render(){

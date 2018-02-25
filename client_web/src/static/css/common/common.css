@@ -51,6 +51,7 @@ footer{
 }
 
 .more_link{
+    margin-top: 15px;
     text-align: right;
     float: right;
     color: #f16c20;

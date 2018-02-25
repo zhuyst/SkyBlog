@@ -1,5 +1,5 @@
 import React from 'react'
-import {Panel} from "react-bootstrap";
+import {Label, Panel} from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 class Preview extends React.Component{
@@ -15,7 +15,10 @@ class Preview extends React.Component{
                     <Panel defaultExpanded>
                         <Panel.Heading>
                             <Panel.Title toggle>
-                                {article.title}&nbsp;&nbsp;【分类：{article.classify.name}】
+                                {article.title}
+                                <Label className="preview_classify">
+                                    {article.classify.name}
+                                    </Label>
                             </Panel.Title>
                         </Panel.Heading>
                         <Panel.Collapse>

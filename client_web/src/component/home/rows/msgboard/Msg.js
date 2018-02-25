@@ -1,6 +1,6 @@
 import React from 'react'
-import {convertBr} from "../../Util";
-import UserInfoPopover from "../../common/UserInfoPopover";
+import {convertBr} from "../../../Util";
+import UserInfoPopover from "../../../common/UserInfoPopover";
 
 class Msg extends React.Component{
     render(){

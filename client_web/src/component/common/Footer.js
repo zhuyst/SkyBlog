@@ -1,9 +1,10 @@
 import React from 'react'
 import {Button, Glyphicon} from "react-bootstrap";
+import {SKY_BLOG_URL} from "../../Constant";
 
 class Footer extends React.Component{
     render(){
-        const url = "https://github.com/zhuyst/SkyBlog";
+        const url = SKY_BLOG_URL;
 
         return (
             <div className="footer">
