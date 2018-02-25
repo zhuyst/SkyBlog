@@ -1,5 +1,6 @@
 package indi.zhuyst.skyblog.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import indi.zhuyst.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -7,8 +8,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.Column;
 import javax.persistence.OrderBy;
 import javax.validation.constraints.Pattern;
+import java.util.Date;
 
 /**
  * 用户
@@ -58,4 +61,12 @@ public class User extends BaseEntity {
      */
     @ApiModelProperty("状态ID")
     private Integer status;
+
+    /**
+     * 创建时间
+     */
+    @ApiModelProperty("创建时间")
+    @Column(name = "create_date")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
+    private Date createDate;
 }
