@@ -37,12 +37,20 @@
     text-align: center;
 }
 
-.nav_image_button_group :first-child{
-    margin-right: 15px;
+.nav_image_button_group .btn{
+    margin: 5px 5%;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
 }
 
-.nav_image_button_group :last-child{
-    margin-left: 15px;
+.nav_image_button_group .btn:active{
+    color: #e6e6e6;
+    background: transparent;
+}
+
+.nav_image_button_group .btn:hover{
+    border: 2px solid #f16c20;
 }
 
 .rows{
