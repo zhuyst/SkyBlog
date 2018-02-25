@@ -24,7 +24,7 @@ class Index extends React.Component{
                 <Col md={4} sm={12}>
                     {
                         login.ok &&
-                        <Col lgOffset={3} lg={6} mdOffset={2} md={8} sm={12}>
+                        <Col lgOffset={2} lg={8} mdOffset={1} md={10} sm={12}>
                             <Panel bsStyle="primary">
                                 <Panel.Heading>
                                     <Panel.Title componentClass="h3">
