@@ -15,6 +15,13 @@ class ArticleTitle extends React.Component{
 
         return (
             <PageHeader className={className}>
+                <small className="title_info">
+                    文章发布时间：{article.create_date}
+                    <br/>
+                    最后修改时间：{article.update_date}
+                    <br/>
+                    分类：{article.classify.name}
+                </small>
                 {title}
                 <br/>
                 <small>{sub_title}</small>

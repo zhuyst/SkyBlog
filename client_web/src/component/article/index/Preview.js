@@ -15,7 +15,7 @@ class Preview extends React.Component{
                     <Panel defaultExpanded>
                         <Panel.Heading>
                             <Panel.Title toggle>
-                                {article.title}
+                                {article.title}&nbsp;&nbsp;【分类：{article.classify.name}】
                             </Panel.Title>
                         </Panel.Heading>
                         <Panel.Collapse>
