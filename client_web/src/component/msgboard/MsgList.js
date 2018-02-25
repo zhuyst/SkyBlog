@@ -18,18 +18,10 @@ class MsgList extends React.Component{
         const {list,page_num,pages,total} = page;
 
         let msgList = [];
-        list.forEach((msg,i) => {
-            if(i === list.length - 1){
-                msgList.push(
-                    <Msg key={msg.id} msg={msg}
-                             isLast={true}/>
-                )
-            }
-            else {
-                msgList.push(
-                    <Msg key={msg.id} msg={msg}/>
-                )
-            }
+        list.forEach(msg => {
+            msgList.push(
+                <Msg key={msg.id} msg={msg}/>
+            )
         });
 
         let pager;

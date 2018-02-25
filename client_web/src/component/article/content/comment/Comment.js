@@ -20,10 +20,8 @@ class Comment extends React.Component{
             __html : convertBr(comment.content)
         };
 
-        const className = this.props.isLast ? "comment comment_last" : "comment";
-
         return (
-            <div className={className}>
+            <div className="comment">
                 <div className="comment_content">
                     <UserInfoPopover user={comment.author} content={
                         <strong>{comment.author.nickname}&nbsp;:&nbsp;</strong>

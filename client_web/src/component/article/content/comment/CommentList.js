@@ -15,18 +15,10 @@ class CommentList extends React.Component{
         const {list,page_num,pages,total} = comments;
 
         let commentList = [];
-        list.forEach((comment,i) => {
-            if(i === list.length - 1){
-                commentList.push(
-                    <Comment key={comment.id} comment={comment}
-                             isLast={true}/>
-                )
-            }
-            else {
-                commentList.push(
-                    <Comment key={comment.id} comment={comment}/>
-                )
-            }
+        list.forEach(comment => {
+            commentList.push(
+                <Comment key={comment.id} comment={comment}/>
+            )
         });
 
         let pager;
