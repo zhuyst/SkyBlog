@@ -63,7 +63,7 @@ class ArticleEditor extends React.Component{
                     <Button disabled={submitting} bsStyle="success"
                             onClick={handleSubmit(data => this.submit(data,false))}>
                         <Glyphicon glyph="floppy-disk" />
-                        &nbsp;&nbsp;发布&nbsp;
+                        `发布&nbsp;
                     </Button>
                     <Button disabled={submitting} bsStyle="success"
                             onClick={handleSubmit(data => this.submit(data,true))}>

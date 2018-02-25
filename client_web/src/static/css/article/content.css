@@ -65,3 +65,9 @@
 .upload_button{
     margin-bottom: 15px;
 }
+
+.title_info{
+    font-size: 12px;
+    float: right;
+    text-align: right;
+}
