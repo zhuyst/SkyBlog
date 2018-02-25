@@ -1,4 +1,6 @@
 import React from 'react'
+import {convertBr} from "../../Util";
+import UserInfoPopover from "../../common/UserInfoPopover";
 
 class Msg extends React.Component{
     render(){
@@ -6,10 +8,14 @@ class Msg extends React.Component{
 
         return (
             <div className="comment">
-                <p>
-                    <strong>{msg.author.nickname} : </strong>
-                    {msg.content}
-                </p>
+                <div className="comment_content">
+                    <UserInfoPopover user={msg.author} content={
+                        <strong>{msg.author.nickname}&nbsp;:&nbsp;</strong>
+                    }/>
+                    <span dangerouslySetInnerHTML={{
+                        __html : convertBr(msg.content)
+                    }}/>
+                </div>
             </div>
         )
     }

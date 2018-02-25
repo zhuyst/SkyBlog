@@ -1,5 +1,5 @@
 .nav_image{
-    max-height: 400px;
+    max-height: 30em
 }
 
 .nav_image_text{
@@ -7,9 +7,9 @@
     top: 15%;
     left: 50%;
     z-index: 15;
-    width: 60%;
+    width: 80%;
     padding-left: 0;
-    margin-left: -30%;
+    margin-left: -40%;
     text-align: center;
     color : white;
 }
@@ -31,9 +31,9 @@
     bottom: 15%;
     left: 50%;
     z-index: 15;
-    width: 60%;
+    width: 80%;
     padding-left: 0;
-    margin-left: -30%;
+    margin-left: -40%;
     text-align: center;
 }
 
