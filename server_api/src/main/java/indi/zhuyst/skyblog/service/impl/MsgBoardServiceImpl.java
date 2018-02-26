@@ -16,6 +16,10 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 留言板服务实现类
+ * @author zhuyst
+ */
 @Service("msgBoardService")
 public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
 
@@ -25,6 +29,10 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
     @Autowired
     private CommentService commentService;
 
+    /**
+     * 初始化留言板
+     * @see #MSG_BOARD_KEY
+     */
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... strings) throws Exception {
@@ -77,6 +85,11 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
         return commentService.delete(id);
     }
 
+    /**
+     * 检查查询的ID是否为发布在留言板底下 {@link #MSG_BOARD_KEY}
+     * 如果不是则会抛出NOT FOUND异常{@link CommonException}
+     * @param articleId 检查的ID
+     */
     private void checkArticleId(int articleId){
         if(articleId != MSG_BOARD_KEY){
             throw new CommonException(CodeEnum.NOT_FOUND.getCode(),

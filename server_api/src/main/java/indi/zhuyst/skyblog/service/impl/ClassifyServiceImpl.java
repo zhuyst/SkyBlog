@@ -20,16 +20,21 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 文章分类服务实现类
+ * @author zhuyst
+ */
 @Service("classifyService")
 public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classify>
         implements ClassifyService,CommandLineRunner{
 
     @Autowired
-    private ClassifyDao dao;
-
-    @Autowired
     private ArticleDao articleDao;
 
+    /**
+     * 初始化未分类
+     * @see #NOT_CLASSIFY_KEY
+     */
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... args) throws Exception {
@@ -48,6 +53,33 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
     @Cacheable(cacheNames = CACHE_OBJECT,key = "#id")
     public Classify getByID(int id) {
         return super.getByID(id);
+    }
+
+
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_LIST},allEntries = true)
+    public Classify save(Classify entity) {
+        checkClassify(entity);
+        return super.save(entity);
+    }
+
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_LIST},allEntries = true)
+    public boolean delete(int id) {
+        if(id == NOT_CLASSIFY_KEY){
+            throw new CommonException("未分类不能被删除");
+        }
+
+        // 将分类下的文章归为未分类
+        List<Article> articles = articleDao.selectBaseInfoByClassify(id);
+        for(Article article : articles){
+            article.setClassifyId(NOT_CLASSIFY_KEY);
+            articleDao.updateByPrimaryKeySelective(article);
+        }
+
+        return super.delete(id);
     }
 
     @Override
@@ -78,32 +110,11 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
         return dtoList;
     }
 
-    @Override
-    @Transactional(rollbackFor = RuntimeException.class)
-    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_LIST},allEntries = true)
-    public Classify save(Classify entity) {
-        checkClassify(entity);
-        return super.save(entity);
-    }
-
-    @Override
-    @Transactional(rollbackFor = RuntimeException.class)
-    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_LIST},allEntries = true)
-    public boolean delete(int id) {
-        if(id == NOT_CLASSIFY_KEY){
-            throw new CommonException("未分类不能被删除");
-        }
-
-        // 将分类下的文章归为未分类
-        List<Article> articles = articleDao.selectBaseInfoByClassify(id);
-        for(Article article : articles){
-            article.setClassifyId(NOT_CLASSIFY_KEY);
-            articleDao.updateByPrimaryKeySelective(article);
-        }
-
-        return super.delete(id);
-    }
-
+    /**
+     * 检查分类名是否存在重名
+     * 如果存在重复则会抛出异常{@link FieldErrorException}
+     * @param classify 分类对象
+     */
     private void checkClassify(Classify classify){
         final String fieldName = "name";
         Classify oldClassify = this.getByName(classify.getName());
@@ -116,6 +127,11 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
         }
     }
 
+    /**
+     * 将DO封装为DTO
+     * @param classify DO
+     * @return DTO
+     */
     private ClassifyDTO produceDTO(Classify classify){
         if(classify == null){
             return null;

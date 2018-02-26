@@ -1,9 +1,7 @@
 package indi.zhuyst.skyblog;
 
 import indi.zhuyst.security.pojo.SecurityUser;
-import indi.zhuyst.skyblog.entity.Comment;
 import indi.zhuyst.skyblog.entity.User;
-import indi.zhuyst.skyblog.service.MsgBoardService;
 import indi.zhuyst.skyblog.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,16 +18,15 @@ public class SkyblogApplicationTests {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private MsgBoardService msgBoardService;
-
 	@Test
 	public void contextLoads() {
 		fakeLogin();
-		for(int i = 1;i <= 60;i++){
-			Comment comment = new Comment();
-			comment.setContent("测试留言" + i);
-			msgBoardService.insertMsg(comment);
+		for(int i = 1;i <= 30;i++){
+			User user = new User();
+			user.setUsername("username" + i);
+			user.setNickname("用户" + i);
+			user.setPassword("123456" + i);
+			userService.saveUser(user);
 		}
 	}
 

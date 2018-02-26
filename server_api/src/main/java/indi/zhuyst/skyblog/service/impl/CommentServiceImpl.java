@@ -23,6 +23,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 文章评论服务实现类
+ * @author zhuyst
+ */
 @Service("commentService")
 public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> implements CommentService{
 
@@ -87,6 +91,11 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
         return PageUtils.copyNewInfo(pageInfo,pojoList);
     }
 
+    /**
+     * 将DO封装为DTO
+     * @param comment DO
+     * @return DTO
+     */
     private CommentDTO produceDTO(Comment comment){
         if(comment == null){
             return null;
@@ -109,8 +118,14 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
         return pojo;
     }
 
+    /**
+     * 设置评论的作者
+     * @param dto 要设置的评论
+     */
     private void setAuthor(CommentDTO dto){
         UserDTO user = userService.getUserDTO(dto.getAuthorId());
-        dto.setAuthor(user);
+        if(user != null){
+            dto.setAuthor(user);
+        }
     }
 }

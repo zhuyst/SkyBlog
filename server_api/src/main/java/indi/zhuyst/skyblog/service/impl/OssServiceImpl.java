@@ -17,6 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PreDestroy;
 
+/**
+ * 阿里云OSS服务实现类
+ * @author zhuyst
+ */
 @Service("ossService")
 public class OssServiceImpl implements OssService,CommandLineRunner{
 
@@ -25,6 +29,9 @@ public class OssServiceImpl implements OssService,CommandLineRunner{
 
     private OSSClient ossClient;
 
+    /**
+     * 通过{@link #ossSettings}初始化{@link #ossClient}
+     */
     @Override
     public void run(String... args) throws Exception {
         CredentialsProvider credentialsProvider =
@@ -37,6 +44,9 @@ public class OssServiceImpl implements OssService,CommandLineRunner{
                 credentialsProvider,clientConfiguration);
     }
 
+    /**
+     * 关闭{@link #ossClient}
+     */
     @PreDestroy
     private void destroy(){
         ossClient.shutdown();

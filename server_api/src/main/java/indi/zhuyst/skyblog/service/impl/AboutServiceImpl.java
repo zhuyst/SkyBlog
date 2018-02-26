@@ -12,6 +12,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 关于服务实现
+ * @author zhuyst
+ */
 @Service("aboutService")
 public class AboutServiceImpl extends BaseService implements AboutService,
         CommandLineRunner{
@@ -19,6 +23,10 @@ public class AboutServiceImpl extends BaseService implements AboutService,
     @Autowired
     private ArticleDao articleDao;
 
+    /**
+     * 初始化留言板
+     * @see #ABOUT_KEY
+     */
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... args) throws Exception {
