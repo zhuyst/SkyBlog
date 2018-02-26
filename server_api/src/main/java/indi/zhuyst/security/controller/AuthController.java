@@ -1,7 +1,7 @@
 package indi.zhuyst.security.controller;
 
 import indi.zhuyst.common.controller.BaseController;
-import indi.zhuyst.common.pojo.R;
+import indi.zhuyst.common.pojo.Result;
 import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.service.SecurityService;
@@ -38,10 +38,10 @@ public class AuthController extends BaseController{
      */
     @ApiOperation(value = "登陆，获取Token")
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public R<AccessToken> login(@ApiParam("用户名") @RequestParam String username,
-                                @ApiParam("密码") @RequestParam String password) {
+    public Result<AccessToken> login(@ApiParam("用户名") @RequestParam String username,
+                                     @ApiParam("密码") @RequestParam String password) {
         AccessToken accessToken = securityService.login(username,password);
-        return R.ok(accessToken);
+        return Result.ok(accessToken);
     }
 
     /**
@@ -51,11 +51,11 @@ public class AuthController extends BaseController{
      */
     @ApiOperation("通过老Token换取新Token")
     @RequestMapping(value = "/refresh",method = RequestMethod.POST)
-    public R<AccessToken> refresh(@ApiParam("老Token") @RequestParam String token){
+    public Result<AccessToken> refresh(@ApiParam("老Token") @RequestParam String token){
         Integer userId = securityService.getIDByToken(token);
         User user = userService.getByID(userId);
 
         AccessToken accessToken = securityService.generateToken(new SecurityUser(user));
-        return R.ok(accessToken);
+        return Result.ok(accessToken);
     }
 }

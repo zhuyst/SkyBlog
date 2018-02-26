@@ -5,7 +5,7 @@ import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.pojo.Query;
-import indi.zhuyst.common.pojo.R;
+import indi.zhuyst.common.pojo.Result;
 import indi.zhuyst.security.enums.RoleEnum;
 import indi.zhuyst.security.enums.StatusEnum;
 import indi.zhuyst.security.pojo.AccessToken;
@@ -50,8 +50,8 @@ public class UserController extends BaseController{
     @PutMapping("/{id}")
     @ApiOperation("更新用户信息")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN') or #id == authentication.principal.id")
-    public R<UserDTO> updateUser(@ApiParam("用户ID") @PathVariable("id") @P("id") Integer id,
-                                 @ApiParam("用户对象") @Valid @RequestBody User user){
+    public Result<UserDTO> updateUser(@ApiParam("用户ID") @PathVariable("id") @P("id") Integer id,
+                                      @ApiParam("用户对象") @Valid @RequestBody User user){
         user.setId(id);
         UserDTO pojo = userService.saveUser(user);
         return produceResult(pojo,"用户信息更新失败");
@@ -65,7 +65,7 @@ public class UserController extends BaseController{
     @GetMapping("/{id}")
     @ApiOperation("根据id获取用户信息")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN') or #id == authentication.principal.id")
-    public R<UserDTO> getUser(@ApiParam("用户ID") @PathVariable("id") @P("id") Integer id){
+    public Result<UserDTO> getUser(@ApiParam("用户ID") @PathVariable("id") @P("id") Integer id){
         UserDTO user = userService.getUserDTO(id);
         return produceResult(user, CodeEnum.NOT_FOUND.getCode(),"未找到该用户");
     }
@@ -77,7 +77,7 @@ public class UserController extends BaseController{
      */
     @PostMapping("/public/")
     @ApiOperation("注册新用户")
-    public R<AccessToken> register(@ApiParam("用户对象") @Valid @RequestBody User newUser){
+    public Result<AccessToken> register(@ApiParam("用户对象") @Valid @RequestBody User newUser){
         newUser.setId(null);
 
         User user = userService.save(newUser);
@@ -87,7 +87,7 @@ public class UserController extends BaseController{
 
         SecurityUser securityUser = new SecurityUser(user);
         AccessToken accessToken = securityService.generateToken(securityUser);
-        return R.ok(accessToken);
+        return Result.ok(accessToken);
     }
 
     /**
@@ -98,7 +98,7 @@ public class UserController extends BaseController{
     @DeleteMapping("/{id}")
     @ApiOperation("根据id删除用户")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
-    public R deleteUser(@ApiParam("用户ID") @PathVariable("id")Integer id){
+    public Result deleteUser(@ApiParam("用户ID") @PathVariable("id")Integer id){
         return produceResult(userService.delete(id),"不存在该用户");
     }
 
@@ -110,9 +110,9 @@ public class UserController extends BaseController{
     @GetMapping("/list/")
     @ApiOperation("查询用户列表")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
-    public R<PageInfo<UserDTO>> listUser(Query query){
+    public Result<PageInfo<UserDTO>> listUser(Query query){
         PageInfo<UserDTO> pageInfo = userService.listUser(new Query<>(query));
-        return R.ok(pageInfo);
+        return Result.ok(pageInfo);
     }
 
     /**
@@ -124,8 +124,8 @@ public class UserController extends BaseController{
     @PatchMapping("/role/{id}")
     @ApiOperation("更新用户角色")
     @PreAuthorize("hasRole('SYS_ADMIN')")
-    public R updateUserRole(@ApiParam("用户ID") @PathVariable("id")Integer id,
-                            @ApiParam("角色ID") @Valid @RequestBody UpdateRole update){
+    public Result updateUserRole(@ApiParam("用户ID") @PathVariable("id")Integer id,
+                                 @ApiParam("角色ID") @Valid @RequestBody UpdateRole update){
         Integer roleId = update.getRoleId();
 
         boolean isSuccess = false;
@@ -148,8 +148,8 @@ public class UserController extends BaseController{
     @ApiOperation("更新用户状态")
     @PatchMapping("/status/{id}")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
-    public R updateUserStatus(@ApiParam("角色ID") @PathVariable("id") Integer id,
-                              @ApiParam("状态ID") @Valid @RequestBody UpdateStatus update){
+    public Result updateUserStatus(@ApiParam("角色ID") @PathVariable("id") Integer id,
+                                   @ApiParam("状态ID") @Valid @RequestBody UpdateStatus update){
         UserDTO user = userService.getUserDTO(id);
         if(user.getAdmin()){
             throw new CommonException("管理员不能被锁定");

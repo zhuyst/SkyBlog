@@ -1,9 +1,10 @@
 package indi.zhuyst.common.exception;
 
 import indi.zhuyst.common.enums.CodeEnum;
+import indi.zhuyst.common.pojo.Result;
 
 /**
- * 全局公用异常，与{@link indi.zhuyst.common.pojo.R}配合使用
+ * 全局公用异常，与{@link Result}配合使用
  * @author zhuyst
  */
 public class CommonException extends RuntimeException{

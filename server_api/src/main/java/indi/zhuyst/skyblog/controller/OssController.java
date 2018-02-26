@@ -1,7 +1,7 @@
 package indi.zhuyst.skyblog.controller;
 
 import indi.zhuyst.common.controller.BaseController;
-import indi.zhuyst.common.pojo.R;
+import indi.zhuyst.common.pojo.Result;
 import indi.zhuyst.skyblog.pojo.OssFile;
 import indi.zhuyst.skyblog.service.OssService;
 import io.swagger.annotations.Api;
@@ -33,9 +33,9 @@ public class OssController extends BaseController{
      */
     @PostMapping("/upload")
     @ApiOperation("上传文件")
-    public R<OssFile> uploadFile(@ApiParam("文件") @RequestParam("file")
+    public Result<OssFile> uploadFile(@ApiParam("文件") @RequestParam("file")
                                              MultipartFile file){
         OssFile ossFile = ossService.upload(file);
-        return R.ok(ossFile);
+        return Result.ok(ossFile);
     }
 }

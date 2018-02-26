@@ -2,7 +2,7 @@ package indi.zhuyst.common.exception;
 
 import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.pojo.Error;
-import indi.zhuyst.common.pojo.R;
+import indi.zhuyst.common.pojo.Result;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -25,19 +25,19 @@ public class GlobalExceptionHandler {
      * @return 错误结果对象
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public R methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e){
+    public Result methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e){
         List<FieldError> errors = e.getBindingResult().getFieldErrors();
 
-        R r = R.error(CodeEnum.ERROR.getCode(),"表单验证失败");
+        Result result = Result.error(CodeEnum.ERROR.getCode(),"表单验证失败");
         for(FieldError fieldError : errors){
             Error error = new Error();
 
             error.setField(fieldError.getField());
             error.setMessage(fieldError.getDefaultMessage());
 
-            r.addError(error);
+            result.addError(error);
         }
-        return r;
+        return result;
     }
 
     /**
@@ -46,13 +46,13 @@ public class GlobalExceptionHandler {
      * @return 错误结果对象
      */
     @ExceptionHandler(FieldErrorException.class)
-    public R fieldErrorExceptionHandler(FieldErrorException e){
-        R r = R.error(CodeEnum.ERROR.getCode(),"表单验证失败");
+    public Result fieldErrorExceptionHandler(FieldErrorException e){
+        Result result = Result.error(CodeEnum.ERROR.getCode(),"表单验证失败");
 
         List<Error> list = e.getErrors();
-        r.addError(list);
+        result.addError(list);
 
-        return r;
+        return result;
     }
 
     /**
@@ -61,8 +61,8 @@ public class GlobalExceptionHandler {
      * @return 授权失败/错误结果对象
      */
     @ExceptionHandler(AccessDeniedException.class)
-    public R accessDeniedExceptionHandler(AccessDeniedException e){
-        return R.error(CodeEnum.FORBIDDEN.getCode(),e.getMessage());
+    public Result accessDeniedExceptionHandler(AccessDeniedException e){
+        return Result.error(CodeEnum.FORBIDDEN.getCode(),e.getMessage());
     }
 
     /**
@@ -71,8 +71,8 @@ public class GlobalExceptionHandler {
      * @return 提醒支持文件最大大小的错误对象
      */
     @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public R maxUploadSizeExceededException(MaxUploadSizeExceededException e){
-        return R.error("上传文件过大，最大支持上传大小为"
+    public Result maxUploadSizeExceededException(MaxUploadSizeExceededException e){
+        return Result.error("上传文件过大，最大支持上传大小为"
                 + e.getMaxUploadSize() + "的文件");
     }
 
@@ -82,7 +82,7 @@ public class GlobalExceptionHandler {
      * @return 错误对象
      */
     @ExceptionHandler(CommonException.class)
-    public R commonExceptionHandler(CommonException e){
-        return R.error(e.getCode(),e.getMessage());
+    public Result commonExceptionHandler(CommonException e){
+        return Result.error(e.getCode(),e.getMessage());
     }
 }

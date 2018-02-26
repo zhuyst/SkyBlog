@@ -1,7 +1,7 @@
 package indi.zhuyst.skyblog.controller;
 
 import indi.zhuyst.common.controller.BaseController;
-import indi.zhuyst.common.pojo.R;
+import indi.zhuyst.common.pojo.Result;
 import indi.zhuyst.skyblog.pojo.About;
 import indi.zhuyst.skyblog.service.AboutService;
 import io.swagger.annotations.Api;
@@ -31,7 +31,7 @@ public class AboutController extends BaseController{
      */
     @GetMapping("/public/")
     @ApiOperation("获取关于")
-    public R<About> getAbout(){
+    public Result<About> getAbout(){
         return produceResult(aboutService.getAbout(),"获取关于失败");
     }
 
@@ -43,7 +43,7 @@ public class AboutController extends BaseController{
     @PutMapping("/")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     @ApiOperation("更新关于")
-    public R<About> updateAbout(@ApiParam("关于对象") @Valid @RequestBody About about){
+    public Result<About> updateAbout(@ApiParam("关于对象") @Valid @RequestBody About about){
         return produceResult(aboutService.updateAbout(about),"更新关于失败");
     }
 
