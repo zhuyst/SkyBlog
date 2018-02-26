@@ -5,6 +5,10 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Spring Boot启动类
+ * @author zhuyst
+ */
 @SpringBootApplication
 @MapperScan(basePackages = "indi.zhuyst.skyblog.dao",markerInterface = BaseDao.class)
 public class SkyblogApplication {

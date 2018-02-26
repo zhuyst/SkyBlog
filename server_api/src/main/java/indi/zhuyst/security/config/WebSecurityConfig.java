@@ -1,7 +1,7 @@
 package indi.zhuyst.security.config;
 
 import indi.zhuyst.common.enums.CodeEnum;
-import indi.zhuyst.common.pojo.R;
+import indi.zhuyst.common.pojo.Result;
 import indi.zhuyst.security.filter.TokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -116,7 +116,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     public AccessDeniedHandler accessDeniedHandler(){
         return (request, response, accessDeniedException) -> {
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-            response.getWriter().write(R.error(CodeEnum.UNAUTHORIZED.getCode(),
+            response.getWriter().write(Result.error(CodeEnum.UNAUTHORIZED.getCode(),
                     "未授权或没有权限访问该接口").toJsonStr());
         };
     }

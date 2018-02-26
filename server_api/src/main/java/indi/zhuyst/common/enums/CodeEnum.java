@@ -1,10 +1,11 @@
 package indi.zhuyst.common.enums;
 
+import indi.zhuyst.common.pojo.Result;
 import lombok.Getter;
 
 /**
  * 状态码枚举类
- * @see indi.zhuyst.common.pojo.R#code
+ * @see Result#code
  * @author zhuyst
  */
 public enum CodeEnum{

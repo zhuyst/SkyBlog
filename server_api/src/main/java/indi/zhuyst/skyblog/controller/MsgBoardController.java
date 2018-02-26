@@ -3,7 +3,7 @@ package indi.zhuyst.skyblog.controller;
 import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.pojo.Query;
-import indi.zhuyst.common.pojo.R;
+import indi.zhuyst.common.pojo.Result;
 import indi.zhuyst.security.util.SecurityUtils;
 import indi.zhuyst.skyblog.entity.Comment;
 import indi.zhuyst.skyblog.entity.User;
@@ -37,9 +37,9 @@ public class MsgBoardController extends BaseController{
      */
     @GetMapping("/public/list/")
     @ApiOperation("查询留言列表")
-    public R<PageInfo<CommentDTO>> listMsg(Query query){
+    public Result<PageInfo<CommentDTO>> listMsg(Query query){
         PageInfo<CommentDTO> pageInfo = msgBoardService.listMsg(new Query<>(query));
-        return R.ok(pageInfo);
+        return Result.ok(pageInfo);
     }
 
     /**
@@ -50,7 +50,7 @@ public class MsgBoardController extends BaseController{
     @PostMapping("/")
     @ApiOperation("新增留言")
     @PreAuthorize("isAuthenticated()")
-    public R<CommentDTO> insertMsg(@ApiParam("留言对象") @Valid @RequestBody Comment comment){
+    public Result<CommentDTO> insertMsg(@ApiParam("留言对象") @Valid @RequestBody Comment comment){
         comment.setId(null);
 
         User user = SecurityUtils.getUser();
@@ -68,7 +68,7 @@ public class MsgBoardController extends BaseController{
     @DeleteMapping("/{id}")
     @ApiOperation("根据id删除留言")
     @PreAuthorize("isAuthenticated()")
-    public R deleteMsg(@ApiParam("留言ID") @PathVariable("id")Integer id){
+    public Result deleteMsg(@ApiParam("留言ID") @PathVariable("id")Integer id){
         Comment comment = msgBoardService.getMsg(id);
         checkPerms(comment.getAuthorId());
         return produceResult(msgBoardService.deleteMsg(id),"删除文章失败");

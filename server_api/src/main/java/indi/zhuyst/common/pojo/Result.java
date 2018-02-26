@@ -22,7 +22,7 @@ import java.util.Map;
  */
 @NoArgsConstructor
 @ToString
-public class R<T> implements Serializable{
+public class Result<T> implements Serializable{
 
     private static final long serialVersionUID = -3712751146584906976L;
 
@@ -60,7 +60,7 @@ public class R<T> implements Serializable{
      * 通过code实例化对象，调用{@link #setCode(int)}
      * @param code 状态码
      */
-    private R(int code){
+    private Result(int code){
         this.setCode(code);
     }
 
@@ -68,7 +68,7 @@ public class R<T> implements Serializable{
      * 通过codeEnum实例化对象，调用{@link #setCode(CodeEnum)}
      * @param codeEnum 状态码枚举类
      */
-    private R(CodeEnum codeEnum){
+    private Result(CodeEnum codeEnum){
         this.setCode(codeEnum);
     }
 
@@ -77,7 +77,7 @@ public class R<T> implements Serializable{
      * @param code 状态码
      * @param message 结果信息
      */
-    private R(int code, String message){
+    private Result(int code, String message){
         this.code = code;
         this.message = message;
     }
@@ -86,10 +86,10 @@ public class R<T> implements Serializable{
      * 成功 - 获取结果对象
      * @return 结果对象
      */
-    public static R ok(){
-        R r = new R();
-        r.setCode(CodeEnum.SUCCESS);
-        return r;
+    public static Result ok(){
+        Result result = new Result();
+        result.setCode(CodeEnum.SUCCESS);
+        return result;
     }
 
     /**
@@ -98,11 +98,11 @@ public class R<T> implements Serializable{
      * @param <T> 实体类的类型
      * @return 带有实体的结果对象
      */
-    public static <T> R<T> ok(T entity){
-        R<T> r = new R<>();
-        r.setCode(CodeEnum.SUCCESS);
-        r.setEntity(entity);
-        return r;
+    public static <T> Result<T> ok(T entity){
+        Result<T> result = new Result<>();
+        result.setCode(CodeEnum.SUCCESS);
+        result.setEntity(entity);
+        return result;
     }
 
     /**
@@ -110,8 +110,8 @@ public class R<T> implements Serializable{
      * @param codeEnum 状态码枚举类
      * @return 结果对象
      */
-    public static R error(CodeEnum codeEnum){
-        return new R(codeEnum);
+    public static Result error(CodeEnum codeEnum){
+        return new Result(codeEnum);
     }
 
     /**
@@ -119,10 +119,10 @@ public class R<T> implements Serializable{
      * @param message 错误信息
      * @return 结果对象
      */
-    public static R error(String message){
-        R r = error(CodeEnum.ERROR);
-        r.setMessage(message);
-        return r;
+    public static Result error(String message){
+        Result result = error(CodeEnum.ERROR);
+        result.setMessage(message);
+        return result;
     }
 
     /**
@@ -131,8 +131,8 @@ public class R<T> implements Serializable{
      * @param message 错误信息
      * @return 结果对象
      */
-    public static R error(int code,String message){
-        return new R(code,message);
+    public static Result error(int code, String message){
+        return new Result(code,message);
     }
 
     /**
@@ -167,7 +167,7 @@ public class R<T> implements Serializable{
      */
     public void addError(Collection<Error> errors){
         if(this.errors == null){
-            this.errors = new HashMap<>();
+            this.errors = new HashMap<>(5);
         }
 
         for(Error error : errors){

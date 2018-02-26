@@ -1,7 +1,7 @@
 package indi.zhuyst.common.controller;
 
 import indi.zhuyst.common.enums.CodeEnum;
-import indi.zhuyst.common.pojo.R;
+import indi.zhuyst.common.pojo.Result;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.util.SecurityUtils;
 import org.slf4j.Logger;
@@ -28,7 +28,7 @@ public abstract class BaseController {
      * @param <T> 对象类型
      * @return 结果对象
      */
-    protected <T> R<T> produceResult(T pojo,String errorMsg){
+    protected <T> Result<T> produceResult(T pojo, String errorMsg){
         return this.produceResult(pojo, CodeEnum.ERROR.getCode(),errorMsg);
     }
 
@@ -42,8 +42,8 @@ public abstract class BaseController {
      * @param <T> 对象类型
      * @return 结果对象
      */
-    protected <T> R<T> produceResult(T pojo,int code,String errorMsg){
-        return pojo == null ? R.error(code,errorMsg) : R.ok(pojo);
+    protected <T> Result<T> produceResult(T pojo, int code, String errorMsg){
+        return pojo == null ? Result.error(code,errorMsg) : Result.ok(pojo);
     }
 
     /**
@@ -54,8 +54,8 @@ public abstract class BaseController {
      * @param errorMsg 错误信息
      * @return 结果对象
      */
-    protected R produceResult(boolean isSuccess,String errorMsg){
-        return isSuccess ? R.ok() : R.error(errorMsg);
+    protected Result produceResult(boolean isSuccess, String errorMsg){
+        return isSuccess ? Result.ok() : Result.error(errorMsg);
     }
 
     /**
