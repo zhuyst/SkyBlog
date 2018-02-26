@@ -125,7 +125,7 @@ public class UserController extends BaseController{
     @ApiOperation("更新用户角色")
     @PreAuthorize("hasRole('SYS_ADMIN')")
     public R updateUserRole(@ApiParam("用户ID") @PathVariable("id")Integer id,
-                            @ApiParam("角色ID") @RequestBody UpdateRole update){
+                            @ApiParam("角色ID") @Valid @RequestBody UpdateRole update){
         Integer roleId = update.getRoleId();
 
         boolean isSuccess = false;
@@ -149,7 +149,7 @@ public class UserController extends BaseController{
     @PatchMapping("/status/{id}")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R updateUserStatus(@ApiParam("角色ID") @PathVariable("id") Integer id,
-                              @ApiParam("状态ID") @RequestBody UpdateStatus update){
+                              @ApiParam("状态ID") @Valid @RequestBody UpdateStatus update){
         UserDTO user = userService.getUserDTO(id);
         if(user.getAdmin()){
             throw new CommonException("管理员不能被锁定");

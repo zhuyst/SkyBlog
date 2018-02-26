@@ -1,7 +1,10 @@
 package indi.zhuyst.skyblog.pojo;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 更新用户状态，为Spring MVC反射使用
@@ -17,5 +20,7 @@ public class UpdateStatus {
      * @see indi.zhuyst.skyblog.entity.User#status
      * @see indi.zhuyst.security.enums.StatusEnum
      */
+    @ApiModelProperty("状态ID")
+    @NotNull(message = "缺失状态ID")
     private Integer statusId;
 }

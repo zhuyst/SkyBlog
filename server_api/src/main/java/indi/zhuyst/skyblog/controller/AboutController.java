@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * 关于相关API
  * @author zhuyst
@@ -41,7 +43,7 @@ public class AboutController extends BaseController{
     @PutMapping("/")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     @ApiOperation("更新关于")
-    public R<About> updateAbout(@ApiParam("关于对象") @RequestBody About about){
+    public R<About> updateAbout(@ApiParam("关于对象") @Valid @RequestBody About about){
         return produceResult(aboutService.updateAbout(about),"更新关于失败");
     }
 

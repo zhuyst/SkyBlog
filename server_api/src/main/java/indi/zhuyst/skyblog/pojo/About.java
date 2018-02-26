@@ -4,6 +4,7 @@ import indi.zhuyst.skyblog.entity.Article;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
 
@@ -22,6 +23,7 @@ public class About implements Serializable{
      * 文章正文
      */
     @ApiModelProperty("文章正文")
+    @NotBlank(message = "正文不能为空")
     private String content;
 
     public About(Article article){
