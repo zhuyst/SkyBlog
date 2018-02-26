@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {connect} from "react-redux";
 import {Badge, Panel} from 'react-bootstrap'
 import {Link} from "react-router-dom";
@@ -30,7 +31,12 @@ class Article extends React.Component{
                     </Panel.Title>
                 </Panel.Heading>
                 <Panel.Body>
-                    {articles}
+                    <ReactCSSTransitionGroup
+                        transitionName='fade'
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}>
+                        {articles}
+                    </ReactCSSTransitionGroup>
                     <Link className="more_link"
                           to="/article">
                         查看更多文章

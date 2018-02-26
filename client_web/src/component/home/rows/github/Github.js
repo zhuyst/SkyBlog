@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Panel} from "react-bootstrap";
 import {connect} from "react-redux";
 import Commit from "./Commit";
@@ -23,7 +24,12 @@ class Github extends React.Component{
                     </Panel.Title>
                 </Panel.Heading>
                 <Panel.Body>
-                    {list}
+                    <ReactCSSTransitionGroup
+                        transitionName='fade'
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}>
+                        {list}
+                    </ReactCSSTransitionGroup>
                     <a className="more_link"
                        href={SKY_BLOG_URL} target="_blank">
                         在Github上查看项目

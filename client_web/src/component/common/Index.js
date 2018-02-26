@@ -1,5 +1,6 @@
 import React from 'react'
 import {Route, Switch, withRouter} from 'react-router-dom'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux'
 
 import Navigation from './Navigation'
@@ -18,6 +19,7 @@ import {getAbout} from "../../action/about/AboutAction";
 import {checkUserLoginState} from "../../action/user/UsersAction";
 
 import '../../static/css/common/common.css'
+import '../../static/css/common/animation.css'
 import {listMsg} from "../../action/msgboard/MsgBoardAction";
 import {listCommits} from "../../action/github/GithubAction";
 import NotFound from "../error/NotFound";
@@ -46,14 +48,19 @@ class Index extends React.Component{
                 </header>
 
                 <div className="main">
-                    <Switch>
-                        <Route exact strict path="/" component={Home} />
-                        <Route exact strict path="/home" component={Home}/>
-                        <Route path="/article" component={Article} />
-                        <Route path="/msg_board" component={MsgBoard} />
-                        <Route path="/about" component={About} />
-                        <Route component={NotFound} />
-                    </Switch>
+                    <ReactCSSTransitionGroup
+                        transitionName='fade'
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}>
+                        <Switch key={this.props.location.pathname} location={this.props.location}>
+                            <Route exact strict path="/" component={Home} />
+                            <Route exact strict path="/home" component={Home}/>
+                            <Route path="/article" component={Article} />
+                            <Route path="/msg_board" component={MsgBoard} />
+                            <Route path="/about" component={About} />
+                            <Route component={NotFound} />
+                        </Switch>
+                    </ReactCSSTransitionGroup>
                 </div>
 
                 <footer>
