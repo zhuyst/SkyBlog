@@ -127,7 +127,7 @@ public class ArticleController extends BaseController{
         PageInfo<ArticleDTO> pageInfo = articleService.listArticle(articleQuery);
         vo.setArticles(pageInfo);
 
-        Classify classify = classifyService.getById(classifyId);
+        Classify classify = classifyService.getByID(classifyId);
         vo.setClassify(classify);
 
         return R.ok(vo);

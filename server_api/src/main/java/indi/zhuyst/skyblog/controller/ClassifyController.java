@@ -79,7 +79,7 @@ public class ClassifyController extends BaseController{
     @ApiOperation("根据id删除分类")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R<List<ClassifyDTO>> deleteClassify(@ApiParam("分类ID") @PathVariable("id")Integer id){
-        List<ClassifyDTO> list = this.produceDTOList(classifyService.deleteClassify(id));
+        List<ClassifyDTO> list = this.produceDTOList(classifyService.delete(id));
         return produceResult(list,"删除分类成功");
     }
 

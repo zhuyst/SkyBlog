@@ -3,6 +3,7 @@ package indi.zhuyst.skyblog.service.impl;
 import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.exception.FieldErrorException;
 import indi.zhuyst.common.pojo.Error;
+import indi.zhuyst.common.service.BaseCrudServiceImpl;
 import indi.zhuyst.skyblog.dao.ArticleDao;
 import indi.zhuyst.skyblog.dao.ClassifyDao;
 import indi.zhuyst.skyblog.entity.Article;
@@ -20,7 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("classifyService")
-public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
+public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classify>
+        implements ClassifyService,CommandLineRunner{
 
     @Autowired
     private ClassifyDao dao;
@@ -31,7 +33,7 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... args) throws Exception {
-        Classify classify = this.getById(NOT_CLASSIFY_KEY);
+        Classify classify = this.getByID(NOT_CLASSIFY_KEY);
         if(classify == null){
             classify = new Classify();
 
@@ -44,14 +46,13 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
 
     @Override
     @Cacheable(cacheNames = CACHE_OBJECT,key = "#id")
-    public Classify getById(int id){
-        Classify classify = dao.selectByPrimaryKey(id);
-        return this.produceDTO(classify);
+    public Classify getByID(int id) {
+        return super.getByID(id);
     }
 
     @Override
     public ClassifyDTO getClassifyDTO(int id) {
-        Classify classify = this.getById(id);
+        Classify classify = this.getByID(id);
         return this.produceDTO(classify);
     }
 
@@ -60,14 +61,13 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
         Classify classify = new Classify();
         classify.setName(name);
 
-        classify = dao.selectOne(classify);
-        return this.produceDTO(classify);
+        return dao.selectOne(classify);
     }
 
     @Override
     @Cacheable(CACHE_LIST)
     public List<ClassifyDTO> listClassify(){
-        List<Classify> list = dao.selectAll();
+        List<Classify> list = super.listAll();
         List<ClassifyDTO> dtoList = new ArrayList<>();
 
         for(Classify classify : list){
@@ -83,23 +83,17 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
     @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_LIST},allEntries = true)
     public ClassifyDTO saveClassify(Classify classify){
         checkClassify(classify);
-
-        boolean isSuccess;
-        if(classify.getId() == null){
-            isSuccess = dao.insertUseGeneratedKeys(classify) > 0;
-        }
-        else {
-            isSuccess = dao.updateByPrimaryKeySelective(classify) > 0;
-        }
-
-        return isSuccess ? this.getClassifyDTO(classify.getId()) : null;
+        classify = super.save(classify);
+        return classify != null ? this.getClassifyDTO(classify.getId()) : null;
     }
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_LIST},allEntries = true)
-    public boolean deleteClassify(int id){
-
+    public boolean delete(int id) {
+        if(id == NOT_CLASSIFY_KEY){
+            throw new CommonException("未分类不能被删除");
+        }
 
         // 将分类下的文章归为未分类
         List<Article> articles = articleDao.selectBaseInfoByClassify(id);
@@ -108,11 +102,7 @@ public class ClassifyServiceImpl implements ClassifyService,CommandLineRunner{
             articleDao.updateByPrimaryKeySelective(article);
         }
 
-        if(id == NOT_CLASSIFY_KEY){
-            throw new CommonException("未分类不能被删除");
-        }
-
-        return dao.deleteByPrimaryKey(id) > 0;
+        return super.delete(id);
     }
 
     private void checkClassify(Classify classify){
