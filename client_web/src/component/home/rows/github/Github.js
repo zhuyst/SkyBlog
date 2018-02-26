@@ -9,13 +9,6 @@ class Github extends React.Component{
     render(){
         const commits = this.props.commits;
 
-        let list = [];
-        commits.forEach(commit => {
-            list.push(
-                <Commit key={commit.sha} commit={commit}/>
-            )
-        });
-
         return (
             <Panel bsStyle="primary">
                 <Panel.Heading>
@@ -28,7 +21,9 @@ class Github extends React.Component{
                         transitionName='fade'
                         transitionEnterTimeout={FADE_ENTER}
                         transitionLeaveTimeout={FADE_LEAVE}>
-                        {list}
+                        {
+                            commits.map(commit => <Commit key={commit.sha} commit={commit}/>)
+                        }
                     </ReactCSSTransitionGroup>
                     <a className="more_link"
                        href={SKY_BLOG_URL} target="_blank">

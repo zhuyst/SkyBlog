@@ -9,13 +9,6 @@ class Navigation extends React.Component{
     render(){
         const {admin,total,classifyList} = this.props;
 
-        let list = [];
-        classifyList.forEach(classify => {
-            list.push(
-                <ClassifyListGroup key={classify.id} classify={classify}/>
-            )
-        });
-
         return(
             <Well>
                 <div className="navigation_title">
@@ -41,7 +34,9 @@ class Navigation extends React.Component{
                     </LinkContainer>
                 </ListGroup>
 
-                {list}
+                {
+                    classifyList.map(classify => <ClassifyListGroup key={classify.id} classify={classify}/>)
+                }
             </Well>
         )
     }

@@ -15,13 +15,6 @@ class CommentList extends React.Component{
         const id = article.id;
         const {list,page_num,pages,total} = comments;
 
-        let commentList = [];
-        list.forEach(comment => {
-            commentList.push(
-                <Comment key={comment.id} comment={comment}/>
-            )
-        });
-
         let pager;
         if(total === 0){
             pager = (
@@ -79,7 +72,9 @@ class CommentList extends React.Component{
                         transitionName='fade'
                         transitionEnterTimeout={FADE_ENTER}
                         transitionLeaveTimeout={FADE_LEAVE}>
-                        {commentList}
+                        {
+                            list.map(comment => <Comment key={comment.id} comment={comment}/>)
+                        }
                     </ReactCSSTransitionGroup>
                     {pager}
                 </Panel.Body>

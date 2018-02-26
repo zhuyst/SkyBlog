@@ -10,15 +10,6 @@ class ClassifyListGroup extends React.Component{
         const {admin,classify} = this.props;
         const articles = classify.articles;
 
-        const articleList = [];
-        articles.forEach(article => {
-            articleList.push(
-                <LinkContainer key={article.id} to={`/article/content/${article.id}`}>
-                    <ListGroupItem>{article.title}</ListGroupItem>
-                </LinkContainer>
-            )
-        });
-
         return (
             <ListGroup key={classify.id}>
                 <LinkContainer to={`/article/classify/${classify.id}`}>
@@ -31,7 +22,13 @@ class ClassifyListGroup extends React.Component{
                     admin &&
                     <ClassifyButtonGroup classify={classify}/>
                 }
-                {articleList}
+                {
+                    articles.map(article => (
+                        <LinkContainer key={article.id} to={`/article/content/${article.id}`}>
+                            <ListGroupItem>{article.title}</ListGroupItem>
+                        </LinkContainer>
+                    ))
+                }
             </ListGroup>
         )
     }

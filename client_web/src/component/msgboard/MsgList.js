@@ -18,13 +18,6 @@ class MsgList extends React.Component{
         const {listMsg,page} = this.props;
         const {list,page_num,pages,total} = page;
 
-        let msgList = [];
-        list.forEach(msg => {
-            msgList.push(
-                <Msg key={msg.id} msg={msg}/>
-            )
-        });
-
         let pager;
         if(total === 0){
             pager = (
@@ -84,7 +77,9 @@ class MsgList extends React.Component{
                         transitionName='fade'
                         transitionEnterTimeout={FADE_ENTER}
                         transitionLeaveTimeout={FADE_LEAVE}>
-                        {msgList}
+                        {
+                            list.map(msg => <Msg key={msg.id} msg={msg}/>)
+                        }
                     </ReactCSSTransitionGroup>
                     {pager}
                 </Panel.Body>
