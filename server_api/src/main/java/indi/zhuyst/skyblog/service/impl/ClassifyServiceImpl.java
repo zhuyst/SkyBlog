@@ -81,10 +81,9 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_LIST},allEntries = true)
-    public ClassifyDTO saveClassify(Classify classify){
-        checkClassify(classify);
-        classify = super.save(classify);
-        return classify != null ? this.getClassifyDTO(classify.getId()) : null;
+    public Classify save(Classify entity) {
+        checkClassify(entity);
+        return super.save(entity);
     }
 
     @Override
