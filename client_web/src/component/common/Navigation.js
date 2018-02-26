@@ -8,7 +8,7 @@ import {
     setLoginModalShow, setRegisterModalShow, setUserInfoModalShow,
     setUserManagementModalShow
 } from "../../action/common/ModalAction";
-import {logout} from "../../action/common/LoginAction"
+import {logout, setAdmin} from "../../action/common/LoginAction"
 
 import LoginModal from './modal/LoginModal'
 import RegisterModal from './modal/RegisterModal'
@@ -18,9 +18,10 @@ import UserManagementModal from "./modal/UserManagementModal";
 class Navigation extends React.Component{
 
     render(){
-        const { logout, login, showLoginModal,showUserManagementModal,
+        const { logout, login, setAdmin,showLoginModal,showUserManagementModal,
             showRegisterModal,showUserInfoModal} = this.props;
         const user = login.user;
+        const admin = user.admin;
 
         let right;
         if(login.ok){
@@ -31,16 +32,19 @@ class Navigation extends React.Component{
                         <UserInfoModal/>
 
                         {
-                            user.admin &&
+                            admin &&
                             <MenuItem onClick={showUserManagementModal}>用户管理</MenuItem>
                         }
                         {
-                            user.admin &&
+                            admin &&
                             <UserManagementModal/>
                         }
 
                         <MenuItem onClick={logout}>登出</MenuItem>
                     </NavDropdown>
+                    <NavItem onClick={() => setAdmin(!admin)}>
+                        {admin ? "访客模式" : "管理模式"}
+                    </NavItem>
                 </Nav>
             )
         }
@@ -121,6 +125,9 @@ const mapDispatchToProps = dispatch => {
         },
         logout : () => {
             dispatch(logout())
+        },
+        setAdmin : admin => {
+            dispatch(setAdmin(admin))
         }
     }
 };
