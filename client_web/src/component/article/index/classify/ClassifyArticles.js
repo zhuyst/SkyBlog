@@ -31,13 +31,6 @@ class ClassifyArticles extends React.Component{
         const page = classify.page;
         const {list,page_num} = page;
 
-        const articles = [];
-        list.forEach(article => {
-            articles.push (
-                <Preview key={article.id} article={article}/>
-            )
-        });
-
         return(
             <div>
                 <PanelGroup id="articles">
@@ -50,7 +43,9 @@ class ClassifyArticles extends React.Component{
                         transitionName='fade'
                         transitionEnterTimeout={FADE_ENTER}
                         transitionLeaveTimeout={FADE_LEAVE}>
-                        {articles}
+                        {
+                            list.map(article => <Preview key={article.id} article={article}/>)
+                        }
                     </ReactCSSTransitionGroup>
                 </PanelGroup>
                 <div className="pager">

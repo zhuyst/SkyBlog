@@ -96,15 +96,6 @@ class ArticleEditor extends React.Component{
         const {classifyList,classifyShow,
             setClassifyShow,showUploadModal} = this.props;
 
-        const classifyOptions = [];
-        classifyList.forEach(classify => {
-            classifyOptions.push(
-                <option key={classify.id}
-                        value={classify.id}>
-                    {classify.name}</option>
-            )
-        });
-
         return (
             <div>
                 {this.toolbar()}
@@ -128,7 +119,13 @@ class ArticleEditor extends React.Component{
                                 <FormGroup controlId="classify_id">
                                     <ControlLabel>文章分类</ControlLabel>
                                     <Field name="classify_id" component="select" className="form-control">
-                                        {classifyOptions}
+                                        {
+                                            classifyList.map(classify =>
+                                                <option key={classify.id}
+                                                        value={classify.id}>
+                                                    {classify.name}</option>
+                                            )
+                                        }
                                     </Field>
                                 </FormGroup>
                             </Col>
