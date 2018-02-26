@@ -26,6 +26,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/**
+ * 用户相关API
+ * @author zhuyst
+ */
 @RestController
 @Api(value = "UserApi",description = "用户相关API")
 @RequestMapping("/users")
@@ -37,6 +41,12 @@ public class UserController extends BaseController{
     @Autowired
     private SecurityService securityService;
 
+    /**
+     * 更新用户信息
+     * @param id 用户ID
+     * @param user 用户对象
+     * @return 更新后的用户
+     */
     @PutMapping("/{id}")
     @ApiOperation("更新用户信息")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN') or #id == authentication.principal.id")
@@ -47,6 +57,11 @@ public class UserController extends BaseController{
         return produceResult(pojo,"用户信息更新失败");
     }
 
+    /**
+     * 根据id获取用户信息
+     * @param id 用户ID
+     * @return 用户DTO
+     */
     @GetMapping("/{id}")
     @ApiOperation("根据id获取用户信息")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN') or #id == authentication.principal.id")
@@ -55,6 +70,11 @@ public class UserController extends BaseController{
         return produceResult(user, CodeEnum.NOT_FOUND.getCode(),"未找到该用户");
     }
 
+    /**
+     * 注册新用户
+     * @param newUser 新用户对象
+     * @return 授权Token
+     */
     @PostMapping("/public/")
     @ApiOperation("注册新用户")
     public R<AccessToken> register(@ApiParam("用户对象") @Valid @RequestBody User newUser){
@@ -70,6 +90,11 @@ public class UserController extends BaseController{
         return R.ok(accessToken);
     }
 
+    /**
+     * 根据id删除用户
+     * @param id 用户ID
+     * @return 结果对象
+     */
     @DeleteMapping("/{id}")
     @ApiOperation("根据id删除用户")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
@@ -77,6 +102,11 @@ public class UserController extends BaseController{
         return produceResult(userService.delete(id),"不存在该用户");
     }
 
+    /**
+     * 查询用户列表
+     * @param query 查询对象
+     * @return 用户的分页对象
+     */
     @GetMapping("/list/")
     @ApiOperation("查询用户列表")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
@@ -85,6 +115,12 @@ public class UserController extends BaseController{
         return R.ok(pageInfo);
     }
 
+    /**
+     * 更新用户角色
+     * @param id 用户ID
+     * @param update 更新角色对象
+     * @return 结果对象
+     */
     @PatchMapping("/role/{id}")
     @ApiOperation("更新用户角色")
     @PreAuthorize("hasRole('SYS_ADMIN')")
@@ -103,6 +139,12 @@ public class UserController extends BaseController{
         return produceResult(isSuccess,"更新用户角色失败");
     }
 
+    /**
+     * 更新用户状态
+     * @param id 用户ID
+     * @param update 更新状态对象
+     * @return 结果对象
+     */
     @ApiOperation("更新用户状态")
     @PatchMapping("/status/{id}")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
