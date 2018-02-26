@@ -6,9 +6,11 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Column;
 import javax.persistence.OrderBy;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -26,6 +28,7 @@ public class Comment extends BaseEntity {
      * 评论正文
      */
     @ApiModelProperty("评论正文")
+    @NotBlank(message = "正文不能为空")
     private String content;
 
     /**
@@ -34,6 +37,7 @@ public class Comment extends BaseEntity {
      */
     @ApiModelProperty("文章ID")
     @Column(name = "article_id")
+    @NotNull(message = "缺失文章ID")
     private Integer articleId;
 
     /**
