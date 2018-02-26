@@ -6,9 +6,11 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Column;
 import javax.persistence.OrderBy;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -26,6 +28,7 @@ public class Article extends BaseEntity {
      * 文章标题
      */
     @ApiModelProperty("文章标题")
+    @NotBlank(message = "标题不能为空")
     private String title;
 
     /**
@@ -72,6 +75,7 @@ public class Article extends BaseEntity {
      * 文章正文
      */
     @ApiModelProperty("文章正文")
+    @NotBlank(message = "正文不能为空")
     private String content;
 
     public Article(Integer id,String title, String subTitle,
