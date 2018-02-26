@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/**
+ * 留言板相关API
+ * @author zhuyst
+ */
 @RestController
 @Api(value = "MsgBoardApi",description = "留言板相关API")
 @RequestMapping("/msg_board")
@@ -26,6 +30,11 @@ public class MsgBoardController extends BaseController{
     @Autowired
     private MsgBoardService msgBoardService;
 
+    /**
+     * 查询留言列表
+     * @param query 查询对象
+     * @return 留言的分页对象
+     */
     @GetMapping("/public/list/")
     @ApiOperation("查询留言列表")
     public R<PageInfo<CommentDTO>> listMsg(Query query){
@@ -33,6 +42,11 @@ public class MsgBoardController extends BaseController{
         return R.ok(pageInfo);
     }
 
+    /**
+     * 新增留言
+     * @param comment 留言对象
+     * @return 新增后的留言对象
+     */
     @PostMapping("/")
     @ApiOperation("新增留言")
     @PreAuthorize("isAuthenticated()")
@@ -46,6 +60,11 @@ public class MsgBoardController extends BaseController{
         return produceResult(pojo,"新增留言失败");
     }
 
+    /**
+     * 根据id删除留言
+     * @param id 留言ID
+     * @return 结果对象
+     */
     @DeleteMapping("/{id}")
     @ApiOperation("根据id删除留言")
     @PreAuthorize("isAuthenticated()")

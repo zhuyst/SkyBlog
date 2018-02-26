@@ -11,20 +11,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 关于相关API
+ * @author zhuyst
+ */
 @RestController
-@Api(value = "AboutApi",description = "关于相关Api")
+@Api(value = "AboutApi",description = "关于相关API")
 @RequestMapping("/about")
 public class AboutController extends BaseController{
 
     @Autowired
     private AboutService aboutService;
 
+    /**
+     * 获取关于
+     * @return 关于对象
+     */
     @GetMapping("/public/")
     @ApiOperation("获取关于")
     public R<About> getAbout(){
         return produceResult(aboutService.getAbout(),"获取关于失败");
     }
 
+    /**
+     * 更新关于
+     * @param about 关于对象
+     * @return 更新后的关于对象
+     */
     @PutMapping("/")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     @ApiOperation("更新关于")

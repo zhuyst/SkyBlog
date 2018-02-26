@@ -23,8 +23,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/**
+ * 文章相关API
+ * @author zhuyst
+ */
 @RestController
-@Api(value = "ArticleApi",description = "文章相关Api")
+@Api(value = "ArticleApi",description = "文章相关API")
 @RequestMapping("/articles")
 public class ArticleController extends BaseController{
 
@@ -37,6 +41,11 @@ public class ArticleController extends BaseController{
     @Autowired
     private ClassifyService classifyService;
 
+    /**
+     * 根据id查询文章
+     * @param id 文章ID
+     * @return 文章DTO
+     */
     @GetMapping("/public/{id}")
     @ApiOperation("根据id查询文章")
     public R<ArticleDTO> getArticle(@ApiParam("文章ID") @PathVariable("id")Integer id){
@@ -44,6 +53,12 @@ public class ArticleController extends BaseController{
         return produceResult(pojo, CodeEnum.NOT_FOUND.getCode(),"未找到该文章");
     }
 
+    /**
+     * 更新文章
+     * @param id 文章ID
+     * @param article 文章对象
+     * @return 更新后的文章DTO
+     */
     @PutMapping("/{id}")
     @ApiOperation("更新文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
@@ -54,6 +69,11 @@ public class ArticleController extends BaseController{
         return produceResult(pojo,"更新文章失败");
     }
 
+    /**
+     * 新增文章
+     * @param article 文章对象
+     * @return 新增后的文章DTO
+     */
     @PostMapping("/")
     @ApiOperation("新增文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
@@ -63,6 +83,11 @@ public class ArticleController extends BaseController{
         return produceResult(pojo,"新增文章失败");
     }
 
+    /**
+     * 根据id删除文章
+     * @param id 文章ID
+     * @return 结果对象
+     */
     @DeleteMapping("/{id}")
     @ApiOperation("根据id删除文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
@@ -70,6 +95,11 @@ public class ArticleController extends BaseController{
         return produceResult(articleService.delete(id),"删除文章失败");
     }
 
+    /**
+     * 查询文章列表
+     * @param query 查询对象
+     * @return 文章分页对象
+     */
     @GetMapping("/public/list/")
     @ApiOperation("查询文章列表")
     public R<PageInfo<ArticleDTO>> listArticle(Query query){
@@ -77,6 +107,12 @@ public class ArticleController extends BaseController{
         return R.ok(pageInfo);
     }
 
+    /**
+     * 根据分类id查询文章列表
+     * @param classifyId 分类id
+     * @param query 查询对象
+     * @return 包含了Article的分页信息以及分类信息的VO
+     */
     @GetMapping("/public/classify/{id}/")
     @ApiOperation("根据分类id查询文章列表")
     public R<ArticlesAndClassifyVO> listArticleByClassify(@ApiParam("分类ID")
@@ -97,6 +133,12 @@ public class ArticleController extends BaseController{
         return R.ok(vo);
     }
 
+    /**
+     * 查询文章下的评论列表
+     * @param articleId 文章ID
+     * @param query 查询对象
+     * @return 评论的分页对象
+     */
     @GetMapping("/public/{id}/comment/")
     @ApiOperation("查询文章下的评论列表")
     public R<PageInfo<CommentDTO>> listComment(@ApiParam("文章ID") @PathVariable("id")Integer articleId,
@@ -109,6 +151,12 @@ public class ArticleController extends BaseController{
         return R.ok(pageInfo);
     }
 
+    /**
+     * 新增该id的文章下的评论
+     * @param articleId 文章ID
+     * @param comment 评论对象
+     * @return 评论DTO
+     */
     @PostMapping("/{id}/comment/")
     @ApiOperation("新增该id的文章下的评论")
     @PreAuthorize("isAuthenticated()")
@@ -121,6 +169,11 @@ public class ArticleController extends BaseController{
         return produceResult(pojo,"新增评论失败");
     }
 
+    /**
+     * 根据id删除评论
+     * @param id 评论id
+     * @return 结果对象
+     */
     @DeleteMapping(value = "/comment/{id}")
     @ApiOperation("根据id删除评论")
     @PreAuthorize("isAuthenticated()")
