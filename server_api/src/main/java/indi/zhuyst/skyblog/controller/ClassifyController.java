@@ -48,7 +48,7 @@ public class ClassifyController extends BaseController{
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public R<List<ClassifyDTO>> insertClassify(@ApiParam("分类对象") @Valid @RequestBody Classify classify){
         classify.setId(null);
-        classify = classifyService.saveClassify(classify);
+        classify = classifyService.save(classify);
         List<ClassifyDTO> list = this.produceDTOList(classify != null);
         return produceResult(list,"新增分类失败");
     }
@@ -65,7 +65,7 @@ public class ClassifyController extends BaseController{
     public R<List<ClassifyDTO>> updateClassify(@ApiParam("分类ID") @PathVariable("id")Integer id,
                                             @ApiParam("分类对象") @Valid @RequestBody Classify classify){
         classify.setId(id);
-        classify = classifyService.saveClassify(classify);
+        classify = classifyService.save(classify);
         List<ClassifyDTO> list = this.produceDTOList(classify != null);
         return produceResult(list,"更新分类失败");
     }

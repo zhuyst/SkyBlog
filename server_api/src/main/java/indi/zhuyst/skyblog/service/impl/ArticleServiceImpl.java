@@ -28,7 +28,8 @@ import java.util.Date;
 import java.util.List;
 
 @Service("articleService")
-public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> implements ArticleService{
+public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article>
+        implements ArticleService{
     @Autowired
     private UserService userService;
 
@@ -123,7 +124,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article> 
         pojo.setAuthor(user);
 
         if(article.getClassifyId() != null){
-            Classify classify = classifyService.getById(article.getClassifyId());
+            Classify classify = classifyService.getByID(article.getClassifyId());
             pojo.setClassify(classify);
         }
 
