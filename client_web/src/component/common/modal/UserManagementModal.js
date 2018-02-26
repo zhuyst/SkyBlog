@@ -1,9 +1,10 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Button, ButtonGroup, Label, Modal, Pager, Table} from "react-bootstrap";
 import {setUserManagementModalShow} from "../../../action/common/ModalAction";
 import {connect} from "react-redux";
 import {listUsers, updateUserRole, updateUserStatus} from "../../../action/user/UsersAction";
-import {USER_PAGE_SIZE, UserRole, UserStatus} from "../../../Constant";
+import {FADE_ENTER, FADE_LEAVE, USER_PAGE_SIZE, UserRole, UserStatus} from "../../../Constant";
 
 class UserManagementModal extends React.Component{
 
@@ -99,9 +100,13 @@ class UserManagementModal extends React.Component{
                             <th>操作</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        {users}
-                        </tbody>
+                        <ReactCSSTransitionGroup
+                            transitionName='fade'
+                            component="tbody"
+                            transitionEnterTimeout={FADE_ENTER}
+                            transitionLeave={false}>
+                            {users}
+                        </ReactCSSTransitionGroup>
                     </Table>
                     <div className="pager_message">
                         当前为第{page_num}页，共有{pages}页
