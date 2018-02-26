@@ -65,12 +65,22 @@ public class GlobalExceptionHandler {
         return R.error(CodeEnum.FORBIDDEN.getCode(),e.getMessage());
     }
 
+    /**
+     * 处理异常 - {@link MaxUploadSizeExceededException}
+     * @param e 上传文件大小过大时抛出的异常
+     * @return 提醒支持文件最大大小的错误对象
+     */
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public R maxUploadSizeExceededException(MaxUploadSizeExceededException e){
         return R.error("上传文件过大，最大支持上传大小为"
                 + e.getMaxUploadSize() + "的文件");
     }
 
+    /**
+     * 处理异常 - {@link CommonException}
+     * @param e 自定义异常
+     * @return 错误对象
+     */
     @ExceptionHandler(CommonException.class)
     public R commonExceptionHandler(CommonException e){
         return R.error(e.getCode(),e.getMessage());
