@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 
 import Preview from './ArticlePreview'
 import {getLength} from "../Util";
+import {FADE_ENTER, FADE_LEAVE} from "../../../../Constant";
 
 class Article extends React.Component{
     render(){
@@ -33,8 +34,8 @@ class Article extends React.Component{
                 <Panel.Body>
                     <ReactCSSTransitionGroup
                         transitionName='fade'
-                        transitionEnterTimeout={500}
-                        transitionLeaveTimeout={500}>
+                        transitionEnterTimeout={FADE_ENTER}
+                        transitionLeaveTimeout={FADE_LEAVE}>
                         {articles}
                     </ReactCSSTransitionGroup>
                     <Link className="more_link"

@@ -3,7 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Panel} from "react-bootstrap";
 import {connect} from "react-redux";
 import Commit from "./Commit";
-import {SKY_BLOG_URL} from "../../../../Constant";
+import {FADE_ENTER, FADE_LEAVE, SKY_BLOG_URL} from "../../../../Constant";
 
 class Github extends React.Component{
     render(){
@@ -26,8 +26,8 @@ class Github extends React.Component{
                 <Panel.Body>
                     <ReactCSSTransitionGroup
                         transitionName='fade'
-                        transitionEnterTimeout={500}
-                        transitionLeaveTimeout={500}>
+                        transitionEnterTimeout={FADE_ENTER}
+                        transitionLeaveTimeout={FADE_LEAVE}>
                         {list}
                     </ReactCSSTransitionGroup>
                     <a className="more_link"

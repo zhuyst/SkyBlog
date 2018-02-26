@@ -5,7 +5,7 @@ import {Alert, PanelGroup} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 
 import {listArticlesByClassify} from "../../../../action/article/ArticlesAction";
-import {ARTICLE_PAGE_SIZE} from "../../../../Constant";
+import {ARTICLE_PAGE_SIZE, FADE_ENTER, FADE_LEAVE} from "../../../../Constant";
 
 import Preview from "../Preview";
 import Pager from "../Pager";
@@ -48,8 +48,8 @@ class ClassifyArticles extends React.Component{
                     </Alert>
                     <ReactCSSTransitionGroup
                         transitionName='fade'
-                        transitionEnterTimeout={500}
-                        transitionLeaveTimeout={500}>
+                        transitionEnterTimeout={FADE_ENTER}
+                        transitionLeaveTimeout={FADE_LEAVE}>
                         {articles}
                     </ReactCSSTransitionGroup>
                 </PanelGroup>

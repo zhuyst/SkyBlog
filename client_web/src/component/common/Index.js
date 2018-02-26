@@ -11,7 +11,7 @@ import Article from '../article/Index'
 import MsgBoard from '../msgboard/Index'
 import About from '../about/Index'
 
-import {ARTICLE_PAGE_SIZE, GITHUB_PAGE_SIZE, MSG_PAGE_SIZE} from "../../Constant";
+import {ARTICLE_PAGE_SIZE, FADE_ENTER, FADE_LEAVE, GITHUB_PAGE_SIZE, MSG_PAGE_SIZE} from "../../Constant";
 
 import {listArticles} from "../../action/article/ArticlesAction";
 import {listClassify} from "../../action/article/ClassifyAction";
@@ -50,8 +50,8 @@ class Index extends React.Component{
                 <div className="main">
                     <ReactCSSTransitionGroup
                         transitionName='fade'
-                        transitionEnterTimeout={500}
-                        transitionLeaveTimeout={500}>
+                        transitionEnterTimeout={FADE_ENTER}
+                        transitionLeaveTimeout={FADE_LEAVE}>
                         <Switch key={this.props.location.pathname} location={this.props.location}>
                             <Route exact strict path="/" component={Home} />
                             <Route exact strict path="/home" component={Home}/>
