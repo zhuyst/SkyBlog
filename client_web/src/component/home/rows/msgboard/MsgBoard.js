@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 
 import {getLength} from "../Util";
 import Msg from "./Msg";
+import {FADE_ENTER, FADE_LEAVE} from "../../../../Constant";
 
 class MsgBoard extends React.Component{
     render(){
@@ -33,8 +34,8 @@ class MsgBoard extends React.Component{
                 <Panel.Body>
                     <ReactCSSTransitionGroup
                         transitionName='fade'
-                        transitionEnterTimeout={500}
-                        transitionLeaveTimeout={500}>
+                        transitionEnterTimeout={FADE_ENTER}
+                        transitionLeaveTimeout={FADE_LEAVE}>
                         {msgList}
                     </ReactCSSTransitionGroup>
                     <Link className="more_link"

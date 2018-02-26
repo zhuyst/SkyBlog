@@ -5,7 +5,7 @@ import {Alert, Badge,Panel} from 'react-bootstrap'
 import Comment from './Comment'
 import {connect} from "react-redux";
 import {listComments} from "../../../../action/article/ContentAction";
-import {COMMENT_PAGE_SIZE} from "../../../../Constant";
+import {COMMENT_PAGE_SIZE, FADE_ENTER, FADE_LEAVE} from "../../../../Constant";
 
 class CommentList extends React.Component{
 
@@ -77,8 +77,8 @@ class CommentList extends React.Component{
                 <Panel.Body>
                     <ReactCSSTransitionGroup
                         transitionName='fade'
-                        transitionEnterTimeout={500}
-                        transitionLeaveTimeout={500}>
+                        transitionEnterTimeout={FADE_ENTER}
+                        transitionLeaveTimeout={FADE_LEAVE}>
                         {commentList}
                     </ReactCSSTransitionGroup>
                     {pager}

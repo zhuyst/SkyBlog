@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 
 import Msg from './Msg'
 
-import {MSG_PAGE_SIZE} from "../../Constant";
+import {FADE_ENTER, FADE_LEAVE, MSG_PAGE_SIZE} from "../../Constant";
 import {listMsg} from "../../action/msgboard/MsgBoardAction";
 
 class MsgList extends React.Component{
@@ -82,8 +82,8 @@ class MsgList extends React.Component{
                 <Panel.Body>
                     <ReactCSSTransitionGroup
                         transitionName='fade'
-                        transitionEnterTimeout={500}
-                        transitionLeaveTimeout={500}>
+                        transitionEnterTimeout={FADE_ENTER}
+                        transitionLeaveTimeout={FADE_LEAVE}>
                         {msgList}
                     </ReactCSSTransitionGroup>
                     {pager}

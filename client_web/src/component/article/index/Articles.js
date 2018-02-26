@@ -7,7 +7,7 @@ import Preview from './Preview'
 import Pager from "./Pager";
 
 import {listArticles} from "../../../action/article/ArticlesAction";
-import {ARTICLE_PAGE_SIZE} from "../../../Constant";
+import {ARTICLE_PAGE_SIZE, FADE_ENTER, FADE_LEAVE} from "../../../Constant";
 
 class Articles extends React.Component{
 
@@ -31,8 +31,8 @@ class Articles extends React.Component{
                 <PanelGroup id="articles">
                     <ReactCSSTransitionGroup
                         transitionName='fade'
-                        transitionEnterTimeout={500}
-                        transitionLeaveTimeout={500}>
+                        transitionEnterTimeout={FADE_ENTER}
+                        transitionLeaveTimeout={FADE_LEAVE}>
                         {articles}
                     </ReactCSSTransitionGroup>
                 </PanelGroup>
