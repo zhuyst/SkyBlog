@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {PanelGroup} from 'react-bootstrap'
 import { connect } from 'react-redux'
 
@@ -28,7 +29,12 @@ class Articles extends React.Component{
         return(
             <div>
                 <PanelGroup id="articles">
-                    {articles}
+                    <ReactCSSTransitionGroup
+                        transitionName='fade'
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}>
+                        {articles}
+                    </ReactCSSTransitionGroup>
                 </PanelGroup>
                 <div className="pager">
                     <Pager page={page} onClick={() => listArticles(page_num + 1)} />

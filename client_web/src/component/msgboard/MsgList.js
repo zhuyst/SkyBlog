@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Alert, Badge, Panel} from "react-bootstrap";
 import {connect} from "react-redux";
 
@@ -79,7 +80,12 @@ class MsgList extends React.Component{
                     </Panel.Title>
                 </Panel.Heading>
                 <Panel.Body>
-                    {msgList}
+                    <ReactCSSTransitionGroup
+                        transitionName='fade'
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}>
+                        {msgList}
+                    </ReactCSSTransitionGroup>
                     {pager}
                 </Panel.Body>
             </Panel>

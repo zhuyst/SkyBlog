@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {connect} from "react-redux";
 import {Alert, PanelGroup} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
@@ -45,7 +46,12 @@ class ClassifyArticles extends React.Component{
                         <strong>{classify.name}</strong>
                         &nbsp;下的文章
                     </Alert>
-                    {articles}
+                    <ReactCSSTransitionGroup
+                        transitionName='fade'
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}>
+                        {articles}
+                    </ReactCSSTransitionGroup>
                 </PanelGroup>
                 <div className="pager">
                     <Pager page={page} onClick={() => listArticlesByClassify(classify.id,page_num + 1)} />

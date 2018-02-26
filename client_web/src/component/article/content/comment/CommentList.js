@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Alert, Badge,Panel} from 'react-bootstrap'
 
 import Comment from './Comment'
@@ -74,7 +75,12 @@ class CommentList extends React.Component{
                     <span>评论列表&nbsp;&nbsp;<Badge>{total}</Badge></span>
                 </Panel.Heading>
                 <Panel.Body>
-                    {commentList}
+                    <ReactCSSTransitionGroup
+                        transitionName='fade'
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}>
+                        {commentList}
+                    </ReactCSSTransitionGroup>
                     {pager}
                 </Panel.Body>
             </Panel>

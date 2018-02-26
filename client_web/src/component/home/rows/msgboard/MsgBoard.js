@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Link} from "react-router-dom";
 import {Badge, Panel} from 'react-bootstrap'
 import {connect} from "react-redux";
@@ -30,7 +31,12 @@ class MsgBoard extends React.Component{
                     </Panel.Title>
                 </Panel.Heading>
                 <Panel.Body>
-                    {msgList}
+                    <ReactCSSTransitionGroup
+                        transitionName='fade'
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}>
+                        {msgList}
+                    </ReactCSSTransitionGroup>
                     <Link className="more_link"
                           to="/msg_board">
                         查看更多留言
