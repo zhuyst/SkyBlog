@@ -107,3 +107,7 @@ skyblog:
     access-key-secret : 7XWvmA5okuxlOiJXhfetgUDMQmGr1D
     
     bucket-name: zhuyst
+  admin:
+    username: admin
+    password: admin123
+    nickname: 系统管理员

@@ -2,7 +2,6 @@ package indi.zhuyst.skyblog.pojo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * 向OSS上传文件后返回的内容

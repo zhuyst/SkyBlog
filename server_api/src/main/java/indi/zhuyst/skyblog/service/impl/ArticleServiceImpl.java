@@ -27,9 +27,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 文章服务实现类
+ * @author zhuyst
+ */
 @Service("articleService")
 public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article>
         implements ArticleService{
+
     @Autowired
     private UserService userService;
 
@@ -105,6 +110,11 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article>
         return pojo;
     }
 
+    /**
+     * 检查是否为排除的ID {@link #EXCEPT_IDS}
+     * 如果为排除的ID则会抛出NOT FOUND异常{@link CommonException}
+     * @param id 检查的ID
+     */
     private void checkExcept(int id){
         for(Integer exceptId : EXCEPT_IDS){
             if(id == exceptId){
@@ -113,6 +123,11 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article>
         }
     }
 
+    /**
+     * 将DO封装为DTO
+     * @param article DO
+     * @return 封装后的DTO
+     */
     private ArticleDTO produceDTO(Article article){
         if(article == null){
             return null;
@@ -121,7 +136,9 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article>
         ArticleDTO pojo = new ArticleDTO(article);
 
         UserDTO user = userService.getUserDTO(article.getAuthorId());
-        pojo.setAuthor(user);
+        if(user != null){
+            pojo.setAuthor(user);
+        }
 
         if(article.getClassifyId() != null){
             Classify classify = classifyService.getByID(article.getClassifyId());
@@ -131,6 +148,11 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article>
         return pojo;
     }
 
+    /**
+     * 将DO分页对象封装为DTO分页对象
+     * @param pageInfo DO分页对象
+     * @return DTO分页对象
+     */
     private PageInfo<ArticleDTO> produceDTOPageInfo(PageInfo<Article> pageInfo){
         List<ArticleDTO> pojoList = new ArrayList<>();
         for(Article a : pageInfo.getList()){

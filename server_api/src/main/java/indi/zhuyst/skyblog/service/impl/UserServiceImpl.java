@@ -14,6 +14,7 @@ import indi.zhuyst.skyblog.dao.UserDao;
 import indi.zhuyst.skyblog.entity.User;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.UserService;
+import indi.zhuyst.skyblog.setting.DefaultAdminSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,13 +26,23 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 用户服务实现类
+ * @author zhuyst
+ */
 @Service("userService")
 public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
         implements UserService,CommandLineRunner{
 
     @Autowired
+    private DefaultAdminSettings defaultAdminSettings;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * 初始化管理员
+     */
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... strings) throws Exception {
@@ -40,9 +51,9 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
             user = new User();
 
             user.setId(ADMIN_KEY);
-            user.setUsername(ADMIN_DEFAULT_USERNAME);
-            user.setPassword(passwordEncoder.encode(ADMIN_DEFAULT_PASSWORD));
-            user.setNickname(ADMIN_DEFAULT_NICKNAME);
+            user.setUsername(defaultAdminSettings.getUsername());
+            user.setPassword(passwordEncoder.encode(defaultAdminSettings.getPassword()));
+            user.setNickname(defaultAdminSettings.getNickname());
             user.setRole(RoleEnum.SYS_ADMIN.getId());
 
             dao.insertSelective(user);
@@ -179,9 +190,14 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     @Override
     public PageInfo<UserDTO> listUser(Query<User> query){
         PageInfo<User> pageInfo = super.listByCondition(query);
-        return this.produceDTOPageInfo(pageInfo.getList());
+        return this.produceDTOPageInfo(pageInfo);
     }
 
+    /**
+     * 检查{@link User#username}和{@link User#nickname}是否存在重复
+     * 如果存在重复则会抛出{@link FieldErrorException}
+     * @param user 检查的用户对象
+     */
     private void checkUserInfo(User user){
         final String fieldUsername = "username";
         final String fieldNickname = "nickname";
@@ -209,6 +225,11 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
         }
     }
 
+    /**
+     * 将DO封装为DTO
+     * @param user DO
+     * @return DTO
+     */
     private UserDTO produceDTO(User user){
         if(user == null){
             return null;
@@ -218,11 +239,14 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
         return new UserDTO(user);
     }
 
-    private PageInfo<UserDTO> produceDTOPageInfo(List<User> list){
-        PageInfo<User> pageInfo = new PageInfo<>(list);
-
+    /**
+     * 将DO分页对象封装为DTO分页对象
+     * @param pageInfo DO分页对象
+     * @return DTO分页对象
+     */
+    private PageInfo<UserDTO> produceDTOPageInfo(PageInfo<User> pageInfo){
         List<UserDTO> pojoList = new ArrayList<>();
-        for(User u : list){
+        for(User u : pageInfo.getList()){
             u.setPassword(null);
             UserDTO pojo = this.produceDTO(u);
             pojoList.add(pojo);
