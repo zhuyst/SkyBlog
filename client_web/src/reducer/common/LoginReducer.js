@@ -1,4 +1,4 @@
-import {LOGIN_CLEAR, LOGIN_RESPONSE} from "../../action/common/LoginAction";
+import {LOGIN_CLEAR, LOGIN_RESPONSE, SET_ADMIN} from "../../action/common/LoginAction";
 import {SET_LOGIN_USER, UPDATE_USER_INFO_RESPONSE} from "../../action/user/UsersAction";
 
 const initialUser = {
@@ -18,6 +18,17 @@ const LoginReducer = (state = initialState,action) => {
     console.log(action.type);
 
     switch (action.type){
+        case SET_ADMIN:{
+            const user = state.user;
+            return {
+                ...state,
+                user : {
+                    ...user,
+                    admin : action.admin
+                }
+            }
+        }
+
         case LOGIN_CLEAR:{
             return {
                 ...state,
@@ -25,6 +36,7 @@ const LoginReducer = (state = initialState,action) => {
                 user : initialUser
             }
         }
+
         case LOGIN_RESPONSE:{
             let ok = action.ok;
             let message = action.message;
@@ -41,11 +53,13 @@ const LoginReducer = (state = initialState,action) => {
                 ...state,
                 user : action.user
             };
+
         case UPDATE_USER_INFO_RESPONSE:
             return {
                 ...state,
                 user : action.user
             };
+
         default:
             return state;
     }
