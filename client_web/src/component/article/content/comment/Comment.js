@@ -6,7 +6,7 @@ import {deleteComment, setPreviousComment} from "../../../../action/article/Cont
 import {FORM_COMMENT} from "../../../../Constant";
 import {convertBr} from "../../../Util";
 import {Alert} from "react-bootstrap";
-import UserInfoPopover from "../../../common/UserInfoPopover";
+import UserInfoPopover from "../../../common/userinfo/UserInfoPopover";
 
 class Comment extends React.Component{
     render(){
