@@ -1,0 +1,9 @@
+.error{
+    position: absolute;
+    top: 30%;
+    width: 100%;
+}
+
+.not_found{
+    text-align: center;
+}

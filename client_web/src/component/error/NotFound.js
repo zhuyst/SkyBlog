@@ -2,18 +2,26 @@ import React from 'react'
 import {Button} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 
+import '../../static/css/error/error.css'
+
 class NotFound extends React.Component{
     render(){
         return (
-            <div>
-                <h1>404 NOT FOUND</h1>
-                <h2>
-                    没有找到该页面，你可以从上方页面查看其它页面，或者
+            <div className="error">
+                <div className="not_found">
+                    <h1>404 NOT FOUND</h1>
                     <br/>
-                    <LinkContainer to="/">
-                        <Button>返回主页</Button>
-                    </LinkContainer>
-                </h2>
+                    <h2>
+                        没有找到该页面，你可以从上方页面查看其它页面
+                    </h2>
+                    <br/>
+                    <h2>
+                        或者
+                        <LinkContainer to="/">
+                            <Button bsStyle="primary">返回主页</Button>
+                        </LinkContainer>
+                    </h2>
+                </div>
             </div>
         )
     }
