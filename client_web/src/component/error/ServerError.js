@@ -2,20 +2,17 @@ import React from 'react'
 import {Button} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 
-import '../../static/css/error/error.css'
-
-class NotFound extends React.Component{
+class ServerError extends React.Component{
     render(){
         return (
             <div className="error">
-                <h1>404 NOT FOUND</h1>
+                <h1>500 SERVER ERROR</h1>
                 <br/>
                 <h2>
-                    没有找到该页面，你可以从上方页面查看其它页面
+                    服务器错误或者网络不稳定，请稍后再试
                 </h2>
                 <br/>
                 <h2>
-                    或者&nbsp;&nbsp;
                     <LinkContainer to="/">
                         <Button bsStyle="primary" bsSize="large">返回主页</Button>
                     </LinkContainer>
@@ -25,4 +22,4 @@ class NotFound extends React.Component{
     }
 }
 
-export default NotFound
+export default ServerError
