@@ -8,7 +8,7 @@ import lombok.Getter;
  * @see SysLog
  * @author zhuyst
  */
-public enum SysLogType {
+public enum SysLogTypeEnum {
 
     /**
      * 未定义
@@ -39,7 +39,7 @@ public enum SysLogType {
     @Getter
     private String name;
 
-    SysLogType(String name){
+    SysLogTypeEnum(String name){
         this.name = name;
     }
 }

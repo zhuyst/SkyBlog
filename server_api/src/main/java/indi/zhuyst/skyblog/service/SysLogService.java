@@ -12,7 +12,17 @@ import indi.zhuyst.skyblog.pojo.SysLogDTO;
  */
 public interface SysLogService extends BaseCrudService<SysLogDO> {
 
+    /**
+     * 通过id获取系统日志DTO
+     * @param id 系统日志ID
+     * @return 系统日志DTO
+     */
     SysLogDTO getSysLogDTO(int id);
 
+    /**
+     * 获取系统日志分页对象
+     * @param query 查询对象
+     * @return 系统日志分页对象
+     */
     PageInfo<SysLogDTO> listSysLogDTO(Query<SysLogDO> query);
 }
