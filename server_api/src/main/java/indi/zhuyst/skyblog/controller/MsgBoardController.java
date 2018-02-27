@@ -5,8 +5,10 @@ import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.Result;
 import indi.zhuyst.security.util.SecurityUtils;
+import indi.zhuyst.skyblog.annotation.SysLog;
 import indi.zhuyst.skyblog.entity.CommentDO;
 import indi.zhuyst.skyblog.entity.UserDO;
+import indi.zhuyst.skyblog.enums.SysLogTypeEnum;
 import indi.zhuyst.skyblog.pojo.CommentDTO;
 import indi.zhuyst.skyblog.service.MsgBoardService;
 import io.swagger.annotations.Api;
@@ -26,6 +28,11 @@ import javax.validation.Valid;
 @Api(value = "MsgBoardApi",description = "留言板相关API")
 @RequestMapping("/msg_board")
 public class MsgBoardController extends BaseController{
+
+    /**
+     * 资源名 - 留言板
+     */
+    private static final String RESOURCE_MSG = "留言板";
 
     @Autowired
     private MsgBoardService msgBoardService;
@@ -50,6 +57,7 @@ public class MsgBoardController extends BaseController{
     @PostMapping("/")
     @ApiOperation("新增留言")
     @PreAuthorize("isAuthenticated()")
+    @SysLog(resource = RESOURCE_MSG,type = SysLogTypeEnum.INSERT)
     public Result<CommentDTO> insertMsg(@ApiParam("留言对象") @Valid @RequestBody CommentDO comment){
         comment.setId(null);
 
@@ -68,6 +76,7 @@ public class MsgBoardController extends BaseController{
     @DeleteMapping("/{id}")
     @ApiOperation("根据id删除留言")
     @PreAuthorize("isAuthenticated()")
+    @SysLog(resource = RESOURCE_MSG,type = SysLogTypeEnum.DELETE)
     public Result deleteMsg(@ApiParam("留言ID") @PathVariable("id")Integer id){
         CommentDO comment = msgBoardService.getMsg(id);
         checkPerms(comment.getAuthorId());

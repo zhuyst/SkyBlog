@@ -2,6 +2,8 @@ package indi.zhuyst.skyblog.controller;
 
 import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.pojo.Result;
+import indi.zhuyst.skyblog.annotation.SysLog;
+import indi.zhuyst.skyblog.enums.SysLogTypeEnum;
 import indi.zhuyst.skyblog.pojo.About;
 import indi.zhuyst.skyblog.service.AboutService;
 import io.swagger.annotations.Api;
@@ -21,6 +23,11 @@ import javax.validation.Valid;
 @Api(value = "AboutApi",description = "关于相关API")
 @RequestMapping("/about")
 public class AboutController extends BaseController{
+
+    /**
+     * 资源名 - 留言板
+     */
+    private static final String RESOURCE_ABOUT = "留言板";
 
     @Autowired
     private AboutService aboutService;
@@ -43,6 +50,7 @@ public class AboutController extends BaseController{
     @PutMapping("/")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     @ApiOperation("更新关于")
+    @SysLog(resource = RESOURCE_ABOUT,type = SysLogTypeEnum.UPDATE)
     public Result<About> updateAbout(@ApiParam("关于对象") @Valid @RequestBody About about){
         return produceResult(aboutService.updateAbout(about),"更新关于失败");
     }

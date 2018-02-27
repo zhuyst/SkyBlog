@@ -97,6 +97,16 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
     }
 
     @Override
+    public boolean delete(int id) {
+        UserDTO user = this.getUserDTO(id);
+        if(user.getAdmin()){
+            throw new CommonException("管理员不能被删除");
+        }
+
+        return super.delete(id);
+    }
+
+    @Override
     public UserDTO getUserDTO(int id){
         UserDO user = super.getByID(id);
         return this.produceDTO(user);
