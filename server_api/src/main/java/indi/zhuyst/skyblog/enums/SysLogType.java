@@ -1,6 +1,7 @@
 package indi.zhuyst.skyblog.enums;
 
 import indi.zhuyst.skyblog.annotation.SysLog;
+import lombok.Getter;
 
 /**
  * 系统日志类型
@@ -35,13 +36,10 @@ public enum SysLogType {
      */
     DELETE("删除");
 
+    @Getter
     private String name;
 
     SysLogType(String name){
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 }
