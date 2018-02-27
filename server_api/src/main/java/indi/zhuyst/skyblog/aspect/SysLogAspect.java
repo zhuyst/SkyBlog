@@ -1,19 +1,20 @@
 package indi.zhuyst.skyblog.aspect;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import indi.zhuyst.skyblog.entity.SysLogDO;
-import indi.zhuyst.skyblog.annotation.SysLog;
 import indi.zhuyst.common.exception.CommonException;
-import indi.zhuyst.skyblog.service.SysLogService;
 import indi.zhuyst.common.util.JsonUtils;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.util.SecurityUtils;
+import indi.zhuyst.skyblog.annotation.SysLog;
+import indi.zhuyst.skyblog.entity.SysLogDO;
+import indi.zhuyst.skyblog.service.SysLogService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -25,6 +26,7 @@ import java.util.Date;
  */
 @Aspect
 @Component
+@Order(-100)
 public class SysLogAspect {
 
     @Autowired
@@ -53,7 +55,7 @@ public class SysLogAspect {
         // 设置操作类型以及信息
         SysLog annotation = method.getAnnotation(SysLog.class);
         log.setType(annotation.type().getName());
-        log.setMessage(annotation.message());
+        log.setResource(annotation.resource());
 
         // 设置方法名
         String className = point.getTarget().getClass().getName();

@@ -13,6 +13,8 @@ import org.springframework.beans.BeanUtils;
 @Data
 public class SysLogDTO extends SysLogDO{
 
+    private static final long serialVersionUID = 1271342715565500545L;
+
     /**
      * 操作用户对象
      */

@@ -45,7 +45,7 @@ spring:
         login-password: zhuyst
         reset-enable: false
 
-      aop-patterns: indi.zhuyst.skyblog.util.*,indi.zhuyst.skyblog.dao.*
+      aop-patterns: indi.zhuyst.skyblog.service.impl.*,indi.zhuyst.skyblog.dao.*
 
   aop:
     proxy-target-class: true

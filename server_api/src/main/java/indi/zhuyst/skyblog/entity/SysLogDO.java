@@ -1,5 +1,6 @@
 package indi.zhuyst.skyblog.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import indi.zhuyst.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -27,10 +28,10 @@ public class SysLogDO extends BaseEntity {
     private String type;
 
     /**
-     * 信息
+     * 资源
      */
-    @ApiModelProperty("信息")
-    private String message;
+    @ApiModelProperty("资源")
+    private String resource;
 
     /**
      * 方法名
@@ -50,6 +51,8 @@ public class SysLogDO extends BaseEntity {
      * 操作时间
      */
     @Column(name = "create_date")
+    @OrderBy("desc")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
     @ApiModelProperty("操作时间")
     private Date createDate;
 
