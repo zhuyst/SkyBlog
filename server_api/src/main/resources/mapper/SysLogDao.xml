@@ -8,7 +8,7 @@
     <constructor>
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="message" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="resource" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="method" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="create_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
@@ -21,7 +21,7 @@
     <constructor>
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="message" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="resource" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="method" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="create_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
@@ -32,7 +32,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    id, type, message, method, user_id, create_date
+    id, type, resource, method, user_id, create_date
   </sql>
   <sql id="Blob_Column_List">
     <!--

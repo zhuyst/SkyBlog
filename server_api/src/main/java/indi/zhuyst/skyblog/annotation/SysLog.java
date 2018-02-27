@@ -15,11 +15,15 @@ import java.lang.annotation.*;
 @Documented
 public @interface SysLog {
 
+    /**
+     * 操作类型
+     * @see indi.zhuyst.skyblog.entity.SysLogDO#type
+     */
     SysLogType type() default SysLogType.UNDEFINED;
 
-    @AliasFor("message")
-    String value() default "";
-
-    @AliasFor("value")
-    String message() default "";
+    /**
+     * 资源
+     * @see indi.zhuyst.skyblog.entity.SysLogDO#resource
+     */
+    String resource() default "";
 }
