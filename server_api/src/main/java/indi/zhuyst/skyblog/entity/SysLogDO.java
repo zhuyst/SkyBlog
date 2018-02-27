@@ -1,5 +1,6 @@
-package indi.zhuyst.common.entity;
+package indi.zhuyst.skyblog.entity;
 
+import indi.zhuyst.common.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "sys_log")
 @Data
-public class SysLogDO extends BaseEntity{
+public class SysLogDO extends BaseEntity {
 
     private static final long serialVersionUID = -7383283970879751197L;
 

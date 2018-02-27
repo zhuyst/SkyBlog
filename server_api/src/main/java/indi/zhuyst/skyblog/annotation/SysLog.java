@@ -1,13 +1,13 @@
-package indi.zhuyst.common.annotation;
+package indi.zhuyst.skyblog.annotation;
 
-import indi.zhuyst.common.enums.SysLogType;
+import indi.zhuyst.skyblog.enums.SysLogType;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
 
 /**
  * 系统日志注解
- * @see indi.zhuyst.common.aspect.SysLogAspect
+ * @see indi.zhuyst.skyblog.aspect.SysLogAspect
  * @author zhuyst
  */
 @Target(ElementType.METHOD)

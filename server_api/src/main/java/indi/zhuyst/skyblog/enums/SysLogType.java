@@ -1,6 +1,6 @@
-package indi.zhuyst.common.enums;
+package indi.zhuyst.skyblog.enums;
 
-import indi.zhuyst.common.annotation.SysLog;
+import indi.zhuyst.skyblog.annotation.SysLog;
 
 /**
  * 系统日志类型
