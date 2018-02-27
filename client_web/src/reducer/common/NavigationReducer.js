@@ -1,5 +1,5 @@
 import {
-    SET_LOGIN_MODAL_SHOW, SET_REGISTER_MODAL_SHOW, SET_USER_MANAGEMENT_MODAL_SHOW,
+    SET_LOGIN_MODAL_SHOW, SET_REGISTER_MODAL_SHOW, SET_SYS_LOG_MODAL_SHOW, SET_USER_MANAGEMENT_MODAL_SHOW,
     SET_USERINFO_MODAL_SHOW
 } from '../../action/common/ModalAction'
 
@@ -8,7 +8,8 @@ const initialState = {
         loginModal_show : false,
         registerModal_show : false,
         userInfoModal_show : false,
-        userManagementModal_show : false
+        userManagementModal_show : false,
+        sysLogModal_show : false
     }
 };
 
@@ -43,6 +44,7 @@ const NavigationReducer = (state = initialState,action) => {
                     userInfoModal_show : show
                 }
             };
+
         case SET_USER_MANAGEMENT_MODAL_SHOW:
             return {
                 ...state,
@@ -52,6 +54,14 @@ const NavigationReducer = (state = initialState,action) => {
                 }
             };
 
+        case SET_SYS_LOG_MODAL_SHOW:
+            return {
+                ...state,
+                modal : {
+                    ...modal,
+                    sysLogModal_show: show
+                }
+            };
         default :
             return state
     }

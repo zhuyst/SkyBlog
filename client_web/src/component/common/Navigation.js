@@ -5,7 +5,7 @@ import { Nav,NavItem,Navbar,NavDropdown,MenuItem} from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import {
-    setLoginModalShow, setRegisterModalShow, setUserInfoModalShow,
+    setLoginModalShow, setRegisterModalShow, setSysLogModalShow, setUserInfoModalShow,
     setUserManagementModalShow
 } from "../../action/common/ModalAction";
 import {logout, setAdmin} from "../../action/common/LoginAction"
@@ -14,12 +14,13 @@ import LoginModal from './modal/LoginModal'
 import RegisterModal from './modal/RegisterModal'
 import UserInfoModal from "./modal/UserInfoModal";
 import UserManagementModal from "./modal/UserManagementModal";
+import SysLogModal from "./modal/SysLogModal";
 
 class Navigation extends React.Component{
 
     render(){
         const { logout, login, setAdmin,showLoginModal,showUserManagementModal,
-            showRegisterModal,showUserInfoModal} = this.props;
+            showRegisterModal,showUserInfoModal,showSysLogModal} = this.props;
         const user = login.user;
         const admin = user.admin;
 
@@ -33,11 +34,13 @@ class Navigation extends React.Component{
 
                         {
                             admin &&
-                            <MenuItem onClick={showUserManagementModal}>用户管理</MenuItem>
-                        }
-                        {
-                            admin &&
-                            <UserManagementModal/>
+                            [
+                                <MenuItem onClick={showUserManagementModal}>用户管理</MenuItem>,
+                                <UserManagementModal/>,
+
+                                <MenuItem onClick={showSysLogModal}>系统日志</MenuItem>,
+                                <SysLogModal/>
+                            ]
                         }
 
                         <MenuItem onClick={logout}>登出</MenuItem>
@@ -122,6 +125,9 @@ const mapDispatchToProps = dispatch => {
         },
         showUserManagementModal : () => {
             dispatch(setUserManagementModalShow(true))
+        },
+        showSysLogModal : () => {
+            dispatch(setSysLogModalShow(true))
         },
         logout : () => {
             dispatch(logout())

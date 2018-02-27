@@ -67,7 +67,6 @@ class UserManagementModal extends React.Component{
 
             users.push(
                 <CSSTransition
-                    {...this.props}
                     classNames="fade"
                     exit={false}
                     timeout={{
@@ -134,6 +133,9 @@ class UserManagementModal extends React.Component{
                     </Pager>
                 </Modal.Body>
                 <Modal.Footer>
+                    <Button bsStyle="primary" onClick={() => listUsers(page_num)}>
+                        &nbsp;刷新&nbsp;
+                    </Button>
                     <Button onClick={onHide}>&nbsp;关闭&nbsp;</Button>
                 </Modal.Footer>
             </Modal>
