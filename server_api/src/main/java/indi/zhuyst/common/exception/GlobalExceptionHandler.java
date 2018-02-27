@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
     public Result methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e){
         List<FieldError> errors = e.getBindingResult().getFieldErrors();
 
-        Result result = Result.error(CodeEnum.ERROR.getCode(),"表单验证失败");
+        Result result = Result.error(CodeEnum.ERROR);
         for(FieldError fieldError : errors){
             Error error = new Error();
 
@@ -37,6 +37,8 @@ public class GlobalExceptionHandler {
 
             result.addError(error);
         }
+
+        result.setMessage(getFieldErrorMessage(result));
         return result;
     }
 
@@ -47,11 +49,12 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(FieldErrorException.class)
     public Result fieldErrorExceptionHandler(FieldErrorException e){
-        Result result = Result.error(CodeEnum.ERROR.getCode(),"表单验证失败");
+        Result result = Result.error(CodeEnum.ERROR);
 
         List<Error> list = e.getErrors();
         result.addError(list);
 
+        result.setMessage(getFieldErrorMessage(result));
         return result;
     }
 
@@ -84,5 +87,18 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CommonException.class)
     public Result commonExceptionHandler(CommonException e){
         return Result.error(e.getCode(),e.getMessage());
+    }
+
+    /**
+     * 将{@link Result#errors}中的错误转为String
+     * @param result 要转换的Result
+     * @return 转换后的String
+     */
+    private String getFieldErrorMessage(Result result){
+        StringBuilder builder = new StringBuilder();
+        for(Object message : result.getErrors().values()){
+            builder.append(message).append("\t");
+        }
+        return builder.toString();
     }
 }
