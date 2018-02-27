@@ -1,6 +1,12 @@
 package indi.zhuyst.common.dao;
 
-import indi.zhuyst.common.entity.SysLog;
+import indi.zhuyst.common.entity.SysLogDO;
+import org.springframework.stereotype.Repository;
 
-public interface SysLogDao extends BaseDao<SysLog> {
+/**
+ * 系统日志DAO
+ * @author zhuyst
+ */
+@Repository
+public interface SysLogDao extends BaseDao<SysLogDO> {
 }

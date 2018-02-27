@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.Table;
+
 /**
  * 分类
  * @author zhuyst
@@ -14,7 +16,8 @@ import org.hibernate.validator.constraints.NotBlank;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class Classify extends BaseEntity {
+@Table(name = "classify")
+public class ClassifyDO extends BaseEntity {
 
     private static final long serialVersionUID = 6077264447508816892L;
 

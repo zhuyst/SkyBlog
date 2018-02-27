@@ -1,6 +1,6 @@
 package indi.zhuyst.skyblog.setting;
 
-import indi.zhuyst.skyblog.entity.User;
+import indi.zhuyst.skyblog.entity.UserDO;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -16,19 +16,19 @@ public class DefaultAdminSettings {
 
     /**
      * 管理员的默认用户名
-     * @see User#username
+     * @see UserDO#username
      */
     private String username;
 
     /**
      * 管理员的默认密码
-     * @see User#password
+     * @see UserDO#password
      */
     private String password;
 
     /**
      * 管理员的默认昵称
-     * @see User#nickname
+     * @see UserDO#nickname
      */
     private String nickname;
 }

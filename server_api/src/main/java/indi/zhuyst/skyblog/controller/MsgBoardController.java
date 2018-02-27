@@ -5,8 +5,8 @@ import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.Result;
 import indi.zhuyst.security.util.SecurityUtils;
-import indi.zhuyst.skyblog.entity.Comment;
-import indi.zhuyst.skyblog.entity.User;
+import indi.zhuyst.skyblog.entity.CommentDO;
+import indi.zhuyst.skyblog.entity.UserDO;
 import indi.zhuyst.skyblog.pojo.CommentDTO;
 import indi.zhuyst.skyblog.service.MsgBoardService;
 import io.swagger.annotations.Api;
@@ -50,10 +50,10 @@ public class MsgBoardController extends BaseController{
     @PostMapping("/")
     @ApiOperation("新增留言")
     @PreAuthorize("isAuthenticated()")
-    public Result<CommentDTO> insertMsg(@ApiParam("留言对象") @Valid @RequestBody Comment comment){
+    public Result<CommentDTO> insertMsg(@ApiParam("留言对象") @Valid @RequestBody CommentDO comment){
         comment.setId(null);
 
-        User user = SecurityUtils.getUser();
+        UserDO user = SecurityUtils.getUser();
         comment.setAuthorId(user.getId());
 
         CommentDTO pojo = msgBoardService.insertMsg(comment);
@@ -69,7 +69,7 @@ public class MsgBoardController extends BaseController{
     @ApiOperation("根据id删除留言")
     @PreAuthorize("isAuthenticated()")
     public Result deleteMsg(@ApiParam("留言ID") @PathVariable("id")Integer id){
-        Comment comment = msgBoardService.getMsg(id);
+        CommentDO comment = msgBoardService.getMsg(id);
         checkPerms(comment.getAuthorId());
         return produceResult(msgBoardService.deleteMsg(id),"删除文章失败");
     }

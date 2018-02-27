@@ -10,7 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author zhuyst
  */
 @SpringBootApplication
-@MapperScan(basePackages = "indi.zhuyst.skyblog.dao",markerInterface = BaseDao.class)
+@MapperScan(basePackages = {"indi.zhuyst.common.dao",
+		"indi.zhuyst.skyblog.dao"},
+		markerInterface = BaseDao.class)
 public class SkyblogApplication {
 
 	public static void main(String[] args) {

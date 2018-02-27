@@ -2,7 +2,7 @@ package indi.zhuyst.skyblog.controller;
 
 import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.pojo.Result;
-import indi.zhuyst.skyblog.entity.Classify;
+import indi.zhuyst.skyblog.entity.ClassifyDO;
 import indi.zhuyst.skyblog.pojo.ClassifyDTO;
 import indi.zhuyst.skyblog.service.ClassifyService;
 import io.swagger.annotations.Api;
@@ -46,7 +46,7 @@ public class ClassifyController extends BaseController{
     @PostMapping("/")
     @ApiOperation("新增分类")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
-    public Result<List<ClassifyDTO>> insertClassify(@ApiParam("分类对象") @Valid @RequestBody Classify classify){
+    public Result<List<ClassifyDTO>> insertClassify(@ApiParam("分类对象") @Valid @RequestBody ClassifyDO classify){
         classify.setId(null);
         classify = classifyService.save(classify);
         List<ClassifyDTO> list = this.produceDTOList(classify != null);
@@ -63,7 +63,7 @@ public class ClassifyController extends BaseController{
     @ApiOperation("根据id更新分类")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public Result<List<ClassifyDTO>> updateClassify(@ApiParam("分类ID") @PathVariable("id")Integer id,
-                                                    @ApiParam("分类对象") @Valid @RequestBody Classify classify){
+                                                    @ApiParam("分类对象") @Valid @RequestBody ClassifyDO classify){
         classify.setId(id);
         classify = classifyService.save(classify);
         List<ClassifyDTO> list = this.produceDTOList(classify != null);

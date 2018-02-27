@@ -1,11 +1,12 @@
 package indi.zhuyst.security.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import indi.zhuyst.skyblog.entity.UserDO;
 import lombok.Getter;
 
 /**
  * 用户角色枚举类
- * @see indi.zhuyst.skyblog.entity.User#role
+ * @see UserDO#role
  * @author zhuyst
  */
 public enum RoleEnum {
@@ -26,7 +27,7 @@ public enum RoleEnum {
 
     /**
      * 角色ID
-     * @see indi.zhuyst.skyblog.entity.User#role
+     * @see UserDO#role
      */
     @Getter
     private int id;
@@ -44,7 +45,7 @@ public enum RoleEnum {
 
     /**
      * 通过ID获取枚举类
-     * @param id 角色ID {@link indi.zhuyst.skyblog.entity.User#role}
+     * @param id 角色ID {@link UserDO#role}
      * @return 枚举类
      */
     @JsonCreator

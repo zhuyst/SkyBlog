@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;
 import javax.persistence.OrderBy;
+import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
@@ -20,7 +21,8 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class User extends BaseEntity {
+@Table(name = "user")
+public class UserDO extends BaseEntity {
 
     private static final long serialVersionUID = 955034318028237994L;
 

@@ -1,5 +1,6 @@
 package indi.zhuyst.skyblog.pojo;
 
+import indi.zhuyst.skyblog.entity.UserDO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ public class UpdateRole {
 
     /**
      * 角色ID
-     * @see indi.zhuyst.skyblog.entity.User#role
+     * @see UserDO#role
      * @see indi.zhuyst.security.enums.RoleEnum
      */
     @ApiModelProperty("角色ID")

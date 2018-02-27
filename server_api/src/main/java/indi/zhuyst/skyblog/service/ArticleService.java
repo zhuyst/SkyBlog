@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.BaseCrudService;
 import indi.zhuyst.common.service.CacheableService;
-import indi.zhuyst.skyblog.entity.Article;
+import indi.zhuyst.skyblog.entity.ArticleDO;
 import indi.zhuyst.skyblog.pojo.ArticleDTO;
 
 import java.util.Arrays;
@@ -14,7 +14,7 @@ import java.util.List;
  * 文章服务接口
  * @author zhuyst
  */
-public interface ArticleService extends BaseCrudService<Article>,
+public interface ArticleService extends BaseCrudService<ArticleDO>,
         CacheableService{
 
     /**
@@ -48,13 +48,13 @@ public interface ArticleService extends BaseCrudService<Article>,
      * @param query 查询对象
      * @return 文章DTO分页对象
      */
-    PageInfo<ArticleDTO> listArticle(Query<Article> query);
+    PageInfo<ArticleDTO> listArticle(Query<ArticleDO> query);
 
     /**
      * 保存并返回文章DTO
      * @param article 文章对象
      * @return 保存后的文章DTO
      */
-    ArticleDTO saveArticle(Article article);
+    ArticleDTO saveArticle(ArticleDO article);
 
 }

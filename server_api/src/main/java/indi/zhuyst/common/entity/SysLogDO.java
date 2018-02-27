@@ -13,7 +13,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "sys_log")
 @Data
-public class SysLog extends BaseEntity{
+public class SysLogDO extends BaseEntity{
 
     private static final long serialVersionUID = -7383283970879751197L;
 

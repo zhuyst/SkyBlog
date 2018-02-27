@@ -3,7 +3,7 @@ package indi.zhuyst.skyblog.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import indi.zhuyst.security.enums.RoleEnum;
 import indi.zhuyst.security.enums.StatusEnum;
-import indi.zhuyst.skyblog.entity.User;
+import indi.zhuyst.skyblog.entity.UserDO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,7 +18,7 @@ import org.springframework.beans.BeanUtils;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-public class UserDTO extends User {
+public class UserDTO extends UserDO {
 
     private static final long serialVersionUID = -9051994604875275894L;
 
@@ -52,7 +52,7 @@ public class UserDTO extends User {
     @Getter
     private Boolean locked;
 
-    public UserDTO(User user){
+    public UserDTO(UserDO user){
         BeanUtils.copyProperties(user,this,
                 "role","status");
 

@@ -3,7 +3,7 @@ package indi.zhuyst.skyblog.service;
 import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.BaseCrudService;
-import indi.zhuyst.skyblog.entity.User;
+import indi.zhuyst.skyblog.entity.UserDO;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -11,11 +11,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * 用户服务接口
  * @author zhuyst
  */
-public interface UserService extends BaseCrudService<User>,UserDetailsService{
+public interface UserService extends BaseCrudService<UserDO>,UserDetailsService{
 
     /**
      * 管理员的ID
-     * @see User#id
+     * @see UserDO#id
      */
     int ADMIN_KEY = 1;
 
@@ -31,25 +31,25 @@ public interface UserService extends BaseCrudService<User>,UserDetailsService{
      * @param username 用户名
      * @return 用户对象
      */
-    User getByUsername(String username);
+    UserDO getByUsername(String username);
 
     /**
      * 根据昵称获取用户对象
      * @param nickname 昵称
      * @return 用户对象
      */
-    User getByNickName(String nickname);
+    UserDO getByNickName(String nickname);
 
     /**
      * 保存用户并且返回用户DTO
      * @param user 用户对象
      * @return 保存后的用户DTO
      */
-    UserDTO saveUser(User user);
+    UserDTO saveUser(UserDO user);
 
     /**
      * 提升用户为管理员{@link indi.zhuyst.security.enums.RoleEnum#ADMIN}
-     * @see User#role
+     * @see UserDO#role
      * @param id 用户ID
      * @return 结果
      */
@@ -57,7 +57,7 @@ public interface UserService extends BaseCrudService<User>,UserDetailsService{
 
     /**
      * 降低用户为访客{@link indi.zhuyst.security.enums.RoleEnum#VISITOR}
-     * @see User#role
+     * @see UserDO#role
      * @param id 用户ID
      * @return 结果
      */
@@ -65,7 +65,7 @@ public interface UserService extends BaseCrudService<User>,UserDetailsService{
 
     /**
      * 锁定用户{@link indi.zhuyst.security.enums.StatusEnum#LOCKED}
-     * @see User#status
+     * @see UserDO#status
      * @param id 用户ID
      * @return 结果
      */
@@ -73,7 +73,7 @@ public interface UserService extends BaseCrudService<User>,UserDetailsService{
 
     /**
      * 解锁用户{@link indi.zhuyst.security.enums.StatusEnum#NORMAL}
-     * @see User#status
+     * @see UserDO#status
      * @param id 用户ID
      * @return 结果
      */
@@ -84,6 +84,6 @@ public interface UserService extends BaseCrudService<User>,UserDetailsService{
      * @param query 查询对象
      * @return 用户DTO分页对象
      */
-    PageInfo<UserDTO> listUser(Query<User> query);
+    PageInfo<UserDTO> listUser(Query<UserDO> query);
 
 }

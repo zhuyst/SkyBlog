@@ -6,8 +6,8 @@ import indi.zhuyst.common.pojo.Error;
 import indi.zhuyst.common.service.impl.BaseCrudServiceImpl;
 import indi.zhuyst.skyblog.dao.ArticleDao;
 import indi.zhuyst.skyblog.dao.ClassifyDao;
-import indi.zhuyst.skyblog.entity.Article;
-import indi.zhuyst.skyblog.entity.Classify;
+import indi.zhuyst.skyblog.entity.ArticleDO;
+import indi.zhuyst.skyblog.entity.ClassifyDO;
 import indi.zhuyst.skyblog.pojo.ClassifyDTO;
 import indi.zhuyst.skyblog.service.ClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import java.util.List;
  * @author zhuyst
  */
 @Service("classifyService")
-public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classify>
+public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,ClassifyDO>
         implements ClassifyService,CommandLineRunner{
 
     @Autowired
@@ -38,9 +38,9 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... args) throws Exception {
-        Classify classify = this.getByID(NOT_CLASSIFY_KEY);
+        ClassifyDO classify = this.getByID(NOT_CLASSIFY_KEY);
         if(classify == null){
-            classify = new Classify();
+            classify = new ClassifyDO();
 
             classify.setId(NOT_CLASSIFY_KEY);
             classify.setName("未分类");
@@ -51,7 +51,7 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
 
     @Override
     @Cacheable(cacheNames = CACHE_OBJECT,key = "#id")
-    public Classify getByID(int id) {
+    public ClassifyDO getByID(int id) {
         return super.getByID(id);
     }
 
@@ -59,7 +59,7 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_LIST},allEntries = true)
-    public Classify save(Classify entity) {
+    public ClassifyDO save(ClassifyDO entity) {
         checkClassify(entity);
         return super.save(entity);
     }
@@ -73,8 +73,8 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
         }
 
         // 将分类下的文章归为未分类
-        List<Article> articles = articleDao.selectBaseInfoByClassify(id);
-        for(Article article : articles){
+        List<ArticleDO> articles = articleDao.selectBaseInfoByClassify(id);
+        for(ArticleDO article : articles){
             article.setClassifyId(NOT_CLASSIFY_KEY);
             articleDao.updateByPrimaryKeySelective(article);
         }
@@ -84,13 +84,13 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
 
     @Override
     public ClassifyDTO getClassifyDTO(int id) {
-        Classify classify = this.getByID(id);
+        ClassifyDO classify = this.getByID(id);
         return this.produceDTO(classify);
     }
 
     @Override
-    public Classify getByName(String name) {
-        Classify classify = new Classify();
+    public ClassifyDO getByName(String name) {
+        ClassifyDO classify = new ClassifyDO();
         classify.setName(name);
 
         return dao.selectOne(classify);
@@ -99,10 +99,10 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
     @Override
     @Cacheable(CACHE_LIST)
     public List<ClassifyDTO> listClassify(){
-        List<Classify> list = super.listAll();
+        List<ClassifyDO> list = super.listAll();
         List<ClassifyDTO> dtoList = new ArrayList<>();
 
-        for(Classify classify : list){
+        for(ClassifyDO classify : list){
             ClassifyDTO dto = this.produceDTO(classify);
             dtoList.add(dto);
         }
@@ -115,9 +115,9 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
      * 如果存在重复则会抛出异常{@link FieldErrorException}
      * @param classify 分类对象
      */
-    private void checkClassify(Classify classify){
+    private void checkClassify(ClassifyDO classify){
         final String fieldName = "name";
-        Classify oldClassify = this.getByName(classify.getName());
+        ClassifyDO oldClassify = this.getByName(classify.getName());
 
         if(oldClassify != null){
             Error error = new Error();
@@ -132,14 +132,14 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
      * @param classify DO
      * @return DTO
      */
-    private ClassifyDTO produceDTO(Classify classify){
+    private ClassifyDTO produceDTO(ClassifyDO classify){
         if(classify == null){
             return null;
         }
 
         ClassifyDTO dto = new ClassifyDTO(classify);
 
-        List<Article> articles = articleDao.selectBaseInfoByClassify(classify.getId());
+        List<ArticleDO> articles = articleDao.selectBaseInfoByClassify(classify.getId());
         dto.setArticles(articles);
 
         return dto;

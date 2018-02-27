@@ -2,7 +2,7 @@ package indi.zhuyst.skyblog.service.impl;
 
 import indi.zhuyst.common.service.BaseService;
 import indi.zhuyst.skyblog.dao.ArticleDao;
-import indi.zhuyst.skyblog.entity.Article;
+import indi.zhuyst.skyblog.entity.ArticleDO;
 import indi.zhuyst.skyblog.pojo.About;
 import indi.zhuyst.skyblog.service.AboutService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +30,9 @@ public class AboutServiceImpl extends BaseService implements AboutService,
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... args) throws Exception {
-        Article about = articleDao.selectByPrimaryKey(ABOUT_KEY);
+        ArticleDO about = articleDao.selectByPrimaryKey(ABOUT_KEY);
         if(about == null){
-            about = new Article();
+            about = new ArticleDO();
 
             about.setId(ABOUT_KEY);
             about.setTitle("关于");
@@ -45,7 +45,7 @@ public class AboutServiceImpl extends BaseService implements AboutService,
     @Override
     @Cacheable(CACHE_OBJECT)
     public About getAbout() {
-        Article article = this.getAboutArticle();
+        ArticleDO article = this.getAboutArticle();
         return new About(article);
     }
 
@@ -53,14 +53,14 @@ public class AboutServiceImpl extends BaseService implements AboutService,
     @Transactional(rollbackFor = RuntimeException.class)
     @CacheEvict(cacheNames = CACHE_OBJECT,allEntries = true)
     public About updateAbout(About about) {
-        Article article = this.getAboutArticle();
+        ArticleDO article = this.getAboutArticle();
         article.setContent(about.getContent());
 
         return articleDao.updateByPrimaryKeySelective(article) > 0 ?
                 this.getAbout() : null;
     }
 
-    private Article getAboutArticle(){
+    private ArticleDO getAboutArticle(){
         return articleDao.selectByPrimaryKey(ABOUT_KEY);
     }
 }

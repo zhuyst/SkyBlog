@@ -1,7 +1,7 @@
 package indi.zhuyst.skyblog.pojo;
 
-import indi.zhuyst.skyblog.entity.Article;
-import indi.zhuyst.skyblog.entity.Classify;
+import indi.zhuyst.skyblog.entity.ArticleDO;
+import indi.zhuyst.skyblog.entity.ClassifyDO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,7 +15,7 @@ import org.springframework.beans.BeanUtils;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ArticleDTO extends Article{
+public class ArticleDTO extends ArticleDO {
 
     private static final long serialVersionUID = -1201642195559990379L;
 
@@ -24,7 +24,7 @@ public class ArticleDTO extends Article{
      * @see #classifyId
      */
     @ApiModelProperty("分类对象")
-    private Classify classify;
+    private ClassifyDO classify;
 
     /**
      * 作者对象
@@ -33,7 +33,7 @@ public class ArticleDTO extends Article{
     @ApiModelProperty("作者对象")
     private UserDTO author;
 
-    public ArticleDTO(Article article){
+    public ArticleDTO(ArticleDO article){
         BeanUtils.copyProperties(article,this);
     }
 }

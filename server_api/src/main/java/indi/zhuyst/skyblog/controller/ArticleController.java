@@ -5,9 +5,9 @@ import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.Result;
-import indi.zhuyst.skyblog.entity.Article;
-import indi.zhuyst.skyblog.entity.Classify;
-import indi.zhuyst.skyblog.entity.Comment;
+import indi.zhuyst.skyblog.entity.ArticleDO;
+import indi.zhuyst.skyblog.entity.ClassifyDO;
+import indi.zhuyst.skyblog.entity.CommentDO;
 import indi.zhuyst.skyblog.pojo.ArticleDTO;
 import indi.zhuyst.skyblog.pojo.ArticlesAndClassifyVO;
 import indi.zhuyst.skyblog.pojo.CommentDTO;
@@ -63,7 +63,7 @@ public class ArticleController extends BaseController{
     @ApiOperation("更新文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
     public Result<ArticleDTO> updateArticle(@ApiParam("文章ID") @PathVariable("id")Integer id,
-                                            @ApiParam("文章对象") @Valid @RequestBody Article article){
+                                            @ApiParam("文章对象") @Valid @RequestBody ArticleDO article){
         article.setId(id);
         ArticleDTO pojo = articleService.saveArticle(article);
         return produceResult(pojo,"更新文章失败");
@@ -77,7 +77,7 @@ public class ArticleController extends BaseController{
     @PostMapping("/")
     @ApiOperation("新增文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
-    public Result<ArticleDTO> insertArticle(@ApiParam("文章对象") @Valid @RequestBody Article article){
+    public Result<ArticleDTO> insertArticle(@ApiParam("文章对象") @Valid @RequestBody ArticleDO article){
         article.setId(null);
         ArticleDTO pojo = articleService.saveArticle(article);
         return produceResult(pojo,"新增文章失败");
@@ -120,14 +120,14 @@ public class ArticleController extends BaseController{
                                                                Query query){
         ArticlesAndClassifyVO vo = new ArticlesAndClassifyVO();
 
-        Article article = new Article();
+        ArticleDO article = new ArticleDO();
         article.setClassifyId(classifyId);
-        Query<Article> articleQuery = new Query<>(query,article);
+        Query<ArticleDO> articleQuery = new Query<>(query,article);
 
         PageInfo<ArticleDTO> pageInfo = articleService.listArticle(articleQuery);
         vo.setArticles(pageInfo);
 
-        Classify classify = classifyService.getByID(classifyId);
+        ClassifyDO classify = classifyService.getByID(classifyId);
         vo.setClassify(classify);
 
         return Result.ok(vo);
@@ -143,9 +143,9 @@ public class ArticleController extends BaseController{
     @ApiOperation("查询文章下的评论列表")
     public Result<PageInfo<CommentDTO>> listComment(@ApiParam("文章ID") @PathVariable("id")Integer articleId,
                                                     Query query){
-        Comment comment = new Comment();
+        CommentDO comment = new CommentDO();
         comment.setArticleId(articleId);
-        Query<Comment> commentQuery = new Query<>(query,comment);
+        Query<CommentDO> commentQuery = new Query<>(query,comment);
 
         PageInfo<CommentDTO> pageInfo = commentService.listComment(commentQuery);
         return Result.ok(pageInfo);
@@ -161,7 +161,7 @@ public class ArticleController extends BaseController{
     @ApiOperation("新增该id的文章下的评论")
     @PreAuthorize("isAuthenticated()")
     public Result<CommentDTO> insertComment(@ApiParam("文章ID") @PathVariable("id") Integer articleId,
-                                            @ApiParam("评论对象") @Valid @RequestBody Comment comment){
+                                            @ApiParam("评论对象") @Valid @RequestBody CommentDO comment){
         comment.setId(null);
         comment.setArticleId(articleId);
 
@@ -178,7 +178,7 @@ public class ArticleController extends BaseController{
     @ApiOperation("根据id删除评论")
     @PreAuthorize("isAuthenticated()")
     public Result deleteComment(@ApiParam("评论ID") @PathVariable("id") Integer id){
-        Comment comment = commentService.getCommentDTO(id);
+        CommentDO comment = commentService.getCommentDTO(id);
         checkPerms(comment.getAuthorId());
         return produceResult(commentService.delete(id),"评论删除失败");
     }

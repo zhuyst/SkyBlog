@@ -1,6 +1,7 @@
 package indi.zhuyst.skyblog.service;
 
 import indi.zhuyst.common.service.CacheableService;
+import indi.zhuyst.skyblog.entity.ArticleDO;
 import indi.zhuyst.skyblog.pojo.About;
 
 /**
@@ -10,7 +11,7 @@ import indi.zhuyst.skyblog.pojo.About;
 public interface AboutService extends CacheableService{
 
     /**
-     * 关于存储在{@link indi.zhuyst.skyblog.entity.Article#id}当中
+     * 关于存储在{@link ArticleDO#id}当中
      * ID == 2
      */
     int ABOUT_KEY = 2;

@@ -1,7 +1,7 @@
 package indi.zhuyst.security.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import indi.zhuyst.skyblog.entity.User;
+import indi.zhuyst.skyblog.entity.UserDO;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -37,7 +37,7 @@ public class SecurityUser extends UserDTO implements UserDetails, CredentialsCon
     @ApiModelProperty(hidden = true)
     private List<GrantedAuthority> authorities = new ArrayList<>();
 
-    public SecurityUser(User user){
+    public SecurityUser(UserDO user){
         super(user);
 
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(PREFIX +

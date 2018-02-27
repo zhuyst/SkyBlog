@@ -1,6 +1,6 @@
 package indi.zhuyst.skyblog.pojo;
 
-import indi.zhuyst.skyblog.entity.Comment;
+import indi.zhuyst.skyblog.entity.CommentDO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,7 +14,7 @@ import org.springframework.beans.BeanUtils;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class CommentDTO extends Comment{
+public class CommentDTO extends CommentDO {
 
     private static final long serialVersionUID = -8051478888596801720L;
 
@@ -32,7 +32,7 @@ public class CommentDTO extends Comment{
     @ApiModelProperty("上级评论对象")
     private CommentDTO previousComment;
 
-    public CommentDTO(Comment comment){
+    public CommentDTO(CommentDO comment){
         BeanUtils.copyProperties(comment,this);
     }
 }
