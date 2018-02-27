@@ -1,7 +1,6 @@
 package indi.zhuyst.skyblog.annotation;
 
-import indi.zhuyst.skyblog.enums.SysLogType;
-import org.springframework.core.annotation.AliasFor;
+import indi.zhuyst.skyblog.enums.SysLogTypeEnum;
 
 import java.lang.annotation.*;
 
@@ -19,7 +18,7 @@ public @interface SysLog {
      * 操作类型
      * @see indi.zhuyst.skyblog.entity.SysLogDO#type
      */
-    SysLogType type() default SysLogType.UNDEFINED;
+    SysLogTypeEnum type() default SysLogTypeEnum.UNDEFINED;
 
     /**
      * 资源

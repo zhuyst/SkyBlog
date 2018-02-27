@@ -2,6 +2,7 @@ package indi.zhuyst.skyblog.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import indi.zhuyst.common.entity.BaseEntity;
+import indi.zhuyst.skyblog.enums.SysLogTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,7 +23,7 @@ public class SysLogDO extends BaseEntity {
 
     /**
      * 操作类型
-     * @see indi.zhuyst.skyblog.enums.SysLogType
+     * @see SysLogTypeEnum
      */
     @ApiModelProperty("操作类型")
     private String type;
