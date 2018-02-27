@@ -36,12 +36,14 @@ class Navigation extends React.Component{
                     </LinkContainer>
                 </ListGroup>
 
-                {
-                    classifyList.map(classify => (
-                        <FadeTransition key={classify.id}>
-                            <ClassifyListGroup classify={classify}/>
-                        </FadeTransition>))
-                }
+                <TransitionGroup>
+                    {
+                        classifyList.map(classify => (
+                            <FadeTransition key={classify.id}>
+                                <ClassifyListGroup classify={classify}/>
+                            </FadeTransition>))
+                    }
+                </TransitionGroup>
             </Well>
         )
     }
