@@ -1,10 +1,10 @@
-package indi.zhuyst.common.aspect;
+package indi.zhuyst.skyblog.aspect;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import indi.zhuyst.common.annotation.SysLog;
-import indi.zhuyst.common.entity.SysLogDO;
+import indi.zhuyst.skyblog.annotation.SysLog;
+import indi.zhuyst.skyblog.entity.SysLogDO;
 import indi.zhuyst.common.exception.CommonException;
-import indi.zhuyst.common.service.SysLogService;
+import indi.zhuyst.skyblog.service.SysLogService;
 import indi.zhuyst.common.util.JsonUtils;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.util.SecurityUtils;
@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
 import java.util.Date;
 
 /**
- * 对{@link indi.zhuyst.common.annotation.SysLog}进行的切面
+ * 对{@link indi.zhuyst.skyblog.annotation.SysLog}进行的切面
  * @author zhuyst
  */
 @Aspect
@@ -30,7 +30,7 @@ public class SysLogAspect {
     @Autowired
     private SysLogService sysLogService;
 
-    @Pointcut("@annotation(indi.zhuyst.common.annotation.SysLog)")
+    @Pointcut("@annotation(indi.zhuyst.skyblog.annotation.SysLog)")
     public void pointCut() {}
 
     @Around("pointCut()")
