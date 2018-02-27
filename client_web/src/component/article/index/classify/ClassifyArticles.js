@@ -14,18 +14,10 @@ import FadeTransition from "../../../common/FadeTransition";
 class ClassifyArticles extends React.Component{
 
     componentWillMount(){
-        this.init();
-    }
-
-    componentDidUpdate(){
-        this.init();
-    }
-
-    init = () => {
         const {listArticlesByClassify} = this.props;
         const id = this.props.match.params.id;
         listArticlesByClassify(id,1);
-    };
+    }
 
     render(){
         const {classify, listArticlesByClassify} = this.props;

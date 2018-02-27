@@ -11,17 +11,9 @@ import {LinkContainer} from "react-router-bootstrap";
 class AboutEditor extends React.Component{
 
     componentWillMount(){
-        this.init();
-    }
-
-    componentDidUpdate(){
-        this.init();
-    }
-
-    init = () => {
         const {about,setAboutForm} = this.props;
         setAboutForm(about);
-    };
+    }
 
     submit = (data,back) => {
         const about = {
