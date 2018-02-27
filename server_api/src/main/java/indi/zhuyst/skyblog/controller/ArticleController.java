@@ -5,9 +5,11 @@ import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.Result;
+import indi.zhuyst.skyblog.annotation.SysLog;
 import indi.zhuyst.skyblog.entity.ArticleDO;
 import indi.zhuyst.skyblog.entity.ClassifyDO;
 import indi.zhuyst.skyblog.entity.CommentDO;
+import indi.zhuyst.skyblog.enums.SysLogTypeEnum;
 import indi.zhuyst.skyblog.pojo.ArticleDTO;
 import indi.zhuyst.skyblog.pojo.ArticlesAndClassifyVO;
 import indi.zhuyst.skyblog.pojo.CommentDTO;
@@ -31,6 +33,16 @@ import javax.validation.Valid;
 @Api(value = "ArticleApi",description = "文章相关API")
 @RequestMapping("/articles")
 public class ArticleController extends BaseController{
+
+    /**
+     * 资源名 - 文章
+     */
+    private static final String RESOURCE_ARTICLE = "文章";
+
+    /**
+     * 资源名 - 文章评论
+     */
+    private static final String RESOURCE_COMMENT = "文章评论";
 
     @Autowired
     private ArticleService articleService;
@@ -62,6 +74,7 @@ public class ArticleController extends BaseController{
     @PutMapping("/{id}")
     @ApiOperation("更新文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @SysLog(resource = RESOURCE_ARTICLE,type = SysLogTypeEnum.UPDATE)
     public Result<ArticleDTO> updateArticle(@ApiParam("文章ID") @PathVariable("id")Integer id,
                                             @ApiParam("文章对象") @Valid @RequestBody ArticleDO article){
         article.setId(id);
@@ -77,6 +90,7 @@ public class ArticleController extends BaseController{
     @PostMapping("/")
     @ApiOperation("新增文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @SysLog(resource = RESOURCE_ARTICLE,type = SysLogTypeEnum.INSERT)
     public Result<ArticleDTO> insertArticle(@ApiParam("文章对象") @Valid @RequestBody ArticleDO article){
         article.setId(null);
         ArticleDTO pojo = articleService.saveArticle(article);
@@ -91,6 +105,7 @@ public class ArticleController extends BaseController{
     @DeleteMapping("/{id}")
     @ApiOperation("根据id删除文章")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @SysLog(resource = RESOURCE_ARTICLE,type = SysLogTypeEnum.DELETE)
     public Result deleteArticle(@ApiParam("文章ID") @PathVariable("id")Integer id){
         return produceResult(articleService.delete(id),"删除文章失败");
     }
@@ -160,6 +175,7 @@ public class ArticleController extends BaseController{
     @PostMapping("/{id}/comment/")
     @ApiOperation("新增该id的文章下的评论")
     @PreAuthorize("isAuthenticated()")
+    @SysLog(resource = RESOURCE_COMMENT,type = SysLogTypeEnum.INSERT)
     public Result<CommentDTO> insertComment(@ApiParam("文章ID") @PathVariable("id") Integer articleId,
                                             @ApiParam("评论对象") @Valid @RequestBody CommentDO comment){
         comment.setId(null);
@@ -177,6 +193,7 @@ public class ArticleController extends BaseController{
     @DeleteMapping(value = "/comment/{id}")
     @ApiOperation("根据id删除评论")
     @PreAuthorize("isAuthenticated()")
+    @SysLog(resource = RESOURCE_COMMENT,type = SysLogTypeEnum.DELETE)
     public Result deleteComment(@ApiParam("评论ID") @PathVariable("id") Integer id){
         CommentDO comment = commentService.getCommentDTO(id);
         checkPerms(comment.getAuthorId());

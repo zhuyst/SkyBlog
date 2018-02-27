@@ -2,7 +2,9 @@ package indi.zhuyst.skyblog.controller;
 
 import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.pojo.Result;
+import indi.zhuyst.skyblog.annotation.SysLog;
 import indi.zhuyst.skyblog.entity.ClassifyDO;
+import indi.zhuyst.skyblog.enums.SysLogTypeEnum;
 import indi.zhuyst.skyblog.pojo.ClassifyDTO;
 import indi.zhuyst.skyblog.service.ClassifyService;
 import io.swagger.annotations.Api;
@@ -23,6 +25,11 @@ import java.util.List;
 @Api(value = "ClassifyApi",description = "文章分类相关API")
 @RequestMapping("/classifies")
 public class ClassifyController extends BaseController{
+
+    /**
+     * 资源名 - 文章分类
+     */
+    private static final String RESOURCE_CLASSIFY = "文章分类";
 
     @Autowired
     private ClassifyService classifyService;
@@ -46,6 +53,7 @@ public class ClassifyController extends BaseController{
     @PostMapping("/")
     @ApiOperation("新增分类")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @SysLog(resource = RESOURCE_CLASSIFY,type = SysLogTypeEnum.INSERT)
     public Result<List<ClassifyDTO>> insertClassify(@ApiParam("分类对象") @Valid @RequestBody ClassifyDO classify){
         classify.setId(null);
         classify = classifyService.save(classify);
@@ -62,6 +70,7 @@ public class ClassifyController extends BaseController{
     @PutMapping("/{id}")
     @ApiOperation("根据id更新分类")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @SysLog(resource = RESOURCE_CLASSIFY,type = SysLogTypeEnum.UPDATE)
     public Result<List<ClassifyDTO>> updateClassify(@ApiParam("分类ID") @PathVariable("id")Integer id,
                                                     @ApiParam("分类对象") @Valid @RequestBody ClassifyDO classify){
         classify.setId(id);
@@ -78,6 +87,7 @@ public class ClassifyController extends BaseController{
     @DeleteMapping("/{id}")
     @ApiOperation("根据id删除分类")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @SysLog(resource = RESOURCE_CLASSIFY,type = SysLogTypeEnum.DELETE)
     public Result<List<ClassifyDTO>> deleteClassify(@ApiParam("分类ID") @PathVariable("id")Integer id){
         List<ClassifyDTO> list = this.produceDTOList(classifyService.delete(id));
         return produceResult(list,"删除分类成功");
