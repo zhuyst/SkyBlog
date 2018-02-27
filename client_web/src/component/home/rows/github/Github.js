@@ -1,9 +1,10 @@
 import React from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {TransitionGroup} from "react-transition-group";
 import {Panel} from "react-bootstrap";
 import {connect} from "react-redux";
 import Commit from "./Commit";
-import {FADE_ENTER, FADE_LEAVE, SKY_BLOG_URL} from "../../../../Constant";
+import {SKY_BLOG_URL} from "../../../../Constant";
+import FadeTransition from "../../../common/FadeTransition";
 
 class Github extends React.Component{
     render(){
@@ -17,14 +18,15 @@ class Github extends React.Component{
                     </Panel.Title>
                 </Panel.Heading>
                 <Panel.Body>
-                    <ReactCSSTransitionGroup
-                        transitionName='fade'
-                        transitionEnterTimeout={FADE_ENTER}
-                        transitionLeaveTimeout={FADE_LEAVE}>
+                    <TransitionGroup>
                         {
-                            commits.map(commit => <Commit key={commit.sha} commit={commit}/>)
+                            commits.map(commit => (
+                                <FadeTransition key={commit.sha}>
+                                    <Commit commit={commit}/>
+                                </FadeTransition>
+                            ))
                         }
-                    </ReactCSSTransitionGroup>
+                    </TransitionGroup>
                     <a className="more_link"
                        href={SKY_BLOG_URL} target="_blank">
                         在Github上查看项目

@@ -1,12 +1,12 @@
 import React from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {TransitionGroup} from "react-transition-group";
 import {Link} from "react-router-dom";
 import {Badge, Panel} from 'react-bootstrap'
 import {connect} from "react-redux";
 
 import {getLength} from "../Util";
 import Msg from "./Msg";
-import {FADE_ENTER, FADE_LEAVE} from "../../../../Constant";
+import FadeTransition from "../../../common/FadeTransition";
 
 class MsgBoard extends React.Component{
     render(){
@@ -20,7 +20,9 @@ class MsgBoard extends React.Component{
         for(let i = 0;i < length;i++){
             const msg = list[i];
             msgList.push(
-                <Msg key={msg.id} msg={msg}/>
+                <FadeTransition key={msg.id}>
+                    <Msg msg={msg}/>
+                </FadeTransition>
             )
         }
 
@@ -32,12 +34,9 @@ class MsgBoard extends React.Component{
                     </Panel.Title>
                 </Panel.Heading>
                 <Panel.Body>
-                    <ReactCSSTransitionGroup
-                        transitionName='fade'
-                        transitionEnterTimeout={FADE_ENTER}
-                        transitionLeaveTimeout={FADE_LEAVE}>
+                    <TransitionGroup>
                         {msgList}
-                    </ReactCSSTransitionGroup>
+                    </TransitionGroup>
                     <Link className="more_link"
                           to="/msg_board">
                         查看更多留言

@@ -1,14 +1,15 @@
 import React from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {TransitionGroup} from "react-transition-group";
 import {connect} from "react-redux";
 import {Alert, PanelGroup} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 
 import {listArticlesByClassify} from "../../../../action/article/ArticlesAction";
-import {ARTICLE_PAGE_SIZE, FADE_ENTER, FADE_LEAVE} from "../../../../Constant";
+import {ARTICLE_PAGE_SIZE} from "../../../../Constant";
 
 import Preview from "../Preview";
 import Pager from "../Pager";
+import FadeTransition from "../../../common/FadeTransition";
 
 class ClassifyArticles extends React.Component{
 
@@ -39,14 +40,15 @@ class ClassifyArticles extends React.Component{
                         <strong>{classify.name}</strong>
                         &nbsp;下的文章
                     </Alert>
-                    <ReactCSSTransitionGroup
-                        transitionName='fade'
-                        transitionEnterTimeout={FADE_ENTER}
-                        transitionLeaveTimeout={FADE_LEAVE}>
+                    <TransitionGroup>
                         {
-                            list.map(article => <Preview key={article.id} article={article}/>)
+                            list.map(article => (
+                                <FadeTransition>
+                                    <Preview key={article.id} article={article}/>
+                                </FadeTransition>
+                            ))
                         }
-                    </ReactCSSTransitionGroup>
+                    </TransitionGroup>
                 </PanelGroup>
                 <div className="pager">
                     <Pager page={page} onClick={() => listArticlesByClassify(classify.id,page_num + 1)} />

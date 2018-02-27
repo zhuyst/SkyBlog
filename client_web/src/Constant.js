@@ -17,7 +17,7 @@ export const SKY_BLOG_URL = "https://github.com/zhuyst/SkyBlog";
 export const GITHUB_URL = "https://github.com/zhuyst";
 
 export const FADE_ENTER = 500;
-export const FADE_LEAVE = 10;
+export const FADE_EXIT = 10;
 
 export const UserRole = {
     SYS_ADMIN : {

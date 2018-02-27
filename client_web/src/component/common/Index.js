@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Switch, withRouter} from 'react-router-dom'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {TransitionGroup} from "react-transition-group";
 import { connect } from 'react-redux'
 
 import Navigation from './Navigation'
@@ -11,7 +11,7 @@ import Article from '../article/Index'
 import MsgBoard from '../msgboard/Index'
 import About from '../about/Index'
 
-import {ARTICLE_PAGE_SIZE, FADE_ENTER, FADE_LEAVE, GITHUB_PAGE_SIZE, MSG_PAGE_SIZE} from "../../Constant";
+import {ARTICLE_PAGE_SIZE, GITHUB_PAGE_SIZE, MSG_PAGE_SIZE} from "../../Constant";
 
 import {listArticles} from "../../action/article/ArticlesAction";
 import {listClassify} from "../../action/article/ClassifyAction";
@@ -23,6 +23,7 @@ import '../../static/css/common/animation.css'
 import {listMsg} from "../../action/msgboard/MsgBoardAction";
 import {listCommits} from "../../action/github/GithubAction";
 import NotFound from "../error/NotFound";
+import FadeTransition from "./FadeTransition";
 
 class Index extends React.Component{
     componentWillMount(){
@@ -48,19 +49,18 @@ class Index extends React.Component{
                 </header>
 
                 <div className="main">
-                    <ReactCSSTransitionGroup
-                        transitionName='fade'
-                        transitionEnterTimeout={FADE_ENTER}
-                        transitionLeaveTimeout={FADE_LEAVE}>
-                        <Switch key={this.props.location.pathname} location={this.props.location}>
-                            <Route exact strict path="/" component={Home} />
-                            <Route exact strict path="/home" component={Home}/>
-                            <Route path="/article" component={Article} />
-                            <Route path="/msg_board" component={MsgBoard} />
-                            <Route path="/about" component={About} />
-                            <Route component={NotFound} />
-                        </Switch>
-                    </ReactCSSTransitionGroup>
+                    <TransitionGroup>
+                        <FadeTransition key={this.props.location.pathname}>
+                            <Switch location={this.props.location}>
+                                <Route exact strict path="/" component={Home} />
+                                <Route exact strict path="/home" component={Home}/>
+                                <Route path="/article" component={Article} />
+                                <Route path="/msg_board" component={MsgBoard} />
+                                <Route path="/about" component={About} />
+                                <Route component={NotFound} />
+                            </Switch>
+                        </FadeTransition>
+                    </TransitionGroup>
                 </div>
 
                 <footer>
