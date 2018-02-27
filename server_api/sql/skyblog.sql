@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-02-25 17:28:55
+Date: 2018-02-27 19:26:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,9 +30,7 @@ CREATE TABLE `article` (
   `update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `classify_id` (`classify_id`),
-  KEY `author_id` (`author_id`),
-  CONSTRAINT `article_ibfk_1` FOREIGN KEY (`classify_id`) REFERENCES `classify` (`id`),
-  CONSTRAINT `article_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `user` (`id`)
+  KEY `author_id` (`author_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -53,7 +51,7 @@ INSERT INTO `article` VALUES ('19', '文章标题 - 18', '文章副标题 - 18',
 INSERT INTO `article` VALUES ('20', '文章标题 - 19', '文章副标题 - 19', '# Markdown', '1', '1', '2018-02-08 15:32:00', '2018-02-08 15:32:00');
 INSERT INTO `article` VALUES ('21', '文章标题 - 20', '文章副标题 - 20', '# Markdown', '1', '1', '2018-02-08 15:32:00', '2018-02-08 15:32:00');
 INSERT INTO `article` VALUES ('24', '文章标题 - 23', '文章副标题 - 23', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-18 15:17:31');
-INSERT INTO `article` VALUES ('25', '文章标题 - 24123', '文章副标题 - 24', 'Markdown', '3', '1', '2018-02-08 15:32:01', '2018-02-25 15:47:33');
+INSERT INTO `article` VALUES ('25', '文章标题 - 24123', '文章副标题 - 24', 'MarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown', '3', '1', '2018-02-08 15:32:01', '2018-02-25 20:56:52');
 INSERT INTO `article` VALUES ('26', '文章标题 - 25', '文章副标题 - 25', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-08 15:32:01');
 INSERT INTO `article` VALUES ('27', '文章标题 - 26', '文章副标题 - 26', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-08 15:32:01');
 INSERT INTO `article` VALUES ('28', '文章标题 - 27', '文章副标题 - 27', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-08 15:32:01');
@@ -75,7 +73,7 @@ CREATE TABLE `classify` (
 -- Records of classify
 -- ----------------------------
 INSERT INTO `classify` VALUES ('1', '未分类');
-INSERT INTO `classify` VALUES ('3', '分类3');
+INSERT INTO `classify` VALUES ('3', '分类1');
 
 -- ----------------------------
 -- Table structure for comment
@@ -91,10 +89,8 @@ CREATE TABLE `comment` (
   PRIMARY KEY (`id`),
   KEY `article_id` (`article_id`),
   KEY `author_id` (`author_id`),
-  KEY `previous_comment_id` (`previous_comment_id`),
-  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
-  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
+  KEY `previous_comment_id` (`previous_comment_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comment
@@ -192,42 +188,26 @@ INSERT INTO `comment` VALUES ('125', '回复测试', '1', '1', '108', '2018-02-2
 INSERT INTO `comment` VALUES ('126', '回复测试', '25', '1', '119', '2018-02-23 15:33:04');
 INSERT INTO `comment` VALUES ('127', '123123', '25', '1', '126', '2018-02-23 15:35:22');
 INSERT INTO `comment` VALUES ('128', '123213213', '1', '1', '108', '2018-02-23 15:35:31');
+INSERT INTO `comment` VALUES ('129', '评论测试', '24', '1', null, '2018-02-27 16:18:08');
 
 -- ----------------------------
--- Table structure for msg_board
+-- Table structure for sys_log
 -- ----------------------------
-DROP TABLE IF EXISTS `msg_board`;
-CREATE TABLE `msg_board` (
+DROP TABLE IF EXISTS `sys_log`;
+CREATE TABLE `sys_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` varchar(255) DEFAULT NULL,
-  `article_id` int(11) DEFAULT NULL,
-  `author_id` int(11) DEFAULT NULL,
-  `previous_comment_id` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  `method` varchar(255) DEFAULT NULL,
+  `params` longtext,
+  `user_id` int(11) DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of msg_board
+-- Records of sys_log
 -- ----------------------------
-
--- ----------------------------
--- Table structure for role
--- ----------------------------
-DROP TABLE IF EXISTS `role`;
-CREATE TABLE `role` (
-  `role` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`role`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of role
--- ----------------------------
-INSERT INTO `role` VALUES ('1', 'SYS_ADMIN', '系统管理员');
-INSERT INTO `role` VALUES ('2', 'ADMIN', '管理员');
-INSERT INTO `role` VALUES ('3', 'USER', '用户');
 
 -- ----------------------------
 -- Table structure for user
@@ -242,8 +222,7 @@ CREATE TABLE `user` (
   `status` int(1) DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `role` (`role`),
-  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role`) REFERENCES `role` (`role`)
+  KEY `role` (`role`)
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
