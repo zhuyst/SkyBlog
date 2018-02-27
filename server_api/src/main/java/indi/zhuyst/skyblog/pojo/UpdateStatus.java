@@ -1,5 +1,6 @@
 package indi.zhuyst.skyblog.pojo;
 
+import indi.zhuyst.skyblog.entity.UserDO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ public class UpdateStatus {
 
     /**
      * 状态ID
-     * @see indi.zhuyst.skyblog.entity.User#status
+     * @see UserDO#status
      * @see indi.zhuyst.security.enums.StatusEnum
      */
     @ApiModelProperty("状态ID")

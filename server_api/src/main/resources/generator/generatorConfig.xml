@@ -41,25 +41,25 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <!--<table tableName="User" domainObjectName="User"-->
+        <!--<table tableName="UserDO" domainObjectName="UserDO"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false">-->
         <!--</table>-->
 
-        <!--<table tableName="Article" domainObjectName="Article"-->
+        <!--<table tableName="ArticleDO" domainObjectName="ArticleDO"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false">-->
         <!--</table>-->
 
-        <!--<table tableName="Comment" domainObjectName="Comment"-->
+        <!--<table tableName="CommentDO" domainObjectName="CommentDO"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false">-->
         <!--</table>-->
 
-        <!--<table tableName="Classify" domainObjectName="Classify"-->
+        <!--<table tableName="ClassifyDO" domainObjectName="ClassifyDO"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false">-->

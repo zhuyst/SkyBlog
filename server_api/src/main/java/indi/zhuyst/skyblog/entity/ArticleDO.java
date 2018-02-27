@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Column;
 import javax.persistence.OrderBy;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -19,7 +20,8 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class Article extends BaseEntity {
+@Table(name = "article")
+public class ArticleDO extends BaseEntity {
 
     private static final long serialVersionUID = 8343236688927410161L;
 
@@ -39,7 +41,7 @@ public class Article extends BaseEntity {
 
     /**
      * 分类ID
-     * @see Classify
+     * @see ClassifyDO
      */
     @ApiModelProperty("分类ID")
     @Column(name = "classify_id")
@@ -47,7 +49,7 @@ public class Article extends BaseEntity {
 
     /**
      * 作者ID
-     * @see User
+     * @see UserDO
      */
     @ApiModelProperty("作者ID")
     @Column(name = "author_id")
@@ -77,9 +79,9 @@ public class Article extends BaseEntity {
     @NotBlank(message = "正文不能为空")
     private String content;
 
-    public Article(Integer id,String title, String subTitle,
-                   Integer classifyId, Integer authorId,
-                   Date createDate, Date updateDate) {
+    public ArticleDO(Integer id, String title, String subTitle,
+                     Integer classifyId, Integer authorId,
+                     Date createDate, Date updateDate) {
         this.id = id;
         this.title = title;
         this.subTitle = subTitle;
@@ -89,10 +91,10 @@ public class Article extends BaseEntity {
         this.updateDate = updateDate;
     }
 
-    public Article(Integer id,String title, String subTitle,
-                   Integer classifyId, Integer authorId,
-                   Date createDate, Date updateDate,
-                   String content) {
+    public ArticleDO(Integer id, String title, String subTitle,
+                     Integer classifyId, Integer authorId,
+                     Date createDate, Date updateDate,
+                     String content) {
         this.id = id;
         this.title = title;
         this.subTitle = subTitle;

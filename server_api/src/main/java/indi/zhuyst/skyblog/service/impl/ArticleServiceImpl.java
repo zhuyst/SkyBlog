@@ -9,9 +9,9 @@ import indi.zhuyst.common.service.impl.BaseCrudServiceImpl;
 import indi.zhuyst.common.util.PageUtils;
 import indi.zhuyst.security.util.SecurityUtils;
 import indi.zhuyst.skyblog.dao.ArticleDao;
-import indi.zhuyst.skyblog.entity.Article;
-import indi.zhuyst.skyblog.entity.Classify;
-import indi.zhuyst.skyblog.entity.User;
+import indi.zhuyst.skyblog.entity.ArticleDO;
+import indi.zhuyst.skyblog.entity.ClassifyDO;
+import indi.zhuyst.skyblog.entity.UserDO;
 import indi.zhuyst.skyblog.pojo.ArticleDTO;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.ArticleService;
@@ -32,7 +32,7 @@ import java.util.List;
  * @author zhuyst
  */
 @Service("articleService")
-public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article>
+public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,ArticleDO>
         implements ArticleService{
 
     @Autowired
@@ -42,14 +42,14 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article>
     private ClassifyService classifyService;
 
     @Override
-    public Article getByID(int id) {
+    public ArticleDO getByID(int id) {
         checkExcept(id);
         return super.getByID(id);
     }
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public Article save(Article article) {
+    public ArticleDO save(ArticleDO article) {
         Date date = new Date();
 
         if(article.getId() == null){
@@ -65,7 +65,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article>
             article.setClassifyId(ClassifyService.NOT_CLASSIFY_KEY);
         }
 
-        User user = SecurityUtils.getUser();
+        UserDO user = SecurityUtils.getUser();
         article.setAuthorId(user.getId());
         return super.save(article);
     }
@@ -81,14 +81,14 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article>
     @Override
     @Cacheable(cacheNames = CACHE_OBJECT,key = "#id")
     public ArticleDTO getArticleDTO(int id){
-        Article article = getByID(id);
+        ArticleDO article = getByID(id);
         return this.produceDTO(article);
     }
 
     @Override
     @Cacheable(CACHE_PAGE)
-    public PageInfo<ArticleDTO> listArticle(Query<Article> query){
-        PageInfo<Article> pageInfo =
+    public PageInfo<ArticleDTO> listArticle(Query<ArticleDO> query){
+        PageInfo<ArticleDO> pageInfo =
                 PageHelper.startPage(query.getPageNum(),query.getPageSize())
                         .setOrderBy("update_date desc")
                         .doSelectPageInfo(() -> dao.selectWithoutIDs(
@@ -99,7 +99,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article>
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
-    public ArticleDTO saveArticle(Article article){
+    public ArticleDTO saveArticle(ArticleDO article){
         ArticleDTO pojo = null;
 
         article = this.save(article);
@@ -128,7 +128,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article>
      * @param article DO
      * @return 封装后的DTO
      */
-    private ArticleDTO produceDTO(Article article){
+    private ArticleDTO produceDTO(ArticleDO article){
         if(article == null){
             return null;
         }
@@ -141,7 +141,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article>
         }
 
         if(article.getClassifyId() != null){
-            Classify classify = classifyService.getByID(article.getClassifyId());
+            ClassifyDO classify = classifyService.getByID(article.getClassifyId());
             pojo.setClassify(classify);
         }
 
@@ -153,9 +153,9 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,Article>
      * @param pageInfo DO分页对象
      * @return DTO分页对象
      */
-    private PageInfo<ArticleDTO> produceDTOPageInfo(PageInfo<Article> pageInfo){
+    private PageInfo<ArticleDTO> produceDTOPageInfo(PageInfo<ArticleDO> pageInfo){
         List<ArticleDTO> pojoList = new ArrayList<>();
-        for(Article a : pageInfo.getList()){
+        for(ArticleDO a : pageInfo.getList()){
             ArticleDTO pojo = this.produceDTO(a);
             pojoList.add(pojo);
         }

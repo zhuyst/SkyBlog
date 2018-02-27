@@ -1,7 +1,7 @@
 package indi.zhuyst.skyblog.dao;
 
 import indi.zhuyst.common.dao.BaseDao;
-import indi.zhuyst.skyblog.entity.Classify;
+import indi.zhuyst.skyblog.entity.ClassifyDO;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  * @author zhuyst
  */
 @Repository
-public interface ClassifyDao extends BaseDao<Classify> {
+public interface ClassifyDao extends BaseDao<ClassifyDO> {
 }

@@ -8,7 +8,7 @@ import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.service.SecurityService;
 import indi.zhuyst.security.setting.JwtSettings;
-import indi.zhuyst.skyblog.entity.User;
+import indi.zhuyst.skyblog.entity.UserDO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -114,7 +114,7 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
         Claims claims = this.getClaimByToken(token);
 
         // 从JWT中读取信息，构建User
-        User user = new User();
+        UserDO user = new UserDO();
         user.setId(Integer.valueOf(claims.getSubject()));
         user.setUsername(claims.get(CLAIM_USERNAME,String.class));
         user.setRole(claims.get(CLAIM_ROLE,Integer.class));

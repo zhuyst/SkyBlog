@@ -5,8 +5,8 @@ import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.skyblog.dao.ArticleDao;
-import indi.zhuyst.skyblog.entity.Article;
-import indi.zhuyst.skyblog.entity.Comment;
+import indi.zhuyst.skyblog.entity.ArticleDO;
+import indi.zhuyst.skyblog.entity.CommentDO;
 import indi.zhuyst.skyblog.pojo.CommentDTO;
 import indi.zhuyst.skyblog.service.CommentService;
 import indi.zhuyst.skyblog.service.MsgBoardService;
@@ -36,10 +36,10 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... strings) throws Exception {
-        Article article = articleDao.selectByPrimaryKey(MSG_BOARD_KEY);
+        ArticleDO article = articleDao.selectByPrimaryKey(MSG_BOARD_KEY);
 
         if(article == null){
-            article = new Article();
+            article = new ArticleDO();
 
             article.setId(MSG_BOARD_KEY);
             article.setTitle("留言板");
@@ -58,10 +58,10 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
 
     @Override
     @CacheEvict(cacheNames = CACHE_PAGE,allEntries = true)
-    public PageInfo<CommentDTO> listMsg(Query<Comment> query){
-        Comment comment = query.getEntity();
+    public PageInfo<CommentDTO> listMsg(Query<CommentDO> query){
+        CommentDO comment = query.getEntity();
         if(comment == null){
-            comment = new Comment();
+            comment = new CommentDO();
         }
         comment.setArticleId(MSG_BOARD_KEY);
 
@@ -72,7 +72,7 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     @CacheEvict(cacheNames = CACHE_PAGE,allEntries = true)
-    public CommentDTO insertMsg(Comment comment){
+    public CommentDTO insertMsg(CommentDO comment){
         comment.setArticleId(MSG_BOARD_KEY);
         return commentService.saveComment(comment);
     }

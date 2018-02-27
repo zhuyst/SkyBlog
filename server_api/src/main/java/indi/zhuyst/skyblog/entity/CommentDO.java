@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Column;
 import javax.persistence.OrderBy;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -20,7 +21,8 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class Comment extends BaseEntity {
+@Table(name = "comment")
+public class CommentDO extends BaseEntity {
 
     private static final long serialVersionUID = -6237119613422043750L;
 
@@ -33,7 +35,7 @@ public class Comment extends BaseEntity {
 
     /**
      * 文章ID
-     * @see Article
+     * @see ArticleDO
      */
     @ApiModelProperty("文章ID")
     @Column(name = "article_id")
@@ -42,7 +44,7 @@ public class Comment extends BaseEntity {
 
     /**
      * 作者ID
-     * @see User
+     * @see UserDO
      */
     @ApiModelProperty("作者ID")
     @Column(name = "author_id")
@@ -50,7 +52,7 @@ public class Comment extends BaseEntity {
 
     /**
      * 上级评论ID
-     * @see Comment
+     * @see CommentDO
      */
     @ApiModelProperty("上级评论ID")
     @Column(name = "previous_comment_id")

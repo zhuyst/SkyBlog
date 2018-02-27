@@ -5,7 +5,7 @@ import indi.zhuyst.common.pojo.Result;
 import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.service.SecurityService;
-import indi.zhuyst.skyblog.entity.User;
+import indi.zhuyst.skyblog.entity.UserDO;
 import indi.zhuyst.skyblog.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -53,7 +53,7 @@ public class AuthController extends BaseController{
     @RequestMapping(value = "/refresh",method = RequestMethod.POST)
     public Result<AccessToken> refresh(@ApiParam("老Token") @RequestParam String token){
         Integer userId = securityService.getIDByToken(token);
-        User user = userService.getByID(userId);
+        UserDO user = userService.getByID(userId);
 
         AccessToken accessToken = securityService.generateToken(new SecurityUser(user));
         return Result.ok(accessToken);

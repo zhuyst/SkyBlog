@@ -11,7 +11,7 @@ import indi.zhuyst.security.enums.StatusEnum;
 import indi.zhuyst.security.pojo.AccessToken;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.service.SecurityService;
-import indi.zhuyst.skyblog.entity.User;
+import indi.zhuyst.skyblog.entity.UserDO;
 import indi.zhuyst.skyblog.pojo.UpdateRole;
 import indi.zhuyst.skyblog.pojo.UpdateStatus;
 import indi.zhuyst.skyblog.pojo.UserDTO;
@@ -51,7 +51,7 @@ public class UserController extends BaseController{
     @ApiOperation("更新用户信息")
     @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN') or #id == authentication.principal.id")
     public Result<UserDTO> updateUser(@ApiParam("用户ID") @PathVariable("id") @P("id") Integer id,
-                                      @ApiParam("用户对象") @Valid @RequestBody User user){
+                                      @ApiParam("用户对象") @Valid @RequestBody UserDO user){
         user.setId(id);
         UserDTO pojo = userService.saveUser(user);
         return produceResult(pojo,"用户信息更新失败");
@@ -77,10 +77,10 @@ public class UserController extends BaseController{
      */
     @PostMapping("/public/")
     @ApiOperation("注册新用户")
-    public Result<AccessToken> register(@ApiParam("用户对象") @Valid @RequestBody User newUser){
+    public Result<AccessToken> register(@ApiParam("用户对象") @Valid @RequestBody UserDO newUser){
         newUser.setId(null);
 
-        User user = userService.save(newUser);
+        UserDO user = userService.save(newUser);
         if(user == null){
             throw new CommonException("用户注册失败");
         }

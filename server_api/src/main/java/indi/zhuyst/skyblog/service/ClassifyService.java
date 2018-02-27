@@ -2,7 +2,7 @@ package indi.zhuyst.skyblog.service;
 
 import indi.zhuyst.common.service.BaseCrudService;
 import indi.zhuyst.common.service.CacheableService;
-import indi.zhuyst.skyblog.entity.Classify;
+import indi.zhuyst.skyblog.entity.ClassifyDO;
 import indi.zhuyst.skyblog.pojo.ClassifyDTO;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * 文章分类Service接口
  * @author zhuyst
  */
-public interface ClassifyService extends BaseCrudService<Classify>,
+public interface ClassifyService extends BaseCrudService<ClassifyDO>,
         CacheableService{
 
     /**
@@ -37,11 +37,11 @@ public interface ClassifyService extends BaseCrudService<Classify>,
     ClassifyDTO getClassifyDTO(int id);
 
     /**
-     * 根据{@link Classify#name}进行精确查询
+     * 根据{@link ClassifyDO#name}进行精确查询
      * @param name 分类名
      * @return 分类对象
      */
-    Classify getByName(String name);
+    ClassifyDO getByName(String name);
 
     /**
      * 查询分类DTO列表

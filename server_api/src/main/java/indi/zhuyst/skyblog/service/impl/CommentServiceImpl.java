@@ -6,8 +6,8 @@ import indi.zhuyst.common.service.impl.BaseCrudServiceImpl;
 import indi.zhuyst.common.util.PageUtils;
 import indi.zhuyst.security.util.SecurityUtils;
 import indi.zhuyst.skyblog.dao.CommentDao;
-import indi.zhuyst.skyblog.entity.Comment;
-import indi.zhuyst.skyblog.entity.User;
+import indi.zhuyst.skyblog.entity.CommentDO;
+import indi.zhuyst.skyblog.entity.UserDO;
 import indi.zhuyst.skyblog.pojo.CommentDTO;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.CommentService;
@@ -28,14 +28,14 @@ import java.util.List;
  * @author zhuyst
  */
 @Service("commentService")
-public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> implements CommentService{
+public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,CommentDO> implements CommentService{
 
     @Autowired
     private UserService userService;
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public Comment save(Comment comment) {
+    public CommentDO save(CommentDO comment) {
         String content = comment.getContent();
 
         content = StringUtils.removeHtmlTag(content);
@@ -43,7 +43,7 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
 
         comment.setCreateDate(new Date());
 
-        User user = SecurityUtils.getUser();
+        UserDO user = SecurityUtils.getUser();
         comment.setAuthorId(user.getId());
 
         return super.save(comment);
@@ -59,14 +59,14 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
     @Override
     @Cacheable(cacheNames = CACHE_OBJECT,key = "#id")
     public CommentDTO getCommentDTO(int id){
-        Comment comment = super.getByID(id);
+        CommentDO comment = super.getByID(id);
         return this.produceDTO(comment);
     }
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
-    public CommentDTO saveComment(Comment comment){
+    public CommentDTO saveComment(CommentDO comment){
         CommentDTO pojo = null;
 
         comment = this.save(comment);
@@ -79,11 +79,11 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
 
     @Override
     @Cacheable(cacheNames = CACHE_PAGE)
-    public PageInfo<CommentDTO> listComment(Query<Comment> query){
-        PageInfo<Comment> pageInfo = super.listByCondition(query);
+    public PageInfo<CommentDTO> listComment(Query<CommentDO> query){
+        PageInfo<CommentDO> pageInfo = super.listByCondition(query);
 
         List<CommentDTO> pojoList = new ArrayList<>();
-        for(Comment c : pageInfo.getList()){
+        for(CommentDO c : pageInfo.getList()){
             CommentDTO pojo = produceDTO(c);
             pojoList.add(pojo);
         }
@@ -96,7 +96,7 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
      * @param comment DO
      * @return DTO
      */
-    private CommentDTO produceDTO(Comment comment){
+    private CommentDTO produceDTO(CommentDO comment){
         if(comment == null){
             return null;
         }
@@ -105,7 +105,7 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,Comment> 
         setAuthor(pojo);
 
         if(comment.getPreviousCommentId() != null){
-            Comment previousComment = super.getByID(comment.getPreviousCommentId());
+            CommentDO previousComment = super.getByID(comment.getPreviousCommentId());
 
             // 有可能出现回复的评论已被删除的情况
             if(previousComment != null){

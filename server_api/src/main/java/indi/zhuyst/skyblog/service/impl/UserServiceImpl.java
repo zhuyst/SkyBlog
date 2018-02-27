@@ -11,7 +11,7 @@ import indi.zhuyst.security.enums.RoleEnum;
 import indi.zhuyst.security.enums.StatusEnum;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.skyblog.dao.UserDao;
-import indi.zhuyst.skyblog.entity.User;
+import indi.zhuyst.skyblog.entity.UserDO;
 import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.UserService;
 import indi.zhuyst.skyblog.setting.DefaultAdminSettings;
@@ -31,7 +31,7 @@ import java.util.List;
  * @author zhuyst
  */
 @Service("userService")
-public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
+public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
         implements UserService,CommandLineRunner{
 
     @Autowired
@@ -46,9 +46,9 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... strings) throws Exception {
-        User user = super.getByID(ADMIN_KEY);
+        UserDO user = super.getByID(ADMIN_KEY);
         if(user == null){
-            user = new User();
+            user = new UserDO();
 
             user.setId(ADMIN_KEY);
             user.setUsername(defaultAdminSettings.getUsername());
@@ -62,7 +62,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public User save(User user) {
+    public UserDO save(UserDO user) {
         if(user.getId() == null){
 
             // 设置初始角色及状态
@@ -70,7 +70,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
             user.setStatus(StatusEnum.NORMAL.getId());
         }
         else {
-            User oldUser = super.getByID(user.getId());
+            UserDO oldUser = super.getByID(user.getId());
 
             // 如果两者相等，则表示nickname不需要修改
             if(oldUser.getNickname().equals(user.getNickname())){
@@ -98,21 +98,21 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
 
     @Override
     public UserDTO getUserDTO(int id){
-        User user = super.getByID(id);
+        UserDO user = super.getByID(id);
         return this.produceDTO(user);
     }
 
     @Override
-    public User getByUsername(String username){
-        User user = new User();
+    public UserDO getByUsername(String username){
+        UserDO user = new UserDO();
         user.setUsername(username);
 
         return dao.selectOne(user);
     }
 
     @Override
-    public User getByNickName(String nickname){
-        User user = new User();
+    public UserDO getByNickName(String nickname){
+        UserDO user = new UserDO();
         user.setNickname(nickname);
 
         return dao.selectOne(user);
@@ -120,7 +120,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public UserDTO saveUser(User user){
+    public UserDTO saveUser(UserDO user){
         UserDTO dto = null;
 
         user = this.save(user);
@@ -136,7 +136,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     public boolean promoteAdmin(int id) {
         final RoleEnum admin = RoleEnum.ADMIN;
 
-        User user = super.getByID(id);
+        UserDO user = super.getByID(id);
         if(user.getRole() == admin.getId()){
             throw new CommonException("该用户已经是管理员了！");
         }
@@ -150,7 +150,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     public boolean demoteAdmin(int id) {
         final RoleEnum visitor = RoleEnum.VISITOR;
 
-        User user = super.getByID(id);
+        UserDO user = super.getByID(id);
         if(user.getRole() == visitor.getId()){
             throw new CommonException("该用户已经是访客了！");
         }
@@ -164,7 +164,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     public boolean lockUser(int id) {
         final StatusEnum locked = StatusEnum.LOCKED;
 
-        User user = super.getByID(id);
+        UserDO user = super.getByID(id);
         if(user.getStatus() == locked.getId()){
             throw new CommonException("该用户已经被锁定了！");
         }
@@ -178,7 +178,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     public boolean unlockUser(int id) {
         final StatusEnum normal = StatusEnum.NORMAL;
 
-        User user = super.getByID(id);
+        UserDO user = super.getByID(id);
         if(user.getStatus() == normal.getId()){
             throw new CommonException("该用户没有被锁定");
         }
@@ -188,21 +188,21 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
     }
 
     @Override
-    public PageInfo<UserDTO> listUser(Query<User> query){
-        PageInfo<User> pageInfo = super.listByCondition(query);
+    public PageInfo<UserDTO> listUser(Query<UserDO> query){
+        PageInfo<UserDO> pageInfo = super.listByCondition(query);
         return this.produceDTOPageInfo(pageInfo);
     }
 
     /**
-     * 检查{@link User#username}和{@link User#nickname}是否存在重复
+     * 检查{@link UserDO#username}和{@link UserDO#nickname}是否存在重复
      * 如果存在重复则会抛出{@link FieldErrorException}
      * @param user 检查的用户对象
      */
-    private void checkUserInfo(User user){
+    private void checkUserInfo(UserDO user){
         final String fieldUsername = "username";
         final String fieldNickname = "nickname";
 
-        User oldUser;
+        UserDO oldUser;
         List<Error> errors = new ArrayList<>();
         if(user.getUsername() != null){
             oldUser = this.getByUsername(user.getUsername());
@@ -230,7 +230,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
      * @param user DO
      * @return DTO
      */
-    private UserDTO produceDTO(User user){
+    private UserDTO produceDTO(UserDO user){
         if(user == null){
             return null;
         }
@@ -244,9 +244,9 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
      * @param pageInfo DO分页对象
      * @return DTO分页对象
      */
-    private PageInfo<UserDTO> produceDTOPageInfo(PageInfo<User> pageInfo){
+    private PageInfo<UserDTO> produceDTOPageInfo(PageInfo<UserDO> pageInfo){
         List<UserDTO> pojoList = new ArrayList<>();
-        for(User u : pageInfo.getList()){
+        for(UserDO u : pageInfo.getList()){
             u.setPassword(null);
             UserDTO pojo = this.produceDTO(u);
             pojoList.add(pojo);
@@ -261,7 +261,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,User>
             throw new UsernameNotFoundException("用户名/密码错误");
         }
 
-        User user = this.getByUsername(username);
+        UserDO user = this.getByUsername(username);
 
         if(user == null){
             throw new UsernameNotFoundException("用户名/密码错误");

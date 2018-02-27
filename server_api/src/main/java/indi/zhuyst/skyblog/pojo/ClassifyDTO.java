@@ -1,7 +1,7 @@
 package indi.zhuyst.skyblog.pojo;
 
-import indi.zhuyst.skyblog.entity.Article;
-import indi.zhuyst.skyblog.entity.Classify;
+import indi.zhuyst.skyblog.entity.ArticleDO;
+import indi.zhuyst.skyblog.entity.ClassifyDO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,18 +17,18 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class ClassifyDTO extends Classify{
+public class ClassifyDTO extends ClassifyDO {
 
     private static final long serialVersionUID = -8733947910859840369L;
 
     /**
      * 该分类下的文章列表
-     * 通过{@link indi.zhuyst.skyblog.entity.Article#classifyId}获得
+     * 通过{@link ArticleDO#classifyId}获得
      */
     @ApiModelProperty("该分类下的文章列表")
-    private List<Article> articles;
+    private List<ArticleDO> articles;
 
-    public ClassifyDTO(Classify classify){
+    public ClassifyDTO(ClassifyDO classify){
         BeanUtils.copyProperties(classify,this);
     }
 }

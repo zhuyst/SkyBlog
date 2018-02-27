@@ -1,6 +1,6 @@
 package indi.zhuyst.skyblog.pojo;
 
-import indi.zhuyst.skyblog.entity.Article;
+import indi.zhuyst.skyblog.entity.ArticleDO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
- * 关于 - 该实体存于{@link Article}中
+ * 关于 - 该实体存于{@link ArticleDO}中
  * @see indi.zhuyst.skyblog.service.AboutService#ABOUT_KEY
  * @author zhuyst
  */
@@ -26,7 +26,7 @@ public class About implements Serializable{
     @NotBlank(message = "正文不能为空")
     private String content;
 
-    public About(Article article){
+    public About(ArticleDO article){
         this.content = article.getContent();
     }
 }

@@ -3,7 +3,7 @@ package indi.zhuyst.skyblog.service;
 import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.CacheableService;
-import indi.zhuyst.skyblog.entity.Comment;
+import indi.zhuyst.skyblog.entity.CommentDO;
 import indi.zhuyst.skyblog.pojo.CommentDTO;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public interface MsgBoardService extends CacheableService{
 
     /**
-     * 留言板存储在{@link Comment#articleId}当中
+     * 留言板存储在{@link CommentDO#articleId}当中
      * articleId == 2
      */
     int MSG_BOARD_KEY = 1;
@@ -37,14 +37,14 @@ public interface MsgBoardService extends CacheableService{
      * @param query 查询对象
      * @return 留言分页对象
      */
-    PageInfo<CommentDTO> listMsg(Query<Comment> query);
+    PageInfo<CommentDTO> listMsg(Query<CommentDO> query);
 
     /**
      * 新增留言
      * @param comment 留言对象
      * @return 新增后的留言对象
      */
-    CommentDTO insertMsg(Comment comment);
+    CommentDTO insertMsg(CommentDO comment);
 
     /**
      * 根据ID删除留言

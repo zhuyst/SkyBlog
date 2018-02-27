@@ -1,11 +1,12 @@
 package indi.zhuyst.security.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import indi.zhuyst.skyblog.entity.UserDO;
 import lombok.Getter;
 
 /**
  * 用户状态枚举类
- * @see indi.zhuyst.skyblog.entity.User#status
+ * @see UserDO#status
  * @author zhuyst
  */
 public enum StatusEnum {
@@ -22,7 +23,7 @@ public enum StatusEnum {
 
     /**
      * 状态ID
-     * @see indi.zhuyst.skyblog.entity.User#status
+     * @see UserDO#status
      */
     @Getter
     private int id;
@@ -40,7 +41,7 @@ public enum StatusEnum {
 
     /**
      * 通过ID获取枚举类
-     * @param id 状态ID {@link indi.zhuyst.skyblog.entity.User#status}
+     * @param id 状态ID {@link UserDO#status}
      * @return 枚举类
      */
     @JsonCreator

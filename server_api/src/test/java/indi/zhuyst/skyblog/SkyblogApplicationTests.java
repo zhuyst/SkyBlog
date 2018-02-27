@@ -1,7 +1,7 @@
 package indi.zhuyst.skyblog;
 
 import indi.zhuyst.security.pojo.SecurityUser;
-import indi.zhuyst.skyblog.entity.User;
+import indi.zhuyst.skyblog.entity.UserDO;
 import indi.zhuyst.skyblog.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +22,7 @@ public class SkyblogApplicationTests {
 	public void contextLoads() {
 		fakeLogin();
 		for(int i = 1;i <= 30;i++){
-			User user = new User();
+			UserDO user = new UserDO();
 			user.setUsername("username" + i);
 			user.setNickname("用户" + i);
 			user.setPassword("123456" + i);
@@ -31,7 +31,7 @@ public class SkyblogApplicationTests {
 	}
 
 	private void fakeLogin(){
-		User user = userService.getByID(1);
+		UserDO user = userService.getByID(1);
 		SecurityUser securityUser = new SecurityUser(user);
 
 		UsernamePasswordAuthenticationToken authenticationToken =

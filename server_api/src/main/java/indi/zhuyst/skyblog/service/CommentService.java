@@ -4,14 +4,14 @@ import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.BaseCrudService;
 import indi.zhuyst.common.service.CacheableService;
-import indi.zhuyst.skyblog.entity.Comment;
+import indi.zhuyst.skyblog.entity.CommentDO;
 import indi.zhuyst.skyblog.pojo.CommentDTO;
 
 /**
  * 文章评论服务接口
  * @author zhuyst
  */
-public interface CommentService extends BaseCrudService<Comment>,
+public interface CommentService extends BaseCrudService<CommentDO>,
         CacheableService {
 
     /**
@@ -36,12 +36,12 @@ public interface CommentService extends BaseCrudService<Comment>,
      * @param comment 评论对象
      * @return 保存后的评论DTO
      */
-    CommentDTO saveComment(Comment comment);
+    CommentDTO saveComment(CommentDO comment);
 
     /**
      * 获取评论DTO分页对象
      * @param query 查询对象
      * @return 评论DTO分页对象
      */
-    PageInfo<CommentDTO> listComment(Query<Comment> query);
+    PageInfo<CommentDTO> listComment(Query<CommentDO> query);
 }

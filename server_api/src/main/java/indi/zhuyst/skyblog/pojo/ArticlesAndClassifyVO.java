@@ -1,7 +1,7 @@
 package indi.zhuyst.skyblog.pojo;
 
 import com.github.pagehelper.PageInfo;
-import indi.zhuyst.skyblog.entity.Classify;
+import indi.zhuyst.skyblog.entity.ClassifyDO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,5 +28,5 @@ public class ArticlesAndClassifyVO implements Serializable{
      * 分类实体
      */
     @ApiModelProperty("分类实体")
-    private Classify classify;
+    private ClassifyDO classify;
 }
