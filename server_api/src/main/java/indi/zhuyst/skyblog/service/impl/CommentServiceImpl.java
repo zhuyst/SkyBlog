@@ -2,7 +2,7 @@ package indi.zhuyst.skyblog.service.impl;
 
 import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.pojo.Query;
-import indi.zhuyst.common.service.BaseCrudServiceImpl;
+import indi.zhuyst.common.service.impl.BaseCrudServiceImpl;
 import indi.zhuyst.common.util.PageUtils;
 import indi.zhuyst.security.util.SecurityUtils;
 import indi.zhuyst.skyblog.dao.CommentDao;

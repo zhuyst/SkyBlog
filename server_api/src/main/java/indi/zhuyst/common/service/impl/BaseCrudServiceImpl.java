@@ -1,10 +1,12 @@
-package indi.zhuyst.common.service;
+package indi.zhuyst.common.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.dao.BaseDao;
 import indi.zhuyst.common.entity.BaseEntity;
 import indi.zhuyst.common.pojo.Query;
+import indi.zhuyst.common.service.BaseCrudService;
+import indi.zhuyst.common.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +19,7 @@ import java.util.List;
  * @author zhuyst
  */
 public abstract class BaseCrudServiceImpl<D extends BaseDao<E>,E extends BaseEntity>
-        extends BaseService implements BaseCrudService<E>{
+        extends BaseService implements BaseCrudService<E> {
 
     /**
      * 默认页面大小

@@ -65,7 +65,7 @@
                <!--selectByExampleQueryId="false">-->
         <!--</table>-->
 
-        <table tableName="Role" domainObjectName="Role"
+        <table tableName="sys_log" domainObjectName="SysLog"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

@@ -5,7 +5,7 @@ import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.exception.FieldErrorException;
 import indi.zhuyst.common.pojo.Error;
 import indi.zhuyst.common.pojo.Query;
-import indi.zhuyst.common.service.BaseCrudServiceImpl;
+import indi.zhuyst.common.service.impl.BaseCrudServiceImpl;
 import indi.zhuyst.common.util.PageUtils;
 import indi.zhuyst.security.enums.RoleEnum;
 import indi.zhuyst.security.enums.StatusEnum;

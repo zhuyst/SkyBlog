@@ -3,7 +3,7 @@ package indi.zhuyst.skyblog.service.impl;
 import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.exception.FieldErrorException;
 import indi.zhuyst.common.pojo.Error;
-import indi.zhuyst.common.service.BaseCrudServiceImpl;
+import indi.zhuyst.common.service.impl.BaseCrudServiceImpl;
 import indi.zhuyst.skyblog.dao.ArticleDao;
 import indi.zhuyst.skyblog.dao.ClassifyDao;
 import indi.zhuyst.skyblog.entity.Article;
