@@ -5,7 +5,7 @@ import {FORM_MSG} from "../../Constant";
 import {change, untouch} from "redux-form";
 import {convertBr} from "../Util";
 import {Alert} from "react-bootstrap";
-import UserInfoPopover from "../common/UserInfoPopover";
+import UserInfoPopover from "../common/userinfo/UserInfoPopover";
 
 class Msg extends React.Component{
     render(){

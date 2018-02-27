@@ -5,7 +5,7 @@ import MsgList from "./MsgList";
 import MsgSender from './MsgSender'
 
 import '../../static/css/msgboard/msgboard.css'
-import UserInfoTable from "../common/UserInfoTable";
+import UserInfoTable from "../common/userinfo/UserInfoTable";
 import {connect} from "react-redux";
 
 class Index extends React.Component{
