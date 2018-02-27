@@ -1,8 +1,8 @@
 package indi.zhuyst.skyblog.aspect;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import indi.zhuyst.skyblog.annotation.SysLog;
 import indi.zhuyst.skyblog.entity.SysLogDO;
+import indi.zhuyst.skyblog.annotation.SysLog;
 import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.skyblog.service.SysLogService;
 import indi.zhuyst.common.util.JsonUtils;
@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
 import java.util.Date;
 
 /**
- * 对{@link indi.zhuyst.skyblog.annotation.SysLog}进行的切面
+ * 对{@link SysLog}进行的切面
  * @author zhuyst
  */
 @Aspect
@@ -40,6 +40,10 @@ public class SysLogAspect {
         return result;
     }
 
+    /**
+     * 保存系统日志
+     * @param point 切面
+     */
     private void saveLog(ProceedingJoinPoint point) throws JsonProcessingException {
         SysLogDO log = new SysLogDO();
 
