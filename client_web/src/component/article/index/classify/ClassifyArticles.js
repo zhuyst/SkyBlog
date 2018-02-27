@@ -43,8 +43,8 @@ class ClassifyArticles extends React.Component{
                     <TransitionGroup>
                         {
                             list.map(article => (
-                                <FadeTransition>
-                                    <Preview key={article.id} article={article}/>
+                                <FadeTransition key={article.id}>
+                                    <Preview article={article}/>
                                 </FadeTransition>
                             ))
                         }

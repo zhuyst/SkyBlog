@@ -1,9 +1,11 @@
 import React from 'react'
+import {TransitionGroup} from "react-transition-group";
 import { connect } from 'react-redux'
 import {Badge, Button, Col, ListGroup,
     ListGroupItem, Well} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import ClassifyListGroup from "./classify/ClassifyListGroup";
+import FadeTransition from "../../common/FadeTransition";
 
 class Navigation extends React.Component{
     render(){
@@ -35,7 +37,10 @@ class Navigation extends React.Component{
                 </ListGroup>
 
                 {
-                    classifyList.map(classify => <ClassifyListGroup key={classify.id} classify={classify}/>)
+                    classifyList.map(classify => (
+                        <FadeTransition key={classify.id}>
+                            <ClassifyListGroup classify={classify}/>
+                        </FadeTransition>))
                 }
             </Well>
         )
