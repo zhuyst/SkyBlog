@@ -4,7 +4,7 @@ import {Button, ButtonGroup, Label, Modal, Pager, Table} from "react-bootstrap";
 import {setUserManagementModalShow} from "../../../action/common/ModalAction";
 import {connect} from "react-redux";
 import {listUsers, updateUserRole, updateUserStatus} from "../../../action/user/UsersAction";
-import {FADE_ENTER, FADE_LEAVE, USER_PAGE_SIZE, UserRole, UserStatus} from "../../../Constant";
+import {FADE_ENTER, USER_PAGE_SIZE, UserRole, UserStatus} from "../../../Constant";
 
 class UserManagementModal extends React.Component{
 
