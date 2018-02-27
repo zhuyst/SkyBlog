@@ -24,17 +24,9 @@ import {setUploadModalShow} from "../../../../action/article/UploadAction";
 class ArticleEditor extends React.Component{
 
     componentWillMount(){
-        this.init();
-    }
-
-    componentDidUpdate(){
-        this.init();
-    }
-
-    init = () => {
         const {article,setArticleForm} = this.props;
         setArticleForm(article);
-    };
+    }
 
     submit = (data,back) => {
         const article = {
