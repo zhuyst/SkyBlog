@@ -1,11 +1,12 @@
 import React from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Alert, Badge,Panel} from 'react-bootstrap'
 
 import Comment from './Comment'
 import {connect} from "react-redux";
 import {listComments} from "../../../../action/article/ContentAction";
-import {COMMENT_PAGE_SIZE, FADE_ENTER, FADE_LEAVE} from "../../../../Constant";
+import {COMMENT_PAGE_SIZE} from "../../../../Constant";
+import {TransitionGroup} from "react-transition-group";
+import FadeTransition from "../../../common/FadeTransition";
 
 class CommentList extends React.Component{
 
@@ -68,14 +69,15 @@ class CommentList extends React.Component{
                     <span>评论列表&nbsp;&nbsp;<Badge>{total}</Badge></span>
                 </Panel.Heading>
                 <Panel.Body>
-                    <ReactCSSTransitionGroup
-                        transitionName='fade'
-                        transitionEnterTimeout={FADE_ENTER}
-                        transitionLeaveTimeout={FADE_LEAVE}>
+                    <TransitionGroup>
                         {
-                            list.map(comment => <Comment key={comment.id} comment={comment}/>)
+                            list.map(comment => (
+                                <FadeTransition key={comment.id}>
+                                    <Comment comment={comment}/>
+                                </FadeTransition>
+                            ))
                         }
-                    </ReactCSSTransitionGroup>
+                    </TransitionGroup>
                     {pager}
                 </Panel.Body>
             </Panel>

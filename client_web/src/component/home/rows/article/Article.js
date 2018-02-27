@@ -1,12 +1,12 @@
 import React from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {TransitionGroup} from "react-transition-group";
 import {connect} from "react-redux";
 import {Badge, Panel} from 'react-bootstrap'
 import {Link} from "react-router-dom";
 
 import Preview from './ArticlePreview'
 import {getLength} from "../Util";
-import {FADE_ENTER, FADE_LEAVE} from "../../../../Constant";
+import FadeTransition from "../../../common/FadeTransition";
 
 class Article extends React.Component{
     render(){
@@ -20,7 +20,9 @@ class Article extends React.Component{
         for(let i = 0;i < length;i++){
             const article = list[i];
             articles.push(
-                <Preview key={article.id} article={article}/>
+                <FadeTransition key={article.id}>
+                    <Preview article={article}/>
+                </FadeTransition>
             )
         }
 
@@ -32,12 +34,9 @@ class Article extends React.Component{
                     </Panel.Title>
                 </Panel.Heading>
                 <Panel.Body>
-                    <ReactCSSTransitionGroup
-                        transitionName='fade'
-                        transitionEnterTimeout={FADE_ENTER}
-                        transitionLeaveTimeout={FADE_LEAVE}>
+                    <TransitionGroup>
                         {articles}
-                    </ReactCSSTransitionGroup>
+                    </TransitionGroup>
                     <Link className="more_link"
                           to="/article">
                         查看更多文章

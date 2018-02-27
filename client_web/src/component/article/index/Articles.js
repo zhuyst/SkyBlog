@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {TransitionGroup} from "react-transition-group";
 import {PanelGroup} from 'react-bootstrap'
 import { connect } from 'react-redux'
 
@@ -7,7 +7,8 @@ import Preview from './Preview'
 import Pager from "./Pager";
 
 import {listArticles} from "../../../action/article/ArticlesAction";
-import {ARTICLE_PAGE_SIZE, FADE_ENTER, FADE_LEAVE} from "../../../Constant";
+import {ARTICLE_PAGE_SIZE} from "../../../Constant";
+import FadeTransition from "../../common/FadeTransition";
 
 class Articles extends React.Component{
 
@@ -22,14 +23,15 @@ class Articles extends React.Component{
         return(
             <div>
                 <PanelGroup id="articles">
-                    <ReactCSSTransitionGroup
-                        transitionName='fade'
-                        transitionEnterTimeout={FADE_ENTER}
-                        transitionLeaveTimeout={FADE_LEAVE}>
+                    <TransitionGroup>
                         {
-                            list.map(article => <Preview key={article.id} article={article}/>)
+                            list.map(article => (
+                                <FadeTransition key={article.id}>
+                                    <Preview article={article}/>
+                                </FadeTransition>
+                            ))
                         }
-                    </ReactCSSTransitionGroup>
+                    </TransitionGroup>
                 </PanelGroup>
                 <div className="pager">
                     <Pager page={page} onClick={() => listArticles(page_num + 1)} />

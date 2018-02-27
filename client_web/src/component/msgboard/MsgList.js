@@ -1,12 +1,13 @@
 import React from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {TransitionGroup} from "react-transition-group";
 import {Alert, Badge, Panel} from "react-bootstrap";
 import {connect} from "react-redux";
 
 import Msg from './Msg'
 
-import {FADE_ENTER, FADE_LEAVE, MSG_PAGE_SIZE} from "../../Constant";
+import {MSG_PAGE_SIZE} from "../../Constant";
 import {listMsg} from "../../action/msgboard/MsgBoardAction";
+import FadeTransition from "../common/FadeTransition";
 
 class MsgList extends React.Component{
 
@@ -73,14 +74,15 @@ class MsgList extends React.Component{
                     </Panel.Title>
                 </Panel.Heading>
                 <Panel.Body>
-                    <ReactCSSTransitionGroup
-                        transitionName='fade'
-                        transitionEnterTimeout={FADE_ENTER}
-                        transitionLeaveTimeout={FADE_LEAVE}>
+                    <TransitionGroup>
                         {
-                            list.map(msg => <Msg key={msg.id} msg={msg}/>)
+                            list.map(msg => (
+                                <FadeTransition key={msg.id}>
+                                    <Msg msg={msg}/>
+                                </FadeTransition>
+                            ))
                         }
-                    </ReactCSSTransitionGroup>
+                    </TransitionGroup>
                     {pager}
                 </Panel.Body>
             </Panel>

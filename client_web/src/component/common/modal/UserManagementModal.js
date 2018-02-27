@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {Button, ButtonGroup, Label, Modal, Pager, Table} from "react-bootstrap";
 import {setUserManagementModalShow} from "../../../action/common/ModalAction";
 import {connect} from "react-redux";
@@ -66,14 +66,23 @@ class UserManagementModal extends React.Component{
             );
 
             users.push(
-                <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.username}</td>
-                    <td>{user.nickname}</td>
-                    <td>{getRole(user.role)}</td>
-                    <td>{user.create_date}</td>
-                    <td>{button}</td>
-                </tr>
+                <CSSTransition
+                    {...this.props}
+                    classNames="fade"
+                    exit={false}
+                    timeout={{
+                        enter: FADE_ENTER
+                    }}
+                    key={user.id}>
+                    <tr>
+                        <td>{user.id}</td>
+                        <td>{user.username}</td>
+                        <td>{user.nickname}</td>
+                        <td>{getRole(user.role)}</td>
+                        <td>{user.create_date}</td>
+                        <td>{button}</td>
+                    </tr>
+                </CSSTransition>
             )
         });
 
@@ -100,13 +109,9 @@ class UserManagementModal extends React.Component{
                             <th>操作</th>
                         </tr>
                         </thead>
-                        <ReactCSSTransitionGroup
-                            transitionName='fade'
-                            component="tbody"
-                            transitionEnterTimeout={FADE_ENTER}
-                            transitionLeave={false}>
+                        <TransitionGroup component="tbody">
                             {users}
-                        </ReactCSSTransitionGroup>
+                        </TransitionGroup>
                     </Table>
                     <div className="pager_message">
                         当前为第{page_num}页，共有{pages}页
