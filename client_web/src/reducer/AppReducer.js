@@ -13,6 +13,7 @@ import ClassifyReducer from './article/ClassifyReducer'
 import AboutReducer from './about/AboutReducer'
 import MsgBoardReducer from './msgboard/MsgBoardReducer'
 import GithubReducer from './github/GithubReducer'
+import SysLogReducer from './syslog/SysLogReducer'
 
 const AppReducer = combineReducers({
     navigation : NavigationReducer,
@@ -25,6 +26,7 @@ const AppReducer = combineReducers({
     about : AboutReducer,
     msg : MsgBoardReducer,
     github : GithubReducer,
+    sys_log : SysLogReducer,
     form : formReducer,
     router: routerReducer,
     notifications: notificationsReducer()

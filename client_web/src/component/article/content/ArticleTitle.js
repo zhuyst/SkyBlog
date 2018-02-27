@@ -7,26 +7,29 @@ import {LinkContainer} from "react-router-bootstrap";
 class ArticleTitle extends React.Component{
     render(){
         const {article,login,
-            deleteArticle,hasButton} = this.props;
+            deleteArticle,editing} = this.props;
         const user = login.user;
         const {id,title,sub_title} = article;
 
-        const className = hasButton ? "page-header-has-button" : "";
+        const className = editing ? "page-header-has-button" : "";
 
         return (
             <PageHeader className={className}>
-                <small className="title_info">
-                    文章发布时间：{article.create_date}
-                    <br/>
-                    最后修改时间：{article.update_date}
-                    <br/>
-                    分类：{article.classify.name}
-                </small>
+                {
+                    !editing &&
+                    <small className="title_info">
+                        文章发布时间：{article.create_date}
+                        <br/>
+                        最后修改时间：{article.update_date}
+                        <br/>
+                        分类：{article.classify.name}
+                    </small>
+                }
                 {title}
                 <br/>
                 <small>{sub_title}</small>
                 {
-                    hasButton &&
+                    editing &&
                     <div>
                         <ButtonToolbar className="edit_button">
                             <ButtonGroup className="hidden-sm hidden-xs">

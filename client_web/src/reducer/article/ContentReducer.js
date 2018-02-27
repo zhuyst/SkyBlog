@@ -12,7 +12,7 @@ export const initialArticle = {
         id : 1,
         name : "未分类"
     },
-    classify_id : 0,
+    classify_id : 1,
 
     content : {
         text: "#### 文章内容\n`Markdown编辑器`",
