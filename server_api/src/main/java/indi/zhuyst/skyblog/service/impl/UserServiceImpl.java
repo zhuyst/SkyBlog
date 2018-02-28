@@ -17,6 +17,8 @@ import indi.zhuyst.skyblog.service.UserService;
 import indi.zhuyst.skyblog.setting.DefaultAdminSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -61,7 +63,24 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
     }
 
     @Override
+    @Cacheable(cacheNames = CACHE_OBJECT,key = "#username")
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        if(username == null){
+            throw new UsernameNotFoundException("用户名/密码错误");
+        }
+
+        UserDO user = this.getByUsername(username);
+
+        if(user == null){
+            throw new UsernameNotFoundException("用户名/密码错误");
+        }
+
+        return new SecurityUser(user);
+    }
+
+    @Override
     @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
     public UserDO save(UserDO user) {
         if(user.getId() == null){
 
@@ -96,6 +115,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
     }
 
     @Override
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
     public boolean delete(int id) {
         UserDTO user = this.getUserDTO(id);
         if(user.getAdmin()){
@@ -129,6 +149,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
     public UserDTO saveUser(UserDO user){
         UserDTO dto = null;
 
@@ -142,6 +163,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
     public boolean promoteAdmin(int id) {
         final RoleEnum admin = RoleEnum.ADMIN;
 
@@ -156,6 +178,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
     public boolean demoteAdmin(int id) {
         final RoleEnum visitor = RoleEnum.VISITOR;
 
@@ -170,6 +193,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
     public boolean lockUser(int id) {
         final StatusEnum locked = StatusEnum.LOCKED;
 
@@ -184,6 +208,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
     public boolean unlockUser(int id) {
         final StatusEnum normal = StatusEnum.NORMAL;
 
@@ -197,6 +222,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
     }
 
     @Override
+    @Cacheable(cacheNames = CACHE_PAGE)
     public PageInfo<UserDTO> listUser(Query<UserDO> query){
         PageInfo<UserDO> pageInfo = super.listByCondition(query);
         return this.produceDTOPageInfo(pageInfo);
@@ -253,29 +279,14 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
      * @param pageInfo DO分页对象
      * @return DTO分页对象
      */
-    private PageInfo<UserDTO> produceDTOPageInfo(PageInfo<UserDO> pageInfo){
+    private PageInfo<UserDTO> produceDTOPageInfo(PageInfo<UserDO> pageInfo) {
         List<UserDTO> pojoList = new ArrayList<>();
-        for(UserDO u : pageInfo.getList()){
+        for (UserDO u : pageInfo.getList()) {
             u.setPassword(null);
             UserDTO pojo = this.produceDTO(u);
             pojoList.add(pojo);
         }
 
-        return PageUtils.copyNewInfo(pageInfo,pojoList);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if(username == null){
-            throw new UsernameNotFoundException("用户名/密码错误");
-        }
-
-        UserDO user = this.getByUsername(username);
-
-        if(user == null){
-            throw new UsernameNotFoundException("用户名/密码错误");
-        }
-
-        return new SecurityUser(user);
+        return PageUtils.copyNewInfo(pageInfo, pojoList);
     }
 }

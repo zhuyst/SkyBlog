@@ -20,6 +20,16 @@ public interface UserService extends BaseCrudService<UserDO>,UserDetailsService{
     int ADMIN_KEY = 1;
 
     /**
+     * 缓存 - 对象
+     */
+    String CACHE_OBJECT = "user";
+
+    /**
+     * 缓存 - 分页对象
+     */
+    String CACHE_PAGE = "user_page";
+
+    /**
      * 根据ID获取用户DTO
      * @param id 用户ID
      * @return 用户DTO
