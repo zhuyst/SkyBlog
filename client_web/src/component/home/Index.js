@@ -12,8 +12,8 @@ class Index extends React.Component{
 
     render(){
         return [
-            <NavImage/>,
-            <Rows/>
+            <NavImage key={1}/>,
+            <Rows key={2}/>
         ]
     }
 }

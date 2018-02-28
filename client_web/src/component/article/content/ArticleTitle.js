@@ -29,7 +29,7 @@ class ArticleTitle extends React.Component{
                 <br/>
                 <small>{sub_title}</small>
                 {
-                    editing &&
+                    !editing &&
                     <div>
                         <ButtonToolbar className="edit_button">
                             <ButtonGroup className="hidden-sm hidden-xs">

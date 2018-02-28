@@ -35,11 +35,11 @@ class Navigation extends React.Component{
                         {
                             admin &&
                             [
-                                <MenuItem onClick={showUserManagementModal}>用户管理</MenuItem>,
-                                <UserManagementModal/>,
+                                <MenuItem key={1} onClick={showUserManagementModal}>用户管理</MenuItem>,
+                                <UserManagementModal key={2}/>,
 
-                                <MenuItem onClick={showSysLogModal}>系统日志</MenuItem>,
-                                <SysLogModal/>
+                                <MenuItem key={3} onClick={showSysLogModal}>系统日志</MenuItem>,
+                                <SysLogModal key={4}/>
                             ]
                         }
 
