@@ -16,6 +16,7 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.ApiKey;
+import springfox.documentation.service.Contact;
 import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -78,10 +79,17 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
      * @return ApiInfo
      */
     private ApiInfo apiInfo(){
+        String name = "zhuyst";
+        String url = "http://zhuyst.github.io/";
+        String email = "13553371651@139.com";
+
+        Contact contact = new Contact(name,url,email);
+
         return new ApiInfoBuilder().title("SkyBlog")
                 .description("SkyBlog接口一览")
+                .contact(contact)
                 .termsOfServiceUrl("")
-                .version("0.1").build();
+                .version("1.0").build();
     }
 
     /**

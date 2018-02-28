@@ -7,8 +7,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Column;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 /**
  * 系统日志
