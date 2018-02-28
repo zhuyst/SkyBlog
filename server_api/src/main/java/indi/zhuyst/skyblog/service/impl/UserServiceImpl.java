@@ -238,7 +238,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
         final String fieldNickname = "nickname";
 
         UserDO oldUser;
-        List<Error> errors = new ArrayList<>();
+        List<Error> errors = new ArrayList<>(2);
         if(user.getUsername() != null){
             oldUser = this.getByUsername(user.getUsername());
             if(oldUser != null){
@@ -280,7 +280,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
      * @return DTO分页对象
      */
     private PageInfo<UserDTO> produceDTOPageInfo(PageInfo<UserDO> pageInfo) {
-        List<UserDTO> pojoList = new ArrayList<>();
+        List<UserDTO> pojoList = new ArrayList<>(pageInfo.getSize());
         for (UserDO u : pageInfo.getList()) {
             u.setPassword(null);
             UserDTO pojo = this.produceDTO(u);

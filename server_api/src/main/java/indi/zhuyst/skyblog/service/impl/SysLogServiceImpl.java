@@ -65,7 +65,7 @@ public class SysLogServiceImpl extends BaseCrudServiceImpl<SysLogDao,SysLogDO>
      * @return DTO分页对象
      */
     private PageInfo<SysLogDTO> produceDTOPageInfo(PageInfo<SysLogDO> pageInfo){
-        List<SysLogDTO> list = new ArrayList<>();
+        List<SysLogDTO> list = new ArrayList<>(pageInfo.getSize());
         for(SysLogDO sysLog : pageInfo.getList()){
             SysLogDTO dto = this.produceDTO(sysLog);
             list.add(dto);
