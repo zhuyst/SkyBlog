@@ -68,8 +68,7 @@ public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
             // 设置初始角色及状态
             user.setRole(RoleEnum.VISITOR.getId());
             user.setStatus(StatusEnum.NORMAL.getId());
-        }
-        else {
+        } else {
             UserDO oldUser = super.getByID(user.getId());
 
             // 如果两者相等，则表示nickname不需要修改

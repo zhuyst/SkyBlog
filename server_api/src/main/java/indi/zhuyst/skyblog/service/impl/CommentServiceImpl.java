@@ -1,6 +1,7 @@
 package indi.zhuyst.skyblog.service.impl;
 
 import com.github.pagehelper.PageInfo;
+import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.impl.BaseCrudServiceImpl;
 import indi.zhuyst.common.util.PageUtils;
@@ -36,6 +37,16 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,CommentDO
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public CommentDO save(CommentDO comment) {
+
+        Integer previousCommentId = comment.getPreviousCommentId();
+        if(previousCommentId != null){
+
+            CommentDO previousComment = this.getByID(previousCommentId);
+            if(previousComment == null){
+                throw new CommonException("回复评论有误，不存在该评论");
+            }
+        }
+
         String content = comment.getContent();
 
         content = StringUtils.removeHtmlTag(content);
@@ -45,6 +56,8 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,CommentDO
 
         UserDO user = SecurityUtils.getUser();
         comment.setAuthorId(user.getId());
+
+
 
         return super.save(comment);
     }
