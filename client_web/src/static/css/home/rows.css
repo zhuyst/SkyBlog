@@ -1,3 +1,7 @@
+.rows_title{
+    cursor: pointer;
+}
+
 .home_article{
     margin-bottom: 25px;
     border-bottom: 2px solid #ddd;

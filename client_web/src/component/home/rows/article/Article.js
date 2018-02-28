@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import Preview from './ArticlePreview'
 import {getLength} from "../Util";
 import FadeTransition from "../../../common/FadeTransition";
+import {LinkContainer} from "react-router-bootstrap";
 
 class Article extends React.Component{
     render(){
@@ -26,19 +27,22 @@ class Article extends React.Component{
             )
         }
 
+        const url = "/article";
+
         return(
             <Panel bsStyle="primary">
-                <Panel.Heading>
-                    <Panel.Title componentClass="h3">
-                        最近更新的文章&nbsp;&nbsp;<Badge>{total}</Badge>
-                    </Panel.Title>
-                </Panel.Heading>
+                <LinkContainer to={url}>
+                    <Panel.Heading className="rows_title">
+                        <Panel.Title componentClass="h3">
+                            最近更新的文章&nbsp;&nbsp;<Badge>{total}</Badge>
+                        </Panel.Title>
+                    </Panel.Heading>
+                </LinkContainer>
                 <Panel.Body>
                     <TransitionGroup>
                         {articles}
                     </TransitionGroup>
-                    <Link className="more_link"
-                          to="/article">
+                    <Link className="more_link" to={url}>
                         查看更多文章
                     </Link>
                 </Panel.Body>

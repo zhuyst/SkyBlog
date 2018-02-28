@@ -17,7 +17,7 @@ class ArticleTitle extends React.Component{
             <PageHeader className={className}>
                 {
                     !editing &&
-                    <small className="title_info">
+                    <small className="title_info hidden-sm hidden-xs">
                         文章发布时间：{article.create_date}
                         <br/>
                         最后修改时间：{article.update_date}
