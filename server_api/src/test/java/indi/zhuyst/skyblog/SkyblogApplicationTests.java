@@ -20,14 +20,6 @@ public class SkyblogApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		fakeLogin();
-		for(int i = 1;i <= 30;i++){
-			UserDO user = new UserDO();
-			user.setUsername("username" + i);
-			user.setNickname("用户" + i);
-			user.setPassword("123456" + i);
-			userService.saveUser(user);
-		}
 	}
 
 	private void fakeLogin(){
