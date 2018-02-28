@@ -4,7 +4,7 @@ import fetch from 'isomorphic-fetch'
 import {dispatch} from "./store/Store";
 import {error} from "./action/common/NotifyAction";
 
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "http://api.zhuyst.cc";
 
 export const LOGIN_URL = API_BASE_URL + "/auth/login";
 export const REFRESH_URL = API_BASE_URL + "/auth/refresh";
