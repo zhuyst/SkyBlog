@@ -35,7 +35,7 @@ public class SecurityUser extends UserDTO implements UserDetails, CredentialsCon
     @JsonIgnore
     @Getter
     @ApiModelProperty(hidden = true)
-    private List<GrantedAuthority> authorities = new ArrayList<>();
+    private List<GrantedAuthority> authorities = new ArrayList<>(1);
 
     public SecurityUser(UserDO user){
         super(user);

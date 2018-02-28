@@ -95,7 +95,7 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,CommentDO
     public PageInfo<CommentDTO> listComment(Query<CommentDO> query){
         PageInfo<CommentDO> pageInfo = super.listByCondition(query);
 
-        List<CommentDTO> pojoList = new ArrayList<>();
+        List<CommentDTO> pojoList = new ArrayList<>(pageInfo.getSize());
         for(CommentDO c : pageInfo.getList()){
             CommentDTO pojo = produceDTO(c);
             pojoList.add(pojo);

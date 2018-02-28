@@ -159,7 +159,7 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,ArticleDO
      * @return DTO分页对象
      */
     private PageInfo<ArticleDTO> produceDTOPageInfo(PageInfo<ArticleDO> pageInfo){
-        List<ArticleDTO> pojoList = new ArrayList<>();
+        List<ArticleDTO> pojoList = new ArrayList<>(pageInfo.getSize());
         for(ArticleDO a : pageInfo.getList()){
             ArticleDTO pojo = this.produceDTO(a);
             pojoList.add(pojo);

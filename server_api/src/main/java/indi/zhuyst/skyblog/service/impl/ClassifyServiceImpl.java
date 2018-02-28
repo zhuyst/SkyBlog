@@ -100,7 +100,7 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
     @Cacheable(CACHE_LIST)
     public List<ClassifyDTO> listClassify(){
         List<ClassifyDO> list = super.listAll();
-        List<ClassifyDTO> dtoList = new ArrayList<>();
+        List<ClassifyDTO> dtoList = new ArrayList<>(list.size());
 
         for(ClassifyDO classify : list){
             ClassifyDTO dto = this.produceDTO(classify);
