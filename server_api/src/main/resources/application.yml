@@ -2,13 +2,13 @@
 #  level:
 #    root: debug
 spring:
+  profiles:
+    active: dev
+
   jackson:
     property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/skyblog?characterEncoding=utf-8&useSSL=false
-    username: test
-    password: zhuyst
     driver-class-name: com.mysql.jdbc.Driver
 
     druid:
@@ -60,11 +60,6 @@ spring:
       enabled: true
 
   redis:
-    database: 2
-    host: localhost
-    port: 6379
-    password:
-    timeout: 6000
     pool:
       max-active: 100
       max-wait: -1
@@ -99,6 +94,7 @@ skyblog:
     secret: zojoKieDTQYZXVi4dGKIn4qTkQA=
     expire: 604800
     header: Token
+
   oss:
     end-point: http://oss-cn-shenzhen.aliyuncs.com
     access-domain: http://zhuyst.oss-cn-shenzhen.aliyuncs.com
