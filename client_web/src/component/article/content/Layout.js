@@ -13,19 +13,17 @@ class Layout extends React.Component{
         const md = isJustify ? 5 : 8;
 
         return (
-            <div>
-                <Row>
-                    <Col mdOffset={mdOffset} md={md} sm={12} id="left">
-                        {contentArea}
+            <Row>
+                <Col mdOffset={mdOffset} md={md} sm={12} id="left">
+                    {contentArea}
+                </Col>
+                {
+                    isJustify &&
+                    <Col md={5} sm={12} id="right">
+                        {right}
                     </Col>
-                    {
-                        isJustify &&
-                        <Col md={5} sm={12} id="right">
-                            {right}
-                        </Col>
-                    }
-                </Row>
-            </div>
+                }
+            </Row>
         )
     }
 }

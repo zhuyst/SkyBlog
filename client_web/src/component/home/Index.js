@@ -11,12 +11,10 @@ class Index extends React.Component{
     }
 
     render(){
-        return (
-            <div>
-                <NavImage/>
-                <Rows/>
-            </div>
-        )
+        return [
+            <NavImage/>,
+            <Rows/>
+        ]
     }
 }
 

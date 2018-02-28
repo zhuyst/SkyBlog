@@ -8,10 +8,11 @@ import Preview from './ArticlePreview'
 import {getLength} from "../Util";
 import FadeTransition from "../../../common/FadeTransition";
 import {LinkContainer} from "react-router-bootstrap";
+import Loading from "../../../common/Loading";
 
 class Article extends React.Component{
     render(){
-        const page = this.props.page;
+        const {page,loading} = this.props;
         const {total,list} = page;
 
         const MAX_LENGTH = 3;
@@ -29,6 +30,18 @@ class Article extends React.Component{
 
         const url = "/article";
 
+        const content = loading ? <Loading/> :
+            (
+                [
+                    <TransitionGroup>
+                        {articles}
+                    </TransitionGroup>,
+                    <Link className="more_link" to={url}>
+                    查看更多文章
+                    </Link>
+                ]
+            );
+
         return(
             <Panel bsStyle="primary">
                 <LinkContainer to={url}>
@@ -39,12 +52,7 @@ class Article extends React.Component{
                     </Panel.Heading>
                 </LinkContainer>
                 <Panel.Body>
-                    <TransitionGroup>
-                        {articles}
-                    </TransitionGroup>
-                    <Link className="more_link" to={url}>
-                        查看更多文章
-                    </Link>
+                    {content}
                 </Panel.Body>
             </Panel>
         )
@@ -53,7 +61,8 @@ class Article extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        page : state.articles.page
+        page : state.articles.page,
+        loading : state.articles.loading
     }
 };
 

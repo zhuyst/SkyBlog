@@ -25,19 +25,15 @@ class JustifyContent extends React.Component{
     }
 
     render(){
-        const left = (
-            <div>
-                <ArticleBreadcrumb/>
-                <ContentArea/>
-            </div>
-        );
+        const left = [
+            <ArticleBreadcrumb/>,
+            <ContentArea/>
+        ];
 
-        const right = (
-            <div>
-                <CommentList/>
-                <CommentSender/>
-            </div>
-        );
+        const right = [
+            <CommentList/>,
+            <CommentSender/>
+        ];
 
         return (
             <Layout type={LAYOUT_JUSTIFY}

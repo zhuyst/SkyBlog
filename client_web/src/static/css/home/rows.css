@@ -2,6 +2,10 @@
     cursor: pointer;
 }
 
+.loading{
+    text-align: center;
+}
+
 .home_article{
     margin-bottom: 25px;
     border-bottom: 2px solid #ddd;
