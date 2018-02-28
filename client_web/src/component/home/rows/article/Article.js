@@ -33,10 +33,10 @@ class Article extends React.Component{
         const content = loading ? <Loading/> :
             (
                 [
-                    <TransitionGroup>
+                    <TransitionGroup key={1}>
                         {articles}
                     </TransitionGroup>,
-                    <Link className="more_link" to={url}>
+                    <Link key={2} className="more_link" to={url}>
                     查看更多文章
                     </Link>
                 ]

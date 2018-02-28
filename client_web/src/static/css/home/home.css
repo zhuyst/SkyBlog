@@ -19,7 +19,9 @@
 }
 
 .nav_image_text hr{
-    border-top: 2px double #f16c20;
+    background-color: #f16c20;
+    height: 2px;
+    border: 0;
 }
 
 .nav_image_text h3{

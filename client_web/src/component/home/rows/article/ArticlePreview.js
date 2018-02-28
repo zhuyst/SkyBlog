@@ -10,6 +10,7 @@ class ArticlePreview extends React.Component{
             <div className="home_article">
                 <Link to={path}>
                     <h4 className="home_article_title">{article.title}</h4>
+                    <hr/>
                     <p className="home_article_content">{article.content}</p>
                     <p className="home_article_date">发布时间 : {article.create_date}</p>
                 </Link>

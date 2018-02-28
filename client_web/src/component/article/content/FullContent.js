@@ -25,7 +25,7 @@ class FullContent extends React.Component{
     }
 
     render(){
-        const contentArea = [
+        const contentArea = (
             <div>
                 <ArticleBreadcrumb/>
                 <Panel>
@@ -38,7 +38,7 @@ class FullContent extends React.Component{
                 <CommentList/>
                 <CommentSender/>
             </div>
-        ];
+        );
 
         return (
             <Layout type={LAYOUT_FULL}

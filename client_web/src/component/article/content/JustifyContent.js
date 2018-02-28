@@ -26,13 +26,13 @@ class JustifyContent extends React.Component{
 
     render(){
         const left = [
-            <ArticleBreadcrumb/>,
-            <ContentArea/>
+            <ArticleBreadcrumb key={1}/>,
+            <ContentArea key={2}/>
         ];
 
         const right = [
-            <CommentList/>,
-            <CommentSender/>
+            <CommentList key={1}/>,
+            <CommentSender key={2}/>
         ];
 
         return (
