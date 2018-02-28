@@ -19,6 +19,7 @@ const initialState = {
         pages : 0,
         total : 0,
     },
+    loading: true,
     classify : initialClassify
 };
 
@@ -33,6 +34,7 @@ const ArticlesReducer = (state = initialState,action) => {
 
             return {
                 ...state,
+                loading: false,
                 page : {
                     list : newList,
                     page_num : page.page_num,
