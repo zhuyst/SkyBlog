@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import Commit from "./Commit";
 import {SKY_BLOG_URL} from "../../../../Constant";
 import FadeTransition from "../../../common/FadeTransition";
+import {LinkContainer} from "react-router-bootstrap";
 
 class Github extends React.Component{
     render(){
@@ -12,11 +13,13 @@ class Github extends React.Component{
 
         return (
             <Panel bsStyle="primary">
-                <Panel.Heading>
-                    <Panel.Title componentClass="h3">
-                        SkyBlog项目动态
-                    </Panel.Title>
-                </Panel.Heading>
+                <LinkContainer to={SKY_BLOG_URL}>
+                    <Panel.Heading className="rows_title">
+                        <Panel.Title componentClass="h3">
+                            SkyBlog项目动态
+                        </Panel.Title>
+                    </Panel.Heading>
+                </LinkContainer>
                 <Panel.Body>
                     <TransitionGroup>
                         {

@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {getLength} from "../Util";
 import Msg from "./Msg";
 import FadeTransition from "../../../common/FadeTransition";
+import {LinkContainer} from "react-router-bootstrap";
 
 class MsgBoard extends React.Component{
     render(){
@@ -26,13 +27,17 @@ class MsgBoard extends React.Component{
             )
         }
 
+        const url = "/msg_board";
+
         return(
             <Panel bsStyle="primary">
-                <Panel.Heading>
-                    <Panel.Title componentClass="h3">
-                        留言板&nbsp;&nbsp;<Badge>{total}</Badge>
-                    </Panel.Title>
-                </Panel.Heading>
+                <LinkContainer to={url}>
+                    <Panel.Heading className="rows_title">
+                        <Panel.Title componentClass="h3">
+                            留言板&nbsp;&nbsp;<Badge>{total}</Badge>
+                        </Panel.Title>
+                    </Panel.Heading>
+                </LinkContainer>
                 <Panel.Body>
                     <TransitionGroup>
                         {msgList}
