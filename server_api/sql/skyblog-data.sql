@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-02-27 21:40:22
+Date: 2018-02-28 14:50:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,9 +29,8 @@ CREATE TABLE `article` (
   `create_date` datetime DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `classify_id` (`classify_id`),
-  KEY `author_id` (`author_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+  KEY `classify_id` (`classify_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of article
@@ -51,14 +50,14 @@ INSERT INTO `article` VALUES ('19', '文章标题 - 18', '文章副标题 - 18',
 INSERT INTO `article` VALUES ('20', '文章标题 - 19', '文章副标题 - 19', '# Markdown', '1', '1', '2018-02-08 15:32:00', '2018-02-08 15:32:00');
 INSERT INTO `article` VALUES ('21', '文章标题 - 20', '文章副标题 - 20', '# Markdown', '1', '1', '2018-02-08 15:32:00', '2018-02-08 15:32:00');
 INSERT INTO `article` VALUES ('24', '文章标题 - 23', '文章副标题 - 23', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-18 15:17:31');
-INSERT INTO `article` VALUES ('25', '文章标题 - 24123', '文章副标题 - 24', 'MarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown', '3', '1', '2018-02-08 15:32:01', '2018-02-27 20:25:19');
+INSERT INTO `article` VALUES ('25', '文章标题 - 24', '文章副标题 - 24', 'MarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown', '3', '1', '2018-02-08 15:32:01', '2018-02-27 22:34:42');
 INSERT INTO `article` VALUES ('26', '文章标题 - 25', '文章副标题 - 25', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-08 15:32:01');
 INSERT INTO `article` VALUES ('27', '文章标题 - 26', '文章副标题 - 26', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-08 15:32:01');
 INSERT INTO `article` VALUES ('28', '文章标题 - 27', '文章副标题 - 27', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-08 15:32:01');
 INSERT INTO `article` VALUES ('29', '文章标题 - 28', '文章副标题 - 28', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-08 15:32:01');
 INSERT INTO `article` VALUES ('30', '文章标题 - 29', '文章副标题 - 29', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-08 15:32:01');
 INSERT INTO `article` VALUES ('31', '文章标题 - 30', '文章副标题 - 30', '# Markdown', '1', '1', '2018-02-08 15:32:01', '2018-02-08 15:32:01');
-INSERT INTO `article` VALUES ('33', '文新增文章测试', '文章副标题', '#### 文章内容\n`Markdown编辑器`', '3', '1', '2018-02-27 20:27:46', '2018-02-27 20:34:31');
+INSERT INTO `article` VALUES ('35', '新增文章测试', '文章副标题', '#### 文章内容\n`Markdown编辑器`', '1', '1', '2018-02-27 22:44:32', '2018-02-27 22:44:32');
 
 -- ----------------------------
 -- Table structure for classify
@@ -68,13 +67,13 @@ CREATE TABLE `classify` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of classify
 -- ----------------------------
 INSERT INTO `classify` VALUES ('1', '未分类');
-INSERT INTO `classify` VALUES ('3', '分类2');
+INSERT INTO `classify` VALUES ('3', '分类1');
 
 -- ----------------------------
 -- Table structure for comment
@@ -89,7 +88,6 @@ CREATE TABLE `comment` (
   `create_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `article_id` (`article_id`),
-  KEY `author_id` (`author_id`),
   KEY `previous_comment_id` (`previous_comment_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8;
 
@@ -204,11 +202,16 @@ CREATE TABLE `sys_log` (
   `user_id` int(11) DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_log
 -- ----------------------------
+INSERT INTO `sys_log` VALUES ('3', '删除', '文章', 'indi.zhuyst.skyblog.controller.ArticleController.deleteArticle()', '[33]', '1', '2018-02-27 22:03:45');
+INSERT INTO `sys_log` VALUES ('4', '更新', '文章分类', 'indi.zhuyst.skyblog.controller.ClassifyController.updateClassify()', '[3,{\"id\":3,\"name\":\"分类1\"}]', '1', '2018-02-27 22:34:09');
+INSERT INTO `sys_log` VALUES ('5', '更新', '文章', 'indi.zhuyst.skyblog.controller.ArticleController.updateArticle()', '[25,{\"id\":25,\"title\":\"文章标题 - 24\",\"subTitle\":\"文章副标题 - 24\",\"classifyId\":3,\"authorId\":1,\"createDate\":null,\"updateDate\":\"2018-02-27 22:34\",\"content\":\"MarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown\"}]', '1', '2018-02-27 22:34:42');
+INSERT INTO `sys_log` VALUES ('6', '新增', '文章', 'indi.zhuyst.skyblog.controller.ArticleController.insertArticle()', '[{\"id\":34,\"title\":\"新增文章测试\",\"subTitle\":\"文章副标题\",\"classifyId\":0,\"authorId\":1,\"createDate\":\"2018-02-27 22:38\",\"updateDate\":\"2018-02-27 22:38\",\"content\":\"#### 文章内容\\n`Markdown编辑器`\"}]', '1', '2018-02-27 22:38:02');
+INSERT INTO `sys_log` VALUES ('7', '新增', '文章', 'indi.zhuyst.skyblog.controller.ArticleController.insertArticle()', '[{\"id\":35,\"title\":\"新增文章测试\",\"subTitle\":\"文章副标题\",\"classifyId\":1,\"authorId\":1,\"createDate\":\"2018-02-27 22:44\",\"updateDate\":\"2018-02-27 22:44\",\"content\":\"#### 文章内容\\n`Markdown编辑器`\"}]', '1', '2018-02-27 22:44:32');
 
 -- ----------------------------
 -- Table structure for user
@@ -223,7 +226,8 @@ CREATE TABLE `user` (
   `status` int(1) DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `role` (`role`)
+  KEY `username` (`username`),
+  KEY `nickname` (`nickname`)
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
