@@ -50,20 +50,25 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,ArticleDO
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public ArticleDO save(ArticleDO article) {
+        Integer classifyId = article.getClassifyId();
+        if(classifyId == null){
+            article.setClassifyId(ClassifyService.NOT_CLASSIFY_KEY);
+        } else {
+            ClassifyDO classify = classifyService.getByID(classifyId);
+            if(classify == null){
+                throw new CommonException("文章分类有误，不存在该分类");
+            }
+        }
+
         Date date = new Date();
 
         if(article.getId() == null){
             article.setCreateDate(date);
-        }
-        else {
+        } else {
             checkExcept(article.getId());
         }
 
         article.setUpdateDate(date);
-
-        if(article.getClassifyId() == null){
-            article.setClassifyId(ClassifyService.NOT_CLASSIFY_KEY);
-        }
 
         UserDO user = SecurityUtils.getUser();
         article.setAuthorId(user.getId());

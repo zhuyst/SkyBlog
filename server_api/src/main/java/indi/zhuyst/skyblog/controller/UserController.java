@@ -142,8 +142,7 @@ public class UserController extends BaseController{
         boolean isSuccess = false;
         if(roleId == RoleEnum.ADMIN.getId()){
             isSuccess = userService.promoteAdmin(id);
-        }
-        else if(roleId == RoleEnum.VISITOR.getId()){
+        } else if(roleId == RoleEnum.VISITOR.getId()){
             isSuccess = userService.demoteAdmin(id);
         }
 
@@ -172,8 +171,7 @@ public class UserController extends BaseController{
         boolean isSuccess = false;
         if(statusId == StatusEnum.NORMAL.getId()){
             isSuccess = userService.unlockUser(id);
-        }
-        else if(statusId == StatusEnum.LOCKED.getId()){
+        } else if(statusId == StatusEnum.LOCKED.getId()){
             isSuccess = userService.lockUser(id);
         }
 
