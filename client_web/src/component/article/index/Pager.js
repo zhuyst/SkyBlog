@@ -3,10 +3,29 @@ import {Alert} from "react-bootstrap";
 
 class Pager extends React.Component{
     render(){
-        const {page,onClick} = this.props;
+        const {page,loading,onClick} = this.props;
         const {total,page_num,pages} = page;
 
-        if(total === 0){
+        if(loading) {
+            return (
+                <Alert bsStyle="warning">
+                    <p>
+                            <span className="more_left">
+                                <i className="fa fa-lg fa-spinner fa-spin"/>
+                            </span>
+
+                        <i className="fa fa-lg fa-spinner fa-spin" />
+                        &nbsp;&nbsp;加载中...&nbsp;&nbsp;
+                        <i className="fa fa-lg fa-spinner fa-spin" />
+
+                        <span className="more_right">
+                                <i className="fa fa-lg fa-spinner fa-spin"/>
+                            </span>
+                    </p>
+                </Alert>
+            );
+        }
+        else if(total === 0){
             return (
                 <Alert bsStyle="info">
                     &nbsp;&nbsp;还没有文章，快来发布一个吧&nbsp;&nbsp;

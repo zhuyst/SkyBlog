@@ -10,6 +10,7 @@ import {ARTICLE_PAGE_SIZE} from "../../../../Constant";
 import Preview from "../Preview";
 import Pager from "../Pager";
 import FadeTransition from "../../../common/FadeTransition";
+import Loading from "../../../common/Loading";
 
 class ClassifyArticles extends React.Component{
 
@@ -21,8 +22,16 @@ class ClassifyArticles extends React.Component{
 
     render(){
         const {classify, listArticlesByClassify} = this.props;
-        const page = classify.page;
+        const {loading, page} = classify;
         const {list,page_num} = page;
+
+        if(page.total === 0 && loading){
+            return (
+                <Alert bsStyle="warning" className="articles_loading">
+                    <Loading/>
+                </Alert>
+            )
+        }
 
         return(
             <div>
@@ -43,7 +52,8 @@ class ClassifyArticles extends React.Component{
                     </TransitionGroup>
                 </PanelGroup>
                 <div className="pager">
-                    <Pager page={page} onClick={() => listArticlesByClassify(classify.id,page_num + 1)} />
+                    <Pager page={page} loading={loading}
+                           onClick={() => listArticlesByClassify(classify.id,page_num + 1)} />
                 </div>
             </div>
         )
