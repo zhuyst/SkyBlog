@@ -38,7 +38,8 @@ class ClassifyButtonGroup extends React.Component{
     };
 
     render(){
-        const {classify,deleteClassify,handleSubmit} = this.props;
+        const {classify,submitting,
+            deleteClassify,handleSubmit} = this.props;
 
         let buttonGroup;
         if(this.state.edit){
@@ -50,6 +51,7 @@ class ClassifyButtonGroup extends React.Component{
                         type="text"
                         label="分类名"
                         placeholder="请输入分类名"
+                        disabled={submitting}
                     />
                     <ButtonGroup className="btn-block">
                         <Button bsStyle="success"
