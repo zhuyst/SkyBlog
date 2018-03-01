@@ -11,6 +11,10 @@
     border-bottom: 2px solid #ddd;
 }
 
+.home_article a{
+    cursor: pointer;
+}
+
 .home_article:last-of-type{
     margin-bottom: 0 !important;
 }

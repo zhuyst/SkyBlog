@@ -2,7 +2,7 @@ import {GET_ABOUT_RESPONSE, SET_ABOUT, UPDATE_ABOUT_RESPONSE} from "../../action
 
 const initialState = {
     content : {
-        text: "## 关于SkyBlog",
+        text: "",
         selection: null
     }
 };

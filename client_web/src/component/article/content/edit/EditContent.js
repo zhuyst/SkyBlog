@@ -12,15 +12,16 @@ import {setArticle} from "../../../../action/article/ContentAction";
 
 class EditContent extends React.Component{
     componentWillMount(){
+        const {setArticle,getArticle,article} = this.props;
         let action;
 
         const id = this.props.match.params.id;
         if(id === "new"){
-            this.props.setArticle(initialArticle);
+            setArticle(initialArticle);
             action = "发布"
         }
-        else {
-            this.props.getArticle(id);
+        else if(article.id !== Number(id)){
+            getArticle(id);
             action = "修改"
         }
 

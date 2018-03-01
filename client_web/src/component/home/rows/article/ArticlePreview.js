@@ -1,22 +1,39 @@
 import React from 'react'
-import {Link} from "react-router-dom";
+import {push} from 'react-router-redux'
+import {connect} from "react-redux";
+import {setArticle} from "../../../../action/article/ContentAction";
 
 class ArticlePreview extends React.Component{
     render(){
-        const article = this.props.article;
-        const path = `/article/content/${article.id}/full`;
+        const {article,push} = this.props;
 
         return (
-            <div className="home_article">
-                <Link to={path}>
+            <div className="home_article" onClick={() => push(article)}>
+                <a>
                     <h4 className="home_article_title">{article.title}</h4>
                     <hr/>
                     <p className="home_article_content">{article.content}</p>
                     <p className="home_article_date">发布时间 : {article.create_date}</p>
-                </Link>
+                </a>
             </div>
         )
     }
 }
 
-export default ArticlePreview
+const mapDispatchToProps = dispatch => {
+    return {
+        push : article => {
+            dispatch(setArticle(article));
+
+            const path = `/article/content/${article.id}/full`;
+            dispatch(push(path))
+        }
+    }
+};
+
+const ArticlePreviewContainer = connect(
+    null,
+    mapDispatchToProps
+)(ArticlePreview);
+
+export default ArticlePreviewContainer

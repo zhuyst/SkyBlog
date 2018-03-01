@@ -12,6 +12,10 @@
     font-weight: bold;
 }
 
+.preview a{
+    cursor: pointer;
+}
+
 .preview:first-of-type{
     margin-top: 0 !important;
 }

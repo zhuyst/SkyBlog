@@ -44,17 +44,15 @@ const initialState = {
 };
 
 const ContentReducer = (state = initialState,action) => {
+    let article = action.article;
+
     let newList;
     let comments;
 
     switch(action.type){
         case SET_ARTICLE:
-            const article = Object.assign({},state.article,action.article);
-
-            return {
-                ...state,
-                article : article
-            };
+            article = Object.assign({},state.article,article);
+            return convert(article,state);
 
         case SET_PREVIOUS_COMMENT:
             return {
@@ -63,13 +61,13 @@ const ContentReducer = (state = initialState,action) => {
             };
 
         case GET_ARTICLE_INFO_RESPONSE:
-            return convert(action,state);
+            return convert(article,state);
 
         case INSERT_ARTICLE_RESPONSE:
-            return convert(action,state);
+            return convert(article,state);
 
         case UPDATE_ARTICLE_RESPONSE:
-            return convert(action,state);
+            return convert(article,state);
 
         case LIST_COMMENTS_RESPONSE:
             comments = action.comments;
@@ -89,8 +87,7 @@ const ContentReducer = (state = initialState,action) => {
     }
 };
 
-const convert = (action,state) => {
-    const article = action.article;
+const convert = (article,state) => {
     const convertArticle = {
         ...article,
         content: {

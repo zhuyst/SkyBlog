@@ -235,7 +235,10 @@ const validate = values => {
 };
 
 const onChange = (values,dispatch) => {
-    dispatch(setArticle(values));
+    dispatch(setArticle({
+        ...values,
+        content : values.content.text
+    }));
 };
 
 const ArticleEditorForm = reduxForm({
