@@ -9,6 +9,7 @@ import {MSG_PAGE_SIZE} from "../../Constant";
 import {listMsg} from "../../action/msgboard/MsgBoardAction";
 import FadeTransition from "../common/FadeTransition";
 import Loading from "../common/Loading";
+import Pager from "./Pager";
 
 class MsgList extends React.Component{
 
@@ -21,60 +22,13 @@ class MsgList extends React.Component{
 
     render(){
         const {listMsg,loading,page} = this.props;
-        const {list,page_num,pages,total} = page;
+        const {list,page_num,total} = page;
 
         let content;
-        if(loading){
+        if(page.total === 0 && loading){
             content = <Loading/>
         }
         else {
-            let pager;
-            if(total === 0){
-                pager = (
-                    <div className="pager" style={{
-                        marginTop : 0
-                    }}>
-                        <Alert bsStyle="info" className="comment_pager">
-                            &nbsp;&nbsp;还没人留过言，来发送第一条留言吧！&nbsp;&nbsp;
-                        </Alert>
-                    </div>
-                )
-            }
-            else if(page_num === pages){
-                pager = (
-                    <div className="pager">
-                        <Alert bsStyle="info" className="comment_pager">
-                            &nbsp;&nbsp;已经没有更多留言啦！&nbsp;&nbsp;
-                        </Alert>
-                    </div>
-                )
-            }
-            else {
-                pager = (
-                    <div className="pager">
-                        <div className="more">
-                            <div onClick={() => listMsg(page_num + 1)}>
-                                <Alert bsStyle="warning" className="comment_pager">
-                                    <p>
-                            <span className="more_left">
-                                <i className="fa fa-angle-double-down fa-lg"/>
-                            </span>
-
-                                        <i className="fa fa-toggle-down" />
-                                        &nbsp;&nbsp;点击查看更多留言&nbsp;&nbsp;
-                                        <i className="fa fa-toggle-down" />
-
-                                        <span className="more_right">
-                                <i className="fa fa-angle-double-down fa-lg"/>
-                            </span>
-                                    </p>
-                                </Alert>
-                            </div>
-                        </div>
-                    </div>
-                )
-            }
-
             content = [
                 <TransitionGroup key={1}>
                     {
@@ -86,7 +40,8 @@ class MsgList extends React.Component{
                     }
                 </TransitionGroup>,
                 <div key={2}>
-                    {pager}
+                    <Pager page={page} loading={loading}
+                           onClick={() => listMsg(page_num + 1)}/>
                 </div>
             ]
         }
