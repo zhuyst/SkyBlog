@@ -15,12 +15,14 @@ import ArticleBreadcrumb from "./ArticleBreadcrumb";
 
 class JustifyContent extends React.Component{
     componentWillMount(){
+        const {setArticle,getArticle,article} = this.props;
         const id = this.props.match.params.id;
+
         if(id === "new"){
-            this.props.setArticle(initialArticle);
+            setArticle(initialArticle);
         }
-        else {
-            this.props.getArticle(id);
+        else if(article.id !== Number(id)){
+            getArticle(id);
         }
     }
 
@@ -43,6 +45,12 @@ class JustifyContent extends React.Component{
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        article : state.content.article
+    }
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         getArticle : id =>{
@@ -55,7 +63,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 const JustifyContentContainer = connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(JustifyContent);
 

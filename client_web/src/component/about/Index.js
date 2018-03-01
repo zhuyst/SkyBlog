@@ -14,7 +14,11 @@ class Index extends React.Component{
 
     componentWillMount(){
         document.title = "关于 - 青云的小窝";
-        this.props.getAbout();
+
+        const {about,getAbout} = this.props;
+        if(about.content.text === ""){
+            getAbout()
+        }
     }
 
     render(){

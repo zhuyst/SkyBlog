@@ -13,7 +13,10 @@ import FadeTransition from "../../common/FadeTransition";
 class Articles extends React.Component{
 
     componentWillMount(){
-        this.props.listArticles(1);
+        const {page, listArticles} = this.props;
+        if(page.total === 0){
+            listArticles(1);
+        }
     }
 
     render(){

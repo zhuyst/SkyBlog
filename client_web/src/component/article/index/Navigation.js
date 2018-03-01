@@ -11,7 +11,10 @@ import {listClassify} from "../../../action/article/ClassifyAction";
 class Navigation extends React.Component{
 
     componentWillMount(){
-        this.props.listClassify();
+        const {classifyList,listClassify} = this.props;
+        if(classifyList.length === 0){
+            listClassify();
+        }
     }
 
     render(){
