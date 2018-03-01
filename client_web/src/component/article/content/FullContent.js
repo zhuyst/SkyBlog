@@ -9,13 +9,14 @@ import Layout, {LAYOUT_FULL} from "./Layout";
 import {initialArticle} from "../../../reducer/article/ContentReducer";
 
 import {getArticleInfo} from "../../../action/article/ArticlesAction";
-import {setArticle} from "../../../action/article/ContentAction";
+import {listComments, setArticle} from "../../../action/article/ContentAction";
 import ArticleBreadcrumb from "./ArticleBreadcrumb";
 import {Panel} from "react-bootstrap";
+import {COMMENT_PAGE_SIZE} from "../../../Constant";
 
 class FullContent extends React.Component{
     componentWillMount(){
-        const {setArticle,getArticle,article} = this.props;
+        const {setArticle,getArticle,listComments,article} = this.props;
         const id = this.props.match.params.id;
 
         if(id === "new"){
@@ -23,6 +24,9 @@ class FullContent extends React.Component{
         }
         else if(article.id !== Number(id)){
             getArticle(id);
+        }
+        else {
+            listComments(id,1)
         }
     }
 
@@ -62,6 +66,9 @@ const mapDispatchToProps = dispatch => {
         },
         setArticle : article =>{
             dispatch(setArticle(article))
+        },
+        listComments : (id,pageNum) => {
+            dispatch(listComments(id,pageNum,COMMENT_PAGE_SIZE));
         }
     }
 };
