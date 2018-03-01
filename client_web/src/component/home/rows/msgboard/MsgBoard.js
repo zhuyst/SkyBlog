@@ -10,6 +10,7 @@ import FadeTransition from "../../../common/FadeTransition";
 import {LinkContainer} from "react-router-bootstrap";
 import {listMsg} from "../../../../action/msgboard/MsgBoardAction";
 import {MSG_PAGE_SIZE} from "../../../../Constant";
+import Loading from "../../../common/Loading";
 
 class MsgBoard extends React.Component{
 
@@ -18,7 +19,7 @@ class MsgBoard extends React.Component{
     }
 
     render(){
-        const page = this.props.page;
+        const {loading,page} = this.props;
         const {list,total} = page;
 
         const MAX_LENGTH = 5;
@@ -36,6 +37,18 @@ class MsgBoard extends React.Component{
 
         const url = "/msg_board";
 
+        const content = loading ?
+            <Loading/> :
+            [
+                <TransitionGroup key={1}>
+                    {msgList}
+                </TransitionGroup>,
+                <Link key={2} className="more_link"
+                to="/msg_board">
+                    查看更多留言
+                    </Link>
+            ];
+
         return(
             <Panel bsStyle="primary">
                 <LinkContainer to={url}>
@@ -46,13 +59,7 @@ class MsgBoard extends React.Component{
                     </Panel.Heading>
                 </LinkContainer>
                 <Panel.Body>
-                    <TransitionGroup>
-                        {msgList}
-                    </TransitionGroup>
-                    <Link className="more_link"
-                          to="/msg_board">
-                        查看更多留言
-                    </Link>
+                    {content}
                 </Panel.Body>
             </Panel>
         )
@@ -61,7 +68,8 @@ class MsgBoard extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        page : state.msg.page
+        page : state.msg.page,
+        loading : state.msg.loading
     }
 };
 

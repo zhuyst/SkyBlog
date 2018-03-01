@@ -1,9 +1,19 @@
 import {checkStatus, FAIL_RESULT, HttpMethod} from "../../Api";
 import {error} from "../common/NotifyAction";
 
+export const SET_GITHUB_LOADING = "SET_GITHUB_LOADING";
 export const LIST_COMMITS_RESPONSE = "LIST_COMMITS_RESPONSE";
 
+export const setGithubLoading = loading => {
+    return {
+        type : SET_GITHUB_LOADING,
+        loading : loading
+    }
+};
+
 export const listCommits = per_page => dispatch => {
+    dispatch(setGithubLoading(true));
+
     const url = `https://api.github.com/repos/zhuyst/SkyBlog/commits?per_page=${per_page}`;
     return fetch(url,{
         method : HttpMethod.GET,
@@ -11,7 +21,10 @@ export const listCommits = per_page => dispatch => {
             Accept: "application/vnd.github.v3+json"
         }
     }).then(response => checkStatus(response))
-        .then(result => dispatch(listCommitsResponse(result)))
+        .then(result => {
+            dispatch(setGithubLoading(false));
+            dispatch(listCommitsResponse(result))
+        })
         .catch(() => dispatch(error(FAIL_RESULT.message)));
 };
 

@@ -8,6 +8,8 @@ import {ARTICLE_PAGE_SIZE, FORM_ARTICLE, FORM_COMMENT} from "../../Constant";
 import {listComments} from "./ContentAction";
 import {listClassify} from "./ClassifyAction";
 
+export const SET_ARTICLES_LOADING = "SET_ARTICLES_LOADING";
+
 export const LIST_ARTICLES_RESPONSE = "LIST_ARTICLES_RESPONSE";
 export const LIST_ARTICLES_BY_CLASSIFY_RESPONSE = "LIST_ARTICLES_BY_CLASSIFY_RESPONSE";
 export const GET_ARTICLE_INFO_RESPONSE = "GET_ARTICLE_INFO_RESPONSE";
@@ -15,6 +17,13 @@ export const GET_ARTICLE_INFO_RESPONSE = "GET_ARTICLE_INFO_RESPONSE";
 export const INSERT_ARTICLE_RESPONSE = "INSERT_ARTICLE_RESPONSE";
 export const UPDATE_ARTICLE_RESPONSE = "UPDATE_ARTICLE_RESPONSE";
 export const DELETE_ARTICLE_RESPONSE  = "DELETE_ARTICLE_RESPONSE";
+
+export const setArticlesLoading = loading => {
+    return {
+        type : SET_ARTICLES_LOADING,
+        loading : loading
+    }
+};
 
 export const insertArticle = (article,back) => dispatch => {
     dispatch(startSubmit(FORM_ARTICLE));
@@ -51,11 +60,16 @@ const insertArticleResponse = result => {
 };
 
 export const listArticles = (pageNum,pageSize) => dispatch => {
+    dispatch(setArticlesLoading(true));
+
     const url = ARTICLE_API_URL + "/public/list/";
     return _get(url, {
             pageNum : pageNum,
             pageSize : pageSize
-        }).then(result => dispatch(listArticlesResponse(result)))
+        }).then(result => {
+            dispatch(setArticlesLoading(false));
+            dispatch(listArticlesResponse(result))
+    })
 };
 
 const listArticlesResponse = result => {

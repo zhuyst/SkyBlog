@@ -1,4 +1,7 @@
-import {LIST_ARTICLES_BY_CLASSIFY_RESPONSE, LIST_ARTICLES_RESPONSE} from "../../action/article/ArticlesAction";
+import {
+    LIST_ARTICLES_BY_CLASSIFY_RESPONSE, LIST_ARTICLES_RESPONSE,
+    SET_ARTICLES_LOADING
+} from "../../action/article/ArticlesAction";
 import {concatList} from "../Util";
 
 const initialClassify = {
@@ -28,6 +31,12 @@ const ArticlesReducer = (state = initialState,action) => {
     let newList;
 
     switch (action.type){
+        case SET_ARTICLES_LOADING:
+            return {
+                ...state,
+                loading : action.loading
+            };
+
         case LIST_ARTICLES_RESPONSE:
             page = action.page;
             newList = concatList(page,state.page.list);
