@@ -5,12 +5,20 @@ import {_delete, _get, _post, MSG_BOARD_API_URL} from "../../Api";
 import {FORM_MSG, MSG_PAGE_SIZE} from "../../Constant";
 import {initialPreviousComment} from "../../reducer/article/ContentReducer";
 
+export const SET_MSG_LOADING = "SET_MSG_LOADING";
 export const SET_PREVIOUS_MSG = "SET_PREVIOUS_MSG";
 
 export const LIST_MSG_RESPONSE = "LIST_MSG_RESPONSE";
 
 export const INSERT_MSG_RESPONSE = "INSERT_MSG_RESPONSE";
 export const DELETE_MSG_RESPONSE = "DELETE_MSG_RESPONSE";
+
+export const setMsgLoading = loading => {
+    return {
+        type : SET_MSG_LOADING,
+        loading : loading
+    }
+};
 
 export const setPreviousMsg = msg => {
     return {
@@ -48,11 +56,16 @@ const insertMsgResponse = result => {
 };
 
 export const listMsg = (pageNum,pageSize) => dispatch => {
+    dispatch(setMsgLoading(true));
+
     const url = MSG_BOARD_API_URL + "/public/list/";
     return _get(url,{
         pageNum : pageNum,
         pageSize: pageSize
-    }).then(result => dispatch(listMsgResponse(result)))
+    }).then(result => {
+        dispatch(setMsgLoading(false));
+        dispatch(listMsgResponse(result))
+    })
 };
 
 const listMsgResponse = result => {

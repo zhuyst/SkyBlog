@@ -7,6 +7,7 @@ import {GITHUB_PAGE_SIZE, SKY_BLOG_URL} from "../../../../Constant";
 import FadeTransition from "../../../common/FadeTransition";
 import {LinkContainer} from "react-router-bootstrap";
 import {listCommits} from "../../../../action/github/GithubAction";
+import Loading from "../../../common/Loading";
 
 class Github extends React.Component{
 
@@ -15,7 +16,25 @@ class Github extends React.Component{
     }
 
     render(){
-        const commits = this.props.commits;
+        const {loading,commits} = this.props;
+
+        const content = loading ?
+            <Loading/> :
+            [
+                <TransitionGroup key={1}>
+                    {
+                        commits.map(commit => (
+                            <FadeTransition key={commit.sha}>
+                                <Commit commit={commit}/>
+                            </FadeTransition>
+                        ))
+                    }
+                </TransitionGroup>,
+                <a key={2} className="more_link"
+                href={SKY_BLOG_URL} target="_blank">
+                在Github上查看项目
+                </a>
+            ];
 
         return (
             <Panel bsStyle="primary">
@@ -27,19 +46,7 @@ class Github extends React.Component{
                     </Panel.Heading>
                 </LinkContainer>
                 <Panel.Body>
-                    <TransitionGroup>
-                        {
-                            commits.map(commit => (
-                                <FadeTransition key={commit.sha}>
-                                    <Commit commit={commit}/>
-                                </FadeTransition>
-                            ))
-                        }
-                    </TransitionGroup>
-                    <a className="more_link"
-                       href={SKY_BLOG_URL} target="_blank">
-                        在Github上查看项目
-                    </a>
+                    {content}
                 </Panel.Body>
             </Panel>
         )
@@ -48,7 +55,8 @@ class Github extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        commits : state.github.commits
+        commits : state.github.commits,
+        loading : state.github.loading
     }
 };
 
