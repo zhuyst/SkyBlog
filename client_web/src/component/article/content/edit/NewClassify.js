@@ -10,7 +10,7 @@ import {insertClassify} from "../../../../action/article/ClassifyAction";
 class NewClassify extends React.Component{
 
     render(){
-        const {show,handleSubmit} = this.props;
+        const {show,submitting,handleSubmit} = this.props;
         const className = show ? "classify_content" : "classify_content collapse";
 
         return (
@@ -22,6 +22,7 @@ class NewClassify extends React.Component{
                             type="text"
                             label="分类名"
                             placeholder="请输入分类名"
+                            disabled={submitting}
                         />
                     </Col>
                     <Col md={2} smHidden xsHidden>
