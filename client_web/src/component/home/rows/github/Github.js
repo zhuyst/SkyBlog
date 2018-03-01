@@ -12,7 +12,10 @@ import Loading from "../../../common/Loading";
 class Github extends React.Component{
 
     componentWillMount(){
-        this.props.listCommits();
+        const {commits,listCommits} = this.props;
+        if(commits.length === 0){
+            listCommits();
+        }
     }
 
     render(){
