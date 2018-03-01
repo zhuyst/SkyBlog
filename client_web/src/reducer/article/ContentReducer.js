@@ -1,4 +1,4 @@
-import {SET_ARTICLE, SET_PREVIOUS_COMMENT} from "../../action/article/ContentAction";
+import {SET_ARTICLE, SET_COMMENTS_LOADING, SET_PREVIOUS_COMMENT} from "../../action/article/ContentAction";
 import {GET_ARTICLE_INFO_RESPONSE, INSERT_ARTICLE_RESPONSE, UPDATE_ARTICLE_RESPONSE} from "../../action/article/ArticlesAction";
 import {LIST_COMMENTS_RESPONSE} from "../../action/article/ContentAction";
 import {concatList} from "../Util";
@@ -38,6 +38,8 @@ export const initialPreviousComment = {
 
 const initialState = {
     comments : initialComments,
+    comments_loading : true,
+
     article : initialArticle,
     previous_comment : initialPreviousComment,
     uploadModal_show : false
@@ -60,6 +62,12 @@ const ContentReducer = (state = initialState,action) => {
                 previous_comment : action.previous_comment
             };
 
+        case SET_COMMENTS_LOADING:
+            return {
+                ...state,
+                comments_loading: action.comments_loading
+            };
+
         case GET_ARTICLE_INFO_RESPONSE:
             return convert(article,state);
 
@@ -75,6 +83,7 @@ const ContentReducer = (state = initialState,action) => {
 
             return {
                 ...state,
+                comments_loading: false,
                 comments : {
                     list: newList,
                     page_num: comments.page_num,
