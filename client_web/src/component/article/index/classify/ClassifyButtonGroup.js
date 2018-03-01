@@ -16,13 +16,19 @@ class ClassifyButtonGroup extends React.Component{
     }
 
     componentWillMount(){
-        const {classify,setClassifyForm} = this.props;
-        setClassifyForm(classify);
+        this.init();
     }
 
+    init = () => {
+        const {classify,setClassifyForm} = this.props;
+        setClassifyForm(classify);
+    };
+
     setEdit = edit => {
+        this.init();
+
         this.setState({
-            edit : edit
+            edit: edit
         });
     };
 

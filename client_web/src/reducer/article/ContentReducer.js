@@ -1,5 +1,5 @@
 import {
-    GET_ARTICLE_INFO_RESPONSE, INSERT_ARTICLE_RESPONSE, SET_ARTICLE, SET_COMMENTS_LOADING,
+    GET_ARTICLE_INFO_RESPONSE, INSERT_ARTICLE_RESPONSE, SET_ARTICLE, SET_ARTICLE_LOADING, SET_COMMENTS_LOADING,
     SET_PREVIOUS_COMMENT, UPDATE_ARTICLE_RESPONSE
 } from "../../action/article/ContentAction";
 import {LIST_COMMENTS_RESPONSE} from "../../action/article/ContentAction";
@@ -43,6 +43,8 @@ const initialState = {
     comments_loading : true,
 
     article : initialArticle,
+    article_loading: true,
+
     previous_comment : initialPreviousComment,
     uploadModal_show : false
 };
@@ -68,6 +70,12 @@ const ContentReducer = (state = initialState,action) => {
             return {
                 ...state,
                 comments_loading: action.comments_loading
+            };
+
+        case SET_ARTICLE_LOADING:
+            return {
+                ...state,
+                article_loading : action.article_loading
             };
 
         case GET_ARTICLE_INFO_RESPONSE:
@@ -109,6 +117,7 @@ const convert = (article,state) => {
     return {
         ...state,
         article : convertArticle,
+        article_loading: false,
         comments : initialComments,
         previous_comment : initialPreviousComment
     };

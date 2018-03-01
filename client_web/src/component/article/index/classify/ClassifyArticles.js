@@ -10,7 +10,7 @@ import {ARTICLE_PAGE_SIZE} from "../../../../Constant";
 import Preview from "../Preview";
 import Pager from "../Pager";
 import FadeTransition from "../../../common/FadeTransition";
-import Loading from "../../../common/Loading";
+import ArticlesLoading from "../ArticlesLoading";
 
 class ClassifyArticles extends React.Component{
 
@@ -27,9 +27,7 @@ class ClassifyArticles extends React.Component{
 
         if(page.total === 0 && loading){
             return (
-                <Alert bsStyle="warning" className="articles_loading">
-                    <Loading/>
-                </Alert>
+                <ArticlesLoading/>
             )
         }
 

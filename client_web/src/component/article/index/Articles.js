@@ -1,6 +1,6 @@
 import React from 'react'
 import {TransitionGroup} from "react-transition-group";
-import {Alert, PanelGroup} from 'react-bootstrap'
+import {PanelGroup} from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import Preview from './Preview'
@@ -9,7 +9,7 @@ import Pager from "./Pager";
 import {listArticles} from "../../../action/article/ArticlesAction";
 import {ARTICLE_PAGE_SIZE} from "../../../Constant";
 import FadeTransition from "../../common/FadeTransition";
-import Loading from "../../common/Loading";
+import ArticlesLoading from "./ArticlesLoading";
 
 class Articles extends React.Component{
 
@@ -26,9 +26,7 @@ class Articles extends React.Component{
 
         if(page.total === 0 && loading){
             return (
-                <Alert bsStyle="warning" className="articles_loading">
-                    <Loading/>
-                </Alert>
+                <ArticlesLoading/>
             )
         }
 
