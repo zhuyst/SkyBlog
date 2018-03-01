@@ -9,6 +9,7 @@ import {getAbout} from "../../action/about/AboutAction";
 import AboutEditor from "./AboutEditor";
 
 import '../../static/css/about/about.css'
+import AboutLoading from "./AboutLoading";
 
 class Index extends React.Component{
 
@@ -23,8 +24,31 @@ class Index extends React.Component{
 
     render(){
         const {about,admin,editing,editAbout} = this.props;
-        const {content} = about;
+        const {content,loading} = about;
         const path = this.props.match.path;
+
+        let body;
+        if(loading){
+            body = (
+                <AboutLoading/>
+            )
+        }
+        else {
+            body = [];
+            if(admin && !editing){
+                body.push(
+                    <Button key={1} bsStyle="primary"
+                            className="about_edit_button"
+                            onClick={editAbout}>
+                        <Glyphicon glyph="edit" />
+                        &nbsp;&nbsp;编辑&nbsp;
+                    </Button>
+                )
+            }
+            body.push(
+                <ReactMarkdown key={2} source={content.text}/>
+            )
+        }
 
         return (
             <div className="about_main">
@@ -36,16 +60,7 @@ class Index extends React.Component{
                     <Col md={8} mdOffset={2} sm={12}>
                         <Panel>
                             <Panel.Body>
-                                {
-                                    admin && !editing &&
-                                    <Button bsStyle="primary"
-                                            className="about_edit_button"
-                                            onClick={editAbout}>
-                                        <Glyphicon glyph="edit" />
-                                        &nbsp;&nbsp;编辑&nbsp;
-                                    </Button>
-                                }
-                                <ReactMarkdown source={content.text}/>
+                                {body}
                             </Panel.Body>
                         </Panel>
                     </Col>

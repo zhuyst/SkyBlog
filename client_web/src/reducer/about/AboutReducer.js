@@ -4,13 +4,15 @@ const initialState = {
     content : {
         text: "",
         selection: null
-    }
+    },
+    loading : true
 };
 
 const convert = (action,state) => {
     const about = action.about;
     const convertAbout = {
         ...about,
+        loading: false,
         content: {
             text : about.content,
             selection: null
