@@ -1,6 +1,6 @@
 import React from 'react'
 import {TransitionGroup} from "react-transition-group";
-import {Alert, Badge, Panel} from "react-bootstrap";
+import {Badge, Panel} from "react-bootstrap";
 import {connect} from "react-redux";
 
 import Msg from './Msg'
@@ -39,10 +39,8 @@ class MsgList extends React.Component{
                         ))
                     }
                 </TransitionGroup>,
-                <div key={2}>
-                    <Pager page={page} loading={loading}
-                           onClick={() => listMsg(page_num + 1)}/>
-                </div>
+                <Pager key={2} page={page} loading={loading}
+                       onClick={() => listMsg(page_num + 1)}/>
             ]
         }
 

@@ -7,6 +7,7 @@ import {initialPreviousComment} from "../../reducer/article/ContentReducer";
 
 export const SET_ARTICLE = "SET_ARTICLE";
 export const SET_PREVIOUS_COMMENT = "SET_PREVIOUS_COMMENT";
+export const SET_COMMENTS_LOADING = "SET_COMMENTS_LOADING";
 
 export const INSERT_COMMENT_RESPONSE = "INSERT_COMMENT_RESPONSE";
 export const LIST_COMMENTS_RESPONSE = "LIST_COMMENTS_RESPONSE";
@@ -23,6 +24,13 @@ export const setPreviousComment = comment => {
     return {
         type : SET_PREVIOUS_COMMENT,
         previous_comment : comment
+    }
+};
+
+export const setCommentsLoading = loading => {
+    return {
+        type : SET_COMMENTS_LOADING,
+        comments_loading: loading
     }
 };
 
@@ -57,11 +65,16 @@ const insertCommentResponse = result => {
 };
 
 export const listComments = (id,pageNum,pageSize) => dispatch => {
+    dispatch(setCommentsLoading(true));
+
     const url = ARTICLE_API_URL + `/public/${id}/comment/`;
     return _get(url,{
         pageNum : pageNum,
         pageSize: pageSize
-    }).then(result => dispatch(listCommentsResponse(result)))
+    }).then(result => {
+        dispatch(setCommentsLoading(false));
+        dispatch(listCommentsResponse(result))
+    })
 };
 
 const listCommentsResponse = result => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Alert, Badge,Panel} from 'react-bootstrap'
+import {Badge,Panel} from 'react-bootstrap'
 
 import Comment from './Comment'
 import {connect} from "react-redux";
@@ -7,60 +7,33 @@ import {listComments} from "../../../../action/article/ContentAction";
 import {COMMENT_PAGE_SIZE} from "../../../../Constant";
 import {TransitionGroup} from "react-transition-group";
 import FadeTransition from "../../../common/FadeTransition";
+import CommentPager from "./CommentPager";
+import Loading from "../../../common/Loading";
 
 class CommentList extends React.Component{
 
     render(){
-        const {listComments,comments,article} = this.props;
+        const {listComments,comments,comments_loading,article} = this.props;
+        const {list,page_num,total} = comments;
 
-        const id = article.id;
-        const {list,page_num,pages,total} = comments;
-
-        let pager;
-        if(total === 0){
-            pager = (
-                <div className="pager" style={{
-                    marginTop : 0
-                }}>
-                    <Alert bsStyle="info" className="comment_pager">
-                        &nbsp;&nbsp;这篇文章还没人评论，快在下方评论吧！&nbsp;&nbsp;
-                    </Alert>
-                </div>
-            )
-        }
-        else if(page_num === pages){
-            pager = (
-                <div className="pager">
-                    <Alert bsStyle="info" className="comment_pager">
-                        &nbsp;&nbsp;已经没有更多评论啦！&nbsp;&nbsp;
-                    </Alert>
-                </div>
-            )
+        let content;
+        if(total === 0 && comments_loading){
+            content = <Loading/>
         }
         else {
-            pager = (
-                <div className="pager">
-                    <div className="more">
-                        <div onClick={() => listComments(id,page_num + 1)}>
-                            <Alert bsStyle="warning" className="comment_pager">
-                                <p>
-                            <span className="more_left">
-                                <i className="fa fa-angle-double-down fa-lg"/>
-                            </span>
-
-                                    <i className="fa fa-toggle-down" />
-                                    &nbsp;&nbsp;点击查看更多评论&nbsp;&nbsp;
-                                    <i className="fa fa-toggle-down" />
-
-                                    <span className="more_right">
-                                <i className="fa fa-angle-double-down fa-lg"/>
-                            </span>
-                                </p>
-                            </Alert>
-                        </div>
-                    </div>
-                </div>
-            )
+            content = [
+                <TransitionGroup key={1}>
+                    {
+                        list.map(comment => (
+                            <FadeTransition key={comment.id}>
+                                <Comment comment={comment}/>
+                            </FadeTransition>
+                        ))
+                    }
+                </TransitionGroup>,
+                <CommentPager key={2} page={comments} loading={comments_loading}
+                              onClick={() => listComments(article.id,page_num + 1)}/>
+            ];
         }
 
         return (
@@ -69,16 +42,7 @@ class CommentList extends React.Component{
                     <span>评论列表&nbsp;&nbsp;<Badge>{total}</Badge></span>
                 </Panel.Heading>
                 <Panel.Body>
-                    <TransitionGroup>
-                        {
-                            list.map(comment => (
-                                <FadeTransition key={comment.id}>
-                                    <Comment comment={comment}/>
-                                </FadeTransition>
-                            ))
-                        }
-                    </TransitionGroup>
-                    {pager}
+                    {content}
                 </Panel.Body>
             </Panel>
         )
@@ -88,7 +52,8 @@ class CommentList extends React.Component{
 const mapStateToProps = state => {
     return {
         article : state.content.article,
-        comments : state.content.comments
+        comments : state.content.comments,
+        comments_loading : state.content.comments_loading
     }
 };
 
