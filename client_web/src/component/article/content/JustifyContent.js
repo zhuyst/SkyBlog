@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import {setArticle} from "../../../action/article/ContentAction";
+import {listComments, setArticle} from "../../../action/article/ContentAction";
 import {getArticleInfo} from "../../../action/article/ArticlesAction";
 import {initialArticle} from "../../../reducer/article/ContentReducer";
 
@@ -12,6 +12,7 @@ import ContentArea from "./ContentArea";
 
 import '../../../static/css/article/content.css'
 import ArticleBreadcrumb from "./ArticleBreadcrumb";
+import {COMMENT_PAGE_SIZE} from "../../../Constant";
 
 class JustifyContent extends React.Component{
     componentWillMount(){
@@ -23,6 +24,9 @@ class JustifyContent extends React.Component{
         }
         else if(article.id !== Number(id)){
             getArticle(id);
+        }
+        else {
+            listComments(id,1)
         }
     }
 
@@ -58,6 +62,9 @@ const mapDispatchToProps = dispatch => {
         },
         setArticle : article =>{
             dispatch(setArticle(article))
+        },
+        listComments : (id,pageNum) => {
+            dispatch(listComments(id,pageNum,COMMENT_PAGE_SIZE));
         }
     }
 };

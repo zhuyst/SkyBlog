@@ -4,7 +4,7 @@ import {change} from 'redux-form'
 
 import {_delete, _post, _get, _put, ARTICLE_API_URL} from "../../Api";
 import {error, success} from "../common/NotifyAction";
-import {ARTICLE_PAGE_SIZE, FORM_ARTICLE, FORM_COMMENT} from "../../Constant";
+import {ARTICLE_PAGE_SIZE, COMMENT_PAGE_SIZE, FORM_ARTICLE, FORM_COMMENT} from "../../Constant";
 import {listComments} from "./ContentAction";
 import {listClassify} from "./ClassifyAction";
 
@@ -117,7 +117,7 @@ export const getArticleInfo = id => dispatch => {
             const article = result.entity;
             const id = article.id;
             dispatch(change(FORM_COMMENT,"article_id",id));
-            dispatch(listComments(id,1,10));
+            dispatch(listComments(id,1,COMMENT_PAGE_SIZE));
 
             document.title = `${article.title} - 博客文章 - 青云的小窝`;
         })
