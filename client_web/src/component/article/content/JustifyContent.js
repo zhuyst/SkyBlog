@@ -42,7 +42,7 @@ class JustifyContent extends React.Component{
         else {
             left = [
                 <ArticleBreadcrumb key={1}/>,
-                <div className="justify_content">
+                <div key={2} className="justify_content">
                     <ContentArea key={2}/>
                 </div>
             ];

@@ -11,10 +11,8 @@ class ArticleTitle extends React.Component{
         const user = login.user;
         const {id,title,sub_title} = article;
 
-        const className = editing ? "page-header-has-button" : "";
-
         return (
-            <PageHeader className={className}>
+            <PageHeader>
                 {
                     !editing &&
                     <small className="title_info hidden-sm hidden-xs">
