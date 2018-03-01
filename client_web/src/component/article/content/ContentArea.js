@@ -4,7 +4,7 @@ import {Clearfix} from "react-bootstrap";
 import {connect} from "react-redux";
 
 import ArticleTitle from "./ArticleTitle";
-import {deleteArticle} from "../../../action/article/ArticlesAction";
+import {deleteArticle} from "../../../action/article/ContentAction";
 
 class ContentArea extends React.Component{
 
