@@ -39,7 +39,6 @@ public class CommentDO extends BaseEntity {
      */
     @ApiModelProperty("文章ID")
     @Column(name = "article_id")
-    @NotNull(message = "缺失文章ID")
     private Integer articleId;
 
     /**

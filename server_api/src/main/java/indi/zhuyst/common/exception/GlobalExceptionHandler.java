@@ -90,6 +90,15 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * 捕获没有被捕捉的{@link RuntimeException}
+     * @return 错误对象
+     */
+    @ExceptionHandler(RuntimeException.class)
+    public Result runtimeExceptionHandler(){
+        return Result.error(CodeEnum.ERROR);
+    }
+
+    /**
      * 将{@link Result#errors}中的错误转为String
      * @param result 要转换的Result
      * @return 转换后的String
