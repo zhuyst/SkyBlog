@@ -9,8 +9,15 @@ import {getLength} from "../Util";
 import FadeTransition from "../../../common/FadeTransition";
 import {LinkContainer} from "react-router-bootstrap";
 import Loading from "../../../common/Loading";
+import {ARTICLE_PAGE_SIZE} from "../../../../Constant";
+import {listArticles} from "../../../../action/article/ArticlesAction";
 
 class Article extends React.Component{
+
+    componentWillMount(){
+        this.props.listArticles(1);
+    }
+
     render(){
         const {page,loading} = this.props;
         const {total,list} = page;
@@ -66,9 +73,17 @@ const mapStateToProps = state => {
     }
 };
 
+const mapDispatchToProps = dispatch => {
+    return {
+        listArticles : pageNum => {
+            dispatch(listArticles(pageNum,ARTICLE_PAGE_SIZE));
+        }
+    }
+};
+
 const ArticleContainer = connect(
     mapStateToProps,
-    null,
+    mapDispatchToProps
 )(Article);
 
 export default ArticleContainer

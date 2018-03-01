@@ -6,8 +6,14 @@ import {Badge, Button, Col, ListGroup,
 import {LinkContainer} from 'react-router-bootstrap'
 import ClassifyListGroup from "./classify/ClassifyListGroup";
 import FadeTransition from "../../common/FadeTransition";
+import {listClassify} from "../../../action/article/ClassifyAction";
 
 class Navigation extends React.Component{
+
+    componentWillMount(){
+        this.props.listClassify();
+    }
+
     render(){
         const {admin,total,classifyList} = this.props;
 
@@ -57,9 +63,17 @@ const mapStateToProps = state => {
     }
 };
 
+const mapDispatchToProps = dispatch => {
+    return {
+        listClassify : () => {
+            dispatch(listClassify());
+        }
+    }
+};
+
 const NavigationContainer = connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(Navigation);
 
 export default NavigationContainer

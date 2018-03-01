@@ -3,11 +3,17 @@ import {TransitionGroup} from "react-transition-group";
 import {Panel} from "react-bootstrap";
 import {connect} from "react-redux";
 import Commit from "./Commit";
-import {SKY_BLOG_URL} from "../../../../Constant";
+import {GITHUB_PAGE_SIZE, SKY_BLOG_URL} from "../../../../Constant";
 import FadeTransition from "../../../common/FadeTransition";
 import {LinkContainer} from "react-router-bootstrap";
+import {listCommits} from "../../../../action/github/GithubAction";
 
 class Github extends React.Component{
+
+    componentWillMount(){
+        this.props.listCommits();
+    }
+
     render(){
         const commits = this.props.commits;
 
@@ -46,9 +52,17 @@ const mapStateToProps = state => {
     }
 };
 
+const mapDispatchToProps = dispatch => {
+    return {
+        listCommits : () => {
+            dispatch(listCommits(GITHUB_PAGE_SIZE))
+        }
+    }
+};
+
 const GithubContainer = connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(Github);
 
 export default GithubContainer
