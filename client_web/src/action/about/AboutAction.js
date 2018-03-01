@@ -6,6 +6,8 @@ import {error, success} from "../common/NotifyAction";
 import {FORM_ABOUT} from "../../Constant";
 
 export const SET_ABOUT = "SET_ABOUT";
+export const SET_ABOUT_LOADING = "SET_ABOUT_LOADING";
+
 export const GET_ABOUT_RESPONSE = "GET_ABOUT_RESPONSE";
 export const UPDATE_ABOUT_RESPONSE = "UPDATE_ABOUT_RESPONSE";
 
@@ -16,10 +18,22 @@ export const setAbout = about => {
     }
 };
 
+export const setAboutLoading = loading => {
+    return {
+        type : SET_ABOUT_LOADING,
+        loading : loading
+    }
+};
+
 export const getAbout = about => dispatch => {
+    dispatch(setAboutLoading(true));
+
     const url = ABOUT_API_URL + "/public/";
     return _get(url,about)
-        .then(result => dispatch(getAboutResponse(result)))
+        .then(result => {
+            dispatch(setAboutLoading(false));
+            dispatch(getAboutResponse(result))
+        })
 };
 
 const getAboutResponse = result => {
