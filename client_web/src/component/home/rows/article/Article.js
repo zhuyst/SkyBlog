@@ -15,7 +15,10 @@ import {listArticles} from "../../../../action/article/ArticlesAction";
 class Article extends React.Component{
 
     componentWillMount(){
-        this.props.listArticles(1);
+        const {page,listArticles} = this.props;
+        if(page.total === 0){
+            listArticles(1);
+        }
     }
 
     render(){

@@ -15,7 +15,10 @@ import Loading from "../../../common/Loading";
 class MsgBoard extends React.Component{
 
     componentWillMount(){
-        this.props.listMsg(1);
+        const {listMsg,page} = this.props;
+        if(page.total === 0){
+            listMsg(1)
+        }
     }
 
     render(){
