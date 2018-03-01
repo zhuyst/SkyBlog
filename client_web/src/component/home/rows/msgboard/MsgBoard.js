@@ -8,8 +8,15 @@ import {getLength} from "../Util";
 import Msg from "./Msg";
 import FadeTransition from "../../../common/FadeTransition";
 import {LinkContainer} from "react-router-bootstrap";
+import {listMsg} from "../../../../action/msgboard/MsgBoardAction";
+import {MSG_PAGE_SIZE} from "../../../../Constant";
 
 class MsgBoard extends React.Component{
+
+    componentWillMount(){
+        this.props.listMsg(1);
+    }
+
     render(){
         const page = this.props.page;
         const {list,total} = page;
@@ -58,9 +65,17 @@ const mapStateToProps = state => {
     }
 };
 
+const mapDispatchToProps = dispatch => {
+    return {
+        listMsg : pageNum => {
+            dispatch(listMsg(pageNum,MSG_PAGE_SIZE))
+        }
+    }
+};
+
 const MsgBoardContainer = connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(MsgBoard);
 
 export default MsgBoardContainer

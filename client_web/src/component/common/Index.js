@@ -13,27 +13,17 @@ import About from '../about/Index'
 import NotFound from "../error/NotFound";
 import FadeTransition from "./FadeTransition";
 import ServerError from "../error/ServerError";
+import ErrorBoundary from "./ErrorBoundary";
 
-import {ARTICLE_PAGE_SIZE, GITHUB_PAGE_SIZE, MSG_PAGE_SIZE} from "../../Constant";
-
-import {listArticles} from "../../action/article/ArticlesAction";
-import {listClassify} from "../../action/article/ClassifyAction";
-import {getAbout} from "../../action/about/AboutAction";
 import {checkUserLoginState} from "../../action/user/UsersAction";
 
 import '../../static/css/common/common.css'
 import '../../static/css/common/animation.css'
-import {listMsg} from "../../action/msgboard/MsgBoardAction";
-import {listCommits} from "../../action/github/GithubAction";
-import ErrorBoundary from "./ErrorBoundary";
 
 class Index extends React.Component{
+
     componentWillMount(){
         this.props.checkUserLoginState();
-    }
-
-    componentDidMount(){
-        this.props.initFetch();
     }
 
     componentDidUpdate(prevProps){
@@ -84,13 +74,6 @@ const mapDispatchToProps = dispatch => {
     return {
         checkUserLoginState : () => {
             dispatch(checkUserLoginState());
-        },
-        initFetch : () => {
-            dispatch(listArticles(1,ARTICLE_PAGE_SIZE));
-            dispatch(listClassify());
-            dispatch(listMsg(1,MSG_PAGE_SIZE));
-            dispatch(getAbout());
-            dispatch(listCommits(GITHUB_PAGE_SIZE))
         }
     }
 };
