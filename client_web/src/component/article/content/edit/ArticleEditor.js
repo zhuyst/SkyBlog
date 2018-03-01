@@ -3,7 +3,10 @@ import ReactMde, { ReactMdeCommands } from 'react-mde';
 import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 import { Field,reduxForm,change } from 'redux-form'
-import {Button, ButtonGroup, ButtonToolbar, Col, ControlLabel, FormGroup, Glyphicon, Row} from "react-bootstrap";
+import {
+    Button, ButtonGroup, ButtonToolbar, Col, ControlLabel, FormControl, FormGroup, Glyphicon,
+    Row
+} from "react-bootstrap";
 
 import {FORM_ARTICLE} from "../../../../Constant";
 import FieldGroup from "../../../common/FieldGroup";
@@ -99,7 +102,7 @@ class ArticleEditor extends React.Component{
     };
 
     render(){
-        const {classifyList,classifyShow,
+        const {submitting,classifyList,classifyShow,
             setClassifyShow,showUploadModal} = this.props;
 
         return (
@@ -113,27 +116,20 @@ class ArticleEditor extends React.Component{
                             type="text"
                             label="文章标题"
                             placeholder="请输入文章标题"
+                            disabled={submitting}
                         />
                         <FieldGroup
                             name="sub_title"
                             type="text"
                             label="文章副标题"
                             placeholder="请输入文章副标题"
+                            disabled={submitting}
                         />
                         <Row>
                             <Col md={8} sm={12}>
-                                <FormGroup controlId="classify_id">
-                                    <ControlLabel>文章分类</ControlLabel>
-                                    <Field name="classify_id" component="select" className="form-control">
-                                        {
-                                            classifyList.map(classify =>
-                                                <option key={classify.id}
-                                                        value={classify.id}>
-                                                    {classify.name}</option>
-                                            )
-                                        }
-                                    </Field>
-                                </FormGroup>
+                                <Field name="classify_id" component={classifySelect}
+                                       classifyList={classifyList}>
+                                </Field>
                             </Col>
                             <Col md={4} smHidden xsHidden>
                                 {classifyButton(classifyShow,setClassifyShow,false)}
@@ -158,7 +154,9 @@ class ArticleEditor extends React.Component{
 class editor extends React.Component{
 
     render(){
-        const { input: { value, onChange },showUploadModal} = this.props;
+        const { input: { value, onChange },
+            meta: {submitting},
+            showUploadModal} = this.props;
 
         let commands = ReactMdeCommands.getDefaultCommands();
 
@@ -181,13 +179,38 @@ class editor extends React.Component{
         return (
             <FormGroup>
                 <ControlLabel>文章内容</ControlLabel>
-                <ReactMde value={value}
-                          onChange={onChange}
-                          commands={commands}/>
+                <ReactMde value={value} onChange={onChange}
+                          commands={commands}
+                          textAreaProps={{disabled : submitting}}
+                          visibility={{preview:false}}/>
             </FormGroup>
         )
     }
 
+}
+
+class classifySelect extends React.Component{
+    render(){
+        const {input: { value, onChange },
+            meta: {submitting},
+            classifyList} = this.props;
+
+        return(
+            <FormGroup controlId="classify_id">
+                <ControlLabel>文章分类</ControlLabel>
+                <FormControl componentClass="select" disabled={submitting}
+                             value={value} onChange={onChange}>
+                    {
+                        classifyList.map(classify =>
+                            <option key={classify.id}
+                                    value={classify.id}>
+                                {classify.name}</option>
+                        )
+                    }
+                </FormControl>
+            </FormGroup>
+        )
+    }
 }
 
 const classifyButton = (classifyShow,setClassifyShow,sm) => {
