@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import {listComments, setArticle} from "../../../action/article/ContentAction";
-import {getArticleInfo} from "../../../action/article/ArticlesAction";
+import {getArticleInfo} from "../../../action/article/ContentAction";
 import {initialArticle} from "../../../reducer/article/ContentReducer";
 
 import CommentSender from './comment/CommentSender'

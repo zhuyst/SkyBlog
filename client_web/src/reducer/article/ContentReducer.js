@@ -1,5 +1,7 @@
-import {SET_ARTICLE, SET_COMMENTS_LOADING, SET_PREVIOUS_COMMENT} from "../../action/article/ContentAction";
-import {GET_ARTICLE_INFO_RESPONSE, INSERT_ARTICLE_RESPONSE, UPDATE_ARTICLE_RESPONSE} from "../../action/article/ArticlesAction";
+import {
+    GET_ARTICLE_INFO_RESPONSE, INSERT_ARTICLE_RESPONSE, SET_ARTICLE, SET_COMMENTS_LOADING,
+    SET_PREVIOUS_COMMENT, UPDATE_ARTICLE_RESPONSE
+} from "../../action/article/ContentAction";
 import {LIST_COMMENTS_RESPONSE} from "../../action/article/ContentAction";
 import {concatList} from "../Util";
 

@@ -8,7 +8,7 @@ import Layout, {LAYOUT_FULL} from "./Layout";
 
 import {initialArticle} from "../../../reducer/article/ContentReducer";
 
-import {getArticleInfo} from "../../../action/article/ArticlesAction";
+import {getArticleInfo} from "../../../action/article/ContentAction";
 import {listComments, setArticle} from "../../../action/article/ContentAction";
 import ArticleBreadcrumb from "./ArticleBreadcrumb";
 import {Panel} from "react-bootstrap";

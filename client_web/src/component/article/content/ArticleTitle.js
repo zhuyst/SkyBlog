@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, ButtonGroup, ButtonToolbar, Glyphicon, PageHeader} from "react-bootstrap";
 import {connect} from "react-redux";
-import {deleteArticle} from "../../../action/article/ArticlesAction";
+import {deleteArticle} from "../../../action/article/ContentAction";
 import {LinkContainer} from "react-router-bootstrap";
 
 class ArticleTitle extends React.Component{

@@ -7,7 +7,7 @@ import ArticleTitle from "../ArticleTitle";
 import Layout, {LAYOUT_JUSTIFY} from "../Layout";
 
 import {initialArticle} from "../../../../reducer/article/ContentReducer";
-import {deleteArticle, getArticleInfo} from "../../../../action/article/ArticlesAction";
+import {deleteArticle, getArticleInfo} from "../../../../action/article/ContentAction";
 import {setArticle} from "../../../../action/article/ContentAction";
 
 class EditContent extends React.Component{

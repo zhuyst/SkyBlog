@@ -11,7 +11,7 @@ import NewClassify from "./NewClassify";
 import UploadModal from "./UploadModal";
 
 import {setArticle} from "../../../../action/article/ContentAction";
-import {deleteArticle, insertArticle, updateArticle} from "../../../../action/article/ArticlesAction";
+import {deleteArticle, insertArticle, updateArticle} from "../../../../action/article/ContentAction";
 
 import 'react-mde/lib/styles/css/react-mde.css';
 import 'react-mde/lib/styles/css/react-mde-toolbar.css';
