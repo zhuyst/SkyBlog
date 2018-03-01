@@ -1,6 +1,5 @@
 import React from 'react'
 import {Label, Panel} from "react-bootstrap";
-import { Link } from "react-router-dom";
 import {push} from "react-router-redux";
 import {setArticle} from "../../../action/article/ContentAction";
 import {connect} from "react-redux";

@@ -1,10 +1,11 @@
 import {
     LIST_ARTICLES_BY_CLASSIFY_RESPONSE, LIST_ARTICLES_RESPONSE,
-    SET_ARTICLES_LOADING
+    SET_ARTICLES_LOADING, SET_CLASSIFY_ARTICLES_LOADING
 } from "../../action/article/ArticlesAction";
 import {concatList} from "../Util";
 
 const initialClassify = {
+    loading: true,
     id : 0,
     name : "",
     page : {
@@ -37,6 +38,15 @@ const ArticlesReducer = (state = initialState,action) => {
                 loading : action.loading
             };
 
+        case SET_CLASSIFY_ARTICLES_LOADING:
+            return {
+                ...state,
+                classify : {
+                    ...state.classify,
+                    loading : action.loading
+                }
+            };
+
         case LIST_ARTICLES_RESPONSE:
             page = action.page;
             newList = concatList(page,state.page.list);
@@ -62,6 +72,7 @@ const ArticlesReducer = (state = initialState,action) => {
             return {
                 ...state,
                 classify :{
+                    loading: false,
                     id : classify.id,
                     name : classify.name,
                     page : {

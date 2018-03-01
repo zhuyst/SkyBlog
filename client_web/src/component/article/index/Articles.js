@@ -1,6 +1,6 @@
 import React from 'react'
 import {TransitionGroup} from "react-transition-group";
-import {PanelGroup} from 'react-bootstrap'
+import {Alert, PanelGroup} from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import Preview from './Preview'
@@ -9,6 +9,7 @@ import Pager from "./Pager";
 import {listArticles} from "../../../action/article/ArticlesAction";
 import {ARTICLE_PAGE_SIZE} from "../../../Constant";
 import FadeTransition from "../../common/FadeTransition";
+import Loading from "../../common/Loading";
 
 class Articles extends React.Component{
 
@@ -20,8 +21,16 @@ class Articles extends React.Component{
     }
 
     render(){
-        const {page, listArticles} = this.props;
+        const {page, loading, listArticles} = this.props;
         const {list,page_num} = page;
+
+        if(page.total === 0 && loading){
+            return (
+                <Alert bsStyle="warning" className="articles_loading">
+                    <Loading/>
+                </Alert>
+            )
+        }
 
         return(
             <div>
@@ -37,7 +46,8 @@ class Articles extends React.Component{
                     </TransitionGroup>
                 </PanelGroup>
                 <div className="pager">
-                    <Pager page={page} onClick={() => listArticles(page_num + 1)} />
+                    <Pager page={page} loading={loading}
+                           onClick={() => listArticles(page_num + 1)} />
                 </div>
             </div>
         )
@@ -46,7 +56,8 @@ class Articles extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        page : state.articles.page
+        page : state.articles.page,
+        loading : state.articles.loading
     }
 };
 

@@ -9,6 +9,7 @@ import {listComments} from "./ContentAction";
 import {listClassify} from "./ClassifyAction";
 
 export const SET_ARTICLES_LOADING = "SET_ARTICLES_LOADING";
+export const SET_CLASSIFY_ARTICLES_LOADING = "SET_CLASSIFY_ARTICLES_LOADING";
 
 export const LIST_ARTICLES_RESPONSE = "LIST_ARTICLES_RESPONSE";
 export const LIST_ARTICLES_BY_CLASSIFY_RESPONSE = "LIST_ARTICLES_BY_CLASSIFY_RESPONSE";
@@ -21,6 +22,13 @@ export const DELETE_ARTICLE_RESPONSE  = "DELETE_ARTICLE_RESPONSE";
 export const setArticlesLoading = loading => {
     return {
         type : SET_ARTICLES_LOADING,
+        loading : loading
+    }
+};
+
+export const setClassifyArticlesLoading = loading => {
+    return {
+        type : SET_CLASSIFY_ARTICLES_LOADING,
         loading : loading
     }
 };
@@ -80,11 +88,14 @@ const listArticlesResponse = result => {
 };
 
 export const listArticlesByClassify = (classifyId,pageNum,pageSize) => dispatch => {
+    dispatch(setClassifyArticlesLoading(true));
+
     const url = ARTICLE_API_URL + `/public/classify/${classifyId}/`;
     return _get(url,{
         pageNum : pageNum,
         pageSize : pageSize
     }).then(result => {
+        dispatch(setClassifyArticlesLoading(false));
         dispatch(listArticlesByClassifyResponse(result));
         document.title = `${result.entity.classify.name} - 博客文章 - 青云的小窝`;
     })
