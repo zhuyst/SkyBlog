@@ -13,6 +13,7 @@ import ContentArea from "./ContentArea";
 import '../../../static/css/article/content.css'
 import ArticleBreadcrumb from "./ArticleBreadcrumb";
 import {COMMENT_PAGE_SIZE} from "../../../Constant";
+import ContentLoading from "./ContentLoading";
 
 class JustifyContent extends React.Component{
     componentWillMount(){
@@ -31,10 +32,21 @@ class JustifyContent extends React.Component{
     }
 
     render(){
-        const left = [
-            <ArticleBreadcrumb key={1}/>,
-            <ContentArea key={2}/>
-        ];
+
+        let left;
+        if(this.props.loading){
+            left = (
+                <ContentLoading/>
+            )
+        }
+        else {
+            left = [
+                <ArticleBreadcrumb key={1}/>,
+                <div className="justify_content">
+                    <ContentArea key={2}/>
+                </div>
+            ];
+        }
 
         const right = [
             <CommentList key={1}/>,
@@ -51,7 +63,8 @@ class JustifyContent extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        article : state.content.article
+        article : state.content.article,
+        loading : state.content.article_loading
     }
 };
 

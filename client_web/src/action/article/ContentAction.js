@@ -10,7 +10,9 @@ import {listArticles} from "./ArticlesAction";
 
 export const SET_ARTICLE = "SET_ARTICLE";
 export const SET_PREVIOUS_COMMENT = "SET_PREVIOUS_COMMENT";
+
 export const SET_COMMENTS_LOADING = "SET_COMMENTS_LOADING";
+export const SET_ARTICLE_LOADING = "SET_ARTICLE_LOADING";
 
 export const GET_ARTICLE_INFO_RESPONSE = "GET_ARTICLE_INFO_RESPONSE";
 
@@ -40,6 +42,13 @@ export const setCommentsLoading = loading => {
     return {
         type : SET_COMMENTS_LOADING,
         comments_loading: loading
+    }
+};
+
+export const setArticleLoading = loading => {
+    return {
+        type : SET_ARTICLE_LOADING,
+        article_loading : loading
     }
 };
 

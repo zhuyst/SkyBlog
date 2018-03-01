@@ -39,7 +39,7 @@ class EditContent extends React.Component{
         const article = this.props.article;
 
         const contentArea = (
-            <ArticleEditor article={article} />
+            <ArticleEditor/>
         );
         const right = (
             <div className="content_main edit_content">

@@ -18,15 +18,29 @@ import 'react-mde/lib/styles/css/react-mde-toolbar.css';
 import 'react-mde/lib/styles/css/react-mde-textarea.css';
 
 import '../../../../static/css/article/editor.css'
-import {setClassifyShow} from "../../../../action/article/ClassifyAction";
+import {listClassify, setClassifyShow} from "../../../../action/article/ClassifyAction";
 import {setUploadModalShow} from "../../../../action/article/UploadAction";
 
 class ArticleEditor extends React.Component{
 
     componentWillMount(){
+        this.init();
+
+        const {classifyList,listClassify} = this.props;
+
+        if(classifyList.length === 0){
+            listClassify();
+        }
+    }
+
+    componentDidUpdate(){
+        this.init();
+    }
+
+    init = () => {
         const {article,setArticleForm} = this.props;
         setArticleForm(article);
-    }
+    };
 
     submit = (data,back) => {
         const article = {
@@ -282,6 +296,9 @@ const mapDispatchToProps = dispatch => {
             }
         },
 
+        listClassify : () => {
+            dispatch(listClassify());
+        },
         setClassifyShow : show => {
             dispatch(setClassifyShow(show));
         },

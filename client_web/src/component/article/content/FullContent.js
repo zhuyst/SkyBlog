@@ -13,6 +13,7 @@ import {listComments, setArticle} from "../../../action/article/ContentAction";
 import ArticleBreadcrumb from "./ArticleBreadcrumb";
 import {Panel} from "react-bootstrap";
 import {COMMENT_PAGE_SIZE} from "../../../Constant";
+import ContentLoading from "./ContentLoading";
 
 class FullContent extends React.Component{
     componentWillMount(){
@@ -31,14 +32,26 @@ class FullContent extends React.Component{
     }
 
     render(){
+        let content;
+        if(this.props.loading){
+            content = (
+                <ContentLoading/>
+            )
+        }
+        else {
+            content = (
+                <div className="full_content">
+                    <ContentArea/>
+                </div>
+            )
+        }
+
         const contentArea = (
             <div>
                 <ArticleBreadcrumb/>
                 <Panel>
                     <Panel.Body>
-                        <div className="full_content">
-                            <ContentArea/>
-                        </div>
+                        {content}
                     </Panel.Body>
                 </Panel>
                 <CommentList/>
@@ -55,7 +68,8 @@ class FullContent extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        article : state.content.article
+        article : state.content.article,
+        loading : state.content.article_loading
     }
 };
 

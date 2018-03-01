@@ -7,7 +7,9 @@
 }
 
 .articles_loading{
-    padding-top: 5px !important;
+    text-align: center;
+    padding-top: 25px !important;
+    padding-bottom: 15px !important;
 }
 
 .preview{
