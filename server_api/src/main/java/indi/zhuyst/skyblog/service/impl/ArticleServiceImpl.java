@@ -76,7 +76,9 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,ArticleDO
     }
 
     @Override
-    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE,
+            ClassifyService.CACHE_OBJECT,ClassifyService.CACHE_LIST},
+            allEntries = true)
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(int id) {
         checkExcept(id);
@@ -103,7 +105,9 @@ public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,ArticleDO
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
+    @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE,
+            ClassifyService.CACHE_OBJECT,ClassifyService.CACHE_LIST},
+            allEntries = true)
     public ArticleDTO saveArticle(ArticleDO article){
         ArticleDTO pojo = null;
 
