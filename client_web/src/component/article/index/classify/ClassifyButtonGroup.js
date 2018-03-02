@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import FieldGroup from "../../../common/FieldGroup";
 import {FORM_CLASSIFY} from "../../../../Constant";
 import {change, Field, reduxForm} from "redux-form";
+import {confirm} from "../../../Util";
 
 class ClassifyButtonGroup extends React.Component{
 
@@ -133,7 +134,9 @@ const mapDispatchToProps = dispatch => {
             dispatch(updateClassify(classify))
         },
         deleteClassify : id => {
-            dispatch(deleteClassify(id))
+            confirm("确定要删除该分类吗？<br/>删除后分类下的文章会归为未分类中。").then(() => {
+                dispatch(deleteClassify(id))
+            });
         }
     }
 };

@@ -4,7 +4,7 @@ import {change, untouch} from "redux-form";
 
 import {deleteComment, setPreviousComment} from "../../../../action/article/ContentAction";
 import {FORM_COMMENT} from "../../../../Constant";
-import {convertBr} from "../../../Util";
+import {confirm, convertBr} from "../../../Util";
 import {Alert} from "react-bootstrap";
 import UserInfoPopover from "../../../common/userinfo/UserInfoPopover";
 
@@ -69,7 +69,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         deleteComment : id => {
-            dispatch(deleteComment(id))
+            confirm("确定要删除这条评论吗？").then(() => {
+                dispatch(deleteComment(id))
+            });
         },
         reply : comment => {
             dispatch(untouch(FORM_COMMENT,"content"));

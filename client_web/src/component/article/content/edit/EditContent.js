@@ -7,7 +7,7 @@ import ArticleTitle from "../ArticleTitle";
 import Layout, {LAYOUT_JUSTIFY} from "../Layout";
 
 import {initialArticle} from "../../../../reducer/article/ContentReducer";
-import {deleteArticle, getArticleInfo} from "../../../../action/article/ContentAction";
+import {getArticleInfo} from "../../../../action/article/ContentAction";
 import {setArticle} from "../../../../action/article/ContentAction";
 
 class EditContent extends React.Component{
@@ -69,9 +69,6 @@ const mapDispatchToProps = dispatch => {
         },
         setArticle : article =>{
             dispatch(setArticle(article));
-        },
-        deleteArticle : id => {
-            dispatch(deleteArticle(id))
         }
     }
 };

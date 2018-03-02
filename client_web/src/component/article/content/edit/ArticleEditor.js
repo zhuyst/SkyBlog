@@ -12,7 +12,7 @@ import {FORM_ARTICLE} from "../../../../Constant";
 import FieldGroup from "../../../common/FieldGroup";
 import NewClassify from "./NewClassify";
 
-import {setArticle} from "../../../../action/article/ContentAction";
+import {getArticleInfo, setArticle} from "../../../../action/article/ContentAction";
 import {deleteArticle, insertArticle, updateArticle} from "../../../../action/article/ContentAction";
 
 import 'react-mde/lib/styles/css/react-mde.css';
@@ -22,6 +22,7 @@ import 'react-mde/lib/styles/css/react-mde-textarea.css';
 import '../../../../static/css/article/editor.css'
 import {listClassify, setClassifyShow} from "../../../../action/article/ClassifyAction";
 import {setUploadModalShow} from "../../../../action/article/UploadAction";
+import {confirm} from "../../../Util";
 
 class ArticleEditor extends React.Component{
 
@@ -300,21 +301,30 @@ const mapDispatchToProps = dispatch => {
             dispatch(change(FORM_ARTICLE,"content",article.content));
         },
         insertArticle : (article,back) => {
-            dispatch(insertArticle(article,back))
+            confirm("确定要发布文章吗？").then(() => {
+                dispatch(insertArticle(article,back))
+            });
         },
         updateArticle : (article,back) => {
-            dispatch(updateArticle(article,back));
+            confirm("确定要更新文章吗？").then(() => {
+                dispatch(updateArticle(article,back));
+            });
         },
         deleteArticle : id => {
-            dispatch(deleteArticle(id))
+            confirm("确定要删除文章吗？").then(() => {
+                dispatch(deleteArticle(id))
+            });
         },
         goBack : (isNew,id) => {
-            if(isNew){
-                dispatch(push("/article"))
-            }
-            else {
-                dispatch(push(`/article/content/${id}/justify`))
-            }
+            confirm("确定要放弃编辑吗？").then(() => {
+                if(isNew){
+                    dispatch(push("/article"))
+                }
+                else {
+                    dispatch(getArticleInfo(id));
+                    dispatch(push(`/article/content/${id}/justify`))
+                }
+            });
         },
 
         listClassify : () => {

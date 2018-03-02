@@ -1,20 +1,29 @@
 import React from 'react'
 import {connect} from "react-redux";
+import {push} from 'react-router-redux'
 import ReactMde, { ReactMdeCommands } from 'react-mde';
 import {Button, ButtonGroup, Col, ControlLabel, FormGroup, Glyphicon, Row} from "react-bootstrap";
 import {change, Field, reduxForm} from "redux-form";
 
 import {FORM_ABOUT} from "../../Constant";
-import {setAbout, updateAbout} from "../../action/about/AboutAction";
-import {LinkContainer} from "react-router-bootstrap";
+import {getAbout, setAbout, updateAbout} from "../../action/about/AboutAction";
 import {setUploadModalShow} from "../../action/article/UploadAction";
+import {confirm} from "../Util";
 
 class AboutEditor extends React.Component{
 
     componentWillMount(){
+        this.init();
+    }
+
+    componentDidUpdate(){
+        this.init();
+    }
+
+    init = () => {
         const {about,setAboutForm} = this.props;
         setAboutForm(about);
-    }
+    };
 
     submit = (data,back) => {
         const about = {
@@ -25,7 +34,8 @@ class AboutEditor extends React.Component{
     };
 
     render(){
-        const {submitting,handleSubmit,showUploadModal} = this.props;
+        const {submitting,handleSubmit,
+            goBack,showUploadModal} = this.props;
 
         return (
             <form>
@@ -43,12 +53,11 @@ class AboutEditor extends React.Component{
                                 <Glyphicon glyph="floppy-saved" />
                                 &nbsp;&nbsp;保存并退出编辑&nbsp;
                             </Button>
-                            <LinkContainer to="/about">
-                                <Button disabled={submitting} bsStyle="primary">
-                                    <Glyphicon glyph="circle-arrow-left" />
-                                    &nbsp;&nbsp;放弃编辑并返回&nbsp;
-                                </Button>
-                            </LinkContainer>
+                            <Button disabled={submitting} bsStyle="primary"
+                                    onClick={goBack}>
+                                <Glyphicon glyph="circle-arrow-left" />
+                                &nbsp;&nbsp;放弃编辑并返回&nbsp;
+                            </Button>
                         </ButtonGroup>
                     </Col>
                 </Row>
@@ -130,7 +139,15 @@ const mapDispatchToProps = dispatch => {
             dispatch(change(FORM_ABOUT,"content",about.content))
         },
         updateAbout : (about,back) => {
-            dispatch(updateAbout(about,back))
+            confirm("确定要更新关于吗？").then(() => {
+                dispatch(updateAbout(about,back))
+            });
+        },
+        goBack : () => {
+            confirm("确定要放弃编辑吗？").then(() => {
+                dispatch(getAbout());
+                dispatch(push("/about"))
+            })
         },
         showUploadModal : () => {
             dispatch(setUploadModalShow(true))

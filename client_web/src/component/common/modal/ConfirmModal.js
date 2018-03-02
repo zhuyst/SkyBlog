@@ -13,7 +13,9 @@ class ConfirmModal extends React.Component{
                     <Modal.Title id="contained-modal-title-lg">确认</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {confirmation}
+                    <div dangerouslySetInnerHTML={{
+                        __html : confirmation
+                    }} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button bsStyle="primary" onClick={proceed}>确定</Button>
