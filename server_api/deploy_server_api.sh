@@ -13,13 +13,13 @@ PID=$(ps aux | grep $APP_NAME | grep -v grep | awk '{printf $2}')
 # 更新工程
 git pull
 
-# 构建工程
-sh mvn clean package -f $PROJECT_PATH
-
 # 如果应用正在运行，则强制终止进程
-if ["$PID" == ""];then
+if [ -n "$PID" ];then
 	kill $PID
 fi
+
+# 构建工程
+sh mvn clean package -f $PROJECT_PATH
 
 # 启动应用
 nohup java -jar $PROJECT_JAR_PATH &
