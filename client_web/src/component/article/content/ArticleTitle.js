@@ -3,6 +3,7 @@ import {Button, ButtonGroup, ButtonToolbar, Glyphicon, PageHeader} from "react-b
 import {connect} from "react-redux";
 import {deleteArticle} from "../../../action/article/ContentAction";
 import {LinkContainer} from "react-router-bootstrap";
+import {confirm} from "../../Util";
 
 class ArticleTitle extends React.Component{
     render(){
@@ -77,7 +78,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         deleteArticle : id => {
-            dispatch(deleteArticle(id))
+            confirm("确定要删除文章吗？").then(() => {
+                dispatch(deleteArticle(id))
+            });
         }
     }
 };

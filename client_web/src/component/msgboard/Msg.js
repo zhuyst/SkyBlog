@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {deleteMsg, setPreviousMsg} from "../../action/msgboard/MsgBoardAction";
 import {FORM_MSG} from "../../Constant";
 import {change, untouch} from "redux-form";
-import {convertBr} from "../Util";
+import {convertBr,confirm} from "../Util";
 import {Alert} from "react-bootstrap";
 import UserInfoPopover from "../common/userinfo/UserInfoPopover";
 
@@ -68,7 +68,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         deleteMsg : id => {
-            dispatch(deleteMsg(id))
+            confirm("确定要删除这条留言吗？").then(() => {
+                dispatch(deleteMsg(id))
+            });
         },
         reply : msg => {
             dispatch(untouch(FORM_MSG,"content"));
