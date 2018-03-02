@@ -11,7 +11,6 @@ import {
 import {FORM_ARTICLE} from "../../../../Constant";
 import FieldGroup from "../../../common/FieldGroup";
 import NewClassify from "./NewClassify";
-import UploadModal from "./UploadModal";
 
 import {setArticle} from "../../../../action/article/ContentAction";
 import {deleteArticle, insertArticle, updateArticle} from "../../../../action/article/ContentAction";
@@ -143,7 +142,6 @@ class ArticleEditor extends React.Component{
                         </Row>
 
                         <Field name="content" component={editor} showUploadModal={showUploadModal}/>
-                        <UploadModal/>
                     </form>
                 </div>
             </div>

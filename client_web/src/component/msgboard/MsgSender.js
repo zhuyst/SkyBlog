@@ -22,7 +22,7 @@ class MsgSender extends React.Component{
     };
 
     render(){
-        const {handleSubmit,cancelReply,
+        const {handleSubmit,submitting,cancelReply,
             previous_comment, login} = this.props;
 
         if(login.ok){
@@ -44,6 +44,7 @@ class MsgSender extends React.Component{
                     <Field name="previous_comment_id" component="input" type="hidden"/>
                     <Field name="content" component={textArea}/>
                     <Button bsStyle="primary" bsSize="large" block
+                            className="msg_sender_button" disabled={submitting}
                             onClick={handleSubmit(data => this.submit(data))}>
                         发表留言
                     </Button>
@@ -70,7 +71,8 @@ class MsgSender extends React.Component{
 }
 
 const textArea = (field) => {
-    const error = field.meta.touched && field.meta.error;
+    const meta = field.meta;
+    const error = meta.touched && meta.error;
 
     let state = null;
     if(error){
@@ -83,11 +85,12 @@ const textArea = (field) => {
             <FormControl componentClass="textarea" placeholder="请输入留言......"
                          style={{height : '100px'}}
                          {...field.input}
+                         disabled={meta.submitting}
             />
             <FormControl.Feedback/>
             {
                 error &&
-                <HelpBlock>{field.meta.error}</HelpBlock>
+                <HelpBlock>{meta.error}</HelpBlock>
             }
         </FormGroup>
     )

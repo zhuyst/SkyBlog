@@ -15,6 +15,7 @@ import RegisterModal from './modal/RegisterModal'
 import UserInfoModal from "./modal/UserInfoModal";
 import UserManagementModal from "./modal/UserManagementModal";
 import SysLogModal from "./modal/SysLogModal";
+import UploadModal from "../article/content/edit/UploadModal";
 
 class Navigation extends React.Component{
 
@@ -39,7 +40,9 @@ class Navigation extends React.Component{
                                 <UserManagementModal key={2}/>,
 
                                 <MenuItem key={3} onClick={showSysLogModal}>系统日志</MenuItem>,
-                                <SysLogModal key={4}/>
+                                <SysLogModal key={4}/>,
+
+                                <UploadModal key={5}/>
                             ]
                         }
 

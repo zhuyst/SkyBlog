@@ -7,6 +7,7 @@ import {change, Field, reduxForm} from "redux-form";
 import {FORM_ABOUT} from "../../Constant";
 import {setAbout, updateAbout} from "../../action/about/AboutAction";
 import {LinkContainer} from "react-router-bootstrap";
+import {setUploadModalShow} from "../../action/article/UploadAction";
 
 class AboutEditor extends React.Component{
 
@@ -24,11 +25,11 @@ class AboutEditor extends React.Component{
     };
 
     render(){
-        const {submitting,handleSubmit} = this.props;
+        const {submitting,handleSubmit,showUploadModal} = this.props;
 
         return (
             <form>
-                <Field name="content" component={editor}/>
+                <Field name="content" component={editor} showUploadModal={showUploadModal}/>
                 <Row className="about_button">
                     <Col>
                         <ButtonGroup>
@@ -56,16 +57,45 @@ class AboutEditor extends React.Component{
     }
 }
 
-const editor = ({ input: { value, onChange }}) => {
-    return (
-        <FormGroup>
-            <ControlLabel>内容</ControlLabel>
-            <ReactMde value={value}
-                      onChange={onChange}
-                      commands={ReactMdeCommands.getDefaultCommands()}/>
-        </FormGroup>
-    )
-};
+class editor extends React.Component{
+
+    render() {
+        const {
+            input: {value, onChange},
+            meta: {submitting},
+            showUploadModal
+        } = this.props;
+
+        let commands = ReactMdeCommands.getDefaultCommands();
+
+        const uploadCommand = {
+            icon: 'upload',
+            tooltip:
+                '上传文件',
+            execute: (text, selection) => {
+                showUploadModal();
+
+                return {
+                    text: text,
+                    selection: selection
+                };
+            },
+        };
+
+        commands.push([uploadCommand]);
+
+        return (
+            <FormGroup>
+                <ControlLabel>内容</ControlLabel>
+                <ReactMde value={value}
+                          onChange={onChange}
+                          commands={commands}
+                          textAreaProps={{disabled : submitting}}
+                          visibility={{preview:false}}/>
+            </FormGroup>
+        )
+    }
+}
 
 const validate = values => {
     const errors = {};
@@ -101,6 +131,9 @@ const mapDispatchToProps = dispatch => {
         },
         updateAbout : (about,back) => {
             dispatch(updateAbout(about,back))
+        },
+        showUploadModal : () => {
+            dispatch(setUploadModalShow(true))
         }
     }
 };
