@@ -54,13 +54,13 @@ class ClassifyButtonGroup extends React.Component{
                         disabled={submitting}
                     />
                     <ButtonGroup className="btn-block">
-                        <Button bsStyle="success"
+                        <Button bsStyle="success" disabled={submitting}
                                 className="navigation_classify_button"
                                 onClick={handleSubmit(data => this.submit(data))}>
                             <Glyphicon glyph="ok-sign" />
                             &nbsp;&nbsp;确认&nbsp;
                         </Button>
-                        <Button bsStyle="danger"
+                        <Button bsStyle="danger" disabled={submitting}
                                 className="navigation_classify_button"
                                 onClick={() => this.setEdit(false)}>
                             <Glyphicon glyph="remove-sign" />
@@ -74,11 +74,12 @@ class ClassifyButtonGroup extends React.Component{
             buttonGroup = (
                 <ButtonGroup className="btn-block navigation_classify_edit">
                     <Button className="navigation_classify_button"
+                            disabled={submitting}
                             onClick={() => this.setEdit(true)}>
                         <Glyphicon glyph="edit" />
                         &nbsp;&nbsp;编辑分类名&nbsp;
                     </Button>
-                    <Button bsStyle="danger"
+                    <Button bsStyle="danger" disabled={submitting}
                             className="navigation_classify_button"
                             onClick={() => deleteClassify(classify.id)}>
                         <Glyphicon glyph="trash" />

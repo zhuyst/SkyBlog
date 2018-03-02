@@ -79,7 +79,8 @@ class CommentSender extends React.Component{
 }
 
 const textArea = (field) => {
-    const error = field.meta.touched && field.meta.error;
+    const meta = field.meta;
+    const error = meta.touched && meta.error;
 
     let state = null;
     if(error){
@@ -94,11 +95,12 @@ const textArea = (field) => {
                              height : '60px'
                          }}
                          {...field.input}
+                disabled={meta.submitting}
             />
             <FormControl.Feedback/>
             {
                 error &&
-                <HelpBlock>{field.meta.error}</HelpBlock>
+                <HelpBlock>{meta.error}</HelpBlock>
             }
         </FormGroup>
     )
@@ -111,9 +113,18 @@ const submitButton = (handleSubmit,submitting,submit,sm) => {
         onClick : handleSubmit(data => submit(data))
     };
 
-    if(!sm) {
+    if(sm) {
         props = {
             ...props,
+            style : {
+                marginBottom : '25px'
+            }
+        }
+    }
+    else {
+        props = {
+            ...props,
+            bsSize : "large",
             style : {
                 height : '60px',
                 marginTop : '24px'
