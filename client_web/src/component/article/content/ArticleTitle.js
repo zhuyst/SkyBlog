@@ -7,9 +7,8 @@ import {confirm} from "../../Util";
 
 class ArticleTitle extends React.Component{
     render(){
-        const {article,login,
+        const {article,management,
             deleteArticle,editing} = this.props;
-        const user = login.user;
         const {id,title,sub_title} = article;
 
         return (
@@ -46,7 +45,7 @@ class ArticleTitle extends React.Component{
                                 </LinkContainer>
                             </ButtonGroup>
                             {
-                                user.admin &&
+                                management &&
                                 <ButtonGroup>
                                     <LinkContainer to={`/article/content/${id}/edit`}>
                                         <Button bsStyle="primary">
@@ -71,7 +70,7 @@ class ArticleTitle extends React.Component{
 const mapStateToProps = state => {
     return {
         article : state.content.article,
-        login : state.login
+        management : state.login.management
     }
 };
 

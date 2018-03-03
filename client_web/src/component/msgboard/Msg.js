@@ -12,7 +12,7 @@ class Msg extends React.Component{
         const {msg, login,reply,
             deleteMsg} = this.props;
         const id = msg.id;
-        const user = login.user;
+        const {user,management} = login;
 
         const previous_comment = msg.previous_comment;
         const content = {
@@ -48,7 +48,7 @@ class Msg extends React.Component{
                     login.ok &&
                     <div className="comment_footer">
                         {
-                            (user.admin || user.id === msg.author_id) &&
+                            (management || user.id === msg.author_id) &&
                             <a onClick={() => deleteMsg(id)}>删除</a>
                         }
                         <a onClick={() => reply(msg)}>回复</a>

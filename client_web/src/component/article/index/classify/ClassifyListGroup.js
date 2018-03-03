@@ -9,7 +9,7 @@ import FadeTransition from "../../../common/FadeTransition";
 
 class ClassifyListGroup extends React.Component{
     render(){
-        const {admin,classify} = this.props;
+        const {management,classify} = this.props;
         const articles = classify.articles;
 
         return (
@@ -21,7 +21,7 @@ class ClassifyListGroup extends React.Component{
                     </ListGroupItem>
                 </LinkContainer>
                 {
-                    admin &&
+                    management &&
                     <ClassifyButtonGroup classify={classify}/>
                 }
                 <TransitionGroup>
@@ -42,7 +42,7 @@ class ClassifyListGroup extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        admin : state.login.user.admin
+        management : state.login.management
     }
 };
 

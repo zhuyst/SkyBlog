@@ -23,7 +23,7 @@ class Index extends React.Component{
                     <Route exact strict path={`${path}/content/:id/full`} component={FullContent}/>
                     <Route exact strict path={`${path}/content/:id/justify`} component={JustifyContent} />
                     {
-                        this.props.admin &&
+                        this.props.management &&
                         <Route path={`${path}/content/:id/edit`} component={EditContent} />
                     }
                     <Route component={RouteIndex}/>
@@ -35,7 +35,7 @@ class Index extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        admin : state.login.user.admin,
+        management : state.login.management,
     }
 };
 

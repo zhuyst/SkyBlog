@@ -18,7 +18,7 @@ class Navigation extends React.Component{
     }
 
     render(){
-        const {admin,total,classifyList} = this.props;
+        const {management,total,classifyList} = this.props;
 
         return(
             <Well>
@@ -29,7 +29,7 @@ class Navigation extends React.Component{
                 </div>
 
                 {
-                    admin &&
+                    management &&
                     <LinkContainer to="/article/content/new/edit">
                         <Button bsStyle="success" bsSize="large" block
                                 className="navigation_button">发布文章</Button>
@@ -62,7 +62,7 @@ const mapStateToProps = state => {
     return {
         total : state.articles.total,
         classifyList : state.classify.list,
-        admin : state.login.user.admin
+        management : state.login.management
     }
 };
 
