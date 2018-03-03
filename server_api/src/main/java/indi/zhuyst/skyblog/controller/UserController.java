@@ -85,7 +85,6 @@ public class UserController extends BaseController{
      */
     @PostMapping("/public/")
     @ApiOperation("注册新用户")
-    @SysLog(resource = RESOURCE_USER,type = SysLogTypeEnum.INSERT)
     public Result<AccessToken> register(@ApiParam("用户对象") @Valid @RequestBody UserDO newUser){
         newUser.setId(null);
 
