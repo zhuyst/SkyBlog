@@ -8,7 +8,7 @@ import {afterLogin} from "../user/UsersAction";
 
 export const LOGIN_RESPONSE = "LOGIN_RESPONSE";
 export const LOGIN_CLEAR = "LOGIN_CLEAR";
-export const SET_ADMIN = "SET_ADMIN";
+export const SET_MANAGEMENT = "SET_MANAGEMENT";
 
 export const loginClear = () => {
     return {
@@ -46,9 +46,9 @@ export const logout = () => (dispatch) =>{
     dispatch(loginClear());
 };
 
-export const setAdmin = admin => {
+export const setManagement = management => {
     return {
-        type : SET_ADMIN,
-        admin : admin
+        type : SET_MANAGEMENT,
+        management : management
     }
 };

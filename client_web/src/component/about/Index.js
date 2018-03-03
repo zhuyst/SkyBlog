@@ -23,7 +23,7 @@ class Index extends React.Component{
     }
 
     render(){
-        const {about,admin,editing,editAbout} = this.props;
+        const {about,management,editing,editAbout} = this.props;
         const {content,loading} = about;
         const path = this.props.match.path;
 
@@ -35,7 +35,7 @@ class Index extends React.Component{
         }
         else {
             body = [];
-            if(admin && !editing){
+            if(management && !editing){
                 body.push(
                     <Button key={1} bsStyle="primary"
                             className="about_edit_button"
@@ -53,7 +53,7 @@ class Index extends React.Component{
         return (
             <div className="about_main">
                 {
-                    admin &&
+                    management &&
                     <Route exact strict path={`${path}/edit`} component={editor}/>
                 }
                 <Row>
@@ -86,7 +86,7 @@ const mapStateToProps = state => {
 
     return {
         about : state.about,
-        admin : state.login.user.admin,
+        management : state.login.management,
         pathname : pathname,
         editing : editing
     }
