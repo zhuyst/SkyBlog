@@ -28,7 +28,7 @@ class ClassifyListGroup extends React.Component{
                     {
                         articles.map(article => (
                             <FadeTransition key={article.id}>
-                                <LinkContainer to={`/article/content/${article.id}`}>
+                                <LinkContainer to={`/article/content/${article.id}/full`}>
                                     <ListGroupItem>{article.title}</ListGroupItem>
                                 </LinkContainer>
                             </FadeTransition>
