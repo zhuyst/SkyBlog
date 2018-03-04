@@ -45,8 +45,7 @@ const initialState = {
     article : initialArticle,
     article_loading: true,
 
-    previous_comment : initialPreviousComment,
-    uploadModal_show : false
+    previous_comment : initialPreviousComment
 };
 
 const ContentReducer = (state = initialState,action) => {
