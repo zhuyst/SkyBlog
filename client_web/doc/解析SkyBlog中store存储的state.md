@@ -248,4 +248,4 @@ const initialState = {
 2. `redux-form` - 存储表单信息
 3. `notifications` - 通知系统`reapop`存储的信息
 
-以上便是项目中`ViewModal`中存储的信息啦，不得不说`Redux`可以说是SkyBlog的MVP，没有状态管理工具估计要写半天上下文的代码。 
+以上便是项目中`ViewModel`中存储的信息啦，不得不说`Redux`可以说是SkyBlog的MVP，没有状态管理工具估计要写半天上下文的代码。 
