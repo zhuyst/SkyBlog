@@ -15,14 +15,14 @@ import java.lang.annotation.*;
 public @interface SysLog {
 
     /**
-     * 操作类型
      * @see indi.zhuyst.skyblog.entity.SysLogDO#type
+     * @return 操作类型
      */
     SysLogTypeEnum type() default SysLogTypeEnum.UNDEFINED;
 
     /**
-     * 资源
      * @see indi.zhuyst.skyblog.entity.SysLogDO#resource
+     * @return 资源
      */
     String resource() default "";
 }
