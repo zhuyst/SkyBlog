@@ -15,7 +15,7 @@ import FadeTransition from "./FadeTransition";
 import ServerError from "../error/ServerError";
 import ErrorBoundary from "./ErrorBoundary";
 
-import {checkUserLoginState} from "../../action/user/UsersAction";
+import {checkUserLoginState} from "../../action/common/LoginAction";
 
 import '../../static/css/common/common.css'
 import '../../static/css/common/animation.css'

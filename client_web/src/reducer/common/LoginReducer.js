@@ -1,5 +1,5 @@
-import {LOGIN_CLEAR, LOGIN_RESPONSE, SET_MANAGEMENT} from "../../action/common/LoginAction";
-import {SET_LOGIN_USER, UPDATE_USER_INFO_RESPONSE} from "../../action/user/UsersAction";
+import {LOGIN_CLEAR, LOGIN_RESPONSE, SET_MANAGEMENT,SET_LOGIN_USER} from "../../action/common/LoginAction";
+import {UPDATE_USER_INFO_RESPONSE} from "../../action/user/UsersAction";
 
 const initialUser = {
     id: 0,
@@ -48,10 +48,13 @@ const LoginReducer = (state = initialState,action) => {
         }
 
         case SET_LOGIN_USER:
+            const user = action.user;
+            let management = user.admin;
+
             return {
                 ...state,
-                user : action.user,
-                management: false
+                user : user,
+                management: management
             };
 
         case UPDATE_USER_INFO_RESPONSE:
