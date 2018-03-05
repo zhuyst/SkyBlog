@@ -17,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -85,6 +86,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 // 处理异常
                 .exceptionHandling()
                     .accessDeniedHandler(accessDeniedHandler())
+                    .authenticationEntryPoint(authenticationEntryPoint())
                     .and()
 
                 // 设置TokenFilter作为Token认证
@@ -106,15 +108,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     /**
-     * 设置未授权或没有权限时访问的内容
+     * 设置没有权限时访问的内容
+     * @see CodeEnum#FORBIDDEN
      * @return Handler
      */
     @Bean
     public AccessDeniedHandler accessDeniedHandler(){
         return (request, response, accessDeniedException) -> {
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-            response.getWriter().write(Result.error(CodeEnum.UNAUTHORIZED.getCode(),
-                    "未授权或没有权限访问该接口").toJsonStr());
+            response.getWriter().write(Result.error(CodeEnum.FORBIDDEN).toJsonStr());
+        };
+    }
+
+    /**
+     * 设置未授权访问的内容
+     * @see CodeEnum#UNAUTHORIZED
+     * @see <a href="https://stackoverflow.com/questions/28057592/spring-boot-accessdeniedhandler-does-not-work">
+     *     Spring Boot: accessDeniedHandler does not work
+     *     </a>
+     * @return EntryPoint
+     */
+    @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint(){
+        return (request, response, e) -> {
+            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            response.getWriter().write(Result.error(CodeEnum.UNAUTHORIZED).toJsonStr());
         };
     }
 }
