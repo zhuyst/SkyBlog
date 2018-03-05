@@ -1,5 +1,5 @@
 import React from 'react'
-import {Col, Row} from "react-bootstrap";
+import {Col, Grid, Row} from "react-bootstrap";
 
 export const LAYOUT_JUSTIFY = "justify";
 export const LAYOUT_FULL = "full";
@@ -13,17 +13,19 @@ class Layout extends React.Component{
         const md = isJustify ? 5 : 8;
 
         return (
-            <Row>
-                <Col mdOffset={mdOffset} md={md} sm={12} id="left">
-                    {contentArea}
-                </Col>
-                {
-                    isJustify &&
-                    <Col md={5} sm={12} id="right">
-                        {right}
+            <Grid fluid={true}>
+                <Row>
+                    <Col mdOffset={mdOffset} md={md} sm={12} id="left">
+                        {contentArea}
                     </Col>
-                }
-            </Row>
+                    {
+                        isJustify &&
+                        <Col md={5} sm={12} id="right">
+                            {right}
+                        </Col>
+                    }
+                </Row>
+            </Grid>
         )
     }
 }

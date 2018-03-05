@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import {Button, Col, Glyphicon, Panel, Row} from "react-bootstrap";
+import {Button, Col, Glyphicon, Grid, Panel, Row} from "react-bootstrap";
 import {connect} from "react-redux";
 import {push} from 'react-router-redux'
 import {Route, withRouter} from "react-router-dom";
@@ -56,15 +56,17 @@ class Index extends React.Component{
                     management &&
                     <Route exact strict path={`${path}/edit`} component={editor}/>
                 }
-                <Row>
-                    <Col md={8} mdOffset={2} sm={12}>
-                        <Panel>
-                            <Panel.Body>
-                                {body}
-                            </Panel.Body>
-                        </Panel>
-                    </Col>
-                </Row>
+                <Grid fluid={true}>
+                    <Row>
+                        <Col md={8} mdOffset={2} sm={12}>
+                            <Panel>
+                                <Panel.Body>
+                                    {body}
+                                </Panel.Body>
+                            </Panel>
+                        </Col>
+                    </Row>
+                </Grid>
             </div>
         )
     }
