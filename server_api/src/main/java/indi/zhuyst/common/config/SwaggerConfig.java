@@ -1,6 +1,6 @@
 package indi.zhuyst.common.config;
 
-import indi.zhuyst.security.service.SecurityService;
+import indi.zhuyst.security.setting.JwtSettings;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -32,11 +32,11 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurerAdapter {
 
-    private final SecurityService securityService;
+    private final JwtSettings jwtSettings;
 
     @Autowired
-    public SwaggerConfig(SecurityService securityService) {
-        this.securityService = securityService;
+    public SwaggerConfig(JwtSettings jwtSettings) {
+        this.jwtSettings = jwtSettings;
     }
 
     /**
@@ -101,8 +101,8 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
      * @return 授权Key
      */
     private List<ApiKey> apiKey(){
-        ApiKey apiKey = new ApiKey(securityService.getHeader(),
-                securityService.getHeader(),"header");
+        ApiKey apiKey = new ApiKey(jwtSettings.getHeader(),
+                jwtSettings.getHeader(),"header");
         return Collections.singletonList(apiKey);
     }
 
@@ -114,8 +114,8 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
     private List<Parameter> headerToken(){
         ParameterBuilder tokenPar = new ParameterBuilder();
 
-        tokenPar.name(securityService.getHeader())
-                .description(securityService.getHeader())
+        tokenPar.name(jwtSettings.getHeader())
+                .description(jwtSettings.getHeader())
                 .modelRef(new ModelRef("string"))
                 .parameterType("header")
                 .required(false)

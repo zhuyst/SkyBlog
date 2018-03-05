@@ -24,12 +24,8 @@ import java.io.IOException;
 @Component
 public class TokenFilter extends OncePerRequestFilter{
 
-    private final SecurityService securityService;
-
     @Autowired
-    public TokenFilter(SecurityService securityService) {
-        this.securityService = securityService;
-    }
+    private SecurityService securityService;
 
     /**
      * 通过获取请求中的Token来设置Spring Security的Authentication

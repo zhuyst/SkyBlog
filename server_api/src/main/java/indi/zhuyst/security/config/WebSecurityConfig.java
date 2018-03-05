@@ -29,18 +29,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
-    private final UserDetailsService userDetailsService;
-
-    private final TokenFilter tokenFilter;
-
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Autowired
-    public WebSecurityConfig(UserDetailsService userDetailsService, TokenFilter tokenFilter, PasswordEncoder passwordEncoder) {
-        this.userDetailsService = userDetailsService;
-        this.tokenFilter = tokenFilter;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private TokenFilter tokenFilter;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * 配置UserDetailService与PasswordEncoder
