@@ -2,6 +2,7 @@ package indi.zhuyst.skyblog.controller;
 
 import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.pojo.Result;
+import indi.zhuyst.security.annotation.AdminAuthorize;
 import indi.zhuyst.skyblog.annotation.SysLog;
 import indi.zhuyst.skyblog.entity.ClassifyDO;
 import indi.zhuyst.skyblog.enums.SysLogTypeEnum;
@@ -11,7 +12,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -43,7 +43,7 @@ public class ClassifyController extends BaseController{
      * @return 分类列表
      */
     @GetMapping("/public/")
-    @ApiOperation("查询分类列表")
+    @ApiOperation(value = "查询分类列表",notes = NOTES_PUBLIC)
     public Result<List<ClassifyDTO>> listClassify(){
         List<ClassifyDTO> list = classifyService.listClassify();
         return Result.ok(list);
@@ -55,8 +55,8 @@ public class ClassifyController extends BaseController{
      * @return 新增后的分类列表
      */
     @PostMapping("/")
-    @ApiOperation("新增分类")
-    @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @ApiOperation(value = "新增分类",notes = NOTES_ADMIN)
+    @AdminAuthorize
     @SysLog(resource = RESOURCE_CLASSIFY,type = SysLogTypeEnum.INSERT)
     public Result<List<ClassifyDTO>> insertClassify(@ApiParam("分类对象") @Valid @RequestBody ClassifyDO classify){
         classify.setId(null);
@@ -72,8 +72,8 @@ public class ClassifyController extends BaseController{
      * @return 更新后的分类列表
      */
     @PutMapping("/{id}")
-    @ApiOperation("根据id更新分类")
-    @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @ApiOperation(value = "根据id更新分类",notes = NOTES_ADMIN)
+    @AdminAuthorize
     @SysLog(resource = RESOURCE_CLASSIFY,type = SysLogTypeEnum.UPDATE)
     public Result<List<ClassifyDTO>> updateClassify(@ApiParam("分类ID") @PathVariable("id")Integer id,
                                                     @ApiParam("分类对象") @Valid @RequestBody ClassifyDO classify){
@@ -89,8 +89,8 @@ public class ClassifyController extends BaseController{
      * @return 删除后的分类列表
      */
     @DeleteMapping("/{id}")
-    @ApiOperation("根据id删除分类")
-    @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @ApiOperation(value = "根据id删除分类",notes = NOTES_ADMIN)
+    @AdminAuthorize
     @SysLog(resource = RESOURCE_CLASSIFY,type = SysLogTypeEnum.DELETE)
     public Result<List<ClassifyDTO>> deleteClassify(@ApiParam("分类ID") @PathVariable("id")Integer id){
         List<ClassifyDTO> list = this.produceDTOList(classifyService.delete(id));

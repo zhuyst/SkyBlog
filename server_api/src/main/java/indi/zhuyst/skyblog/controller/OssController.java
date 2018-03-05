@@ -2,6 +2,7 @@ package indi.zhuyst.skyblog.controller;
 
 import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.pojo.Result;
+import indi.zhuyst.security.annotation.AdminAuthorize;
 import indi.zhuyst.skyblog.pojo.OssFile;
 import indi.zhuyst.skyblog.service.OssService;
 import io.swagger.annotations.Api;
@@ -36,7 +37,8 @@ public class OssController extends BaseController{
      * @return 文件URL对象
      */
     @PostMapping("/upload")
-    @ApiOperation("上传文件")
+    @ApiOperation(value = "上传文件",notes = NOTES_ADMIN)
+    @AdminAuthorize
     public Result<OssFile> uploadFile(@ApiParam("文件") @RequestParam("file")
                                              MultipartFile file){
         OssFile ossFile = ossService.upload(file);

@@ -5,6 +5,9 @@ import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.Result;
+import indi.zhuyst.security.annotation.AdminAuthorize;
+import indi.zhuyst.security.annotation.LoginAuthorize;
+import indi.zhuyst.security.annotation.SelfAuthorize;
 import indi.zhuyst.skyblog.annotation.SysLog;
 import indi.zhuyst.skyblog.entity.ArticleDO;
 import indi.zhuyst.skyblog.entity.ClassifyDO;
@@ -20,7 +23,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -63,7 +65,7 @@ public class ArticleController extends BaseController{
      * @return 文章DTO
      */
     @GetMapping("/public/{id}")
-    @ApiOperation("根据id查询文章")
+    @ApiOperation(value = "根据id查询文章",notes = NOTES_PUBLIC)
     public Result<ArticleDTO> getArticle(@ApiParam("文章ID") @PathVariable("id")Integer id){
         ArticleDTO pojo = articleService.getArticleDTO(id);
         return produceResult(pojo, CodeEnum.NOT_FOUND.getCode(),"未找到该文章");
@@ -76,8 +78,8 @@ public class ArticleController extends BaseController{
      * @return 更新后的文章DTO
      */
     @PutMapping("/{id}")
-    @ApiOperation("更新文章")
-    @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @ApiOperation(value = "更新文章",notes = NOTES_ADMIN)
+    @AdminAuthorize
     @SysLog(resource = RESOURCE_ARTICLE,type = SysLogTypeEnum.UPDATE)
     public Result<ArticleDTO> updateArticle(@ApiParam("文章ID") @PathVariable("id")Integer id,
                                             @ApiParam("文章对象") @Valid @RequestBody ArticleDO article){
@@ -92,8 +94,8 @@ public class ArticleController extends BaseController{
      * @return 新增后的文章DTO
      */
     @PostMapping("/")
-    @ApiOperation("新增文章")
-    @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @ApiOperation(value = "新增文章",notes = NOTES_ADMIN)
+    @AdminAuthorize
     @SysLog(resource = RESOURCE_ARTICLE,type = SysLogTypeEnum.INSERT)
     public Result<ArticleDTO> insertArticle(@ApiParam("文章对象") @Valid @RequestBody ArticleDO article){
         article.setId(null);
@@ -107,8 +109,8 @@ public class ArticleController extends BaseController{
      * @return 结果对象
      */
     @DeleteMapping("/{id}")
-    @ApiOperation("根据id删除文章")
-    @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @ApiOperation(value = "根据id删除文章",notes = NOTES_ADMIN)
+    @AdminAuthorize
     @SysLog(resource = RESOURCE_ARTICLE,type = SysLogTypeEnum.DELETE)
     public Result deleteArticle(@ApiParam("文章ID") @PathVariable("id")Integer id){
         return produceResult(articleService.delete(id),"删除文章失败");
@@ -120,7 +122,7 @@ public class ArticleController extends BaseController{
      * @return 文章分页对象
      */
     @GetMapping("/public/list/")
-    @ApiOperation("查询文章列表")
+    @ApiOperation(value = "查询文章列表",notes = NOTES_PUBLIC)
     public Result<PageInfo<ArticleDTO>> listArticle(Query query){
         PageInfo<ArticleDTO> pageInfo = articleService.listArticle(new Query<>(query));
         return Result.ok(pageInfo);
@@ -133,7 +135,7 @@ public class ArticleController extends BaseController{
      * @return 包含了Article的分页信息以及分类信息的VO
      */
     @GetMapping("/public/classify/{id}/")
-    @ApiOperation("根据分类id查询文章列表")
+    @ApiOperation(value = "根据分类id查询文章列表",notes = NOTES_PUBLIC)
     public Result<ArticlesAndClassifyVO> listArticleByClassify(@ApiParam("分类ID")
                                                              @PathVariable("id")Integer classifyId,
                                                                Query query){
@@ -159,7 +161,7 @@ public class ArticleController extends BaseController{
      * @return 评论的分页对象
      */
     @GetMapping("/public/{id}/comment/")
-    @ApiOperation("查询文章下的评论列表")
+    @ApiOperation(value = "查询文章下的评论列表",notes = NOTES_PUBLIC)
     public Result<PageInfo<CommentDTO>> listComment(@ApiParam("文章ID") @PathVariable("id")Integer articleId,
                                                     Query query){
         CommentDO comment = new CommentDO();
@@ -177,8 +179,8 @@ public class ArticleController extends BaseController{
      * @return 评论DTO
      */
     @PostMapping("/{id}/comment/")
-    @ApiOperation("新增该id的文章下的评论")
-    @PreAuthorize("isAuthenticated()")
+    @ApiOperation(value = "新增该id的文章下的评论",notes = NOTES_PROTECTED)
+    @LoginAuthorize
     @SysLog(resource = RESOURCE_COMMENT,type = SysLogTypeEnum.INSERT)
     public Result<CommentDTO> insertComment(@ApiParam("文章ID") @PathVariable("id") Integer articleId,
                                             @ApiParam("评论对象") @Valid @RequestBody CommentDO comment){
@@ -195,8 +197,8 @@ public class ArticleController extends BaseController{
      * @return 结果对象
      */
     @DeleteMapping(value = "/comment/{id}")
-    @ApiOperation("根据id删除评论")
-    @PreAuthorize("isAuthenticated()")
+    @ApiOperation(value = "根据id删除评论",notes = NOTES_SELF)
+    @SelfAuthorize
     @SysLog(resource = RESOURCE_COMMENT,type = SysLogTypeEnum.DELETE)
     public Result deleteComment(@ApiParam("评论ID") @PathVariable("id") Integer id){
         CommentDO comment = commentService.getCommentDTO(id);
