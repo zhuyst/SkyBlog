@@ -44,14 +44,18 @@ public class ArticleController extends BaseController{
      */
     private static final String RESOURCE_COMMENT = "文章评论";
 
-    @Autowired
-    private ArticleService articleService;
+    private final ArticleService articleService;
+
+    private final CommentService commentService;
+
+    private final ClassifyService classifyService;
 
     @Autowired
-    private CommentService commentService;
-
-    @Autowired
-    private ClassifyService classifyService;
+    public ArticleController(ArticleService articleService, CommentService commentService, ClassifyService classifyService) {
+        this.articleService = articleService;
+        this.commentService = commentService;
+        this.classifyService = classifyService;
+    }
 
     /**
      * 根据id查询文章

@@ -24,16 +24,18 @@ import java.io.IOException;
 @Component
 public class TokenFilter extends OncePerRequestFilter{
 
+    private final SecurityService securityService;
+
     @Autowired
-    private SecurityService securityService;
+    public TokenFilter(SecurityService securityService) {
+        this.securityService = securityService;
+    }
 
     /**
      * 通过获取请求中的Token来设置Spring Security的Authentication
      * @param request 当前request，用于获取Token
      * @param response 当前response
      * @param chain chain
-     * @throws ServletException Servlet异常
-     * @throws IOException IO异常
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {

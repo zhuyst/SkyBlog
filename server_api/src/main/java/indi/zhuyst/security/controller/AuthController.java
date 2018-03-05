@@ -25,11 +25,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "AuthApi",description = "授权相关API")
 public class AuthController extends BaseController{
 
-    @Autowired
-    private SecurityService securityService;
+    private final SecurityService securityService;
+
+    private final UserService userService;
 
     @Autowired
-    private UserService userService;
+    public AuthController(SecurityService securityService, UserService userService) {
+        this.securityService = securityService;
+        this.userService = userService;
+    }
 
     /**
      * @param username 用户名

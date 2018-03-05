@@ -29,19 +29,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
+
+    private final TokenFilter tokenFilter;
+
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private TokenFilter tokenFilter;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public WebSecurityConfig(UserDetailsService userDetailsService, TokenFilter tokenFilter, PasswordEncoder passwordEncoder) {
+        this.userDetailsService = userDetailsService;
+        this.tokenFilter = tokenFilter;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     /**
      * 配置UserDetailService与PasswordEncoder
      * @param auth 配置
-     * @throws Exception 异常
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -53,10 +56,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     /**
      * 配置不进行拦截的静态资源
      * @param web 配置
-     * @throws Exception 异常
      */
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         // 无视Swagger相关资源
         web.ignoring().antMatchers("/v2/api-docs/**",
                 "/swagger-resources/**",
@@ -67,7 +69,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     /**
      * 配置安全相关项
      * @param http 配置
-     * @throws Exception 异常
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {

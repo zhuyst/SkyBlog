@@ -1,6 +1,5 @@
 package indi.zhuyst.common.config;
 
-import com.google.common.base.Predicates;
 import indi.zhuyst.security.service.SecurityService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +32,12 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurerAdapter {
 
+    private final SecurityService securityService;
+
     @Autowired
-    private SecurityService securityService;
+    public SwaggerConfig(SecurityService securityService) {
+        this.securityService = securityService;
+    }
 
     /**
      * 将路径/映射到SwaggerUI主界面
@@ -70,7 +73,7 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
 
                 // 扫描有ApiOperation注解的接口
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
-                .paths(Predicates.or(PathSelectors.any()))
+                .paths(PathSelectors.any())
                 .build();
     }
 

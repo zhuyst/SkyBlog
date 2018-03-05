@@ -31,11 +31,9 @@ import java.util.Date;
 @Service
 public class SecurityServiceImpl extends BaseService implements SecurityService{
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtSettings jwtSettings;
+    private final JwtSettings jwtSettings;
 
     /**
      * {@link SecurityUser#username}在Claims中的name
@@ -46,6 +44,12 @@ public class SecurityServiceImpl extends BaseService implements SecurityService{
      * {@link SecurityUser#role}在Claims中的name
      */
     private static final String CLAIM_ROLE = "role";
+
+    @Autowired
+    public SecurityServiceImpl(AuthenticationManager authenticationManager, JwtSettings jwtSettings) {
+        this.authenticationManager = authenticationManager;
+        this.jwtSettings = jwtSettings;
+    }
 
     @Override
     public AccessToken login(String username, String password) {

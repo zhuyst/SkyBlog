@@ -24,16 +24,20 @@ import javax.annotation.PreDestroy;
 @Service("ossService")
 public class OssServiceImpl implements OssService,CommandLineRunner{
 
-    @Autowired
-    private OssSettings ossSettings;
+    private final OssSettings ossSettings;
 
     private OSSClient ossClient;
+
+    @Autowired
+    public OssServiceImpl(OssSettings ossSettings) {
+        this.ossSettings = ossSettings;
+    }
 
     /**
      * 通过{@link #ossSettings}初始化{@link #ossClient}
      */
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         CredentialsProvider credentialsProvider =
                 new DefaultCredentialProvider(ossSettings.getAccessKeyId(),
                         ossSettings.getAccessKeySecret());

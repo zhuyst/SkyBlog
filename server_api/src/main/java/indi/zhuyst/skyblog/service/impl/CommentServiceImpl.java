@@ -31,8 +31,12 @@ import java.util.List;
 @Service("commentService")
 public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,CommentDO> implements CommentService{
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public CommentServiceImpl(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
