@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.Result;
+import indi.zhuyst.security.annotation.LoginAuthorize;
+import indi.zhuyst.security.annotation.SelfAuthorize;
 import indi.zhuyst.security.util.SecurityUtils;
 import indi.zhuyst.skyblog.annotation.SysLog;
 import indi.zhuyst.skyblog.entity.CommentDO;
@@ -15,7 +17,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -47,7 +48,7 @@ public class MsgBoardController extends BaseController{
      * @return 留言的分页对象
      */
     @GetMapping("/public/list/")
-    @ApiOperation("查询留言列表")
+    @ApiOperation(value = "查询留言列表",notes = NOTES_PUBLIC)
     public Result<PageInfo<CommentDTO>> listMsg(Query query){
         PageInfo<CommentDTO> pageInfo = msgBoardService.listMsg(new Query<>(query));
         return Result.ok(pageInfo);
@@ -59,8 +60,8 @@ public class MsgBoardController extends BaseController{
      * @return 新增后的留言对象
      */
     @PostMapping("/")
-    @ApiOperation("新增留言")
-    @PreAuthorize("isAuthenticated()")
+    @ApiOperation(value = "新增留言",notes = NOTES_PROTECTED)
+    @LoginAuthorize
     @SysLog(resource = RESOURCE_MSG,type = SysLogTypeEnum.INSERT)
     public Result<CommentDTO> insertMsg(@ApiParam("留言对象") @Valid @RequestBody CommentDO comment){
         comment.setId(null);
@@ -78,8 +79,8 @@ public class MsgBoardController extends BaseController{
      * @return 结果对象
      */
     @DeleteMapping("/{id}")
-    @ApiOperation("根据id删除留言")
-    @PreAuthorize("isAuthenticated()")
+    @ApiOperation(value = "根据id删除留言",notes = NOTES_SELF)
+    @SelfAuthorize
     @SysLog(resource = RESOURCE_MSG,type = SysLogTypeEnum.DELETE)
     public Result deleteMsg(@ApiParam("留言ID") @PathVariable("id")Integer id){
         CommentDO comment = msgBoardService.getMsg(id);

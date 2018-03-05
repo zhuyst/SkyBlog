@@ -1,12 +1,13 @@
 package indi.zhuyst.common.controller;
 
 import indi.zhuyst.common.enums.CodeEnum;
+import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.pojo.Result;
 import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.util.SecurityUtils;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.access.AccessDeniedException;
 
 /**
  * 基础Controller
@@ -18,6 +19,40 @@ public abstract class BaseController {
      * 日志对象
      */
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    /**
+     * 公共接口，无需授权
+     * @see ApiOperation#notes()
+     */
+    protected static final String NOTES_PUBLIC = "公共接口，无需授权";
+
+    /**
+     * 需要授权后才能使用
+     * @see indi.zhuyst.security.annotation.LoginAuthorize
+     * @see ApiOperation#notes()
+     */
+    protected static final String NOTES_PROTECTED = "需要授权后才能使用";
+
+    /**
+     * 需要系统管理员或管理员权限，或者操作者是调用者本人
+     * @see indi.zhuyst.security.annotation.SelfAuthorize
+     * @see ApiOperation#notes()
+     */
+    protected static final String NOTES_SELF = "需要系统管理员或管理员权限，或者操作者是调用者本人";
+
+    /**
+     * 需要系统管理员或管理员权限
+     * @see indi.zhuyst.security.annotation.AdminAuthorize
+     * @see ApiOperation#notes()
+     */
+    protected static final String NOTES_ADMIN = "需要系统管理员或管理员权限";
+
+    /**
+     * 需要系统管理员权限
+     * @see indi.zhuyst.security.annotation.SysAdminAuthorize
+     * @see ApiOperation#notes()
+     */
+    protected static final String NOTES_SYS_ADMIN = "需要系统管理员权限";
 
     /**
      * 通过判断pojo是否为NULL，生成结果对象
@@ -75,7 +110,8 @@ public abstract class BaseController {
 
         // 不是管理员或者作者ID不等于当前用于ID，则为越权
         if(!user.getAdmin() && authorId != user.getId()){
-            throw new AccessDeniedException("您没有权限进行该操作");
+            throw new CommonException(CodeEnum.UNAUTHORIZED.getCode(),
+                    "您没有权限进行该操作");
         }
     }
 }

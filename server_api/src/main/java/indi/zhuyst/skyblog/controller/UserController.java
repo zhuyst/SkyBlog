@@ -6,6 +6,9 @@ import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.pojo.Result;
+import indi.zhuyst.security.annotation.AdminAuthorize;
+import indi.zhuyst.security.annotation.SelfAuthorize;
+import indi.zhuyst.security.annotation.SysAdminAuthorize;
 import indi.zhuyst.security.enums.RoleEnum;
 import indi.zhuyst.security.enums.StatusEnum;
 import indi.zhuyst.security.pojo.AccessToken;
@@ -23,7 +26,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.method.P;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -59,8 +61,8 @@ public class UserController extends BaseController{
      * @return 更新后的用户
      */
     @PutMapping("/{id}")
-    @ApiOperation("更新用户信息")
-    @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN') or #id == authentication.principal.id")
+    @ApiOperation(value = "更新用户信息",notes = NOTES_SELF)
+    @SelfAuthorize
     @SysLog(resource = RESOURCE_USER,type = SysLogTypeEnum.UPDATE)
     public Result<UserDTO> updateUser(@ApiParam("用户ID") @PathVariable("id") @P("id") Integer id,
                                       @ApiParam("用户对象") @Valid @RequestBody UserDO user){
@@ -75,8 +77,8 @@ public class UserController extends BaseController{
      * @return 用户DTO
      */
     @GetMapping("/{id}")
-    @ApiOperation("根据id获取用户信息")
-    @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN') or #id == authentication.principal.id")
+    @ApiOperation(value = "根据id获取用户信息",notes = NOTES_SELF)
+    @SelfAuthorize
     public Result<UserDTO> getUser(@ApiParam("用户ID") @PathVariable("id") @P("id") Integer id){
         UserDTO user = userService.getUserDTO(id);
         return produceResult(user, CodeEnum.NOT_FOUND.getCode(),"未找到该用户");
@@ -88,7 +90,7 @@ public class UserController extends BaseController{
      * @return 授权Token
      */
     @PostMapping("/public/")
-    @ApiOperation("注册新用户")
+    @ApiOperation(value = "注册新用户",notes = NOTES_PUBLIC)
     public Result<AccessToken> register(@ApiParam("用户对象") @Valid @RequestBody UserDO newUser){
         newUser.setId(null);
 
@@ -108,8 +110,8 @@ public class UserController extends BaseController{
      * @return 结果对象
      */
     @DeleteMapping("/{id}")
-    @ApiOperation("根据id删除用户")
-    @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @ApiOperation(value = "根据id删除用户",notes = NOTES_SYS_ADMIN)
+    @SysAdminAuthorize
     @SysLog(resource = RESOURCE_USER,type = SysLogTypeEnum.DELETE)
     public Result deleteUser(@ApiParam("用户ID") @PathVariable("id")Integer id){
         return produceResult(userService.delete(id),"不存在该用户");
@@ -121,8 +123,8 @@ public class UserController extends BaseController{
      * @return 用户的分页对象
      */
     @GetMapping("/list/")
-    @ApiOperation("查询用户列表")
-    @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @ApiOperation(value = "查询用户列表",notes = NOTES_ADMIN)
+    @AdminAuthorize
     public Result<PageInfo<UserDTO>> listUser(Query query){
         PageInfo<UserDTO> pageInfo = userService.listUser(new Query<>(query));
         return Result.ok(pageInfo);
@@ -135,8 +137,8 @@ public class UserController extends BaseController{
      * @return 结果对象
      */
     @PatchMapping("/role/{id}")
-    @ApiOperation("更新用户角色")
-    @PreAuthorize("hasRole('SYS_ADMIN')")
+    @ApiOperation(value = "更新用户角色",notes = NOTES_SYS_ADMIN)
+    @SysAdminAuthorize
     @SysLog(resource = "用户权限",type = SysLogTypeEnum.UPDATE)
     public Result updateUserRole(@ApiParam("用户ID") @PathVariable("id")Integer id,
                                  @ApiParam("角色ID") @Valid @RequestBody UpdateRole update){
@@ -158,9 +160,9 @@ public class UserController extends BaseController{
      * @param update 更新状态对象
      * @return 结果对象
      */
-    @ApiOperation("更新用户状态")
+    @ApiOperation(value = "更新用户状态",notes = NOTES_ADMIN)
     @PatchMapping("/status/{id}")
-    @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
+    @AdminAuthorize
     @SysLog(resource = "用户状态",type = SysLogTypeEnum.UPDATE)
     public Result updateUserStatus(@ApiParam("角色ID") @PathVariable("id") Integer id,
                                    @ApiParam("状态ID") @Valid @RequestBody UpdateStatus update){

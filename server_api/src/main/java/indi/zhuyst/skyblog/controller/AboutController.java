@@ -2,6 +2,7 @@ package indi.zhuyst.skyblog.controller;
 
 import indi.zhuyst.common.controller.BaseController;
 import indi.zhuyst.common.pojo.Result;
+import indi.zhuyst.security.annotation.AdminAuthorize;
 import indi.zhuyst.skyblog.annotation.SysLog;
 import indi.zhuyst.skyblog.enums.SysLogTypeEnum;
 import indi.zhuyst.skyblog.pojo.About;
@@ -10,7 +11,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -41,7 +41,7 @@ public class AboutController extends BaseController{
      * @return 关于对象
      */
     @GetMapping("/public/")
-    @ApiOperation("获取关于")
+    @ApiOperation(value = "获取关于",notes = NOTES_PUBLIC)
     public Result<About> getAbout(){
         return produceResult(aboutService.getAbout(),"获取关于失败");
     }
@@ -52,8 +52,8 @@ public class AboutController extends BaseController{
      * @return 更新后的关于对象
      */
     @PutMapping("/")
-    @PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN')")
-    @ApiOperation("更新关于")
+    @AdminAuthorize
+    @ApiOperation(value = "更新关于",notes = NOTES_ADMIN)
     @SysLog(resource = RESOURCE_ABOUT,type = SysLogTypeEnum.UPDATE)
     public Result<About> updateAbout(@ApiParam("关于对象") @Valid @RequestBody About about){
         return produceResult(aboutService.updateAbout(about),"更新关于失败");
