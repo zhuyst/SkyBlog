@@ -1,7 +1,8 @@
 import React from 'react'
 import {TransitionGroup} from "react-transition-group";
 import {connect} from "react-redux";
-import {Alert, PanelGroup} from "react-bootstrap";
+import {push} from "react-router-redux";
+import {Alert, Button, PanelGroup} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 
 import {listArticlesByClassify} from "../../../../action/article/ArticlesAction";
@@ -21,7 +22,7 @@ class ClassifyArticles extends React.Component{
     }
 
     render(){
-        const {classify, listArticlesByClassify} = this.props;
+        const {classify, listArticlesByClassify,goArticles} = this.props;
         const {loading, page} = classify;
         const {list,page_num} = page;
 
@@ -35,9 +36,16 @@ class ClassifyArticles extends React.Component{
             <div>
                 <PanelGroup id="articles">
                     <Alert bsStyle="info">
-                        您正在查看文章分类&nbsp;-&nbsp;
-                        <strong>{classify.name}</strong>
-                        &nbsp;下的文章
+                        <div>
+                            您正在查看文章分类&nbsp;-&nbsp;
+                            <strong>{classify.name}</strong>
+                            &nbsp;下的文章。
+                        </div>
+                        <div className="show_all_button">
+                            <Button onClick={goArticles}>
+                                查看全部文章
+                            </Button>
+                        </div>
                     </Alert>
                     <TransitionGroup>
                         {
@@ -68,6 +76,9 @@ const mapDispatchToProps = dispatch => {
     return {
         listArticlesByClassify : (classifyId,pageNum) => {
             dispatch(listArticlesByClassify(classifyId,pageNum,ARTICLE_PAGE_SIZE))
+        },
+        goArticles : () => {
+            dispatch(push("/article"))
         }
     }
 };

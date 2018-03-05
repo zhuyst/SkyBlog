@@ -2,6 +2,10 @@
     max-height: 30em
 }
 
+.nav_image img{
+    width: 100% !important;
+}
+
 .nav_image_text{
     position: absolute;
     top: 15%;

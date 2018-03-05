@@ -3,21 +3,33 @@ import {Label, Panel} from "react-bootstrap";
 import {push} from "react-router-redux";
 import {setArticle} from "../../../action/article/ContentAction";
 import {connect} from "react-redux";
+import {LinkContainer} from "react-router-bootstrap";
 
 class Preview extends React.Component{
 
     render(){
         const {article,push} = this.props;
+        const classify = article.classify;
+        const classifyUrl = `/article/classify/${classify.id}`;
 
         return (
                 <div className="preview">
                     <Panel defaultExpanded>
                         <Panel.Heading>
-                            <Panel.Title toggle>
+                            <Panel.Title toggle className="hidden-xs">
                                 {article.title}
-                                <Label className="preview_classify">
-                                    {article.classify.name}
+                                <LinkContainer to={classifyUrl}>
+                                    <Label className="preview_classify-xs">
+                                        {classify.name}
                                     </Label>
+                                </LinkContainer>
+                            </Panel.Title>
+                            <Panel.Title className="preview_classify-lg hidden-sm hidden-md hidden-lg">
+                                <LinkContainer to={classifyUrl}>
+                                    <Label>
+                                        {classify.name}
+                                    </Label>
+                                </LinkContainer>
                             </Panel.Title>
                         </Panel.Heading>
                         <Panel.Collapse>
