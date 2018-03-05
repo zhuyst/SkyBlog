@@ -9,6 +9,7 @@ indi.zhuyst.common.pojo
 indi.zhuyst.common.service
 indi.zhuyst.common.service.impl
 indi.zhuyst.common.util
+indi.zhuyst.security.annotation
 indi.zhuyst.security.config
 indi.zhuyst.security.controller
 indi.zhuyst.security.enums
