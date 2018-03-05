@@ -1,14 +1,12 @@
-import fetch from 'isomorphic-fetch'
-import {change, startSubmit, stopSubmit} from 'redux-form'
+import {startSubmit, stopSubmit} from 'redux-form'
 
 import {
-    USER_API_URL, FAIL_RESULT, _post, checkStatus, _put, REFRESH_URL, ContentType, HttpMethod,
-    _get, _delete, setToken, getToken, _patch
+    USER_API_URL, _post, _put, _get, _delete, _patch
 } from "../../Api";
 import {FORM_REGISTER, FORM_USERINFO, USER_PAGE_SIZE, UserRole, UserStatus} from "../../Constant";
-import {setLoginModalShow, setRegisterModalShow, setUserInfoModalShow} from "../common/ModalAction";
-import {loginResponse} from  "../common/LoginAction"
+import { setRegisterModalShow, setUserInfoModalShow} from "../common/ModalAction";
 import {success, error} from "../common/NotifyAction";
+import {afterLogin, setLoginUser} from "../common/LoginAction";
 
 export const LIST_USERS_RESPONSE = "LIST_USERS_RESPONSE";
 export const GET_USER_INFO_RESPONSE = "GET_USER_INFO_RESPONSE";
@@ -19,8 +17,6 @@ export const DELETE_USER_RESPONSE = "DELETE_USER_RESPONSE";
 export const UPDATE_USER_INFO_RESPONSE = "UPDATE_USER_INFO_RESPONSE";
 export const UPDATE_USER_ROLE_RESPONSE = "UPDATE_USER_ROLE_RESPONSE";
 export const UPDATE_USER_STATUS_RESPONSE = "UPDATE_USER_STATUS_RESPONSE";
-
-export const SET_LOGIN_USER = "SET_LOGIN_USER";
 
 export const registerUser = (user) => (dispatch) => {
     const url = USER_API_URL + "/public/";
@@ -172,63 +168,6 @@ const updateUserStatusResponse = result => {
     return {
         type : UPDATE_USER_STATUS_RESPONSE,
         result : result
-    }
-};
-
-export const checkUserLoginState = () => dispatch => {
-    let token = getToken();
-
-    return fetch(REFRESH_URL,{
-            method: HttpMethod.POST,
-            headers: {
-                "Content-Type": ContentType.FORM
-            },
-            body: `token=${token}`
-        }).then(response => checkStatus(response))
-        .then(result => afterLogin(result,dispatch,false))
-        .catch(() => afterLogin(FAIL_RESULT,dispatch,false))
-};
-
-export const afterLogin = (result,dispatch,alert) => {
-    let ok = false;
-    let message = null;
-
-    if(result.code === 200){
-        dispatch(setLoginModalShow(false));
-
-        const entity = result.entity;
-
-        const user = entity.user;
-        dispatch(setLoginUser(user));
-
-        setToken(entity);
-
-        dispatch(change(FORM_USERINFO,"id",user.id));
-        dispatch(change(FORM_USERINFO,"username",user.username));
-        dispatch(change(FORM_USERINFO,"nickname",user.nickname));
-
-        if(alert){
-            dispatch(success("登陆成功"));
-        }
-
-        ok = true;
-    }
-    else if(result.code === 401){
-        ok = null;
-    }
-    else {
-        dispatch(error(result.message));
-        message = result.message
-    }
-
-    dispatch(loginResponse(ok,message))
-};
-
-export const setLoginUser = user => {
-    user.password = null;
-    return {
-        type : SET_LOGIN_USER,
-        user : user
     }
 };
 

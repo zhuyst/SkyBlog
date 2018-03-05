@@ -9,11 +9,12 @@ import Layout, {LAYOUT_JUSTIFY} from "../Layout";
 import {initialArticle} from "../../../../reducer/article/ContentReducer";
 import {getArticleInfo} from "../../../../action/article/ContentAction";
 import {setArticle} from "../../../../action/article/ContentAction";
+import ArticleBreadcrumb from "../ArticleBreadcrumb";
 
 class EditContent extends React.Component{
     componentWillMount(){
         const {setArticle,getArticle,article} = this.props;
-        let action;
+        let action = "修改";
 
         const id = this.props.match.params.id;
         if(id === "new"){
@@ -26,7 +27,6 @@ class EditContent extends React.Component{
         }
         else if(article.id !== Number(id)){
             getArticle(id);
-            action = "修改"
         }
 
         document.title = `${action} - ${this.props.article.title} - 博客文章 - 青云的小窝`;
@@ -42,9 +42,10 @@ class EditContent extends React.Component{
     render(){
         const article = this.props.article;
 
-        const contentArea = (
-            <ArticleEditor/>
-        );
+        const contentArea = [
+            <ArticleBreadcrumb key={1}/>,
+            <ArticleEditor key={2}/>
+        ];
         const right = (
             <div className="content_main edit_content">
                 <ArticleTitle editing={true}/>
