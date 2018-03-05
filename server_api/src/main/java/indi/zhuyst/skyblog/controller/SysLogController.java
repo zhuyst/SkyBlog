@@ -23,8 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys_log")
 public class SysLogController extends BaseController {
 
+    private final SysLogService sysLogService;
+
     @Autowired
-    private SysLogService sysLogService;
+    public SysLogController(SysLogService sysLogService) {
+        this.sysLogService = sysLogService;
+    }
 
     @GetMapping("/list/")
     @ApiOperation("查询系统日志列表")

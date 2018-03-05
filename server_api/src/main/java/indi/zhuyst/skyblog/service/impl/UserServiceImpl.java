@@ -36,18 +36,22 @@ import java.util.List;
 public class UserServiceImpl extends BaseCrudServiceImpl<UserDao,UserDO>
         implements UserService,CommandLineRunner{
 
-    @Autowired
-    private DefaultAdminSettings defaultAdminSettings;
+    private final DefaultAdminSettings defaultAdminSettings;
+
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public UserServiceImpl(DefaultAdminSettings defaultAdminSettings, PasswordEncoder passwordEncoder) {
+        this.defaultAdminSettings = defaultAdminSettings;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     /**
      * 初始化管理员
      */
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public void run(String... strings) throws Exception {
+    public void run(String... strings) {
         UserDO user = super.getByID(ADMIN_KEY);
         if(user == null){
             user = new UserDO();

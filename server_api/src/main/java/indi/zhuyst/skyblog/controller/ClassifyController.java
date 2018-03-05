@@ -31,8 +31,12 @@ public class ClassifyController extends BaseController{
      */
     private static final String RESOURCE_CLASSIFY = "文章分类";
 
+    private final ClassifyService classifyService;
+
     @Autowired
-    private ClassifyService classifyService;
+    public ClassifyController(ClassifyService classifyService) {
+        this.classifyService = classifyService;
+    }
 
     /**
      * 查询分类列表

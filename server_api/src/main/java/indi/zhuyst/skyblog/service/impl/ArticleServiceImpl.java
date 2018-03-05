@@ -35,11 +35,15 @@ import java.util.List;
 public class ArticleServiceImpl extends BaseCrudServiceImpl<ArticleDao,ArticleDO>
         implements ArticleService{
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    private final ClassifyService classifyService;
 
     @Autowired
-    private ClassifyService classifyService;
+    public ArticleServiceImpl(UserService userService, ClassifyService classifyService) {
+        this.userService = userService;
+        this.classifyService = classifyService;
+    }
 
     @Override
     public ArticleDO getByID(int id) {

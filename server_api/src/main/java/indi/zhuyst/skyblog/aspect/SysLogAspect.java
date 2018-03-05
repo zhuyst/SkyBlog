@@ -29,8 +29,12 @@ import java.util.Date;
 @Order(-100)
 public class SysLogAspect {
 
+    private final SysLogService sysLogService;
+
     @Autowired
-    private SysLogService sysLogService;
+    public SysLogAspect(SysLogService sysLogService) {
+        this.sysLogService = sysLogService;
+    }
 
     @Pointcut("@annotation(indi.zhuyst.skyblog.annotation.SysLog)")
     public void pointCut() {}

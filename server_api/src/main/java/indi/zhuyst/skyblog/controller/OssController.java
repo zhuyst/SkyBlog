@@ -23,8 +23,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/oss")
 public class OssController extends BaseController{
 
+    private final OssService ossService;
+
     @Autowired
-    private OssService ossService;
+    public OssController(OssService ossService) {
+        this.ossService = ossService;
+    }
 
     /**
      * 上传文件

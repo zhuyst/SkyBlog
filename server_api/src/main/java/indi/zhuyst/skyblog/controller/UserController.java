@@ -42,11 +42,15 @@ public class UserController extends BaseController{
      */
     private static final String RESOURCE_USER = "用户";
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    private final SecurityService securityService;
 
     @Autowired
-    private SecurityService securityService;
+    public UserController(UserService userService, SecurityService securityService) {
+        this.userService = userService;
+        this.securityService = securityService;
+    }
 
     /**
      * 更新用户信息

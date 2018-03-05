@@ -22,8 +22,12 @@ public class CacheConfig implements CommandLineRunner{
      */
     public static final String CACHE_KEY_PREFIX = "CACHE:";
 
+    private final RedisTemplate<Object,Object> redisTemplate;
+
     @Autowired
-    private RedisTemplate<Object,Object> redisTemplate;
+    public CacheConfig(RedisTemplate<Object, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     /**
      * 清空缓存

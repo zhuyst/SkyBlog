@@ -29,8 +29,12 @@ public class AboutController extends BaseController{
      */
     private static final String RESOURCE_ABOUT = "留言板";
 
+    private final AboutService aboutService;
+
     @Autowired
-    private AboutService aboutService;
+    public AboutController(AboutService aboutService) {
+        this.aboutService = aboutService;
+    }
 
     /**
      * 获取关于

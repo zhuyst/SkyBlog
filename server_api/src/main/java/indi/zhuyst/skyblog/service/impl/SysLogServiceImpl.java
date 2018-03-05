@@ -24,8 +24,12 @@ import java.util.List;
 public class SysLogServiceImpl extends BaseCrudServiceImpl<SysLogDao,SysLogDO>
         implements SysLogService{
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public SysLogServiceImpl(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public SysLogDTO getSysLogDTO(int id) {

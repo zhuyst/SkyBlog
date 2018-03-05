@@ -28,8 +28,12 @@ import java.util.List;
 public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,ClassifyDO>
         implements ClassifyService,CommandLineRunner{
 
+    private final ArticleDao articleDao;
+
     @Autowired
-    private ArticleDao articleDao;
+    public ClassifyServiceImpl(ArticleDao articleDao) {
+        this.articleDao = articleDao;
+    }
 
     /**
      * 初始化未分类
@@ -37,7 +41,7 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
      */
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         ClassifyDO classify = this.getByID(NOT_CLASSIFY_KEY);
         if(classify == null){
             classify = new ClassifyDO();

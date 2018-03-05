@@ -20,8 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class AboutServiceImpl extends BaseService implements AboutService,
         CommandLineRunner{
 
+    private final ArticleDao articleDao;
+
     @Autowired
-    private ArticleDao articleDao;
+    public AboutServiceImpl(ArticleDao articleDao) {
+        this.articleDao = articleDao;
+    }
 
     /**
      * 初始化留言板
@@ -29,7 +33,7 @@ public class AboutServiceImpl extends BaseService implements AboutService,
      */
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         ArticleDO about = articleDao.selectByPrimaryKey(ABOUT_KEY);
         if(about == null){
             about = new ArticleDO();

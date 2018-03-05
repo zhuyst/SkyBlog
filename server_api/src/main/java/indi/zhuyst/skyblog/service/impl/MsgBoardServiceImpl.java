@@ -23,11 +23,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("msgBoardService")
 public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
 
-    @Autowired
-    private ArticleDao articleDao;
+    private final ArticleDao articleDao;
+
+    private final CommentService commentService;
 
     @Autowired
-    private CommentService commentService;
+    public MsgBoardServiceImpl(ArticleDao articleDao, CommentService commentService) {
+        this.articleDao = articleDao;
+        this.commentService = commentService;
+    }
 
     /**
      * 初始化留言板
@@ -35,7 +39,7 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
      */
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public void run(String... strings) throws Exception {
+    public void run(String... strings) {
         ArticleDO article = articleDao.selectByPrimaryKey(MSG_BOARD_KEY);
 
         if(article == null){

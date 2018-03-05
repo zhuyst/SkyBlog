@@ -34,8 +34,12 @@ public class MsgBoardController extends BaseController{
      */
     private static final String RESOURCE_MSG = "留言板";
 
+    private final MsgBoardService msgBoardService;
+
     @Autowired
-    private MsgBoardService msgBoardService;
+    public MsgBoardController(MsgBoardService msgBoardService) {
+        this.msgBoardService = msgBoardService;
+    }
 
     /**
      * 查询留言列表
