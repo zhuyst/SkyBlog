@@ -1,5 +1,5 @@
 import React from 'react'
-import {Row, Col} from 'react-bootstrap'
+import {Row, Col, Grid} from 'react-bootstrap'
 
 import Articles from './index/Articles'
 import Navigation from './index/Navigation'
@@ -11,15 +11,17 @@ class RouteIndex extends React.Component{
         const path = this.props.match.path;
 
         return (
-            <Row>
-                <Col className="articles_left" mdOffset={1} md={7}>
-                    <Route exact strict path={path} component={Articles}/>
-                    <Route exact strict path={`${path}/classify/:id`} component={ClassifyArticles}/>
-                </Col>
-                <Col md={3}>
-                    <Navigation/>
-                </Col>
-            </Row>
+            <Grid fluid={true}>
+                <Row>
+                    <Col className="articles_left" mdOffset={1} md={7}>
+                        <Route exact strict path={path} component={Articles}/>
+                        <Route exact strict path={`${path}/classify/:id`} component={ClassifyArticles}/>
+                    </Col>
+                    <Col md={3}>
+                        <Navigation/>
+                    </Col>
+                </Row>
+            </Grid>
         )
     }
 }
