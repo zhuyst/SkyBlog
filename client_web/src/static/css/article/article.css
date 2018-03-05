@@ -57,9 +57,16 @@
     border-bottom: 2px solid #f16c20;
 }
 
-.preview_classify{
+.preview .label{
     font-size: 14px !important;
+}
+
+.preview_classify-xs{
     float: right;
+}
+
+.preview_classify-lg{
+    text-align: center;
 }
 
 .preview_preview{
@@ -122,4 +129,9 @@
 
 #articles .alert{
     font-size: 16px;
+}
+
+#articles .show_all_button{
+    text-align: right;
+    margin-top: 10px;
 }
