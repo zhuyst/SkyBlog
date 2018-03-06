@@ -57,7 +57,7 @@ Token的生成使用的是`JWT`，减少请求时对数据库的查询
 
 负责提供Token相关的服务
 
-1. 登陆时，调用`Spring Security`的`AuthenticationManager`，对用户进行验证，并在验证通过时生成Token
+1. 登录时，调用`Spring Security`的`AuthenticationManager`，对用户进行验证，并在验证通过时生成Token
 2. Token中包装了三段重要的信息：`id、username、role`，通过这些信息便足以组成一个用户的基本对象
 3. 服务提供了从Token中获取各类信息的方法，也提供了验证Token是否合法、过期的方法，确保Token的可靠性
 
@@ -121,7 +121,7 @@ Token的生成使用的是`JWT`，减少请求时对数据库的查询
 
 ### AuthController
 
-负责提供登陆以及刷新Token的接口
+负责提供登录以及刷新Token的接口
 
 ```java
    /**
@@ -129,7 +129,7 @@ Token的生成使用的是`JWT`，减少请求时对数据库的查询
      * @param password 密码
      * @return AccessToken
      */
-    @ApiOperation(value = "登陆，获取Token")
+    @ApiOperation(value = "登录，获取Token")
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public Result<AccessToken> login(@ApiParam("用户名") @RequestParam String username,
                                      @ApiParam("密码") @RequestParam String password) {

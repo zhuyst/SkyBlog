@@ -41,7 +41,7 @@ const initialState = {
 
 ## Login State
 
-登陆相关的state，是非常重要的state，存储了
+登录相关的state，是非常重要的state，存储了
 1. 登录是否成功
 2. 登录用户信息
 3. 还有`是否开启管理模式`的信息

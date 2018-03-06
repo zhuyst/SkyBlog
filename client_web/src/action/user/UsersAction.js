@@ -28,7 +28,7 @@ export const registerUser = (user) => (dispatch) => {
 
             if(result.code === 200){
                 dispatch(setRegisterModalShow(false));
-                dispatch(success("注册成功，开始登陆"));
+                dispatch(success("注册成功，开始登录"));
                 dispatch(registerUserResponse(result));
                 afterLogin(result,dispatch,true);
             }

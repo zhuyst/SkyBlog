@@ -40,7 +40,7 @@ public class AuthController extends BaseController{
      * @param password 密码
      * @return AccessToken
      */
-    @ApiOperation(value = "登陆，获取Token")
+    @ApiOperation(value = "登录，获取Token")
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public Result<AccessToken> login(@ApiParam("用户名") @RequestParam String username,
                                      @ApiParam("密码") @RequestParam String password) {

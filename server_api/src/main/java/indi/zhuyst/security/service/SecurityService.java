@@ -10,7 +10,7 @@ import indi.zhuyst.security.pojo.SecurityUser;
 public interface SecurityService{
 
     /**
-     * 使用用户名与密码进行登陆
+     * 使用用户名与密码进行登录
      * @param username 用户名
      * @param password 密码
      * @return AccessToken
