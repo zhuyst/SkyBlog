@@ -37,11 +37,11 @@ class Index extends React.Component{
         return (
             <ErrorBoundary>
                 <div className="website">
-                    <header>
+                    <header id="header">
                         <Navigation/>
                     </header>
 
-                    <div className="main">
+                    <div className="main" id="main">
                         <TransitionGroup>
                             <FadeTransition key={this.props.location.pathname}>
                                 <Switch location={this.props.location}>
@@ -61,7 +61,7 @@ class Index extends React.Component{
                         </TransitionGroup>
                     </div>
 
-                    <footer>
+                    <footer id="footer">
                         <Footer/>
                     </footer>
                 </div>

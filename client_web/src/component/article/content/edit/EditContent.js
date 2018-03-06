@@ -10,6 +10,7 @@ import {initialArticle} from "../../../../reducer/article/ContentReducer";
 import {getArticleInfo} from "../../../../action/article/ContentAction";
 import {setArticle} from "../../../../action/article/ContentAction";
 import ArticleBreadcrumb from "../ArticleBreadcrumb";
+import {FADE_ENTER} from "../../../../Constant";
 
 class EditContent extends React.Component{
     componentWillMount(){
@@ -33,19 +34,41 @@ class EditContent extends React.Component{
     }
 
     componentDidMount(){
-        // 获取左侧编辑器高度，设置在右侧显示框中
-        const left = document.getElementById("left");
-        const right = document.getElementById("right");
-        right.style.height = left.offsetHeight + "px";
+        this.init();
     }
+
+    init = () => {
+        setTimeout(() => {
+            const main = document.getElementById("main");
+            const mde_editor = document.getElementById("mde-editor");
+            const all_editor = document.getElementById("all-editor");
+            const left = document.getElementById("left");
+            const right = document.getElementById("right");
+
+            // 有可能会出现用户已经离开页面的情况
+            const samePage = right != null && left != null;
+            if(samePage){
+
+                // 调整高度
+                right.style.height = left.offsetHeight + "px";
+                right.style.height = main.offsetHeight + "px";
+
+                // 将剩余的高度设置给textArea
+                const mdeHeight = mde_editor.offsetHeight + right.offsetHeight - all_editor.offsetHeight;
+                mde_editor.style.height = mdeHeight + "px";
+            }
+        },FADE_ENTER)
+    };
 
     render(){
         const article = this.props.article;
 
-        const contentArea = [
-            <ArticleBreadcrumb key={1}/>,
-            <ArticleEditor key={2}/>
-        ];
+        const contentArea = (
+            <div id="all-editor">
+                <ArticleBreadcrumb/>,
+                <ArticleEditor/>
+            </div>
+        );
         const right = (
             <div className="content_main edit_content">
                 <ArticleTitle editing={true}/>
