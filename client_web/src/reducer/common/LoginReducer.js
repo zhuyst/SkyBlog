@@ -42,8 +42,7 @@ const LoginReducer = (state = initialState,action) => {
             return {
                 ...state,
                 ok : ok,
-                message : message,
-                management: false
+                message : message
             }
         }
 
@@ -60,8 +59,7 @@ const LoginReducer = (state = initialState,action) => {
         case UPDATE_USER_INFO_RESPONSE:
             return {
                 ...state,
-                user : action.user,
-                management: false
+                user : action.user
             };
 
         default:
