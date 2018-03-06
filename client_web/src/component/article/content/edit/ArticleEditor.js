@@ -180,7 +180,10 @@ class editor extends React.Component{
                 <ControlLabel>文章内容</ControlLabel>
                 <ReactMde value={value} onChange={onChange}
                           commands={commands}
-                          textAreaProps={{disabled : submitting}}
+                          textAreaProps={{
+                              disabled : submitting,
+                              id : "mde-editor"
+                          }}
                           visibility={{preview:false}}/>
             </FormGroup>
         )
