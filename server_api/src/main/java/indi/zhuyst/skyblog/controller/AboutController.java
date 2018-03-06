@@ -25,9 +25,9 @@ import javax.validation.Valid;
 public class AboutController extends BaseController{
 
     /**
-     * 资源名 - 留言板
+     * 资源名 - 关于
      */
-    private static final String RESOURCE_ABOUT = "留言板";
+    private static final String RESOURCE_ABOUT = "关于";
 
     private final AboutService aboutService;
 
