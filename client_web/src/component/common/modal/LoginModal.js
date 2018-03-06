@@ -19,7 +19,7 @@ class LoginModal extends React.Component{
             <Modal show={show} onHide={onHide}
                    bsSize="small" aria-labelledby="contained-modal-title-lg" >
                 <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-lg">登陆</Modal.Title>
+                    <Modal.Title id="contained-modal-title-lg">登录</Modal.Title>
                 </Modal.Header>
                 <form onSubmit={handleSubmit}>
                     <Modal.Body>
@@ -45,7 +45,7 @@ class LoginModal extends React.Component{
                     </Modal.Body>
                     <Modal.Footer>
                         <Button disabled={submitting} onClick={onHide}>&nbsp;关闭&nbsp;</Button>
-                        <Button disabled={submitting} type="submit" bsStyle="primary">&nbsp;登陆&nbsp;</Button>
+                        <Button disabled={submitting} type="submit" bsStyle="primary">&nbsp;登录&nbsp;</Button>
                     </Modal.Footer>
                 </form>
             </Modal>

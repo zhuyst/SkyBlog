@@ -91,7 +91,7 @@ export const afterLogin = (result,dispatch,alert) => {
         dispatch(change(FORM_USERINFO,"nickname",user.nickname));
 
         if(alert){
-            dispatch(success("登陆成功"));
+            dispatch(success("登录成功"));
         }
 
         ok = true;

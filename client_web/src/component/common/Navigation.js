@@ -60,7 +60,7 @@ class Navigation extends React.Component{
         else {
             right = (
                 <Nav pullRight>
-                    <NavItem onClick={showLoginModal}>登陆</NavItem>
+                    <NavItem onClick={showLoginModal}>登录</NavItem>
                     <LoginModal/>
 
                     <NavItem onClick={showRegisterModal}>注册</NavItem>
