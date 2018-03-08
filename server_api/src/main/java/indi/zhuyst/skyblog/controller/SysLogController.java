@@ -30,6 +30,11 @@ public class SysLogController extends BaseController {
         this.sysLogService = sysLogService;
     }
 
+    /**
+     * 查询系统日志列表
+     * @param query 查询对象
+     * @return 系统日志列表
+     */
     @GetMapping("/list/")
     @ApiOperation(value = "查询系统日志列表",notes = NOTES_ADMIN)
     @AdminAuthorize
