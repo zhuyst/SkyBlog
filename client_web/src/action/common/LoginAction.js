@@ -8,6 +8,7 @@ import {
 import {FORM_LOGIN, FORM_USERINFO} from "../../Constant";
 import {error, info, success} from "./NotifyAction";
 import {setLoginModalShow} from "./ModalAction";
+import {getAccessCount} from "../log/AccessLogAction";
 
 export const LOGIN_RESPONSE = "LOGIN_RESPONSE";
 export const LOGIN_CLEAR = "LOGIN_CLEAR";
@@ -68,7 +69,10 @@ export const checkUserLoginState = () => dispatch => {
         },
         body: `token=${token}`
     }).then(response => checkStatus(response))
-        .then(result => afterLogin(result,dispatch,false))
+        .then(result => {
+            afterLogin(result,dispatch,false);
+            dispatch(getAccessCount())
+        })
         .catch(() => afterLogin(FAIL_RESULT,dispatch,false))
 };
 

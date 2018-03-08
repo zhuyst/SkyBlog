@@ -15,6 +15,7 @@ export const CLASSIFY_API_URL = API_BASE_URL + "/classifies";
 export const MSG_BOARD_API_URL = API_BASE_URL + "/msg_board";
 export const ABOUT_API_URL = API_BASE_URL + "/about";
 export const SYS_LOG_URL = API_BASE_URL + "/sys_log";
+export const ACCESS_LOG_URL = API_BASE_URL + "/access_log";
 export const OSS_URL = API_BASE_URL + "/oss";
 
 const COOKIE_TOKEN = "Token";
