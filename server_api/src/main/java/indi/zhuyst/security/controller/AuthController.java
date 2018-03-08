@@ -58,6 +58,7 @@ public class AuthController extends BaseController{
     /**
      * 通过老Token换取新Token，顺便记录访问日志
      * @param token 老Token
+     * @param request 请求，用于获取IP信息
      * @return 新Token
      */
     @ApiOperation("通过老Token换取新Token")
