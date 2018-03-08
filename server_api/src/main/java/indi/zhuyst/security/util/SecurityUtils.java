@@ -1,6 +1,7 @@
 package indi.zhuyst.security.util;
 
 import indi.zhuyst.security.pojo.SecurityUser;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -24,5 +25,14 @@ public class SecurityUtils {
      */
     public static SecurityUser getUser(){
         return (SecurityUser) getAuthentication().getPrincipal();
+    }
+
+    /**
+     * 检查是否登陆
+     * @return 是否登陆
+     */
+    public static boolean checkLogin() {
+        return getAuthentication() != null &&
+                !(getAuthentication() instanceof AnonymousAuthenticationToken);
     }
 }
