@@ -1,6 +1,7 @@
 package indi.zhuyst.skyblog.service.impl;
 
 import com.github.pagehelper.PageInfo;
+import indi.zhuyst.common.config.RedisConfig;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.impl.BaseCrudServiceImpl;
 import indi.zhuyst.common.util.PageUtils;
@@ -14,6 +15,9 @@ import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.AccessLogService;
 import indi.zhuyst.skyblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,20 +32,39 @@ import java.util.List;
  */
 @Service("accessLogService")
 public class AccessLogServiceImpl extends BaseCrudServiceImpl<AccessLogDao,AccessLogDO> 
-        implements AccessLogService{
+        implements AccessLogService,CommandLineRunner{
+
+    private static final String LOG_COUNT_KEY = RedisConfig.DATA_KEY_PREFIX + "ACCESS_LOG_COUNT";
 
     private final UserService userService;
+
+    private final RedisConnectionFactory connectionFactory;
+
+    private RedisAtomicLong logCount;
+
+    @Autowired
+    public AccessLogServiceImpl(UserService userService,
+                                RedisConnectionFactory connectionFactory){
+        this.userService = userService;
+        this.connectionFactory = connectionFactory;
+    }
+
+    @Override
+    public void run(String... strings) {
+        logCount = new RedisAtomicLong(LOG_COUNT_KEY, connectionFactory);
+    }
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public AccessLogDO save(AccessLogDO entity) {
+        logCount.incrementAndGet();
         entity.setAccessDate(new Date());
         return super.save(entity);
     }
 
-    @Autowired
-    public AccessLogServiceImpl(UserService userService){
-        this.userService = userService;
+    @Override
+    public long countAll() {
+        return logCount.get();
     }
 
     @Override
