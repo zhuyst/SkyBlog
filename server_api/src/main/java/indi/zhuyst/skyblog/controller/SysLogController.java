@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author zhuyst
  */
 @RestController
-@Api(value = "SysLogApi",description = "系统日志API")
+@Api(value = "SysLogApi",description = "系统日志相关API")
 @RequestMapping("/sys_log")
 public class SysLogController extends BaseController {
 
