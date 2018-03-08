@@ -14,5 +14,5 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@PreAuthorize("isAuthenticated()")
+@PreAuthorize("hasAnyRole('SYS_ADMIN','ADMIN','VISITOR')")
 public @interface LoginAuthorize {}
