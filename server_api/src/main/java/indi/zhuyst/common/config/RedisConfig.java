@@ -10,22 +10,27 @@ import org.springframework.data.redis.core.RedisTemplate;
 import java.util.Set;
 
 /**
- * 缓存设置
+ * Redis、缓存设置
  * @author zhuyst
  */
 @Configuration
 @EnableCaching
-public class CacheConfig implements CommandLineRunner{
+public class RedisConfig implements CommandLineRunner{
 
     /**
      * 缓存KEY使用的前缀，用于{@link #run(String...)}清除缓存
      */
     public static final String CACHE_KEY_PREFIX = "CACHE:";
 
+    /**
+     * 业务数据KEY使用的前缀
+     */
+    public static final String DATA_KEY_PREFIX = "DATA:";
+
     private final RedisTemplate<Object,Object> redisTemplate;
 
     @Autowired
-    public CacheConfig(RedisTemplate<Object, Object> redisTemplate) {
+    public RedisConfig(RedisTemplate<Object, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
