@@ -7,6 +7,7 @@ import indi.zhuyst.common.pojo.Result;
 import indi.zhuyst.security.annotation.AdminAuthorize;
 import indi.zhuyst.skyblog.pojo.AccessLogDTO;
 import indi.zhuyst.skyblog.service.AccessLogService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author zhuyst
  */
 @RestController
+@Api(value = "AccessLogApi",description = "访问日志相关API")
 @RequestMapping("/access_log")
 public class AccessLogController extends BaseController{
 

@@ -14,8 +14,8 @@ import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.AccessLogService;
 import indi.zhuyst.skyblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -33,6 +33,7 @@ public class AccessLogServiceImpl extends BaseCrudServiceImpl<AccessLogDao,Acces
     private final UserService userService;
 
     @Override
+    @Transactional(rollbackFor = RuntimeException.class)
     public AccessLogDO save(AccessLogDO entity) {
         entity.setAccessDate(new Date());
         return super.save(entity);
@@ -56,15 +57,15 @@ public class AccessLogServiceImpl extends BaseCrudServiceImpl<AccessLogDao,Acces
     }
 
     @Override
+    @Transactional(rollbackFor = RuntimeException.class)
     public AccessLogDO save(HttpServletRequest request) {
         AccessLogDO accessLog = new AccessLogDO();
 
         String ip = IpUtils.getIpAdrress(request);
         accessLog.setIp(ip);
 
-        Authentication authentication = SecurityUtils.getAuthentication();
-        if(authentication != null){
-            SecurityUser user = (SecurityUser) authentication.getPrincipal();
+        if(SecurityUtils.checkLogin()){
+            SecurityUser user = SecurityUtils.getUser();
             accessLog.setUserId(user.getId());
         }
 
