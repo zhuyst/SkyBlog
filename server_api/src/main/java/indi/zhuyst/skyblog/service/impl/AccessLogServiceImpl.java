@@ -4,6 +4,9 @@ import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.impl.BaseCrudServiceImpl;
 import indi.zhuyst.common.util.PageUtils;
+import indi.zhuyst.security.pojo.SecurityUser;
+import indi.zhuyst.security.util.IpUtils;
+import indi.zhuyst.security.util.SecurityUtils;
 import indi.zhuyst.skyblog.dao.AccessLogDao;
 import indi.zhuyst.skyblog.entity.AccessLogDO;
 import indi.zhuyst.skyblog.pojo.AccessLogDTO;
@@ -11,9 +14,12 @@ import indi.zhuyst.skyblog.pojo.UserDTO;
 import indi.zhuyst.skyblog.service.AccessLogService;
 import indi.zhuyst.skyblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,6 +31,12 @@ public class AccessLogServiceImpl extends BaseCrudServiceImpl<AccessLogDao,Acces
         implements AccessLogService{
 
     private final UserService userService;
+
+    @Override
+    public AccessLogDO save(AccessLogDO entity) {
+        entity.setAccessDate(new Date());
+        return super.save(entity);
+    }
 
     @Autowired
     public AccessLogServiceImpl(UserService userService){
@@ -43,6 +55,22 @@ public class AccessLogServiceImpl extends BaseCrudServiceImpl<AccessLogDao,Acces
         return this.produceDTOPageInfo(pageInfo);
     }
 
+    @Override
+    public AccessLogDO save(HttpServletRequest request) {
+        AccessLogDO accessLog = new AccessLogDO();
+
+        String ip = IpUtils.getIpAdrress(request);
+        accessLog.setIp(ip);
+
+        Authentication authentication = SecurityUtils.getAuthentication();
+        if(authentication != null){
+            SecurityUser user = (SecurityUser) authentication.getPrincipal();
+            accessLog.setUserId(user.getId());
+        }
+
+        return this.save(accessLog);
+    }
+
     /**
      * 将DO封装为DTO
      * @param accessLog DO
@@ -55,9 +83,12 @@ public class AccessLogServiceImpl extends BaseCrudServiceImpl<AccessLogDao,Acces
 
         AccessLogDTO dto = new AccessLogDTO(accessLog);
 
-        UserDTO user = userService.getUserDTO(accessLog.getUserId());
-        if(user != null){
-            dto.setUser(user);
+        Integer userId = accessLog.getUserId();
+        if(userId != null){
+            UserDTO user = userService.getUserDTO(userId);
+            if(user != null){
+                dto.setUser(user);
+            }
         }
 
         return dto;
