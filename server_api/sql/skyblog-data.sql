@@ -10,10 +10,26 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-02-28 14:50:58
+Date: 2018-03-08 19:41:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for access_log
+-- ----------------------------
+DROP TABLE IF EXISTS `access_log`;
+CREATE TABLE `access_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ip` varchar(255) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `access_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of access_log
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for article
@@ -228,7 +244,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   KEY `username` (`username`),
   KEY `nickname` (`nickname`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
@@ -266,3 +282,4 @@ INSERT INTO `user` VALUES ('35', 'username27', '$2a$04$IV72YvigGdM/0Jt6jLFXoeQ01
 INSERT INTO `user` VALUES ('36', 'username28', '$2a$04$Cd5mKWhu1hgwA0spRPvnEOXD9jHkLWJH8Qz0RDbxkF7UucCqFQYVO', '用户28', '3', '0', '2018-02-25 17:21:25');
 INSERT INTO `user` VALUES ('37', 'username29', '$2a$04$QQvNu3OokbvVtg2oSoJKQulpSjAlSSjsoem5Z1nGpR.b62oJLz2bm', '用户29', '3', '0', '2018-02-25 17:21:25');
 INSERT INTO `user` VALUES ('38', 'username30', '$2a$04$GuwCbWfoDQyleOzrI9l3wuBnLt4P31dhllQAw3zM4MOeus/9TJrPW', '用户30', '3', '0', '2018-02-25 17:21:25');
+INSERT INTO `user` VALUES ('39', 'zhuyst125', '$2a$04$FEj413B8Hg4yDX8TbBubzOwhL3yT1LkBP3Ea.5tLZ5V3PtE6xbspq', '青云桑123', '3', '0', null);
