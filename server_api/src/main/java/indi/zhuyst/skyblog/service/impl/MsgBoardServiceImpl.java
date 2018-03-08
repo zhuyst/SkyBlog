@@ -43,11 +43,13 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
         ArticleDO article = articleDao.selectByPrimaryKey(MSG_BOARD_KEY);
 
         if(article == null){
+            final String defaultTitle = "留言板";
+
             article = new ArticleDO();
 
             article.setId(MSG_BOARD_KEY);
-            article.setTitle("留言板");
-            article.setContent("留言板引用文章");
+            article.setTitle(defaultTitle);
+            article.setContent("");
 
             articleDao.insertSelective(article);
         }
