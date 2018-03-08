@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 import {Uploader, UploadField} from "@navjobs/upload/dist/index";
-import {FAIL_RESULT, getToken} from "../../../../Api";
+import {FAIL_RESULT, getToken, OSS_URL} from "../../../../Api";
 import {error, success} from "../../../../action/common/NotifyAction";
 
 class UploadModal extends React.Component{
@@ -47,7 +47,7 @@ class UploadModal extends React.Component{
                     <Uploader
                         request={{
                             fileName: 'file',
-                            url: 'http://localhost:8080/oss/upload',
+                            url: `${OSS_URL}/upload`,
                             method: 'POST',
                             headers: {
                                 "Token": getToken(),
