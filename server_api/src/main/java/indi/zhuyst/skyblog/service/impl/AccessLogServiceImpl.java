@@ -49,19 +49,35 @@ public class AccessLogServiceImpl extends BaseCrudServiceImpl<AccessLogDao,Acces
         this.connectionFactory = connectionFactory;
     }
 
+    /**
+     * 初始化{@link #logCount}
+     * 同时防止Redis中的次数与数据库的次数不一致
+     */
     @Override
     public void run(String... strings) {
         logCount = new RedisAtomicLong(LOG_COUNT_KEY, connectionFactory);
+        long databaseCount = super.countAll();
+
+        // 检查Redis中的次数与数据库的次数
+        if(databaseCount != logCount.get()){
+            logCount.set(databaseCount);
+        }
     }
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public AccessLogDO save(AccessLogDO entity) {
+        // 对Redis中的次数进行自增
         logCount.incrementAndGet();
+
         entity.setAccessDate(new Date());
         return super.save(entity);
     }
 
+    /**
+     * 从Redis中获取访问次数
+     * @return 访问次数
+     */
     @Override
     public long countAll() {
         return logCount.get();
