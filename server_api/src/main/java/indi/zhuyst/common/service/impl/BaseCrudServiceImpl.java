@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import indi.zhuyst.common.dao.BaseDao;
 import indi.zhuyst.common.entity.BaseEntity;
+import indi.zhuyst.common.enums.CodeEnum;
+import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.BaseCrudService;
 import indi.zhuyst.common.service.BaseService;
@@ -72,12 +74,14 @@ public abstract class BaseCrudServiceImpl<D extends BaseDao<E>,E extends BaseEnt
         boolean isSuccess;
 
         // 如果ID为NULL，执行INSERT操作
-        if(entity.getId() == null){
+        Integer id = entity.getId();
+        if(id == null){
             isSuccess = dao.insertUseGeneratedKeys(entity) > 0;
         }
 
         // 反则执行UPDATE操作
         else {
+            checkExists(id);
             isSuccess = dao.updateByPrimaryKeySelective(entity) > 0;
         }
 
@@ -88,6 +92,13 @@ public abstract class BaseCrudServiceImpl<D extends BaseDao<E>,E extends BaseEnt
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(int id){
+        checkExists(id);
         return dao.deleteByPrimaryKey(id) > 0;
+    }
+
+    private void checkExists(int id){
+        if(getByID(id) == null){
+            throw new CommonException(CodeEnum.NOT_FOUND);
+        }
     }
 }
