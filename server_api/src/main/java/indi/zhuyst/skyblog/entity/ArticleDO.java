@@ -68,7 +68,7 @@ public class ArticleDO extends BaseEntity {
      */
     @ApiModelProperty("更新时间")
     @Column(name = "update_date")
-    @OrderBy("desc")
+    @OrderBy("DESC")
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
     private Date updateDate;
 

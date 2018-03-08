@@ -1,5 +1,6 @@
 package indi.zhuyst.skyblog.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import indi.zhuyst.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -37,5 +38,7 @@ public class AccessLogDO extends BaseEntity{
      */
     @Column(name = "access_date")
     @ApiModelProperty("访问日期")
+    @OrderBy("DESC")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
     private Date accessDate;
 }

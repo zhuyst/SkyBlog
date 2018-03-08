@@ -54,7 +54,7 @@ public class SysLogDO extends BaseEntity {
      * 操作时间
      */
     @Column(name = "create_date")
-    @OrderBy("desc")
+    @OrderBy("DESC")
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
     @ApiModelProperty("操作时间")
     private Date createDate;
