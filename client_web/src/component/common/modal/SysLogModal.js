@@ -1,6 +1,6 @@
 import React from 'react'
 import {setSysLogModalShow} from "../../../action/common/ModalAction";
-import {listSysLog} from "../../../action/syslog/SysLogAction";
+import {listSysLog} from "../../../action/log/SysLogAction";
 import {FADE_ENTER, SYS_LOG_PAGE_SIZE} from "../../../Constant";
 import {connect} from "react-redux";
 import {Button, Label, Modal, Pager, Table} from "react-bootstrap";
