@@ -1,4 +1,4 @@
-import {LIST_SYS_LOG_RESPONSE} from "../../action/syslog/SysLogAction";
+import {LIST_SYS_LOG_RESPONSE} from "../../action/log/SysLogAction";
 
 const initialState = {
     list : [],
