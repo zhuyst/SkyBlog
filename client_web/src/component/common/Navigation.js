@@ -5,6 +5,7 @@ import { Nav,NavItem,Navbar,NavDropdown,MenuItem} from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import {
+    setAccessLogModalShow,
     setLoginModalShow, setRegisterModalShow, setSysLogModalShow, setUserInfoModalShow,
     setUserManagementModalShow
 } from "../../action/common/ModalAction";
@@ -16,12 +17,13 @@ import UserInfoModal from "./modal/UserInfoModal";
 import UserManagementModal from "./modal/UserManagementModal";
 import SysLogModal from "./modal/SysLogModal";
 import UploadModal from "../article/content/edit/UploadModal";
+import AccessLogModal from "./modal/AccessLogModal";
 
 class Navigation extends React.Component{
 
     render(){
         const { logout, login, setManagement,showLoginModal,showUserManagementModal,
-            showRegisterModal,showUserInfoModal,showSysLogModal} = this.props;
+            showRegisterModal,showUserInfoModal,showSysLogModal,showAccessLogModal} = this.props;
         const {user,management} = login;
         const admin = user.admin;
 
@@ -42,7 +44,10 @@ class Navigation extends React.Component{
                                 <MenuItem key={3} onClick={showSysLogModal}>系统日志</MenuItem>,
                                 <SysLogModal key={4}/>,
 
-                                <UploadModal key={5}/>
+                                <MenuItem key={5} onClick={showAccessLogModal}>访问日志</MenuItem>,
+                                <AccessLogModal key={6} />,
+
+                                <UploadModal key={7}/>
                             ]
                         }
 
@@ -134,6 +139,9 @@ const mapDispatchToProps = dispatch => {
         },
         showSysLogModal : () => {
             dispatch(setSysLogModalShow(true))
+        },
+        showAccessLogModal : () => {
+            dispatch(setAccessLogModalShow(true))
         },
         logout : () => {
             dispatch(logout())

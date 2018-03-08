@@ -3,6 +3,7 @@ export const SET_REGISTER_MODAL_SHOW = "SET_REGISTER_MODAL_SHOW";
 export const SET_USERINFO_MODAL_SHOW = "SET_USERINFO_MODAL_SHOW";
 export const SET_USER_MANAGEMENT_MODAL_SHOW = "SET_USER_MANAGEMENT_MODAL_SHOW";
 export const SET_SYS_LOG_MODAL_SHOW = "SET_SYS_LOG_MODAL_SHOW";
+export const SET_ACCESS_LOG_MODAL_SHOW = "SET_ACCESS_LOG_MODAL_SHOW";
 
 export const setLoginModalShow = show =>{
     return {
@@ -35,6 +36,13 @@ export const setUserManagementModalShow = show => {
 export const setSysLogModalShow = show => {
     return {
         type: SET_SYS_LOG_MODAL_SHOW,
+        show : show
+    }
+};
+
+export const setAccessLogModalShow = show => {
+    return {
+        type : SET_ACCESS_LOG_MODAL_SHOW,
         show : show
     }
 };

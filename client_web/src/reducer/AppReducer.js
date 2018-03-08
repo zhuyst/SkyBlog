@@ -13,7 +13,8 @@ import ClassifyReducer from './article/ClassifyReducer'
 import AboutReducer from './about/AboutReducer'
 import MsgBoardReducer from './msgboard/MsgBoardReducer'
 import GithubReducer from './github/GithubReducer'
-import SysLogReducer from './syslog/SysLogReducer'
+import SysLogReducer from './log/SysLogReducer'
+import AccessLogReducer from './log/AccessLogReducer'
 
 const AppReducer = combineReducers({
     navigation : NavigationReducer,
@@ -27,6 +28,7 @@ const AppReducer = combineReducers({
     msg : MsgBoardReducer,
     github : GithubReducer,
     sys_log : SysLogReducer,
+    access_log : AccessLogReducer,
     form : formReducer,
     router: routerReducer,
     notifications: notificationsReducer()
