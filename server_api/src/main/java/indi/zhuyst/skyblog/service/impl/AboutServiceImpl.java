@@ -36,10 +36,12 @@ public class AboutServiceImpl extends BaseService implements AboutService,
     public void run(String... args) {
         ArticleDO about = articleDao.selectByPrimaryKey(ABOUT_KEY);
         if(about == null){
+            final String defaultTitle = "关于";
+
             about = new ArticleDO();
 
             about.setId(ABOUT_KEY);
-            about.setTitle("关于");
+            about.setTitle(defaultTitle);
             about.setContent("");
 
             articleDao.insertSelective(about);

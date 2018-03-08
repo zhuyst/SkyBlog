@@ -44,10 +44,12 @@ public class ClassifyServiceImpl extends BaseCrudServiceImpl<ClassifyDao,Classif
     public void run(String... args) {
         ClassifyDO classify = this.getByID(NOT_CLASSIFY_KEY);
         if(classify == null){
+            final String defaultName = "未分类";
+
             classify = new ClassifyDO();
 
             classify.setId(NOT_CLASSIFY_KEY);
-            classify.setName("未分类");
+            classify.setName(defaultName);
 
             dao.insertSelective(classify);
         }
