@@ -1,7 +1,7 @@
 import {GET_ACCESS_COUNT_RESPONSE, LIST_ACCESS_LOG_RESPONSE} from "../../action/log/AccessLogAction";
 
 const initialState = {
-    count : 0,
+    count : null,
     page : {
         list : [],
         page_num : 1,
