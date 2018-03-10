@@ -201,8 +201,6 @@ public class ArticleController extends BaseController{
     @SelfAuthorize
     @SysLog(resource = RESOURCE_COMMENT,type = SysLogTypeEnum.DELETE)
     public Result deleteComment(@ApiParam("评论ID") @PathVariable("id") Integer id){
-        CommentDO comment = commentService.getCommentDTO(id);
-        checkPerms(comment.getAuthorId());
         return produceResult(commentService.delete(id),"评论删除失败");
     }
 }

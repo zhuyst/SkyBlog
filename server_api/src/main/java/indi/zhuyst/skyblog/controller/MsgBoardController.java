@@ -83,8 +83,6 @@ public class MsgBoardController extends BaseController{
     @SelfAuthorize
     @SysLog(resource = RESOURCE_MSG,type = SysLogTypeEnum.DELETE)
     public Result deleteMsg(@ApiParam("留言ID") @PathVariable("id")Integer id){
-        CommentDO comment = msgBoardService.getMsg(id);
-        checkPerms(comment.getAuthorId());
         return produceResult(msgBoardService.deleteMsg(id),"删除文章失败");
     }
 

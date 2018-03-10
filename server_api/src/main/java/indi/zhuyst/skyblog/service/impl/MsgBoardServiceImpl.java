@@ -58,8 +58,12 @@ public class MsgBoardServiceImpl implements MsgBoardService,CommandLineRunner{
     @Override
     public CommentDTO getMsg(int id){
         CommentDTO comment = this.commentService.getCommentDTO(id);
+        if(comment == null){
+            throw new CommonException(CodeEnum.NOT_FOUND);
+        }
+
         checkArticleId(comment.getArticleId());
-        return this.commentService.getCommentDTO(id);
+        return comment;
     }
 
     @Override

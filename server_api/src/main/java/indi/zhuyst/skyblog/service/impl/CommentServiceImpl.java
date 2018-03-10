@@ -1,10 +1,12 @@
 package indi.zhuyst.skyblog.service.impl;
 
 import com.github.pagehelper.PageInfo;
+import indi.zhuyst.common.enums.CodeEnum;
 import indi.zhuyst.common.exception.CommonException;
 import indi.zhuyst.common.pojo.Query;
 import indi.zhuyst.common.service.impl.BaseCrudServiceImpl;
 import indi.zhuyst.common.util.PageUtils;
+import indi.zhuyst.security.pojo.SecurityUser;
 import indi.zhuyst.security.util.SecurityUtils;
 import indi.zhuyst.skyblog.dao.CommentDao;
 import indi.zhuyst.skyblog.entity.CommentDO;
@@ -61,8 +63,6 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,CommentDO
         UserDO user = SecurityUtils.getUser();
         comment.setAuthorId(user.getId());
 
-
-
         return super.save(comment);
     }
 
@@ -70,6 +70,19 @@ public class CommentServiceImpl extends BaseCrudServiceImpl<CommentDao,CommentDO
     @CacheEvict(cacheNames = {CACHE_OBJECT,CACHE_PAGE},allEntries = true)
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean delete(int id) {
+        CommentDO comment = this.getCommentDTO(id);
+        if(comment == null){
+            throw new CommonException(CodeEnum.NOT_FOUND);
+        }
+
+        SecurityUser user = SecurityUtils.getUser();
+
+        // 不是管理员或者作者ID不等于当前用于ID，则为越权
+        if (!user.getAdmin() && !comment.getAuthorId().equals(user.getId())) {
+            throw new CommonException(CodeEnum.UNAUTHORIZED.getCode(),
+                    "您没有权限进行该操作");
+        }
+
         return super.delete(id);
     }
 
