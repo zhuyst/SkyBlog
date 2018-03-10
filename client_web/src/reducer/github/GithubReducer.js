@@ -1,7 +1,8 @@
-import {LIST_COMMITS_RESPONSE, SET_GITHUB_LOADING} from "../../action/github/GithubAction";
+import {GET_PROJECT_STAR_RESPONSE, LIST_COMMITS_RESPONSE, SET_GITHUB_LOADING} from "../../action/github/GithubAction";
 
 const initialState = {
     commits : [],
+    star : null,
     loading : true
 };
 
@@ -19,6 +20,13 @@ const GithubReducer = (state = initialState,action) => {
                 loading : false,
                 commits : action.commits
             };
+
+        case GET_PROJECT_STAR_RESPONSE:
+            return {
+                ...state,
+                star : action.star
+            };
+
         default:
             return state
     }

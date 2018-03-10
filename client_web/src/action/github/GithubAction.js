@@ -1,8 +1,19 @@
-import {checkStatus, FAIL_RESULT, HttpMethod} from "../../Api";
+import fetch from 'isomorphic-fetch'
+import {checkStatus, FAIL_RESULT} from "../../Api";
 import {error} from "../common/NotifyAction";
 
+const PROJECT_URL = "https://api.github.com/repos/zhuyst/SkyBlog";
+const GITHUB_HEADER = {
+    method : "GET",
+    headers : {
+        Accept: "application/vnd.github.v3+json"
+    }
+};
+
 export const SET_GITHUB_LOADING = "SET_GITHUB_LOADING";
+
 export const LIST_COMMITS_RESPONSE = "LIST_COMMITS_RESPONSE";
+export const GET_PROJECT_STAR_RESPONSE = "GET_PROJECT_STAR_RESPONSE";
 
 export const setGithubLoading = loading => {
     return {
@@ -14,13 +25,9 @@ export const setGithubLoading = loading => {
 export const listCommits = per_page => dispatch => {
     dispatch(setGithubLoading(true));
 
-    const url = `https://api.github.com/repos/zhuyst/SkyBlog/commits?per_page=${per_page}`;
-    return fetch(url,{
-        method : HttpMethod.GET,
-        headers : {
-            Accept: "application/vnd.github.v3+json"
-        }
-    }).then(response => checkStatus(response))
+    const url = `${PROJECT_URL}/commits?per_page=${per_page}`;
+    return fetch(url,GITHUB_HEADER)
+        .then(response => checkStatus(response))
         .then(result => {
             dispatch(setGithubLoading(false));
             dispatch(listCommitsResponse(result))
@@ -43,5 +50,21 @@ const listCommitsResponse = commits => {
     return {
         type : LIST_COMMITS_RESPONSE,
         commits : list
+    }
+};
+
+export const getProjectStar = () => dispatch => {
+    return fetch(PROJECT_URL,GITHUB_HEADER)
+        .then(response => checkStatus(response))
+        .then(result => {
+            dispatch(getProjectStarResponse(result))
+        })
+        .catch(() => dispatch(error(FAIL_RESULT.message)));
+};
+
+const getProjectStarResponse = result => {
+    return {
+        type : GET_PROJECT_STAR_RESPONSE,
+        star : result.stargazers_count
     }
 };
