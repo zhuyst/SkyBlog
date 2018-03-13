@@ -1,24 +1,44 @@
 import React from 'react'
 import {TransitionGroup} from "react-transition-group";
 import { connect } from 'react-redux'
-import {Badge, Button, Col, ListGroup,
-    ListGroupItem, Well} from 'react-bootstrap'
+import {
+    Alert, Badge, Button, Col, ListGroup,
+    ListGroupItem, Well
+} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import ClassifyListGroup from "./classify/ClassifyListGroup";
 import FadeTransition from "../../common/FadeTransition";
 import {listClassify} from "../../../action/article/ClassifyAction";
+import Loading from "../../common/Loading";
 
 class Navigation extends React.Component{
 
     componentWillMount(){
-        const {classifyList,listClassify} = this.props;
-        if(classifyList.length === 0){
+        const {classify,listClassify} = this.props;
+        if(classify.list.length === 0){
             listClassify();
         }
     }
 
     render(){
-        const {management,total,classifyList} = this.props;
+        const {management,total,classify} = this.props;
+        const {list,loading} = classify;
+
+        let content = loading ?
+            (
+                <Alert bsStyle="warning">
+                    <Loading/>
+                </Alert>
+            ) : (
+                <TransitionGroup>
+                    {
+                        list.map(classify => (
+                            <FadeTransition key={classify.id}>
+                                <ClassifyListGroup classify={classify}/>
+                            </FadeTransition>))
+                    }
+                </TransitionGroup>
+            );
 
         return(
             <Well>
@@ -45,14 +65,7 @@ class Navigation extends React.Component{
                     </LinkContainer>
                 </ListGroup>
 
-                <TransitionGroup>
-                    {
-                        classifyList.map(classify => (
-                            <FadeTransition key={classify.id}>
-                                <ClassifyListGroup classify={classify}/>
-                            </FadeTransition>))
-                    }
-                </TransitionGroup>
+                {content}
             </Well>
         )
     }
@@ -61,7 +74,7 @@ class Navigation extends React.Component{
 const mapStateToProps = state => {
     return {
         total : state.articles.total,
-        classifyList : state.classify.list,
+        classify : state.classify,
         management : state.login.management
     }
 };
