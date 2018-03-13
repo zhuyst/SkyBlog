@@ -5,6 +5,7 @@ import {error, success} from "../common/NotifyAction";
 import {FORM_CLASSIFY} from "../../Constant";
 
 export const SET_CLASSIFY_SHOW = "SET_CLASSIFY_SHOW";
+export const SET_CLASSIFY_LOADING = "SET_CLASSIFY_LOADING";
 
 export const LIST_CLASSIFY_RESPONSE = "LIST_CLASSIFY_RESPONSE";
 
@@ -19,10 +20,20 @@ export const setClassifyShow = show => {
     }
 };
 
+export const setClassifyLoading = loading => {
+    return {
+        type : SET_CLASSIFY_LOADING,
+        loading : loading
+    }
+};
+
 export const listClassify = () => dispatch => {
     const url = CLASSIFY_API_URL + "/public/";
     return _get(url)
-        .then(result => dispatch(listClassifyResponse(result)))
+        .then(result => {
+            dispatch(listClassifyResponse(result));
+            dispatch(setClassifyLoading(false))
+        })
 };
 
 const listClassifyResponse = result => {
@@ -43,6 +54,7 @@ export const insertClassify = classify => dispatch => {
             if(result.code === 200){
                 dispatch(success("新增文章分类成功"));
                 dispatch(insertClassifyResponse(result));
+                dispatch(setClassifyLoading(false));
                 dispatch(setClassifyShow(false))
             }
             else {
@@ -69,6 +81,7 @@ export const updateClassify = classify => dispatch => {
             if(result.code === 200){
                 dispatch(success("更新文章分类成功"));
                 dispatch(updateClassifyResponse(result));
+                dispatch(setClassifyLoading(false))
             }
             else {
                 dispatch(error(result.message));
@@ -93,7 +106,8 @@ export const deleteClassify = id => dispatch => {
 
             if(result.code === 200){
                 dispatch(success("删除文章分类成功"));
-                dispatch(deleteClassifyResponse(result))
+                dispatch(deleteClassifyResponse(result));
+                dispatch(setClassifyLoading(false))
             }
             else {
                 dispatch(error(result.message));
