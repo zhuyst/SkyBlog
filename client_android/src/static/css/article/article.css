@@ -1,0 +1,138 @@
+.articles_main{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.articles_left{
+    border-right: 2px solid #eaeaea;;
+}
+
+.articles_loading{
+    text-align: center;
+    padding-top: 25px !important;
+    padding-bottom: 15px !important;
+}
+
+.preview{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.preview a{
+    cursor: pointer;
+}
+
+.preview:first-of-type{
+    margin-top: 0 !important;
+}
+
+.preview_image{
+    max-width: 98%;
+    overflow: hidden;
+    margin: 0 auto;
+    height: 300px;
+
+    padding: 4px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s;
+
+    cursor:pointer
+}
+
+.preview_title{
+    width: 100%;
+}
+
+.preview_sub_title{
+    color: #777;
+
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+
+    border-bottom: 2px solid #f16c20;
+}
+
+.preview .label{
+    font-size: 14px !important;
+}
+
+.preview_classify-xs{
+    float: right;
+}
+
+.preview_classify-lg{
+    text-align: center;
+}
+
+.preview_preview{
+    color: #999;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.preview_date{
+    margin-top: 20px;
+
+    text-align: right;
+    font-size: 12px;
+    color: #777777;
+}
+
+.preview_content{
+    margin: 1.2%;
+    font-weight: bold;
+}
+
+.pager{
+    text-align: center;
+    font-weight: bolder;
+}
+
+.more :hover{
+    background-color: #faebcc;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.more_left{
+    float: left;
+}
+
+.more_right{
+    float: right;
+}
+
+.navigation_title{
+    margin: 20px auto 20px auto;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #ddd;
+}
+
+.navigation_button{
+    margin-bottom: 20px !important;
+}
+
+.navigation_classify_button{
+    width: 50%;
+}
+
+.navigation_classify_edit .navigation_classify_button{
+    border-radius: 0 !important;
+}
+
+#articles .alert{
+    font-size: 16px;
+}
+
+#articles .show_all_button{
+    text-align: right;
+    margin-top: 10px;
+}

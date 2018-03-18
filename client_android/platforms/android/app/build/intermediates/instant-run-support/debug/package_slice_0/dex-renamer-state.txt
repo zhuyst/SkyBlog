@@ -1,0 +1,4 @@
+#Sun Mar 18 14:22:24 CST 2018
+base.0=C\:\\workplace\\cordova\\skyblog\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\153
+renamed.0=classes.dex
+file.0=C\:\\workplace\\cordova\\skyblog\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\153\\classes.dex
