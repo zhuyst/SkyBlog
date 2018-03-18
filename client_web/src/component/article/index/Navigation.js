@@ -73,7 +73,7 @@ class Navigation extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        total : state.articles.total,
+        total : state.articles.page.total,
         classify : state.classify,
         management : state.login.management
     }
