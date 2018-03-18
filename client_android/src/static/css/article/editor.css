@@ -1,0 +1,23 @@
+.classify_button {
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.classify_button_not_show{
+    margin-bottom: 0 !important;
+}
+
+.classify_content{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.classify_well {
+    display: flow-root;
+    padding-bottom: 4px;
+}
+
+.edit_content{
+    overflow-y: scroll;
+    height: 100%;
+}

@@ -1,0 +1,80 @@
+.nav_image{
+    max-height: 30em
+}
+
+.nav_image img{
+    width: 100% !important;
+}
+
+.nav_image_text{
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    z-index: 15;
+    width: 80%;
+    padding-left: 0;
+    margin-left: -40%;
+    text-align: center;
+    color : white;
+}
+
+.nav_image_text h1{
+    font-size: 2.7em;
+}
+
+.nav_image_text hr{
+    background-color: #f16c20;
+    height: 2px;
+    border: 0;
+}
+
+.nav_image_text h3{
+    font-size: 1.7em;
+}
+
+.nav_image_button_group{
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    z-index: 15;
+    width: 80%;
+    padding-left: 0;
+    margin-left: -40%;
+    text-align: center;
+}
+
+.nav_image_button_group .btn{
+    margin: 5px 5% !important;
+    background: transparent !important;
+    border: 2px solid #fff !important;
+    color: #fff !important;
+}
+
+.nav_image_button_group .btn:active{
+    color: #e6e6e6 !important;
+    background: transparent !important;
+}
+
+.nav_image_button_group .btn:hover{
+    border: 2px solid #f16c20 !important;
+}
+
+.rows{
+    margin-top: 20px;
+}
+
+.carousel-indicators{
+    display: none;
+}
+
+.carousel-control.left{
+    display: none;
+}
+
+.carousel-control.right{
+    display: none;
+}
+
+.star_button{
+    padding: 3px 5px !important;
+}
