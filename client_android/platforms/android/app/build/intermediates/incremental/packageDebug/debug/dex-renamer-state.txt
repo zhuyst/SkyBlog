@@ -1,19 +1,4 @@
-#Sun Mar 18 14:22:34 CST 2018
-renamed.5=classes6.dex
-renamed.4=classes5.dex
-renamed.3=classes4.dex
-renamed.2=classes3.dex
-renamed.1=classes2.dex
+#Sun Mar 18 15:53:43 CST 2018
+base.0=C\:\\workplace\\SkyBlog\\client_android\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\190
 renamed.0=classes.dex
-base.5=C\:\\workplace\\cordova\\skyblog\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\167
-base.4=C\:\\workplace\\cordova\\skyblog\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\166
-base.3=C\:\\workplace\\cordova\\skyblog\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\165
-base.2=C\:\\workplace\\cordova\\skyblog\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\164
-base.1=C\:\\workplace\\cordova\\skyblog\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\169
-base.0=C\:\\workplace\\cordova\\skyblog\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\168
-file.5=C\:\\workplace\\cordova\\skyblog\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\167\\classes.dex
-file.4=C\:\\workplace\\cordova\\skyblog\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\166\\classes.dex
-file.3=C\:\\workplace\\cordova\\skyblog\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\165\\classes.dex
-file.2=C\:\\workplace\\cordova\\skyblog\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\164\\classes.dex
-file.1=C\:\\workplace\\cordova\\skyblog\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\169\\classes.dex
-file.0=C\:\\workplace\\cordova\\skyblog\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\168\\classes.dex
+file.0=C\:\\workplace\\SkyBlog\\client_android\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\190\\classes.dex

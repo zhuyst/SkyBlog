@@ -26,6 +26,9 @@ class Footer extends React.Component{
                         Star&nbsp;&nbsp;{star === null ? "" : star}
                     </Button>
                 </p>
+                <Button onClick={() => {
+                    navigator.app.exitApp();
+                }}>关闭</Button>
             </div>
         )
     }
