@@ -17,14 +17,14 @@ class Footer extends React.Component{
         return (
             <div className="footer">
                 <p>网页访问次数：{count === null ? "加载中..." : count}</p>
-                <p>Powered by <a href={url}>SkyBlog</a></p>
-                <p>麻烦各位大爷&nbsp;&nbsp;
+                <p>
+                    Powered by <a href={url}>SkyBlog</a>
+                    &nbsp;
                     <Button bsSize="small" className="star_button"
                             href={url} target="_blank">
                         <Glyphicon glyph="star" />
                         Star&nbsp;&nbsp;{star === null ? "" : star}
                     </Button>
-                    &nbsp;&nbsp;一个吧
                 </p>
             </div>
         )
