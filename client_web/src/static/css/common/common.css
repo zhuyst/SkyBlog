@@ -97,3 +97,15 @@ footer{
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus{
     color: #337ab7 !important;
 }
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{
+    background-color: #bce8f1 !important;
+}
+
+.navbar-default .navbar-toggle{
+    border-color: #31708f !important;
+}
+
+.navbar-default .navbar-toggle .icon-bar{
+    background-color: #31708f !important;
+}
