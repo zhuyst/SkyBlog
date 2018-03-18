@@ -44,19 +44,19 @@
 }
 
 .nav_image_button_group .btn{
-    margin: 5px 5%;
-    background: transparent;
-    border: 2px solid #fff;
-    color: #fff;
+    margin: 5px 5% !important;
+    background: transparent !important;
+    border: 2px solid #fff !important;
+    color: #fff !important;
 }
 
 .nav_image_button_group .btn:active{
-    color: #e6e6e6;
-    background: transparent;
+    color: #e6e6e6 !important;
+    background: transparent !important;
 }
 
 .nav_image_button_group .btn:hover{
-    border: 2px solid #f16c20;
+    border: 2px solid #f16c20 !important;
 }
 
 .rows{
@@ -76,5 +76,5 @@
 }
 
 .star_button{
-    padding: 3px 5px;
+    padding: 3px 5px !important;
 }

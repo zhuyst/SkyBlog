@@ -117,7 +117,7 @@
 }
 
 .navigation_button{
-    margin-bottom: 20px;
+    margin-bottom: 20px !important;
 }
 
 .navigation_classify_button{

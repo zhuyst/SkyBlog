@@ -26,13 +26,13 @@ footer{
 }
 
 .navigation{
-    font-size: 18px;
-    margin-bottom: 0;
+    font-size: 18px !important;
+    margin-bottom: 0 !important;
 }
 
 .nav_button{
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
 }
 
 .nav_button li{
@@ -41,7 +41,7 @@ footer{
 }
 
 .nav_brand{
-    font-size: 22px;
+    font-size: 22px !important;
     font-weight: bold;
     color: #31708f !important;
 }

@@ -53,11 +53,11 @@
 }
 
 .pager{
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
 }
 
 .comment_pager{
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
 }
 
 .full_content{
