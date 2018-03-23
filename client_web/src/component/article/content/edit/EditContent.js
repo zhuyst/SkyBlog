@@ -65,7 +65,7 @@ class EditContent extends React.Component{
 
         const contentArea = (
             <div id="all-editor">
-                <ArticleBreadcrumb/>,
+                <ArticleBreadcrumb/>
                 <ArticleEditor/>
             </div>
         );
