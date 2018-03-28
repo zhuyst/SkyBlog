@@ -2,7 +2,9 @@ import * as Cookies from 'js-cookie'
 import fetch from 'isomorphic-fetch'
 
 import {dispatch} from "./store/Store";
-import {error} from "./action/common/NotifyAction";
+import {error, info} from "./action/common/NotifyAction";
+
+import {loginClear} from "./action/common/LoginAction";
 
 const API_BASE_URL = "https://api.zhuyst.cc";
 
@@ -118,7 +120,14 @@ export const checkStatus = response => {
 const handleFetch = promise => {
     return promise
         .then(response => checkStatus(response))
-        .catch(() => dispatch(error(FAIL_RESULT.message)))
+        .then(result => {
+            if(result.code === 401){
+                info(result.message);
+                removeToken();
+                dispatch(loginClear());
+            }
+            return result;
+        }).catch(() => dispatch(error(FAIL_RESULT.message)))
 };
 
 export const FAIL_RESULT = {
