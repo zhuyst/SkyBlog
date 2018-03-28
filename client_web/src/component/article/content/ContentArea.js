@@ -1,10 +1,11 @@
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 import {Clearfix} from "react-bootstrap";
 import {connect} from "react-redux";
 
 import ArticleTitle from "./ArticleTitle";
+
 import {deleteArticle} from "../../../action/article/ContentAction";
+import Markdown from "../../common/markdown/Markdown";
 
 class ContentArea extends React.Component{
 
@@ -15,7 +16,7 @@ class ContentArea extends React.Component{
             <div className="content_main">
                 <ArticleTitle editing={false}/>
                 <Clearfix>
-                    <ReactMarkdown source={article.content.text}/>
+                    <Markdown text={article.content.text}/>
                 </Clearfix>
             </div>
         )

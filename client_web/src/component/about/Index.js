@@ -1,15 +1,16 @@
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 import {Button, Col, Glyphicon, Grid, Panel, Row} from "react-bootstrap";
 import {connect} from "react-redux";
 import {push} from 'react-router-redux'
 import {Route, withRouter} from "react-router-dom";
 
+import AboutLoading from "./AboutLoading";
+import Markdown from "../common/markdown/Markdown";
+
 import {getAbout} from "../../action/about/AboutAction";
 import AboutEditor from "./AboutEditor";
 
 import '../../static/css/about/about.css'
-import AboutLoading from "./AboutLoading";
 
 class Index extends React.Component{
 
@@ -46,7 +47,7 @@ class Index extends React.Component{
                 )
             }
             body.push(
-                <ReactMarkdown key={2} source={content.text}/>
+                <Markdown key={2} text={content.text}/>
             )
         }
 
