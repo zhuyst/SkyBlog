@@ -9,8 +9,8 @@ class Layout extends React.Component{
         const {contentArea,right,type} = this.props;
 
         const isJustify = (type === LAYOUT_JUSTIFY);
-        const mdOffset = isJustify ? 1 : 2;
-        const md = isJustify ? 5 : 8;
+        const mdOffset = isJustify ? 0 : 2;
+        const md = isJustify ? 6 : 8;
 
         return (
             <Grid fluid={true}>
@@ -20,7 +20,7 @@ class Layout extends React.Component{
                     </Col>
                     {
                         isJustify &&
-                        <Col md={5} sm={12} id="right">
+                        <Col md={6} sm={12} id="right">
                             {right}
                         </Col>
                     }
