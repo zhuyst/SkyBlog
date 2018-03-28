@@ -35,6 +35,13 @@ public class TokenFilter extends OncePerRequestFilter{
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+        final String publicUri = "public";
+
+        String uri = request.getRequestURI();
+        if(uri.contains(publicUri)){
+            chain.doFilter(request,response);
+            return;
+        }
 
         // 有时请求会错误发送null与undefined
         final String nullStr = "null";
@@ -44,8 +51,8 @@ public class TokenFilter extends OncePerRequestFilter{
 
         // 如果token不存在，则直接放行，由之后的Filter拦截
         if(StringUtils.isBlank(token) ||
-                nullStr.equals(token) ||
-                undefinedStr.equals(token)) {
+                nullStr.equalsIgnoreCase(token) ||
+                undefinedStr.equalsIgnoreCase(token)) {
             chain.doFilter(request,response);
             return;
         }
