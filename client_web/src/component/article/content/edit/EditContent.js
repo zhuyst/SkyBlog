@@ -1,9 +1,9 @@
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 import {connect} from "react-redux";
 
 import ArticleEditor from "./ArticleEditor";
 import ArticleTitle from "../ArticleTitle";
+import Markdown from "../../../common/markdown/Markdown";
 import Layout, {LAYOUT_JUSTIFY} from "../Layout";
 
 import {initialArticle} from "../../../../reducer/article/ContentReducer";
@@ -72,7 +72,7 @@ class EditContent extends React.Component{
         const right = (
             <div className="content_main edit_content">
                 <ArticleTitle editing={true}/>
-                <ReactMarkdown source={article.content.text}/>
+                <Markdown text={article.content.text}/>
             </div>
         );
 
