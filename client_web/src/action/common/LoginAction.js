@@ -70,6 +70,10 @@ export const checkUserLoginState = () => dispatch => {
         body: `token=${token}`
     }).then(response => checkStatus(response))
         .then(result => {
+            if(result.code === 401){
+                removeToken();
+            }
+
             afterLogin(result,dispatch,false);
             dispatch(getAccessCount())
         })
