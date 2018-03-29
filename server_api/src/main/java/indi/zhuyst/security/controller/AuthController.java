@@ -63,7 +63,7 @@ public class AuthController extends BaseController{
      */
     @ApiOperation("通过老Token换取新Token")
     @RequestMapping(value = "/refresh",method = RequestMethod.POST)
-    public Result<AccessToken> refresh(@ApiParam("老Token") @RequestParam String token,
+    public Result<AccessToken> refresh(@ApiParam("老Token") @RequestParam("Token") String token,
                                        HttpServletRequest request){
         accessLogService.save(request);
         
