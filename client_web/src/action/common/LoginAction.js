@@ -67,7 +67,7 @@ export const checkUserLoginState = () => dispatch => {
         headers: {
             "Content-Type": ContentType.FORM
         },
-        body: `token=${token}`
+        body: `Token=${token}`
     }).then(response => checkStatus(response))
         .then(result => {
             if(result.code === 401){
