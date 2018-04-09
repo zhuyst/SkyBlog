@@ -14,6 +14,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 异常处理Controller
+ * 主要处理 {@link TokenException}
+ * 顺便处理 {@link RuntimeException}
+ * @author zhuyst
+ */
 @RestController
 public class ErrorController implements org.springframework.boot.autoconfigure.web.ErrorController {
 
@@ -27,6 +33,11 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
         return ERROR_PATH;
     }
 
+    /**
+     * 主要处理 {@link TokenException}
+     * 顺便处理 {@link RuntimeException}
+     * @return 处理后的结果对象
+     */
     @RequestMapping(ERROR_PATH)
     public Result error(HttpServletRequest request, HttpServletResponse response){
         RequestAttributes requestAttributes = new ServletRequestAttributes(request);
