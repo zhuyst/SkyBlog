@@ -35,6 +35,8 @@ public class TokenFilter extends OncePerRequestFilter{
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+
+        // 公共接口不进行验证
         final String publicUri = "public";
 
         String uri = request.getRequestURI();
