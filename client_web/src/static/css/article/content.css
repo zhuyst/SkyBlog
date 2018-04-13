@@ -79,3 +79,7 @@
     float: right;
     text-align: right;
 }
+
+pre{
+    background-color: #F0F0F0 !important;
+}
