@@ -83,3 +83,11 @@
 pre{
     background-color: #F0F0F0 !important;
 }
+
+blockquote{
+    font-size: 14px !important;
+}
+
+img{
+    max-width: 100% !important;
+}
