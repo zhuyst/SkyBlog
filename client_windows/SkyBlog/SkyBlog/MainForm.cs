@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using WindowsFormsControlLibrary;
-using Api.api.article;
-using Api.api.article.model;
-using DSkin.DirectUI;
 using DSkin.Forms;
+using SkyBlog.Api.Business;
+using SkyBlog.Model.Business;
 
 namespace SkyBlog
 {
@@ -22,7 +14,7 @@ namespace SkyBlog
 
         private Dictionary<int, ArticleListItem> articles;
 
-        private int selectArticleId;
+        private Article selectArticle;
 
         public MainForm()
         {
@@ -34,16 +26,16 @@ namespace SkyBlog
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            var init = false;
             foreach (var article in _articleApi.List(1,10).Entity.List)
             {
-                var item = new ArticleListItem()
-                {
-                    Id = article.Id,
-                    Title = article.Title,
-                    Date = article.UpdateDate
-                };
+                var item = new ArticleListItem(article);
                 articles[article.Id] = item;
                 ArticleList.Items.Add(item);
+
+                if (init) continue;
+                SelectArticle(item);
+                init = true;
             }
             ArticleList.LayoutContent();
         }
@@ -57,14 +49,26 @@ namespace SkyBlog
             }
 
             var item = (ArticleListItem)e.Control;
-            selectArticleId = item.Id;
-            item.Selected = true;
-            item.BackColor = Color.FromArgb(255, 217, 237, 247);
+            SelectArticle(item);
         }
 
         private void ArticleList_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void SelectArticle(ArticleListItem item)
+        {
+            item.Selected = true;
+            item.BackColor = Color.FromArgb(255, 217, 237, 247);
+            SetArticleInfo(item.Article);
+        }
+
+        private void SetArticleInfo(Article article)
+        {
+            selectArticle = article;
+            ArticleTitle.Text = article.Title;
+            ArticleSubTitle.Text = article.SubTitle;
         }
     }
 }

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3245E0FC-032A-4DE1-ABDA-0DE3653E8004}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>SkyBlog</RootNamespace>
-    <AssemblyName>SkyBlog</AssemblyName>
+    <ProjectGuid>{9D8F14CD-265B-4832-8958-E40B6F2A0CC7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SkyBlog.Api</RootNamespace>
+    <AssemblyName>SkyBlog.Api</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,18 +35,14 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DSkin, Version=16.5.2.12, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\DSkin.dll</HintPath>
-    </Reference>
-    <Reference Include="DSkin.Design, Version=16.5.2.12, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\DSkin.Design.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=106.2.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.2.1\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
@@ -56,62 +52,30 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="api\about\AboutApi.cs" />
+    <Compile Include="api\article\ArticleApi.cs" />
+    <Compile Include="api\article\model\Article.cs" />
+    <Compile Include="api\auth\AuthApi.cs" />
+    <Compile Include="api\auth\model\AccessToken.cs" />
+    <Compile Include="api\classify\ClassifyApi.cs" />
+    <Compile Include="api\classify\model\Classify.cs" />
+    <Compile Include="api\user\model\User.cs" />
+    <Compile Include="api\about\model\About.cs" />
+    <Compile Include="api\ApiClient.cs" />
+    <Compile Include="model\BaseModel.cs" />
+    <Compile Include="model\PageInfo.cs" />
+    <Compile Include="model\Result.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <Compile Include="model\DataResult.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SkyBlog.Api\SkyBlog.Api.csproj">
-      <Project>{9d8f14cd-265b-4832-8958-e40b6f2a0cc7}</Project>
-      <Name>SkyBlog.Api</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SkyBlog.Model\SkyBlog.Model.csproj">
-      <Project>{63E31B03-FFD6-4A14-AF2F-1D7424D7D9DB}</Project>
-      <Name>SkyBlog.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WindowsFormsControlLibrary\WindowsFormsControlLibrary.csproj">
-      <Project>{7d95543a-4639-4f28-99c9-90d40ed99cfd}</Project>
-      <Name>WindowsFormsControlLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
