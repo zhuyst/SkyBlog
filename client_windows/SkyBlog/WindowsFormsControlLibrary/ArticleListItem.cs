@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DSkin.Controls;
 using DSkin.DirectUI;
+using SkyBlog.Model.Business;
 
 namespace WindowsFormsControlLibrary
 {
@@ -16,22 +17,22 @@ namespace WindowsFormsControlLibrary
     {
         public int Id { get; set; }
 
-        public string Title { get; set; }
-
-        public string Date { get; set; }
+        public Article Article;
 
         public bool Selected { get; set; }
 
-        public ArticleListItem()
+        public ArticleListItem(Article article)
         {
             InitializeComponent();
+            Article = article;
+            Id = article.Id;
             Selected = false;
         }
 
         private void ArticleListItem_Load(object sender, EventArgs e)
         {
-            ArticleTitle.Text = Title;
-            ArticleDate.Text = Date;
+            ArticleTitle.Text = Article.Title;
+            ArticleDate.Text = Article.UpdateDate;
         }
 
         private void ArticleListItem_MouseEnter(object sender, MouseEventArgs e)

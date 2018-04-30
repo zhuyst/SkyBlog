@@ -1,0 +1,6 @@
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Model\bin\Debug\SkyBlog.Model.dll
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Model\bin\Debug\SkyBlog.Model.pdb
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Model\obj\Debug\SkyBlog.Model.csprojResolveAssemblyReference.cache
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Model\obj\Debug\SkyBlog.Model.csproj.CoreCompileInputs.cache
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Model\obj\Debug\SkyBlog.Model.dll
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Model\obj\Debug\SkyBlog.Model.pdb

@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.ArticleList = new DSkin.Controls.DSkinListBox();
-            this.dSkinLabel1 = new DSkin.Controls.DSkinLabel();
+            this.SplitLine = new DSkin.Controls.DSkinLabel();
+            this.ArticleTitle = new DSkin.Controls.DSkinLabel();
+            this.ArticleSubTitle = new DSkin.Controls.DSkinLabel();
             ((System.ComponentModel.ISupportInitialize)(this.ArticleList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,14 +48,33 @@
             this.ArticleList.Value = 0D;
             this.ArticleList.ItemClick += new System.EventHandler<DSkin.Controls.ItemClickEventArgs>(this.ArticleList_ItemClick);
             // 
-            // dSkinLabel1
+            // SplitLine
             // 
-            this.dSkinLabel1.AutoSize = false;
-            this.dSkinLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(237)))), ((int)(((byte)(247)))));
-            this.dSkinLabel1.Location = new System.Drawing.Point(359, 18);
-            this.dSkinLabel1.Name = "dSkinLabel1";
-            this.dSkinLabel1.Size = new System.Drawing.Size(11, 700);
-            this.dSkinLabel1.TabIndex = 1;
+            this.SplitLine.AutoSize = false;
+            this.SplitLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(237)))), ((int)(((byte)(247)))));
+            this.SplitLine.Location = new System.Drawing.Point(359, 18);
+            this.SplitLine.Name = "SplitLine";
+            this.SplitLine.Size = new System.Drawing.Size(11, 700);
+            this.SplitLine.TabIndex = 1;
+            // 
+            // ArticleTitle
+            // 
+            this.ArticleTitle.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Bold);
+            this.ArticleTitle.Location = new System.Drawing.Point(376, 48);
+            this.ArticleTitle.Name = "ArticleTitle";
+            this.ArticleTitle.Size = new System.Drawing.Size(104, 34);
+            this.ArticleTitle.TabIndex = 2;
+            this.ArticleTitle.Text = "文章标题";
+            // 
+            // ArticleSubTitle
+            // 
+            this.ArticleSubTitle.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.ArticleSubTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))));
+            this.ArticleSubTitle.Location = new System.Drawing.Point(377, 89);
+            this.ArticleSubTitle.Name = "ArticleSubTitle";
+            this.ArticleSubTitle.Size = new System.Drawing.Size(92, 25);
+            this.ArticleSubTitle.TabIndex = 3;
+            this.ArticleSubTitle.Text = "文章副标题";
             // 
             // MainForm
             // 
@@ -68,7 +89,9 @@
             this.CaptionFont = new System.Drawing.Font("宋体", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.CaptionHeight = 35;
             this.ClientSize = new System.Drawing.Size(1200, 655);
-            this.Controls.Add(this.dSkinLabel1);
+            this.Controls.Add(this.ArticleSubTitle);
+            this.Controls.Add(this.ArticleTitle);
+            this.Controls.Add(this.SplitLine);
             this.Controls.Add(this.ArticleList);
             this.DoubleClickMaximized = false;
             this.DrawIcon = false;
@@ -86,12 +109,15 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ArticleList)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private DSkin.Controls.DSkinListBox ArticleList;
-        private DSkin.Controls.DSkinLabel dSkinLabel1;
+        private DSkin.Controls.DSkinLabel SplitLine;
+        private DSkin.Controls.DSkinLabel ArticleTitle;
+        private DSkin.Controls.DSkinLabel ArticleSubTitle;
     }
 }

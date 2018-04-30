@@ -1,0 +1,15 @@
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\obj\Debug\SkyBlog.Api.csprojResolveAssemblyReference.cache
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\obj\Debug\SkyBlog.Api.csproj.CoreCompileInputs.cache
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\bin\Debug\SkyBlog.Api.dll.config
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\bin\Debug\SkyBlog.Api.dll
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\bin\Debug\SkyBlog.Api.pdb
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\bin\Debug\Newtonsoft.Json.dll
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\bin\Debug\RestSharp.dll
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\bin\Debug\SkyBlog.Model.dll
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\bin\Debug\System.ValueTuple.dll
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\bin\Debug\SkyBlog.Model.pdb
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\bin\Debug\Newtonsoft.Json.xml
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\bin\Debug\System.ValueTuple.xml
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\obj\Debug\SkyBlog.Api.csproj.CopyComplete
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\obj\Debug\SkyBlog.Api.dll
+C:\workplace\SkyBlog\client_windows\SkyBlog\SkyBlog.Api\obj\Debug\SkyBlog.Api.pdb
