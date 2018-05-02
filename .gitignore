@@ -7,5 +7,7 @@ client_android/platforms/android/.idea/workspace.xml
 /client_windows/SkyBlog/WindowsFormsControlLibrary/bin/Debug
 /client_windows/SkyBlog/WindowsFormsControlLibrary/obj/Debug
 /client_windows/SkyBlog/packages
-/client_windows/SkyBlog/Api/obj/Debug
-/client_windows/SkyBlog/Api/bin/Debug
+/client_windows/SkyBlog/SkyBlog.Api/obj/Debug
+/client_windows/SkyBlog/SkyBlog.Api/bin/Debug
+/client_windows/SkyBlog/SkyBlog.Model/obj/Debug
+/client_windows/SkyBlog/SkyBlog.Model/bin/Debug
