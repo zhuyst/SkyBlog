@@ -23,5 +23,20 @@ namespace SkyBlog
             var content = Article.Content.Replace("\n", "\r\n");
             ContentTextBox.Text = content;
         }
+
+        private void SaveButton_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void ExitButton_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void SaveAndExitButton_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
