@@ -165,7 +165,7 @@
             this.ContentMenuStrip.ItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
             this.ContentMenuStrip.Name = "ContentMenuStrip";
             this.ContentMenuStrip.RadiusStyle = DSkin.Common.RoundStyle.All;
-            this.ContentMenuStrip.Size = new System.Drawing.Size(199, 106);
+            this.ContentMenuStrip.Size = new System.Drawing.Size(211, 134);
             this.ContentMenuStrip.SkinAllColor = true;
             this.ContentMenuStrip.TitleAnamorphosis = true;
             this.ContentMenuStrip.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(228)))), ((int)(((byte)(236)))));
@@ -175,34 +175,35 @@
             // CopyToolStripMenuItem
             // 
             this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.CopyToolStripMenuItem.Text = "复制";
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // AllSelectToolStripMenuItem
             // 
             this.AllSelectToolStripMenuItem.Name = "AllSelectToolStripMenuItem";
-            this.AllSelectToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.AllSelectToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.AllSelectToolStripMenuItem.Text = "全选";
             this.AllSelectToolStripMenuItem.Click += new System.EventHandler(this.AllSelectToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(207, 6);
             // 
             // ViewToolStripMenuItem
             // 
             this.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem";
-            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.ViewToolStripMenuItem.Text = "在网页中查看文章";
             this.ViewToolStripMenuItem.Click += new System.EventHandler(this.ViewToolStripMenuItem_Click);
             // 
             // EditToolStripMenuItem
             // 
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.EditToolStripMenuItem.Text = "编辑文章";
+            this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // dSkinFlowLayoutPanel1
             // 

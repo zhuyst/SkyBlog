@@ -17,7 +17,7 @@ namespace SkyBlog
 
         private static string _webUrl;
 
-        private Dictionary<int, ArticleListItem> articles;
+        private readonly Dictionary<int, ArticleListItem> _articles;
 
         private Article _selectArticle;
 
@@ -25,7 +25,7 @@ namespace SkyBlog
         {
             InitializeComponent();
 
-            articles = new Dictionary<int, ArticleListItem>();
+            _articles = new Dictionary<int, ArticleListItem>();
             _articleApi = ArticleApi.GetInstance();
 
             _webUrl = ConfigurationManager.AppSettings["webUrl"];
@@ -37,7 +37,7 @@ namespace SkyBlog
             foreach (var article in _articleApi.List(1,10).Entity.List)
             {
                 var item = new ArticleListItem(article);
-                articles[article.Id] = item;
+                _articles[article.Id] = item;
                 ArticleListPanel.Items.Add(item);
 
                 if (init) continue;
@@ -49,7 +49,7 @@ namespace SkyBlog
 
         private void ArticleList_ItemClick(object sender, DSkin.Controls.ItemClickEventArgs e)
         {
-            foreach (var article in articles)
+            foreach (var article in _articles)
             {
                 article.Value.BackColor = Color.Transparent;
                 article.Value.Selected = false;
@@ -110,6 +110,14 @@ namespace SkyBlog
         private void SkyBlogTitleLabel_Click(object sender, EventArgs e)
         {
             Process.Start(_webUrl);
+        }
+
+        private void EditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new EditForm
+            {
+                Article = _selectArticle
+            }.ShowDialog();
         }
     }
 }
