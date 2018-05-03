@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
+using System.Windows.Forms;
 using WindowsFormsControlLibrary;
 using DSkin.Forms;
 using SkyBlog.Api.Business;
@@ -14,7 +15,7 @@ namespace SkyBlog
     {
         private readonly ArticleApi _articleApi;
 
-        private readonly string _webUrl;
+        private static string _webUrl;
 
         private Dictionary<int, ArticleListItem> articles;
 
@@ -87,9 +88,28 @@ namespace SkyBlog
             Process.Start(GetArticleUrl(_selectArticle.Id));
         }
 
-        private string GetArticleUrl(int id)
+        private static string GetArticleUrl(int id)
         {
             return $"{_webUrl}/article/content/{id}/full";
+        }
+
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selectText = ArticleContentLabel.SelectedText;
+            if (selectText != "")
+            {
+                Clipboard.SetDataObject(selectText);
+            }
+        }
+
+        private void AllSelectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ArticleContentLabel.SelectAll();
+        }
+
+        private void SkyBlogTitleLabel_Click(object sender, EventArgs e)
+        {
+            Process.Start(_webUrl);
         }
     }
 }
