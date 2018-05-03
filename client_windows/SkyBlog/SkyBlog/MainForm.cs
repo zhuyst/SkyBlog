@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using WindowsFormsControlLibrary;
 using DSkin.Forms;
@@ -31,13 +32,13 @@ namespace SkyBlog
             {
                 var item = new ArticleListItem(article);
                 articles[article.Id] = item;
-                ArticleList.Items.Add(item);
+                ArticleListPanel.Items.Add(item);
 
                 if (init) continue;
                 SelectArticle(item);
                 init = true;
             }
-            ArticleList.LayoutContent();
+            ArticleListPanel.LayoutContent();
         }
 
         private void ArticleList_ItemClick(object sender, DSkin.Controls.ItemClickEventArgs e)
@@ -67,8 +68,13 @@ namespace SkyBlog
         private void SetArticleInfo(Article article)
         {
             selectArticle = article;
-            ArticleTitle.Text = article.Title;
-            ArticleSubTitle.Text = article.SubTitle;
+            ArticleTitleLabel.Text = article.Title;
+            ArticleSubTitleLabel.Text = article.SubTitle;
+            ArticleCreateDateLabel.Text = $@"文章发布时间：{article.CreateDate}";
+            ArticleUpdateDateLabel.Text = $@"最后修改时间：{article.UpdateDate}";
+            ArticleClassifyLabel.Text = $@"分类：{article.Classify.Name}";
+            ArticleContentLabel.Text = article.Content;
+            ArticleContentLabel.Convert();
         }
     }
 }
