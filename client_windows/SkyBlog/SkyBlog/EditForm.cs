@@ -15,11 +15,13 @@ namespace SkyBlog
 
         private void EditForm_Load(object sender, System.EventArgs e)
         {
-            if (Article != null)
-            {
-                Text = $@"编辑 - {Article.Title}";
-                TitleTextBox.Text = Article.Title;
-            }
+            if (Article == null) return;
+
+            Text = $@"编辑 - {Article.Title}";
+            TitleTextBox.Text = Article.Title;
+            SubTitleTextBox.Text = Article.SubTitle;
+            var content = Article.Content.Replace("\n", "\r\n");
+            ContentTextBox.Text = content;
         }
     }
 }
