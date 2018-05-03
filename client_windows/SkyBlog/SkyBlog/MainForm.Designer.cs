@@ -41,6 +41,7 @@
             this.ArticleClassifyLabel = new DSkin.Controls.DSkinLabel();
             this.ArticleUpdateDateLabel = new DSkin.Controls.DSkinLabel();
             this.ArticleCreateDateLabel = new DSkin.Controls.DSkinLabel();
+            this.articleContent1 = new WindowsFormsControlLibrary.ArticleContent();
             ((System.ComponentModel.ISupportInitialize)(this.ArticleListPanel)).BeginInit();
             this.SkyBlogTitlePanel.SuspendLayout();
             this.dSkinNewPanel2.SuspendLayout();
@@ -134,6 +135,7 @@
             this.dSkinFlowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.dSkinFlowLayoutPanel1.BitmapCache = false;
             this.dSkinFlowLayoutPanel1.Controls.Add(this.ArticleContentLabel);
+            this.dSkinFlowLayoutPanel1.Controls.Add(this.articleContent1);
             this.dSkinFlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.dSkinFlowLayoutPanel1.Location = new System.Drawing.Point(17, 107);
             this.dSkinFlowLayoutPanel1.Name = "dSkinFlowLayoutPanel1";
@@ -178,6 +180,16 @@
             this.ArticleCreateDateLabel.Size = new System.Drawing.Size(244, 22);
             this.ArticleCreateDateLabel.TabIndex = 4;
             this.ArticleCreateDateLabel.Text = "文章发布时间：2018-04-23 15:32";
+            // 
+            // articleContent1
+            // 
+            this.articleContent1.AutoSize = false;
+            this.articleContent1.BaseStylesheet = "";
+            this.articleContent1.Location = new System.Drawing.Point(3, 34);
+            this.articleContent1.Name = "articleContent1";
+            this.articleContent1.Size = new System.Drawing.Size(100, 100);
+            this.articleContent1.TabIndex = 1;
+            this.articleContent1.Text = "articleContent1";
             // 
             // MainForm
             // 
@@ -235,5 +247,6 @@
         private DSkin.Controls.DSkinLabel ArticleUpdateDateLabel;
         private DSkin.Controls.DSkinFlowLayoutPanel dSkinFlowLayoutPanel1;
         private WindowsFormsControlLibrary.ArticleContent ArticleContentLabel;
+        private WindowsFormsControlLibrary.ArticleContent articleContent1;
     }
 }
