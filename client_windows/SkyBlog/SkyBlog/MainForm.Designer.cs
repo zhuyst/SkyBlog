@@ -37,6 +37,9 @@
             this.dSkinNewPanel1 = new DSkin.Controls.DSkinNewPanel();
             this.ArticlePanel = new DSkin.Controls.DSkinNewPanel();
             this.ContentMenuStrip = new DSkin.Controls.DSkinContextMenuStrip();
+            this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AllSelectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dSkinFlowLayoutPanel1 = new DSkin.Controls.DSkinFlowLayoutPanel();
@@ -95,6 +98,7 @@
             // 
             // SkyBlogTitleLabel
             // 
+            this.SkyBlogTitleLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.SkyBlogTitleLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SkyBlogTitleLabel.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Bold);
             this.SkyBlogTitleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(237)))), ((int)(((byte)(247)))));
@@ -106,6 +110,7 @@
             this.SkyBlogTitleLabel.Text = "SkyBlog";
             this.SkyBlogTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.SkyBlogTitleLabel.TextEffect = DSkin.DirectUI.TextEffects.Forme;
+            this.SkyBlogTitleLabel.Click += new System.EventHandler(this.SkyBlogTitleLabel_Click);
             // 
             // dSkinNewPanel1
             // 
@@ -152,29 +157,51 @@
             this.ContentMenuStrip.ItemRadius = 4;
             this.ContentMenuStrip.ItemRadiusStyle = DSkin.Common.RoundStyle.All;
             this.ContentMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CopyToolStripMenuItem,
+            this.AllSelectToolStripMenuItem,
+            this.toolStripSeparator1,
             this.ViewToolStripMenuItem,
             this.EditToolStripMenuItem});
             this.ContentMenuStrip.ItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
             this.ContentMenuStrip.Name = "ContentMenuStrip";
             this.ContentMenuStrip.RadiusStyle = DSkin.Common.RoundStyle.All;
-            this.ContentMenuStrip.Size = new System.Drawing.Size(211, 80);
+            this.ContentMenuStrip.Size = new System.Drawing.Size(199, 106);
             this.ContentMenuStrip.SkinAllColor = true;
             this.ContentMenuStrip.TitleAnamorphosis = true;
             this.ContentMenuStrip.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(228)))), ((int)(((byte)(236)))));
             this.ContentMenuStrip.TitleRadius = 4;
             this.ContentMenuStrip.TitleRadiusStyle = DSkin.Common.RoundStyle.All;
             // 
+            // CopyToolStripMenuItem
+            // 
+            this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.CopyToolStripMenuItem.Text = "复制";
+            this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
+            // 
+            // AllSelectToolStripMenuItem
+            // 
+            this.AllSelectToolStripMenuItem.Name = "AllSelectToolStripMenuItem";
+            this.AllSelectToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.AllSelectToolStripMenuItem.Text = "全选";
+            this.AllSelectToolStripMenuItem.Click += new System.EventHandler(this.AllSelectToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
+            // 
             // ViewToolStripMenuItem
             // 
             this.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem";
-            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.ViewToolStripMenuItem.Text = "在网页中查看文章";
             this.ViewToolStripMenuItem.Click += new System.EventHandler(this.ViewToolStripMenuItem_Click);
             // 
             // EditToolStripMenuItem
             // 
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.EditToolStripMenuItem.Text = "编辑文章";
             // 
             // dSkinFlowLayoutPanel1
@@ -198,9 +225,9 @@
             this.ArticleContentLabel.IsContextMenuEnabled = false;
             this.ArticleContentLabel.Location = new System.Drawing.Point(3, 3);
             this.ArticleContentLabel.Name = "ArticleContentLabel";
-            this.ArticleContentLabel.Size = new System.Drawing.Size(798, 25);
+            this.ArticleContentLabel.Size = new System.Drawing.Size(798, 82);
             this.ArticleContentLabel.TabIndex = 0;
-            this.ArticleContentLabel.Text = "articleContent1";
+            this.ArticleContentLabel.Text = "<h1>文章内容</h1>";
             // 
             // ArticleClassifyLabel
             // 
@@ -289,5 +316,8 @@
         private DSkin.Controls.DSkinContextMenuStrip ContentMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem ViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CopyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AllSelectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
