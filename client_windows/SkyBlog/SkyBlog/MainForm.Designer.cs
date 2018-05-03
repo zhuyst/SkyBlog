@@ -35,16 +35,19 @@
             this.SkyBlogTitlePanel = new DSkin.Controls.DSkinNewPanel();
             this.SkyBlogTitleLabel = new DSkin.Controls.DSkinLabel();
             this.dSkinNewPanel1 = new DSkin.Controls.DSkinNewPanel();
-            this.dSkinNewPanel2 = new DSkin.Controls.DSkinNewPanel();
+            this.ArticlePanel = new DSkin.Controls.DSkinNewPanel();
+            this.ContentMenuStrip = new DSkin.Controls.DSkinContextMenuStrip();
+            this.ViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dSkinFlowLayoutPanel1 = new DSkin.Controls.DSkinFlowLayoutPanel();
             this.ArticleContentLabel = new WindowsFormsControlLibrary.ArticleContent();
             this.ArticleClassifyLabel = new DSkin.Controls.DSkinLabel();
             this.ArticleUpdateDateLabel = new DSkin.Controls.DSkinLabel();
             this.ArticleCreateDateLabel = new DSkin.Controls.DSkinLabel();
-            this.articleContent1 = new WindowsFormsControlLibrary.ArticleContent();
             ((System.ComponentModel.ISupportInitialize)(this.ArticleListPanel)).BeginInit();
             this.SkyBlogTitlePanel.SuspendLayout();
-            this.dSkinNewPanel2.SuspendLayout();
+            this.ArticlePanel.SuspendLayout();
+            this.ContentMenuStrip.SuspendLayout();
             this.dSkinFlowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,21 +116,66 @@
             this.dSkinNewPanel1.TabIndex = 5;
             this.dSkinNewPanel1.Text = "dSkinNewPanel1";
             // 
-            // dSkinNewPanel2
+            // ArticlePanel
             // 
-            this.dSkinNewPanel2.BackColor = System.Drawing.Color.Transparent;
-            this.dSkinNewPanel2.Controls.Add(this.dSkinFlowLayoutPanel1);
-            this.dSkinNewPanel2.Controls.Add(this.ArticleClassifyLabel);
-            this.dSkinNewPanel2.Controls.Add(this.ArticleUpdateDateLabel);
-            this.dSkinNewPanel2.Controls.Add(this.ArticleCreateDateLabel);
-            this.dSkinNewPanel2.Controls.Add(this.ArticleSubTitleLabel);
-            this.dSkinNewPanel2.Controls.Add(this.ArticleTitleLabel);
-            this.dSkinNewPanel2.Location = new System.Drawing.Point(360, 60);
-            this.dSkinNewPanel2.Name = "dSkinNewPanel2";
-            this.dSkinNewPanel2.Padding = new System.Windows.Forms.Padding(20);
-            this.dSkinNewPanel2.Size = new System.Drawing.Size(842, 602);
-            this.dSkinNewPanel2.TabIndex = 6;
-            this.dSkinNewPanel2.Text = "dSkinNewPanel2";
+            this.ArticlePanel.BackColor = System.Drawing.Color.Transparent;
+            this.ArticlePanel.ContextMenuStrip = this.ContentMenuStrip;
+            this.ArticlePanel.Controls.Add(this.dSkinFlowLayoutPanel1);
+            this.ArticlePanel.Controls.Add(this.ArticleClassifyLabel);
+            this.ArticlePanel.Controls.Add(this.ArticleUpdateDateLabel);
+            this.ArticlePanel.Controls.Add(this.ArticleCreateDateLabel);
+            this.ArticlePanel.Controls.Add(this.ArticleSubTitleLabel);
+            this.ArticlePanel.Controls.Add(this.ArticleTitleLabel);
+            this.ArticlePanel.Location = new System.Drawing.Point(360, 60);
+            this.ArticlePanel.Name = "ArticlePanel";
+            this.ArticlePanel.Padding = new System.Windows.Forms.Padding(20);
+            this.ArticlePanel.Size = new System.Drawing.Size(842, 602);
+            this.ArticlePanel.TabIndex = 6;
+            this.ArticlePanel.Text = "dSkinNewPanel2";
+            // 
+            // ContentMenuStrip
+            // 
+            this.ContentMenuStrip.Arrow = System.Drawing.Color.Black;
+            this.ContentMenuStrip.Back = System.Drawing.Color.White;
+            this.ContentMenuStrip.BackRadius = 4;
+            this.ContentMenuStrip.Base = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(200)))), ((int)(((byte)(254)))));
+            this.ContentMenuStrip.CheckedImage = null;
+            this.ContentMenuStrip.DropDownImageSeparator = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
+            this.ContentMenuStrip.Fore = System.Drawing.Color.Black;
+            this.ContentMenuStrip.HoverFore = System.Drawing.Color.White;
+            this.ContentMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.ContentMenuStrip.ItemAnamorphosis = true;
+            this.ContentMenuStrip.ItemBorder = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.ContentMenuStrip.ItemBorderShow = true;
+            this.ContentMenuStrip.ItemHover = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.ContentMenuStrip.ItemPressed = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.ContentMenuStrip.ItemRadius = 4;
+            this.ContentMenuStrip.ItemRadiusStyle = DSkin.Common.RoundStyle.All;
+            this.ContentMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ViewToolStripMenuItem,
+            this.EditToolStripMenuItem});
+            this.ContentMenuStrip.ItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.ContentMenuStrip.Name = "ContentMenuStrip";
+            this.ContentMenuStrip.RadiusStyle = DSkin.Common.RoundStyle.All;
+            this.ContentMenuStrip.Size = new System.Drawing.Size(211, 80);
+            this.ContentMenuStrip.SkinAllColor = true;
+            this.ContentMenuStrip.TitleAnamorphosis = true;
+            this.ContentMenuStrip.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(228)))), ((int)(((byte)(236)))));
+            this.ContentMenuStrip.TitleRadius = 4;
+            this.ContentMenuStrip.TitleRadiusStyle = DSkin.Common.RoundStyle.All;
+            // 
+            // ViewToolStripMenuItem
+            // 
+            this.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem";
+            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.ViewToolStripMenuItem.Text = "在网页中查看文章";
+            this.ViewToolStripMenuItem.Click += new System.EventHandler(this.ViewToolStripMenuItem_Click);
+            // 
+            // EditToolStripMenuItem
+            // 
+            this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.EditToolStripMenuItem.Text = "编辑文章";
             // 
             // dSkinFlowLayoutPanel1
             // 
@@ -135,12 +183,11 @@
             this.dSkinFlowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.dSkinFlowLayoutPanel1.BitmapCache = false;
             this.dSkinFlowLayoutPanel1.Controls.Add(this.ArticleContentLabel);
-            this.dSkinFlowLayoutPanel1.Controls.Add(this.articleContent1);
             this.dSkinFlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.dSkinFlowLayoutPanel1.Location = new System.Drawing.Point(17, 107);
             this.dSkinFlowLayoutPanel1.Name = "dSkinFlowLayoutPanel1";
             this.dSkinFlowLayoutPanel1.RightBottom = ((System.Drawing.Image)(resources.GetObject("dSkinFlowLayoutPanel1.RightBottom")));
-            this.dSkinFlowLayoutPanel1.Size = new System.Drawing.Size(816, 489);
+            this.dSkinFlowLayoutPanel1.Size = new System.Drawing.Size(822, 489);
             this.dSkinFlowLayoutPanel1.TabIndex = 7;
             // 
             // ArticleContentLabel
@@ -148,9 +195,10 @@
             this.ArticleContentLabel.AutoSize = false;
             this.ArticleContentLabel.AutoSizeHeightOnly = true;
             this.ArticleContentLabel.BaseStylesheet = "";
+            this.ArticleContentLabel.IsContextMenuEnabled = false;
             this.ArticleContentLabel.Location = new System.Drawing.Point(3, 3);
             this.ArticleContentLabel.Name = "ArticleContentLabel";
-            this.ArticleContentLabel.Size = new System.Drawing.Size(790, 25);
+            this.ArticleContentLabel.Size = new System.Drawing.Size(798, 25);
             this.ArticleContentLabel.TabIndex = 0;
             this.ArticleContentLabel.Text = "articleContent1";
             // 
@@ -181,16 +229,6 @@
             this.ArticleCreateDateLabel.TabIndex = 4;
             this.ArticleCreateDateLabel.Text = "文章发布时间：2018-04-23 15:32";
             // 
-            // articleContent1
-            // 
-            this.articleContent1.AutoSize = false;
-            this.articleContent1.BaseStylesheet = "";
-            this.articleContent1.Location = new System.Drawing.Point(3, 34);
-            this.articleContent1.Name = "articleContent1";
-            this.articleContent1.Size = new System.Drawing.Size(100, 100);
-            this.articleContent1.TabIndex = 1;
-            this.articleContent1.Text = "articleContent1";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
@@ -205,7 +243,7 @@
             this.CaptionHeight = 60;
             this.CaptionShowMode = DSkin.TextShowModes.Ordinary;
             this.ClientSize = new System.Drawing.Size(1200, 663);
-            this.Controls.Add(this.dSkinNewPanel2);
+            this.Controls.Add(this.ArticlePanel);
             this.Controls.Add(this.SkyBlogTitlePanel);
             this.Controls.Add(this.ArticleListPanel);
             this.Controls.Add(this.dSkinNewPanel1);
@@ -227,8 +265,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.ArticleListPanel)).EndInit();
             this.SkyBlogTitlePanel.ResumeLayout(false);
             this.SkyBlogTitlePanel.PerformLayout();
-            this.dSkinNewPanel2.ResumeLayout(false);
-            this.dSkinNewPanel2.PerformLayout();
+            this.ArticlePanel.ResumeLayout(false);
+            this.ArticlePanel.PerformLayout();
+            this.ContentMenuStrip.ResumeLayout(false);
             this.dSkinFlowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -241,12 +280,14 @@
         private DSkin.Controls.DSkinNewPanel SkyBlogTitlePanel;
         private DSkin.Controls.DSkinNewPanel dSkinNewPanel1;
         private DSkin.Controls.DSkinLabel SkyBlogTitleLabel;
-        private DSkin.Controls.DSkinNewPanel dSkinNewPanel2;
+        private DSkin.Controls.DSkinNewPanel ArticlePanel;
         private DSkin.Controls.DSkinLabel ArticleCreateDateLabel;
         private DSkin.Controls.DSkinLabel ArticleClassifyLabel;
         private DSkin.Controls.DSkinLabel ArticleUpdateDateLabel;
         private DSkin.Controls.DSkinFlowLayoutPanel dSkinFlowLayoutPanel1;
         private WindowsFormsControlLibrary.ArticleContent ArticleContentLabel;
-        private WindowsFormsControlLibrary.ArticleContent articleContent1;
+        private DSkin.Controls.DSkinContextMenuStrip ContentMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem ViewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
     }
 }
