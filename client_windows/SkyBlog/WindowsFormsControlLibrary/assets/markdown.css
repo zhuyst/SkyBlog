@@ -76,32 +76,32 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
     font-size: 28px;
-    color: #2B3F52;
+    color: black;
 }
 
 h2 {
     font-size: 24px;
     border-bottom: 1px solid #DDE4E9;
-    color: #2B3F52;
+    color: black;
 }
 
 h3 {
     font-size: 18px;
-    color: #2B3F52;
+    color: black;
 }
 
 h4 {
     font-size: 16px;
-    color: #2B3F52;
+    color: black;
 }
 
 h5 {
     font-size: 14px;
-    color: #2B3F52;
+    color: black;
 }
 
 h6 {
-    color: #2B3F52;
+    color: black;
     font-size: 14px;
 }
 
@@ -205,7 +205,7 @@ blockquote {
     /*padding: 0 15px;*/
     padding: 15px;
     background-color: #F7F9FA;
-    color: #2B3F52;
+    color: black;
 }
 
     blockquote > :first-child {

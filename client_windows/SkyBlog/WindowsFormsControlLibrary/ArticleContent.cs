@@ -26,7 +26,6 @@ namespace WindowsFormsControlLibrary
             var result = Markdown.ToHtml(Text);
             result = HttpUtility.HtmlDecode(result);
             Text = result;
-            Debug.WriteLine(result);
         }
     }
 }
