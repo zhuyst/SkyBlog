@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using WindowsFormsControlLibrary;
@@ -13,9 +14,11 @@ namespace SkyBlog
     {
         private readonly ArticleApi _articleApi;
 
+        private readonly string _webUrl;
+
         private Dictionary<int, ArticleListItem> articles;
 
-        private Article selectArticle;
+        private Article _selectArticle;
 
         public MainForm()
         {
@@ -23,6 +26,8 @@ namespace SkyBlog
 
             articles = new Dictionary<int, ArticleListItem>();
             _articleApi = ArticleApi.GetInstance();
+
+            _webUrl = ConfigurationManager.AppSettings["webUrl"];
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -67,7 +72,7 @@ namespace SkyBlog
 
         private void SetArticleInfo(Article article)
         {
-            selectArticle = article;
+            _selectArticle = article;
             ArticleTitleLabel.Text = article.Title;
             ArticleSubTitleLabel.Text = article.SubTitle;
             ArticleCreateDateLabel.Text = $@"文章发布时间：{article.CreateDate}";
@@ -75,6 +80,16 @@ namespace SkyBlog
             ArticleClassifyLabel.Text = $@"分类：{article.Classify.Name}";
             ArticleContentLabel.Text = article.Content;
             ArticleContentLabel.Convert();
+        }
+
+        private void ViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(GetArticleUrl(_selectArticle.Id));
+        }
+
+        private string GetArticleUrl(int id)
+        {
+            return $"{_webUrl}/article/content/{id}/full";
         }
     }
 }
