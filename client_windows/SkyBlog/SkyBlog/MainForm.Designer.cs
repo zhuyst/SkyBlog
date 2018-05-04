@@ -47,11 +47,16 @@
             this.ArticleClassifyLabel = new DSkin.Controls.DSkinLabel();
             this.ArticleUpdateDateLabel = new DSkin.Controls.DSkinLabel();
             this.ArticleCreateDateLabel = new DSkin.Controls.DSkinLabel();
+            this.dSkinNewPanel2 = new DSkin.Controls.DSkinNewPanel();
+            this.NextPageButton = new DSkin.Controls.DSkinButton();
+            this.PrevPageButton = new DSkin.Controls.DSkinButton();
+            this.ArticlePageInfo = new DSkin.Controls.DSkinLabel();
             ((System.ComponentModel.ISupportInitialize)(this.ArticleListPanel)).BeginInit();
             this.SkyBlogTitlePanel.SuspendLayout();
             this.ArticlePanel.SuspendLayout();
             this.ContentMenuStrip.SuspendLayout();
             this.dSkinFlowLayoutPanel1.SuspendLayout();
+            this.dSkinNewPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // ArticleTitleLabel
@@ -134,7 +139,7 @@
             this.ArticlePanel.Location = new System.Drawing.Point(360, 60);
             this.ArticlePanel.Name = "ArticlePanel";
             this.ArticlePanel.Padding = new System.Windows.Forms.Padding(20);
-            this.ArticlePanel.Size = new System.Drawing.Size(842, 602);
+            this.ArticlePanel.Size = new System.Drawing.Size(842, 642);
             this.ArticlePanel.TabIndex = 6;
             this.ArticlePanel.Text = "dSkinNewPanel2";
             // 
@@ -165,7 +170,7 @@
             this.ContentMenuStrip.ItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
             this.ContentMenuStrip.Name = "ContentMenuStrip";
             this.ContentMenuStrip.RadiusStyle = DSkin.Common.RoundStyle.All;
-            this.ContentMenuStrip.Size = new System.Drawing.Size(211, 134);
+            this.ContentMenuStrip.Size = new System.Drawing.Size(199, 106);
             this.ContentMenuStrip.SkinAllColor = true;
             this.ContentMenuStrip.TitleAnamorphosis = true;
             this.ContentMenuStrip.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(228)))), ((int)(((byte)(236)))));
@@ -175,33 +180,33 @@
             // CopyToolStripMenuItem
             // 
             this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.CopyToolStripMenuItem.Text = "复制";
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // AllSelectToolStripMenuItem
             // 
             this.AllSelectToolStripMenuItem.Name = "AllSelectToolStripMenuItem";
-            this.AllSelectToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.AllSelectToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.AllSelectToolStripMenuItem.Text = "全选";
             this.AllSelectToolStripMenuItem.Click += new System.EventHandler(this.AllSelectToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(207, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
             // 
             // ViewToolStripMenuItem
             // 
             this.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem";
-            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.ViewToolStripMenuItem.Text = "在网页中查看文章";
             this.ViewToolStripMenuItem.Click += new System.EventHandler(this.ViewToolStripMenuItem_Click);
             // 
             // EditToolStripMenuItem
             // 
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.EditToolStripMenuItem.Text = "编辑文章";
             this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
@@ -215,7 +220,7 @@
             this.dSkinFlowLayoutPanel1.Location = new System.Drawing.Point(17, 107);
             this.dSkinFlowLayoutPanel1.Name = "dSkinFlowLayoutPanel1";
             this.dSkinFlowLayoutPanel1.RightBottom = ((System.Drawing.Image)(resources.GetObject("dSkinFlowLayoutPanel1.RightBottom")));
-            this.dSkinFlowLayoutPanel1.Size = new System.Drawing.Size(822, 489);
+            this.dSkinFlowLayoutPanel1.Size = new System.Drawing.Size(822, 526);
             this.dSkinFlowLayoutPanel1.TabIndex = 7;
             // 
             // ArticleContentLabel
@@ -257,6 +262,82 @@
             this.ArticleCreateDateLabel.TabIndex = 4;
             this.ArticleCreateDateLabel.Text = "文章发布时间：2018-04-23 15:32";
             // 
+            // dSkinNewPanel2
+            // 
+            this.dSkinNewPanel2.BackColor = System.Drawing.Color.Transparent;
+            this.dSkinNewPanel2.Controls.Add(this.NextPageButton);
+            this.dSkinNewPanel2.Controls.Add(this.PrevPageButton);
+            this.dSkinNewPanel2.Controls.Add(this.ArticlePageInfo);
+            this.dSkinNewPanel2.Location = new System.Drawing.Point(0, 660);
+            this.dSkinNewPanel2.Name = "dSkinNewPanel2";
+            this.dSkinNewPanel2.Size = new System.Drawing.Size(360, 40);
+            this.dSkinNewPanel2.TabIndex = 7;
+            this.dSkinNewPanel2.Text = "dSkinNewPanel2";
+            // 
+            // NextPageButton
+            // 
+            this.NextPageButton.AdaptImage = true;
+            this.NextPageButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(186)))), ((int)(((byte)(233)))));
+            this.NextPageButton.ButtonBorderColor = System.Drawing.Color.Gray;
+            this.NextPageButton.ButtonBorderWidth = 1;
+            this.NextPageButton.ButtonStyle = DSkin.DirectUI.ButtonStyles.Style1;
+            this.NextPageButton.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.NextPageButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.NextPageButton.HoverColor = System.Drawing.Color.Empty;
+            this.NextPageButton.HoverImage = null;
+            this.NextPageButton.IsPureColor = false;
+            this.NextPageButton.Location = new System.Drawing.Point(300, 5);
+            this.NextPageButton.Name = "NextPageButton";
+            this.NextPageButton.NormalImage = null;
+            this.NextPageButton.PressColor = System.Drawing.Color.Empty;
+            this.NextPageButton.PressedImage = null;
+            this.NextPageButton.Radius = 25;
+            this.NextPageButton.ShowButtonBorder = true;
+            this.NextPageButton.Size = new System.Drawing.Size(30, 30);
+            this.NextPageButton.TabIndex = 5;
+            this.NextPageButton.Text = "→";
+            this.NextPageButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.NextPageButton.TextPadding = 0;
+            this.NextPageButton.Click += new System.EventHandler(this.NextPageButton_Click);
+            // 
+            // PrevPageButton
+            // 
+            this.PrevPageButton.AdaptImage = true;
+            this.PrevPageButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(186)))), ((int)(((byte)(233)))));
+            this.PrevPageButton.ButtonBorderColor = System.Drawing.Color.Gray;
+            this.PrevPageButton.ButtonBorderWidth = 1;
+            this.PrevPageButton.ButtonStyle = DSkin.DirectUI.ButtonStyles.Style1;
+            this.PrevPageButton.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.PrevPageButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.PrevPageButton.HoverColor = System.Drawing.Color.Empty;
+            this.PrevPageButton.HoverImage = null;
+            this.PrevPageButton.IsPureColor = false;
+            this.PrevPageButton.Location = new System.Drawing.Point(31, 5);
+            this.PrevPageButton.Name = "PrevPageButton";
+            this.PrevPageButton.NormalImage = null;
+            this.PrevPageButton.PressColor = System.Drawing.Color.Empty;
+            this.PrevPageButton.PressedImage = null;
+            this.PrevPageButton.Radius = 25;
+            this.PrevPageButton.ShowButtonBorder = true;
+            this.PrevPageButton.Size = new System.Drawing.Size(30, 30);
+            this.PrevPageButton.TabIndex = 4;
+            this.PrevPageButton.Text = "←";
+            this.PrevPageButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.PrevPageButton.TextPadding = 0;
+            this.PrevPageButton.Click += new System.EventHandler(this.PrevPageButton_Click);
+            // 
+            // ArticlePageInfo
+            // 
+            this.ArticlePageInfo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ArticlePageInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ArticlePageInfo.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.ArticlePageInfo.Location = new System.Drawing.Point(0, 0);
+            this.ArticlePageInfo.Name = "ArticlePageInfo";
+            this.ArticlePageInfo.Size = new System.Drawing.Size(360, 40);
+            this.ArticlePageInfo.TabIndex = 3;
+            this.ArticlePageInfo.Text = "第 1 页,共 4 页";
+            this.ArticlePageInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
@@ -270,7 +351,8 @@
             this.CaptionFont = new System.Drawing.Font("宋体", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.CaptionHeight = 60;
             this.CaptionShowMode = DSkin.TextShowModes.Ordinary;
-            this.ClientSize = new System.Drawing.Size(1200, 663);
+            this.ClientSize = new System.Drawing.Size(1200, 700);
+            this.Controls.Add(this.dSkinNewPanel2);
             this.Controls.Add(this.ArticlePanel);
             this.Controls.Add(this.SkyBlogTitlePanel);
             this.Controls.Add(this.ArticleListPanel);
@@ -297,6 +379,8 @@
             this.ArticlePanel.PerformLayout();
             this.ContentMenuStrip.ResumeLayout(false);
             this.dSkinFlowLayoutPanel1.ResumeLayout(false);
+            this.dSkinNewPanel2.ResumeLayout(false);
+            this.dSkinNewPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -320,5 +404,9 @@
         private System.Windows.Forms.ToolStripMenuItem CopyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AllSelectToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private DSkin.Controls.DSkinNewPanel dSkinNewPanel2;
+        private DSkin.Controls.DSkinButton NextPageButton;
+        private DSkin.Controls.DSkinButton PrevPageButton;
+        private DSkin.Controls.DSkinLabel ArticlePageInfo;
     }
 }
