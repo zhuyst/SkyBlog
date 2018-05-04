@@ -5,14 +5,18 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using WindowsFormsControlLibrary;
+using DSkin.Controls;
 using DSkin.Forms;
 using SkyBlog.Api.Business;
+using SkyBlog.Model.Base;
 using SkyBlog.Model.Business;
 
 namespace SkyBlog
 {
     public partial class MainForm : DSkinForm
     {
+        private const int PageSize = 10;
+
         private readonly ArticleApi _articleApi;
 
         private static string _webUrl;
@@ -20,6 +24,8 @@ namespace SkyBlog
         private readonly Dictionary<int, ArticleListItem> _articles;
 
         private Article _selectArticle;
+
+        private int _pageNum;
 
         public MainForm()
         {
@@ -33,8 +39,23 @@ namespace SkyBlog
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            RequestArticles(1);
+        }
+
+        private void RequestArticles(int pageNum)
+        {
+            _pageNum = pageNum;
+            var page = _articleApi.List(_pageNum, PageSize).Entity;
+            SetArticlePageInfo(page);
+            SetArticleList(page.List);
+        }
+
+        private void SetArticleList(IEnumerable<Article> list)
+        {
+            ArticleListPanel.Items.Clear();
+
             var init = false;
-            foreach (var article in _articleApi.List(1,10).Entity.List)
+            foreach (var article in list)
             {
                 var item = new ArticleListItem(article);
                 _articles[article.Id] = item;
@@ -47,7 +68,45 @@ namespace SkyBlog
             ArticleListPanel.LayoutContent();
         }
 
-        private void ArticleList_ItemClick(object sender, DSkin.Controls.ItemClickEventArgs e)
+        private void SetArticlePageInfo(PageInfo<Article> page)
+        {
+            var pageNum = page.PageNum;
+            var pages = page.Pages;
+
+            ArticlePageInfo.Text = $@"第 {pageNum} 页,共 {pages} 页";
+
+            if (pageNum == 1)
+            {
+                DisableButton(PrevPageButton);
+            }
+            else
+            {
+                EnableButton(PrevPageButton);
+            }
+
+            if (pageNum == pages)
+            {
+                DisableButton(NextPageButton);
+            }
+            else
+            {
+                EnableButton(NextPageButton);
+            }
+        }
+
+        private static void DisableButton(DSkinButton button)
+        {
+            button.Enabled = false;
+            button.BaseColor = Color.FromArgb(245, 245, 245);
+        }
+
+        private static void EnableButton(DSkinButton button)
+        {
+            button.Enabled = true;
+            button.BaseColor = Color.FromArgb(133, 186, 233);
+        }
+
+        private void ArticleList_ItemClick(object sender, ItemClickEventArgs e)
         {
             foreach (var article in _articles)
             {
@@ -118,6 +177,16 @@ namespace SkyBlog
             {
                 Article = _selectArticle
             }.ShowDialog();
+        }
+
+        private void PrevPageButton_Click(object sender, EventArgs e)
+        {
+            RequestArticles(_pageNum - 1);
+        }
+
+        private void NextPageButton_Click(object sender, EventArgs e)
+        {
+            RequestArticles(_pageNum + 1);
         }
     }
 }
