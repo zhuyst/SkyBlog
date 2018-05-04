@@ -65,7 +65,7 @@
             this.dSkinTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.dSkinTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.dSkinTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 166F));
-            this.dSkinTableLayoutPanel1.Size = new System.Drawing.Size(972, 493);
+            this.dSkinTableLayoutPanel1.Size = new System.Drawing.Size(972, 547);
             this.dSkinTableLayoutPanel1.TabIndex = 0;
             // 
             // ContentTextBox
@@ -79,7 +79,7 @@
             this.ContentTextBox.Multiline = true;
             this.ContentTextBox.Name = "ContentTextBox";
             this.ContentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ContentTextBox.Size = new System.Drawing.Size(834, 373);
+            this.ContentTextBox.Size = new System.Drawing.Size(834, 427);
             this.ContentTextBox.TabIndex = 5;
             this.ContentTextBox.TransparencyKey = System.Drawing.Color.Empty;
             this.ContentTextBox.WaterFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -93,7 +93,7 @@
             this.ContentLabal.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.ContentLabal.Location = new System.Drawing.Point(3, 103);
             this.ContentLabal.Name = "ContentLabal";
-            this.ContentLabal.Size = new System.Drawing.Size(112, 387);
+            this.ContentLabal.Size = new System.Drawing.Size(112, 441);
             this.ContentLabal.TabIndex = 4;
             this.ContentLabal.Text = "文章内容：(Markdown)";
             this.ContentLabal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -156,7 +156,7 @@
             this.dSkinNewPanel1.Controls.Add(this.SaveAndExitButton);
             this.dSkinNewPanel1.Controls.Add(this.SaveButton);
             this.dSkinNewPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dSkinNewPanel1.Location = new System.Drawing.Point(14, 549);
+            this.dSkinNewPanel1.Location = new System.Drawing.Point(14, 603);
             this.dSkinNewPanel1.Name = "dSkinNewPanel1";
             this.dSkinNewPanel1.Size = new System.Drawing.Size(972, 46);
             this.dSkinNewPanel1.TabIndex = 1;
@@ -251,7 +251,7 @@
             this.CaptionCenter = true;
             this.CaptionFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
             this.CaptionHeight = 35;
-            this.ClientSize = new System.Drawing.Size(1000, 609);
+            this.ClientSize = new System.Drawing.Size(1000, 663);
             this.Controls.Add(this.dSkinNewPanel1);
             this.Controls.Add(this.dSkinTableLayoutPanel1);
             this.DoubleClickMaximized = false;
@@ -262,8 +262,9 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "EditForm";
-            this.Opacity = 0.95D;
+            this.Opacity = 0.98D;
             this.Padding = new System.Windows.Forms.Padding(10, 15, 10, 10);
+            this.Radius = 20;
             this.Text = "EditForm";
             this.Load += new System.EventHandler(this.EditForm_Load);
             this.dSkinTableLayoutPanel1.ResumeLayout(false);
