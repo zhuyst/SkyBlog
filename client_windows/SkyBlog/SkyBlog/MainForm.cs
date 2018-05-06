@@ -25,7 +25,7 @@ namespace SkyBlog
 
         private Article _selectArticle;
 
-        private int _pageNum;
+        private int _pageNum = 1;
 
         public MainForm()
         {
@@ -187,6 +187,11 @@ namespace SkyBlog
         private void NextPageButton_Click(object sender, EventArgs e)
         {
             RequestArticles(_pageNum + 1);
+        }
+
+        private void ViewIndexToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(_webUrl);
         }
     }
 }
