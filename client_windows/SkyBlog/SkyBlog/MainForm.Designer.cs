@@ -35,10 +35,6 @@
             this.SkyBlogTitlePanel = new DSkin.Controls.DSkinNewPanel();
             this.SkyBlogTitleLabel = new DSkin.Controls.DSkinLabel();
             this.dSkinNewPanel1 = new DSkin.Controls.DSkinNewPanel();
-            this.DeleteButton = new DSkin.Controls.DSkinButton();
-            this.EditButton = new DSkin.Controls.DSkinButton();
-            this.RefreshButton = new DSkin.Controls.DSkinButton();
-            this.ArticlePanel = new DSkin.Controls.DSkinNewPanel();
             this.ContentMenuStrip = new DSkin.Controls.DSkinContextMenuStrip();
             this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AllSelectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +44,10 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeleteButton = new DSkin.Controls.DSkinButton();
+            this.EditButton = new DSkin.Controls.DSkinButton();
+            this.RefreshButton = new DSkin.Controls.DSkinButton();
+            this.ArticlePanel = new DSkin.Controls.DSkinNewPanel();
             this.dSkinFlowLayoutPanel1 = new DSkin.Controls.DSkinFlowLayoutPanel();
             this.ArticleContentLabel = new WindowsFormsControlLibrary.ArticleContent();
             this.ArticleClassifyLabel = new DSkin.Controls.DSkinLabel();
@@ -60,8 +60,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ArticleListPanel)).BeginInit();
             this.SkyBlogTitlePanel.SuspendLayout();
             this.dSkinNewPanel1.SuspendLayout();
-            this.ArticlePanel.SuspendLayout();
             this.ContentMenuStrip.SuspendLayout();
+            this.ArticlePanel.SuspendLayout();
             this.dSkinFlowLayoutPanel1.SuspendLayout();
             this.dSkinNewPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -136,95 +136,6 @@
             this.dSkinNewPanel1.Size = new System.Drawing.Size(779, 60);
             this.dSkinNewPanel1.TabIndex = 5;
             this.dSkinNewPanel1.Text = "dSkinNewPanel1";
-            // 
-            // DeleteButton
-            // 
-            this.DeleteButton.AdaptImage = true;
-            this.DeleteButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(186)))), ((int)(((byte)(233)))));
-            this.DeleteButton.ButtonBorderColor = System.Drawing.Color.Gray;
-            this.DeleteButton.ButtonBorderWidth = 1;
-            this.DeleteButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.DeleteButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.DeleteButton.HoverColor = System.Drawing.Color.Empty;
-            this.DeleteButton.HoverImage = null;
-            this.DeleteButton.IsPureColor = false;
-            this.DeleteButton.Location = new System.Drawing.Point(303, 14);
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.NormalImage = null;
-            this.DeleteButton.PressColor = System.Drawing.Color.Empty;
-            this.DeleteButton.PressedImage = null;
-            this.DeleteButton.Radius = 25;
-            this.DeleteButton.ShowButtonBorder = true;
-            this.DeleteButton.Size = new System.Drawing.Size(100, 40);
-            this.DeleteButton.TabIndex = 5;
-            this.DeleteButton.Text = "删除文章";
-            this.DeleteButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.DeleteButton.TextPadding = 0;
-            // 
-            // EditButton
-            // 
-            this.EditButton.AdaptImage = true;
-            this.EditButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(186)))), ((int)(((byte)(233)))));
-            this.EditButton.ButtonBorderColor = System.Drawing.Color.Gray;
-            this.EditButton.ButtonBorderWidth = 1;
-            this.EditButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.EditButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.EditButton.HoverColor = System.Drawing.Color.Empty;
-            this.EditButton.HoverImage = null;
-            this.EditButton.IsPureColor = false;
-            this.EditButton.Location = new System.Drawing.Point(160, 14);
-            this.EditButton.Name = "EditButton";
-            this.EditButton.NormalImage = null;
-            this.EditButton.PressColor = System.Drawing.Color.Empty;
-            this.EditButton.PressedImage = null;
-            this.EditButton.Radius = 25;
-            this.EditButton.ShowButtonBorder = true;
-            this.EditButton.Size = new System.Drawing.Size(100, 40);
-            this.EditButton.TabIndex = 4;
-            this.EditButton.Text = "编辑文章";
-            this.EditButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.EditButton.TextPadding = 0;
-            // 
-            // RefreshButton
-            // 
-            this.RefreshButton.AdaptImage = true;
-            this.RefreshButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(186)))), ((int)(((byte)(233)))));
-            this.RefreshButton.ButtonBorderColor = System.Drawing.Color.Gray;
-            this.RefreshButton.ButtonBorderWidth = 1;
-            this.RefreshButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.RefreshButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RefreshButton.HoverColor = System.Drawing.Color.Empty;
-            this.RefreshButton.HoverImage = null;
-            this.RefreshButton.IsPureColor = false;
-            this.RefreshButton.Location = new System.Drawing.Point(17, 14);
-            this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.NormalImage = null;
-            this.RefreshButton.PressColor = System.Drawing.Color.Empty;
-            this.RefreshButton.PressedImage = null;
-            this.RefreshButton.Radius = 25;
-            this.RefreshButton.ShowButtonBorder = true;
-            this.RefreshButton.Size = new System.Drawing.Size(100, 40);
-            this.RefreshButton.TabIndex = 3;
-            this.RefreshButton.Text = "刷新列表";
-            this.RefreshButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.RefreshButton.TextPadding = 0;
-            // 
-            // ArticlePanel
-            // 
-            this.ArticlePanel.BackColor = System.Drawing.Color.Transparent;
-            this.ArticlePanel.ContextMenuStrip = this.ContentMenuStrip;
-            this.ArticlePanel.Controls.Add(this.dSkinFlowLayoutPanel1);
-            this.ArticlePanel.Controls.Add(this.ArticleClassifyLabel);
-            this.ArticlePanel.Controls.Add(this.ArticleUpdateDateLabel);
-            this.ArticlePanel.Controls.Add(this.ArticleCreateDateLabel);
-            this.ArticlePanel.Controls.Add(this.ArticleSubTitleLabel);
-            this.ArticlePanel.Controls.Add(this.ArticleTitleLabel);
-            this.ArticlePanel.Location = new System.Drawing.Point(360, 60);
-            this.ArticlePanel.Name = "ArticlePanel";
-            this.ArticlePanel.Padding = new System.Windows.Forms.Padding(20);
-            this.ArticlePanel.Size = new System.Drawing.Size(842, 642);
-            this.ArticlePanel.TabIndex = 6;
-            this.ArticlePanel.Text = "dSkinNewPanel2";
             // 
             // ContentMenuStrip
             // 
@@ -313,6 +224,97 @@
             this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
             this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.DeleteToolStripMenuItem.Text = "删除文章";
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.AdaptImage = true;
+            this.DeleteButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(186)))), ((int)(((byte)(233)))));
+            this.DeleteButton.ButtonBorderColor = System.Drawing.Color.Gray;
+            this.DeleteButton.ButtonBorderWidth = 1;
+            this.DeleteButton.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.DeleteButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DeleteButton.HoverColor = System.Drawing.Color.Empty;
+            this.DeleteButton.HoverImage = null;
+            this.DeleteButton.IsPureColor = false;
+            this.DeleteButton.Location = new System.Drawing.Point(303, 14);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.NormalImage = null;
+            this.DeleteButton.PressColor = System.Drawing.Color.Empty;
+            this.DeleteButton.PressedImage = null;
+            this.DeleteButton.Radius = 25;
+            this.DeleteButton.ShowButtonBorder = true;
+            this.DeleteButton.Size = new System.Drawing.Size(100, 40);
+            this.DeleteButton.TabIndex = 5;
+            this.DeleteButton.Text = "删除文章";
+            this.DeleteButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.DeleteButton.TextPadding = 0;
+            // 
+            // EditButton
+            // 
+            this.EditButton.AdaptImage = true;
+            this.EditButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(186)))), ((int)(((byte)(233)))));
+            this.EditButton.ButtonBorderColor = System.Drawing.Color.Gray;
+            this.EditButton.ButtonBorderWidth = 1;
+            this.EditButton.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.EditButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.EditButton.HoverColor = System.Drawing.Color.Empty;
+            this.EditButton.HoverImage = null;
+            this.EditButton.IsPureColor = false;
+            this.EditButton.Location = new System.Drawing.Point(160, 14);
+            this.EditButton.Name = "EditButton";
+            this.EditButton.NormalImage = null;
+            this.EditButton.PressColor = System.Drawing.Color.Empty;
+            this.EditButton.PressedImage = null;
+            this.EditButton.Radius = 25;
+            this.EditButton.ShowButtonBorder = true;
+            this.EditButton.Size = new System.Drawing.Size(100, 40);
+            this.EditButton.TabIndex = 4;
+            this.EditButton.Text = "编辑文章";
+            this.EditButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.EditButton.TextPadding = 0;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
+            // 
+            // RefreshButton
+            // 
+            this.RefreshButton.AdaptImage = true;
+            this.RefreshButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(186)))), ((int)(((byte)(233)))));
+            this.RefreshButton.ButtonBorderColor = System.Drawing.Color.Gray;
+            this.RefreshButton.ButtonBorderWidth = 1;
+            this.RefreshButton.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.RefreshButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.RefreshButton.HoverColor = System.Drawing.Color.Empty;
+            this.RefreshButton.HoverImage = null;
+            this.RefreshButton.IsPureColor = false;
+            this.RefreshButton.Location = new System.Drawing.Point(17, 14);
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.NormalImage = null;
+            this.RefreshButton.PressColor = System.Drawing.Color.Empty;
+            this.RefreshButton.PressedImage = null;
+            this.RefreshButton.Radius = 25;
+            this.RefreshButton.ShowButtonBorder = true;
+            this.RefreshButton.Size = new System.Drawing.Size(100, 40);
+            this.RefreshButton.TabIndex = 3;
+            this.RefreshButton.Text = "刷新列表";
+            this.RefreshButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.RefreshButton.TextPadding = 0;
+            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            // 
+            // ArticlePanel
+            // 
+            this.ArticlePanel.BackColor = System.Drawing.Color.Transparent;
+            this.ArticlePanel.ContextMenuStrip = this.ContentMenuStrip;
+            this.ArticlePanel.Controls.Add(this.dSkinFlowLayoutPanel1);
+            this.ArticlePanel.Controls.Add(this.ArticleClassifyLabel);
+            this.ArticlePanel.Controls.Add(this.ArticleUpdateDateLabel);
+            this.ArticlePanel.Controls.Add(this.ArticleCreateDateLabel);
+            this.ArticlePanel.Controls.Add(this.ArticleSubTitleLabel);
+            this.ArticlePanel.Controls.Add(this.ArticleTitleLabel);
+            this.ArticlePanel.Location = new System.Drawing.Point(360, 60);
+            this.ArticlePanel.Name = "ArticlePanel";
+            this.ArticlePanel.Padding = new System.Windows.Forms.Padding(20);
+            this.ArticlePanel.Size = new System.Drawing.Size(842, 642);
+            this.ArticlePanel.TabIndex = 6;
+            this.ArticlePanel.Text = "dSkinNewPanel2";
             // 
             // dSkinFlowLayoutPanel1
             // 
@@ -480,9 +482,9 @@
             this.SkyBlogTitlePanel.ResumeLayout(false);
             this.SkyBlogTitlePanel.PerformLayout();
             this.dSkinNewPanel1.ResumeLayout(false);
+            this.ContentMenuStrip.ResumeLayout(false);
             this.ArticlePanel.ResumeLayout(false);
             this.ArticlePanel.PerformLayout();
-            this.ContentMenuStrip.ResumeLayout(false);
             this.dSkinFlowLayoutPanel1.ResumeLayout(false);
             this.dSkinNewPanel2.ResumeLayout(false);
             this.dSkinNewPanel2.PerformLayout();
