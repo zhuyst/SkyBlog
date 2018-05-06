@@ -58,14 +58,14 @@
             this.dSkinTableLayoutPanel1.Controls.Add(this.TitleLabel, 0, 0);
             this.dSkinTableLayoutPanel1.Controls.Add(this.TitleTextBox, 1, 0);
             this.dSkinTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dSkinTableLayoutPanel1.Location = new System.Drawing.Point(9, 31);
+            this.dSkinTableLayoutPanel1.Location = new System.Drawing.Point(14, 50);
             this.dSkinTableLayoutPanel1.Name = "dSkinTableLayoutPanel1";
             this.dSkinTableLayoutPanel1.RightBottom = ((System.Drawing.Image)(resources.GetObject("dSkinTableLayoutPanel1.RightBottom")));
             this.dSkinTableLayoutPanel1.RowCount = 3;
             this.dSkinTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.dSkinTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.dSkinTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 166F));
-            this.dSkinTableLayoutPanel1.Size = new System.Drawing.Size(982, 547);
+            this.dSkinTableLayoutPanel1.Size = new System.Drawing.Size(972, 547);
             this.dSkinTableLayoutPanel1.TabIndex = 0;
             // 
             // ContentTextBox
@@ -74,12 +74,12 @@
             this.ContentTextBox.BitmapCache = false;
             this.ContentTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ContentTextBox.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.ContentTextBox.Location = new System.Drawing.Point(129, 110);
-            this.ContentTextBox.Margin = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.ContentTextBox.Location = new System.Drawing.Point(128, 110);
+            this.ContentTextBox.Margin = new System.Windows.Forms.Padding(10);
             this.ContentTextBox.Multiline = true;
             this.ContentTextBox.Name = "ContentTextBox";
             this.ContentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ContentTextBox.Size = new System.Drawing.Size(843, 427);
+            this.ContentTextBox.Size = new System.Drawing.Size(834, 427);
             this.ContentTextBox.TabIndex = 5;
             this.ContentTextBox.TransparencyKey = System.Drawing.Color.Empty;
             this.ContentTextBox.WaterFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -93,7 +93,7 @@
             this.ContentLabal.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.ContentLabal.Location = new System.Drawing.Point(3, 103);
             this.ContentLabal.Name = "ContentLabal";
-            this.ContentLabal.Size = new System.Drawing.Size(113, 441);
+            this.ContentLabal.Size = new System.Drawing.Size(112, 441);
             this.ContentLabal.TabIndex = 4;
             this.ContentLabal.Text = "文章内容：(Markdown)";
             this.ContentLabal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -103,10 +103,10 @@
             this.SubTitleTextBox.BitmapCache = false;
             this.SubTitleTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SubTitleTextBox.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.SubTitleTextBox.Location = new System.Drawing.Point(129, 60);
-            this.SubTitleTextBox.Margin = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.SubTitleTextBox.Location = new System.Drawing.Point(128, 60);
+            this.SubTitleTextBox.Margin = new System.Windows.Forms.Padding(10);
             this.SubTitleTextBox.Name = "SubTitleTextBox";
-            this.SubTitleTextBox.Size = new System.Drawing.Size(843, 29);
+            this.SubTitleTextBox.Size = new System.Drawing.Size(834, 29);
             this.SubTitleTextBox.TabIndex = 3;
             this.SubTitleTextBox.TransparencyKey = System.Drawing.Color.Empty;
             this.SubTitleTextBox.WaterFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -119,7 +119,7 @@
             this.dSkinLabel1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.dSkinLabel1.Location = new System.Drawing.Point(3, 53);
             this.dSkinLabel1.Name = "dSkinLabel1";
-            this.dSkinLabel1.Size = new System.Drawing.Size(113, 44);
+            this.dSkinLabel1.Size = new System.Drawing.Size(112, 44);
             this.dSkinLabel1.TabIndex = 2;
             this.dSkinLabel1.Text = "文章副标题：";
             this.dSkinLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -130,7 +130,7 @@
             this.TitleLabel.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.TitleLabel.Location = new System.Drawing.Point(3, 3);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(113, 44);
+            this.TitleLabel.Size = new System.Drawing.Size(112, 44);
             this.TitleLabel.TabIndex = 0;
             this.TitleLabel.Text = "文章标题：";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -139,8 +139,8 @@
             // 
             this.TitleTextBox.BitmapCache = false;
             this.TitleTextBox.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.TitleTextBox.Location = new System.Drawing.Point(129, 10);
-            this.TitleTextBox.Margin = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.TitleTextBox.Location = new System.Drawing.Point(128, 10);
+            this.TitleTextBox.Margin = new System.Windows.Forms.Padding(10);
             this.TitleTextBox.Name = "TitleTextBox";
             this.TitleTextBox.Size = new System.Drawing.Size(828, 29);
             this.TitleTextBox.TabIndex = 1;
@@ -156,9 +156,9 @@
             this.dSkinNewPanel1.Controls.Add(this.SaveAndExitButton);
             this.dSkinNewPanel1.Controls.Add(this.SaveButton);
             this.dSkinNewPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dSkinNewPanel1.Location = new System.Drawing.Point(9, 594);
+            this.dSkinNewPanel1.Location = new System.Drawing.Point(14, 589);
             this.dSkinNewPanel1.Name = "dSkinNewPanel1";
-            this.dSkinNewPanel1.Size = new System.Drawing.Size(982, 46);
+            this.dSkinNewPanel1.Size = new System.Drawing.Size(972, 46);
             this.dSkinNewPanel1.TabIndex = 1;
             this.dSkinNewPanel1.Text = "dSkinNewPanel1";
             // 
@@ -180,7 +180,7 @@
             this.ExitButton.NormalImage = null;
             this.ExitButton.PressColor = System.Drawing.Color.Empty;
             this.ExitButton.PressedImage = null;
-            this.ExitButton.Radius = 10;
+            this.ExitButton.Radius = 25;
             this.ExitButton.ShowButtonBorder = true;
             this.ExitButton.Size = new System.Drawing.Size(136, 40);
             this.ExitButton.TabIndex = 5;
@@ -207,7 +207,7 @@
             this.SaveAndExitButton.NormalImage = null;
             this.SaveAndExitButton.PressColor = System.Drawing.Color.Empty;
             this.SaveAndExitButton.PressedImage = null;
-            this.SaveAndExitButton.Radius = 10;
+            this.SaveAndExitButton.Radius = 25;
             this.SaveAndExitButton.ShowButtonBorder = true;
             this.SaveAndExitButton.Size = new System.Drawing.Size(100, 40);
             this.SaveAndExitButton.TabIndex = 4;
@@ -235,7 +235,7 @@
             this.SaveButton.NormalImage = null;
             this.SaveButton.PressColor = System.Drawing.Color.Empty;
             this.SaveButton.PressedImage = null;
-            this.SaveButton.Radius = 10;
+            this.SaveButton.Radius = 25;
             this.SaveButton.ShowButtonBorder = true;
             this.SaveButton.Size = new System.Drawing.Size(100, 40);
             this.SaveButton.TabIndex = 3;
@@ -263,7 +263,7 @@
             this.EnabledDWM = true;
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.InheritTheme = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "EditForm";
             this.Opacity = 0.98D;

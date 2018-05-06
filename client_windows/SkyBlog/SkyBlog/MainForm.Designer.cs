@@ -35,13 +35,19 @@
             this.SkyBlogTitlePanel = new DSkin.Controls.DSkinNewPanel();
             this.SkyBlogTitleLabel = new DSkin.Controls.DSkinLabel();
             this.dSkinNewPanel1 = new DSkin.Controls.DSkinNewPanel();
+            this.DeleteButton = new DSkin.Controls.DSkinButton();
+            this.EditButton = new DSkin.Controls.DSkinButton();
+            this.RefreshButton = new DSkin.Controls.DSkinButton();
             this.ArticlePanel = new DSkin.Controls.DSkinNewPanel();
             this.ContentMenuStrip = new DSkin.Controls.DSkinContextMenuStrip();
             this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AllSelectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewIndexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dSkinFlowLayoutPanel1 = new DSkin.Controls.DSkinFlowLayoutPanel();
             this.ArticleContentLabel = new WindowsFormsControlLibrary.ArticleContent();
             this.ArticleClassifyLabel = new DSkin.Controls.DSkinLabel();
@@ -53,6 +59,7 @@
             this.ArticlePageInfo = new DSkin.Controls.DSkinLabel();
             ((System.ComponentModel.ISupportInitialize)(this.ArticleListPanel)).BeginInit();
             this.SkyBlogTitlePanel.SuspendLayout();
+            this.dSkinNewPanel1.SuspendLayout();
             this.ArticlePanel.SuspendLayout();
             this.ContentMenuStrip.SuspendLayout();
             this.dSkinFlowLayoutPanel1.SuspendLayout();
@@ -120,11 +127,87 @@
             // dSkinNewPanel1
             // 
             this.dSkinNewPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(237)))), ((int)(((byte)(247)))));
+            this.dSkinNewPanel1.ContextMenuStrip = this.ContentMenuStrip;
+            this.dSkinNewPanel1.Controls.Add(this.DeleteButton);
+            this.dSkinNewPanel1.Controls.Add(this.EditButton);
+            this.dSkinNewPanel1.Controls.Add(this.RefreshButton);
             this.dSkinNewPanel1.Location = new System.Drawing.Point(360, 0);
             this.dSkinNewPanel1.Name = "dSkinNewPanel1";
             this.dSkinNewPanel1.Size = new System.Drawing.Size(779, 60);
             this.dSkinNewPanel1.TabIndex = 5;
             this.dSkinNewPanel1.Text = "dSkinNewPanel1";
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.AdaptImage = true;
+            this.DeleteButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(186)))), ((int)(((byte)(233)))));
+            this.DeleteButton.ButtonBorderColor = System.Drawing.Color.Gray;
+            this.DeleteButton.ButtonBorderWidth = 1;
+            this.DeleteButton.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.DeleteButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DeleteButton.HoverColor = System.Drawing.Color.Empty;
+            this.DeleteButton.HoverImage = null;
+            this.DeleteButton.IsPureColor = false;
+            this.DeleteButton.Location = new System.Drawing.Point(303, 14);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.NormalImage = null;
+            this.DeleteButton.PressColor = System.Drawing.Color.Empty;
+            this.DeleteButton.PressedImage = null;
+            this.DeleteButton.Radius = 25;
+            this.DeleteButton.ShowButtonBorder = true;
+            this.DeleteButton.Size = new System.Drawing.Size(100, 40);
+            this.DeleteButton.TabIndex = 5;
+            this.DeleteButton.Text = "删除文章";
+            this.DeleteButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.DeleteButton.TextPadding = 0;
+            // 
+            // EditButton
+            // 
+            this.EditButton.AdaptImage = true;
+            this.EditButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(186)))), ((int)(((byte)(233)))));
+            this.EditButton.ButtonBorderColor = System.Drawing.Color.Gray;
+            this.EditButton.ButtonBorderWidth = 1;
+            this.EditButton.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.EditButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.EditButton.HoverColor = System.Drawing.Color.Empty;
+            this.EditButton.HoverImage = null;
+            this.EditButton.IsPureColor = false;
+            this.EditButton.Location = new System.Drawing.Point(160, 14);
+            this.EditButton.Name = "EditButton";
+            this.EditButton.NormalImage = null;
+            this.EditButton.PressColor = System.Drawing.Color.Empty;
+            this.EditButton.PressedImage = null;
+            this.EditButton.Radius = 25;
+            this.EditButton.ShowButtonBorder = true;
+            this.EditButton.Size = new System.Drawing.Size(100, 40);
+            this.EditButton.TabIndex = 4;
+            this.EditButton.Text = "编辑文章";
+            this.EditButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.EditButton.TextPadding = 0;
+            // 
+            // RefreshButton
+            // 
+            this.RefreshButton.AdaptImage = true;
+            this.RefreshButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(186)))), ((int)(((byte)(233)))));
+            this.RefreshButton.ButtonBorderColor = System.Drawing.Color.Gray;
+            this.RefreshButton.ButtonBorderWidth = 1;
+            this.RefreshButton.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.RefreshButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.RefreshButton.HoverColor = System.Drawing.Color.Empty;
+            this.RefreshButton.HoverImage = null;
+            this.RefreshButton.IsPureColor = false;
+            this.RefreshButton.Location = new System.Drawing.Point(17, 14);
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.NormalImage = null;
+            this.RefreshButton.PressColor = System.Drawing.Color.Empty;
+            this.RefreshButton.PressedImage = null;
+            this.RefreshButton.Radius = 25;
+            this.RefreshButton.ShowButtonBorder = true;
+            this.RefreshButton.Size = new System.Drawing.Size(100, 40);
+            this.RefreshButton.TabIndex = 3;
+            this.RefreshButton.Text = "刷新列表";
+            this.RefreshButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.RefreshButton.TextPadding = 0;
             // 
             // ArticlePanel
             // 
@@ -166,11 +249,14 @@
             this.AllSelectToolStripMenuItem,
             this.toolStripSeparator1,
             this.ViewToolStripMenuItem,
-            this.EditToolStripMenuItem});
+            this.ViewIndexToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.EditToolStripMenuItem,
+            this.DeleteToolStripMenuItem});
             this.ContentMenuStrip.ItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
             this.ContentMenuStrip.Name = "ContentMenuStrip";
             this.ContentMenuStrip.RadiusStyle = DSkin.Common.RoundStyle.All;
-            this.ContentMenuStrip.Size = new System.Drawing.Size(199, 106);
+            this.ContentMenuStrip.Size = new System.Drawing.Size(199, 160);
             this.ContentMenuStrip.SkinAllColor = true;
             this.ContentMenuStrip.TitleAnamorphosis = true;
             this.ContentMenuStrip.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(228)))), ((int)(((byte)(236)))));
@@ -203,12 +289,30 @@
             this.ViewToolStripMenuItem.Text = "在网页中查看文章";
             this.ViewToolStripMenuItem.Click += new System.EventHandler(this.ViewToolStripMenuItem_Click);
             // 
+            // ViewIndexToolStripMenuItem
+            // 
+            this.ViewIndexToolStripMenuItem.Name = "ViewIndexToolStripMenuItem";
+            this.ViewIndexToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.ViewIndexToolStripMenuItem.Text = "打开SkyBlog首页";
+            this.ViewIndexToolStripMenuItem.Click += new System.EventHandler(this.ViewIndexToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(195, 6);
+            // 
             // EditToolStripMenuItem
             // 
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
             this.EditToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.EditToolStripMenuItem.Text = "编辑文章";
             this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
+            // 
+            // DeleteToolStripMenuItem
+            // 
+            this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
+            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.DeleteToolStripMenuItem.Text = "删除文章";
             // 
             // dSkinFlowLayoutPanel1
             // 
@@ -375,6 +479,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ArticleListPanel)).EndInit();
             this.SkyBlogTitlePanel.ResumeLayout(false);
             this.SkyBlogTitlePanel.PerformLayout();
+            this.dSkinNewPanel1.ResumeLayout(false);
             this.ArticlePanel.ResumeLayout(false);
             this.ArticlePanel.PerformLayout();
             this.ContentMenuStrip.ResumeLayout(false);
@@ -408,5 +513,11 @@
         private DSkin.Controls.DSkinButton NextPageButton;
         private DSkin.Controls.DSkinButton PrevPageButton;
         private DSkin.Controls.DSkinLabel ArticlePageInfo;
+        private System.Windows.Forms.ToolStripMenuItem ViewIndexToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem DeleteToolStripMenuItem;
+        private DSkin.Controls.DSkinButton RefreshButton;
+        private DSkin.Controls.DSkinButton DeleteButton;
+        private DSkin.Controls.DSkinButton EditButton;
     }
 }
