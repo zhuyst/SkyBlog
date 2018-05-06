@@ -193,5 +193,15 @@ namespace SkyBlog
         {
             Process.Start(_webUrl);
         }
+
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
+            RequestArticles(1);
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            new LoginForm().ShowDialog();
+        }
     }
 }
