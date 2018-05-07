@@ -134,10 +134,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\password.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\username.png" />
+    <Content Include="Resources\密码.png" />
+    <Content Include="Resources\用户名.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
