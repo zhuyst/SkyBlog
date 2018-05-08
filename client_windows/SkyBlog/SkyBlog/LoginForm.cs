@@ -1,29 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DSkin.Forms;
 using SkyBlog.Api.Business;
+using SkyBlog.Model.Business;
 using SkyBlog.Model.LocalStorage;
 
 namespace SkyBlog
 {
     public partial class LoginForm : DSkinForm
     {
+        private readonly Action<User> _loginAction;
+
         private readonly StorageService _storageService;
 
         private readonly AuthApi _authApi;
 
-        public LoginForm()
+        public LoginForm(Action<User> loginAction)
         {
             InitializeComponent();
+
             _storageService = StorageService.GetInstance();
             _authApi = AuthApi.GetInstance();
+
+            _loginAction = loginAction;
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -55,6 +54,9 @@ namespace SkyBlog
             else
             {
                 SaveSettings(result.Entity.Token);
+                DialogResult = DialogResult.OK;
+                _loginAction?.Invoke(result.Entity.User);
+
                 Close();
             }
         }

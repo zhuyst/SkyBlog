@@ -44,12 +44,11 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.DeleteButton = new DSkin.Controls.DSkinButton();
-            this.EditButton = new DSkin.Controls.DSkinButton();
-            this.RefreshButton = new DSkin.Controls.DSkinButton();
+            this.DeleteButton = new DSkin.Controls.DSkinPictureBox();
+            this.EditButton = new DSkin.Controls.DSkinPictureBox();
+            this.ReloadButton = new DSkin.Controls.DSkinPictureBox();
             this.ArticlePanel = new DSkin.Controls.DSkinNewPanel();
             this.dSkinFlowLayoutPanel1 = new DSkin.Controls.DSkinFlowLayoutPanel();
-            this.ArticleContentLabel = new WindowsFormsControlLibrary.ArticleContent();
             this.ArticleClassifyLabel = new DSkin.Controls.DSkinLabel();
             this.ArticleUpdateDateLabel = new DSkin.Controls.DSkinLabel();
             this.ArticleCreateDateLabel = new DSkin.Controls.DSkinLabel();
@@ -57,6 +56,8 @@
             this.NextPageButton = new DSkin.Controls.DSkinButton();
             this.PrevPageButton = new DSkin.Controls.DSkinButton();
             this.ArticlePageInfo = new DSkin.Controls.DSkinLabel();
+            this.ArticleContentLabel = new WindowsFormsControlLibrary.ArticleContent();
+            this.UserToolStrip = new WindowsFormsControlLibrary.UserToolStrip();
             ((System.ComponentModel.ISupportInitialize)(this.ArticleListPanel)).BeginInit();
             this.SkyBlogTitlePanel.SuspendLayout();
             this.dSkinNewPanel1.SuspendLayout();
@@ -128,11 +129,13 @@
             // 
             this.dSkinNewPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(237)))), ((int)(((byte)(247)))));
             this.dSkinNewPanel1.ContextMenuStrip = this.ContentMenuStrip;
+            this.dSkinNewPanel1.Controls.Add(this.UserToolStrip);
             this.dSkinNewPanel1.Controls.Add(this.DeleteButton);
             this.dSkinNewPanel1.Controls.Add(this.EditButton);
-            this.dSkinNewPanel1.Controls.Add(this.RefreshButton);
+            this.dSkinNewPanel1.Controls.Add(this.ReloadButton);
             this.dSkinNewPanel1.Location = new System.Drawing.Point(360, 0);
             this.dSkinNewPanel1.Name = "dSkinNewPanel1";
+            this.dSkinNewPanel1.Padding = new System.Windows.Forms.Padding(50, 10, 0, 10);
             this.dSkinNewPanel1.Size = new System.Drawing.Size(779, 60);
             this.dSkinNewPanel1.TabIndex = 5;
             this.dSkinNewPanel1.Text = "dSkinNewPanel1";
@@ -227,77 +230,44 @@
             // 
             // DeleteButton
             // 
-            this.DeleteButton.AdaptImage = true;
-            this.DeleteButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(186)))), ((int)(((byte)(233)))));
-            this.DeleteButton.ButtonBorderColor = System.Drawing.Color.Gray;
-            this.DeleteButton.ButtonBorderWidth = 1;
-            this.DeleteButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.DeleteButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.DeleteButton.HoverColor = System.Drawing.Color.Empty;
-            this.DeleteButton.HoverImage = null;
-            this.DeleteButton.IsPureColor = false;
-            this.DeleteButton.Location = new System.Drawing.Point(303, 14);
+            this.DeleteButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DeleteButton.Image = global::SkyBlog.Properties.Resources.delete;
+            this.DeleteButton.Images = new System.Drawing.Image[] {
+        ((System.Drawing.Image)(global::SkyBlog.Properties.Resources.delete))};
+            this.DeleteButton.Location = new System.Drawing.Point(222, 10);
             this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.NormalImage = null;
-            this.DeleteButton.PressColor = System.Drawing.Color.Empty;
-            this.DeleteButton.PressedImage = null;
-            this.DeleteButton.Radius = 25;
-            this.DeleteButton.ShowButtonBorder = true;
-            this.DeleteButton.Size = new System.Drawing.Size(100, 40);
+            this.DeleteButton.Size = new System.Drawing.Size(65, 44);
+            this.DeleteButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.DeleteButton.TabIndex = 5;
-            this.DeleteButton.Text = "删除文章";
-            this.DeleteButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.DeleteButton.TextPadding = 0;
+            this.DeleteButton.Text = "dSkinPictureBox1";
             // 
             // EditButton
             // 
-            this.EditButton.AdaptImage = true;
-            this.EditButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(186)))), ((int)(((byte)(233)))));
-            this.EditButton.ButtonBorderColor = System.Drawing.Color.Gray;
-            this.EditButton.ButtonBorderWidth = 1;
-            this.EditButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.EditButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.EditButton.HoverColor = System.Drawing.Color.Empty;
-            this.EditButton.HoverImage = null;
-            this.EditButton.IsPureColor = false;
-            this.EditButton.Location = new System.Drawing.Point(160, 14);
+            this.EditButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EditButton.Image = global::SkyBlog.Properties.Resources.edit;
+            this.EditButton.Images = new System.Drawing.Image[] {
+        ((System.Drawing.Image)(global::SkyBlog.Properties.Resources.edit))};
+            this.EditButton.Location = new System.Drawing.Point(128, 10);
             this.EditButton.Name = "EditButton";
-            this.EditButton.NormalImage = null;
-            this.EditButton.PressColor = System.Drawing.Color.Empty;
-            this.EditButton.PressedImage = null;
-            this.EditButton.Radius = 25;
-            this.EditButton.ShowButtonBorder = true;
-            this.EditButton.Size = new System.Drawing.Size(100, 40);
+            this.EditButton.Size = new System.Drawing.Size(54, 44);
+            this.EditButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.EditButton.TabIndex = 4;
-            this.EditButton.Text = "编辑文章";
-            this.EditButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.EditButton.TextPadding = 0;
+            this.EditButton.Text = "dSkinPictureBox1";
             this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
-            // RefreshButton
+            // ReloadButton
             // 
-            this.RefreshButton.AdaptImage = true;
-            this.RefreshButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(186)))), ((int)(((byte)(233)))));
-            this.RefreshButton.ButtonBorderColor = System.Drawing.Color.Gray;
-            this.RefreshButton.ButtonBorderWidth = 1;
-            this.RefreshButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.RefreshButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RefreshButton.HoverColor = System.Drawing.Color.Empty;
-            this.RefreshButton.HoverImage = null;
-            this.RefreshButton.IsPureColor = false;
-            this.RefreshButton.Location = new System.Drawing.Point(17, 14);
-            this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.NormalImage = null;
-            this.RefreshButton.PressColor = System.Drawing.Color.Empty;
-            this.RefreshButton.PressedImage = null;
-            this.RefreshButton.Radius = 25;
-            this.RefreshButton.ShowButtonBorder = true;
-            this.RefreshButton.Size = new System.Drawing.Size(100, 40);
-            this.RefreshButton.TabIndex = 3;
-            this.RefreshButton.Text = "刷新列表";
-            this.RefreshButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.RefreshButton.TextPadding = 0;
-            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            this.ReloadButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ReloadButton.Image = global::SkyBlog.Properties.Resources.reload;
+            this.ReloadButton.Images = new System.Drawing.Image[] {
+        ((System.Drawing.Image)(global::SkyBlog.Properties.Resources.reload))};
+            this.ReloadButton.Location = new System.Drawing.Point(23, 10);
+            this.ReloadButton.Name = "ReloadButton";
+            this.ReloadButton.Size = new System.Drawing.Size(65, 44);
+            this.ReloadButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ReloadButton.TabIndex = 3;
+            this.ReloadButton.Text = "dSkinPictureBox1";
+            this.ReloadButton.Click += new System.EventHandler(this.ReloadButton_Click);
             // 
             // ArticlePanel
             // 
@@ -328,18 +298,6 @@
             this.dSkinFlowLayoutPanel1.RightBottom = ((System.Drawing.Image)(resources.GetObject("dSkinFlowLayoutPanel1.RightBottom")));
             this.dSkinFlowLayoutPanel1.Size = new System.Drawing.Size(822, 526);
             this.dSkinFlowLayoutPanel1.TabIndex = 7;
-            // 
-            // ArticleContentLabel
-            // 
-            this.ArticleContentLabel.AutoSize = false;
-            this.ArticleContentLabel.AutoSizeHeightOnly = true;
-            this.ArticleContentLabel.BaseStylesheet = "";
-            this.ArticleContentLabel.IsContextMenuEnabled = false;
-            this.ArticleContentLabel.Location = new System.Drawing.Point(3, 3);
-            this.ArticleContentLabel.Name = "ArticleContentLabel";
-            this.ArticleContentLabel.Size = new System.Drawing.Size(798, 82);
-            this.ArticleContentLabel.TabIndex = 0;
-            this.ArticleContentLabel.Text = "<h1>文章内容</h1>";
             // 
             // ArticleClassifyLabel
             // 
@@ -444,6 +402,75 @@
             this.ArticlePageInfo.Text = "第 1 页,共 4 页";
             this.ArticlePageInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // ArticleContentLabel
+            // 
+            this.ArticleContentLabel.AutoSize = false;
+            this.ArticleContentLabel.AutoSizeHeightOnly = true;
+            this.ArticleContentLabel.BaseStylesheet = "";
+            this.ArticleContentLabel.IsContextMenuEnabled = false;
+            this.ArticleContentLabel.Location = new System.Drawing.Point(3, 3);
+            this.ArticleContentLabel.Name = "ArticleContentLabel";
+            this.ArticleContentLabel.Size = new System.Drawing.Size(798, 82);
+            this.ArticleContentLabel.TabIndex = 0;
+            this.ArticleContentLabel.Text = "<h1>文章内容</h1>";
+            // 
+            // UserToolStrip
+            // 
+            this.UserToolStrip.Arrow = System.Drawing.Color.Black;
+            this.UserToolStrip.Back = System.Drawing.Color.White;
+            this.UserToolStrip.BackColor = System.Drawing.Color.White;
+            this.UserToolStrip.BackRadius = 4;
+            this.UserToolStrip.BackRectangle = new System.Drawing.Rectangle(10, 10, 10, 10);
+            this.UserToolStrip.Base = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(200)))), ((int)(((byte)(254)))));
+            this.UserToolStrip.BaseFore = System.Drawing.Color.Black;
+            this.UserToolStrip.BaseForeAnamorphosis = false;
+            this.UserToolStrip.BaseForeAnamorphosisBorder = 4;
+            this.UserToolStrip.BaseForeAnamorphosisColor = System.Drawing.Color.White;
+            this.UserToolStrip.BaseForeOffset = new System.Drawing.Point(0, 0);
+            this.UserToolStrip.BaseHoverFore = System.Drawing.Color.White;
+            this.UserToolStrip.BaseItemAnamorphosis = true;
+            this.UserToolStrip.BaseItemBorder = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.UserToolStrip.BaseItemBorderShow = true;
+            this.UserToolStrip.BaseItemDown = ((System.Drawing.Image)(resources.GetObject("UserToolStrip.BaseItemDown")));
+            this.UserToolStrip.BaseItemHover = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.UserToolStrip.BaseItemMouse = ((System.Drawing.Image)(resources.GetObject("UserToolStrip.BaseItemMouse")));
+            this.UserToolStrip.BaseItemNorml = null;
+            this.UserToolStrip.BaseItemPressed = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.UserToolStrip.BaseItemRadius = 4;
+            this.UserToolStrip.BaseItemRadiusStyle = DSkin.Common.RoundStyle.All;
+            this.UserToolStrip.BaseItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.UserToolStrip.BindTabControl = null;
+            this.UserToolStrip.CheckedImage = null;
+            this.UserToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.UserToolStrip.DropDownImageSeparator = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
+            this.UserToolStrip.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.UserToolStrip.Fore = System.Drawing.Color.Black;
+            this.UserToolStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 4, 2);
+            this.UserToolStrip.HoverFore = System.Drawing.Color.White;
+            this.UserToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.UserToolStrip.ItemAnamorphosis = true;
+            this.UserToolStrip.ItemBorder = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.UserToolStrip.ItemBorderShow = true;
+            this.UserToolStrip.ItemHover = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.UserToolStrip.ItemPressed = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.UserToolStrip.ItemRadius = 4;
+            this.UserToolStrip.ItemRadiusStyle = DSkin.Common.RoundStyle.All;
+            this.UserToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.UserToolStrip.Location = new System.Drawing.Point(365, 10);
+            this.UserToolStrip.LoginHandler = null;
+            this.UserToolStrip.LoginUser = null;
+            this.UserToolStrip.LogoutHandler = null;
+            this.UserToolStrip.Name = "UserToolStrip";
+            this.UserToolStrip.RadiusStyle = DSkin.Common.RoundStyle.All;
+            this.UserToolStrip.Size = new System.Drawing.Size(26, 111);
+            this.UserToolStrip.SkinAllColor = true;
+            this.UserToolStrip.TabIndex = 7;
+            this.UserToolStrip.Text = "userToolStrip1";
+            this.UserToolStrip.TitleAnamorphosis = true;
+            this.UserToolStrip.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(228)))), ((int)(((byte)(236)))));
+            this.UserToolStrip.TitleRadius = 4;
+            this.UserToolStrip.TitleRadiusStyle = DSkin.Common.RoundStyle.All;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
@@ -482,6 +509,7 @@
             this.SkyBlogTitlePanel.ResumeLayout(false);
             this.SkyBlogTitlePanel.PerformLayout();
             this.dSkinNewPanel1.ResumeLayout(false);
+            this.dSkinNewPanel1.PerformLayout();
             this.ContentMenuStrip.ResumeLayout(false);
             this.ArticlePanel.ResumeLayout(false);
             this.ArticlePanel.PerformLayout();
@@ -518,8 +546,9 @@
         private System.Windows.Forms.ToolStripMenuItem ViewIndexToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem DeleteToolStripMenuItem;
-        private DSkin.Controls.DSkinButton RefreshButton;
-        private DSkin.Controls.DSkinButton DeleteButton;
-        private DSkin.Controls.DSkinButton EditButton;
+        private DSkin.Controls.DSkinPictureBox ReloadButton;
+        private DSkin.Controls.DSkinPictureBox EditButton;
+        private DSkin.Controls.DSkinPictureBox DeleteButton;
+        private WindowsFormsControlLibrary.UserToolStrip UserToolStrip;
     }
 }
