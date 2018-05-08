@@ -8,6 +8,8 @@
 
         public bool AutoLogin { get; set; }
 
+        public string Token { get; set; }
+
         public string GetFileName()
         {
             return FileName;
