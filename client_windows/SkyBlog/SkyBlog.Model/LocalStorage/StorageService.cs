@@ -12,6 +12,8 @@ namespace SkyBlog.Model.LocalStorage
     {
         private static StorageService _instance;
 
+        private readonly Dictionary<string, IStorable> _storables;
+
         private readonly string _storagePath;
 
         public static StorageService GetInstance()
@@ -21,6 +23,8 @@ namespace SkyBlog.Model.LocalStorage
 
         private StorageService()
         {
+            _storables = new Dictionary<string, IStorable>();
+
             var path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             _storagePath = path + "/SkyBlog/";
             Directory.CreateDirectory(_storagePath);
@@ -28,14 +32,12 @@ namespace SkyBlog.Model.LocalStorage
 
         public LoginSettingsStorage GetLoginSettingsStorage()
         {
-            var json = ReadFile(LoginSettingsStorage.FileName);
-            return json == null ? new LoginSettingsStorage() : JsonConvert.DeserializeObject<LoginSettingsStorage>(json);
+            return GetStorage<LoginSettingsStorage>(LoginSettingsStorage.FileName);
         }
 
         public UserStorage GetUserStorage()
         {
-            var json = ReadFile(UserStorage.FileName);
-            return json == null ? new UserStorage() : JsonConvert.DeserializeObject<UserStorage>(json);
+            return GetStorage<UserStorage>(UserStorage.FileName);
         }
 
         public void SaveStorage<T>(T storable) where T : IStorable
@@ -44,6 +46,22 @@ namespace SkyBlog.Model.LocalStorage
             var json = JsonConvert.SerializeObject(storable);
 
             File.WriteAllText(path,json);
+        }
+
+        public T GetStorage<T>(string fileName) where T : IStorable, new()
+        {
+            if (_storables.ContainsKey(fileName))
+            {
+                return (T)_storables[fileName];
+            }
+
+            var json = ReadFile(fileName);
+
+            var storage = json == null ? new T() :
+                JsonConvert.DeserializeObject<T>(json);
+            _storables[fileName] = storage;
+
+            return storage;
         }
 
         private string ReadFile(string fileName)
