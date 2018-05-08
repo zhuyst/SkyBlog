@@ -32,33 +32,39 @@ namespace SkyBlog.Model.LocalStorage
 
         public LoginSettingsStorage GetLoginSettingsStorage()
         {
-            return GetStorage<LoginSettingsStorage>(LoginSettingsStorage.FileName);
+            return GetStorage<LoginSettingsStorage>();
         }
 
         public UserStorage GetUserStorage()
         {
-            return GetStorage<UserStorage>(UserStorage.FileName);
+            return GetStorage<UserStorage>();
         }
 
         public void SaveStorage<T>(T storable) where T : IStorable
         {
-            var path = _storagePath + storable.GetFileName();
+            var fileName = storable.GetFileName();
+            var path = _storagePath + fileName;
             var json = JsonConvert.SerializeObject(storable);
 
             File.WriteAllText(path,json);
+            _storables[fileName] = storable;
         }
 
-        public T GetStorage<T>(string fileName) where T : IStorable, new()
+        public T GetStorage<T>() where T : IStorable, new()
         {
+            var storage = new T();
+            var fileName = storage.GetFileName();
+
             if (_storables.ContainsKey(fileName))
             {
                 return (T)_storables[fileName];
             }
 
             var json = ReadFile(fileName);
-
-            var storage = json == null ? new T() :
-                JsonConvert.DeserializeObject<T>(json);
+            if (json != null)
+            {
+                storage = JsonConvert.DeserializeObject<T>(json);
+            }
             _storables[fileName] = storage;
 
             return storage;
