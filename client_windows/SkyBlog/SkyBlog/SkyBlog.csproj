@@ -82,6 +82,10 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainForm.ArticleList.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="EditForm.resx">
@@ -134,6 +138,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\修改.png" />
+    <Content Include="Resources\删除.png" />
+    <Content Include="Resources\刷新.png" />
     <Content Include="Resources\密码.png" />
     <Content Include="Resources\用户名.png" />
   </ItemGroup>
