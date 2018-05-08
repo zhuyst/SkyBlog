@@ -10,6 +10,7 @@ using DSkin.Forms;
 using SkyBlog.Api.Business;
 using SkyBlog.Model.Base;
 using SkyBlog.Model.Business;
+using SkyBlog.Model.LocalStorage;
 
 namespace SkyBlog
 {
@@ -18,6 +19,10 @@ namespace SkyBlog
         private const int PageSize = 10;
 
         private readonly ArticleApi _articleApi;
+
+        private readonly AuthApi _authApi;
+
+        private readonly StorageService _storageService;
 
         private static string _webUrl;
 
@@ -32,7 +37,10 @@ namespace SkyBlog
             InitializeComponent();
 
             _articles = new Dictionary<int, ArticleListItem>();
+
             _articleApi = ArticleApi.GetInstance();
+            _storageService = StorageService.GetInstance();
+            _authApi = AuthApi.GetInstance();
 
             _webUrl = ConfigurationManager.AppSettings["webUrl"];
         }
@@ -40,6 +48,7 @@ namespace SkyBlog
         private void MainForm_Load(object sender, EventArgs e)
         {
             RequestArticles(1);
+            AutoLogin();
         }
 
         private void RequestArticles(int pageNum)
@@ -48,6 +57,18 @@ namespace SkyBlog
             var page = _articleApi.List(_pageNum, PageSize).Entity;
             SetArticlePageInfo(page);
             SetArticleList(page.List);
+        }
+
+        private void AutoLogin()
+        {
+            var loginSettingsStorage = _storageService.GetLoginSettingsStorage();
+            if (!loginSettingsStorage.AutoLogin) return;
+
+            var result = _authApi.Refresh(loginSettingsStorage.Token);
+            if (result.Code != 200) return;
+
+            loginSettingsStorage.Token = result.Entity.Token;
+            _storageService.SaveStorage(loginSettingsStorage);
         }
 
         private void SetArticleList(IEnumerable<Article> list)
