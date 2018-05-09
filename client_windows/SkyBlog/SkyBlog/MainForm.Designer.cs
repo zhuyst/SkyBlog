@@ -38,17 +38,19 @@
             this.ContentMenuStrip = new DSkin.Controls.DSkinContextMenuStrip();
             this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AllSelectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewIndexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UserToolStrip = new WindowsFormsControlLibrary.UserToolStrip();
             this.DeleteButton = new DSkin.Controls.DSkinPictureBox();
             this.EditButton = new DSkin.Controls.DSkinPictureBox();
             this.ReloadButton = new DSkin.Controls.DSkinPictureBox();
             this.ArticlePanel = new DSkin.Controls.DSkinNewPanel();
             this.dSkinFlowLayoutPanel1 = new DSkin.Controls.DSkinFlowLayoutPanel();
+            this.ArticleContentLabel = new WindowsFormsControlLibrary.ArticleContent();
             this.ArticleClassifyLabel = new DSkin.Controls.DSkinLabel();
             this.ArticleUpdateDateLabel = new DSkin.Controls.DSkinLabel();
             this.ArticleCreateDateLabel = new DSkin.Controls.DSkinLabel();
@@ -56,8 +58,6 @@
             this.NextPageButton = new DSkin.Controls.DSkinButton();
             this.PrevPageButton = new DSkin.Controls.DSkinButton();
             this.ArticlePageInfo = new DSkin.Controls.DSkinLabel();
-            this.ArticleContentLabel = new WindowsFormsControlLibrary.ArticleContent();
-            this.UserToolStrip = new WindowsFormsControlLibrary.UserToolStrip();
             ((System.ComponentModel.ISupportInitialize)(this.ArticleListPanel)).BeginInit();
             this.SkyBlogTitlePanel.SuspendLayout();
             this.dSkinNewPanel1.SuspendLayout();
@@ -161,16 +161,16 @@
             this.ContentMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CopyToolStripMenuItem,
             this.AllSelectToolStripMenuItem,
-            this.toolStripSeparator1,
+            this.ToolStripSeparator1,
             this.ViewToolStripMenuItem,
             this.ViewIndexToolStripMenuItem,
-            this.toolStripSeparator2,
+            this.ToolStripSeparator2,
             this.EditToolStripMenuItem,
             this.DeleteToolStripMenuItem});
             this.ContentMenuStrip.ItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
             this.ContentMenuStrip.Name = "ContentMenuStrip";
             this.ContentMenuStrip.RadiusStyle = DSkin.Common.RoundStyle.All;
-            this.ContentMenuStrip.Size = new System.Drawing.Size(199, 160);
+            this.ContentMenuStrip.Size = new System.Drawing.Size(211, 188);
             this.ContentMenuStrip.SkinAllColor = true;
             this.ContentMenuStrip.TitleAnamorphosis = true;
             this.ContentMenuStrip.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(228)))), ((int)(((byte)(236)))));
@@ -180,53 +180,110 @@
             // CopyToolStripMenuItem
             // 
             this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.CopyToolStripMenuItem.Text = "复制";
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // AllSelectToolStripMenuItem
             // 
             this.AllSelectToolStripMenuItem.Name = "AllSelectToolStripMenuItem";
-            this.AllSelectToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.AllSelectToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.AllSelectToolStripMenuItem.Text = "全选";
             this.AllSelectToolStripMenuItem.Click += new System.EventHandler(this.AllSelectToolStripMenuItem_Click);
             // 
-            // toolStripSeparator1
+            // ToolStripSeparator1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
+            this.ToolStripSeparator1.Name = "ToolStripSeparator1";
+            this.ToolStripSeparator1.Size = new System.Drawing.Size(207, 6);
             // 
             // ViewToolStripMenuItem
             // 
             this.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem";
-            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.ViewToolStripMenuItem.Text = "在网页中查看文章";
             this.ViewToolStripMenuItem.Click += new System.EventHandler(this.ViewToolStripMenuItem_Click);
             // 
             // ViewIndexToolStripMenuItem
             // 
             this.ViewIndexToolStripMenuItem.Name = "ViewIndexToolStripMenuItem";
-            this.ViewIndexToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.ViewIndexToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.ViewIndexToolStripMenuItem.Text = "打开SkyBlog首页";
             this.ViewIndexToolStripMenuItem.Click += new System.EventHandler(this.ViewIndexToolStripMenuItem_Click);
             // 
-            // toolStripSeparator2
+            // ToolStripSeparator2
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(195, 6);
+            this.ToolStripSeparator2.Name = "ToolStripSeparator2";
+            this.ToolStripSeparator2.Size = new System.Drawing.Size(207, 6);
             // 
             // EditToolStripMenuItem
             // 
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.EditToolStripMenuItem.Text = "编辑文章";
             this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // DeleteToolStripMenuItem
             // 
             this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
-            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.DeleteToolStripMenuItem.Text = "删除文章";
+            // 
+            // UserToolStrip
+            // 
+            this.UserToolStrip.Arrow = System.Drawing.Color.Black;
+            this.UserToolStrip.Back = System.Drawing.Color.White;
+            this.UserToolStrip.BackColor = System.Drawing.Color.White;
+            this.UserToolStrip.BackRadius = 4;
+            this.UserToolStrip.BackRectangle = new System.Drawing.Rectangle(10, 10, 10, 10);
+            this.UserToolStrip.Base = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(200)))), ((int)(((byte)(254)))));
+            this.UserToolStrip.BaseFore = System.Drawing.Color.Black;
+            this.UserToolStrip.BaseForeAnamorphosis = false;
+            this.UserToolStrip.BaseForeAnamorphosisBorder = 4;
+            this.UserToolStrip.BaseForeAnamorphosisColor = System.Drawing.Color.White;
+            this.UserToolStrip.BaseForeOffset = new System.Drawing.Point(0, 0);
+            this.UserToolStrip.BaseHoverFore = System.Drawing.Color.White;
+            this.UserToolStrip.BaseItemAnamorphosis = true;
+            this.UserToolStrip.BaseItemBorder = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.UserToolStrip.BaseItemBorderShow = true;
+            this.UserToolStrip.BaseItemDown = ((System.Drawing.Image)(resources.GetObject("UserToolStrip.BaseItemDown")));
+            this.UserToolStrip.BaseItemHover = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.UserToolStrip.BaseItemMouse = ((System.Drawing.Image)(resources.GetObject("UserToolStrip.BaseItemMouse")));
+            this.UserToolStrip.BaseItemNorml = null;
+            this.UserToolStrip.BaseItemPressed = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.UserToolStrip.BaseItemRadius = 4;
+            this.UserToolStrip.BaseItemRadiusStyle = DSkin.Common.RoundStyle.All;
+            this.UserToolStrip.BaseItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.UserToolStrip.BindTabControl = null;
+            this.UserToolStrip.CheckedImage = null;
+            this.UserToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.UserToolStrip.DropDownImageSeparator = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
+            this.UserToolStrip.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.UserToolStrip.Fore = System.Drawing.Color.Black;
+            this.UserToolStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 4, 2);
+            this.UserToolStrip.HoverFore = System.Drawing.Color.White;
+            this.UserToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.UserToolStrip.ItemAnamorphosis = true;
+            this.UserToolStrip.ItemBorder = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.UserToolStrip.ItemBorderShow = true;
+            this.UserToolStrip.ItemHover = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.UserToolStrip.ItemPressed = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.UserToolStrip.ItemRadius = 4;
+            this.UserToolStrip.ItemRadiusStyle = DSkin.Common.RoundStyle.All;
+            this.UserToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.UserToolStrip.Location = new System.Drawing.Point(365, 10);
+            this.UserToolStrip.LoginHandler = null;
+            this.UserToolStrip.LoginUser = null;
+            this.UserToolStrip.LogoutHandler = null;
+            this.UserToolStrip.Name = "UserToolStrip";
+            this.UserToolStrip.RadiusStyle = DSkin.Common.RoundStyle.All;
+            this.UserToolStrip.Size = new System.Drawing.Size(26, 111);
+            this.UserToolStrip.SkinAllColor = true;
+            this.UserToolStrip.TabIndex = 7;
+            this.UserToolStrip.Text = "userToolStrip1";
+            this.UserToolStrip.TitleAnamorphosis = true;
+            this.UserToolStrip.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(228)))), ((int)(((byte)(236)))));
+            this.UserToolStrip.TitleRadius = 4;
+            this.UserToolStrip.TitleRadiusStyle = DSkin.Common.RoundStyle.All;
             // 
             // DeleteButton
             // 
@@ -298,6 +355,18 @@
             this.dSkinFlowLayoutPanel1.RightBottom = ((System.Drawing.Image)(resources.GetObject("dSkinFlowLayoutPanel1.RightBottom")));
             this.dSkinFlowLayoutPanel1.Size = new System.Drawing.Size(822, 526);
             this.dSkinFlowLayoutPanel1.TabIndex = 7;
+            // 
+            // ArticleContentLabel
+            // 
+            this.ArticleContentLabel.AutoSize = false;
+            this.ArticleContentLabel.AutoSizeHeightOnly = true;
+            this.ArticleContentLabel.BaseStylesheet = "";
+            this.ArticleContentLabel.IsContextMenuEnabled = false;
+            this.ArticleContentLabel.Location = new System.Drawing.Point(3, 3);
+            this.ArticleContentLabel.Name = "ArticleContentLabel";
+            this.ArticleContentLabel.Size = new System.Drawing.Size(798, 82);
+            this.ArticleContentLabel.TabIndex = 0;
+            this.ArticleContentLabel.Text = "<h1>文章内容</h1>";
             // 
             // ArticleClassifyLabel
             // 
@@ -402,75 +471,6 @@
             this.ArticlePageInfo.Text = "第 1 页,共 4 页";
             this.ArticlePageInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ArticleContentLabel
-            // 
-            this.ArticleContentLabel.AutoSize = false;
-            this.ArticleContentLabel.AutoSizeHeightOnly = true;
-            this.ArticleContentLabel.BaseStylesheet = "";
-            this.ArticleContentLabel.IsContextMenuEnabled = false;
-            this.ArticleContentLabel.Location = new System.Drawing.Point(3, 3);
-            this.ArticleContentLabel.Name = "ArticleContentLabel";
-            this.ArticleContentLabel.Size = new System.Drawing.Size(798, 82);
-            this.ArticleContentLabel.TabIndex = 0;
-            this.ArticleContentLabel.Text = "<h1>文章内容</h1>";
-            // 
-            // UserToolStrip
-            // 
-            this.UserToolStrip.Arrow = System.Drawing.Color.Black;
-            this.UserToolStrip.Back = System.Drawing.Color.White;
-            this.UserToolStrip.BackColor = System.Drawing.Color.White;
-            this.UserToolStrip.BackRadius = 4;
-            this.UserToolStrip.BackRectangle = new System.Drawing.Rectangle(10, 10, 10, 10);
-            this.UserToolStrip.Base = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(200)))), ((int)(((byte)(254)))));
-            this.UserToolStrip.BaseFore = System.Drawing.Color.Black;
-            this.UserToolStrip.BaseForeAnamorphosis = false;
-            this.UserToolStrip.BaseForeAnamorphosisBorder = 4;
-            this.UserToolStrip.BaseForeAnamorphosisColor = System.Drawing.Color.White;
-            this.UserToolStrip.BaseForeOffset = new System.Drawing.Point(0, 0);
-            this.UserToolStrip.BaseHoverFore = System.Drawing.Color.White;
-            this.UserToolStrip.BaseItemAnamorphosis = true;
-            this.UserToolStrip.BaseItemBorder = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
-            this.UserToolStrip.BaseItemBorderShow = true;
-            this.UserToolStrip.BaseItemDown = ((System.Drawing.Image)(resources.GetObject("UserToolStrip.BaseItemDown")));
-            this.UserToolStrip.BaseItemHover = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
-            this.UserToolStrip.BaseItemMouse = ((System.Drawing.Image)(resources.GetObject("UserToolStrip.BaseItemMouse")));
-            this.UserToolStrip.BaseItemNorml = null;
-            this.UserToolStrip.BaseItemPressed = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
-            this.UserToolStrip.BaseItemRadius = 4;
-            this.UserToolStrip.BaseItemRadiusStyle = DSkin.Common.RoundStyle.All;
-            this.UserToolStrip.BaseItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
-            this.UserToolStrip.BindTabControl = null;
-            this.UserToolStrip.CheckedImage = null;
-            this.UserToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.UserToolStrip.DropDownImageSeparator = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
-            this.UserToolStrip.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.UserToolStrip.Fore = System.Drawing.Color.Black;
-            this.UserToolStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 4, 2);
-            this.UserToolStrip.HoverFore = System.Drawing.Color.White;
-            this.UserToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.UserToolStrip.ItemAnamorphosis = true;
-            this.UserToolStrip.ItemBorder = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
-            this.UserToolStrip.ItemBorderShow = true;
-            this.UserToolStrip.ItemHover = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
-            this.UserToolStrip.ItemPressed = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
-            this.UserToolStrip.ItemRadius = 4;
-            this.UserToolStrip.ItemRadiusStyle = DSkin.Common.RoundStyle.All;
-            this.UserToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.UserToolStrip.Location = new System.Drawing.Point(365, 10);
-            this.UserToolStrip.LoginHandler = null;
-            this.UserToolStrip.LoginUser = null;
-            this.UserToolStrip.LogoutHandler = null;
-            this.UserToolStrip.Name = "UserToolStrip";
-            this.UserToolStrip.RadiusStyle = DSkin.Common.RoundStyle.All;
-            this.UserToolStrip.Size = new System.Drawing.Size(26, 111);
-            this.UserToolStrip.SkinAllColor = true;
-            this.UserToolStrip.TabIndex = 7;
-            this.UserToolStrip.Text = "userToolStrip1";
-            this.UserToolStrip.TitleAnamorphosis = true;
-            this.UserToolStrip.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(228)))), ((int)(((byte)(236)))));
-            this.UserToolStrip.TitleRadius = 4;
-            this.UserToolStrip.TitleRadiusStyle = DSkin.Common.RoundStyle.All;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
@@ -538,13 +538,13 @@
         private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AllSelectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
         private DSkin.Controls.DSkinNewPanel dSkinNewPanel2;
         private DSkin.Controls.DSkinButton NextPageButton;
         private DSkin.Controls.DSkinButton PrevPageButton;
         private DSkin.Controls.DSkinLabel ArticlePageInfo;
         private System.Windows.Forms.ToolStripMenuItem ViewIndexToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem DeleteToolStripMenuItem;
         private DSkin.Controls.DSkinPictureBox ReloadButton;
         private DSkin.Controls.DSkinPictureBox EditButton;

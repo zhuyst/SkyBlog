@@ -125,5 +125,10 @@ namespace SkyBlog
         {
             RequestArticles(_pageNum + 1);
         }
+
+        private static string GetArticleUrl(int id)
+        {
+            return $"{_webUrl}/article/content/{id}/full";
+        }
     }
 }
