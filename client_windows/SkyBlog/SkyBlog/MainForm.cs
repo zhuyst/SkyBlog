@@ -48,7 +48,7 @@ namespace SkyBlog
             var loginSettingsStorage = _storageService.GetLoginSettingsStorage();
             if (!loginSettingsStorage.AutoLogin)
             {
-                UserToolStrip.Logout();
+                Logout();
                 return;
             }
 
@@ -69,26 +69,32 @@ namespace SkyBlog
             var loginForm = new LoginForm((user => { _loginUser = user; }));
 
             var result = loginForm.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                UserToolStrip.AfterLogin(_loginUser);
-            }
+            if (result != DialogResult.OK) return;
+
+            UserToolStrip.AfterLogin(_loginUser);
+            EditButton.Show();
+            DeleteButton.Show();
+
+            EditToolStripMenuItem.Enabled = true;
+            DeleteToolStripMenuItem.Enabled = true;
         }
 
         private void Logout()
         {
             _loginUser = null;
+
             UserToolStrip.Logout();
+
+            EditButton.Hide();
+            DeleteButton.Hide();
+
+            EditToolStripMenuItem.Enabled = false;
+            DeleteToolStripMenuItem.Enabled = false;
         }
 
         private void ViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(GetArticleUrl(_selectArticle.Id));
-        }
-
-        private static string GetArticleUrl(int id)
-        {
-            return $"{_webUrl}/article/content/{id}/full";
         }
 
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
