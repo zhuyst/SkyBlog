@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Windows.Forms;
 using WindowsFormsControlLibrary;
 using DSkin.Controls;
 using SkyBlog.Api.Business;
@@ -36,7 +38,7 @@ namespace SkyBlog
             var init = false;
             foreach (var article in list)
             {
-                var item = new ArticleListItem(article);
+                var item = new ArticleListItem(article,GetArticleUrl(article.Id));
                 _articles[article.Id] = item;
                 ArticleListPanel.Items.Add(item);
 
@@ -124,6 +126,25 @@ namespace SkyBlog
         private void NextPageButton_Click(object sender, EventArgs e)
         {
             RequestArticles(_pageNum + 1);
+        }
+
+        private void ViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(GetArticleUrl(_selectArticle.Id));
+        }
+
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selectText = ArticleContentLabel.SelectedText;
+            if (selectText != "")
+            {
+                Clipboard.SetDataObject(selectText);
+            }
+        }
+
+        private void AllSelectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ArticleContentLabel.SelectAll();
         }
 
         private static string GetArticleUrl(int id)

@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Drawing;
-using System.Data;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DSkin.Controls;
 using DSkin.DirectUI;
 using SkyBlog.Model.Business;
 
@@ -17,7 +9,7 @@ namespace WindowsFormsControlLibrary
 {
     public partial class ArticleListItem : DuiBaseControl
     {
-        private static string _webUrl;
+        private readonly string _articleUrl;
 
         public int Id { get; set; }
 
@@ -25,17 +17,15 @@ namespace WindowsFormsControlLibrary
 
         public bool Selected { get; set; }
 
-        public ArticleListItem(Article article)
+        public ArticleListItem(Article article,string articleUrl)
         {
             InitializeComponent();
+
             Article = article;
+            _articleUrl = articleUrl;
+
             Id = article.Id;
             Selected = false;
-
-            if (_webUrl == null)
-            {
-                _webUrl = ConfigurationManager.AppSettings["webUrl"];
-            }
         }
 
         private void ArticleListItem_Load(object sender, EventArgs e)
@@ -58,16 +48,6 @@ namespace WindowsFormsControlLibrary
             {
                 BackColor = Color.Transparent;
             }
-        }
-
-        private void ViewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start(GetArticleUrl(Article.Id));
-        }
-
-        private static string GetArticleUrl(int id)
-        {
-            return $"{_webUrl}/article/content/{id}/full";
         }
 
     }

@@ -92,25 +92,6 @@ namespace SkyBlog
             DeleteToolStripMenuItem.Enabled = false;
         }
 
-        private void ViewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start(GetArticleUrl(_selectArticle.Id));
-        }
-
-        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var selectText = ArticleContentLabel.SelectedText;
-            if (selectText != "")
-            {
-                Clipboard.SetDataObject(selectText);
-            }
-        }
-
-        private void AllSelectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ArticleContentLabel.SelectAll();
-        }
-
         private void SkyBlogTitleLabel_Click(object sender, EventArgs e)
         {
             Process.Start(_webUrl);

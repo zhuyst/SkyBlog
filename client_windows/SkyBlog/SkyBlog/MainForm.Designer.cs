@@ -34,7 +34,6 @@
             this.ArticleListPanel = new DSkin.Controls.DSkinListBox();
             this.SkyBlogTitlePanel = new DSkin.Controls.DSkinNewPanel();
             this.SkyBlogTitleLabel = new DSkin.Controls.DSkinLabel();
-            this.dSkinNewPanel1 = new DSkin.Controls.DSkinNewPanel();
             this.ContentMenuStrip = new DSkin.Controls.DSkinContextMenuStrip();
             this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AllSelectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,13 +57,14 @@
             this.NextPageButton = new DSkin.Controls.DSkinButton();
             this.PrevPageButton = new DSkin.Controls.DSkinButton();
             this.ArticlePageInfo = new DSkin.Controls.DSkinLabel();
+            this.dSkinTableLayoutPanel1 = new DSkin.Controls.DSkinTableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.ArticleListPanel)).BeginInit();
             this.SkyBlogTitlePanel.SuspendLayout();
-            this.dSkinNewPanel1.SuspendLayout();
             this.ContentMenuStrip.SuspendLayout();
             this.ArticlePanel.SuspendLayout();
             this.dSkinFlowLayoutPanel1.SuspendLayout();
             this.dSkinNewPanel2.SuspendLayout();
+            this.dSkinTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ArticleTitleLabel
@@ -125,21 +125,6 @@
             this.SkyBlogTitleLabel.TextEffect = DSkin.DirectUI.TextEffects.Forme;
             this.SkyBlogTitleLabel.Click += new System.EventHandler(this.SkyBlogTitleLabel_Click);
             // 
-            // dSkinNewPanel1
-            // 
-            this.dSkinNewPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(237)))), ((int)(((byte)(247)))));
-            this.dSkinNewPanel1.ContextMenuStrip = this.ContentMenuStrip;
-            this.dSkinNewPanel1.Controls.Add(this.UserToolStrip);
-            this.dSkinNewPanel1.Controls.Add(this.DeleteButton);
-            this.dSkinNewPanel1.Controls.Add(this.EditButton);
-            this.dSkinNewPanel1.Controls.Add(this.ReloadButton);
-            this.dSkinNewPanel1.Location = new System.Drawing.Point(360, 0);
-            this.dSkinNewPanel1.Name = "dSkinNewPanel1";
-            this.dSkinNewPanel1.Padding = new System.Windows.Forms.Padding(50, 10, 0, 10);
-            this.dSkinNewPanel1.Size = new System.Drawing.Size(779, 60);
-            this.dSkinNewPanel1.TabIndex = 5;
-            this.dSkinNewPanel1.Text = "dSkinNewPanel1";
-            // 
             // ContentMenuStrip
             // 
             this.ContentMenuStrip.Arrow = System.Drawing.Color.Black;
@@ -170,7 +155,7 @@
             this.ContentMenuStrip.ItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
             this.ContentMenuStrip.Name = "ContentMenuStrip";
             this.ContentMenuStrip.RadiusStyle = DSkin.Common.RoundStyle.All;
-            this.ContentMenuStrip.Size = new System.Drawing.Size(211, 188);
+            this.ContentMenuStrip.Size = new System.Drawing.Size(199, 160);
             this.ContentMenuStrip.SkinAllColor = true;
             this.ContentMenuStrip.TitleAnamorphosis = true;
             this.ContentMenuStrip.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(228)))), ((int)(((byte)(236)))));
@@ -180,52 +165,52 @@
             // CopyToolStripMenuItem
             // 
             this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.CopyToolStripMenuItem.Text = "复制";
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // AllSelectToolStripMenuItem
             // 
             this.AllSelectToolStripMenuItem.Name = "AllSelectToolStripMenuItem";
-            this.AllSelectToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.AllSelectToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.AllSelectToolStripMenuItem.Text = "全选";
             this.AllSelectToolStripMenuItem.Click += new System.EventHandler(this.AllSelectToolStripMenuItem_Click);
             // 
             // ToolStripSeparator1
             // 
             this.ToolStripSeparator1.Name = "ToolStripSeparator1";
-            this.ToolStripSeparator1.Size = new System.Drawing.Size(207, 6);
+            this.ToolStripSeparator1.Size = new System.Drawing.Size(195, 6);
             // 
             // ViewToolStripMenuItem
             // 
             this.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem";
-            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.ViewToolStripMenuItem.Text = "在网页中查看文章";
             this.ViewToolStripMenuItem.Click += new System.EventHandler(this.ViewToolStripMenuItem_Click);
             // 
             // ViewIndexToolStripMenuItem
             // 
             this.ViewIndexToolStripMenuItem.Name = "ViewIndexToolStripMenuItem";
-            this.ViewIndexToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.ViewIndexToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.ViewIndexToolStripMenuItem.Text = "打开SkyBlog首页";
             this.ViewIndexToolStripMenuItem.Click += new System.EventHandler(this.ViewIndexToolStripMenuItem_Click);
             // 
             // ToolStripSeparator2
             // 
             this.ToolStripSeparator2.Name = "ToolStripSeparator2";
-            this.ToolStripSeparator2.Size = new System.Drawing.Size(207, 6);
+            this.ToolStripSeparator2.Size = new System.Drawing.Size(195, 6);
             // 
             // EditToolStripMenuItem
             // 
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.EditToolStripMenuItem.Text = "编辑文章";
             this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // DeleteToolStripMenuItem
             // 
             this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
-            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.DeleteToolStripMenuItem.Text = "删除文章";
             // 
             // UserToolStrip
@@ -255,7 +240,7 @@
             this.UserToolStrip.BaseItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
             this.UserToolStrip.BindTabControl = null;
             this.UserToolStrip.CheckedImage = null;
-            this.UserToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.UserToolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UserToolStrip.DropDownImageSeparator = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
             this.UserToolStrip.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.UserToolStrip.Fore = System.Drawing.Color.Black;
@@ -270,13 +255,14 @@
             this.UserToolStrip.ItemRadius = 4;
             this.UserToolStrip.ItemRadiusStyle = DSkin.Common.RoundStyle.All;
             this.UserToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.UserToolStrip.Location = new System.Drawing.Point(365, 10);
+            this.UserToolStrip.Location = new System.Drawing.Point(340, 10);
             this.UserToolStrip.LoginHandler = null;
             this.UserToolStrip.LoginUser = null;
             this.UserToolStrip.LogoutHandler = null;
+            this.UserToolStrip.Margin = new System.Windows.Forms.Padding(10);
             this.UserToolStrip.Name = "UserToolStrip";
             this.UserToolStrip.RadiusStyle = DSkin.Common.RoundStyle.All;
-            this.UserToolStrip.Size = new System.Drawing.Size(26, 111);
+            this.UserToolStrip.Size = new System.Drawing.Size(420, 40);
             this.UserToolStrip.SkinAllColor = true;
             this.UserToolStrip.TabIndex = 7;
             this.UserToolStrip.Text = "userToolStrip1";
@@ -288,12 +274,14 @@
             // DeleteButton
             // 
             this.DeleteButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DeleteButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DeleteButton.Image = global::SkyBlog.Properties.Resources.delete;
             this.DeleteButton.Images = new System.Drawing.Image[] {
         ((System.Drawing.Image)(global::SkyBlog.Properties.Resources.delete))};
-            this.DeleteButton.Location = new System.Drawing.Point(222, 10);
+            this.DeleteButton.Location = new System.Drawing.Point(138, 8);
+            this.DeleteButton.Margin = new System.Windows.Forms.Padding(8);
             this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(65, 44);
+            this.DeleteButton.Size = new System.Drawing.Size(84, 44);
             this.DeleteButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.DeleteButton.TabIndex = 5;
             this.DeleteButton.Text = "dSkinPictureBox1";
@@ -301,12 +289,14 @@
             // EditButton
             // 
             this.EditButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EditButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EditButton.Image = global::SkyBlog.Properties.Resources.edit;
             this.EditButton.Images = new System.Drawing.Image[] {
         ((System.Drawing.Image)(global::SkyBlog.Properties.Resources.edit))};
-            this.EditButton.Location = new System.Drawing.Point(128, 10);
+            this.EditButton.Location = new System.Drawing.Point(242, 12);
+            this.EditButton.Margin = new System.Windows.Forms.Padding(12);
             this.EditButton.Name = "EditButton";
-            this.EditButton.Size = new System.Drawing.Size(54, 44);
+            this.EditButton.Size = new System.Drawing.Size(76, 36);
             this.EditButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.EditButton.TabIndex = 4;
             this.EditButton.Text = "dSkinPictureBox1";
@@ -315,12 +305,14 @@
             // ReloadButton
             // 
             this.ReloadButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ReloadButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ReloadButton.Image = global::SkyBlog.Properties.Resources.reload;
             this.ReloadButton.Images = new System.Drawing.Image[] {
         ((System.Drawing.Image)(global::SkyBlog.Properties.Resources.reload))};
-            this.ReloadButton.Location = new System.Drawing.Point(23, 10);
+            this.ReloadButton.Location = new System.Drawing.Point(40, 10);
+            this.ReloadButton.Margin = new System.Windows.Forms.Padding(10);
             this.ReloadButton.Name = "ReloadButton";
-            this.ReloadButton.Size = new System.Drawing.Size(65, 44);
+            this.ReloadButton.Size = new System.Drawing.Size(80, 40);
             this.ReloadButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ReloadButton.TabIndex = 3;
             this.ReloadButton.Text = "dSkinPictureBox1";
@@ -471,6 +463,28 @@
             this.ArticlePageInfo.Text = "第 1 页,共 4 页";
             this.ArticlePageInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // dSkinTableLayoutPanel1
+            // 
+            this.dSkinTableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(237)))), ((int)(((byte)(247)))));
+            this.dSkinTableLayoutPanel1.BitmapCache = false;
+            this.dSkinTableLayoutPanel1.ColumnCount = 5;
+            this.dSkinTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.dSkinTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.dSkinTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.dSkinTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.dSkinTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.dSkinTableLayoutPanel1.Controls.Add(this.ReloadButton, 1, 0);
+            this.dSkinTableLayoutPanel1.Controls.Add(this.DeleteButton, 2, 0);
+            this.dSkinTableLayoutPanel1.Controls.Add(this.EditButton, 3, 0);
+            this.dSkinTableLayoutPanel1.Controls.Add(this.UserToolStrip, 4, 0);
+            this.dSkinTableLayoutPanel1.Location = new System.Drawing.Point(360, 0);
+            this.dSkinTableLayoutPanel1.Name = "dSkinTableLayoutPanel1";
+            this.dSkinTableLayoutPanel1.RightBottom = ((System.Drawing.Image)(resources.GetObject("dSkinTableLayoutPanel1.RightBottom")));
+            this.dSkinTableLayoutPanel1.RowCount = 1;
+            this.dSkinTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.dSkinTableLayoutPanel1.Size = new System.Drawing.Size(770, 60);
+            this.dSkinTableLayoutPanel1.TabIndex = 8;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
@@ -485,11 +499,11 @@
             this.CaptionHeight = 60;
             this.CaptionShowMode = DSkin.TextShowModes.Ordinary;
             this.ClientSize = new System.Drawing.Size(1200, 700);
+            this.Controls.Add(this.dSkinTableLayoutPanel1);
             this.Controls.Add(this.dSkinNewPanel2);
             this.Controls.Add(this.ArticlePanel);
             this.Controls.Add(this.SkyBlogTitlePanel);
             this.Controls.Add(this.ArticleListPanel);
-            this.Controls.Add(this.dSkinNewPanel1);
             this.DoubleClickMaximized = false;
             this.DrawIcon = false;
             this.EnabledDWM = true;
@@ -508,14 +522,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.ArticleListPanel)).EndInit();
             this.SkyBlogTitlePanel.ResumeLayout(false);
             this.SkyBlogTitlePanel.PerformLayout();
-            this.dSkinNewPanel1.ResumeLayout(false);
-            this.dSkinNewPanel1.PerformLayout();
             this.ContentMenuStrip.ResumeLayout(false);
             this.ArticlePanel.ResumeLayout(false);
             this.ArticlePanel.PerformLayout();
             this.dSkinFlowLayoutPanel1.ResumeLayout(false);
             this.dSkinNewPanel2.ResumeLayout(false);
             this.dSkinNewPanel2.PerformLayout();
+            this.dSkinTableLayoutPanel1.ResumeLayout(false);
+            this.dSkinTableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -525,7 +539,6 @@
         private DSkin.Controls.DSkinLabel ArticleSubTitleLabel;
         private DSkin.Controls.DSkinListBox ArticleListPanel;
         private DSkin.Controls.DSkinNewPanel SkyBlogTitlePanel;
-        private DSkin.Controls.DSkinNewPanel dSkinNewPanel1;
         private DSkin.Controls.DSkinLabel SkyBlogTitleLabel;
         private DSkin.Controls.DSkinNewPanel ArticlePanel;
         private DSkin.Controls.DSkinLabel ArticleCreateDateLabel;
@@ -550,5 +563,6 @@
         private DSkin.Controls.DSkinPictureBox EditButton;
         private DSkin.Controls.DSkinPictureBox DeleteButton;
         private WindowsFormsControlLibrary.UserToolStrip UserToolStrip;
+        private DSkin.Controls.DSkinTableLayoutPanel dSkinTableLayoutPanel1;
     }
 }
