@@ -25,7 +25,7 @@ namespace WindowsFormsControlLibrary
             BaseStylesheet = _css;
             var result = Markdown.ToHtml(Text);
             result = HttpUtility.HtmlDecode(result);
-            Text = result;
+            Text = $@"<div>{result}</div>";
         }
     }
 }
