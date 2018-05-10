@@ -28,7 +28,7 @@ namespace SkyBlog
                 return;
             }
 
-            Text = $@"编辑 - {Article.Title}";
+            Text = $@"编辑文章 - {Article.Title}";
             TitleTextBox.Text = Article.Title;
             SubTitleTextBox.Text = Article.SubTitle;
             var content = Article.Content.Replace("\n", "\r\n");
