@@ -45,6 +45,8 @@
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.LoginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LogoutToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.ArticlePanel = new DSkin.Controls.DSkinNewPanel();
             this.dSkinFlowLayoutPanel1 = new DSkin.Controls.DSkinFlowLayoutPanel();
             this.ArticleContentLabel = new WindowsFormsControlLibrary.ArticleContent();
@@ -58,13 +60,10 @@
             this.dSkinNewPanel1 = new DSkin.Controls.DSkinNewPanel();
             this.ToolStrip = new DSkin.Controls.DSkinToolStrip();
             this.ReloadButton = new System.Windows.Forms.ToolStripButton();
-            this.EditButton = new System.Windows.Forms.ToolStripButton();
-            this.DeleteButton = new System.Windows.Forms.ToolStripButton();
+            this.NewButton = new System.Windows.Forms.ToolStripButton();
             this.LoginButton = new System.Windows.Forms.ToolStripButton();
             this.UserToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.LogoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.UserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.LogoutToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ArticleListPanel)).BeginInit();
             this.SkyBlogTitlePanel.SuspendLayout();
             this.ContentMenuStrip.SuspendLayout();
@@ -223,6 +222,7 @@
             this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
             this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.DeleteToolStripMenuItem.Text = "删除文章";
+            this.DeleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -235,6 +235,21 @@
             this.LoginToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.LoginToolStripMenuItem.Text = "登陆";
             this.LoginToolStripMenuItem.Click += new System.EventHandler(this.Login_Click);
+            // 
+            // UserToolStripMenuItem
+            // 
+            this.UserToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.LogoutToolStripMenuItem2});
+            this.UserToolStripMenuItem.Name = "UserToolStripMenuItem";
+            this.UserToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.UserToolStripMenuItem.Text = "昵称";
+            // 
+            // LogoutToolStripMenuItem2
+            // 
+            this.LogoutToolStripMenuItem2.Name = "LogoutToolStripMenuItem2";
+            this.LogoutToolStripMenuItem2.Size = new System.Drawing.Size(114, 26);
+            this.LogoutToolStripMenuItem2.Text = "登出";
+            this.LogoutToolStripMenuItem2.Click += new System.EventHandler(this.Logout_Click);
             // 
             // ArticlePanel
             // 
@@ -432,8 +447,7 @@
             this.ToolStrip.ItemRadiusStyle = DSkin.Common.RoundStyle.All;
             this.ToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ReloadButton,
-            this.EditButton,
-            this.DeleteButton,
+            this.NewButton,
             this.LoginButton,
             this.UserToolStripDropDownButton});
             this.ToolStrip.Location = new System.Drawing.Point(0, 0);
@@ -457,22 +471,14 @@
             this.ReloadButton.Text = "刷新文章列表";
             this.ReloadButton.Click += new System.EventHandler(this.ReloadButton_Click);
             // 
-            // EditButton
+            // NewButton
             // 
-            this.EditButton.Image = global::SkyBlog.Properties.Resources.edit;
-            this.EditButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.EditButton.Name = "EditButton";
-            this.EditButton.Size = new System.Drawing.Size(93, 57);
-            this.EditButton.Text = "修改文章";
-            this.EditButton.Click += new System.EventHandler(this.EditArticle_Click);
-            // 
-            // DeleteButton
-            // 
-            this.DeleteButton.Image = global::SkyBlog.Properties.Resources.delete;
-            this.DeleteButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(93, 57);
-            this.DeleteButton.Text = "删除文章";
+            this.NewButton.Image = global::SkyBlog.Properties.Resources.edit;
+            this.NewButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.NewButton.Name = "NewButton";
+            this.NewButton.Size = new System.Drawing.Size(93, 57);
+            this.NewButton.Text = "新增文章";
+            this.NewButton.Click += new System.EventHandler(this.NewButton_Click);
             // 
             // LoginButton
             // 
@@ -496,24 +502,9 @@
             // LogoutToolStripMenuItem
             // 
             this.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem";
-            this.LogoutToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.LogoutToolStripMenuItem.Size = new System.Drawing.Size(114, 26);
             this.LogoutToolStripMenuItem.Text = "登出";
             this.LogoutToolStripMenuItem.Click += new System.EventHandler(this.Logout_Click);
-            // 
-            // UserToolStripMenuItem
-            // 
-            this.UserToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LogoutToolStripMenuItem2});
-            this.UserToolStripMenuItem.Name = "UserToolStripMenuItem";
-            this.UserToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
-            this.UserToolStripMenuItem.Text = "昵称";
-            // 
-            // LogoutToolStripMenuItem2
-            // 
-            this.LogoutToolStripMenuItem2.Name = "LogoutToolStripMenuItem2";
-            this.LogoutToolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
-            this.LogoutToolStripMenuItem2.Text = "登出";
-            this.LogoutToolStripMenuItem2.Click += new System.EventHandler(this.Logout_Click);
             // 
             // MainForm
             // 
@@ -594,8 +585,7 @@
         private DSkin.Controls.DSkinNewPanel dSkinNewPanel1;
         private DSkin.Controls.DSkinToolStrip ToolStrip;
         private System.Windows.Forms.ToolStripButton ReloadButton;
-        private System.Windows.Forms.ToolStripButton EditButton;
-        private System.Windows.Forms.ToolStripButton DeleteButton;
+        private System.Windows.Forms.ToolStripButton NewButton;
         private System.Windows.Forms.ToolStripButton LoginButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem LoginToolStripMenuItem;

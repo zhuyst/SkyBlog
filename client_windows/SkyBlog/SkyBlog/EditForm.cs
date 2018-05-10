@@ -20,7 +20,11 @@ namespace SkyBlog
 
         private void EditForm_Load(object sender, EventArgs e)
         {
-            if (Article == null) return;
+            if (Article == null)
+            {
+                Text = @"新增文章 - SkyBlog";
+                return;
+            }
 
             Text = $@"编辑 - {Article.Title}";
             TitleTextBox.Text = Article.Title;
