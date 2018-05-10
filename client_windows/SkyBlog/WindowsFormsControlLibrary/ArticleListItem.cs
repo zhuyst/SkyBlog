@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Diagnostics;
 using System.Windows.Forms;
 using DSkin.DirectUI;
 using SkyBlog.Model.Business;
@@ -9,20 +8,26 @@ namespace WindowsFormsControlLibrary
 {
     public partial class ArticleListItem : DuiBaseControl
     {
-        private readonly string _articleUrl;
-
+        /// <summary>
+        /// 文章ID
+        /// </summary>
         public int Id { get; set; }
 
+        /// <summary>
+        /// 文章
+        /// </summary>
         public Article Article;
 
+        /// <summary>
+        /// 是否被选中
+        /// </summary>
         public bool Selected { get; set; }
 
-        public ArticleListItem(Article article,string articleUrl)
+        public ArticleListItem(Article article)
         {
             InitializeComponent();
 
             Article = article;
-            _articleUrl = articleUrl;
 
             Id = article.Id;
             Selected = false;

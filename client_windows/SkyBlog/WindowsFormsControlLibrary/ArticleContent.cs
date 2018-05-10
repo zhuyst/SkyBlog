@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Resources;
+﻿using System.Resources;
 using System.Web;
 using WindowsFormsControlLibrary.Properties;
 using DSkin.Controls;
@@ -9,17 +8,27 @@ namespace WindowsFormsControlLibrary
 {
     public partial class ArticleContent : DSkinHtmlLabel
     {
-        private static string _css;
+        /// <summary>
+        /// CSS文本
+        /// </summary>
+        private static readonly string _css;
 
         public ArticleContent()
         {
             InitializeComponent();
+        }
 
-            if (_css != null) return;
-            var manager = new ResourceManager("WindowsFormsControlLibrary.Properties.Resources", typeof(Resources).Assembly);
+        static ArticleContent()
+        {
+            // 读取CSS文件
+            var manager = new ResourceManager("WindowsFormsControlLibrary.Properties.Resources",
+                typeof(Resources).Assembly);
             _css = manager.GetString("markdown");
         }
 
+        /// <summary>
+        /// Markdown转HTML
+        /// </summary>
         public void Convert()
         {
             BaseStylesheet = _css;

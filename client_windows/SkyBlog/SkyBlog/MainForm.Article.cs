@@ -39,7 +39,7 @@ namespace SkyBlog
             var init = false;
             foreach (var article in list)
             {
-                var item = new ArticleListItem(article,GetArticleUrl(article.Id));
+                var item = new ArticleListItem(article);
                 _articles[article.Id] = item;
                 ArticleListPanel.Items.Add(item);
 
