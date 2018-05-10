@@ -67,8 +67,11 @@ namespace SkyBlog.Api.Business
 
         public Result Delete(int id)
         {
-            const string url = ArticleApiUrl + "/";
+            const string url = ArticleApiUrl + "/{id}";
             var request = new RestRequest(url);
+
+            request.AddUrlSegment("id", id);
+
             return _client.Delete(request);
         }
 
