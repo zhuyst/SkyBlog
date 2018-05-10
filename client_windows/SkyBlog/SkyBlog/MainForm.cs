@@ -50,7 +50,7 @@ namespace SkyBlog
             }
 
             var result = _authApi.Refresh(loginSettingsStorage.Token);
-            if (result.Code != 200)
+            if (!result.IsSuccess())
             {
                 return;
             }

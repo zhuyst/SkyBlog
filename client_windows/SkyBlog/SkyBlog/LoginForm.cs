@@ -47,7 +47,7 @@ namespace SkyBlog
         private void Login(string username,string password)
         {
             var result = _authApi.Login(username, password);
-            if (result.Code != 200)
+            if (!result.IsSuccess())
             {
                 DSkinMessageBox.Show(result.Message, "登陆失败", MessageBoxButtons.OK);
             }
