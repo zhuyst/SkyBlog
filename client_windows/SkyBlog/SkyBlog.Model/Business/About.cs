@@ -1,8 +1,6 @@
-﻿using SkyBlog.Model.Base;
-
-namespace SkyBlog.Model.Business
+﻿namespace SkyBlog.Model.Business
 {
-    public class About : BaseModel
+    public class About
     {
         public string Content { get; set; }
     }

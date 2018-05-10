@@ -1,8 +1,6 @@
-﻿using SkyBlog.Model.Base;
-
-namespace SkyBlog.Model.Business
+﻿namespace SkyBlog.Model.Business
 {
-    public class Article : BaseModel
+    public class Article
     {
         public int Id { get; set; }
 

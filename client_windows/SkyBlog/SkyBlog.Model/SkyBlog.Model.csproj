@@ -46,7 +46,6 @@
     <Compile Include="Business\About.cs" />
     <Compile Include="Business\Article.cs" />
     <Compile Include="Business\AccessToken.cs" />
-    <Compile Include="Base\BaseModel.cs" />
     <Compile Include="Business\Classify.cs" />
     <Compile Include="Base\DataResult.cs" />
     <Compile Include="Base\PageInfo.cs" />

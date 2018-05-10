@@ -25,25 +25,25 @@ namespace SkyBlog.Api.Base
             return _instance ?? (_instance = new ApiClient());
         }
 
-        public DataResult<T> Get<T>(RestRequest request) where T : BaseModel,new()
+        public DataResult<T> Get<T>(RestRequest request) where T : new()
         {
             HandleRequest(request);
             return _client.Get<DataResult<T>>(request).Data;
         }
 
-        public DataResult<T> Post<T>(RestRequest request) where T : BaseModel, new()
+        public DataResult<T> Post<T>(RestRequest request) where T : new()
         {
             HandleRequest(request);
             return _client.Post<DataResult<T>>(request).Data;
         }
 
-        public DataResult<T> Put<T>(RestRequest request) where T : BaseModel, new()
+        public DataResult<T> Put<T>(RestRequest request) where T : new()
         {
             HandleRequest(request);
             return _client.Put<DataResult<T>>(request).Data;
         }
 
-        public DataResult<T> Patch<T>(RestRequest request) where T : BaseModel, new()
+        public DataResult<T> Patch<T>(RestRequest request) where T : new()
         {
             HandleRequest(request);
             return _client.Patch<DataResult<T>>(request).Data;

@@ -2,7 +2,7 @@
 
 namespace SkyBlog.Model.Base
 {
-    public class PageInfo<T> : BaseModel where T : BaseModel, new()
+    public class PageInfo<T> where T : new()
     {
         public int PageNum { get; set; }
 
