@@ -31,7 +31,9 @@ namespace SkyBlog.Api.Business
             request.AddParameter("username", username);
             request.AddParameter("password", password);
 
-            return _client.Post<AccessToken>(request);
+            var result = _client.Post<AccessToken>(request);
+            SetToken(result);
+            return result;
         }
 
         public DataResult<AccessToken> Refresh(string token)
@@ -41,7 +43,17 @@ namespace SkyBlog.Api.Business
 
             request.AddParameter("Token", token);
 
-            return _client.Post<AccessToken>(request);
+            var result = _client.Post<AccessToken>(request);
+            SetToken(result);
+            return result;
+        }
+
+        private void SetToken(DataResult<AccessToken> result)
+        {
+            if (result.IsSuccess())
+            {
+                _client.Token = result.Entity.Token;
+            }
         }
     }
 }
