@@ -6,12 +6,15 @@ using Markdig;
 
 namespace WindowsFormsControlLibrary
 {
+    /// <summary>
+    /// Markdown文章
+    /// </summary>
     public partial class ArticleContent : DSkinHtmlLabel
     {
         /// <summary>
         /// CSS文本
         /// </summary>
-        private static readonly string _css;
+        private static readonly string Css;
 
         public ArticleContent()
         {
@@ -23,7 +26,7 @@ namespace WindowsFormsControlLibrary
             // 读取CSS文件
             var manager = new ResourceManager("WindowsFormsControlLibrary.Properties.Resources",
                 typeof(Resources).Assembly);
-            _css = manager.GetString("markdown");
+            Css = manager.GetString("markdown");
         }
 
         /// <summary>
@@ -31,7 +34,7 @@ namespace WindowsFormsControlLibrary
         /// </summary>
         public void Convert()
         {
-            BaseStylesheet = _css;
+            BaseStylesheet = Css;
             var result = Markdown.ToHtml(Text);
             result = HttpUtility.HtmlDecode(result);
             Text = $@"<div>{result}</div>";
