@@ -64,9 +64,9 @@
             // dSkinPictureBox2
             // 
             this.dSkinPictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dSkinPictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("dSkinPictureBox2.Image")));
+            this.dSkinPictureBox2.Image = global::SkyBlog.Properties.Resources.password;
             this.dSkinPictureBox2.Images = new System.Drawing.Image[] {
-        ((System.Drawing.Image)(((System.Drawing.Image)(resources.GetObject("dSkinPictureBox2.Images")))))};
+        ((System.Drawing.Image)(global::SkyBlog.Properties.Resources.password))};
             this.dSkinPictureBox2.Location = new System.Drawing.Point(3, 79);
             this.dSkinPictureBox2.Name = "dSkinPictureBox2";
             this.dSkinPictureBox2.Size = new System.Drawing.Size(94, 70);
@@ -107,9 +107,9 @@
             // 
             // dSkinPictureBox1
             // 
-            this.dSkinPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("dSkinPictureBox1.Image")));
+            this.dSkinPictureBox1.Image = global::SkyBlog.Properties.Resources.username;
             this.dSkinPictureBox1.Images = new System.Drawing.Image[] {
-        ((System.Drawing.Image)(((System.Drawing.Image)(resources.GetObject("dSkinPictureBox1.Images")))))};
+        ((System.Drawing.Image)(global::SkyBlog.Properties.Resources.username))};
             this.dSkinPictureBox1.Location = new System.Drawing.Point(3, 3);
             this.dSkinPictureBox1.Name = "dSkinPictureBox1";
             this.dSkinPictureBox1.Size = new System.Drawing.Size(94, 70);

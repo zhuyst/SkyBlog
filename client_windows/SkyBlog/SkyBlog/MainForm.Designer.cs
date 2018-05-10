@@ -43,10 +43,8 @@
             this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.UserToolStrip = new WindowsFormsControlLibrary.UserToolStrip();
-            this.DeleteButton = new DSkin.Controls.DSkinPictureBox();
-            this.EditButton = new DSkin.Controls.DSkinPictureBox();
-            this.ReloadButton = new DSkin.Controls.DSkinPictureBox();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.LoginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ArticlePanel = new DSkin.Controls.DSkinNewPanel();
             this.dSkinFlowLayoutPanel1 = new DSkin.Controls.DSkinFlowLayoutPanel();
             this.ArticleContentLabel = new WindowsFormsControlLibrary.ArticleContent();
@@ -57,14 +55,24 @@
             this.NextPageButton = new DSkin.Controls.DSkinButton();
             this.PrevPageButton = new DSkin.Controls.DSkinButton();
             this.ArticlePageInfo = new DSkin.Controls.DSkinLabel();
-            this.dSkinTableLayoutPanel1 = new DSkin.Controls.DSkinTableLayoutPanel();
+            this.dSkinNewPanel1 = new DSkin.Controls.DSkinNewPanel();
+            this.ToolStrip = new DSkin.Controls.DSkinToolStrip();
+            this.ReloadButton = new System.Windows.Forms.ToolStripButton();
+            this.EditButton = new System.Windows.Forms.ToolStripButton();
+            this.DeleteButton = new System.Windows.Forms.ToolStripButton();
+            this.LoginButton = new System.Windows.Forms.ToolStripButton();
+            this.UserToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.LogoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LogoutToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ArticleListPanel)).BeginInit();
             this.SkyBlogTitlePanel.SuspendLayout();
             this.ContentMenuStrip.SuspendLayout();
             this.ArticlePanel.SuspendLayout();
             this.dSkinFlowLayoutPanel1.SuspendLayout();
             this.dSkinNewPanel2.SuspendLayout();
-            this.dSkinTableLayoutPanel1.SuspendLayout();
+            this.dSkinNewPanel1.SuspendLayout();
+            this.ToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // ArticleTitleLabel
@@ -123,7 +131,7 @@
             this.SkyBlogTitleLabel.Text = "SkyBlog";
             this.SkyBlogTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.SkyBlogTitleLabel.TextEffect = DSkin.DirectUI.TextEffects.Forme;
-            this.SkyBlogTitleLabel.Click += new System.EventHandler(this.SkyBlogTitleLabel_Click);
+            this.SkyBlogTitleLabel.Click += new System.EventHandler(this.WebIndex_Click);
             // 
             // ContentMenuStrip
             // 
@@ -151,11 +159,14 @@
             this.ViewIndexToolStripMenuItem,
             this.ToolStripSeparator2,
             this.EditToolStripMenuItem,
-            this.DeleteToolStripMenuItem});
+            this.DeleteToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.LoginToolStripMenuItem,
+            this.UserToolStripMenuItem});
             this.ContentMenuStrip.ItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
             this.ContentMenuStrip.Name = "ContentMenuStrip";
             this.ContentMenuStrip.RadiusStyle = DSkin.Common.RoundStyle.All;
-            this.ContentMenuStrip.Size = new System.Drawing.Size(199, 160);
+            this.ContentMenuStrip.Size = new System.Drawing.Size(211, 242);
             this.ContentMenuStrip.SkinAllColor = true;
             this.ContentMenuStrip.TitleAnamorphosis = true;
             this.ContentMenuStrip.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(228)))), ((int)(((byte)(236)))));
@@ -165,158 +176,65 @@
             // CopyToolStripMenuItem
             // 
             this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.CopyToolStripMenuItem.Text = "复制";
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // AllSelectToolStripMenuItem
             // 
             this.AllSelectToolStripMenuItem.Name = "AllSelectToolStripMenuItem";
-            this.AllSelectToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.AllSelectToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.AllSelectToolStripMenuItem.Text = "全选";
             this.AllSelectToolStripMenuItem.Click += new System.EventHandler(this.AllSelectToolStripMenuItem_Click);
             // 
             // ToolStripSeparator1
             // 
             this.ToolStripSeparator1.Name = "ToolStripSeparator1";
-            this.ToolStripSeparator1.Size = new System.Drawing.Size(195, 6);
+            this.ToolStripSeparator1.Size = new System.Drawing.Size(207, 6);
             // 
             // ViewToolStripMenuItem
             // 
             this.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem";
-            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.ViewToolStripMenuItem.Text = "在网页中查看文章";
             this.ViewToolStripMenuItem.Click += new System.EventHandler(this.ViewToolStripMenuItem_Click);
             // 
             // ViewIndexToolStripMenuItem
             // 
             this.ViewIndexToolStripMenuItem.Name = "ViewIndexToolStripMenuItem";
-            this.ViewIndexToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.ViewIndexToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.ViewIndexToolStripMenuItem.Text = "打开SkyBlog首页";
-            this.ViewIndexToolStripMenuItem.Click += new System.EventHandler(this.ViewIndexToolStripMenuItem_Click);
+            this.ViewIndexToolStripMenuItem.Click += new System.EventHandler(this.WebIndex_Click);
             // 
             // ToolStripSeparator2
             // 
             this.ToolStripSeparator2.Name = "ToolStripSeparator2";
-            this.ToolStripSeparator2.Size = new System.Drawing.Size(195, 6);
+            this.ToolStripSeparator2.Size = new System.Drawing.Size(207, 6);
             // 
             // EditToolStripMenuItem
             // 
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.EditToolStripMenuItem.Text = "编辑文章";
-            this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
+            this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditArticle_Click);
             // 
             // DeleteToolStripMenuItem
             // 
             this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
-            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.DeleteToolStripMenuItem.Text = "删除文章";
             // 
-            // UserToolStrip
+            // toolStripSeparator3
             // 
-            this.UserToolStrip.Arrow = System.Drawing.Color.Black;
-            this.UserToolStrip.Back = System.Drawing.Color.White;
-            this.UserToolStrip.BackColor = System.Drawing.Color.White;
-            this.UserToolStrip.BackRadius = 4;
-            this.UserToolStrip.BackRectangle = new System.Drawing.Rectangle(10, 10, 10, 10);
-            this.UserToolStrip.Base = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(200)))), ((int)(((byte)(254)))));
-            this.UserToolStrip.BaseFore = System.Drawing.Color.Black;
-            this.UserToolStrip.BaseForeAnamorphosis = false;
-            this.UserToolStrip.BaseForeAnamorphosisBorder = 4;
-            this.UserToolStrip.BaseForeAnamorphosisColor = System.Drawing.Color.White;
-            this.UserToolStrip.BaseForeOffset = new System.Drawing.Point(0, 0);
-            this.UserToolStrip.BaseHoverFore = System.Drawing.Color.White;
-            this.UserToolStrip.BaseItemAnamorphosis = true;
-            this.UserToolStrip.BaseItemBorder = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
-            this.UserToolStrip.BaseItemBorderShow = true;
-            this.UserToolStrip.BaseItemDown = ((System.Drawing.Image)(resources.GetObject("UserToolStrip.BaseItemDown")));
-            this.UserToolStrip.BaseItemHover = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
-            this.UserToolStrip.BaseItemMouse = ((System.Drawing.Image)(resources.GetObject("UserToolStrip.BaseItemMouse")));
-            this.UserToolStrip.BaseItemNorml = null;
-            this.UserToolStrip.BaseItemPressed = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
-            this.UserToolStrip.BaseItemRadius = 4;
-            this.UserToolStrip.BaseItemRadiusStyle = DSkin.Common.RoundStyle.All;
-            this.UserToolStrip.BaseItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
-            this.UserToolStrip.BindTabControl = null;
-            this.UserToolStrip.CheckedImage = null;
-            this.UserToolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.UserToolStrip.DropDownImageSeparator = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
-            this.UserToolStrip.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.UserToolStrip.Fore = System.Drawing.Color.Black;
-            this.UserToolStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 4, 2);
-            this.UserToolStrip.HoverFore = System.Drawing.Color.White;
-            this.UserToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.UserToolStrip.ItemAnamorphosis = true;
-            this.UserToolStrip.ItemBorder = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
-            this.UserToolStrip.ItemBorderShow = true;
-            this.UserToolStrip.ItemHover = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
-            this.UserToolStrip.ItemPressed = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
-            this.UserToolStrip.ItemRadius = 4;
-            this.UserToolStrip.ItemRadiusStyle = DSkin.Common.RoundStyle.All;
-            this.UserToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.UserToolStrip.Location = new System.Drawing.Point(340, 10);
-            this.UserToolStrip.LoginHandler = null;
-            this.UserToolStrip.LoginUser = null;
-            this.UserToolStrip.LogoutHandler = null;
-            this.UserToolStrip.Margin = new System.Windows.Forms.Padding(10);
-            this.UserToolStrip.Name = "UserToolStrip";
-            this.UserToolStrip.RadiusStyle = DSkin.Common.RoundStyle.All;
-            this.UserToolStrip.Size = new System.Drawing.Size(420, 40);
-            this.UserToolStrip.SkinAllColor = true;
-            this.UserToolStrip.TabIndex = 7;
-            this.UserToolStrip.Text = "userToolStrip1";
-            this.UserToolStrip.TitleAnamorphosis = true;
-            this.UserToolStrip.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(228)))), ((int)(((byte)(236)))));
-            this.UserToolStrip.TitleRadius = 4;
-            this.UserToolStrip.TitleRadiusStyle = DSkin.Common.RoundStyle.All;
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(207, 6);
             // 
-            // DeleteButton
+            // LoginToolStripMenuItem
             // 
-            this.DeleteButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DeleteButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DeleteButton.Image = global::SkyBlog.Properties.Resources.delete;
-            this.DeleteButton.Images = new System.Drawing.Image[] {
-        ((System.Drawing.Image)(global::SkyBlog.Properties.Resources.delete))};
-            this.DeleteButton.Location = new System.Drawing.Point(138, 8);
-            this.DeleteButton.Margin = new System.Windows.Forms.Padding(8);
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(84, 44);
-            this.DeleteButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.DeleteButton.TabIndex = 5;
-            this.DeleteButton.Text = "dSkinPictureBox1";
-            // 
-            // EditButton
-            // 
-            this.EditButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.EditButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EditButton.Image = global::SkyBlog.Properties.Resources.edit;
-            this.EditButton.Images = new System.Drawing.Image[] {
-        ((System.Drawing.Image)(global::SkyBlog.Properties.Resources.edit))};
-            this.EditButton.Location = new System.Drawing.Point(242, 12);
-            this.EditButton.Margin = new System.Windows.Forms.Padding(12);
-            this.EditButton.Name = "EditButton";
-            this.EditButton.Size = new System.Drawing.Size(76, 36);
-            this.EditButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.EditButton.TabIndex = 4;
-            this.EditButton.Text = "dSkinPictureBox1";
-            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
-            // 
-            // ReloadButton
-            // 
-            this.ReloadButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ReloadButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ReloadButton.Image = global::SkyBlog.Properties.Resources.reload;
-            this.ReloadButton.Images = new System.Drawing.Image[] {
-        ((System.Drawing.Image)(global::SkyBlog.Properties.Resources.reload))};
-            this.ReloadButton.Location = new System.Drawing.Point(40, 10);
-            this.ReloadButton.Margin = new System.Windows.Forms.Padding(10);
-            this.ReloadButton.Name = "ReloadButton";
-            this.ReloadButton.Size = new System.Drawing.Size(80, 40);
-            this.ReloadButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ReloadButton.TabIndex = 3;
-            this.ReloadButton.Text = "dSkinPictureBox1";
-            this.ReloadButton.Click += new System.EventHandler(this.ReloadButton_Click);
+            this.LoginToolStripMenuItem.Name = "LoginToolStripMenuItem";
+            this.LoginToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.LoginToolStripMenuItem.Text = "登陆";
+            this.LoginToolStripMenuItem.Click += new System.EventHandler(this.Login_Click);
             // 
             // ArticlePanel
             // 
@@ -463,27 +381,139 @@
             this.ArticlePageInfo.Text = "第 1 页,共 4 页";
             this.ArticlePageInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // dSkinTableLayoutPanel1
+            // dSkinNewPanel1
             // 
-            this.dSkinTableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(237)))), ((int)(((byte)(247)))));
-            this.dSkinTableLayoutPanel1.BitmapCache = false;
-            this.dSkinTableLayoutPanel1.ColumnCount = 5;
-            this.dSkinTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.dSkinTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.dSkinTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.dSkinTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.dSkinTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.dSkinTableLayoutPanel1.Controls.Add(this.ReloadButton, 1, 0);
-            this.dSkinTableLayoutPanel1.Controls.Add(this.DeleteButton, 2, 0);
-            this.dSkinTableLayoutPanel1.Controls.Add(this.EditButton, 3, 0);
-            this.dSkinTableLayoutPanel1.Controls.Add(this.UserToolStrip, 4, 0);
-            this.dSkinTableLayoutPanel1.Location = new System.Drawing.Point(360, 0);
-            this.dSkinTableLayoutPanel1.Name = "dSkinTableLayoutPanel1";
-            this.dSkinTableLayoutPanel1.RightBottom = ((System.Drawing.Image)(resources.GetObject("dSkinTableLayoutPanel1.RightBottom")));
-            this.dSkinTableLayoutPanel1.RowCount = 1;
-            this.dSkinTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.dSkinTableLayoutPanel1.Size = new System.Drawing.Size(770, 60);
-            this.dSkinTableLayoutPanel1.TabIndex = 8;
+            this.dSkinNewPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(237)))), ((int)(((byte)(247)))));
+            this.dSkinNewPanel1.Controls.Add(this.ToolStrip);
+            this.dSkinNewPanel1.Location = new System.Drawing.Point(360, 0);
+            this.dSkinNewPanel1.Name = "dSkinNewPanel1";
+            this.dSkinNewPanel1.Size = new System.Drawing.Size(772, 60);
+            this.dSkinNewPanel1.TabIndex = 8;
+            this.dSkinNewPanel1.Text = "dSkinNewPanel1";
+            // 
+            // ToolStrip
+            // 
+            this.ToolStrip.Arrow = System.Drawing.Color.Black;
+            this.ToolStrip.Back = System.Drawing.Color.White;
+            this.ToolStrip.BackRadius = 4;
+            this.ToolStrip.BackRectangle = new System.Drawing.Rectangle(10, 10, 10, 10);
+            this.ToolStrip.Base = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(237)))), ((int)(((byte)(247)))));
+            this.ToolStrip.BaseFore = System.Drawing.Color.Black;
+            this.ToolStrip.BaseForeAnamorphosis = false;
+            this.ToolStrip.BaseForeAnamorphosisBorder = 4;
+            this.ToolStrip.BaseForeAnamorphosisColor = System.Drawing.Color.White;
+            this.ToolStrip.BaseForeOffset = new System.Drawing.Point(0, 0);
+            this.ToolStrip.BaseHoverFore = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(112)))), ((int)(((byte)(143)))));
+            this.ToolStrip.BaseItemAnamorphosis = true;
+            this.ToolStrip.BaseItemBorder = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.ToolStrip.BaseItemBorderShow = true;
+            this.ToolStrip.BaseItemDown = ((System.Drawing.Image)(resources.GetObject("ToolStrip.BaseItemDown")));
+            this.ToolStrip.BaseItemHover = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.ToolStrip.BaseItemMouse = ((System.Drawing.Image)(resources.GetObject("ToolStrip.BaseItemMouse")));
+            this.ToolStrip.BaseItemNorml = null;
+            this.ToolStrip.BaseItemPressed = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.ToolStrip.BaseItemRadius = 4;
+            this.ToolStrip.BaseItemRadiusStyle = DSkin.Common.RoundStyle.All;
+            this.ToolStrip.BaseItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.ToolStrip.BindTabControl = null;
+            this.ToolStrip.CheckedImage = null;
+            this.ToolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ToolStrip.DropDownImageSeparator = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
+            this.ToolStrip.Fore = System.Drawing.Color.Black;
+            this.ToolStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 4, 2);
+            this.ToolStrip.HoverFore = System.Drawing.Color.White;
+            this.ToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.ToolStrip.ItemAnamorphosis = true;
+            this.ToolStrip.ItemBorder = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.ToolStrip.ItemBorderShow = true;
+            this.ToolStrip.ItemHover = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.ToolStrip.ItemPressed = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+            this.ToolStrip.ItemRadius = 4;
+            this.ToolStrip.ItemRadiusStyle = DSkin.Common.RoundStyle.All;
+            this.ToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ReloadButton,
+            this.EditButton,
+            this.DeleteButton,
+            this.LoginButton,
+            this.UserToolStripDropDownButton});
+            this.ToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.ToolStrip.Name = "ToolStrip";
+            this.ToolStrip.RadiusStyle = DSkin.Common.RoundStyle.All;
+            this.ToolStrip.Size = new System.Drawing.Size(772, 60);
+            this.ToolStrip.SkinAllColor = true;
+            this.ToolStrip.TabIndex = 3;
+            this.ToolStrip.Text = "ToolStrip";
+            this.ToolStrip.TitleAnamorphosis = true;
+            this.ToolStrip.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(228)))), ((int)(((byte)(236)))));
+            this.ToolStrip.TitleRadius = 4;
+            this.ToolStrip.TitleRadiusStyle = DSkin.Common.RoundStyle.All;
+            // 
+            // ReloadButton
+            // 
+            this.ReloadButton.Image = global::SkyBlog.Properties.Resources.reload;
+            this.ReloadButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ReloadButton.Name = "ReloadButton";
+            this.ReloadButton.Size = new System.Drawing.Size(123, 57);
+            this.ReloadButton.Text = "刷新文章列表";
+            this.ReloadButton.Click += new System.EventHandler(this.ReloadButton_Click);
+            // 
+            // EditButton
+            // 
+            this.EditButton.Image = global::SkyBlog.Properties.Resources.edit;
+            this.EditButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EditButton.Name = "EditButton";
+            this.EditButton.Size = new System.Drawing.Size(93, 57);
+            this.EditButton.Text = "修改文章";
+            this.EditButton.Click += new System.EventHandler(this.EditArticle_Click);
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Image = global::SkyBlog.Properties.Resources.delete;
+            this.DeleteButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(93, 57);
+            this.DeleteButton.Text = "删除文章";
+            // 
+            // LoginButton
+            // 
+            this.LoginButton.Image = global::SkyBlog.Properties.Resources.username;
+            this.LoginButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.LoginButton.Name = "LoginButton";
+            this.LoginButton.Size = new System.Drawing.Size(63, 57);
+            this.LoginButton.Text = "登陆";
+            this.LoginButton.Click += new System.EventHandler(this.Login_Click);
+            // 
+            // UserToolStripDropDownButton
+            // 
+            this.UserToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.LogoutToolStripMenuItem});
+            this.UserToolStripDropDownButton.Image = global::SkyBlog.Properties.Resources.username;
+            this.UserToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.UserToolStripDropDownButton.Name = "UserToolStripDropDownButton";
+            this.UserToolStripDropDownButton.Size = new System.Drawing.Size(130, 57);
+            this.UserToolStripDropDownButton.Text = "用户名 | 昵称";
+            // 
+            // LogoutToolStripMenuItem
+            // 
+            this.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem";
+            this.LogoutToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.LogoutToolStripMenuItem.Text = "登出";
+            this.LogoutToolStripMenuItem.Click += new System.EventHandler(this.Logout_Click);
+            // 
+            // UserToolStripMenuItem
+            // 
+            this.UserToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.LogoutToolStripMenuItem2});
+            this.UserToolStripMenuItem.Name = "UserToolStripMenuItem";
+            this.UserToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.UserToolStripMenuItem.Text = "昵称";
+            // 
+            // LogoutToolStripMenuItem2
+            // 
+            this.LogoutToolStripMenuItem2.Name = "LogoutToolStripMenuItem2";
+            this.LogoutToolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
+            this.LogoutToolStripMenuItem2.Text = "登出";
+            this.LogoutToolStripMenuItem2.Click += new System.EventHandler(this.Logout_Click);
             // 
             // MainForm
             // 
@@ -499,7 +529,7 @@
             this.CaptionHeight = 60;
             this.CaptionShowMode = DSkin.TextShowModes.Ordinary;
             this.ClientSize = new System.Drawing.Size(1200, 700);
-            this.Controls.Add(this.dSkinTableLayoutPanel1);
+            this.Controls.Add(this.dSkinNewPanel1);
             this.Controls.Add(this.dSkinNewPanel2);
             this.Controls.Add(this.ArticlePanel);
             this.Controls.Add(this.SkyBlogTitlePanel);
@@ -528,8 +558,10 @@
             this.dSkinFlowLayoutPanel1.ResumeLayout(false);
             this.dSkinNewPanel2.ResumeLayout(false);
             this.dSkinNewPanel2.PerformLayout();
-            this.dSkinTableLayoutPanel1.ResumeLayout(false);
-            this.dSkinTableLayoutPanel1.PerformLayout();
+            this.dSkinNewPanel1.ResumeLayout(false);
+            this.dSkinNewPanel1.PerformLayout();
+            this.ToolStrip.ResumeLayout(false);
+            this.ToolStrip.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -559,10 +591,17 @@
         private System.Windows.Forms.ToolStripMenuItem ViewIndexToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem DeleteToolStripMenuItem;
-        private DSkin.Controls.DSkinPictureBox ReloadButton;
-        private DSkin.Controls.DSkinPictureBox EditButton;
-        private DSkin.Controls.DSkinPictureBox DeleteButton;
-        private WindowsFormsControlLibrary.UserToolStrip UserToolStrip;
-        private DSkin.Controls.DSkinTableLayoutPanel dSkinTableLayoutPanel1;
+        private DSkin.Controls.DSkinNewPanel dSkinNewPanel1;
+        private DSkin.Controls.DSkinToolStrip ToolStrip;
+        private System.Windows.Forms.ToolStripButton ReloadButton;
+        private System.Windows.Forms.ToolStripButton EditButton;
+        private System.Windows.Forms.ToolStripButton DeleteButton;
+        private System.Windows.Forms.ToolStripButton LoginButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem LoginToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton UserToolStripDropDownButton;
+        private System.Windows.Forms.ToolStripMenuItem LogoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem UserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem LogoutToolStripMenuItem2;
     }
 }

@@ -32,9 +32,6 @@ namespace SkyBlog
             _authApi = AuthApi.GetInstance();
 
             _webUrl = ConfigurationManager.AppSettings["webUrl"];
-
-            UserToolStrip.LoginHandler = (sender, args) => Login();
-            UserToolStrip.LogoutHandler = (sender, args) => Logout();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -71,38 +68,46 @@ namespace SkyBlog
             var result = loginForm.ShowDialog();
             if (result != DialogResult.OK) return;
 
-            UserToolStrip.AfterLogin(_loginUser);
-            EditButton.Show();
-            DeleteButton.Show();
+            UserToolStripDropDownButton.Text = $@"{_loginUser.Username} | {_loginUser.Nickname}";
+
+            UserToolStripMenuItem.Text = _loginUser.Nickname;
+
+            EditButton.Enabled = true;
+            DeleteButton.Enabled = true;
 
             EditToolStripMenuItem.Enabled = true;
             DeleteToolStripMenuItem.Enabled = true;
+
+            LoginButton.Visible = false;
+            UserToolStripDropDownButton.Visible = true;
+
+            LoginToolStripMenuItem.Visible = false;
+            UserToolStripMenuItem.Visible = true;
         }
 
         private void Logout()
         {
             _loginUser = null;
 
-            UserToolStrip.Logout();
-
-            EditButton.Hide();
-            DeleteButton.Hide();
+            EditButton.Enabled = false;
+            DeleteButton.Enabled = false;
 
             EditToolStripMenuItem.Enabled = false;
             DeleteToolStripMenuItem.Enabled = false;
+
+            LoginButton.Visible = true;
+            UserToolStripDropDownButton.Visible = false;
+
+            LoginToolStripMenuItem.Visible = true;
+            UserToolStripMenuItem.Visible = false;
+
+            var storage = _storageService.GetLoginSettingsStorage();
+            storage.AutoLogin = false;
+            storage.Token = null;
+            _storageService.SaveStorage(storage);
         }
 
-        private void SkyBlogTitleLabel_Click(object sender, EventArgs e)
-        {
-            Process.Start(_webUrl);
-        }
-
-        private void EditToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            EditArticle();
-        }
-
-        private void ViewIndexToolStripMenuItem_Click(object sender, EventArgs e)
+        private void WebIndex_Click(object sender, EventArgs e)
         {
             Process.Start(_webUrl);
         }
@@ -112,7 +117,7 @@ namespace SkyBlog
             RequestArticles(1);
         }
 
-        private void EditButton_Click(object sender, EventArgs e)
+        private void EditArticle_Click(object sender, EventArgs e)
         {
             EditArticle();
         }
@@ -124,5 +129,16 @@ namespace SkyBlog
                 Article = _selectArticle
             }.ShowDialog();
         }
+
+        private void Login_Click(object sender, EventArgs e)
+        {
+            Login();
+        }
+
+        private void Logout_Click(object sender, EventArgs e)
+        {
+            Logout();
+        }
+
     }
 }
