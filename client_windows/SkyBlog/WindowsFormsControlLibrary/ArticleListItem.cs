@@ -6,6 +6,9 @@ using SkyBlog.Model.Business;
 
 namespace WindowsFormsControlLibrary
 {
+    /// <summary>
+    /// 文章列表条目
+    /// </summary>
     public partial class ArticleListItem : DuiBaseControl
     {
         /// <summary>
