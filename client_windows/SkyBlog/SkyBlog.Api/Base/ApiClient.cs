@@ -8,7 +8,7 @@ namespace SkyBlog.Api.Base
     {
         private const string AuthHeader = "Token";
 
-        private readonly RestClient _client;
+        public readonly RestClient Client;
 
         private static ApiClient _instance;
 
@@ -17,7 +17,7 @@ namespace SkyBlog.Api.Base
         private ApiClient()
         {
             var apiServerUrl = ConfigurationManager.ConnectionStrings["apiServerUrl"].ConnectionString;
-            _client = new RestClient(apiServerUrl);
+            Client = new RestClient(apiServerUrl);
         }
 
         public static ApiClient GetInstance()
@@ -28,36 +28,31 @@ namespace SkyBlog.Api.Base
         public DataResult<T> Get<T>(RestRequest request) where T : new()
         {
             HandleRequest(request);
-            return _client.Get<DataResult<T>>(request).Data;
+            return Client.Get<DataResult<T>>(request).Data;
         }
 
         public DataResult<T> Post<T>(RestRequest request) where T : new()
         {
             HandleRequest(request);
-            return _client.Post<DataResult<T>>(request).Data;
+            return Client.Post<DataResult<T>>(request).Data;
         }
 
         public DataResult<T> Put<T>(RestRequest request) where T : new()
         {
             HandleRequest(request);
-            return _client.Put<DataResult<T>>(request).Data;
+            return Client.Put<DataResult<T>>(request).Data;
         }
 
         public DataResult<T> Patch<T>(RestRequest request) where T : new()
         {
             HandleRequest(request);
-            return _client.Patch<DataResult<T>>(request).Data;
+            return Client.Patch<DataResult<T>>(request).Data;
         }
 
         public Result Delete(RestRequest request)
         {
             HandleRequest(request);
-            return _client.Delete<Result>(request).Data;
-        }
-
-        public RestClient GetRestClient()
-        {
-            return _client;
+            return Client.Delete<Result>(request).Data;
         }
 
         private void HandleRequest(IRestRequest request)
