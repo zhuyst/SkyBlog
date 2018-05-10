@@ -72,8 +72,7 @@ namespace SkyBlog
 
             UserToolStripMenuItem.Text = _loginUser.Nickname;
 
-            EditButton.Enabled = true;
-            DeleteButton.Enabled = true;
+            NewButton.Enabled = true;
 
             EditToolStripMenuItem.Enabled = true;
             DeleteToolStripMenuItem.Enabled = true;
@@ -89,8 +88,7 @@ namespace SkyBlog
         {
             _loginUser = null;
 
-            EditButton.Enabled = false;
-            DeleteButton.Enabled = false;
+            NewButton.Enabled = false;
 
             EditToolStripMenuItem.Enabled = false;
             DeleteToolStripMenuItem.Enabled = false;
@@ -119,14 +117,15 @@ namespace SkyBlog
 
         private void EditArticle_Click(object sender, EventArgs e)
         {
-            EditArticle();
+            EditArticle(false);
         }
 
-        private void EditArticle()
+        private void EditArticle(bool isNew)
         {
+            var article = isNew ? null : _selectArticle;
             new EditForm
             {
-                Article = _selectArticle
+                Article = article
             }.ShowDialog();
         }
 
@@ -140,5 +139,14 @@ namespace SkyBlog
             Logout();
         }
 
+        private void NewButton_Click(object sender, EventArgs e)
+        {
+            EditArticle(true);
+        }
+
+        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteArticle();
+        }
     }
 }

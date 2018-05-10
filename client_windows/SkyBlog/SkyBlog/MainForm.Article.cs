@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using WindowsFormsControlLibrary;
 using DSkin.Controls;
+using DSkin.Forms;
 using SkyBlog.Api.Business;
 using SkyBlog.Model.Base;
 using SkyBlog.Model.Business;
@@ -150,6 +151,15 @@ namespace SkyBlog
         private static string GetArticleUrl(int id)
         {
             return $"{_webUrl}/article/content/{id}/full";
+        }
+
+        private void DeleteArticle()
+        {
+            if (DSkinMessageBox.Show($"确定要删除 {_selectArticle.Title}吗？", "删除文章",
+                    MessageBoxButtons.OKCancel) != DialogResult.OK) return;
+
+            var result = _articleApi.Delete(_selectArticle.Id);
+            DSkinMessageBox.Show(result.Code == 200 ? "删除成功" : result.Message, "删除文章");
         }
     }
 }
