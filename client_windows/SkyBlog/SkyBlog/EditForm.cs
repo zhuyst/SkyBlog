@@ -3,15 +3,16 @@ using System.Windows.Forms;
 using DSkin.Forms;
 using SkyBlog.Api.Business;
 using SkyBlog.Model.Business;
-using static System.String;
 
 namespace SkyBlog
 {
     public partial class EditForm : DSkinForm
     {
-        private ArticleApi _articleApi;
+        public Action SuccessAction { get; set; }
 
         public Article Article { get; set; }
+
+        private readonly ArticleApi _articleApi;
 
         public EditForm()
         {
@@ -90,24 +91,29 @@ namespace SkyBlog
                 DSkinMessageBox.Show(success ? "修改文章成功" : result.Message, "修改文章");
             }
 
+            if (success)
+            {
+                SuccessAction?.Invoke();
+            }
+
             return success;
         }
 
         private bool CheckArticle()
         {
-            if (CheckTextBox(TitleTextBox))
+            if (!CheckTextBox(TitleTextBox))
             {
                 DSkinMessageBox.Show("文章标题不能为空", "不能为空");
                 return false;
             }
 
-            if (CheckTextBox(SubTitleTextBox))
+            if (!CheckTextBox(SubTitleTextBox))
             {
                 DSkinMessageBox.Show("文章副标题不能为空", "不能为空");
                 return false;
             }
 
-            if (CheckTextBox(ContentTextBox))
+            if (!CheckTextBox(ContentTextBox))
             {
                 DSkinMessageBox.Show("文章内容不能为空", "不能为空");
                 return false;
@@ -118,7 +124,7 @@ namespace SkyBlog
 
         private static bool CheckTextBox(TextBox textBox)
         {
-            return textBox.Text.Trim() != Empty;
+            return textBox.Text.Trim() != string.Empty;
         }
     }
 }

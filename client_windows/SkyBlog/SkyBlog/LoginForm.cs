@@ -9,20 +9,18 @@ namespace SkyBlog
 {
     public partial class LoginForm : DSkinForm
     {
-        private readonly Action<User> _loginAction;
+        public Action<User> LoginAction { get; set; }
 
         private readonly StorageService _storageService;
 
         private readonly AuthApi _authApi;
 
-        public LoginForm(Action<User> loginAction)
+        public LoginForm()
         {
             InitializeComponent();
 
             _storageService = StorageService.GetInstance();
             _authApi = AuthApi.GetInstance();
-
-            _loginAction = loginAction;
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -55,7 +53,7 @@ namespace SkyBlog
             {
                 SaveSettings(result.Entity.Token);
                 DialogResult = DialogResult.OK;
-                _loginAction?.Invoke(result.Entity.User);
+                LoginAction?.Invoke(result.Entity.User);
 
                 Close();
             }

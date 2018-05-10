@@ -59,15 +59,25 @@ namespace SkyBlog
             _storageService.SaveStorage(loginSettingsStorage);
 
             _loginUser = result.Entity.User;
+            AfterLogin();
         }
 
         private void Login()
         {
-            var loginForm = new LoginForm((user => { _loginUser = user; }));
+            var loginForm = new LoginForm()
+            {
+                LoginAction = user => { _loginUser = user; }
+            };
 
             var result = loginForm.ShowDialog();
-            if (result != DialogResult.OK) return;
+            if (result == DialogResult.OK)
+            {
+                AfterLogin();
+            }
+        }
 
+        private void AfterLogin()
+        {
             UserToolStripDropDownButton.Text = $@"{_loginUser.Username} | {_loginUser.Nickname}";
 
             UserToolStripMenuItem.Text = _loginUser.Nickname;
@@ -125,7 +135,8 @@ namespace SkyBlog
             var article = isNew ? null : _selectArticle;
             new EditForm
             {
-                Article = article
+                Article = article,
+                SuccessAction = () => RequestArticles(1)
             }.ShowDialog();
         }
 
