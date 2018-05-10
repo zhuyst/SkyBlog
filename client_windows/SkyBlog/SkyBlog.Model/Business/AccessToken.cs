@@ -1,8 +1,6 @@
-﻿using SkyBlog.Model.Base;
-
-namespace SkyBlog.Model.Business
+﻿namespace SkyBlog.Model.Business
 {
-    public class AccessToken : BaseModel
+    public class AccessToken
     {
         public string Token { get; set; }
 

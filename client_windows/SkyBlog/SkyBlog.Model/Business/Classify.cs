@@ -1,8 +1,6 @@
-﻿using SkyBlog.Model.Base;
-
-namespace SkyBlog.Model.Business
+﻿namespace SkyBlog.Model.Business
 {
-    public class Classify : BaseModel
+    public class Classify
     {
         public int Id { get; set; }
 
