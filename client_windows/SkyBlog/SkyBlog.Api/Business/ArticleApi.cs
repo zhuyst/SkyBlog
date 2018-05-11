@@ -5,6 +5,9 @@ using SkyBlog.Model.Business;
 
 namespace SkyBlog.Api.Business
 {
+    /// <summary>
+    /// 文章API
+    /// </summary>
     public class ArticleApi
     {
         private const string ArticleApiUrl = "/articles";
@@ -23,6 +26,11 @@ namespace SkyBlog.Api.Business
             return _instance ?? (_instance = new ArticleApi());
         }
 
+        /// <summary>
+        /// 获取单篇文章
+        /// </summary>
+        /// <param name="id">文章ID</param>
+        /// <returns>文章对象</returns>
         public DataResult<Article> Get(int id)
         {
             const string url = ArticleApiUrl + "/public/{id}";
@@ -33,6 +41,12 @@ namespace SkyBlog.Api.Business
             return _client.Get<Article>(request);
         }
 
+        /// <summary>
+        /// 获取文章列表（分页）
+        /// </summary>
+        /// <param name="pageNum">页码</param>
+        /// <param name="pageSize">页面大小</param>
+        /// <returns>文章列表（分页）</returns>
         public DataResult<PageInfo<Article>> List(int pageNum, int pageSize)
         {
             const string url = ArticleApiUrl + "/public/list/";
@@ -44,6 +58,11 @@ namespace SkyBlog.Api.Business
             return _client.Get<PageInfo<Article>>(request);
         }
 
+        /// <summary>
+        /// 更新文章
+        /// </summary>
+        /// <param name="article">文章对象</param>
+        /// <returns>更新后的文章对象</returns>
         public DataResult<Article> Update(Article article)
         {
             const string url = ArticleApiUrl + "/{id}";
@@ -55,6 +74,11 @@ namespace SkyBlog.Api.Business
             return _client.Put<Article>(request);
         }
 
+        /// <summary>
+        /// 新增文章
+        /// </summary>
+        /// <param name="article">文章对象</param>
+        /// <returns>新增后的文章对象</returns>
         public DataResult<Article> Insert(Article article)
         {
             const string url = ArticleApiUrl + "/";
@@ -65,6 +89,11 @@ namespace SkyBlog.Api.Business
             return _client.Post<Article>(request);
         }
 
+        /// <summary>
+        /// 删除文章
+        /// </summary>
+        /// <param name="id">文章ID</param>
+        /// <returns>删除结果</returns>
         public Result Delete(int id)
         {
             const string url = ArticleApiUrl + "/{id}";
@@ -75,7 +104,12 @@ namespace SkyBlog.Api.Business
             return _client.Delete(request);
         }
 
-        private object GetArticleJson(Article article)
+        /// <summary>
+        /// 转换为文章的JSON对象
+        /// </summary>
+        /// <param name="article">被转换的文章对象</param>
+        /// <returns>转换后的文章对象</returns>
+        private static object GetArticleJson(Article article)
         {
             return new
             {
