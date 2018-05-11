@@ -5,6 +5,9 @@ using SkyBlog.Model.Business;
 
 namespace SkyBlog.Api.Business
 {
+    /// <summary>
+    /// 关于API
+    /// </summary>
     public class AboutApi
     {
         private const string AboutApiUrl = "/about";
@@ -23,6 +26,10 @@ namespace SkyBlog.Api.Business
             return _instance ?? (_instance = new AboutApi());
         }
 
+        /// <summary>
+        /// 获取关于
+        /// </summary>
+        /// <returns>关于</returns>
         public DataResult<About> Get()
         {
             const string url = AboutApiUrl + "/";
@@ -30,6 +37,11 @@ namespace SkyBlog.Api.Business
             return _client.Get<About>(request);
         }
 
+        /// <summary>
+        /// 更新关于
+        /// </summary>
+        /// <param name="about">关于</param>
+        /// <returns>更新后的关于</returns>
         public DataResult<About> Update(About about)
         {
             const string url = AboutApiUrl + "/";

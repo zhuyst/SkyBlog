@@ -5,6 +5,9 @@ using SkyBlog.Model.Business;
 
 namespace SkyBlog.Api.Business
 {
+    /// <summary>
+    /// 授权API
+    /// </summary>
     public class AuthApi
     {
         private const string AuthApiUrl = "/auth";
@@ -23,6 +26,12 @@ namespace SkyBlog.Api.Business
             return _instance ?? (_instance = new AuthApi());
         }
 
+        /// <summary>
+        /// 登陆
+        /// </summary>
+        /// <param name="username">用户名</param>
+        /// <param name="password">密码</param>
+        /// <returns>授权Token</returns>
         public DataResult<AccessToken> Login(string username,string password)
         {
             const string url = AuthApiUrl + "/login";
@@ -36,6 +45,11 @@ namespace SkyBlog.Api.Business
             return result;
         }
 
+        /// <summary>
+        /// 刷新Token，使用老Token换取新Token
+        /// </summary>
+        /// <param name="token">老Token</param>
+        /// <returns>新Token</returns>
         public DataResult<AccessToken> Refresh(string token)
         {
             const string url = AuthApiUrl + "/refresh";
@@ -48,6 +62,10 @@ namespace SkyBlog.Api.Business
             return result;
         }
 
+        /// <summary>
+        /// 为<see cref="ApiClient"/>设置Token
+        /// </summary>
+        /// <param name="result">Token对象</param>
         private void SetToken(DataResult<AccessToken> result)
         {
             if (result.IsSuccess())
