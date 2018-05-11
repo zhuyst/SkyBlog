@@ -19,6 +19,9 @@ namespace SkyBlog
 
         private static string _webUrl;
 
+        /// <summary>
+        /// 当前登录用户
+        /// </summary>
         private User _loginUser;
 
         public MainForm()
@@ -40,11 +43,15 @@ namespace SkyBlog
             AutoLogin();
         }
 
+        /// <summary>
+        /// 自动登陆
+        /// </summary>
         private void AutoLogin()
         {
             var loginSettingsStorage = _storageService.GetLoginSettingsStorage();
             if (!loginSettingsStorage.AutoLogin)
             {
+                // 没有选择'自动登陆'则设置状态为'登出'
                 Logout();
                 return;
             }
@@ -52,9 +59,12 @@ namespace SkyBlog
             var result = _authApi.Refresh(loginSettingsStorage.Token);
             if (!result.IsSuccess())
             {
+                // Token刷新失败则设置状态为'登出'
+                Logout();
                 return;
             }
 
+            // 保存新Token
             loginSettingsStorage.Token = result.Entity.Token;
             _storageService.SaveStorage(loginSettingsStorage);
 
@@ -62,8 +72,12 @@ namespace SkyBlog
             AfterLogin();
         }
 
+        /// <summary>
+        /// 登陆
+        /// </summary>
         private void Login()
         {
+            // 打开登录框
             var loginForm = new LoginForm()
             {
                 LoginAction = user => { _loginUser = user; }
@@ -76,43 +90,98 @@ namespace SkyBlog
             }
         }
 
+        /// <summary>
+        /// 登陆成功后调用的方法
+        /// </summary>
         private void AfterLogin()
         {
-            UserToolStripDropDownButton.Text = $@"{_loginUser.Username} | {_loginUser.Nickname}";
-
-            UserToolStripMenuItem.Text = _loginUser.Nickname;
-
-            NewButton.Enabled = true;
-
-            EditToolStripMenuItem.Enabled = true;
-            DeleteToolStripMenuItem.Enabled = true;
-
-            LoginButton.Visible = false;
-            UserToolStripDropDownButton.Visible = true;
-
-            LoginToolStripMenuItem.Visible = false;
-            UserToolStripMenuItem.Visible = true;
+            SetLoginStatus(true);
         }
 
+        /// <summary>
+        /// 登出
+        /// </summary>
         private void Logout()
         {
             _loginUser = null;
 
-            NewButton.Enabled = false;
+            SetLoginStatus(false);
 
-            EditToolStripMenuItem.Enabled = false;
-            DeleteToolStripMenuItem.Enabled = false;
-
-            LoginButton.Visible = true;
-            UserToolStripDropDownButton.Visible = false;
-
-            LoginToolStripMenuItem.Visible = true;
-            UserToolStripMenuItem.Visible = false;
-
+            // 取消'自动登陆'，清除Token
             var storage = _storageService.GetLoginSettingsStorage();
             storage.AutoLogin = false;
             storage.Token = null;
             _storageService.SaveStorage(storage);
+        }
+
+        /// <summary>
+        /// 设置登陆状态
+        /// </summary>
+        /// <param name="isLogin">是否登陆</param>
+        private void SetLoginStatus(bool isLogin)
+        {
+            SetToolStrip(isLogin);
+            SetMenuStrip(isLogin);
+        }
+
+        /// <summary>
+        /// 设置工具栏
+        /// </summary>
+        /// <param name="isLogin">是否登陆</param>
+        private void SetToolStrip(bool isLogin)
+        {
+            // 用户按钮
+            UserToolStripDropDownButton.Visible = isLogin;
+            if (isLogin)
+            {
+                UserToolStripDropDownButton.Text = $@"{_loginUser.Username} | {_loginUser.Nickname}";
+            }
+
+            // 登陆按钮
+            LoginButton.Visible = !isLogin;
+
+            // '新增文章'按钮
+            NewButton.Enabled = isLogin;
+        }
+
+        /// <summary>
+        /// 设置右键菜单
+        /// </summary>
+        /// <param name="isLogin">是否登陆</param>
+        private void SetMenuStrip(bool isLogin)
+        {
+            // 用户MenuItem
+            if (isLogin)
+            {
+                UserToolStripMenuItem.Text = _loginUser.Nickname;
+            }
+
+            // '修改文章'MenuItem
+            EditToolStripMenuItem.Enabled = isLogin;
+
+            // '删除文章'MenuItem
+            DeleteToolStripMenuItem.Enabled = isLogin;
+
+            // 登陆MenuItem
+            LoginToolStripMenuItem.Visible = !isLogin;
+
+            // 用户MenuItem
+            UserToolStripMenuItem.Visible = isLogin;
+        }
+
+        /// <summary>
+        /// 新增/修改文章
+        /// </summary>
+        /// <param name="isNew">是否为新文章</param>
+        private void EditArticle(bool isNew)
+        {
+            // 新文章直接传入null
+            var article = isNew ? null : _selectArticle;
+            new EditForm
+            {
+                Article = article,
+                SuccessAction = () => RequestArticles(1)
+            }.ShowDialog();
         }
 
         private void WebIndex_Click(object sender, EventArgs e)
@@ -128,16 +197,6 @@ namespace SkyBlog
         private void EditArticle_Click(object sender, EventArgs e)
         {
             EditArticle(false);
-        }
-
-        private void EditArticle(bool isNew)
-        {
-            var article = isNew ? null : _selectArticle;
-            new EditForm
-            {
-                Article = article,
-                SuccessAction = () => RequestArticles(1)
-            }.ShowDialog();
         }
 
         private void Login_Click(object sender, EventArgs e)
