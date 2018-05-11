@@ -169,7 +169,7 @@
             this.RememberCheckBox.Text = "记住密码";
             this.RememberCheckBox.TextColorDisabled = System.Drawing.Color.Gray;
             this.RememberCheckBox.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.RememberCheckBox.Click += new System.EventHandler(this.RememberCheckBox_Click);
+            this.RememberCheckBox.CheckedChanged += new System.EventHandler(this.RememberCheckBox_CheckedChanged);
             // 
             // AutoLoginCheckBox
             // 
@@ -196,7 +196,7 @@
             this.AutoLoginCheckBox.Text = "自动登陆";
             this.AutoLoginCheckBox.TextColorDisabled = System.Drawing.Color.Gray;
             this.AutoLoginCheckBox.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.AutoLoginCheckBox.Click += new System.EventHandler(this.AutoLoginCheckBox_Click);
+            this.AutoLoginCheckBox.CheckedChanged += new System.EventHandler(this.AutoLoginCheckBox_CheckedChanged);
             // 
             // LoginForm
             // 
