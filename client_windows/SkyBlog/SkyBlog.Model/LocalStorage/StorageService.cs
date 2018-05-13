@@ -10,7 +10,10 @@ namespace SkyBlog.Model.LocalStorage
     /// </summary>
     public class StorageService
     {
-        private static StorageService _instance;
+        private static readonly Lazy<StorageService> LInstance = 
+            new Lazy<StorageService>(() => new StorageService());
+
+        public static StorageService Instance => LInstance.Value;
 
         /// <summary>
         /// 缓存的本地存储
@@ -21,11 +24,6 @@ namespace SkyBlog.Model.LocalStorage
         /// 存储路径
         /// </summary>
         private readonly string _storagePath;
-
-        public static StorageService GetInstance()
-        {
-            return _instance ?? (_instance = new StorageService());
-        }
 
         private StorageService()
         {

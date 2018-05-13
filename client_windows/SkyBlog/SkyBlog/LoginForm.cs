@@ -22,8 +22,8 @@ namespace SkyBlog
         {
             InitializeComponent();
 
-            _storageService = StorageService.GetInstance();
-            _authApi = AuthApi.GetInstance();
+            _storageService = StorageService.Instance;
+            _authApi = AuthApi.Instance;
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
