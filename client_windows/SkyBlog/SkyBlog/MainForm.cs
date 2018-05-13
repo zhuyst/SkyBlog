@@ -30,9 +30,9 @@ namespace SkyBlog
 
             _articles = new Dictionary<int, ArticleListItem>();
 
-            _articleApi = ArticleApi.GetInstance();
-            _storageService = StorageService.GetInstance();
-            _authApi = AuthApi.GetInstance();
+            _articleApi = ArticleApi.Instance;
+            _storageService = StorageService.Instance;
+            _authApi = AuthApi.Instance;
 
             _webUrl = ConfigurationManager.AppSettings["webUrl"];
         }

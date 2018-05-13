@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using System;
+using RestSharp;
 using SkyBlog.Api.Base;
 using SkyBlog.Model.Base;
 using SkyBlog.Model.Business;
@@ -10,20 +11,18 @@ namespace SkyBlog.Api.Business
     /// </summary>
     public class ArticleApi
     {
+        private static readonly Lazy<ArticleApi> LInstance = 
+            new Lazy<ArticleApi>(() => new ArticleApi());
+
+        public static ArticleApi Instance = LInstance.Value;
+
         private const string ArticleApiUrl = "/articles";
 
         private readonly ApiClient _client;
 
-        private static ArticleApi _instance;
-
         private ArticleApi()
         {
-            _client = ApiClient.GetInstance();
-        }
-
-        public static ArticleApi GetInstance()
-        {
-            return _instance ?? (_instance = new ArticleApi());
+            _client = ApiClient.Instance;
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace SkyBlog
         public EditForm()
         {
             InitializeComponent();
-            _articleApi = ArticleApi.GetInstance();
+            _articleApi = ArticleApi.Instance;
         }
 
         private void EditForm_Load(object sender, EventArgs e)

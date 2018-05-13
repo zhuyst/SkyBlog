@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using RestSharp;
 using SkyBlog.Model.Base;
 
@@ -9,14 +10,17 @@ namespace SkyBlog.Api.Base
     /// </summary>
     public class ApiClient
     {
+        private static readonly Lazy<ApiClient> LInstance = 
+            new Lazy<ApiClient>(() => new ApiClient());
+
+        public static ApiClient Instance => LInstance.Value;
+
         /// <summary>
         /// 将放入RequestHeader的Key
         /// </summary>
         private const string AuthHeader = "Token";
 
         public readonly RestClient Client;
-
-        private static ApiClient _instance;
 
         /// <summary>
         /// 授权令牌的值，需要赋值
@@ -27,11 +31,6 @@ namespace SkyBlog.Api.Base
         {
             var apiServerUrl = ConfigurationManager.ConnectionStrings["apiServerUrl"].ConnectionString;
             Client = new RestClient(apiServerUrl);
-        }
-
-        public static ApiClient GetInstance()
-        {
-            return _instance ?? (_instance = new ApiClient());
         }
 
         public DataResult<T> Get<T>(RestRequest request) where T : new()
