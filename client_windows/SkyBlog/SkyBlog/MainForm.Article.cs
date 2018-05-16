@@ -54,6 +54,8 @@ namespace SkyBlog
         /// <param name="list">要渲染的文章列表</param>
         private void SetArticleList(IEnumerable<Article> list)
         {
+            ArticleListPanel.BeginInit();
+
             // 清空当前列表
             ArticleListPanel.Items.Clear();
 
@@ -71,6 +73,8 @@ namespace SkyBlog
                 init = true;
             }
             ArticleListPanel.LayoutContent();
+
+            ArticleListPanel.EndInit();
         }
 
         /// <summary>
