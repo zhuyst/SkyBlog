@@ -217,6 +217,7 @@
             this.Controls.Add(this.dSkinTableLayoutPanel1);
             this.DoubleClickMaximized = false;
             this.DrawIcon = false;
+            this.EnableAnimation = false;
             this.EnabledDWM = true;
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(4);
