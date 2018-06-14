@@ -13,6 +13,17 @@ namespace SkyBlog
 {
     public partial class MainForm : DSkinForm
     {
+        private bool LoginState
+        {
+            get => LoginState;
+            set
+            {
+                LoginState = value;
+                SetToolStrip(LoginState);
+                SetMenuStrip(LoginState);
+            }
+        }
+
         private readonly AuthApi _authApi;
 
         private readonly StorageService _storageService;
@@ -95,7 +106,7 @@ namespace SkyBlog
         /// </summary>
         private void AfterLogin()
         {
-            SetLoginStatus(true);
+            LoginState = true;
         }
 
         /// <summary>
@@ -104,24 +115,13 @@ namespace SkyBlog
         private void Logout()
         {
             _loginUser = null;
-
-            SetLoginStatus(false);
+            LoginState = false;
 
             // 取消'自动登陆'，清除Token
             var storage = _storageService.GetLoginSettingsStorage();
             storage.AutoLogin = false;
             storage.Token = null;
             _storageService.SaveStorage(storage);
-        }
-
-        /// <summary>
-        /// 设置登陆状态
-        /// </summary>
-        /// <param name="isLogin">是否登陆</param>
-        private void SetLoginStatus(bool isLogin)
-        {
-            SetToolStrip(isLogin);
-            SetMenuStrip(isLogin);
         }
 
         /// <summary>
