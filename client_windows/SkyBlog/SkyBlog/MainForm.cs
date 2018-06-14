@@ -13,27 +13,35 @@ namespace SkyBlog
 {
     public partial class MainForm : DSkinForm
     {
-        private bool LoginState
+        /// <summary>
+        /// 登陆状态字段
+        /// </summary>
+        private bool _loginState;
+
+        /// <summary>
+        /// 登陆状态属性，重写了setter
+        /// </summary>
+        public bool LoginState
         {
-            get => LoginState;
+            get => _loginState;
             set
             {
-                LoginState = value;
+                _loginState = value;
                 SetToolStrip(LoginState);
                 SetMenuStrip(LoginState);
             }
         }
+
+        /// <summary>
+        /// 当前登录用户
+        /// </summary>
+        private User _loginUser;
 
         private readonly AuthApi _authApi;
 
         private readonly StorageService _storageService;
 
         private static string _webUrl;
-
-        /// <summary>
-        /// 当前登录用户
-        /// </summary>
-        private User _loginUser;
 
         public MainForm()
         {
