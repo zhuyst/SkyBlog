@@ -27,8 +27,10 @@ namespace SkyBlog
             set
             {
                 _loginState = value;
-                SetToolStrip(LoginState);
-                SetMenuStrip(LoginState);
+
+                // 设置工具栏与右键菜单
+                SetToolStrip(value);
+                SetMenuStrip(value);
             }
         }
 
