@@ -1,6 +1,4 @@
-﻿using System.Resources;
-using System.Web;
-using WindowsFormsControlLibrary.Properties;
+﻿using System.Resources;using WindowsFormsControlLibrary.Properties;
 using DSkin.Controls;
 using Markdig;
 
@@ -36,7 +34,10 @@ namespace WindowsFormsControlLibrary
         {
             BaseStylesheet = Css;
             var result = Markdown.ToHtml(Text);
-            result = HttpUtility.HtmlDecode(result);
+
+            // 处理HtmlLabel无法响应<pre>导致的问题
+            result = result.Replace("&lt;", "[").Replace("&gt;", "]");
+
             Text = $@"<div>{result}</div>";
         }
     }
