@@ -67,11 +67,13 @@ namespace SkyBlog
         private bool SaveArticle()
         {
             bool success;
+            var article = GetArticle();
 
             // 如果Article为null，则是新增文章
             if (Article == null)
             {
-                var result = _articleApi.Insert(GetArticle());
+                var result = _articleApi.Insert(article);
+
                 success = result.IsSuccess();
                 DSkinMessageBox.Show(success ? "新增文章成功" : result.Message, "新增文章");
             }
@@ -79,7 +81,9 @@ namespace SkyBlog
             // 否则是编辑文章
             else
             {
-                var result = _articleApi.Update(GetArticle());
+                article.Id = Article.Id;
+                var result = _articleApi.Update(article);
+
                 success = result.IsSuccess();
                 DSkinMessageBox.Show(success ? "修改文章成功" : result.Message, "修改文章");
             }
