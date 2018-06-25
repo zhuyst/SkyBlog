@@ -1,6 +1,6 @@
-client_web/.idea/workspace.xml
-client_android/.idea/workspace.xml
-client_android/platforms/android/.idea/workspace.xml
+client_web/.idea/
+client_android/.idea/
+client_android/platforms/android/.idea/
 /client_windows/SkyBlog/.vs/SkyBlog/v15
 /client_windows/SkyBlog/SkyBlog/bin/Debug
 /client_windows/SkyBlog/SkyBlog/obj/Debug
