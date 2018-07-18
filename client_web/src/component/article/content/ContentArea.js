@@ -7,6 +7,8 @@ import ArticleTitle from "./ArticleTitle";
 import {deleteArticle} from "../../../action/article/ContentAction";
 import Markdown from "../../common/markdown/Markdown";
 
+import '../../../static/css/article/markdown.css'
+
 class ContentArea extends React.Component{
 
     render(){
@@ -15,7 +17,7 @@ class ContentArea extends React.Component{
         return (
             <div className="content_main">
                 <ArticleTitle editing={false}/>
-                <Clearfix>
+                <Clearfix className="markdown_view">
                     <Markdown text={article.content.text}/>
                 </Clearfix>
             </div>
