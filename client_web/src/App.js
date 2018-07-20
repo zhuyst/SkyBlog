@@ -7,10 +7,10 @@ import { Provider } from 'react-redux'
 import Index from './component/common/Index'
 import store, {history} from "./store/Store";
 
-store.subscribe(() => {
-    // 监听state变化
-    console.log(store.getState())
-});
+// store.subscribe(() => {
+//     // 监听state变化
+//     console.log(store.getState())
+// });
 
 class App extends React.Component {
   render() {
