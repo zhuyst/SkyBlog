@@ -6,7 +6,7 @@ import {error, info} from "./action/common/NotifyAction";
 
 import {loginClear} from "./action/common/LoginAction";
 
-const API_BASE_URL = "https://api.zhuyst.cc";
+const API_BASE_URL = "https://skyblog.zhuyst.cc/server";
 
 export const LOGIN_URL = API_BASE_URL + "/auth/login";
 export const REFRESH_URL = API_BASE_URL + "/auth/refresh";

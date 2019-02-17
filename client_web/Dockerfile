@@ -4,7 +4,7 @@ ADD . .
 
 VOLUME ./node_modules
 
-RUN npm run build
+RUN npm install && npm run build
 
 FROM nginx:1.15.8-alpine
 
