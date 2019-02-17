@@ -18,6 +18,28 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
+	<!-- 设定主仓库，按设定顺序进行查找。 -->
+	<repositories>
+
+		<repository>
+			<id>nexus-aliyun</id>
+			<name>Nexus aliyun</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+		</repository>
+
+	</repositories>
+
+	<!-- 设定插件仓库 -->
+	<pluginRepositories>
+
+		<pluginRepository>
+			<id>nexus-aliyun</id>
+			<name>Nexus aliyun</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+		</pluginRepository>
+
+	</pluginRepositories>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
