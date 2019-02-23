@@ -52,11 +52,16 @@ export const HttpMethod = {
 };
 
 const getHeaders = () => {
+    let headers = {
+        "Content-Type": ContentType.JSON
+    };
+
     const token = Cookies.get(COOKIE_TOKEN);
-    return {
-        "Content-Type": ContentType.JSON,
-        "Token": token
+    if(token) {
+        headers["Token"] = token;
     }
+
+    return headers;
 };
 
 export const _get = (url,body = null) => {
