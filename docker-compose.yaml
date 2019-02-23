@@ -10,6 +10,8 @@ services:
       - /data/mysql:/var/lib/mysql
     environment:
       MYSQL_DATABASE: skyblog
+      MYSQL_USER: skyblog
+      MYSQL_PASSWORD: skyblog
       MYSQL_ROOT_PASSWORD: zhuyst
   redis:
     image: redis:5.0.3-alpine
