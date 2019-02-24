@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  mysql:
+    build: .
+    volumes: 
+      - /data/mysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: skyblog
+      MYSQL_ROOT_PASSWORD: zhuyst
