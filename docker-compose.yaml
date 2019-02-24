@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  mysql:
+    build: ./skyblog_mysql
+    restart: always
+    ports: 
+      - 3306:3306
+    volumes: 
+      - /data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: skyblog
+      MYSQL_USER: skyblog
+      MYSQL_PASSWORD: skyblog
+      MYSQL_ROOT_PASSWORD: zhuyst
+  redis:
+    image: redis:5.0.3-alpine
+    restart: always
+    volumes: 
+      - /data/redis:/data
+  server_api:
+    build: ./server_api
+    restart: always
+    ports: 
+      - 8080:8080
+    depends_on: 
+      - mysql
+      - redis
+  client_web:
+    build: ./client_web
+    restart: always
+    ports:
+      - 9000:9000
+    depends_on: 
+      - server_api
