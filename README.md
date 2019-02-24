@@ -1,14 +1,30 @@
 # SkyBlog
 
-该项目由我独立开发，是一个阅读与管理合一的轻量级博客，仅支持Markdown编辑。
+该项目是一个阅读与管理合一的轻量级博客，仅支持Markdown编辑。
 
 项目使用前后端分离架构，所以部署在Github和自己的服务器各部署了一份前端网页。
 
-## Client Web
+项目整体运用了`Docker`进行构建与运行，并且使用`DockerCompose`来启动。
+
+构建与运行应用了Docker在17.05新增的特性：[Use multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/)，解放了构建机需要对应环境的问题。
+
+# 系统结构
+
+![skyblog.png](./docs/skyblog.png)
+
+# 快速开始
+
+```sh
+docker-compose up -d
+```
+
+## 前端项目 —— Client Web
+
+运用了`NodeJS`镜像进行项目的构建，然后将构建产物`COPY`到`nginx`镜像中，详情见[Dockerfile](./client_web/Dockerfile)
 
 Github Pages : [zhuyst.github.io](https://zhuyst.github.io)
 
-Apache : [skyblog.zhuyst.cc](https://skyblog.zhuyst.cc)
+Nginx : [skyblog.zhuyst.cc](https://skyblog.zhuyst.cc)
 
 前端使用[create-react-app](https://github.com/facebook/create-react-app)创建，并且还使用了以下框架/工具：
 
@@ -20,15 +36,11 @@ Apache : [skyblog.zhuyst.cc](https://skyblog.zhuyst.cc)
 * Markdown编辑器：[react-mde](https://github.com/andrerpena/react-mde)
 * 通知：[reapop](https://github.com/LouisBarranqueiro/reapop)
 
-## Server API
+## 后端项目 —— Server API
+
+运用了`Maven`镜像进行构建，然后将构建后的`app.jar`文件`COPY`到`openjdk`镜像中，然后使用`docker`配置文件启动项目，详情见[Dockerfile](./server_api/Dockerfile)
 
 Swagger : [api.zhuyst.cc](https://api.zhuyst.cc)
-
-#### 运行环境：
-* CentOS 7.0 64bit
-* Java 8
-* MySQL 5.7
-* Redis 3.2.0
 
 1. 后台使用[Spring Boot](https://github.com/spring-projects/spring-boot)为基础构建
 2. 使用[MyBatis](https://github.com/mybatis/mybatis-3)作为持久层框架
