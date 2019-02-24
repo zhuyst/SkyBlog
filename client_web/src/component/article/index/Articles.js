@@ -1,75 +1,76 @@
-import React from 'react'
-import {TransitionGroup} from "react-transition-group";
-import {PanelGroup} from 'react-bootstrap'
-import { connect } from 'react-redux'
+import React from 'react';
+import { TransitionGroup } from 'react-transition-group';
+import { PanelGroup } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-import Preview from './Preview'
-import Pager from "./Pager";
+import Preview from './Preview';
+import Pager from './Pager';
 
-import {listArticles} from "../../../action/article/ArticlesAction";
-import {ARTICLE_PAGE_SIZE} from "../../../Constant";
-import FadeTransition from "../../common/FadeTransition";
-import ArticlesLoading from "./ArticlesLoading";
+import { listArticles } from '../../../action/article/ArticlesAction';
+import { ARTICLE_PAGE_SIZE } from '../../../Constant';
+import FadeTransition from '../../common/FadeTransition';
+import ArticlesLoading from './ArticlesLoading';
 
-class Articles extends React.Component{
+class Articles extends React.Component {
+  componentWillMount() {
+    const { page, listArticles } = this.props;
+    if (page.total === 0) {
+      listArticles(1);
+    }
+  }
 
-    componentWillMount(){
-        const {page, listArticles} = this.props;
-        if(page.total === 0){
-            listArticles(1);
-        }
+  render() {
+    const { page, loading, listArticles } = this.props;
+    const { list, page_num } = page;
+
+    if (page.total === 0 && loading) {
+      return (
+        <ArticlesLoading />
+      );
     }
 
-    render(){
-        const {page, loading, listArticles} = this.props;
-        const {list,page_num} = page;
-
-        if(page.total === 0 && loading){
-            return (
-                <ArticlesLoading/>
-            )
-        }
-
-        return(
-            <div>
-                <PanelGroup id="articles">
-                    <TransitionGroup>
-                        {
+    return (
+      <div>
+        <PanelGroup id="articles">
+          <TransitionGroup>
+            {
                             list.map(article => (
-                                <FadeTransition key={article.id}>
-                                    <Preview article={article}/>
-                                </FadeTransition>
+                              <FadeTransition key={article.id}>
+                                <Preview article={article} />
+                              </FadeTransition>
                             ))
                         }
-                    </TransitionGroup>
-                </PanelGroup>
-                <div className="pager">
-                    <Pager page={page} loading={loading}
-                           onClick={() => listArticles(page_num + 1)} />
-                </div>
-            </div>
-        )
-    }
+          </TransitionGroup>
+        </PanelGroup>
+        <div className="pager">
+          <Pager page={page}
+            loading={loading}
+            onClick={() => listArticles(page_num + 1)}
+          />
+        </div>
+      </div>
+    );
+  }
 }
 
-const mapStateToProps = state => {
-    return {
-        page : state.articles.page,
-        loading : state.articles.loading
-    }
+const mapStateToProps = (state) => {
+  return {
+    page: state.articles.page,
+    loading: state.articles.loading,
+  };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        listArticles : pageNum => {
-            dispatch(listArticles(pageNum,ARTICLE_PAGE_SIZE))
-        }
-    }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    listArticles: (pageNum) => {
+      dispatch(listArticles(pageNum, ARTICLE_PAGE_SIZE));
+    },
+  };
 };
 
 const ArticlesContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps,
 )(Articles);
 
-export default ArticlesContainer
+export default ArticlesContainer;
