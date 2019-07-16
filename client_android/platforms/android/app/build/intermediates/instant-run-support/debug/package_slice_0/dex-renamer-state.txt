@@ -1,4 +1,0 @@
-#Sun Mar 18 15:50:05 CST 2018
-base.0=C\:\\workplace\\SkyBlog\\client_android\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\172
-renamed.0=classes.dex
-file.0=C\:\\workplace\\SkyBlog\\client_android\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\172\\classes.dex
