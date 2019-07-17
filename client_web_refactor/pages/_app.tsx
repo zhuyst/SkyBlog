@@ -2,6 +2,8 @@ import withRedux from "next-redux-wrapper";
 import App, { Container } from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
+import NotificationsSystem from "reapop";
+import theme from "reapop-theme-wybo";
 import {Store} from "redux";
 import { initStore } from "../store";
 
@@ -27,6 +29,7 @@ export default withRedux(initStore)(
             return (
                 <Container>
                     <Provider store={store}>
+                        <NotificationsSystem theme={theme}/>
                         <Component {...pageProps} />
                     </Provider>
                 </Container>
