@@ -15,7 +15,7 @@ export function setGithubLoading(loading: boolean): ISetGithubLoadingAction {
 }
 
 export function listCommits(perPage: number) {
-    return async (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch) => {
         dispatch(setGithubLoading(true));
 
         try {
@@ -31,9 +31,9 @@ export function listCommits(perPage: number) {
 export interface IGithubCommit {
     sha: string;
     author: string;
-    author_url: string;
+    authorUrl: string;
     message: string;
-    commit_url: string;
+    commitUrl: string;
 }
 
 export const LIST_COMMITS_RESPONSE = "LIST_COMMITS_RESPONSE";
@@ -47,16 +47,16 @@ function listCommitsResponse(commits: IGithubFullCommitInfo[]): IListCommitsResp
             return {
                 sha : commit.sha,
                 author : commit.author.login,
-                author_url : commit.author.html_url,
+                authorUrl : commit.author.html_url,
                 message : commit.commit.message,
-                commit_url : commit.html_url,
+                commitUrl : commit.html_url,
             };
         }),
     };
 }
 
 export function getProjectStar() {
-    return async (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch) => {
         try {
             const result = await fetchProjectStar();
             dispatch(getProjectStarResponse(result));

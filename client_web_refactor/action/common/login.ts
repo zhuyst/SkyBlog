@@ -1,9 +1,7 @@
-import { message as msg } from "antd";
+import {message as msg} from "antd";
 import {Action, Dispatch} from "redux";
 import {change, startSubmit, stopSubmit} from "redux-form";
-import {
-    FAIL_RESULT, getToken, IApiResult, removeToken, setToken,
-} from "../../api";
+import {ApiResultCode, FAIL_RESULT, getToken, IApiResult, removeToken, setToken} from "../../api";
 import {fetchLogin, fetchRefresh, IAuthResponse, IUser} from "../../api/auth";
 import {IUpdateAboutResponseAction} from "../about";
 import {FORM_LOGIN, FORM_USERINFO} from "../form";
@@ -46,7 +44,7 @@ export function loginResponse(ok: boolean, message: string): ILoginResponseActio
 }
 
 export function logout() {
-    return (dispatch: Dispatch<any>) => {
+    return (dispatch: Dispatch) => {
         removeToken();
 
         msg.info("登出成功");
@@ -71,7 +69,7 @@ export function checkUserLoginState() {
 
         try {
             const result = await fetchRefresh(token);
-            if (result.code === 401) {
+            if (result.code === ApiResultCode.Unauthorized) {
                 removeToken();
             }
 
@@ -83,11 +81,11 @@ export function checkUserLoginState() {
     };
 }
 
-export function afterLogin(result: IApiResult<IAuthResponse>, dispatch: Dispatch<any>, alert: boolean) {
+export function afterLogin(result: IApiResult<IAuthResponse>, dispatch: Dispatch, alert: boolean) {
     let ok = false;
     let message = null;
 
-    if (result.code === 200) {
+    if (result.code === ApiResultCode.OK) {
         dispatch(setLoginModalShow(false));
 
         const entity = result.entity;
@@ -106,7 +104,7 @@ export function afterLogin(result: IApiResult<IAuthResponse>, dispatch: Dispatch
         }
 
         ok = true;
-    } else if (result.code === 401) {
+    } else if (result.code === ApiResultCode.Unauthorized) {
         ok = null;
     } else {
         msg.error(result.message);

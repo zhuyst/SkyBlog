@@ -62,7 +62,7 @@ function updateAboutResponse(result: IApiResult<IAbout>): IUpdateAboutResponseAc
 }
 
 export function updateAbout(about: IAbout, back: boolean) {
-    return async (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch) => {
         dispatch(startSubmit(FORM_ABOUT));
 
         const result = await fetchUpdateAbout(about);
