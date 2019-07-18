@@ -1,6 +1,6 @@
+import { message as msg } from "antd";
 import {Action, Dispatch} from "redux";
 import {change, startSubmit, stopSubmit} from "redux-form";
-
 import {
     FAIL_RESULT, getToken, IApiResult, removeToken, setToken,
 } from "../../api";
@@ -8,7 +8,6 @@ import {fetchLogin, fetchRefresh, IAuthResponse, IUser} from "../../api/auth";
 import {FORM_LOGIN, FORM_USERINFO} from "../form";
 import {getAccessCount} from "../log/AccessLogAction";
 import {setLoginModalShow} from "./modal";
-import {error, info, success} from "./notify";
 
 export const LOGIN_CLEAR = "LOGIN_CLEAR";
 export interface ILoginClearAction extends Action<typeof LOGIN_CLEAR> {
@@ -49,7 +48,7 @@ export function logout() {
     return (dispatch: Dispatch<any>) => {
         removeToken();
 
-        dispatch(info("登出成功"));
+        msg.info("登出成功");
         dispatch(loginClear());
     };
 }
@@ -102,14 +101,14 @@ export function afterLogin(result: IApiResult<IAuthResponse>, dispatch: Dispatch
         dispatch(change(FORM_USERINFO, "nickname", user.nickname));
 
         if (alert) {
-            dispatch(success("登录成功"));
+            msg.success("登录成功");
         }
 
         ok = true;
     } else if (result.code === 401) {
         ok = null;
     } else {
-        dispatch(error(result.message));
+        msg.error(result.message);
         message = result.message;
     }
 

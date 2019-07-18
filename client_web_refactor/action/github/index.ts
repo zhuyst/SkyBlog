@@ -1,7 +1,7 @@
+import { message as msg } from "antd";
 import {Action, Dispatch} from "redux";
 import {FAIL_RESULT} from "../../api";
 import {fetchCommits, fetchProjectStar, IGithubCommit, IGithubInfo} from "../../api/github";
-import {error} from "../common/notify";
 
 export const SET_GITHUB_LOADING = "SET_GITHUB_LOADING";
 export interface ISetGithubLoadingAction extends Action<typeof SET_GITHUB_LOADING> {
@@ -23,7 +23,7 @@ export function listCommits(perPage: number) {
             dispatch(setGithubLoading(false));
             dispatch(listCommitsResponse(result));
         } catch (e) {
-            dispatch(error(FAIL_RESULT.message));
+            msg.error(FAIL_RESULT.message);
         }
     };
 }
@@ -59,7 +59,7 @@ export function getProjectStar() {
             const result = await fetchProjectStar();
             dispatch(getProjectStarResponse(result));
         } catch (e) {
-            dispatch(error(FAIL_RESULT.message));
+            msg.error(FAIL_RESULT.message);
         }
     };
 }

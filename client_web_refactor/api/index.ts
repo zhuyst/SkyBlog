@@ -2,11 +2,11 @@ import fetch from "isomorphic-fetch";
 import * as Cookies from "js-cookie";
 
 import {loginClear} from "../action/common/login";
-import {error, info} from "../action/common/notify";
 import { API_BASE_URL } from "../Constant";
 import store from "../store";
 import {IAccessToken, Token} from "./auth";
 const { dispatch } = store;
+import { message as msg } from "antd";
 
 export const AUTH_URL = `${API_BASE_URL}/auth`;
 
@@ -169,12 +169,12 @@ async function handleFetch<T>(response: Response): Promise<IApiResult<T>> {
     try {
         const result = await checkStatus<IApiResult<T>>(response);
         if (result.code === ApiResultCode.Unauthorized) {
-            info(result.message);
+            msg.info(result.message);
             removeToken();
             dispatch(loginClear());
         }
         return result;
     } catch (e) {
-        dispatch(error(FAIL_RESULT.message));
+        msg.error(FAIL_RESULT.message);
     }
 }

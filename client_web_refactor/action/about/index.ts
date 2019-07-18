@@ -2,9 +2,9 @@ import Router from "next/router";
 import {Action, Dispatch} from "redux";
 import {startSubmit, stopSubmit} from "redux-form";
 
+import { message as msg } from "antd";
 import {ApiResultCode, IApiResult} from "../../api";
 import {fetchGetAbout, fetchUpdateAbout, IAbout} from "../../api/about";
-import {error, success} from "../common/notify";
 import {FORM_ABOUT} from "../form";
 
 export const SET_ABOUT = "SET_ABOUT";
@@ -69,13 +69,13 @@ export function updateAbout(about: IAbout, back: boolean) {
         dispatch(stopSubmit(FORM_ABOUT, result.errors));
 
         if (result.code === ApiResultCode.OK) {
-            dispatch(success("更新关于成功"));
+            msg.success("更新关于成功");
             dispatch(updateAboutResponse(result));
             if (back) {
                 await Router.push("/about");
             }
         } else {
-            dispatch(error(result.message));
+            msg.error(result.message);
         }
     };
 }
