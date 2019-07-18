@@ -7,7 +7,7 @@ import {
 import {fetchLogin, fetchRefresh, IAuthResponse, IUser} from "../../api/auth";
 import {FORM_LOGIN, FORM_USERINFO} from "../form";
 import {getAccessCount} from "../log/AccessLogAction";
-import {setLoginModalShow} from "./ModalAction";
+import {setLoginModalShow} from "./modal";
 import {error, info, success} from "./notify";
 
 export const LOGIN_CLEAR = "LOGIN_CLEAR";

@@ -1,10 +1,10 @@
 import fetch from "isomorphic-fetch";
 import * as Cookies from "js-cookie";
 
+import {loginClear} from "../action/common/login";
 import {error, info} from "../action/common/notify";
 import { API_BASE_URL } from "../Constant";
 import store from "../store";
-import {loginClear} from "./action/common/LoginAction";
 import {IAccessToken, Token} from "./auth";
 const { dispatch } = store;
 
