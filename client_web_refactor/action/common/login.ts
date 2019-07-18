@@ -5,6 +5,7 @@ import {
     FAIL_RESULT, getToken, IApiResult, removeToken, setToken,
 } from "../../api";
 import {fetchLogin, fetchRefresh, IAuthResponse, IUser} from "../../api/auth";
+import {IUpdateAboutResponseAction} from "../about";
 import {FORM_LOGIN, FORM_USERINFO} from "../form";
 import {getAccessCount} from "../log/AccessLogAction";
 import {setLoginModalShow} from "./modal";
@@ -126,3 +127,6 @@ export function setLoginUser(user: IUser): ISetLoginUserAction {
         user,
     };
 }
+
+export type LoginAction = ISetManagementAction | ILoginClearAction | ILoginResponseAction |
+    ISetLoginUserAction | IUpdateAboutResponseAction;

@@ -79,3 +79,5 @@ export function updateAbout(about: IAbout, back: boolean) {
         }
     };
 }
+
+export type AboutAction = ISetAboutAction | IGetAboutResponseAction | IUpdateAboutResponseAction;

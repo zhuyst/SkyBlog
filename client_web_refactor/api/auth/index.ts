@@ -4,7 +4,8 @@ export interface IUser {
     id: number;
     username: string;
     nickname: string;
-    password: string;
+    password?: string;
+    admin: boolean;
 }
 
 export type Token = string;
