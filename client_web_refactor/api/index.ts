@@ -5,10 +5,10 @@ import {error, info} from "../action/common/notify";
 import { API_BASE_URL } from "../Constant";
 import store from "../store";
 import {loginClear} from "./action/common/LoginAction";
+import {IAccessToken, Token} from "./auth";
 const { dispatch } = store;
 
-export const LOGIN_URL = `${API_BASE_URL}/auth/login`;
-export const REFRESH_URL = `${API_BASE_URL}/auth/refresh`;
+export const AUTH_URL = `${API_BASE_URL}/auth`;
 
 export const USER_API_URL = `${API_BASE_URL}/users`;
 export const ARTICLE_API_URL = `${API_BASE_URL}/articles`;
@@ -18,13 +18,6 @@ export const ABOUT_API_URL = `${API_BASE_URL}/about`;
 export const SYS_LOG_URL = `${API_BASE_URL}/sys_log`;
 export const ACCESS_LOG_URL = `${API_BASE_URL}/access_log`;
 export const OSS_URL = `${API_BASE_URL}/oss`;
-
-type Token = string;
-
-export interface IAccessToken {
-    token: Token;
-    expire: number;
-}
 
 const COOKIE_TOKEN: string = "Token";
 
@@ -44,7 +37,7 @@ export function getToken(): Token {
     return token;
 }
 
-enum ContentType {
+export enum ContentType {
     FORM = "application/x-www-form-urlencoded; charset=UTF-8",
     JSON = "application/json;charset=UTF-8",
 }
@@ -63,9 +56,9 @@ interface IRequestHeaders {
     Token?: Token;
 }
 
-function getHeaders(): IRequestHeaders {
+function getHeaders(contentType: ContentType): IRequestHeaders {
     const headers: IRequestHeaders = {
-        "Content-Type": ContentType.JSON,
+        "Content-Type": contentType,
     };
 
     const token = Cookies.get(COOKIE_TOKEN);
@@ -76,7 +69,7 @@ function getHeaders(): IRequestHeaders {
     return headers;
 }
 
-export interface IRequestBody {
+interface IRequestBody {
     [key: string]: any;
 }
 
@@ -108,26 +101,34 @@ export async function httpGet<T = null>(url: string, body: IRequestBody = null):
     }
 
     const response = await fetch(url, {
-        headers: getHeaders(),
+        headers: getHeaders(ContentType.JSON),
         method : HttpMethod.GET,
     });
     return handleFetch<T>(response);
 }
 
-export function httpPost<T = null>(url: string, body: IRequestBody): Promise<IApiResult<T>> {
-    return handleFetchWithBody<T>(url, body, HttpMethod.POST);
+export function httpPost<T = null>(
+    url: string, body: IRequestBody, contentType: ContentType = ContentType.JSON):
+    Promise<IApiResult<T>> {
+    return handleFetchWithBody<T>(url, body, HttpMethod.POST, contentType);
 }
 
-export function httpPut<T = null>(url: string, body: IRequestBody): Promise<IApiResult<T>> {
-    return handleFetchWithBody<T>(url, body, HttpMethod.PUT);
+export function httpPut<T = null>(
+    url: string, body: IRequestBody, contentType: ContentType = ContentType.JSON):
+    Promise<IApiResult<T>> {
+    return handleFetchWithBody<T>(url, body, HttpMethod.PUT, contentType);
 }
 
-export function httpPatch<T = null>(url: string, body: IRequestBody): Promise<IApiResult<T>> {
-    return handleFetchWithBody<T>(url, body, HttpMethod.PATCH);
+export function httpPatch<T = null>(
+    url: string, body: IRequestBody, contentType: ContentType = ContentType.JSON):
+    Promise<IApiResult<T>> {
+    return handleFetchWithBody<T>(url, body, HttpMethod.PATCH, contentType);
 }
 
-export function httpDelete<T = null>(url: string, body: IRequestBody): Promise<IApiResult<T>> {
-    return handleFetchWithBody<T>(url, body, HttpMethod.DELETE);
+export function httpDelete<T = null>(
+    url: string, body: IRequestBody, contentType: ContentType = ContentType.JSON):
+    Promise<IApiResult<T>> {
+    return handleFetchWithBody<T>(url, body, HttpMethod.DELETE, contentType);
 }
 
 export function checkStatus<T>(response: Response): Promise<IApiResult<T>> {
@@ -138,10 +139,27 @@ export function checkStatus<T>(response: Response): Promise<IApiResult<T>> {
     }
 }
 
-async function handleFetchWithBody<T>(url: string, body: IRequestBody, httpMethod: HttpMethod): Promise<IApiResult<T>> {
+async function handleFetchWithBody<T>(
+    url: string, body: IRequestBody, httpMethod: HttpMethod, contentType: ContentType):
+    Promise<IApiResult<T>> {
+
+    let bodyStr: string;
+    switch (contentType) {
+        case ContentType.JSON:
+            bodyStr = JSON.stringify(body);
+            break;
+        case ContentType.FORM:
+            const keyAndValues = [];
+            Object.keys(body).forEach((key) => {
+                const value = body[key];
+                keyAndValues.push(`${key}=${value}`);
+            });
+            bodyStr = keyAndValues.join("&");
+            break;
+    }
     const response = await fetch(url, {
-        body : JSON.stringify(body),
-        headers: getHeaders(),
+        body : bodyStr,
+        headers: getHeaders(contentType),
         method : httpMethod,
     });
     return handleFetch<T>(response);
