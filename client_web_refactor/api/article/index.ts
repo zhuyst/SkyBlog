@@ -1,6 +1,6 @@
-import {IClassify} from "../../action/article/classify";
 import {IPageInfo} from "../../action/common";
 import {IUser} from "../auth";
+import {IClassify} from "../classify";
 import {ARTICLE_API_URL, httpGet, IApiResult} from "../index";
 
 export interface IArticle {
@@ -8,7 +8,7 @@ export interface IArticle {
 
     title: string;
     subTitle: string;
-    content: string;
+    content?: string;
 
     authorId: number;
     author: IUser;

@@ -93,7 +93,7 @@ export const FAIL_RESULT: IApiResult = {
     message: "网络请求失败，请检查网络状态",
 };
 
-export async function httpGet<T = null>(url: string, body: IRequestBody = null): Promise<IApiResult<T>> {
+export async function httpGet<T = null>(url: string, body?: IRequestBody): Promise<IApiResult<T>> {
     if (body !== null) {
         const urlObj = new URL(url);
         Object.keys(body).forEach((key) => urlObj.searchParams.append(key, body[key]));
@@ -108,25 +108,25 @@ export async function httpGet<T = null>(url: string, body: IRequestBody = null):
 }
 
 export function httpPost<T = null>(
-    url: string, body: IRequestBody, contentType: ContentType = ContentType.JSON):
+    url: string, body?: IRequestBody, contentType: ContentType = ContentType.JSON):
     Promise<IApiResult<T>> {
     return handleFetchWithBody<T>(url, body, HttpMethod.POST, contentType);
 }
 
 export function httpPut<T = null>(
-    url: string, body: IRequestBody, contentType: ContentType = ContentType.JSON):
+    url: string, body?: IRequestBody, contentType: ContentType = ContentType.JSON):
     Promise<IApiResult<T>> {
     return handleFetchWithBody<T>(url, body, HttpMethod.PUT, contentType);
 }
 
 export function httpPatch<T = null>(
-    url: string, body: IRequestBody, contentType: ContentType = ContentType.JSON):
+    url: string, body?: IRequestBody, contentType: ContentType = ContentType.JSON):
     Promise<IApiResult<T>> {
     return handleFetchWithBody<T>(url, body, HttpMethod.PATCH, contentType);
 }
 
 export function httpDelete<T = null>(
-    url: string, body: IRequestBody, contentType: ContentType = ContentType.JSON):
+    url: string, body?: IRequestBody, contentType: ContentType = ContentType.JSON):
     Promise<IApiResult<T>> {
     return handleFetchWithBody<T>(url, body, HttpMethod.DELETE, contentType);
 }

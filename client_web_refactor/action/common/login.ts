@@ -5,7 +5,7 @@ import {ApiResultCode, FAIL_RESULT, getToken, IApiResult, removeToken, setToken}
 import {fetchLogin, fetchRefresh, IAuthResponse, IUser} from "../../api/auth";
 import {IUpdateAboutResponseAction} from "../about";
 import {FORM_LOGIN, FORM_USERINFO} from "../form";
-import {getAccessCount} from "../log/AccessLogAction";
+import {getAccessCount} from "../log/accessLog";
 import {setLoginModalShow} from "./modal";
 
 export const LOGIN_CLEAR = "LOGIN_CLEAR";
