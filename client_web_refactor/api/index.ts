@@ -131,7 +131,7 @@ export function httpDelete<T = null>(
     return handleFetchWithBody<T>(url, body, HttpMethod.DELETE, contentType);
 }
 
-export function checkStatus<T>(response: Response): Promise<IApiResult<T>> {
+export function checkStatus<T>(response: Response): Promise<T> {
     if (response.ok) {
         return response.json();
     } else {
@@ -167,7 +167,7 @@ async function handleFetchWithBody<T>(
 
 async function handleFetch<T>(response: Response): Promise<IApiResult<T>> {
     try {
-        const result = await checkStatus<T>(response);
+        const result = await checkStatus<IApiResult<T>>(response);
         if (result.code === ApiResultCode.Unauthorized) {
             info(result.message);
             removeToken();
