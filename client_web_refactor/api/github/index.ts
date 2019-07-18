@@ -9,7 +9,7 @@ const GITHUB_REQUEST = {
     },
 };
 
-export interface IGithubCommit {
+export interface IGithubFullCommitInfo {
     sha: string;
     author: {
         login: string;
@@ -21,10 +21,10 @@ export interface IGithubCommit {
     html_url: string;
 }
 
-export async function fetchCommits(perPage: number): Promise<IGithubCommit[]> {
+export async function fetchCommits(perPage: number): Promise<IGithubFullCommitInfo[]> {
     const url = `${PROJECT_URL}/commits?per_page=${perPage}`;
     const response = await fetch(url, GITHUB_REQUEST);
-    return checkStatus<IGithubCommit[]>(response);
+    return checkStatus<IGithubFullCommitInfo[]>(response);
 }
 
 export interface IGithubInfo {

@@ -30,10 +30,9 @@ export default function loginReducer(state: ILoginState = initialState, action: 
 
     switch (action.type) {
         case SET_MANAGEMENT: {
-            action = action as ISetManagementAction;
             return {
                 ...state,
-                management: action.management,
+                management: (action as ISetManagementAction).management,
             };
         }
 
@@ -47,9 +46,8 @@ export default function loginReducer(state: ILoginState = initialState, action: 
         }
 
         case LOGIN_RESPONSE: {
-            action = action as ILoginResponseAction;
             const ok = action.ok;
-            const message = action.message;
+            const message = (action as ILoginResponseAction).message;
 
             return {
                 ...state,
@@ -59,8 +57,7 @@ export default function loginReducer(state: ILoginState = initialState, action: 
         }
 
         case SET_LOGIN_USER:
-            action = action as ISetLoginUserAction;
-            const user = action.user;
+            const user = (action as ISetLoginUserAction).user;
             const management = user.admin;
 
             return {

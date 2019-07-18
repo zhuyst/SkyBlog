@@ -1,7 +1,7 @@
 import { message as msg } from "antd";
 import {Action, Dispatch} from "redux";
 import {FAIL_RESULT} from "../../api";
-import {fetchCommits, fetchProjectStar, IGithubCommit, IGithubInfo} from "../../api/github";
+import {fetchCommits, fetchProjectStar, IGithubFullCommitInfo, IGithubInfo} from "../../api/github";
 
 export const SET_GITHUB_LOADING = "SET_GITHUB_LOADING";
 export interface ISetGithubLoadingAction extends Action<typeof SET_GITHUB_LOADING> {
@@ -28,20 +28,22 @@ export function listCommits(perPage: number) {
     };
 }
 
-export const LIST_COMMITS_RESPONSE = "LIST_COMMITS_RESPONSE";
-export interface IListCommitsAction extends Action<typeof LIST_COMMITS_RESPONSE> {
-    commits: Array<{
-        sha: string;
-        author: string;
-        author_url: string;
-        message: string;
-        commit_url: string;
-    }>;
+export interface IGithubCommit {
+    sha: string;
+    author: string;
+    author_url: string;
+    message: string;
+    commit_url: string;
 }
-function listCommitsResponse(commits: IGithubCommit[]): IListCommitsAction {
+
+export const LIST_COMMITS_RESPONSE = "LIST_COMMITS_RESPONSE";
+export interface IListCommitsResponseAction extends Action<typeof LIST_COMMITS_RESPONSE> {
+    commits: IGithubCommit[];
+}
+function listCommitsResponse(commits: IGithubFullCommitInfo[]): IListCommitsResponseAction {
     return {
         type : LIST_COMMITS_RESPONSE,
-        commits : commits.map((commit: IGithubCommit) => {
+        commits : commits.map((commit: IGithubFullCommitInfo) => {
             return {
                 sha : commit.sha,
                 author : commit.author.login,
@@ -74,3 +76,5 @@ function getProjectStarResponse(result: IGithubInfo): IGetProjectStarResponseAct
         star : result.stargazers_count,
     };
 }
+
+export type GithubAction = ISetGithubLoadingAction | IListCommitsResponseAction | IGetProjectStarResponseAction;

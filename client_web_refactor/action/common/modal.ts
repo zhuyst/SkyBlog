@@ -56,4 +56,7 @@ export function setAccessLogModalShow(show: boolean): ISetAccessLogModalShowActi
         type : SET_ACCESS_LOG_MODAL_SHOW,
         show,
     };
-};
+}
+
+export type ModalAction = ISetLoginModalShowAction | ISetRegisterModalShowAction | ISetUserInfoModalShowAction |
+    ISetUserManagementModalShowAction | ISetSysLogModalShowAction | ISetAccessLogModalShowAction;
