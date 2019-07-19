@@ -1,10 +1,11 @@
 import Router from "next/router";
-import {Action, Dispatch} from "redux";
+import {Action} from "redux";
 import {startSubmit, stopSubmit} from "redux-form";
 
 import { message as msg } from "antd";
 import {ApiResultCode, IApiResult} from "../../api";
 import {fetchGetAbout, fetchUpdateAbout, IAbout} from "../../api/about";
+import {IThunkAction} from "../common";
 import {FORM_ABOUT} from "../form";
 
 export const SET_ABOUT = "SET_ABOUT";
@@ -40,8 +41,8 @@ function getAboutResponse(result: IApiResult<IAbout>): IGetAboutResponseAction {
     };
 }
 
-export function getAbout(about: IAbout) {
-    return async (dispatch: Dispatch) => {
+export function getAbout(about: IAbout): IThunkAction {
+    return async (dispatch) => {
         dispatch(setAboutLoading(true));
 
         const result = await fetchGetAbout(about);
@@ -61,8 +62,8 @@ function updateAboutResponse(result: IApiResult<IAbout>): IUpdateAboutResponseAc
     };
 }
 
-export function updateAbout(about: IAbout, back: boolean) {
-    return async (dispatch: Dispatch) => {
+export function updateAbout(about: IAbout, back: boolean): IThunkAction {
+    return async (dispatch) => {
         dispatch(startSubmit(FORM_ABOUT));
 
         const result = await fetchUpdateAbout(about);

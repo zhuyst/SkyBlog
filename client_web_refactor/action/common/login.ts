@@ -4,6 +4,7 @@ import {change, startSubmit, stopSubmit} from "redux-form";
 import {ApiResultCode, FAIL_RESULT, getToken, IApiResult, removeToken, setToken} from "../../api";
 import {fetchLogin, fetchRefresh, IAuthResponse, IUser} from "../../api/auth";
 import {IUpdateAboutResponseAction} from "../about";
+import {IThunkAction} from "../common";
 import {FORM_LOGIN, FORM_USERINFO} from "../form";
 import {getAccessCount} from "../log/accessLog";
 import {setLoginModalShow} from "./modal";
@@ -17,8 +18,8 @@ export function loginClear(): ILoginClearAction {
     };
 }
 
-export function login(username: string, password: string) {
-    return async (dispatch: Dispatch) => {
+export function login(username: string, password: string): IThunkAction {
+    return async (dispatch) => {
         dispatch(startSubmit(FORM_LOGIN));
         try {
             const result = await fetchLogin(username, password);
@@ -43,8 +44,8 @@ export function loginResponse(ok: boolean, message: string): ILoginResponseActio
     };
 }
 
-export function logout() {
-    return (dispatch: Dispatch) => {
+export function logout(): IThunkAction {
+    return (dispatch) => {
         removeToken();
 
         msg.info("登出成功");
@@ -63,8 +64,8 @@ export function setManagement(management: boolean): ISetManagementAction {
     };
 }
 
-export function checkUserLoginState() {
-    return async (dispatch: Dispatch) => {
+export function checkUserLoginState(): IThunkAction {
+    return async (dispatch) => {
         const token = getToken();
 
         try {

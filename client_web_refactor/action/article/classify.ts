@@ -9,6 +9,7 @@ import {
     fetchUpdateClassify,
     IClassify,
 } from "../../api/classify";
+import {IThunkAction} from "../common";
 import {FORM_CLASSIFY} from "../form";
 
 export const SET_CLASSIFY_SHOW = "SET_CLASSIFY_SHOW";
@@ -46,8 +47,8 @@ function listClassifyResponse(result: IApiResult<IClassify[]>): IListClassifyRes
     };
 }
 
-export function listClassify() {
-    return async (dispatch: Dispatch) => {
+export function listClassify(): IThunkAction {
+    return async (dispatch) => {
         const result = await fetchListClassify();
         dispatch(listClassifyResponse(result));
         dispatch(setClassifyLoading(false));
@@ -63,7 +64,7 @@ function insertClassifyResponse(result: IApiResult<IClassify[]>): IInsertClassif
     };
 }
 
-export function insertClassify(classify: IClassify) {
+export function insertClassify(classify: IClassify): IThunkAction {
     return modifyClassify(
         () => fetchInsertClassify(classify),
         "新增文章分类成功",
@@ -81,7 +82,7 @@ function updateClassifyResponse(result: IApiResult<IClassify[]>): IUpdateClassif
     };
 }
 
-export function updateClassify(classify: IClassify) {
+export function updateClassify(classify: IClassify): IThunkAction {
     return modifyClassify(
         () => fetchUpdateClassify(classify),
         "更新文章分类成功",
@@ -98,7 +99,7 @@ function deleteClassifyResponse(result: IApiResult<IClassify[]>): IDeleteClassif
     };
 }
 
-export function deleteClassify(id: number) {
+export function deleteClassify(id: number): IThunkAction {
     return modifyClassify(
         () => fetchDeleteClassify(id),
         "删除文章分类成功",
@@ -111,7 +112,7 @@ function modifyClassify(
     successMsg: string,
     classifyResponseActionCreator: (result: IApiResult<IClassify[]>) => IClassifyResponseAction<any>,
     extraSuccessFunc?: (dispatch: Dispatch) => void,
-) {
+): IThunkAction {
     return async (dispatch: Dispatch) => {
         dispatch(startSubmit(FORM_CLASSIFY));
 

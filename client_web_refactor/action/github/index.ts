@@ -1,7 +1,8 @@
 import { message as msg } from "antd";
-import {Action, Dispatch} from "redux";
+import {Action} from "redux";
 import {FAIL_RESULT} from "../../api";
 import {fetchCommits, fetchProjectStar, IGithubFullCommitInfo, IGithubInfo} from "../../api/github";
+import {IThunkAction} from "../common";
 
 export const SET_GITHUB_LOADING = "SET_GITHUB_LOADING";
 export interface ISetGithubLoadingAction extends Action<typeof SET_GITHUB_LOADING> {
@@ -14,8 +15,8 @@ export function setGithubLoading(loading: boolean): ISetGithubLoadingAction {
     };
 }
 
-export function listCommits(perPage: number) {
-    return async (dispatch: Dispatch) => {
+export function listCommits(perPage: number): IThunkAction {
+    return async (dispatch) => {
         dispatch(setGithubLoading(true));
 
         try {
@@ -55,8 +56,8 @@ function listCommitsResponse(commits: IGithubFullCommitInfo[]): IListCommitsResp
     };
 }
 
-export function getProjectStar() {
-    return async (dispatch: Dispatch) => {
+export function getProjectStar(): IThunkAction<typeof GET_PROJECT_STAR_RESPONSE> {
+    return async (dispatch) => {
         try {
             const result = await fetchProjectStar();
             dispatch(getProjectStarResponse(result));

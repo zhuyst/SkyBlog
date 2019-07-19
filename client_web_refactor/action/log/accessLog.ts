@@ -1,6 +1,6 @@
-import {Action, Dispatch} from "redux";
+import {Action} from "redux";
 import {AccessCount, fetchGetAccessCount, fetchListAccessLog, IAccessLog} from "../../api/accessLog";
-import {IPageInfo} from "../common";
+import {IPageInfo, IThunkAction} from "../common";
 
 export const GET_ACCESS_COUNT_RESPONSE = "GET_ACCESS_COUNT_RESPONSE";
 export interface IGetAccessCountResponseAction extends Action<typeof GET_ACCESS_COUNT_RESPONSE> {
@@ -13,8 +13,8 @@ function getAccessCountResponse(count: AccessCount): IGetAccessCountResponseActi
     };
 }
 
-export function getAccessCount() {
-    return async (dispatch: Dispatch) => {
+export function getAccessCount(): IThunkAction<typeof GET_ACCESS_COUNT_RESPONSE> {
+    return async (dispatch) => {
         const result = await fetchGetAccessCount();
         dispatch(getAccessCountResponse(result.entity));
     };
@@ -31,7 +31,7 @@ function listAccessLogResponse(page: IPageInfo<IAccessLog>): IListAccessLogRespo
     };
 }
 
-export function listAccessLog(pageNum: number, pageSize: number) {
+export function listAccessLog(pageNum: number, pageSize: number): IThunkAction<typeof LIST_ACCESS_LOG_RESPONSE> {
     return async (dispatch) => {
         const result = await fetchListAccessLog(pageNum, pageSize);
         dispatch(listAccessLogResponse(result.entity));

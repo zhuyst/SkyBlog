@@ -1,6 +1,6 @@
-import {Action, Dispatch} from "redux";
+import {Action} from "redux";
 import {fetchListSysLog, ISysLog} from "../../api/sysLog";
-import {IPageInfo} from "../common";
+import {IPageInfo, IThunkAction} from "../common";
 
 export const LIST_SYS_LOG_RESPONSE = "LIST_SYS_LOG_RESPONSE";
 export interface IListSysLogResponseAction extends Action<typeof LIST_SYS_LOG_RESPONSE> {
@@ -13,8 +13,8 @@ function listSysLogResponse(page: IPageInfo<ISysLog>): IListSysLogResponseAction
     };
 }
 
-export function listSysLog(pageNum: number, pageSize: number) {
-    return async (dispatch: Dispatch) => {
+export function listSysLog(pageNum: number, pageSize: number): IThunkAction<typeof LIST_SYS_LOG_RESPONSE> {
+    return async (dispatch) => {
         const result = await fetchListSysLog(pageNum, pageSize);
         dispatch(listSysLogResponse(result.entity));
     };
