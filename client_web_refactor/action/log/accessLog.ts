@@ -37,3 +37,5 @@ export function listAccessLog(pageNum: number, pageSize: number): IThunkAction<t
         dispatch(listAccessLogResponse(result.entity));
     };
 }
+
+export type AccessLogAction = IGetAccessCountResponseAction | IListAccessLogResponseAction;

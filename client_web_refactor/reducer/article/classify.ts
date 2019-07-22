@@ -1,4 +1,5 @@
 import {
+    ClassifyAction,
     DELETE_CLASSIFY_RESPONSE, INSERT_CLASSIFY_RESPONSE,
     LIST_CLASSIFY_RESPONSE, SET_CLASSIFY_LOADING, SET_CLASSIFY_SHOW, UPDATE_CLASSIFY_RESPONSE,
 } from "../../action/article/classify";
@@ -11,12 +12,12 @@ export interface IClassifyState {
 }
 
 const initialState: IClassifyState = {
-    list : [],
-    loading : true,
-    show : false,
+    list: [],
+    loading: true,
+    show: false,
 };
 
-export default function classifyReducer(state: IClassifyState = initialState, action): IClassifyState {
+export default function classifyReducer(state: IClassifyState = initialState, action: ClassifyAction): IClassifyState {
     switch (action.type) {
         case SET_CLASSIFY_LOADING:
             return{
@@ -27,29 +28,29 @@ export default function classifyReducer(state: IClassifyState = initialState, ac
         case LIST_CLASSIFY_RESPONSE:
             return {
                 ...state,
-                list : action.list,
-                loading : false,
+                list: action.list,
+                loading: false,
             };
 
         case INSERT_CLASSIFY_RESPONSE:
             return {
                 ...state,
-                list : action.list,
-                loading : false,
+                list: action.list,
+                loading: false,
             };
 
         case DELETE_CLASSIFY_RESPONSE:
             return {
                 ...state,
-                list : action.list,
-                loading : false,
+                list: action.list,
+                loading: false,
             };
 
         case UPDATE_CLASSIFY_RESPONSE:
             return {
                 ...state,
-                list : action.list,
-                loading : false,
+                list: action.list,
+                loading: false,
             };
 
         case SET_CLASSIFY_SHOW:

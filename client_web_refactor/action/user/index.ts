@@ -202,3 +202,5 @@ function modifyUserDetail(
         }
     };
 }
+
+export type UserAction = IListUsersResponseAction;

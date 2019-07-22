@@ -19,3 +19,5 @@ export function listSysLog(pageNum: number, pageSize: number): IThunkAction<type
         dispatch(listSysLogResponse(result.entity));
     };
 }
+
+export type SysLogAction = IListSysLogResponseAction;

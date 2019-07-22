@@ -134,3 +134,7 @@ function modifyClassify(
         }
     };
 }
+
+export type ClassifyAction = ISetClassifyLoadingAction | IListClassifyResponseAction |
+    IInsertClassifyResponseAction | IDeleteClassifyResponseAction |
+    IUpdateClassifyResponseAction | ISetClassifyShowAction;

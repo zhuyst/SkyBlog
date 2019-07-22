@@ -72,5 +72,5 @@ export function listArticlesByClassify(classifyId: number, pageNum: number, page
     };
 }
 
-export type IArticlesAction = ISetArticlesLoadingAction | ISetClassifyArticlesLoadingAction |
+export type ArticlesAction = ISetArticlesLoadingAction | ISetClassifyArticlesLoadingAction |
     IListArticlesResponseAction | IListArticlesByClassifyResponseAction;

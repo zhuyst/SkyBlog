@@ -1,5 +1,5 @@
 import {
-    IArticlesAction,
+    ArticlesAction,
     LIST_ARTICLES_BY_CLASSIFY_RESPONSE, LIST_ARTICLES_RESPONSE,
     SET_ARTICLES_LOADING, SET_CLASSIFY_ARTICLES_LOADING,
 } from "../../action/article/articles";
@@ -15,13 +15,13 @@ interface IClassifyWithArticlesState extends IClassify {
 
 const initialClassify: IClassifyWithArticlesState = {
     loading: true,
-    id : 0,
-    name : "",
-    page : {
-        list : [],
-        pageNum : 1,
-        pages : 0,
-        total : 0,
+    id: 0,
+    name: "",
+    page: {
+        list: [],
+        pageNum: 1,
+        pages: 0,
+        total: 0,
     },
 };
 
@@ -32,31 +32,31 @@ export interface IArticlesState {
 }
 
 const initialState: IArticlesState = {
-    page : {
-        list : [],
-        pageNum : 1,
-        pages : 0,
-        total : 0,
+    page: {
+        list: [],
+        pageNum: 1,
+        pages: 0,
+        total: 0,
     },
     loading: true,
-    classify : initialClassify,
+    classify: initialClassify,
 };
 
-export default function articlesReducer(state: IArticlesState = initialState, action: IArticlesAction): IArticlesState {
+export default function articlesReducer(state: IArticlesState = initialState, action: ArticlesAction): IArticlesState {
     switch (action.type) {
         case SET_ARTICLES_LOADING: {
             return {
                 ...state,
-                loading : action.loading,
+                loading: action.loading,
             };
         }
 
         case SET_CLASSIFY_ARTICLES_LOADING: {
             return {
                 ...state,
-                classify : {
+                classify: {
                     ...state.classify,
-                    loading : action.loading,
+                    loading: action.loading,
                 },
             };
         }
@@ -68,11 +68,11 @@ export default function articlesReducer(state: IArticlesState = initialState, ac
             return {
                 ...state,
                 loading: false,
-                page : {
-                    list : newList,
-                    pageNum : page.pageNum,
-                    pages : page.pages,
-                    total : page.total,
+                page: {
+                    list: newList,
+                    pageNum: page.pageNum,
+                    pages: page.pages,
+                    total: page.total,
                 },
             };
         }
@@ -87,13 +87,13 @@ export default function articlesReducer(state: IArticlesState = initialState, ac
                 ...state,
                 classify : {
                     loading: false,
-                    id : classify.id,
-                    name : classify.name,
-                    page : {
-                        list : newList,
-                        pageNum : page.pageNum,
-                        pages : page.pages,
-                        total : page.total,
+                    id: classify.id,
+                    name: classify.name,
+                    page: {
+                        list: newList,
+                        pageNum: page.pageNum,
+                        pages: page.pages,
+                        total: page.total,
                     },
                 },
             };

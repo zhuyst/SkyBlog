@@ -10,9 +10,9 @@ export interface IGithubState {
 }
 
 const initialState: IGithubState = {
-    commits : [],
-    star : null,
-    loading : true,
+    commits: [],
+    star: null,
+    loading: true,
 };
 
 export default function githubReducer(state: IGithubState = initialState, action: GithubAction): IGithubState {
@@ -20,20 +20,20 @@ export default function githubReducer(state: IGithubState = initialState, action
         case SET_GITHUB_LOADING:
             return {
                 ...state,
-                loading : action.loading,
+                loading: action.loading,
             };
 
         case LIST_COMMITS_RESPONSE:
             return {
                 ...state,
-                loading : false,
-                commits : action.commits,
+                loading: false,
+                commits: action.commits,
             };
 
         case GET_PROJECT_STAR_RESPONSE:
             return {
                 ...state,
-                star : action.star,
+                star: action.star,
             };
 
         default:

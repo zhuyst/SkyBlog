@@ -9,11 +9,11 @@ export interface IAboutState {
 }
 
 const initialState: IAboutState = {
-    content : {
+    content: {
         text: "",
         selection: null,
     },
-    loading : true,
+    loading: true,
 };
 
 function convert(action: AboutAction, state: IAboutState): IAboutState {

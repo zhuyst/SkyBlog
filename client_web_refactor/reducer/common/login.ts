@@ -6,9 +6,9 @@ import {IUser} from "../../api/user";
 
 const initialUser: IUser = {
     id: 0,
-    username : "",
-    nickname : "",
-    admin : false,
+    username: "",
+    nickname: "",
+    admin: false,
 };
 
 export interface ILoginState {
@@ -19,14 +19,13 @@ export interface ILoginState {
 }
 
 const initialState: ILoginState = {
-    ok : null,
-    message : null,
-    management : false,
-    user : initialUser,
+    ok: null,
+    message: null,
+    management: false,
+    user: initialUser,
 };
 
 export default function loginReducer(state: ILoginState = initialState, action: LoginAction): ILoginState {
-
     switch (action.type) {
         case SET_MANAGEMENT: {
             return {

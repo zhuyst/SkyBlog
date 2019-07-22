@@ -6,6 +6,9 @@ import classifyReducer from "./article/classify";
 import loginReducer from "./common/login";
 import modalReducer from "./common/modal";
 import githubReducer from "./github";
+import accessLogReducer from "./log/accessLog";
+import sysLogReducer from "./log/sysLog";
+import userReducer from "./user";
 
 export default combineReducers({
     form : formReducer,
@@ -15,4 +18,7 @@ export default combineReducers({
     github: githubReducer,
     articles: articlesReducer,
     classify: classifyReducer,
+    accessLog: accessLogReducer,
+    sysLog: sysLogReducer,
+    user: userReducer,
 });

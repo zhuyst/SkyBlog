@@ -24,7 +24,7 @@ const initialState: IModalState = {
 };
 
 export default function navigationReducer(state: IModalState = initialState, action: ModalAction): IModalState {
-    const show = action.show;
+    const { show } = action;
 
     switch (action.type) {
         case SET_LOGIN_MODAL_SHOW:
