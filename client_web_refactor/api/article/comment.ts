@@ -1,8 +1,8 @@
 import {IPageInfo} from "../../action/common";
-import {ARTICLE_API_URL, httpDelete, httpGet, httpPost, IApiResult} from "../index";
+import {ARTICLE_API_URL, httpDelete, httpGet, httpPost, IApiResult, IBaseEntity} from "../index";
 
-export interface IComment {
-    id: number;
+export interface IComment extends IBaseEntity {
+    content: string;
 }
 
 export function fetchInsertComment(articleId: number, comment: IComment): Promise<IApiResult<IComment>> {

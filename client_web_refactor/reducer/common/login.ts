@@ -1,5 +1,4 @@
 import {
-    ILoginResponseAction, ISetLoginUserAction, ISetManagementAction,
     LOGIN_CLEAR, LOGIN_RESPONSE, LoginAction, SET_LOGIN_USER, SET_MANAGEMENT,
 } from "../../action/common/login";
 import {UPDATE_USER_INFO_RESPONSE} from "../../action/user";
@@ -26,13 +25,13 @@ const initialState: ILoginState = {
     user : initialUser,
 };
 
-export default function loginReducer(state: ILoginState = initialState, action: LoginAction) {
+export default function loginReducer(state: ILoginState = initialState, action: LoginAction): ILoginState {
 
     switch (action.type) {
         case SET_MANAGEMENT: {
             return {
                 ...state,
-                management: (action as ISetManagementAction).management,
+                management: action.management,
             };
         }
 
@@ -46,8 +45,7 @@ export default function loginReducer(state: ILoginState = initialState, action: 
         }
 
         case LOGIN_RESPONSE: {
-            const ok = action.ok;
-            const message = (action as ILoginResponseAction).message;
+            const { ok, message } = action;
 
             return {
                 ...state,
@@ -56,8 +54,8 @@ export default function loginReducer(state: ILoginState = initialState, action: 
             };
         }
 
-        case SET_LOGIN_USER:
-            const user = (action as ISetLoginUserAction).user;
+        case SET_LOGIN_USER: {
+            const { user } = action;
             const management = user.admin;
 
             return {
@@ -65,13 +63,15 @@ export default function loginReducer(state: ILoginState = initialState, action: 
                 user,
                 management,
             };
+        }
 
-        // case UPDATE_USER_INFO_RESPONSE:
-        //     action = action as IUpdateU;
-        //     return {
-        //         ...state,
-        //         user : action.user,
-        //     };
+        case UPDATE_USER_INFO_RESPONSE: {
+            const { user } = action;
+            return {
+                ...state,
+                user,
+            };
+        }
 
         default:
             return state;

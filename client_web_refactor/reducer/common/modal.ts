@@ -23,7 +23,7 @@ const initialState: IModalState = {
     accessLogModalShow : false,
 };
 
-export default function navigationReducer(state: IModalState = initialState, action: ModalAction) {
+export default function navigationReducer(state: IModalState = initialState, action: ModalAction): IModalState {
     const show = action.show;
 
     switch (action.type) {
@@ -48,7 +48,7 @@ export default function navigationReducer(state: IModalState = initialState, act
         case SET_USER_MANAGEMENT_MODAL_SHOW:
             return {
                 ...state,
-                userManagementModal_show : show,
+                userManagementModalShow : show,
             };
 
         case SET_SYS_LOG_MODAL_SHOW:
@@ -66,4 +66,4 @@ export default function navigationReducer(state: IModalState = initialState, act
         default :
             return state;
     }
-};
+}

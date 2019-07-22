@@ -71,3 +71,6 @@ export function listArticlesByClassify(classifyId: number, pageNum: number, page
         document.title = `${result.entity.classify.name} - 博客文章 - 青云的小窝`;
     };
 }
+
+export type IArticlesAction = ISetArticlesLoadingAction | ISetClassifyArticlesLoadingAction |
+    IListArticlesResponseAction | IListArticlesByClassifyResponseAction;

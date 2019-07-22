@@ -1,10 +1,8 @@
 import {IArticle} from "../article";
-import {CLASSIFY_API_URL, httpDelete, httpGet, httpPost, httpPut, IApiResult} from "../index";
+import {CLASSIFY_API_URL, httpDelete, httpGet, httpPost, httpPut, IApiResult, IBaseEntity} from "../index";
 
-export interface IClassify {
-    id: number;
+export interface IClassify extends IBaseEntity {
     name: string;
-
     articles?: IArticle[];
 }
 

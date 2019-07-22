@@ -1,11 +1,10 @@
 import {IPageInfo} from "../../action/common";
-import {httpDelete, httpGet, httpPatch, httpPost, httpPut, IApiResult, USER_API_URL} from "../index";
+import {httpDelete, httpGet, httpPatch, httpPost, httpPut, IApiResult, IBaseEntity, USER_API_URL} from "../index";
 
 export type Role = number;
 export type Status = number;
 
-export interface IUser {
-    id: number;
+export interface IUser extends IBaseEntity {
     username: string;
     nickname: string;
     password?: string;

@@ -4,10 +4,10 @@ import {change, startSubmit, stopSubmit} from "redux-form";
 import {ApiResultCode, FAIL_RESULT, getToken, IApiResult, removeToken, setToken} from "../../api";
 import {fetchLogin, fetchRefresh, IAuthResponse} from "../../api/auth";
 import {IUser} from "../../api/user";
-import {IUpdateAboutResponseAction} from "../about";
 import {IThunkAction} from "../common";
 import {FORM_LOGIN, FORM_USERINFO} from "../form";
 import {getAccessCount} from "../log/accessLog";
+import {IUpdateUserInfoResponseAction} from "../user";
 import {setLoginModalShow} from "./modal";
 
 export const LOGIN_CLEAR = "LOGIN_CLEAR";
@@ -129,4 +129,4 @@ export function setLoginUser(user: IUser): ISetLoginUserAction {
 }
 
 export type LoginAction = ISetManagementAction | ILoginClearAction | ILoginResponseAction |
-    ISetLoginUserAction | IUpdateAboutResponseAction;
+    ISetLoginUserAction | IUpdateUserInfoResponseAction;

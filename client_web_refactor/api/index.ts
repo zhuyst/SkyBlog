@@ -19,6 +19,10 @@ export const SYS_LOG_URL = `${API_BASE_URL}/sys_log`;
 export const ACCESS_LOG_URL = `${API_BASE_URL}/access_log`;
 export const OSS_URL = `${API_BASE_URL}/oss`;
 
+export interface IBaseEntity {
+    id: number;
+}
+
 const COOKIE_TOKEN: string = "Token";
 
 export function removeToken() {

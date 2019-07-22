@@ -1,11 +1,9 @@
 import {IPageInfo} from "../../action/common";
 import {IClassify} from "../classify";
-import {ARTICLE_API_URL, httpDelete, httpGet, httpPost, httpPut, IApiResult} from "../index";
+import {ARTICLE_API_URL, httpDelete, httpGet, httpPost, httpPut, IApiResult, IBaseEntity} from "../index";
 import {IUser} from "../user";
 
-export interface IArticle {
-    id: number;
-
+export interface IArticle extends IBaseEntity {
     title: string;
     subTitle: string;
     content?: string;
@@ -27,7 +25,7 @@ export function fetchListArticles(pageNum: number, pageSize: number): Promise<IA
 }
 
 export interface IClassifyWithArticles {
-    articles: IArticle[];
+    articles: IPageInfo<IArticle>;
     classify: IClassify;
 }
 

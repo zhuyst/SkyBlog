@@ -1,9 +1,8 @@
 import {IPageInfo} from "../../action/common";
-import {httpGet, IApiResult, SYS_LOG_URL} from "../index";
+import {httpGet, IApiResult, IBaseEntity, SYS_LOG_URL} from "../index";
 import {IUser} from "../user";
 
-export interface ISysLog {
-    id: number;
+export interface ISysLog extends IBaseEntity {
     createDate: number;
 
     method: string;
