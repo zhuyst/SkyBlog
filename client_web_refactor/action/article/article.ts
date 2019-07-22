@@ -155,3 +155,6 @@ function modifyArticle<T = null>(
         }
     };
 }
+
+export type ArticleAction = ISetArticleAction | IGetArticleInfoResponseAction |
+    IInsertArticleResponseAction | IUpdateArticleResponseAction | ISetArticleLoadingAction;

@@ -1,8 +1,11 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 import aboutReducer from "./about";
+import articleReducer from "./article/article";
 import articlesReducer from "./article/articles";
 import classifyReducer from "./article/classify";
+import commentsReducer from "./article/comments";
+import uploadReducer from "./article/upload";
 import loginReducer from "./common/login";
 import modalReducer from "./common/modal";
 import githubReducer from "./github";
@@ -21,4 +24,7 @@ export default combineReducers({
     accessLog: accessLogReducer,
     sysLog: sysLogReducer,
     user: userReducer,
+    article: articleReducer,
+    comments: commentsReducer,
+    upload: uploadReducer,
 });

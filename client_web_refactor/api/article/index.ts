@@ -14,8 +14,8 @@ export interface IArticle extends IBaseEntity {
     classifyId: number;
     classify?: IClassify;
 
-    createDate: string;
-    updateDate: string;
+    createDate?: string;
+    updateDate?: string;
 }
 
 export function fetchListArticles(pageNum: number, pageSize: number): Promise<IApiResult<IPageInfo<IArticle>>> {

@@ -8,7 +8,7 @@ export interface IUser extends IBaseEntity {
     username: string;
     nickname: string;
     password?: string;
-    admin: boolean;
+    admin?: boolean;
     role?: Role;
     status?: Status;
 }

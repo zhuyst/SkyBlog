@@ -1,8 +1,11 @@
 import {IPageInfo} from "../../action/common";
 import {ARTICLE_API_URL, httpDelete, httpGet, httpPost, IApiResult, IBaseEntity} from "../index";
+import {IUser} from "../user";
 
 export interface IComment extends IBaseEntity {
     content: string;
+    authorId?: number;
+    author?: IUser;
 }
 
 export function fetchInsertComment(articleId: number, comment: IComment): Promise<IApiResult<IComment>> {

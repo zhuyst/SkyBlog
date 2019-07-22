@@ -3,7 +3,7 @@ import {Action} from "redux";
 import {startSubmit, stopSubmit} from "redux-form";
 import {ApiResultCode, IApiResult} from "../../api";
 import {fetchDeleteMsg, fetchInsertMsg, fetchListMsg, IMsg} from "../../api/msgBoard";
-import {initialPreviousComment} from "../../reducer/article/ContentReducer";
+import {initialPreviousComment} from "../../reducer/article/comments";
 import {IAppState} from "../../store";
 import {IPageInfo, IThunkAction} from "../common";
 import {FORM_MSG} from "../form";

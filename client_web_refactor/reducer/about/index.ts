@@ -1,7 +1,7 @@
 import {AboutAction, GET_ABOUT_RESPONSE, SET_ABOUT, UPDATE_ABOUT_RESPONSE} from "../../action/about";
 
 export interface IAboutState {
-    content: {
+    markdownContent: {
         text: string;
         selection: any;
     };
@@ -9,25 +9,12 @@ export interface IAboutState {
 }
 
 const initialState: IAboutState = {
-    content: {
+    markdownContent: {
         text: "",
         selection: null,
     },
     loading: true,
 };
-
-function convert(action: AboutAction, state: IAboutState): IAboutState {
-    const about = action.about;
-    const convertAbout = {
-        ...about,
-        loading: false,
-        content: {
-            text : about.content,
-            selection: null,
-        },
-    };
-    return {...state, ...convertAbout};
-}
 
 export default function aboutReducer(state: IAboutState = initialState, action: AboutAction) {
     switch (action.type) {
@@ -35,7 +22,16 @@ export default function aboutReducer(state: IAboutState = initialState, action: 
             return {...state, ...action.about};
 
         case GET_ABOUT_RESPONSE: case UPDATE_ABOUT_RESPONSE:
-            return convert(action, state);
+            const { about } = action;
+            return {
+                ...state,
+                ...about,
+                loading: false,
+                markdownContent: {
+                    text : about.content,
+                    selection: null,
+                },
+            };
 
         default:
             return state;
