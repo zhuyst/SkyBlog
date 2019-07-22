@@ -1,7 +1,7 @@
 import {IPageInfo} from "../../action/common";
 import {IUser} from "../auth";
 import {IClassify} from "../classify";
-import {ARTICLE_API_URL, httpGet, IApiResult} from "../index";
+import {ARTICLE_API_URL, httpDelete, httpGet, httpPost, httpPut, IApiResult} from "../index";
 
 export interface IArticle {
     id: number;
@@ -11,10 +11,10 @@ export interface IArticle {
     content?: string;
 
     authorId: number;
-    author: IUser;
+    author?: IUser;
 
     classifyId: number;
-    classify: IClassify;
+    classify?: IClassify;
 
     createDate: string;
     updateDate: string;
@@ -37,4 +37,20 @@ export function fetchListArticlesByClassify(
     return httpGet<IClassifyWithArticles>(`${ARTICLE_API_URL}/public/classify/${classifyId}/`, {
         pageNum, pageSize,
     });
+}
+
+export function fetchInsertArticle(article: IArticle): Promise<IApiResult<IArticle>> {
+    return httpPost<IArticle>(`${ARTICLE_API_URL}/`, article);
+}
+
+export function fetchGetArticle(id: number): Promise<IApiResult<IArticle>> {
+    return httpGet<IArticle>(`${ARTICLE_API_URL}/public/${id}`);
+}
+
+export function fetchUpdateArticle(article: IArticle): Promise<IApiResult<IArticle>> {
+    return httpPut<IArticle>(`${ARTICLE_API_URL}/${article.id}`, article);
+}
+
+export function fetchDeleteArticle(id: number): Promise<IApiResult> {
+    return httpDelete(`${ARTICLE_API_URL}/${id}`);
 }

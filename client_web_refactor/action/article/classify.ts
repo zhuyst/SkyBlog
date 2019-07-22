@@ -1,6 +1,7 @@
 import {message as msg} from "antd";
-import {Action, Dispatch} from "redux";
+import {Action} from "redux";
 import {startSubmit, stopSubmit} from "redux-form";
+import {ThunkDispatch} from "redux-thunk";
 import {ApiResultCode, IApiResult} from "../../api";
 import {
     fetchDeleteClassify,
@@ -9,6 +10,7 @@ import {
     fetchUpdateClassify,
     IClassify,
 } from "../../api/classify";
+import {IAppState} from "../../store";
 import {IThunkAction} from "../common";
 import {FORM_CLASSIFY} from "../form";
 
@@ -69,7 +71,7 @@ export function insertClassify(classify: IClassify): IThunkAction {
         () => fetchInsertClassify(classify),
         "新增文章分类成功",
         insertClassifyResponse,
-        (dispatch: Dispatch) => dispatch(setClassifyShow(false)),
+        (dispatch) => dispatch(setClassifyShow(false)),
     );
 }
 
@@ -111,9 +113,9 @@ function modifyClassify(
     fetchFunc: () => Promise<IApiResult<IClassify[]>>,
     successMsg: string,
     classifyResponseActionCreator: (result: IApiResult<IClassify[]>) => IClassifyResponseAction<any>,
-    extraSuccessFunc?: (dispatch: Dispatch) => void,
+    extraSuccessFunc?: (dispatch: ThunkDispatch<IAppState, null, Action<string>>) => void,
 ): IThunkAction {
-    return async (dispatch: Dispatch) => {
+    return async (dispatch) => {
         dispatch(startSubmit(FORM_CLASSIFY));
 
         const result = await fetchFunc();

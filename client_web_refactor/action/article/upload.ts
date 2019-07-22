@@ -25,4 +25,4 @@ export function uploadResponse(result: IApiResult<IUploadResult>): IUploadRespon
         type : UPLOAD_RESPONSE,
         result,
     };
-};
+}

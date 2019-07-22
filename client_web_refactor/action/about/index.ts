@@ -1,4 +1,4 @@
-import Router from "next/router";
+import { useRouter } from "next/router";
 import {Action} from "redux";
 import {startSubmit, stopSubmit} from "redux-form";
 
@@ -73,7 +73,8 @@ export function updateAbout(about: IAbout, back: boolean): IThunkAction {
             msg.success("更新关于成功");
             dispatch(updateAboutResponse(result));
             if (back) {
-                await Router.push("/about");
+                const router = useRouter();
+                await router.push("/about");
             }
         } else {
             msg.error(result.message);
