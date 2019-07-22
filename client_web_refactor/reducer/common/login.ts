@@ -2,8 +2,8 @@ import {
     ILoginResponseAction, ISetLoginUserAction, ISetManagementAction,
     LOGIN_CLEAR, LOGIN_RESPONSE, LoginAction, SET_LOGIN_USER, SET_MANAGEMENT,
 } from "../../action/common/login";
-// import {UPDATE_USER_INFO_RESPONSE} from "../../action/user/UsersAction";
-import {IUser} from "../../api/auth";
+import {UPDATE_USER_INFO_RESPONSE} from "../../action/user";
+import {IUser} from "../../api/user";
 
 const initialUser: IUser = {
     id: 0,

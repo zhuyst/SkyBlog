@@ -73,7 +73,7 @@ interface IRequestBody {
     [key: string]: any;
 }
 
-export enum ApiResultCode {
+export const enum ApiResultCode {
     OK = 200,
     Unauthorized = 401,
     Error = 500,

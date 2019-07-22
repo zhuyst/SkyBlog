@@ -1,7 +1,7 @@
 import {IPageInfo} from "../../action/common";
-import {IUser} from "../auth";
 import {IClassify} from "../classify";
 import {ARTICLE_API_URL, httpDelete, httpGet, httpPost, httpPut, IApiResult} from "../index";
+import {IUser} from "../user";
 
 export interface IArticle {
     id: number;

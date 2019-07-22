@@ -92,15 +92,6 @@ function deleteCommentResponse(result: IApiResult): IDeleteCommentResponseAction
     };
 }
 
-// 重新加载大小为 pageNum*pageSize 的评论列表
-function reloadComments(dispatch, getState) {
-    const pageNum = getState().content.comments.page_num;
-    const articleId = getState().content.article.id;
-
-    const pageSize = pageNum * COMMENT_PAGE_SIZE;
-    dispatch(listComments(articleId, 1, pageSize));
-}
-
 function modifyComment<T = null>(
     fetchFunc: (getState: () => IAppState) => Promise<IApiResult<T>>,
     successMsg: string,
@@ -117,7 +108,13 @@ function modifyComment<T = null>(
             msg.success(successMsg);
             dispatch(commentResponseActionCreator(result.entity));
 
-            reloadComments(dispatch, getState);
+            // 重新加载大小为 pageNum*pageSize 的评论列表
+            const state = getState();
+            const pageNum = state.content.comments.pageNum;
+            const articleId = state.content.article.id;
+
+            const pageSize = pageNum * COMMENT_PAGE_SIZE;
+            dispatch(listComments(articleId, 1, pageSize));
         } else {
             msg.error(result.message);
         }

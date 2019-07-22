@@ -1,6 +1,6 @@
 import {IPageInfo} from "../../action/common";
-import {IUser} from "../auth";
 import {httpGet, IApiResult, SYS_LOG_URL} from "../index";
+import {IUser} from "../user";
 
 export interface ISysLog {
     id: number;

@@ -1,6 +1,6 @@
 import {IPageInfo} from "../../action/common";
-import {IUser} from "../auth";
 import {ACCESS_LOG_URL, httpGet, IApiResult} from "../index";
+import {IUser} from "../user";
 
 export type AccessCount = number;
 

@@ -1,12 +1,5 @@
 import {AUTH_URL, ContentType, httpPost, IApiResult} from "../index";
-
-export interface IUser {
-    id: number;
-    username: string;
-    nickname: string;
-    password?: string;
-    admin: boolean;
-}
+import {IUser} from "../user";
 
 export type Token = string;
 
