@@ -55,10 +55,10 @@ export const UPDATE_ABOUT_RESPONSE = "UPDATE_ABOUT_RESPONSE";
 export interface IUpdateAboutResponseAction extends Action<typeof UPDATE_ABOUT_RESPONSE> {
     about: IAbout;
 }
-function updateAboutResponse(result: IApiResult<IAbout>): IUpdateAboutResponseAction {
+function updateAboutResponse(about: IAbout): IUpdateAboutResponseAction {
     return {
         type : UPDATE_ABOUT_RESPONSE,
-        about : result.entity,
+        about,
     };
 }
 
@@ -71,7 +71,7 @@ export function updateAbout(about: IAbout, back: boolean): IThunkAction {
 
         if (result.code === ApiResultCode.OK) {
             msg.success("更新关于成功");
-            dispatch(updateAboutResponse(result));
+            dispatch(updateAboutResponse(result.entity));
             if (back) {
                 const router = useRouter();
                 await router.push("/about");

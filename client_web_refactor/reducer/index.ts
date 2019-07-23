@@ -11,20 +11,29 @@ import modalReducer from "./common/modal";
 import githubReducer from "./github";
 import accessLogReducer from "./log/accessLog";
 import sysLogReducer from "./log/sysLog";
+import msgBoardReducer from "./msgBoard";
 import userReducer from "./user";
 
 export default combineReducers({
     form : formReducer,
+
     about: aboutReducer,
-    login: loginReducer,
-    modal: modalReducer,
-    github: githubReducer,
+
+    article: articleReducer,
     articles: articlesReducer,
     classify: classifyReducer,
-    accessLog: accessLogReducer,
-    sysLog: sysLogReducer,
-    user: userReducer,
-    article: articleReducer,
     comments: commentsReducer,
     upload: uploadReducer,
+
+    login: loginReducer,
+    modal: modalReducer,
+
+    github: githubReducer,
+
+    accessLog: accessLogReducer,
+    sysLog: sysLogReducer,
+
+    user: userReducer,
+
+    msgBoard: msgBoardReducer,
 });

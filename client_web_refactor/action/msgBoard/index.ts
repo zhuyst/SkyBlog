@@ -116,3 +116,6 @@ function modifyMsg<T = null>(
         }
     };
 }
+
+export type MsgBoardAction = ISetMsgLoadingAction | ISetPreviousMsgAction |
+    IListMsgResponseAction;
