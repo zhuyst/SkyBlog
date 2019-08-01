@@ -1,12 +1,11 @@
 import fetch from "isomorphic-fetch";
 import * as Cookies from "js-cookie";
 
+import { message as msg } from "antd";
 import {loginClear} from "../action/common/login";
 import { API_BASE_URL } from "../Constant";
-import store from "../store";
+import { dispatch } from "../store";
 import {IAccessToken, Token} from "./auth";
-const { dispatch } = store;
-import { message as msg } from "antd";
 
 export const AUTH_URL = `${API_BASE_URL}/auth`;
 
@@ -77,7 +76,7 @@ interface IRequestBody {
     [key: string]: any;
 }
 
-export const enum ApiResultCode {
+export enum ApiResultCode {
     OK = 200,
     Unauthorized = 401,
     Error = 500,

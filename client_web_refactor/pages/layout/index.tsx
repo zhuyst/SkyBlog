@@ -17,22 +17,22 @@ export default (props) => (
             >
                 <Menu.Item key="1">
                     <Link href="/home">
-                        首页
+                        <a>首页</a>
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="2">
                     <Link href="/blog">
-                        博客文章
+                        <a>博客文章</a>
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="3">
                     <Link href="/msgboard">
-                        留言板
+                        <a>留言板</a>
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="4">
                     <Link href="/about">
-                        关于
+                        <a>关于</a>
                     </Link>
                 </Menu.Item>
             </Menu>

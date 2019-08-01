@@ -57,5 +57,8 @@ export default function articleReducer(state: IArticleState = initialState, acti
             const { loading } = action;
             return { ...state, loading };
         }
+
+        default:
+            return state;
     }
 }

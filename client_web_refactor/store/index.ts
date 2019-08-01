@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from "redux";
+import {applyMiddleware, createStore, Dispatch, Store} from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 import reducer from "../reducer";
@@ -38,9 +38,10 @@ export interface IAppState {
     msgBoard?: IMsgBoardState;
 }
 
-let store = null;
+let store: Store<IAppState> = null;
+export let dispatch: Dispatch = null;
 
-export function initStore(initialState: IAppState = {}) {
+export function initStore(initialState: IAppState = {}): Store<IAppState> {
     if (store) {
         return store;
     }
@@ -49,6 +50,7 @@ export function initStore(initialState: IAppState = {}) {
         initialState,
         composeWithDevTools(applyMiddleware(thunkMiddleware)),
     );
+    dispatch = store.dispatch;
     return store;
 }
 

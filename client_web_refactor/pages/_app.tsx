@@ -3,12 +3,12 @@ import App, { Container } from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
 import {Store} from "redux";
-import { initStore } from "../store";
+import {IAppState, initStore} from "../store";
 
 import "antd/dist/antd.css";
 
 interface IReduxAppProps {
-    store: Store;
+    store: Store<IAppState>;
 }
 
 export default withRedux(initStore)(
