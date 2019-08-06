@@ -1,0 +1,23 @@
+.layout {
+  height: 100%;
+  @menu-height: 64px;
+
+  &-header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+  }
+
+  &-menu {
+    line-height: @menu-height;
+  }
+
+  &-content {
+    padding: 0;
+    margin-top: @menu-height;
+  }
+
+  &-footer {
+    text-align: center;
+  }
+}

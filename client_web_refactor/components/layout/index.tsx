@@ -3,17 +3,17 @@ import Link from "next/link";
 import React from "react";
 const { Header, Content, Footer } = Layout;
 
-import "./index.scss";
+import "./index.less";
 
 export default (props) => (
-    <Layout>
-        <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+    <Layout className="layout">
+        <Header className="layout-header">
             <div className="logo" />
             <Menu
                 theme="dark"
                 mode="horizontal"
                 defaultSelectedKeys={["2"]}
-                style={{ lineHeight: "64px" }}
+                className="layout-menu"
             >
                 <Menu.Item key="1">
                     <Link href="/home">
@@ -37,9 +37,11 @@ export default (props) => (
                 </Menu.Item>
             </Menu>
         </Header>
-        <Content style={{ padding: "0 50px", marginTop: 64 }}>
+        <Content className="layout-content">
             {props.children}
         </Content>
-        <Footer style={{ textAlign: "center" }}>Ant Design ©2018 Created by Ant UED</Footer>
+        <Footer className="layout-footer">
+            Ant Design ©2018 Created by Ant UED
+        </Footer>
     </Layout>
 );
