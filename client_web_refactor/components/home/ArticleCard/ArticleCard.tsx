@@ -1,13 +1,17 @@
-import { Badge, Card } from "antd";
+import {Badge, Card, List} from "antd";
 import React from "react";
+import {IPageInfo} from "../../../action/common";
+import {IArticle} from "../../../api/article";
 import {useStoreSelector} from "../../../store";
+import ArticleCardItem from "./ArticleCardItem";
+
 import "./ArticleCard.less";
-import ArticleCardPreview from "./ArticleCardPreview";
 
 const MAX_LENGTH = 3;
 
 export default () => {
-    const page = useStoreSelector((state) => state.articles.page);
+    const page = useStoreSelector<IPageInfo<IArticle>>((state) => state.articles.page);
+    const loading = useStoreSelector<boolean>((state) => state.articles.loading);
     const { total, list } = page;
 
     const title = (
@@ -16,13 +20,14 @@ export default () => {
         </span>
     );
 
-    const content = list.slice(0, MAX_LENGTH).map((article) => (
-        <ArticleCardPreview article={article} key={article.id}/>
-    ));
-
+    const renderItem = (article) => <ArticleCardItem article={article}/>;
     return (
         <Card className="article-card" title={title}>
-            {content}
+            <List
+                dataSource={list.slice(0, MAX_LENGTH)}
+                renderItem={renderItem}
+                loading={loading}
+            />
         </Card>
     );
 };

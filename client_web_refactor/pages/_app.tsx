@@ -1,11 +1,20 @@
+import {NextPage, NextPageContext} from "next";
 import withRedux from "next-redux-wrapper";
 import App, { Container } from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
 import {Store} from "redux";
-import {IAppState, initStore} from "../store";
+import {AppStore, IAppState, initStore} from "../store";
 
 import "./_app.less";
+
+export interface INextPageContext extends NextPageContext {
+    store: AppStore;
+}
+
+export interface INextPage<P = {}, IP = P> extends NextPage<P, IP> {
+    getInitialProps?(ctx: INextPageContext): Promise<IP>;
+}
 
 interface IReduxAppProps {
     store: Store<IAppState>;
