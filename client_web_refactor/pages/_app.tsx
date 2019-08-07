@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import {Store} from "redux";
 import {IAppState, initStore} from "../store";
 
-import "../static/style/common.less";
+import "./_app.less";
 
 interface IReduxAppProps {
     store: Store<IAppState>;

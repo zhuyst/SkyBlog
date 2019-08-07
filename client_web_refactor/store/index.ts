@@ -1,4 +1,5 @@
-import {applyMiddleware, createStore, Dispatch, Store} from "redux";
+import { useSelector } from "react-redux";
+import {applyMiddleware, createStore, Store} from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 import reducer from "../reducer";
@@ -38,10 +39,11 @@ export interface IAppState {
     msgBoard?: IMsgBoardState;
 }
 
-let store: Store<IAppState> = null;
-export let dispatch: Dispatch = null;
+export type AppStore = Store<IAppState>;
 
-export function initStore(initialState: IAppState = {}): Store<IAppState> {
+let store: AppStore = null;
+
+export function initStore(initialState: IAppState = {}): AppStore {
     if (store) {
         return store;
     }
@@ -50,8 +52,14 @@ export function initStore(initialState: IAppState = {}): Store<IAppState> {
         initialState,
         composeWithDevTools(applyMiddleware(thunkMiddleware)),
     );
-    dispatch = store.dispatch;
     return store;
+}
+
+export function useStoreSelector<TSelected>(
+    selector: (state: IAppState) => TSelected,
+    equalityFn?: (left: TSelected, right: TSelected) => boolean)
+    : TSelected {
+    return useSelector<IAppState, TSelected>(selector, equalityFn);
 }
 
 export default store;

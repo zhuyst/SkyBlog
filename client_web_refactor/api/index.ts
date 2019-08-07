@@ -1,14 +1,12 @@
+import { message as msg } from "antd";
 import fetch from "isomorphic-fetch";
 import * as Cookies from "js-cookie";
-
-import { message as msg } from "antd";
+import {useDispatch} from "react-redux";
 import {loginClear} from "../action/common/login";
 import { API_BASE_URL } from "../Constant";
-import { dispatch } from "../store";
 import {IAccessToken, Token} from "./auth";
 
 export const AUTH_URL = `${API_BASE_URL}/auth`;
-
 export const USER_API_URL = `${API_BASE_URL}/users`;
 export const ARTICLE_API_URL = `${API_BASE_URL}/articles`;
 export const CLASSIFY_API_URL = `${API_BASE_URL}/classifies`;
@@ -174,6 +172,8 @@ async function handleFetch<T>(response: Response): Promise<IApiResult<T>> {
         if (result.code === ApiResultCode.Unauthorized) {
             msg.info(result.message);
             removeToken();
+
+            const dispatch = useDispatch();
             dispatch(loginClear());
         }
         return result;

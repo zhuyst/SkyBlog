@@ -1,5 +1,5 @@
-import {Action} from "redux";
-import {ThunkAction} from "redux-thunk";
+import {Action, AnyAction} from "redux";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {IAppState} from "../store";
 
 export interface IPageInfo<T> {
@@ -11,3 +11,4 @@ export interface IPageInfo<T> {
 }
 
 export interface IThunkAction<T = string> extends ThunkAction<void, IAppState, null, Action<T>> {}
+export interface IThunkDispatch<T = string> extends ThunkDispatch<IAppState, null, Action<T>> {}
