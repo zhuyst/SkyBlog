@@ -4,8 +4,9 @@ import {listArticles} from "../../action/article/articles";
 import {IThunkDispatch} from "../../action/common";
 import {listCommits} from "../../action/github";
 import {listMsg} from "../../action/msgBoard";
-import {ARTICLE_PAGE_SIZE, MSG_PAGE_SIZE} from "../../action/pageSize";
+import {ARTICLE_PAGE_SIZE, GITHUB_PAGE_SIZE, MSG_PAGE_SIZE} from "../../action/pageSize";
 import ArticleCard from "../../components/home/ArticleCard/ArticleCard";
+import GithubCard from "../../components/home/GithubCard/GithubCard";
 import MsgBoardCard from "../../components/home/MsgBoardCard/MsgBoardCard";
 import NavImage from "../../components/home/NavImage";
 import Layout from "../../components/layout";
@@ -24,7 +25,7 @@ const Home: INextPage = () => (
                 <MsgBoardCard/>
             </Col>
             <Col md={6} sm={24}>
-                2
+                <GithubCard />
             </Col>
         </Row>
     </Layout>
@@ -35,7 +36,7 @@ Home.getInitialProps = async ({ store }) => {
     await Promise.all([
         dispatch(listArticles(1, ARTICLE_PAGE_SIZE)),
         dispatch(listMsg(1, MSG_PAGE_SIZE)),
-        dispatch(listCommits(1)),
+        dispatch(listCommits(GITHUB_PAGE_SIZE)),
     ]);
     return {};
 };
