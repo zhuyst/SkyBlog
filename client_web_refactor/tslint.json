@@ -4,9 +4,12 @@
     "tslint-react"
   ],
   "rules": {
+    "no-unused-variable": true,
+
     "no-submodule-imports": false,
     "object-literal-sort-keys": false,
-    "jsx-boolean-value": false
+    "jsx-boolean-value": false,
+    "jsx-no-multiline-js": false
   },
   "linterOptions": {
     "exclude": [

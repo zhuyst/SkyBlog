@@ -15,8 +15,8 @@ import {
     Role,
     Status, UserRole, UserStatus,
 } from "../../api/user";
-import {IAppState} from "../../store";
-import {IPageInfo, IThunkAction} from "../common";
+import {IAppState, IThunkAction} from "../../store";
+import {IPageInfo} from "../common";
 import {afterLogin, setLoginUser} from "../common/login";
 import {setRegisterModalShow, setUserInfoModalShow} from "../common/modal";
 import {FORM_REGISTER, FORM_USERINFO} from "../form";

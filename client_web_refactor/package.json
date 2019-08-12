@@ -9,7 +9,7 @@
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-less": "^1.0.1",
-    "antd": "^3.20.3",
+    "antd": "^3.21.4",
     "babel-plugin-import": "^1.12.0",
     "isomorphic-fetch": "^2.2.1",
     "js-cookie": "^2.2.0",
@@ -37,5 +37,6 @@
     "tslint": "^5.18.0",
     "tslint-react": "^4.0.0",
     "typescript": "^3.5.3"
-  }
+  },
+  "license": "MIT"
 }

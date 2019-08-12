@@ -1,6 +1,7 @@
 import {Action} from "redux";
 import {AccessCount, fetchGetAccessCount, fetchListAccessLog, IAccessLog} from "../../api/accessLog";
-import {IPageInfo, IThunkAction} from "../common";
+import {IThunkAction} from "../../store";
+import {IPageInfo} from "../common";
 
 export const GET_ACCESS_COUNT_RESPONSE = "GET_ACCESS_COUNT_RESPONSE";
 export interface IGetAccessCountResponseAction extends Action<typeof GET_ACCESS_COUNT_RESPONSE> {

@@ -4,8 +4,8 @@ import {startSubmit, stopSubmit} from "redux-form";
 import {ApiResultCode, IApiResult} from "../../api";
 import {fetchDeleteMsg, fetchInsertMsg, fetchListMsg, IMsg} from "../../api/msgBoard";
 import {initialPreviousComment} from "../../reducer/article/comments";
-import {IAppState} from "../../store";
-import {IPageInfo, IThunkAction} from "../common";
+import {IAppState, IThunkAction} from "../../store";
+import {IPageInfo} from "../common";
 import {FORM_MSG} from "../form";
 import {MSG_PAGE_SIZE} from "../pageSize";
 
@@ -50,7 +50,7 @@ function insertMsgResponse(msg: IMsg): IInsertMsgResponseAction {
     };
 }
 
-export function listMsg(pageNum: number, pageSize: number): IThunkAction {
+export function listMsg(pageNum: number, pageSize: number = MSG_PAGE_SIZE): IThunkAction {
     return async (dispatch) => {
         dispatch(setMsgLoading(true));
 

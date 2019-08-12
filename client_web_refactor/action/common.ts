@@ -9,6 +9,3 @@ export interface IPageInfo<T> {
     pages: number;
     total: number;
 }
-
-export interface IThunkAction<T = string> extends ThunkAction<void, IAppState, null, Action<T>> {}
-export interface IThunkDispatch<T = string> extends ThunkDispatch<IAppState, null, Action<T>> {}

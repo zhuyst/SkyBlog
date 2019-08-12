@@ -1,7 +1,9 @@
 import {Action} from "redux";
 import {IApiResult} from "../../api";
 import {fetchListArticles, fetchListArticlesByClassify, IArticle, IClassifyWithArticles} from "../../api/article";
-import {IPageInfo, IThunkAction} from "../common";
+import {IThunkAction} from "../../store";
+import {IPageInfo} from "../common";
+import {ARTICLE_PAGE_SIZE} from "../pageSize";
 
 export const SET_ARTICLES_LOADING = "SET_ARTICLES_LOADING";
 export interface ISetArticlesLoadingAction extends Action<typeof SET_ARTICLES_LOADING> {
@@ -37,7 +39,7 @@ function listArticlesResponse(result: IApiResult<IPageInfo<IArticle>>): IListArt
     };
 }
 
-export function listArticles(pageNum: number, pageSize: number): IThunkAction {
+export function listArticles(pageNum: number, pageSize: number = ARTICLE_PAGE_SIZE): IThunkAction {
     return async (dispatch) => {
         dispatch(setArticlesLoading(true));
 

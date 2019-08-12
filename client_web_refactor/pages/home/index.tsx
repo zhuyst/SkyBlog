@@ -1,21 +1,19 @@
 import {Col, Row} from "antd";
 import React from "react";
 import {listArticles} from "../../action/article/articles";
-import {IThunkDispatch} from "../../action/common";
-import {listCommits} from "../../action/github";
 import {listMsg} from "../../action/msgBoard";
-import {ARTICLE_PAGE_SIZE, GITHUB_PAGE_SIZE, MSG_PAGE_SIZE} from "../../action/pageSize";
+import AppLayout from "../../components/AppLayout";
 import ArticleCard from "../../components/home/ArticleCard/ArticleCard";
 import GithubCard from "../../components/home/GithubCard/GithubCard";
 import MsgBoardCard from "../../components/home/MsgBoardCard/MsgBoardCard";
 import NavImage from "../../components/home/NavImage";
-import Layout from "../../components/layout";
+import {IThunkDispatch} from "../../store";
 import {INextPage} from "../_app";
 
 import "./index.less";
 
 const Home: INextPage = () => (
-    <Layout>
+    <AppLayout>
         <NavImage />
         <Row className="home-cards">
             <Col sm={24} md={{span: 8, offset: 2}}>
@@ -28,15 +26,14 @@ const Home: INextPage = () => (
                 <GithubCard />
             </Col>
         </Row>
-    </Layout>
+    </AppLayout>
 );
 
 Home.getInitialProps = async ({ store }) => {
     const dispatch: IThunkDispatch = store.dispatch;
     await Promise.all([
-        dispatch(listArticles(1, ARTICLE_PAGE_SIZE)),
-        dispatch(listMsg(1, MSG_PAGE_SIZE)),
-        dispatch(listCommits(GITHUB_PAGE_SIZE)),
+        dispatch(listArticles(1)),
+        dispatch(listMsg(1)),
     ]);
     return {};
 };

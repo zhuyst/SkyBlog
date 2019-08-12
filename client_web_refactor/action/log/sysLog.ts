@@ -1,6 +1,7 @@
 import {Action} from "redux";
 import {fetchListSysLog, ISysLog} from "../../api/sysLog";
-import {IPageInfo, IThunkAction} from "../common";
+import {IThunkAction} from "../../store";
+import {IPageInfo} from "../common";
 
 export const LIST_SYS_LOG_RESPONSE = "LIST_SYS_LOG_RESPONSE";
 export interface IListSysLogResponseAction extends Action<typeof LIST_SYS_LOG_RESPONSE> {

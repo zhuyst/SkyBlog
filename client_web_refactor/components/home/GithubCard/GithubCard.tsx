@@ -1,12 +1,19 @@
 import {Card, List} from "antd";
-import React from "react";
-import {IGithubCommit} from "../../../action/github";
+import React, {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {IGithubCommit, listCommits} from "../../../action/github";
+import {GITHUB_PAGE_SIZE} from "../../../action/pageSize";
 import {useStoreSelector} from "../../../store";
 import GithubCardItem from "./GithubCardItem";
 
 import "./GithubCard.less";
 
 export default () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(listCommits(GITHUB_PAGE_SIZE));
+    }, []);
+
     const commits = useStoreSelector<IGithubCommit[]>((state) => state.github.commits);
     const loading = useStoreSelector<boolean>((state) => state.github.loading);
 

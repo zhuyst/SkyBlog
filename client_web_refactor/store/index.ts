@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import {applyMiddleware, createStore, Store} from "redux";
+import {Action, applyMiddleware, createStore, Store} from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import thunkMiddleware from "redux-thunk";
+import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk";
 import reducer from "../reducer";
 import {IAboutState} from "../reducer/about";
 import {IArticlesState} from "../reducer/article/articles";
@@ -61,5 +61,8 @@ export function useStoreSelector<TSelected>(
     : TSelected {
     return useSelector<IAppState, TSelected>(selector, equalityFn);
 }
+
+export interface IThunkAction<T = string> extends ThunkAction<void, IAppState, null, Action<T>> {}
+export interface IThunkDispatch<T = string> extends ThunkDispatch<IAppState, null, Action<T>> {}
 
 export default store;

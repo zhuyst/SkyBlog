@@ -4,8 +4,8 @@ import {startSubmit, stopSubmit} from "redux-form";
 import {ApiResultCode, IApiResult} from "../../api";
 import {fetchDeleteComments, fetchInsertComment, fetchListComments, IComment} from "../../api/article/comment";
 import {initialPreviousComment} from "../../reducer/article/comments";
-import {IAppState} from "../../store";
-import {IPageInfo, IThunkAction} from "../common";
+import {IAppState, IThunkAction} from "../../store";
+import {IPageInfo} from "../common";
 import {FORM_COMMENT} from "../form";
 import {COMMENT_PAGE_SIZE} from "../pageSize";
 

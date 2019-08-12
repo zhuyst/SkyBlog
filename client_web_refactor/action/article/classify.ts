@@ -10,8 +10,7 @@ import {
     fetchUpdateClassify,
     IClassify,
 } from "../../api/classify";
-import {IAppState} from "../../store";
-import {IThunkAction} from "../common";
+import {IAppState, IThunkAction} from "../../store";
 import {FORM_CLASSIFY} from "../form";
 
 export const SET_CLASSIFY_SHOW = "SET_CLASSIFY_SHOW";

@@ -6,14 +6,14 @@ const { Header, Content, Footer } = Layout;
 import "./index.less";
 
 export default (props) => (
-    <Layout className="layout">
-        <Header className="layout-header">
+    <Layout className="app-layout">
+        <Header className="app-layout-header">
             <div className="logo" />
             <Menu
                 theme="dark"
                 mode="horizontal"
                 defaultSelectedKeys={["2"]}
-                className="layout-menu"
+                className="app-layout-menu"
             >
                 <Menu.Item key="1">
                     <Link href="/home">
@@ -37,10 +37,10 @@ export default (props) => (
                 </Menu.Item>
             </Menu>
         </Header>
-        <Content className="layout-content">
+        <Content className="app-layout-content">
             {props.children}
         </Content>
-        <Footer className="layout-footer">
+        <Footer className="app-layout-footer">
             Ant Design ©2018 Created by Ant UED
         </Footer>
     </Layout>
