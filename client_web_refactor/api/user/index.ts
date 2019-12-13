@@ -58,7 +58,9 @@ export function fetchRegisterUser(user: IUser): Promise<IApiResult> {
 }
 
 export function fetchListUsers(pageNum: number, pageSize: number): Promise<IApiResult<IPageInfo<IUser>>> {
-    return httpGet(`${USER_API_URL}/list/`);
+    return httpGet(`${USER_API_URL}/list/`, {
+        pageNum, pageSize,
+    });
 }
 
 export function fetchDeleteUser(id: number): Promise<IApiResult> {

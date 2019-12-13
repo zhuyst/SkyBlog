@@ -2,7 +2,7 @@ import { Collapse } from "antd";
 import React from "react";
 import {IArticle} from "../../api/article";
 
-import "./ArticleListItem.less";
+import "./ArticleListItem.scss";
 
 const { Panel } = Collapse;
 

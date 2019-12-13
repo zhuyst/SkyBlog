@@ -1,5 +1,5 @@
-import {Col, Row} from "antd";
 import React from "react";
+import {Col, Container, Row} from "react-bootstrap";
 import {listArticles} from "../../action/article/articles";
 import {listMsg} from "../../action/msgBoard";
 import AppLayout from "../../components/AppLayout";
@@ -10,22 +10,24 @@ import NavImage from "../../components/home/NavImage";
 import {IThunkDispatch} from "../../store";
 import {INextPage} from "../_app";
 
-import "./index.less";
+import "./index.scss";
 
 const Home: INextPage = () => (
     <AppLayout>
         <NavImage />
-        <Row className="home-cards">
-            <Col sm={24} md={{span: 8, offset: 2}}>
-                <ArticleCard/>
-            </Col>
-            <Col md={6} sm={24}>
-                <MsgBoardCard/>
-            </Col>
-            <Col md={6} sm={24}>
-                <GithubCard />
-            </Col>
-        </Row>
+        <Container>
+            <Row className="home-cards">
+                <Col sm={12} md={{span: 4, offset: 1}}>
+                    <ArticleCard/>
+                </Col>
+                <Col md={3} sm={12}>
+                    <MsgBoardCard/>
+                </Col>
+                <Col md={3} sm={12}>
+                    <GithubCard />
+                </Col>
+            </Row>
+        </Container>
     </AppLayout>
 );
 

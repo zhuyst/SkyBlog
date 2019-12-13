@@ -6,7 +6,8 @@ import { Provider } from "react-redux";
 import {Store} from "redux";
 import {AppStore, IAppState, initStore} from "../store";
 
-import "./_app.less";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./_app.scss";
 
 export interface INextPageContext extends NextPageContext {
     store: AppStore;

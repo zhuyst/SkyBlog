@@ -1,14 +1,13 @@
 import React from "react";
 import {listArticles} from "../../action/article/articles";
 import {IPageInfo} from "../../action/common";
-import {ARTICLE_PAGE_SIZE} from "../../action/pageSize";
 import {IArticle} from "../../api/article";
 import AppLayout from "../../components/AppLayout";
 import ArticleList from "../../components/blog/ArticleList";
 import {IThunkDispatch, useStoreSelector} from "../../store";
 import {INextPage} from "../_app";
 
-import "./index.less";
+import "./index.scss";
 
 const Blog: INextPage = () => {
     const page = useStoreSelector<IPageInfo<IArticle>>((state) => state.articles.page);
@@ -17,7 +16,7 @@ const Blog: INextPage = () => {
     return (
         <AppLayout>
             <div className="blog-main">
-                <ArticleList articles={page.list} loading={loading}/>
+                <ArticleList pageInfo={page} loading={loading}/>
             </div>
         </AppLayout>
     );

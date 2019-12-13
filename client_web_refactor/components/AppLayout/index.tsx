@@ -1,47 +1,44 @@
-import { Layout, Menu } from "antd";
 import Link from "next/link";
 import React from "react";
-const { Header, Content, Footer } = Layout;
+import {Nav, Navbar} from "react-bootstrap";
 
-import "./index.less";
+import "./index.scss";
 
 export default (props) => (
-    <Layout className="app-layout">
-        <Header className="app-layout-header">
+    <div className="app-layout">
+        <div className="app-layout-header">
             <div className="logo" />
-            <Menu
-                theme="dark"
-                mode="horizontal"
-                defaultSelectedKeys={["2"]}
+            <Navbar
+                bg="light"
                 className="app-layout-menu"
             >
-                <Menu.Item key="1">
-                    <Link href="/home">
-                        <a>首页</a>
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key="2">
-                    <Link href="/blog">
-                        <a>博客文章</a>
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key="3">
-                    <Link href="/msgboard">
-                        <a>留言板</a>
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key="4">
-                    <Link href="/about">
-                        <a>关于</a>
-                    </Link>
-                </Menu.Item>
-            </Menu>
-        </Header>
-        <Content className="app-layout-content">
+                <Link href="/home">
+                    <Navbar.Brand>SkyBlog</Navbar.Brand>
+                </Link>
+                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav>
+                        <Nav.Link>
+                            <Link href="/home">首页</Link>
+                        </Nav.Link>
+                        <Nav.Link>
+                            <Link href="/blog">博客文章</Link>
+                        </Nav.Link>
+                        <Nav.Link>
+                            <Link href="/msgboard">留言板</Link>
+                        </Nav.Link>
+                        <Nav.Link>
+                            <Link href="/about">关于</Link>
+                        </Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+        </div>
+        <div className="app-layout-content">
             {props.children}
-        </Content>
-        <Footer className="app-layout-footer">
+        </div>
+        <div className="app-layout-footer">
             Ant Design ©2018 Created by Ant UED
-        </Footer>
-    </Layout>
+        </div>
+    </div>
 );

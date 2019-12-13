@@ -2,7 +2,7 @@ import React from "react";
 import {IMsg} from "../../../api/msgBoard";
 import {convertBr} from "../../../util";
 
-import "./MsgBoardCardItem.less";
+import "./MsgBoardCardItem.scss";
 
 interface IMsgBoardCardItemProps {
     msg: IMsg;

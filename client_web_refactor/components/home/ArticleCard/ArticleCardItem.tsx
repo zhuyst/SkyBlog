@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {setArticle} from "../../../action/article/article";
 import {IArticle} from "../../../api/article";
 
-import "./ArticleCardItem.less";
+import "./ArticleCardItem.scss";
 
 interface IArticleCardItemProps {
     article: IArticle;

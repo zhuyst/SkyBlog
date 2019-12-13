@@ -1,7 +1,7 @@
 import React from "react";
 import {IGithubCommit} from "../../../action/github";
 
-import "./GithubCardItem.less";
+import "./GithubCardItem.scss";
 
 interface IGithubCardItemProps {
     commit: IGithubCommit;
