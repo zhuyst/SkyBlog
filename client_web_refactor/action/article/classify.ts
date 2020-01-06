@@ -1,16 +1,16 @@
-import { message as msg } from "antd";
 import { Action } from "redux";
 import { startSubmit, stopSubmit } from "redux-form";
 import { ThunkDispatch } from "redux-thunk";
-import { ApiResultCode, IApiResult } from "../../api";
+import msg from "../common/notify";
+import { ApiResultCode, IApiResult } from "@/api";
 import {
   fetchDeleteClassify,
   fetchInsertClassify,
   fetchListClassify,
   fetchUpdateClassify,
   IClassify,
-} from "../../api/classify";
-import { IAppState, IThunkAction } from "../../store";
+} from "@/api/classify";
+import { IAppState, IThunkAction } from "@/store";
 import { FORM_CLASSIFY } from "../form";
 
 export const SET_CLASSIFY_SHOW = "SET_CLASSIFY_SHOW";

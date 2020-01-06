@@ -1,12 +1,12 @@
-import { message as msg } from "antd";
 import { useRouter } from "next/router";
 import { Action } from "redux";
 import { change, startSubmit, stopSubmit } from "redux-form";
-import { ApiResultCode, IApiResult } from "../../api";
+import msg from "../common/notify";
+import { ApiResultCode, IApiResult } from "@/api";
 import {
   fetchDeleteArticle, fetchGetArticle, fetchInsertArticle, fetchUpdateArticle, IArticle,
-} from "../../api/article";
-import { IThunkAction } from "../../store";
+} from "@/api/article";
+import { IThunkAction } from "@/store";
 import { FORM_ARTICLE, FORM_COMMENT } from "../form";
 import { ARTICLE_PAGE_SIZE, COMMENT_PAGE_SIZE } from "../pageSize";
 import { listArticles } from "./articles";

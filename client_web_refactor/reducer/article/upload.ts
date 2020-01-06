@@ -1,6 +1,6 @@
 import {
   IUploadResponse, SET_UPLOAD_MODAL_SHOW, UPLOAD_RESPONSE, UploadAction,
-} from "../../action/article/upload";
+} from "@/action/article/upload";
 
 export interface IUploadState {
   uploadModalShow: boolean;

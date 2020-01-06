@@ -1,6 +1,6 @@
 import {
   ABOUT_API_URL, httpGet, httpPut, IApiResult,
-} from "../index";
+} from "@/api";
 
 export interface IAbout {
   content: string;

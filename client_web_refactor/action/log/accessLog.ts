@@ -1,8 +1,8 @@
 import { Action } from "redux";
 import {
   AccessCount, fetchGetAccessCount, fetchListAccessLog, IAccessLog,
-} from "../../api/accessLog";
-import { IThunkAction } from "../../store";
+} from "@/api/accessLog";
+import { IThunkAction } from "@/store";
 import { IPageInfo } from "../common";
 
 export const GET_ACCESS_COUNT_RESPONSE = "GET_ACCESS_COUNT_RESPONSE";

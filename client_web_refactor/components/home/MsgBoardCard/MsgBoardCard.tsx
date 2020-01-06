@@ -1,8 +1,8 @@
 import React from "react";
 import { Badge, Card, List } from "react-bootstrap";
-import { IPageInfo } from "../../../action/common";
-import { IMsg } from "../../../api/msgBoard";
-import { useStoreSelector } from "../../../store";
+import { IPageInfo } from "@/action/common";
+import { IMsg } from "@/api/msgBoard";
+import { useStoreSelector } from "@/store";
 import MsgBoardCardItem from "./MsgBoardCardItem";
 
 import "./MsgBoardCard.scss";

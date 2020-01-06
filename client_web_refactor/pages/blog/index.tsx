@@ -1,10 +1,10 @@
 import React from "react";
-import { listArticles } from "../../action/article/articles";
-import { IPageInfo } from "../../action/common";
-import { IArticle } from "../../api/article";
-import AppLayout from "../../components/AppLayout";
-import ArticleList from "../../components/blog/ArticleList";
-import { IThunkDispatch, useStoreSelector } from "../../store";
+import { listArticles } from "@/action/article/articles";
+import { IPageInfo } from "@/action/common";
+import { IArticle } from "@/api/article";
+import AppLayout from "@/components/AppLayout";
+import ArticleList from "@/components/blog/ArticleList";
+import { IThunkDispatch, useStoreSelector } from "@/store";
 import { INextPage } from "../_app";
 
 import "./index.scss";

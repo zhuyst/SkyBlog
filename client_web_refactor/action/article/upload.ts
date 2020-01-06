@@ -1,5 +1,5 @@
 import { Action } from "redux";
-import { ApiResultCode, IApiResult } from "../../api";
+import { ApiResultCode, IApiResult } from "@/api";
 
 export const SET_UPLOAD_MODAL_SHOW = "SET_UPLOAD_MODAL_SHOW";
 export interface ISetUploadModalShowAction extends Action<typeof SET_UPLOAD_MODAL_SHOW> {

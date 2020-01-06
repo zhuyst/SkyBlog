@@ -1,8 +1,8 @@
-import { IPageInfo } from "../../action/common";
+import { IPageInfo } from "@/action/common";
 import {
   LIST_MSG_RESPONSE, MsgBoardAction, SET_MSG_LOADING, SET_PREVIOUS_MSG,
-} from "../../action/msgBoard";
-import { IMsg } from "../../api/msgBoard";
+} from "@/action/msgBoard";
+import { IMsg } from "@/api/msgBoard";
 import { initialPreviousComment } from "../article/comments";
 import { concatList } from "../util";
 

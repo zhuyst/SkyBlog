@@ -1,6 +1,6 @@
 import {
   AboutAction, GET_ABOUT_RESPONSE, SET_ABOUT, UPDATE_ABOUT_RESPONSE,
-} from "../../action/about";
+} from "@/action/about";
 
 export interface IAboutState {
   markdownContent: {

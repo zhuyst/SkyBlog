@@ -1,5 +1,5 @@
-import { IPageInfo } from "../../action/common";
-import { ACCESS_LOG_URL, httpGet, IApiResult } from "../index";
+import { IPageInfo } from "@/action/common";
+import { ACCESS_LOG_URL, httpGet, IApiResult } from "@/api";
 import { IUser } from "../user";
 
 export type AccessCount = number;

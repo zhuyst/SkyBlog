@@ -1,5 +1,5 @@
 import React from "react";
-import { IGithubCommit } from "../../../action/github";
+import { IGithubCommit } from "@/action/github";
 
 import "./GithubCardItem.scss";
 

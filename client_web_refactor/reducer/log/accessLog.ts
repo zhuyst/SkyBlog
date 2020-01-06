@@ -1,6 +1,6 @@
-import { IPageInfo } from "../../action/common";
-import { AccessLogAction, GET_ACCESS_COUNT_RESPONSE, LIST_ACCESS_LOG_RESPONSE } from "../../action/log/accessLog";
-import { AccessCount, IAccessLog } from "../../api/accessLog";
+import { IPageInfo } from "@/action/common";
+import { AccessLogAction, GET_ACCESS_COUNT_RESPONSE, LIST_ACCESS_LOG_RESPONSE } from "@/action/log/accessLog";
+import { AccessCount, IAccessLog } from "@/api/accessLog";
 
 export interface IAccessLogState {
   count: AccessCount;

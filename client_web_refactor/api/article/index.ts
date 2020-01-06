@@ -1,8 +1,8 @@
-import { IPageInfo } from "../../action/common";
+import { IPageInfo } from "@/action/common";
 import { IClassify } from "../classify";
 import {
   ARTICLE_API_URL, httpDelete, httpGet, httpPost, httpPut, IApiResult, IBaseEntity,
-} from "../index";
+} from "@/api";
 import { IUser } from "../user";
 
 export interface IArticle extends IBaseEntity {

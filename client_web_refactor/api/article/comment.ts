@@ -1,7 +1,7 @@
-import { IPageInfo } from "../../action/common";
+import { IPageInfo } from "@/action/common";
 import {
   ARTICLE_API_URL, httpDelete, httpGet, httpPost, IApiResult, IBaseEntity,
-} from "../index";
+} from "@/api";
 import { IUser } from "../user";
 
 export interface IComment extends IBaseEntity {

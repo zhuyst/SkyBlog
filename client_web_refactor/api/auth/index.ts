@@ -1,6 +1,6 @@
 import {
   AUTH_URL, ContentType, httpPost, IApiResult,
-} from "../index";
+} from "@/api";
 import { IUser } from "../user";
 
 export type Token = string;

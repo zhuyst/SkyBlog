@@ -2,10 +2,10 @@ import {
   ArticlesAction,
   LIST_ARTICLES_BY_CLASSIFY_RESPONSE, LIST_ARTICLES_RESPONSE,
   SET_ARTICLES_LOADING, SET_CLASSIFY_ARTICLES_LOADING,
-} from "../../action/article/articles";
-import { IPageInfo } from "../../action/common";
-import { IArticle } from "../../api/article";
-import { IClassify } from "../../api/classify";
+} from "@/action/article/articles";
+import { IPageInfo } from "@/action/common";
+import { IArticle } from "@/api/article";
+import { IClassify } from "@/api/classify";
 import { concatList } from "../util";
 
 interface IClassifyWithArticlesState extends IClassify {

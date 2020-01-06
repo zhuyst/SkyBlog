@@ -1,10 +1,10 @@
-import { message as msg } from "antd";
 import { Action } from "redux";
-import { FAIL_RESULT } from "../../api";
+import msg from "../common/notify";
+import { FAIL_RESULT } from "@/api";
 import {
   fetchCommits, fetchProjectStar, IGithubFullCommitInfo, IGithubInfo,
-} from "../../api/github";
-import { IThunkAction } from "../../store";
+} from "@/api/github";
+import { IThunkAction } from "@/store";
 
 export const SET_GITHUB_LOADING = "SET_GITHUB_LOADING";
 export interface ISetGithubLoadingAction extends Action<typeof SET_GITHUB_LOADING> {

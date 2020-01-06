@@ -1,9 +1,9 @@
-import { message as msg } from "antd";
 import fetch from "isomorphic-fetch";
 import * as Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
-import { loginClear } from "../action/common/login";
-import { API_BASE_URL } from "../Constant";
+import msg from "@/action/common/notify";
+import { loginClear } from "@/action/common/login";
+import { API_BASE_URL } from "@/Constant";
 import { IAccessToken, Token } from "./auth";
 
 export const AUTH_URL = `${API_BASE_URL}/auth`;

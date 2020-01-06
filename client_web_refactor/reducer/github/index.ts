@@ -1,7 +1,7 @@
 import {
   GET_PROJECT_STAR_RESPONSE, GithubAction,
   IGithubCommit, LIST_COMMITS_RESPONSE, SET_GITHUB_LOADING,
-} from "../../action/github";
+} from "@/action/github";
 
 export interface IGithubState {
   commits: IGithubCommit[];

@@ -4,7 +4,7 @@ import App, { Container } from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
 import { Store } from "redux";
-import { AppStore, IAppState, initStore } from "../store";
+import { AppStore, IAppState, initStore } from "@/store";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./_app.scss";

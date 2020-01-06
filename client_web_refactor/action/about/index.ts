@@ -1,10 +1,10 @@
-import { message as msg } from "antd";
 import { useRouter } from "next/router";
 import { Action } from "redux";
 import { startSubmit, stopSubmit } from "redux-form";
-import { ApiResultCode, IApiResult } from "../../api";
-import { fetchGetAbout, fetchUpdateAbout, IAbout } from "../../api/about";
-import { IThunkAction } from "../../store";
+import msg from "../common/notify";
+import { ApiResultCode, IApiResult } from "@/api";
+import { fetchGetAbout, fetchUpdateAbout, IAbout } from "@/api/about";
+import { IThunkAction } from "@/store";
 import { FORM_ABOUT } from "../form";
 
 export const SET_ABOUT = "SET_ABOUT";

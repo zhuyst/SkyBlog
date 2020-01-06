@@ -1,6 +1,6 @@
-import { IPageInfo } from "../../action/common";
-import { LIST_USERS_RESPONSE, UserAction } from "../../action/user";
-import { IUser } from "../../api/user";
+import { IPageInfo } from "@/action/common";
+import { LIST_USERS_RESPONSE, UserAction } from "@/action/user";
+import { IUser } from "@/api/user";
 
 export type IUserState = IPageInfo<IUser>;
 

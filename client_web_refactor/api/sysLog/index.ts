@@ -1,7 +1,7 @@
-import { IPageInfo } from "../../action/common";
+import { IPageInfo } from "@/action/common";
 import {
   httpGet, IApiResult, IBaseEntity, SYS_LOG_URL,
-} from "../index";
+} from "@/api";
 import { IUser } from "../user";
 
 export interface ISysLog extends IBaseEntity {

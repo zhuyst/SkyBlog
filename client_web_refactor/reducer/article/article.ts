@@ -3,8 +3,8 @@ import {
   GET_ARTICLE_INFO_RESPONSE,
   INSERT_ARTICLE_RESPONSE,
   SET_ARTICLE, SET_ARTICLE_LOADING, UPDATE_ARTICLE_RESPONSE,
-} from "../../action/article/article";
-import { IArticle } from "../../api/article";
+} from "@/action/article/article";
+import { IArticle } from "@/api/article";
 
 export interface IArticleState extends IArticle {
   loading: boolean;

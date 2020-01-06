@@ -19,9 +19,20 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      typescript: {
+        "alwaysTryTypes": true
+      }
+    },
+  },
   plugins: [
     'react',
-    "@typescript-eslint"
+    "@typescript-eslint",
+    'import'
   ],
   rules: {
     "@typescript-eslint/quotes": ["error", "double"],

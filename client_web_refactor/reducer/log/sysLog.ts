@@ -1,6 +1,6 @@
-import { IPageInfo } from "../../action/common";
-import { LIST_SYS_LOG_RESPONSE, SysLogAction } from "../../action/log/sysLog";
-import { ISysLog } from "../../api/sysLog";
+import { IPageInfo } from "@/action/common";
+import { LIST_SYS_LOG_RESPONSE, SysLogAction } from "@/action/log/sysLog";
+import { ISysLog } from "@/api/sysLog";
 
 export type ISysLogState = IPageInfo<ISysLog>;
 

@@ -3,7 +3,7 @@ import {
   SET_ACCESS_LOG_MODAL_SHOW,
   SET_LOGIN_MODAL_SHOW, SET_REGISTER_MODAL_SHOW, SET_SYS_LOG_MODAL_SHOW, SET_USER_MANAGEMENT_MODAL_SHOW,
   SET_USERINFO_MODAL_SHOW,
-} from "../../action/common/modal";
+} from "@/action/common/modal";
 
 export interface IModalState {
   loginModalShow: boolean;

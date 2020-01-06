@@ -1,11 +1,14 @@
 import Link from "next/link";
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
+import NotificationsSystem from "reapop";
+import theme from "reapop-theme-wybo";
 
 import "./index.scss";
 
 export default (props) => (
   <div className="app-layout">
+    <NotificationsSystem theme={theme} />
     <div className="app-layout-header">
       <div className="logo" />
       <Navbar

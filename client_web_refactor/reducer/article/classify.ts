@@ -2,8 +2,8 @@ import {
   ClassifyAction,
   DELETE_CLASSIFY_RESPONSE, INSERT_CLASSIFY_RESPONSE,
   LIST_CLASSIFY_RESPONSE, SET_CLASSIFY_LOADING, SET_CLASSIFY_SHOW, UPDATE_CLASSIFY_RESPONSE,
-} from "../../action/article/classify";
-import { IClassify } from "../../api/classify";
+} from "@/action/article/classify";
+import { IClassify } from "@/api/classify";
 
 export interface IClassifyState {
   list: IClassify[];

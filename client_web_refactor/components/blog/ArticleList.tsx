@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import List from "../List";
-import { listArticles } from "../../action/article/articles";
-import { IPageInfo } from "../../action/common";
-import { IArticle } from "../../api/article";
+import { listArticles } from "@/action/article/articles";
+import { IPageInfo } from "@/action/common";
+import { IArticle } from "@/api/article";
 import ArticleListItem from "./ArticleListItem";
 
 interface IArticleListProps {

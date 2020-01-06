@@ -1,9 +1,9 @@
 import { Action } from "redux";
-import { IApiResult } from "../../api";
+import { IApiResult } from "@/api";
 import {
   fetchListArticles, fetchListArticlesByClassify, IArticle, IClassifyWithArticles,
-} from "../../api/article";
-import { IThunkAction } from "../../store";
+} from "@/api/article";
+import { IThunkAction } from "@/store";
 import { IPageInfo } from "../common";
 import { ARTICLE_PAGE_SIZE } from "../pageSize";
 

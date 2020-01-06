@@ -1,13 +1,12 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { listArticles } from "../../action/article/articles";
-import { listMsg } from "../../action/msgBoard";
-import AppLayout from "../../components/AppLayout";
-import ArticleCard from "../../components/home/ArticleCard/ArticleCard";
-import GithubCard from "../../components/home/GithubCard/GithubCard";
-import MsgBoardCard from "../../components/home/MsgBoardCard/MsgBoardCard";
-import NavImage from "../../components/home/NavImage";
-import { IThunkDispatch } from "../../store";
+import { listArticles } from "@/action/article/articles";
+import { listMsg } from "@/action/msgBoard";
+import AppLayout from "@/components/AppLayout";
+import ArticleCard from "@/components/home/ArticleCard/ArticleCard";
+import GithubCard from "@/components/home/GithubCard/GithubCard";
+import MsgBoardCard from "@/components/home/MsgBoardCard/MsgBoardCard";
+import NavImage from "@/components/home/NavImage";
 import { INextPage } from "../_app";
 
 import "./index.scss";

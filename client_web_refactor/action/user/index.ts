@@ -1,8 +1,8 @@
-import { message as msg } from "antd";
 import { Action } from "redux";
 import { startSubmit, stopSubmit } from "redux-form";
 import { ThunkDispatch } from "redux-thunk";
-import { ApiResultCode, IApiResult } from "../../api";
+import msg from "../common/notify";
+import { ApiResultCode, IApiResult } from "@/api";
 import {
   fetchDeleteUser,
   fetchGetUserInfo,
@@ -14,8 +14,8 @@ import {
   IUser,
   Role,
   Status, UserRole, UserStatus,
-} from "../../api/user";
-import { IAppState, IThunkAction } from "../../store";
+} from "@/api/user";
+import { IAppState, IThunkAction } from "@/store";
 import { IPageInfo } from "../common";
 import { afterLogin, setLoginUser } from "../common/login";
 import { setRegisterModalShow, setUserInfoModalShow } from "../common/modal";

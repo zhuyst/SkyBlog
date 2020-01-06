@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { Button } from "react-bootstrap";
-import { useStoreSelector } from "../../store";
+import { useStoreSelector } from "@/store";
 
 export default () => {
   const management = useStoreSelector<boolean>((state) => state.login.management);

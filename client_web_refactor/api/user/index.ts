@@ -1,7 +1,7 @@
-import { IPageInfo } from "../../action/common";
+import { IPageInfo } from "@/action/common";
 import {
   httpDelete, httpGet, httpPatch, httpPost, httpPut, IApiResult, IBaseEntity, USER_API_URL,
-} from "../index";
+} from "@/api";
 
 export type Role = number;
 export type Status = number;

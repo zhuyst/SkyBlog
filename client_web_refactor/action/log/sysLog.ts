@@ -1,6 +1,6 @@
 import { Action } from "redux";
-import { fetchListSysLog, ISysLog } from "../../api/sysLog";
-import { IThunkAction } from "../../store";
+import { fetchListSysLog, ISysLog } from "@/api/sysLog";
+import { IThunkAction } from "@/store";
 import { IPageInfo } from "../common";
 
 export const LIST_SYS_LOG_RESPONSE = "LIST_SYS_LOG_RESPONSE";

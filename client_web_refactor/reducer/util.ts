@@ -1,5 +1,5 @@
-import { IPageInfo } from "../action/common";
-import { IBaseEntity } from "../api";
+import { IPageInfo } from "@/action/common";
+import { IBaseEntity } from "@/api";
 
 export function concatList<T extends IBaseEntity>(page: IPageInfo<T>, stateList: T[]): T[] {
   const resultList = page.list;

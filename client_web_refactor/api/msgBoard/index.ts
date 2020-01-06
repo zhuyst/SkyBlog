@@ -1,8 +1,8 @@
-import { IPageInfo } from "../../action/common";
+import { IPageInfo } from "@/action/common";
 import { IComment } from "../article/comment";
 import {
   httpDelete, httpGet, httpPost, IApiResult, MSG_BOARD_API_URL,
-} from "../index";
+} from "@/api";
 
 export type IMsg = IComment;
 

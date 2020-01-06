@@ -1,12 +1,12 @@
-import { message as msg } from "antd";
 import { Action, Dispatch } from "redux";
 import { change, startSubmit, stopSubmit } from "redux-form";
+import msg from "./notify";
 import {
   ApiResultCode, FAIL_RESULT, getToken, IApiResult, removeToken, setToken,
-} from "../../api";
-import { fetchLogin, fetchRefresh, IAuthResponse } from "../../api/auth";
-import { IUser } from "../../api/user";
-import { IThunkAction } from "../../store";
+} from "@/api";
+import { fetchLogin, fetchRefresh, IAuthResponse } from "@/api/auth";
+import { IUser } from "@/api/user";
+import { IThunkAction } from "@/store";
 import { FORM_LOGIN, FORM_USERINFO } from "../form";
 import { getAccessCount } from "../log/accessLog";
 import { IUpdateUserInfoResponseAction } from "../user";

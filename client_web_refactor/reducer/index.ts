@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
+import {reducer as notificationsReducer} from 'reapop';
 import aboutReducer from "./about";
 import articleReducer from "./article/article";
 import articlesReducer from "./article/articles";
@@ -16,6 +17,7 @@ import userReducer from "./user";
 
 export default combineReducers({
   form: formReducer,
+  notifications: notificationsReducer(),
 
   about: aboutReducer,
 

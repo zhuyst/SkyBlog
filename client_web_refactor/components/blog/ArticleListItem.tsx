@@ -1,6 +1,6 @@
 import { Collapse } from "antd";
 import React from "react";
-import { IArticle } from "../../api/article";
+import { IArticle } from "@/api/article";
 
 import "./ArticleListItem.scss";
 
@@ -26,7 +26,7 @@ export default (props: IArticleListItemProps) => {
           <p className="article-list-item-sub-title">{article.subTitle}</p>
           <p className="article-list-item-content">{article.content}</p>
           <p className="article-list-item-date">
-发布时间 :
+            发布时间 :
             {article.createDate}
           </p>
         </div>

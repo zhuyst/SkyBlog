@@ -3,9 +3,9 @@ import {
   LIST_COMMENTS_RESPONSE,
   SET_COMMENTS_LOADING,
   SET_PREVIOUS_COMMENT,
-} from "../../action/article/comment";
-import { IPageInfo } from "../../action/common";
-import { IComment } from "../../api/article/comment";
+} from "@/action/article/comment";
+import { IPageInfo } from "@/action/common";
+import { IComment } from "@/api/article/comment";
 import { concatList } from "../util";
 
 export interface ICommentsState {
