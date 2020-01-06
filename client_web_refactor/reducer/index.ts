@@ -15,25 +15,25 @@ import msgBoardReducer from "./msgBoard";
 import userReducer from "./user";
 
 export default combineReducers({
-    form : formReducer,
+  form: formReducer,
 
-    about: aboutReducer,
+  about: aboutReducer,
 
-    article: articleReducer,
-    articles: articlesReducer,
-    classify: classifyReducer,
-    comments: commentsReducer,
-    upload: uploadReducer,
+  article: articleReducer,
+  articles: articlesReducer,
+  classify: classifyReducer,
+  comments: commentsReducer,
+  upload: uploadReducer,
 
-    login: loginReducer,
-    modal: modalReducer,
+  login: loginReducer,
+  modal: modalReducer,
 
-    github: githubReducer,
+  github: githubReducer,
 
-    accessLog: accessLogReducer,
-    sysLog: sysLogReducer,
+  accessLog: accessLogReducer,
+  sysLog: sysLogReducer,
 
-    user: userReducer,
+  user: userReducer,
 
-    msgBoard: msgBoardReducer,
+  msgBoard: msgBoardReducer,
 });
