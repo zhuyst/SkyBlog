@@ -21,37 +21,38 @@ import { IUserState } from "@/reducer/user";
 export interface IAppState {
   [key: string]: any;
 
-  about?: IAboutState;
+  about: IAboutState;
 
-  article?: IAboutState;
-  articles?: IArticlesState;
-  classify?: IClassifyState;
-  comments?: ICommentsState;
-  upload?: IUploadState;
+  article: IAboutState;
+  articles: IArticlesState;
+  classify: IClassifyState;
+  comments: ICommentsState;
+  upload: IUploadState;
 
-  login?: ILoginState;
-  modal?: IModalState;
+  login: ILoginState;
+  modal: IModalState;
 
-  github?: IGithubState;
+  github: IGithubState;
 
-  accessLog?: IAccessLogState;
-  sysLog?: ISysLogState;
+  accessLog: IAccessLogState;
+  sysLog: ISysLogState;
 
-  user?: IUserState;
-  msgBoard?: IMsgBoardState;
+  user: IUserState;
+  msgBoard: IMsgBoardState;
 }
 
-export type AppStore = Store<IAppState>;
+export interface AppStore extends Store<IAppState> {
+  dispatch: IThunkDispatch;
+}
 
 let store: AppStore = null;
 
-export function initStore(initialState: IAppState = {}): AppStore {
+export function initStore(): AppStore {
   if (store) {
     return store;
   }
   store = createStore(
     reducer,
-    initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware)),
   );
   return store;

@@ -13,20 +13,20 @@ export default () => {
 
   return (
     <div className="nav-image">
-      <img src="/static/images/home.jpg" />
-      <Container className="nav-image-container">
+      <img src="/static/images/home.jpg" alt="" />
+      <Container className="nav-image-container" fluid>
         <Row className="nav-image-text">
           <h1>Sky&nbsp;Blog</h1>
-          <Col xs={0} sm={12}>
+          <Col className="d-none d-sm-block">
             <hr />
             <h3>一个将阅读与管理合一的轻量级博客</h3>
           </Col>
         </Row>
         <Row className="nav-image-button-group">
-          <Col xs={0} sm={12}>
+          <Col className="d-block d-sm-none">
             {buttons("sm")}
           </Col>
-          <Col xs={12} sm={0}>
+          <Col className="d-none d-sm-block">
             {buttons("lg")}
           </Col>
         </Row>

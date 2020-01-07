@@ -1,18 +1,27 @@
 import Link from "next/link";
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
-import NotificationsSystem from "reapop";
-import theme from "reapop-theme-wybo";
+import { ToastContainer } from "react-toastify";
 
 import "./index.scss";
 
 export default (props) => (
   <div className="app-layout">
-    <NotificationsSystem theme={theme} />
-    <div className="app-layout-header">
-      <div className="logo" />
+    <ToastContainer
+      position="top-center"
+      autoClose={3000}
+      hideProgressBar
+      newestOnTop
+      closeOnClick
+      rtl={false}
+      draggable
+      pauseOnHover
+    />
+    <header className="app-layout-header">
+      {/* <div className="logo" /> */}
       <Navbar
         bg="light"
+        expand="sm"
         className="app-layout-menu"
       >
         <Link href="/home">
@@ -21,27 +30,27 @@ export default (props) => (
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav>
-            <Nav.Link>
-              <Link href="/home">首页</Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link href="/blog">博客文章</Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link href="/msgboard">留言板</Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link href="/about">关于</Link>
-            </Nav.Link>
+            <Link href="/home">
+              <Nav.Link>首页</Nav.Link>
+            </Link>
+            <Link href="/blog">
+              <Nav.Link>博客文章</Nav.Link>
+            </Link>
+            <Link href="/msgboard">
+              <Nav.Link>留言板</Nav.Link>
+            </Link>
+            <Link href="/about">
+              <Nav.Link>关于</Nav.Link>
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-    </div>
+    </header>
     <div className="app-layout-content">
       {props.children}
     </div>
-    <div className="app-layout-footer">
+    <footer className="app-layout-footer">
             Ant Design ©2018 Created by Ant UED
-    </div>
+    </footer>
   </div>
 );

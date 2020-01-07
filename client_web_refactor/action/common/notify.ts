@@ -1,30 +1,15 @@
-import { addNotification as notify, STATUS, POSITIONS } from "reapop";
+import { toast } from "react-toastify";
 
 function info(message) {
-  return notify({
-    message,
-    status: STATUS.info,
-    position: POSITIONS.topCenter,
-    closeButton: true,
-  });
+  return toast.info(message);
 }
 
 function success(message) {
-  return notify({
-    message,
-    status: STATUS.success,
-    position: POSITIONS.topCenter,
-    closeButton: true,
-  });
+  return toast.success(message);
 }
 
 function error(message) {
-  return notify({
-    message,
-    status: STATUS.error,
-    position: POSITIONS.topCenter,
-    closeButton: true,
-  });
+  return toast.error(message);
 }
 
 export default {

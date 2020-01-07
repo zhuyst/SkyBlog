@@ -36,10 +36,14 @@ module.exports = {
   ],
   rules: {
     "@typescript-eslint/quotes": ["error", "double"],
+    "@typescript-eslint/interface-name-prefix": ["error", {"prefixWithI": "always"}],
     "linebreak-style": ["error", "windows"],
-    "import/no-cycle": ["off"],
-    "react/destructuring-assignment": ["off"],
+    "no-param-reassign": ["off"],
     "no-plusplus": ["off"],
-    "react/jsx-props-no-spreading": ["off"]
+    "import/no-cycle": ["off"],
+    "import/no-mutable-exports": ["off"],
+    "react/destructuring-assignment": ["off"],
+    "react/jsx-props-no-spreading": ["off"],
+    "react/prop-types": ["off"]
   },
 };

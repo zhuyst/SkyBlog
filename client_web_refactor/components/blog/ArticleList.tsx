@@ -14,7 +14,7 @@ interface IArticleListProps {
 export default (props: IArticleListProps) => {
   const { pageInfo, loading } = props;
   const {
-    list, pageNum, pageSize, total,
+    list, pageNum, pages,
   } = pageInfo;
 
   const dispatch = useDispatch();
@@ -30,10 +30,7 @@ export default (props: IArticleListProps) => {
       renderItem={renderItem}
       loading={loading}
       pagination={{
-        onChange,
-        pageSize,
-        total,
-        current: pageNum,
+        onChange, pages, pageNum,
       }}
     />
   );

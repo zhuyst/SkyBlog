@@ -1,24 +1,21 @@
-import { NextPage, NextPageContext } from "next";
+import { NextPageContext, NextComponentType } from "next";
 import withRedux from "next-redux-wrapper";
-import App, { Container } from "next/app";
+import App from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
-import { Store } from "redux";
-import { AppStore, IAppState, initStore } from "@/store";
+import { AppStore, initStore } from "@/store";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./_app.scss";
 
 export interface INextPageContext extends NextPageContext {
   store: AppStore;
+  isServer: boolean;
 }
 
-export interface INextPage<P = {}, IP = P> extends NextPage<P, IP> {
-  getInitialProps?(ctx: INextPageContext): Promise<IP>;
-}
+export type INextPage<P = {}, IP = P> = NextComponentType<INextPageContext, IP, P>;
 
 interface IReduxAppProps {
-  store: Store<IAppState>;
+  store: AppStore;
 }
 
 export default withRedux(initStore)(
@@ -35,11 +32,9 @@ export default withRedux(initStore)(
       const { Component, pageProps, store } = this.props;
 
       return (
-        <Container>
-          <Provider store={store}>
-            <Component {...pageProps} />
-          </Provider>
-        </Container>
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       );
     }
   },

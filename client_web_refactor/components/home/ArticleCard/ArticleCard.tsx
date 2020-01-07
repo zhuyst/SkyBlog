@@ -1,5 +1,6 @@
 import React from "react";
-import { Badge, Card, List } from "react-bootstrap";
+import { Badge, Card } from "react-bootstrap";
+import List from "@/components/List";
 import { IPageInfo } from "@/action/common";
 import { IArticle } from "@/api/article";
 import { useStoreSelector } from "@/store";
@@ -17,10 +18,10 @@ export default () => {
   const renderItem = (article) => <ArticleCardItem article={article} />;
   return (
     <Card className="article-card">
-      <Card.Title>
+      <Card.Header>
                 最近更新的文章&nbsp;&nbsp;
         <Badge>{total}</Badge>
-      </Card.Title>
+      </Card.Header>
       <List
         dataSource={list.slice(0, MAX_LENGTH)}
         renderItem={renderItem}

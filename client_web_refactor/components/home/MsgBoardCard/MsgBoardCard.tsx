@@ -1,5 +1,6 @@
 import React from "react";
-import { Badge, Card, List } from "react-bootstrap";
+import { Badge, Card } from "react-bootstrap";
+import List from "@/components/List";
 import { IPageInfo } from "@/action/common";
 import { IMsg } from "@/api/msgBoard";
 import { useStoreSelector } from "@/store";
@@ -17,15 +18,17 @@ export default () => {
   const renderItem = (msg) => <MsgBoardCardItem msg={msg} />;
   return (
     <Card className="msg-board-card">
-      <Card.Title>
+      <Card.Header>
                 留言板&nbsp;&nbsp;
         <Badge>{total}</Badge>
-      </Card.Title>
-      <List
-        dataSource={list.slice(0, MAX_LENGTH)}
-        renderItem={renderItem}
-        loading={loading}
-      />
+      </Card.Header>
+      <Card.Body>
+        <List
+          dataSource={list.slice(0, MAX_LENGTH)}
+          renderItem={renderItem}
+          loading={loading}
+        />
+      </Card.Body>
     </Card>
   );
 };

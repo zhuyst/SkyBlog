@@ -16,6 +16,10 @@
   }
 
   &-text {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
     h1, h3{
       color: white;
     }
@@ -26,7 +30,7 @@
   }
 
   &-button-group {
-    .ant-btn {
+    .btn {
       margin: 0 5vw;
     }
   }
