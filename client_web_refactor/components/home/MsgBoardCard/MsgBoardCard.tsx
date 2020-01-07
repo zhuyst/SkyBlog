@@ -19,8 +19,8 @@ export default () => {
   return (
     <Card className="msg-board-card">
       <Card.Header>
-                留言板&nbsp;&nbsp;
-        <Badge>{total}</Badge>
+        <span>留言板</span>
+        <Badge variant="light">{total}</Badge>
       </Card.Header>
       <Card.Body>
         <List

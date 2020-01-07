@@ -19,14 +19,16 @@ export default () => {
   return (
     <Card className="article-card">
       <Card.Header>
-                最近更新的文章&nbsp;&nbsp;
-        <Badge>{total}</Badge>
+        <span>最近更新的文章</span>
+        <Badge variant="light">{total}</Badge>
       </Card.Header>
-      <List
-        dataSource={list.slice(0, MAX_LENGTH)}
-        renderItem={renderItem}
-        loading={loading}
-      />
+      <Card.Body>
+        <List
+          dataSource={list.slice(0, MAX_LENGTH)}
+          renderItem={renderItem}
+          loading={loading}
+        />
+      </Card.Body>
     </Card>
   );
 };

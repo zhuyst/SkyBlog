@@ -1,36 +1,42 @@
 import React from "react";
-import {
-  Button, Col, Container, Row,
-} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 import "./NavImage.scss";
 
-export default () => {
-  const buttons = (size) => [
-    (<Button size={size} variant="outline-primary">查看SkyBlog源码</Button>),
-    (<Button size={size} variant="outline-primary">查看作者Github</Button>),
-  ];
+const button = (size, text) => (
+  (
+    <Button
+      size={size}
+      variant="outline-secondary"
+      className="nav-image-btn"
+    >
+      {text}
+    </Button>
+  )
+);
 
-  return (
-    <div className="nav-image">
-      <img src="/static/images/home.jpg" alt="" />
-      <Container className="nav-image-container" fluid>
-        <Row className="nav-image-text">
-          <h1>Sky&nbsp;Blog</h1>
-          <Col className="d-none d-sm-block">
-            <hr />
-            <h3>一个将阅读与管理合一的轻量级博客</h3>
-          </Col>
-        </Row>
-        <Row className="nav-image-button-group">
-          <Col className="d-block d-sm-none">
-            {buttons("sm")}
-          </Col>
-          <Col className="d-none d-sm-block">
-            {buttons("lg")}
-          </Col>
-        </Row>
-      </Container>
+const buttons = (size) => [
+  (button(size, "查看SkyBlog源码")),
+  (button(size, "查看作者Github")),
+];
+
+export default () => (
+  <div className="nav-image">
+    <img src="/static/images/home.jpg" alt="" />
+    <div className="nav-image-text">
+      <h1>Sky&nbsp;Blog</h1>
+      <div className="d-none d-md-block">
+        <hr />
+        <h3>一个将阅读与管理合一的轻量级博客</h3>
+      </div>
     </div>
-  );
-};
+    <div className="nav-image-button-group">
+      <div className="d-block d-sm-none">
+        {buttons("sm")}
+      </div>
+      <div className="d-none d-sm-block">
+        {buttons("lg")}
+      </div>
+    </div>
+  </div>
+);

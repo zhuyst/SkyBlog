@@ -14,15 +14,15 @@ import "./index.scss";
 const Home: INextPage = () => (
   <AppLayout>
     <NavImage />
-    <Container>
+    <Container fluid>
       <Row className="home-cards">
-        <Col sm={12} md={{ span: 4, offset: 1 }}>
+        <Col lg={{ span: 4, offset: 1 }} md={12}>
           <ArticleCard />
         </Col>
-        <Col md={3} sm={12}>
+        <Col lg={3} md={12}>
           <MsgBoardCard />
         </Col>
-        <Col md={3} sm={12}>
+        <Col lg={3} md={12}>
           <GithubCard />
         </Col>
       </Row>

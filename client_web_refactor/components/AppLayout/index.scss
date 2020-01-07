@@ -3,6 +3,29 @@
   flex-direction: column;
   height: 100%;
 
+  &-menu {
+    background-color: #d9edf7!important;
+    padding: 0.5rem 1.5rem;
+
+    .nav-link, .navbar-brand {
+      color: #31708f!important;
+    }
+
+    .navbar-brand {
+      font-size: 22px;
+      font-weight: bolder;
+    }
+
+    .navbar-collapse.collapse:not(.show) {
+      .nav-link {
+        font-size: 18px;
+        text-align: center;
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+      }
+    }
+  }
+
   &-header {
     flex: 0;
   }

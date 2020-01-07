@@ -22,11 +22,13 @@ export default () => {
   return (
     <Card className="github-card">
       <Card.Header>SkyBlog项目动态</Card.Header>
-      <List
-        dataSource={commits}
-        renderItem={renderItem}
-        loading={loading}
-      />
+      <Card.Body>
+        <List
+          dataSource={commits}
+          renderItem={renderItem}
+          loading={loading}
+        />
+      </Card.Body>
     </Card>
   );
 };
