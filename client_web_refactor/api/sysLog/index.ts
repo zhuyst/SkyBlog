@@ -16,7 +16,8 @@ export interface ISysLog extends IBaseEntity {
   user: IUser;
 }
 
-export function fetchListSysLog(pageNum: number, pageSize: number): Promise<IApiResult<IPageInfo<ISysLog>>> {
+export function fetchListSysLog(pageNum: number, pageSize: number)
+  : Promise<IApiResult<IPageInfo<ISysLog>>> {
   return httpGet<IPageInfo<ISysLog>>(`${SYS_LOG_URL}/list/`, {
     pageNum, pageSize,
   });

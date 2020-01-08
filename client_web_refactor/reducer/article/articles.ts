@@ -42,7 +42,10 @@ const initialState: IArticlesState = {
   classify: initialClassify,
 };
 
-export default function articlesReducer(state: IArticlesState = initialState, action: ArticlesAction): IArticlesState {
+export default function articlesReducer(
+  state: IArticlesState = initialState,
+  action: ArticlesAction,
+): IArticlesState {
   switch (action.type) {
     case SET_ARTICLES_LOADING: {
       return {

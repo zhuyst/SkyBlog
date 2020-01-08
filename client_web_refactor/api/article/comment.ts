@@ -10,12 +10,13 @@ export interface IComment extends IBaseEntity {
   author?: IUser;
 }
 
-export function fetchInsertComment(articleId: number, comment: IComment): Promise<IApiResult<IComment>> {
+export function fetchInsertComment(articleId: number, comment: IComment)
+  : Promise<IApiResult<IComment>> {
   return httpPost(`${ARTICLE_API_URL}/${articleId}/comment/`, comment);
 }
 
-export function fetchListComments(id: number, pageNum: number, pageSize: number):
-Promise<IApiResult<IPageInfo<IComment>>> {
+export function fetchListComments(id: number, pageNum: number, pageSize: number)
+  : Promise<IApiResult<IPageInfo<IComment>>> {
   return httpGet<IPageInfo<IComment>>(`${ARTICLE_API_URL}/public/${id}/comment/`, {
     pageNum, pageSize,
   });

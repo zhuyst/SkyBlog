@@ -94,6 +94,61 @@ export const FAIL_RESULT: IApiResult = {
   message: "网络请求失败，请检查网络状态",
 };
 
+export function checkStatus<T>(response: Response): Promise<T> {
+  if (response.ok) {
+    return response.json();
+  }
+  throw new Error();
+}
+
+async function handleFetch<T>(response: Response): Promise<IApiResult<T>> {
+  try {
+    const result = await checkStatus<IApiResult<T>>(response);
+    if (result.code === ApiResultCode.Unauthorized) {
+      msg.info(result.message);
+      removeToken();
+
+      const dispatch = useDispatch();
+      dispatch(loginClear());
+    }
+    return result;
+  } catch (e) {
+    msg.error(FAIL_RESULT.message);
+    throw e;
+  }
+}
+
+async function handleFetchWithBody<T>(
+  url: string, body: IRequestBody, httpMethod: HttpMethod, contentType: ContentType,
+):
+  Promise<IApiResult<T>> {
+  let bodyStr: string;
+  switch (contentType) {
+    case ContentType.JSON: {
+      bodyStr = JSON.stringify(body);
+      break;
+    }
+    case ContentType.FORM: {
+      const keyAndValues = [];
+      Object.keys(body).forEach((key) => {
+        const value = body[key];
+        keyAndValues.push(`${key}=${value}`);
+      });
+      bodyStr = keyAndValues.join("&");
+      break;
+    }
+    default: {
+      throw new Error(`ContentType ${contentType} not found`);
+    }
+  }
+  const response = await fetch(url, {
+    body: bodyStr,
+    headers: getHeaders(contentType),
+    method: httpMethod,
+  });
+  return handleFetch<T>(response);
+}
+
 export async function httpGet<T = null>(url: string, body?: IRequestBody): Promise<IApiResult<T>> {
   if (body !== null) {
     const urlObj = new URL(url);
@@ -134,53 +189,4 @@ export function httpDelete<T = null>(
 ):
   Promise<IApiResult<T>> {
   return handleFetchWithBody<T>(url, body, HttpMethod.DELETE, contentType);
-}
-
-export function checkStatus<T>(response: Response): Promise<T> {
-  if (response.ok) {
-    return response.json();
-  }
-  throw new Error();
-}
-
-async function handleFetchWithBody<T>(
-  url: string, body: IRequestBody, httpMethod: HttpMethod, contentType: ContentType,
-):
-  Promise<IApiResult<T>> {
-  let bodyStr: string;
-  switch (contentType) {
-    case ContentType.JSON:
-      bodyStr = JSON.stringify(body);
-      break;
-    case ContentType.FORM:
-      const keyAndValues = [];
-      Object.keys(body).forEach((key) => {
-        const value = body[key];
-        keyAndValues.push(`${key}=${value}`);
-      });
-      bodyStr = keyAndValues.join("&");
-      break;
-  }
-  const response = await fetch(url, {
-    body: bodyStr,
-    headers: getHeaders(contentType),
-    method: httpMethod,
-  });
-  return handleFetch<T>(response);
-}
-
-async function handleFetch<T>(response: Response): Promise<IApiResult<T>> {
-  try {
-    const result = await checkStatus<IApiResult<T>>(response);
-    if (result.code === ApiResultCode.Unauthorized) {
-      msg.info(result.message);
-      removeToken();
-
-      const dispatch = useDispatch();
-      dispatch(loginClear());
-    }
-    return result;
-  } catch (e) {
-    msg.error(FAIL_RESULT.message);
-  }
 }

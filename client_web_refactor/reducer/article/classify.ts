@@ -17,7 +17,10 @@ const initialState: IClassifyState = {
   show: false,
 };
 
-export default function classifyReducer(state: IClassifyState = initialState, action: ClassifyAction): IClassifyState {
+export default function classifyReducer(
+  state: IClassifyState = initialState,
+  action: ClassifyAction,
+): IClassifyState {
   switch (action.type) {
     case SET_CLASSIFY_LOADING:
       return {

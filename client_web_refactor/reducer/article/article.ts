@@ -35,7 +35,10 @@ export const initialState: IArticleState = {
   },
 };
 
-export default function articleReducer(state: IArticleState = initialState, action: ArticleAction): IArticleState {
+export default function articleReducer(
+  state: IArticleState = initialState,
+  action: ArticleAction,
+): IArticleState {
   switch (action.type) {
     case SET_ARTICLE:
     case GET_ARTICLE_INFO_RESPONSE:

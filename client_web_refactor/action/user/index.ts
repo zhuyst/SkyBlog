@@ -22,6 +22,17 @@ import { setRegisterModalShow, setUserInfoModalShow } from "../common/modal";
 import { FORM_REGISTER, FORM_USERINFO } from "../form";
 import { USER_PAGE_SIZE } from "../pageSize";
 
+export const REGISTER_USER_RESPONSE = "REGISTER_USER_RESPONSE";
+export interface IRegisterUserResponseAction extends Action<typeof REGISTER_USER_RESPONSE> {
+  result: IApiResult;
+}
+function registerUserResponse(result: IApiResult): IRegisterUserResponseAction {
+  return {
+    type: REGISTER_USER_RESPONSE,
+    result,
+  };
+}
+
 export function registerUser(user: IUser): IThunkAction {
   return async (dispatch) => {
     dispatch(startSubmit(FORM_REGISTER));
@@ -39,24 +50,6 @@ export function registerUser(user: IUser): IThunkAction {
   };
 }
 
-export const REGISTER_USER_RESPONSE = "REGISTER_USER_RESPONSE";
-export interface IRegisterUserResponseAction extends Action<typeof REGISTER_USER_RESPONSE> {
-  result: IApiResult;
-}
-function registerUserResponse(result: IApiResult): IRegisterUserResponseAction {
-  return {
-    type: REGISTER_USER_RESPONSE,
-    result,
-  };
-}
-
-export function listUsers(pageNum: number, pageSize: number): IThunkAction {
-  return async (dispatch) => {
-    const result = await fetchListUsers(pageNum, pageSize);
-    dispatch(listUsersResponse(result.entity));
-  };
-}
-
 export const LIST_USERS_RESPONSE = "LIST_USERS_RESPONSE";
 export interface IListUsersResponseAction extends Action<typeof LIST_USERS_RESPONSE> {
   page: IPageInfo<IUser>;
@@ -68,10 +61,10 @@ function listUsersResponse(page: IPageInfo<IUser>): IListUsersResponseAction {
   };
 }
 
-export function deleteUser(id: number): IThunkAction {
+export function listUsers(pageNum: number, pageSize: number): IThunkAction {
   return async (dispatch) => {
-    const result = await fetchDeleteUser(id);
-    dispatch(deleteUserResponse(result));
+    const result = await fetchListUsers(pageNum, pageSize);
+    dispatch(listUsersResponse(result.entity));
   };
 }
 
@@ -86,10 +79,10 @@ function deleteUserResponse(result: IApiResult): IDeleteUserResponseAction {
   };
 }
 
-export function getUserInfo(id: number): IThunkAction {
+export function deleteUser(id: number): IThunkAction {
   return async (dispatch) => {
-    const result = await fetchGetUserInfo(id);
-    dispatch(getUserInfoResponse(result.entity));
+    const result = await fetchDeleteUser(id);
+    dispatch(deleteUserResponse(result));
   };
 }
 
@@ -100,6 +93,24 @@ export interface IGetUserInfoResponseAction extends Action<typeof GET_USER_INFO_
 function getUserInfoResponse(user: IUser): IGetUserInfoResponseAction {
   return {
     type: GET_USER_INFO_RESPONSE,
+    user,
+  };
+}
+
+export function getUserInfo(id: number): IThunkAction {
+  return async (dispatch) => {
+    const result = await fetchGetUserInfo(id);
+    dispatch(getUserInfoResponse(result.entity));
+  };
+}
+
+export const UPDATE_USER_INFO_RESPONSE = "UPDATE_USER_INFO_RESPONSE";
+export interface IUpdateUserInfoResponseAction extends Action<typeof UPDATE_USER_INFO_RESPONSE> {
+  user: IUser;
+}
+function updateUserInfoResponse(user: IUser): IUpdateUserInfoResponseAction {
+  return {
+    type: UPDATE_USER_INFO_RESPONSE,
     user,
   };
 }
@@ -118,67 +129,6 @@ export function updateUserInfo(user: IUser): IThunkAction {
     } else {
       msg.error(result.message);
     }
-  };
-}
-
-export const UPDATE_USER_INFO_RESPONSE = "UPDATE_USER_INFO_RESPONSE";
-export interface IUpdateUserInfoResponseAction extends Action<typeof UPDATE_USER_INFO_RESPONSE> {
-  user: IUser;
-}
-function updateUserInfoResponse(user: IUser): IUpdateUserInfoResponseAction {
-  return {
-    type: UPDATE_USER_INFO_RESPONSE,
-    user,
-  };
-}
-
-export function updateUserRole(id: number, roleId: Role): IThunkAction {
-  return modifyUserDetail(
-    () => fetchUpdateUserRole(id, roleId),
-    (dispatch, result) => {
-      dispatch(updateUserRoleResponse(result));
-      if (roleId === UserRole.ADMIN.id) {
-        msg.success("提升为管理员成功");
-      } else if (roleId === UserRole.VISITOR.id) {
-        msg.success("降低为访客成功");
-      }
-    },
-  );
-}
-
-export const UPDATE_USER_ROLE_RESPONSE = "UPDATE_USER_ROLE_RESPONSE";
-export interface IUpdateUserRoleResponseAction extends Action<typeof UPDATE_USER_ROLE_RESPONSE> {
-  result: IApiResult;
-}
-function updateUserRoleResponse(result: IApiResult): IUpdateUserRoleResponseAction {
-  return {
-    type: UPDATE_USER_ROLE_RESPONSE,
-    result,
-  };
-}
-
-export function updateUserStatus(id: number, statusId: Status): IThunkAction {
-  return modifyUserDetail(
-    () => fetchUpdateUserStatus(id, statusId),
-    (dispatch, result) => {
-      dispatch(updateUserStatusResponse(result));
-      if (statusId === UserStatus.NORMAL.id) {
-        msg.success("解除锁定成功");
-      } else if (statusId === UserStatus.LOCKED.id) {
-        msg.success("锁定账户成功");
-      }
-    },
-  );
-}
-
-export const UPDATE_USER_STATUS_RESPONSE = "UPDATE_USER_STATUS_RESPONSE";
-export interface IUpdateUserStatusResponseAction extends Action<typeof UPDATE_USER_STATUS_RESPONSE> {
-  result: IApiResult;
-}
-function updateUserStatusResponse(result: IApiResult): IUpdateUserStatusResponseAction {
-  return {
-    type: UPDATE_USER_STATUS_RESPONSE,
-    result,
   };
 }
 
@@ -201,6 +151,57 @@ function modifyUserDetail(
       msg.error(result.message);
     }
   };
+}
+
+export const UPDATE_USER_ROLE_RESPONSE = "UPDATE_USER_ROLE_RESPONSE";
+export interface IUpdateUserRoleResponseAction extends Action<typeof UPDATE_USER_ROLE_RESPONSE> {
+  result: IApiResult;
+}
+function updateUserRoleResponse(result: IApiResult): IUpdateUserRoleResponseAction {
+  return {
+    type: UPDATE_USER_ROLE_RESPONSE,
+    result,
+  };
+}
+
+export function updateUserRole(id: number, roleId: Role): IThunkAction {
+  return modifyUserDetail(
+    () => fetchUpdateUserRole(id, roleId),
+    (dispatch, result) => {
+      dispatch(updateUserRoleResponse(result));
+      if (roleId === UserRole.ADMIN.id) {
+        msg.success("提升为管理员成功");
+      } else if (roleId === UserRole.VISITOR.id) {
+        msg.success("降低为访客成功");
+      }
+    },
+  );
+}
+
+export const UPDATE_USER_STATUS_RESPONSE = "UPDATE_USER_STATUS_RESPONSE";
+export interface IUpdateUserStatusResponseAction
+  extends Action<typeof UPDATE_USER_STATUS_RESPONSE> {
+  result: IApiResult;
+}
+function updateUserStatusResponse(result: IApiResult): IUpdateUserStatusResponseAction {
+  return {
+    type: UPDATE_USER_STATUS_RESPONSE,
+    result,
+  };
+}
+
+export function updateUserStatus(id: number, statusId: Status): IThunkAction {
+  return modifyUserDetail(
+    () => fetchUpdateUserStatus(id, statusId),
+    (dispatch, result) => {
+      dispatch(updateUserStatusResponse(result));
+      if (statusId === UserStatus.NORMAL.id) {
+        msg.success("解除锁定成功");
+      } else if (statusId === UserStatus.LOCKED.id) {
+        msg.success("锁定账户成功");
+      }
+    },
+  );
 }
 
 export type UserAction = IListUsersResponseAction;

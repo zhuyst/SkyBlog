@@ -40,8 +40,10 @@ module.exports = {
     "linebreak-style": ["error", "windows"],
     "no-param-reassign": ["off"],
     "no-plusplus": ["off"],
+    "no-control-regex": ["off"],
     "import/no-cycle": ["off"],
     "import/no-mutable-exports": ["off"],
+    "import/prefer-default-export": ["off"],
     "react/destructuring-assignment": ["off"],
     "react/jsx-props-no-spreading": ["off"],
     "react/prop-types": ["off"]

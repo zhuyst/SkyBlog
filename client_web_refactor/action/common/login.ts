@@ -21,16 +21,15 @@ export function loginClear(): ILoginClearAction {
   };
 }
 
-export function login(username: string, password: string): IThunkAction {
-  return async (dispatch) => {
-    dispatch(startSubmit(FORM_LOGIN));
-    try {
-      const result = await fetchLogin(username, password);
-      dispatch(stopSubmit(FORM_LOGIN));
-      afterLogin(result, dispatch, true);
-    } catch (e) {
-      afterLogin(FAIL_RESULT, dispatch, true);
-    }
+export const SET_LOGIN_USER = "SET_LOGIN_USER";
+export interface ISetLoginUserAction extends Action<typeof SET_LOGIN_USER> {
+  user: IUser;
+}
+export function setLoginUser(user: IUser): ISetLoginUserAction {
+  user.password = null;
+  return {
+    type: SET_LOGIN_USER,
+    user,
   };
 }
 
@@ -44,6 +43,52 @@ export function loginResponse(ok: boolean, message: string): ILoginResponseActio
     type: LOGIN_RESPONSE,
     ok,
     message,
+  };
+}
+
+export function afterLogin(result: IApiResult<IAuthResponse>, dispatch: Dispatch, alert: boolean) {
+  let ok = false;
+  let message = null;
+
+  if (result.code === ApiResultCode.OK) {
+    dispatch(setLoginModalShow(false));
+
+    const { entity } = result;
+
+    const { user } = entity;
+    dispatch(setLoginUser(user));
+
+    setToken(entity);
+
+    dispatch(change(FORM_USERINFO, "id", user.id));
+    dispatch(change(FORM_USERINFO, "username", user.username));
+    dispatch(change(FORM_USERINFO, "nickname", user.nickname));
+
+    if (alert) {
+      msg.success("登录成功");
+    }
+
+    ok = true;
+  } else if (result.code === ApiResultCode.Unauthorized) {
+    ok = null;
+  } else {
+    msg.error(result.message);
+    message = result.message;
+  }
+
+  dispatch(loginResponse(ok, message));
+}
+
+export function login(username: string, password: string): IThunkAction {
+  return async (dispatch) => {
+    dispatch(startSubmit(FORM_LOGIN));
+    try {
+      const result = await fetchLogin(username, password);
+      dispatch(stopSubmit(FORM_LOGIN));
+      afterLogin(result, dispatch, true);
+    } catch (e) {
+      afterLogin(FAIL_RESULT, dispatch, true);
+    }
   };
 }
 
@@ -82,51 +127,6 @@ export function checkUserLoginState(): IThunkAction {
     } catch (e) {
       afterLogin(FAIL_RESULT, dispatch, false);
     }
-  };
-}
-
-export function afterLogin(result: IApiResult<IAuthResponse>, dispatch: Dispatch, alert: boolean) {
-  let ok = false;
-  let message = null;
-
-  if (result.code === ApiResultCode.OK) {
-    dispatch(setLoginModalShow(false));
-
-    const { entity } = result;
-
-    const { user } = entity;
-    dispatch(setLoginUser(user));
-
-    setToken(entity);
-
-    dispatch(change(FORM_USERINFO, "id", user.id));
-    dispatch(change(FORM_USERINFO, "username", user.username));
-    dispatch(change(FORM_USERINFO, "nickname", user.nickname));
-
-    if (alert) {
-      msg.success("登录成功");
-    }
-
-    ok = true;
-  } else if (result.code === ApiResultCode.Unauthorized) {
-    ok = null;
-  } else {
-    msg.error(result.message);
-    message = result.message;
-  }
-
-  dispatch(loginResponse(ok, message));
-}
-
-export const SET_LOGIN_USER = "SET_LOGIN_USER";
-export interface ISetLoginUserAction extends Action<typeof SET_LOGIN_USER> {
-  user: IUser;
-}
-export function setLoginUser(user: IUser): ISetLoginUserAction {
-  user.password = null;
-  return {
-    type: SET_LOGIN_USER,
-    user,
   };
 }
 

@@ -27,7 +27,7 @@ export default (props: IArticleCardItemProps) => {
         <hr />
         <p className="article-card-item-content">{article.content}</p>
         <p className="article-card-item-date">
-发布时间 :
+          发布时间 :
           {article.createDate}
         </p>
       </a>

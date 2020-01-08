@@ -59,7 +59,8 @@ export function fetchRegisterUser(user: IUser): Promise<IApiResult> {
   return httpPost(`${USER_API_URL}/public/`, user);
 }
 
-export function fetchListUsers(pageNum: number, pageSize: number): Promise<IApiResult<IPageInfo<IUser>>> {
+export function fetchListUsers(pageNum: number, pageSize: number)
+  : Promise<IApiResult<IPageInfo<IUser>>> {
   return httpGet(`${USER_API_URL}/list/`, {
     pageNum, pageSize,
   });

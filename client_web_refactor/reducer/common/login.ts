@@ -25,7 +25,10 @@ const initialState: ILoginState = {
   user: initialUser,
 };
 
-export default function loginReducer(state: ILoginState = initialState, action: LoginAction): ILoginState {
+export default function loginReducer(
+  state: ILoginState = initialState,
+  action: LoginAction,
+): ILoginState {
   switch (action.type) {
     case SET_MANAGEMENT: {
       return {

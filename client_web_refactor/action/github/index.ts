@@ -17,20 +17,6 @@ export function setGithubLoading(loading: boolean): ISetGithubLoadingAction {
   };
 }
 
-export function listCommits(perPage: number): IThunkAction {
-  return async (dispatch) => {
-    dispatch(setGithubLoading(true));
-
-    try {
-      const result = await fetchCommits(perPage);
-      dispatch(setGithubLoading(false));
-      dispatch(listCommitsResponse(result));
-    } catch (e) {
-      msg.error(FAIL_RESULT.message);
-    }
-  };
-}
-
 export interface IGithubCommit {
   sha: string;
   author: string;
@@ -56,11 +42,14 @@ function listCommitsResponse(commits: IGithubFullCommitInfo[]): IListCommitsResp
   };
 }
 
-export function getProjectStar(): IThunkAction<typeof GET_PROJECT_STAR_RESPONSE> {
+export function listCommits(perPage: number): IThunkAction {
   return async (dispatch) => {
+    dispatch(setGithubLoading(true));
+
     try {
-      const result = await fetchProjectStar();
-      dispatch(getProjectStarResponse(result));
+      const result = await fetchCommits(perPage);
+      dispatch(setGithubLoading(false));
+      dispatch(listCommitsResponse(result));
     } catch (e) {
       msg.error(FAIL_RESULT.message);
     }
@@ -78,4 +67,18 @@ function getProjectStarResponse(result: IGithubInfo): IGetProjectStarResponseAct
   };
 }
 
-export type GithubAction = ISetGithubLoadingAction | IListCommitsResponseAction | IGetProjectStarResponseAction;
+export function getProjectStar(): IThunkAction<typeof GET_PROJECT_STAR_RESPONSE> {
+  return async (dispatch) => {
+    try {
+      const result = await fetchProjectStar();
+      dispatch(getProjectStarResponse(result));
+    } catch (e) {
+      msg.error(FAIL_RESULT.message);
+    }
+  };
+}
+
+export type GithubAction =
+  ISetGithubLoadingAction |
+  IListCommitsResponseAction |
+  IGetProjectStarResponseAction;

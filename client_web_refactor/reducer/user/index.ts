@@ -11,7 +11,10 @@ const initialState: IUserState = {
   total: 0,
 };
 
-export default function userReducer(state: IUserState = initialState, action: UserAction): IUserState {
+export default function userReducer(
+  state: IUserState = initialState,
+  action: UserAction,
+): IUserState {
   switch (action.type) {
     case LIST_USERS_RESPONSE:
       return { ...state, ...action.page };

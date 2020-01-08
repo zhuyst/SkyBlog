@@ -15,7 +15,10 @@ const initialState: IGithubState = {
   loading: true,
 };
 
-export default function githubReducer(state: IGithubState = initialState, action: GithubAction): IGithubState {
+export default function githubReducer(
+  state: IGithubState = initialState,
+  action: GithubAction,
+): IGithubState {
   switch (action.type) {
     case SET_GITHUB_LOADING:
       return {

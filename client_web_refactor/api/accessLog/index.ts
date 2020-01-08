@@ -18,7 +18,8 @@ export interface IAccessLog {
   user: IUser;
 }
 
-export function fetchListAccessLog(pageNum: number, pageSize: number): Promise<IApiResult<IPageInfo<IAccessLog>>> {
+export function fetchListAccessLog(pageNum: number, pageSize: number)
+  : Promise<IApiResult<IPageInfo<IAccessLog>>> {
   return httpGet<IPageInfo<IAccessLog>>(`${ACCESS_LOG_URL}/list/`, {
     pageNum, pageSize,
   });

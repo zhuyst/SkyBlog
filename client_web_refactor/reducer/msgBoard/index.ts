@@ -23,7 +23,10 @@ const initialState: IMsgBoardState = {
   previousMsg: initialPreviousComment,
 };
 
-export default function msgBoardReducer(state: IMsgBoardState = initialState, action: MsgBoardAction): IMsgBoardState {
+export default function msgBoardReducer(
+  state: IMsgBoardState = initialState,
+  action: MsgBoardAction,
+): IMsgBoardState {
   switch (action.type) {
     case SET_MSG_LOADING:
       return {
@@ -37,7 +40,7 @@ export default function msgBoardReducer(state: IMsgBoardState = initialState, ac
         previousMsg: action.msg,
       };
 
-    case LIST_MSG_RESPONSE:
+    case LIST_MSG_RESPONSE: {
       const { page } = action;
       const newList = concatList(page, state.page.list);
 
@@ -51,6 +54,7 @@ export default function msgBoardReducer(state: IMsgBoardState = initialState, ac
           total: page.total,
         },
       };
+    }
     default:
       return state;
   }

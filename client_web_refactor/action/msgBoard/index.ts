@@ -35,33 +35,6 @@ export function setPreviousMsg(msg: IMsg): ISetPreviousMsgAction {
   };
 }
 
-export function insertMsg(msg: IMsg): IThunkAction {
-  return modifyMsg<IMsg>(
-    () => fetchInsertMsg(msg),
-    "新增留言成功",
-    insertMsgResponse,
-  );
-}
-
-export const INSERT_MSG_RESPONSE = "INSERT_MSG_RESPONSE";
-export interface IInsertMsgResponseAction extends IMsgAction<typeof INSERT_MSG_RESPONSE> {}
-function insertMsgResponse(msg: IMsg): IInsertMsgResponseAction {
-  return {
-    type: INSERT_MSG_RESPONSE,
-    msg,
-  };
-}
-
-export function listMsg(pageNum: number, pageSize: number = MSG_PAGE_SIZE): IThunkAction {
-  return async (dispatch) => {
-    dispatch(setMsgLoading(true));
-
-    const result = await fetchListMsg(pageNum, pageSize);
-    dispatch(setMsgLoading(false));
-    dispatch(listMsgResponse(result.entity));
-  };
-}
-
 export const LIST_MSG_RESPONSE = "LIST_MSG_RESPONSE";
 export interface IListMsgResponseAction extends Action<typeof LIST_MSG_RESPONSE> {
   page: IPageInfo<IMsg>;
@@ -73,22 +46,13 @@ function listMsgResponse(page: IPageInfo<IMsg>): IListMsgResponseAction {
   };
 }
 
-export function deleteMsg(id: number): IThunkAction {
-  return modifyMsg(
-    () => fetchDeleteMsg(id),
-    "删除评论成功",
-    deleteMsgResponse,
-  );
-}
+export function listMsg(pageNum: number, pageSize: number = MSG_PAGE_SIZE): IThunkAction {
+  return async (dispatch) => {
+    dispatch(setMsgLoading(true));
 
-export const DELETE_MSG_RESPONSE = "DELETE_MSG_RESPONSE";
-export interface IDeleteMsgResponseAction extends Action<typeof DELETE_MSG_RESPONSE> {
-  result: IApiResult;
-}
-function deleteMsgResponse(result: IApiResult): IDeleteMsgResponseAction {
-  return {
-    type: DELETE_MSG_RESPONSE,
-    result,
+    const result = await fetchListMsg(pageNum, pageSize);
+    dispatch(setMsgLoading(false));
+    dispatch(listMsgResponse(result.entity));
   };
 }
 
@@ -117,6 +81,42 @@ function modifyMsg<T = null>(
       message.error(result.message);
     }
   };
+}
+
+export const INSERT_MSG_RESPONSE = "INSERT_MSG_RESPONSE";
+export interface IInsertMsgResponseAction extends IMsgAction<typeof INSERT_MSG_RESPONSE> {}
+function insertMsgResponse(msg: IMsg): IInsertMsgResponseAction {
+  return {
+    type: INSERT_MSG_RESPONSE,
+    msg,
+  };
+}
+
+export function insertMsg(msg: IMsg): IThunkAction {
+  return modifyMsg<IMsg>(
+    () => fetchInsertMsg(msg),
+    "新增留言成功",
+    insertMsgResponse,
+  );
+}
+
+export const DELETE_MSG_RESPONSE = "DELETE_MSG_RESPONSE";
+export interface IDeleteMsgResponseAction extends Action<typeof DELETE_MSG_RESPONSE> {
+  result: IApiResult;
+}
+function deleteMsgResponse(result: IApiResult): IDeleteMsgResponseAction {
+  return {
+    type: DELETE_MSG_RESPONSE,
+    result,
+  };
+}
+
+export function deleteMsg(id: number): IThunkAction {
+  return modifyMsg(
+    () => fetchDeleteMsg(id),
+    "删除评论成功",
+    deleteMsgResponse,
+  );
 }
 
 export type MsgBoardAction = ISetMsgLoadingAction | ISetPreviousMsgAction |

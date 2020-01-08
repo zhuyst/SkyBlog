@@ -20,7 +20,8 @@ export interface IArticle extends IBaseEntity {
   updateDate?: string;
 }
 
-export function fetchListArticles(pageNum: number, pageSize: number): Promise<IApiResult<IPageInfo<IArticle>>> {
+export function fetchListArticles(pageNum: number, pageSize: number)
+  : Promise<IApiResult<IPageInfo<IArticle>>> {
   return httpGet<IPageInfo<IArticle>>(`${ARTICLE_API_URL}/public/list/`, {
     pageNum, pageSize,
   });
@@ -32,7 +33,9 @@ export interface IClassifyWithArticles {
 }
 
 export function fetchListArticlesByClassify(
-  classifyId: number, pageNum: number, pageSize: number,
+  classifyId: number,
+  pageNum: number,
+  pageSize: number,
 ): Promise<IApiResult<IClassifyWithArticles>> {
   return httpGet<IClassifyWithArticles>(`${ARTICLE_API_URL}/public/classify/${classifyId}/`, {
     pageNum, pageSize,

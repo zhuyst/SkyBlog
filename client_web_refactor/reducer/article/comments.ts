@@ -37,7 +37,10 @@ const initialState: ICommentsState = {
   previousComment: initialPreviousComment,
 };
 
-export default function commentsReducer(state: ICommentsState = initialState, action: CommentAction): ICommentsState {
+export default function commentsReducer(
+  state: ICommentsState = initialState,
+  action: CommentAction,
+): ICommentsState {
   switch (action.type) {
     case SET_PREVIOUS_COMMENT:
       return {
@@ -50,7 +53,7 @@ export default function commentsReducer(state: ICommentsState = initialState, ac
         ...state,
         loading: action.loading,
       };
-    case LIST_COMMENTS_RESPONSE:
+    case LIST_COMMENTS_RESPONSE: {
       const { comments } = action;
       const newList = concatList(comments, state.comments.list);
 
@@ -64,6 +67,7 @@ export default function commentsReducer(state: ICommentsState = initialState, ac
           total: comments.total,
         },
       };
+    }
     default:
       return state;
   }

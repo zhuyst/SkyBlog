@@ -14,7 +14,8 @@ function listSysLogResponse(page: IPageInfo<ISysLog>): IListSysLogResponseAction
   };
 }
 
-export function listSysLog(pageNum: number, pageSize: number): IThunkAction<typeof LIST_SYS_LOG_RESPONSE> {
+export function listSysLog(pageNum: number, pageSize: number)
+  : IThunkAction<typeof LIST_SYS_LOG_RESPONSE> {
   return async (dispatch) => {
     const result = await fetchListSysLog(pageNum, pageSize);
     dispatch(listSysLogResponse(result.entity));

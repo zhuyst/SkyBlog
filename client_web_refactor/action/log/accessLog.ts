@@ -34,7 +34,8 @@ function listAccessLogResponse(page: IPageInfo<IAccessLog>): IListAccessLogRespo
   };
 }
 
-export function listAccessLog(pageNum: number, pageSize: number): IThunkAction<typeof LIST_ACCESS_LOG_RESPONSE> {
+export function listAccessLog(pageNum: number, pageSize: number)
+  : IThunkAction<typeof LIST_ACCESS_LOG_RESPONSE> {
   return async (dispatch) => {
     const result = await fetchListAccessLog(pageNum, pageSize);
     dispatch(listAccessLogResponse(result.entity));

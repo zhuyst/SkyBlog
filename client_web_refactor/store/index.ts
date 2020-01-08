@@ -41,13 +41,13 @@ export interface IAppState {
   msgBoard: IMsgBoardState;
 }
 
-export interface AppStore extends Store<IAppState> {
+export interface IAppStore extends Store<IAppState> {
   dispatch: IThunkDispatch;
 }
 
-let store: AppStore = null;
+let store: IAppStore = null;
 
-export function initStore(): AppStore {
+export function initStore(): IAppStore {
   if (store) {
     return store;
   }

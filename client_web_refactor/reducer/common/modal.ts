@@ -1,7 +1,10 @@
 import {
   ModalAction,
   SET_ACCESS_LOG_MODAL_SHOW,
-  SET_LOGIN_MODAL_SHOW, SET_REGISTER_MODAL_SHOW, SET_SYS_LOG_MODAL_SHOW, SET_USER_MANAGEMENT_MODAL_SHOW,
+  SET_LOGIN_MODAL_SHOW,
+  SET_REGISTER_MODAL_SHOW,
+  SET_SYS_LOG_MODAL_SHOW,
+  SET_USER_MANAGEMENT_MODAL_SHOW,
   SET_USERINFO_MODAL_SHOW,
 } from "@/action/common/modal";
 
@@ -23,7 +26,10 @@ const initialState: IModalState = {
   accessLogModalShow: false,
 };
 
-export default function navigationReducer(state: IModalState = initialState, action: ModalAction): IModalState {
+export default function navigationReducer(
+  state: IModalState = initialState,
+  action: ModalAction,
+): IModalState {
   const { show } = action;
 
   switch (action.type) {

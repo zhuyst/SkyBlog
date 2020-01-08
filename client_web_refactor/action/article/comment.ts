@@ -25,43 +25,14 @@ export function setPreviousComment(comment: IComment): ISetPreviousCommentAction
 }
 
 export const SET_COMMENTS_LOADING = "SET_COMMENTS_LOADING";
-export interface ISetCommentsLoadingAction extends Action<typeof SET_COMMENTS_LOADING> {
+export interface ISetCommentsLoadingAction
+  extends Action<typeof SET_COMMENTS_LOADING> {
   loading: boolean;
 }
 export function setCommentsLoading(loading: boolean): ISetCommentsLoadingAction {
   return {
     type: SET_COMMENTS_LOADING,
     loading,
-  };
-}
-
-export function insertComment(comment: IComment): IThunkAction {
-  return modifyComment<IComment>(
-    (getState) => {
-      const articleId = getState().content.article.id;
-      return fetchInsertComment(articleId, comment);
-    },
-    "新增评论成功",
-    insertCommentResponse,
-  );
-}
-
-export const INSERT_COMMENT_RESPONSE = "INSERT_COMMENT_RESPONSE";
-export interface IInsertCommentResponseAction extends ICommentAction<typeof INSERT_COMMENT_RESPONSE> {}
-function insertCommentResponse(comment: IComment): IInsertCommentResponseAction {
-  return {
-    type: INSERT_COMMENT_RESPONSE,
-    comment,
-  };
-}
-
-export function listComments(id: number, pageNum: number, pageSize: number): IThunkAction {
-  return async (dispatch) => {
-    dispatch(setCommentsLoading(true));
-
-    const result = await fetchListComments(id, pageNum, pageSize);
-    dispatch(setCommentsLoading(false));
-    dispatch(listCommentsResponse(result.entity));
   };
 }
 
@@ -76,22 +47,13 @@ function listCommentsResponse(comments: IPageInfo<IComment>): IListCommentsRespo
   };
 }
 
-export function deleteComment(id: number): IThunkAction {
-  return modifyComment(
-    () => fetchDeleteComments(id),
-    "删除评论成功",
-    deleteCommentResponse,
-  );
-}
+export function listComments(id: number, pageNum: number, pageSize: number): IThunkAction {
+  return async (dispatch) => {
+    dispatch(setCommentsLoading(true));
 
-export const DELETE_COMMENT_RESPONSE = "DELETE_COMMENT_RESPONSE";
-export interface IDeleteCommentResponseAction extends Action<typeof DELETE_COMMENT_RESPONSE> {
-  result: IApiResult;
-}
-function deleteCommentResponse(result: IApiResult): IDeleteCommentResponseAction {
-  return {
-    type: DELETE_COMMENT_RESPONSE,
-    result,
+    const result = await fetchListComments(id, pageNum, pageSize);
+    dispatch(setCommentsLoading(false));
+    dispatch(listCommentsResponse(result.entity));
   };
 }
 
@@ -122,6 +84,46 @@ function modifyComment<T = null>(
       msg.error(result.message);
     }
   };
+}
+
+export const INSERT_COMMENT_RESPONSE = "INSERT_COMMENT_RESPONSE";
+export interface IInsertCommentResponseAction
+  extends ICommentAction<typeof INSERT_COMMENT_RESPONSE> {}
+function insertCommentResponse(comment: IComment): IInsertCommentResponseAction {
+  return {
+    type: INSERT_COMMENT_RESPONSE,
+    comment,
+  };
+}
+
+export function insertComment(comment: IComment): IThunkAction {
+  return modifyComment<IComment>(
+    (getState) => {
+      const articleId = getState().content.article.id;
+      return fetchInsertComment(articleId, comment);
+    },
+    "新增评论成功",
+    insertCommentResponse,
+  );
+}
+
+export const DELETE_COMMENT_RESPONSE = "DELETE_COMMENT_RESPONSE";
+export interface IDeleteCommentResponseAction extends Action<typeof DELETE_COMMENT_RESPONSE> {
+  result: IApiResult;
+}
+function deleteCommentResponse(result: IApiResult): IDeleteCommentResponseAction {
+  return {
+    type: DELETE_COMMENT_RESPONSE,
+    result,
+  };
+}
+
+export function deleteComment(id: number): IThunkAction {
+  return modifyComment(
+    () => fetchDeleteComments(id),
+    "删除评论成功",
+    deleteCommentResponse,
+  );
 }
 
 export type CommentAction = ISetCommentsLoadingAction | IInsertCommentResponseAction |

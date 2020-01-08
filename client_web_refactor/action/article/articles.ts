@@ -34,7 +34,8 @@ export const LIST_ARTICLES_RESPONSE = "LIST_ARTICLES_RESPONSE";
 export interface IListArticlesResponseAction extends Action<typeof LIST_ARTICLES_RESPONSE> {
   page: IPageInfo<IArticle>;
 }
-function listArticlesResponse(result: IApiResult<IPageInfo<IArticle>>): IListArticlesResponseAction {
+function listArticlesResponse(result: IApiResult<IPageInfo<IArticle>>)
+  : IListArticlesResponseAction {
   return {
     type: LIST_ARTICLES_RESPONSE,
     page: result.entity,
@@ -54,7 +55,8 @@ export function listArticles(pageNum: number, pageSize: number = ARTICLE_PAGE_SI
 }
 
 export const LIST_ARTICLES_BY_CLASSIFY_RESPONSE = "LIST_ARTICLES_BY_CLASSIFY_RESPONSE";
-export interface IListArticlesByClassifyResponseAction extends Action<typeof LIST_ARTICLES_BY_CLASSIFY_RESPONSE> {
+export interface IListArticlesByClassifyResponseAction
+  extends Action<typeof LIST_ARTICLES_BY_CLASSIFY_RESPONSE> {
   vo: IClassifyWithArticles;
 }
 function listArticlesByClassifyResponse(result: IApiResult<IClassifyWithArticles>):
@@ -65,7 +67,11 @@ IListArticlesByClassifyResponseAction {
   };
 }
 
-export function listArticlesByClassify(classifyId: number, pageNum: number, pageSize: number): IThunkAction {
+export function listArticlesByClassify(
+  classifyId: number,
+  pageNum: number,
+  pageSize: number,
+): IThunkAction {
   return async (dispatch) => {
     dispatch(setClassifyArticlesLoading(true));
 

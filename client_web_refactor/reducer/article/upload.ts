@@ -16,7 +16,10 @@ const initialState: IUploadState = {
   },
 };
 
-export default function uploadReducer(state: IUploadState = initialState, action: UploadAction): IUploadState {
+export default function uploadReducer(
+  state: IUploadState = initialState,
+  action: UploadAction,
+): IUploadState {
   switch (action.type) {
     case SET_UPLOAD_MODAL_SHOW:
       return {

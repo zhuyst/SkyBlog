@@ -3,19 +3,19 @@ import withRedux from "next-redux-wrapper";
 import App from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
-import { AppStore, initStore } from "@/store";
+import { IAppStore, initStore } from "@/store";
 
 import "./_app.scss";
 
 export interface INextPageContext extends NextPageContext {
-  store: AppStore;
+  store: IAppStore;
   isServer: boolean;
 }
 
 export type INextPage<P = {}, IP = P> = NextComponentType<INextPageContext, IP, P>;
 
 interface IReduxAppProps {
-  store: AppStore;
+  store: IAppStore;
 }
 
 export default withRedux(initStore)(

@@ -25,7 +25,8 @@ export function setClassifyShow(show: boolean): ISetClassifyShowAction {
 }
 
 export const SET_CLASSIFY_LOADING = "SET_CLASSIFY_LOADING";
-export interface ISetClassifyLoadingAction extends Action<typeof SET_CLASSIFY_LOADING> {
+export interface ISetClassifyLoadingAction
+  extends Action<typeof SET_CLASSIFY_LOADING> {
   loading: boolean;
 }
 export function setClassifyLoading(loading: boolean): ISetClassifyLoadingAction {
@@ -33,79 +34,6 @@ export function setClassifyLoading(loading: boolean): ISetClassifyLoadingAction 
     type: SET_CLASSIFY_LOADING,
     loading,
   };
-}
-
-interface IClassifyResponseAction<T> extends Action<T> {
-  list: IClassify[];
-}
-
-export const LIST_CLASSIFY_RESPONSE = "LIST_CLASSIFY_RESPONSE";
-export interface IListClassifyResponseAction extends IClassifyResponseAction<typeof LIST_CLASSIFY_RESPONSE> {}
-function listClassifyResponse(result: IApiResult<IClassify[]>): IListClassifyResponseAction {
-  return {
-    type: LIST_CLASSIFY_RESPONSE,
-    list: result.entity,
-  };
-}
-
-export function listClassify(): IThunkAction {
-  return async (dispatch) => {
-    const result = await fetchListClassify();
-    dispatch(listClassifyResponse(result));
-    dispatch(setClassifyLoading(false));
-  };
-}
-
-export const INSERT_CLASSIFY_RESPONSE = "INSERT_CLASSIFY_RESPONSE";
-export interface IInsertClassifyResponseAction extends IClassifyResponseAction<typeof INSERT_CLASSIFY_RESPONSE> {}
-function insertClassifyResponse(result: IApiResult<IClassify[]>): IInsertClassifyResponseAction {
-  return {
-    type: INSERT_CLASSIFY_RESPONSE,
-    list: result.entity,
-  };
-}
-
-export function insertClassify(classify: IClassify): IThunkAction {
-  return modifyClassify(
-    () => fetchInsertClassify(classify),
-    "新增文章分类成功",
-    insertClassifyResponse,
-    (dispatch) => dispatch(setClassifyShow(false)),
-  );
-}
-
-export const UPDATE_CLASSIFY_RESPONSE = "UPDATE_CLASSIFY_RESPONSE";
-export interface IUpdateClassifyResponseAction extends IClassifyResponseAction<typeof UPDATE_CLASSIFY_RESPONSE> {}
-function updateClassifyResponse(result: IApiResult<IClassify[]>): IUpdateClassifyResponseAction {
-  return {
-    type: UPDATE_CLASSIFY_RESPONSE,
-    list: result.entity,
-  };
-}
-
-export function updateClassify(classify: IClassify): IThunkAction {
-  return modifyClassify(
-    () => fetchUpdateClassify(classify),
-    "更新文章分类成功",
-    updateClassifyResponse,
-  );
-}
-
-export const DELETE_CLASSIFY_RESPONSE = "DELETE_CLASSIFY_RESPONSE";
-export interface IDeleteClassifyResponseAction extends IClassifyResponseAction<typeof DELETE_CLASSIFY_RESPONSE> {}
-function deleteClassifyResponse(result: IApiResult<IClassify[]>): IDeleteClassifyResponseAction {
-  return {
-    type: DELETE_CLASSIFY_RESPONSE,
-    list: result.entity,
-  };
-}
-
-export function deleteClassify(id: number): IThunkAction {
-  return modifyClassify(
-    () => fetchDeleteClassify(id),
-    "删除文章分类成功",
-    deleteClassifyResponse,
-  );
 }
 
 function modifyClassify(
@@ -132,6 +60,83 @@ function modifyClassify(
       msg.error(result.message);
     }
   };
+}
+
+interface IClassifyResponseAction<T> extends Action<T> {
+  list: IClassify[];
+}
+
+export const LIST_CLASSIFY_RESPONSE = "LIST_CLASSIFY_RESPONSE";
+export interface IListClassifyResponseAction
+  extends IClassifyResponseAction<typeof LIST_CLASSIFY_RESPONSE> {}
+function listClassifyResponse(result: IApiResult<IClassify[]>): IListClassifyResponseAction {
+  return {
+    type: LIST_CLASSIFY_RESPONSE,
+    list: result.entity,
+  };
+}
+
+export function listClassify(): IThunkAction {
+  return async (dispatch) => {
+    const result = await fetchListClassify();
+    dispatch(listClassifyResponse(result));
+    dispatch(setClassifyLoading(false));
+  };
+}
+
+export const INSERT_CLASSIFY_RESPONSE = "INSERT_CLASSIFY_RESPONSE";
+export interface IInsertClassifyResponseAction
+  extends IClassifyResponseAction<typeof INSERT_CLASSIFY_RESPONSE> {}
+function insertClassifyResponse(result: IApiResult<IClassify[]>): IInsertClassifyResponseAction {
+  return {
+    type: INSERT_CLASSIFY_RESPONSE,
+    list: result.entity,
+  };
+}
+
+export function insertClassify(classify: IClassify): IThunkAction {
+  return modifyClassify(
+    () => fetchInsertClassify(classify),
+    "新增文章分类成功",
+    insertClassifyResponse,
+    (dispatch) => dispatch(setClassifyShow(false)),
+  );
+}
+
+export const UPDATE_CLASSIFY_RESPONSE = "UPDATE_CLASSIFY_RESPONSE";
+export interface IUpdateClassifyResponseAction
+  extends IClassifyResponseAction<typeof UPDATE_CLASSIFY_RESPONSE> {}
+function updateClassifyResponse(result: IApiResult<IClassify[]>): IUpdateClassifyResponseAction {
+  return {
+    type: UPDATE_CLASSIFY_RESPONSE,
+    list: result.entity,
+  };
+}
+
+export function updateClassify(classify: IClassify): IThunkAction {
+  return modifyClassify(
+    () => fetchUpdateClassify(classify),
+    "更新文章分类成功",
+    updateClassifyResponse,
+  );
+}
+
+export const DELETE_CLASSIFY_RESPONSE = "DELETE_CLASSIFY_RESPONSE";
+export interface IDeleteClassifyResponseAction
+  extends IClassifyResponseAction<typeof DELETE_CLASSIFY_RESPONSE> {}
+function deleteClassifyResponse(result: IApiResult<IClassify[]>): IDeleteClassifyResponseAction {
+  return {
+    type: DELETE_CLASSIFY_RESPONSE,
+    list: result.entity,
+  };
+}
+
+export function deleteClassify(id: number): IThunkAction {
+  return modifyClassify(
+    () => fetchDeleteClassify(id),
+    "删除文章分类成功",
+    deleteClassifyResponse,
+  );
 }
 
 export type ClassifyAction = ISetClassifyLoadingAction | IListClassifyResponseAction |

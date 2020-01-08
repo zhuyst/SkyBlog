@@ -11,7 +11,10 @@ const initialState: ISysLogState = {
   total: 0,
 };
 
-export default function sysLogReducer(state: ISysLogState = initialState, action: SysLogAction): ISysLogState {
+export default function sysLogReducer(
+  state: ISysLogState = initialState,
+  action: SysLogAction,
+): ISysLogState {
   switch (action.type) {
     case LIST_SYS_LOG_RESPONSE:
       return { ...state, ...action.page };
