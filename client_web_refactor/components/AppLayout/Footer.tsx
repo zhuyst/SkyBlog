@@ -22,16 +22,18 @@ export default (props: IFooterProps) => {
     <footer className={props.className}>
       <p>
         网页访问次数：
-        {count ? "加载中..." : count}
+        {count}
       </p>
       <p>
         Powered&nbsp;by&nbsp;
-        <a href={SKY_BLOG_URL}>SkyBlog</a>
+        <a href={SKY_BLOG_URL} target="_blank" rel="noopener noreferrer">SkyBlog</a>
         &nbsp;
-        <Button size="sm" href={SKY_BLOG_URL}>
-          Star&nbsp;&nbsp;
-          {star ? "" : star}
-        </Button>
+        <a href={SKY_BLOG_URL} target="_blank" rel="noopener noreferrer">
+          <Button size="sm">
+            Star&nbsp;&nbsp;
+            {star}
+          </Button>
+        </a>
       </p>
     </footer>
   );

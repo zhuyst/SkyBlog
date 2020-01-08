@@ -3,7 +3,9 @@ import withRedux from "next-redux-wrapper";
 import App from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
+import { getAccessCount } from "@/action/log/accessLog";
 import { IAppStore, initStore } from "@/store";
+import AppLayout from "@/components/AppLayout";
 
 import "./_app.scss";
 
@@ -18,9 +20,12 @@ interface IReduxAppProps {
   store: IAppStore;
 }
 
-export default withRedux(initStore)(
+export default withRedux(initStore, {
+  debug: process.env.NODE_ENV === "development",
+})(
   class MyApp extends App<IReduxAppProps> {
     public static async getInitialProps({ Component, ctx }) {
+      await ctx.store.dispatch(getAccessCount());
       return {
         pageProps: Component.getInitialProps
           ? await Component.getInitialProps(ctx)
@@ -33,7 +38,9 @@ export default withRedux(initStore)(
 
       return (
         <Provider store={store}>
-          <Component {...pageProps} />
+          <AppLayout>
+            <Component {...pageProps} />
+          </AppLayout>
         </Provider>
       );
     }

@@ -41,6 +41,7 @@ module.exports = {
     "no-param-reassign": ["off"],
     "no-plusplus": ["off"],
     "no-control-regex": ["off"],
+    "no-console": ["off"],
     "import/no-cycle": ["off"],
     "import/no-mutable-exports": ["off"],
     "import/prefer-default-export": ["off"],

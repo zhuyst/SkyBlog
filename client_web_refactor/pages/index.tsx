@@ -1,10 +1,43 @@
 import React from "react";
-import Head from "@/components/head";
-import Home from "./home";
+import { Col, Container, Row } from "react-bootstrap";
+import { listArticles } from "@/action/article/articles";
+import { listMsg } from "@/action/msgBoard";
+import Head from "@/components/Head";
+import ArticleCard from "@/components/home/ArticleCard/ArticleCard";
+import GithubCard from "@/components/home/GithubCard/GithubCard";
+import MsgBoardCard from "@/components/home/MsgBoardCard/MsgBoardCard";
+import NavImage from "@/components/home/NavImage";
+import { INextPage } from "./_app";
 
-export default () => (
-  <div style={{ height: "100%" }}>
+import "./index.scss";
+
+const Home: INextPage = () => (
+  <div>
     <Head title="Home" />
-    <Home />
+    <NavImage />
+    <Container fluid>
+      <Row className="home-cards">
+        <Col lg={{ span: 4, offset: 1 }} md={12}>
+          <ArticleCard />
+        </Col>
+        <Col lg={3} md={12}>
+          <MsgBoardCard />
+        </Col>
+        <Col lg={3} md={12}>
+          <GithubCard />
+        </Col>
+      </Row>
+    </Container>
   </div>
 );
+
+Home.getInitialProps = async ({ store }) => {
+  const { dispatch } = store;
+  await Promise.all([
+    dispatch(listArticles(1)),
+    dispatch(listMsg(1))
+  ]);
+  return {};
+};
+
+export default Home;

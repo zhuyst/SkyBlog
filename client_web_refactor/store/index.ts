@@ -47,12 +47,13 @@ export interface IAppStore extends Store<IAppState> {
 
 let store: IAppStore = null;
 
-export function initStore(): IAppStore {
+export function initStore(initialState): IAppStore {
   if (store) {
     return store;
   }
   store = createStore(
     reducer,
+    initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware)),
   );
   return store;

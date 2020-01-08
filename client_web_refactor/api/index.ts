@@ -98,12 +98,13 @@ export function checkStatus<T>(response: Response): Promise<T> {
   if (response.ok) {
     return response.json();
   }
-  throw new Error();
+  throw new Error(response.statusText);
 }
 
 async function handleFetch<T>(response: Response): Promise<IApiResult<T>> {
   try {
     const result = await checkStatus<IApiResult<T>>(response);
+    console.log("result", result);
     if (result.code === ApiResultCode.Unauthorized) {
       msg.info(result.message);
       removeToken();
@@ -150,7 +151,7 @@ async function handleFetchWithBody<T>(
 }
 
 export async function httpGet<T = null>(url: string, body?: IRequestBody): Promise<IApiResult<T>> {
-  if (body !== null) {
+  if (body) {
     const urlObj = new URL(url);
     Object.keys(body).forEach((key) => urlObj.searchParams.append(key, body[key]));
     url = urlObj.toJSON();

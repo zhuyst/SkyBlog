@@ -11,7 +11,7 @@ export interface IGithubState {
 
 const initialState: IGithubState = {
   commits: [],
-  star: null,
+  star: 0,
   loading: true,
 };
 
