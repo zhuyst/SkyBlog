@@ -9,6 +9,18 @@
 
     .nav-link, .navbar-brand {
       color: #31708f!important;
+      transition: color .2s ease, background-color .2s ease;
+      cursor: pointer;
+    }
+
+    .nav-link {
+      padding-right: 1.5rem!important;
+      padding-left: 1.5rem!important;
+
+      &:hover, &:focus, &.active {
+        color: #fff!important;
+        background-color: #87ceeb!important;
+      }
     }
 
     .navbar-brand {
@@ -16,12 +28,12 @@
       font-weight: bolder;
     }
 
-    .navbar-collapse.collapse:not(.show) {
+    @media (min-width: 576px) {
       .nav-link {
         font-size: 18px;
         text-align: center;
-        padding-right: 1.5rem;
-        padding-left: 1.5rem;
+        margin-left: 0.15rem;
+        margin-right: 0.15rem;
       }
     }
   }
@@ -36,5 +48,13 @@
 
   &-footer {
     flex: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 30px;
+    background-color: #d9edf7;
   }
 }

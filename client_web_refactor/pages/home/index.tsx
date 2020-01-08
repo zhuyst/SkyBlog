@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { getAccessCount } from "@/action/log/accessLog";
 import { listArticles } from "@/action/article/articles";
 import { listMsg } from "@/action/msgBoard";
 import AppLayout from "@/components/AppLayout";
@@ -35,6 +36,7 @@ Home.getInitialProps = async ({ store }) => {
   await Promise.all([
     dispatch(listArticles(1)),
     dispatch(listMsg(1)),
+    dispatch(getAccessCount()),
   ]);
   return {};
 };

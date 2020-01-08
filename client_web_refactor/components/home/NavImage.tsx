@@ -15,10 +15,12 @@ const button = (size, text) => (
   )
 );
 
-const buttons = (size) => [
-  (button(size, "查看SkyBlog源码")),
-  (button(size, "查看作者Github")),
-];
+const buttons = (size) => (
+  <div>
+    {button(size, "查看SkyBlog源码")}
+    {button(size, "查看作者Github")}
+  </div>
+);
 
 export default () => (
   <div className="nav-image">
