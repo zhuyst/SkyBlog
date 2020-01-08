@@ -46,6 +46,19 @@
     flex: 1;
   }
 
+  &-loading {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .spinner-grow {
+      $size: 10vw;
+      width: $size;
+      height: $size;
+    }
+  }
+
   &-footer {
     flex: 0;
 

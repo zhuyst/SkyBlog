@@ -12,7 +12,7 @@ import { INextPage } from "./_app";
 import "./index.scss";
 
 const Home: INextPage = () => (
-  <div>
+  <>
     <Head title="Home" />
     <NavImage />
     <Container fluid>
@@ -28,7 +28,7 @@ const Home: INextPage = () => (
         </Col>
       </Row>
     </Container>
-  </div>
+  </>
 );
 
 Home.getInitialProps = async ({ store }) => {

@@ -23,7 +23,7 @@ const List = <T extends any>(props: IListProps<T>) => {
     );
   } else {
     content = (
-      <div>
+      <>
         <div className="b-list-content">
           {props.dataSource.map((item, index) => {
             const key = props.dataKey ? item[props.dataKey] : index;
@@ -35,7 +35,7 @@ const List = <T extends any>(props: IListProps<T>) => {
           })}
         </div>
         {props.pagination && (<BPagination {...props.pagination} />)}
-      </div>
+      </>
     );
   }
 

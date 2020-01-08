@@ -16,10 +16,10 @@ const button = (size, text) => (
 );
 
 const buttons = (size) => (
-  <div>
+  <>
     {button(size, "查看SkyBlog源码")}
     {button(size, "查看作者Github")}
-  </div>
+  </>
 );
 
 export default () => (

@@ -16,7 +16,7 @@ const Blog: INextPage = () => {
   const loading = useStoreSelector<boolean>((state) => state.articles.loading);
 
   return (
-    <div>
+    <>
       <Head title="Blog" />
       <Container className="blog-main" fluid>
         <Row>
@@ -28,7 +28,7 @@ const Blog: INextPage = () => {
           </Col>
         </Row>
       </Container>
-    </div>
+    </>
   );
 };
 
