@@ -17,11 +17,11 @@ const BPagination = (props: IBPaginationProps) => {
 
   return (
     <Pagination>
-      <Pagination.First onClick={props.onChange(1)} />
-      <Pagination.Prev onClick={props.onChange(props.pageNum - 1)} />
+      <Pagination.First onClick={() => props.onChange(1)} />
+      <Pagination.Prev onClick={() => props.onChange(props.pageNum - 1)} />
       {items}
-      <Pagination.Next onClick={props.onChange(props.pageNum + 1)} />
-      <Pagination.Last onClick={props.onChange(props.pages)} />
+      <Pagination.Next onClick={() => props.onChange(props.pageNum + 1)} />
+      <Pagination.Last onClick={() => props.onChange(props.pages)} />
     </Pagination>
   );
 };

@@ -13,26 +13,37 @@ interface IListProps<T> {
   pagination?: IBPaginationProps;
 }
 
-const List = <T extends any>(props: IListProps<T>) => (
-  <div className={`b-list${props.className ? ` ${props.className}` : ""}`}>
-    {props.loading ? (
+const List = <T extends any>(props: IListProps<T>) => {
+  let content;
+  if (props.loading) {
+    content = (
       <div className="b-list-loading">
         <Spinner animation="grow" variant="primary" />
       </div>
-    ) : (
-      <div className="b-list-content">
-        {props.dataSource.map((item, index) => {
-          const key = props.dataKey ? item[props.dataKey] : index;
-          return (
-            <div className="b-list-item" key={key}>
-              {props.renderItem(item)}
-            </div>
-          );
-        })}
+    );
+  } else {
+    content = (
+      <div>
+        <div className="b-list-content">
+          {props.dataSource.map((item, index) => {
+            const key = props.dataKey ? item[props.dataKey] : index;
+            return (
+              <div className="b-list-item" key={key}>
+                {props.renderItem(item)}
+              </div>
+            );
+          })}
+        </div>
+        {props.pagination && (<BPagination {...props.pagination} />)}
       </div>
-    )}
-    {props.pagination && (<BPagination {...props.pagination} />)}
-  </div>
-);
+    );
+  }
+
+  return (
+    <div className={`b-list${props.className ? ` ${props.className}` : ""}`}>
+      {content}
+    </div>
+  );
+};
 
 export default List;

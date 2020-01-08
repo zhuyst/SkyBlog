@@ -1,8 +1,10 @@
+import { Container, Row, Col } from "react-bootstrap";
 import React from "react";
+import Navigation from "@/components/blog/Navigation";
+import Head from "@/components/Head";
 import { listArticles } from "@/action/article/articles";
 import { IPageInfo } from "@/action/common";
 import { IArticle } from "@/api/article";
-import AppLayout from "@/components/AppLayout";
 import ArticleList from "@/components/blog/ArticleList";
 import { useStoreSelector } from "@/store";
 import { INextPage } from "../_app";
@@ -14,11 +16,19 @@ const Blog: INextPage = () => {
   const loading = useStoreSelector<boolean>((state) => state.articles.loading);
 
   return (
-    <AppLayout>
-      <div className="blog-main">
-        <ArticleList pageInfo={page} loading={loading} />
-      </div>
-    </AppLayout>
+    <div>
+      <Head title="Blog" />
+      <Container className="blog-main" fluid>
+        <Row>
+          <Col lg={{ span: 7, offset: 1 }} md={12}>
+            <ArticleList pageInfo={page} loading={loading} />
+          </Col>
+          <Col lg={3} md={12}>
+            <Navigation />
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
 

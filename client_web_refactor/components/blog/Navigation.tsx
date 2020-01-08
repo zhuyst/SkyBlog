@@ -11,15 +11,14 @@ export default () => {
       <div className="navigation-title">
         <h2>博客分类</h2>
       </div>
-
       {
-                management
-                && (
-                <Link href="/article/content/new/edit">
-                  <Button>发布文章</Button>
-                </Link>
-                )
-            }
+        management
+        && (
+          <Link href="/article/content/new/edit">
+            <Button>发布文章</Button>
+          </Link>
+        )
+      }
     </div>
   );
 };

@@ -1,5 +1,13 @@
-.b-list-loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.b-list {
+  .b-list-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
 }
