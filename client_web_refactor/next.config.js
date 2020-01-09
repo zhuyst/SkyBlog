@@ -1,6 +1,7 @@
 const withSass = require("@zeit/next-sass");
 const withCSS = require("@zeit/next-css");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const EslintFriendlyFormatter = require("eslint-friendly-formatter");
 
 const config = {
   webpack: (c) => {
@@ -13,6 +14,15 @@ const config = {
     } else {
       c.resolve.plugins = [new TsconfigPathsPlugin()];
     }
+    c.module.rules.push({
+      test: /\.(jsx?|tsx?)/,
+      loader: "eslint-loader",
+      enforce: "pre",
+      exclude: /node_modules/,
+      options: {
+        formatter: EslintFriendlyFormatter,
+      },
+    });
 
     return c;
   },

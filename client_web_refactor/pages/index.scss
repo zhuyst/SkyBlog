@@ -1,18 +1,12 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
+@import "style/global";
 
 .home-cards {
   margin-top: 20px;
 
   .card {
     margin-bottom: 20px;
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #3BAFDA;
-      color: #fff;
-    }
+    @include sky-card;
   }
 }

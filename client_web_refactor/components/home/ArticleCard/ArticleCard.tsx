@@ -15,7 +15,9 @@ export default () => {
   const loading = useStoreSelector<boolean>((state) => state.articles.loading);
   const { total, list } = page;
 
-  const renderItem = (article: IArticle) => <ArticleCardItem article={article} />;
+  const renderItem = (article: IArticle, index: number) => (
+    <ArticleCardItem article={article} index={index} />
+  );
   return (
     <Card className="article-card">
       <Card.Header>

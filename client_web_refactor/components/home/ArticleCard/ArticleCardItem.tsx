@@ -8,10 +8,11 @@ import "./ArticleCardItem.scss";
 
 interface IArticleCardItemProps {
   article: IArticle;
+  index: number;
 }
 
 export default (props: IArticleCardItemProps) => {
-  const { article } = props;
+  const { article, index } = props;
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -21,16 +22,20 @@ export default (props: IArticleCardItemProps) => {
   };
 
   return (
-    <div className="article-card-item" onClick={push}>
-      <a>
-        <h4 className="article-card-item-title">{article.title}</h4>
-        <hr />
-        <p className="article-card-item-content">{article.content}</p>
-        <p className="article-card-item-date">
-          发布时间 :
-          {article.createDate}
-        </p>
-      </a>
+    <div
+      className="article-card-item"
+      onClick={push}
+      onKeyPress={push}
+      role="link"
+      tabIndex={index}
+    >
+      <h4 className="article-card-item-title">{article.title}</h4>
+      <hr />
+      <p className="article-card-item-content">{article.content}</p>
+      <p className="article-card-item-date">
+        发布时间 :
+        {article.createDate}
+      </p>
     </div>
   );
 };

@@ -8,7 +8,7 @@ import "./List.scss";
 interface IListProps<T> extends IBaseProps {
   dataSource: T[];
   dataKey?: keyof T;
-  renderItem: (item: T) => React.ReactNode;
+  renderItem: (item: T, index: number) => React.ReactNode;
   loading: boolean;
   pagination?: IBPaginationProps;
 }
@@ -29,7 +29,7 @@ const List = <T extends any>(props: IListProps<T>) => {
             const key = props.dataKey ? item[props.dataKey] : index;
             return (
               <div className="b-list-item" key={key}>
-                {props.renderItem(item)}
+                {props.renderItem(item, index)}
               </div>
             );
           })}

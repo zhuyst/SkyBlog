@@ -1,6 +1,6 @@
 import { NextPageContext, NextComponentType } from "next";
 import withRedux from "next-redux-wrapper";
-import App, {AppContext} from "next/app";
+import App, { AppContext } from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
 import { getAccessCount } from "@/action/log/accessLog";
