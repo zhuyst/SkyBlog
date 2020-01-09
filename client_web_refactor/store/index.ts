@@ -45,18 +45,12 @@ export interface IAppStore extends Store<IAppState> {
   dispatch: IThunkDispatch;
 }
 
-let store: IAppStore = null;
-
-export function initStore(initialState): IAppStore {
-  if (store) {
-    return store;
-  }
-  store = createStore(
+export function initStore(initialState: any): IAppStore {
+  return createStore(
     reducer,
     initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware)),
   );
-  return store;
 }
 
 export function useStoreSelector<TSelected>(
@@ -69,5 +63,3 @@ export function useStoreSelector<TSelected>(
 
 export interface IThunkAction<T = string> extends ThunkAction<void, IAppState, null, Action<T>> {}
 export interface IThunkDispatch<T = string> extends ThunkDispatch<IAppState, null, Action<T>> {}
-
-export default store;

@@ -1,11 +1,11 @@
 import React from "react";
 import { Spinner } from "react-bootstrap";
+import { IBaseProps } from "@/components/interfaces";
 import BPagination, { IBPaginationProps } from "./BPagination";
 
 import "./List.scss";
 
-interface IListProps<T> {
-  className?: string;
+interface IListProps<T> extends IBaseProps {
   dataSource: T[];
   dataKey?: keyof T;
   renderItem: (item: T) => React.ReactNode;

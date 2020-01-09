@@ -2,18 +2,19 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Spinner, Fade } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
+import { IBaseProps } from "@/components/interfaces";
 
 import Header from "./Header";
 import Footer from "./Footer";
 
 import "./index.scss";
 
-export default (props) => {
+export default (props: IBaseProps) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    const handleStart = (url) => (url !== router.pathname) && setLoading(true);
-    const handleComplete = (url) => (url !== router.pathname) && setLoading(false);
+    const handleStart = (url: string) => (url !== router.pathname) && setLoading(true);
+    const handleComplete = (url: string) => (url !== router.pathname) && setLoading(false);
 
     router.events.on("routeChangeStart", handleStart);
     router.events.on("routeChangeComplete", handleComplete);

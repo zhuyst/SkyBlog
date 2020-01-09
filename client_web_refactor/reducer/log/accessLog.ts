@@ -1,5 +1,6 @@
 import { IPageInfo } from "@/action/common";
 import { AccessLogAction, GET_ACCESS_COUNT_RESPONSE, LIST_ACCESS_LOG_RESPONSE } from "@/action/log/accessLog";
+import { ACCESS_LOG_PAGE_SIZE } from "@/action/pageSize";
 import { AccessCount, IAccessLog } from "@/api/accessLog";
 
 export interface IAccessLogState {
@@ -12,6 +13,7 @@ const initialState: IAccessLogState = {
   page: {
     list: [],
     pageNum: 1,
+    pageSize: ACCESS_LOG_PAGE_SIZE,
     pages: 0,
     total: 0,
   },

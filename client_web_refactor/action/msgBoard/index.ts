@@ -101,13 +101,10 @@ export function insertMsg(msg: IMsg): IThunkAction {
 }
 
 export const DELETE_MSG_RESPONSE = "DELETE_MSG_RESPONSE";
-export interface IDeleteMsgResponseAction extends Action<typeof DELETE_MSG_RESPONSE> {
-  result: IApiResult;
-}
-function deleteMsgResponse(result: IApiResult): IDeleteMsgResponseAction {
+export interface IDeleteMsgResponseAction extends Action<typeof DELETE_MSG_RESPONSE> {}
+function deleteMsgResponse(): IDeleteMsgResponseAction {
   return {
     type: DELETE_MSG_RESPONSE,
-    result,
   };
 }
 

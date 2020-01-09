@@ -1,6 +1,6 @@
 import React from "react";
 import { Badge, Card } from "react-bootstrap";
-import List from "@/components/List";
+import List from "@/components/common/List";
 import { IPageInfo } from "@/action/common";
 import { IArticle } from "@/api/article";
 import { useStoreSelector } from "@/store";
@@ -15,7 +15,7 @@ export default () => {
   const loading = useStoreSelector<boolean>((state) => state.articles.loading);
   const { total, list } = page;
 
-  const renderItem = (article) => <ArticleCardItem article={article} />;
+  const renderItem = (article: IArticle) => <ArticleCardItem article={article} />;
   return (
     <Card className="article-card">
       <Card.Header>

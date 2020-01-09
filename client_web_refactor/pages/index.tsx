@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { listArticles } from "@/action/article/articles";
 import { listMsg } from "@/action/msgBoard";
-import Head from "@/components/Head";
+import Head from "@/components/common/Head";
 import ArticleCard from "@/components/home/ArticleCard/ArticleCard";
 import GithubCard from "@/components/home/GithubCard/GithubCard";
 import MsgBoardCard from "@/components/home/MsgBoardCard/MsgBoardCard";
@@ -35,7 +35,7 @@ Home.getInitialProps = async ({ store }) => {
   const { dispatch } = store;
   await Promise.all([
     dispatch(listArticles(1)),
-    dispatch(listMsg(1))
+    dispatch(listMsg(1)),
   ]);
   return {};
 };

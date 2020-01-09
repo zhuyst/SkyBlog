@@ -1,5 +1,10 @@
 import {
-  LOGIN_CLEAR, LOGIN_RESPONSE, LoginAction, SET_LOGIN_USER, SET_MANAGEMENT,
+  LOGIN_CLEAR,
+  LOGIN_RESPONSE,
+  LoginAction,
+  LoginStatus,
+  SET_LOGIN_USER,
+  SET_MANAGEMENT,
 } from "@/action/common/login";
 import { UPDATE_USER_INFO_RESPONSE } from "@/action/user";
 import { IUser } from "@/api/user";
@@ -12,15 +17,15 @@ const initialUser: IUser = {
 };
 
 export interface ILoginState {
-  ok: boolean;
+  status: LoginStatus;
   message: string;
   management: boolean;
   user: IUser;
 }
 
 const initialState: ILoginState = {
-  ok: null,
-  message: null,
+  status: LoginStatus.NONE,
+  message: "",
   management: false,
   user: initialUser,
 };
@@ -40,25 +45,25 @@ export default function loginReducer(
     case LOGIN_CLEAR: {
       return {
         ...state,
-        ok: null,
+        status: LoginStatus.NONE,
         user: initialUser,
         management: false,
       };
     }
 
     case LOGIN_RESPONSE: {
-      const { ok, message } = action;
+      const { status, message } = action;
 
       return {
         ...state,
-        ok,
+        status,
         message,
       };
     }
 
     case SET_LOGIN_USER: {
       const { user } = action;
-      const management = user.admin;
+      const management = user.admin!;
 
       return {
         ...state,

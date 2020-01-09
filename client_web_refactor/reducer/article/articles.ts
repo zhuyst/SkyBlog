@@ -4,6 +4,7 @@ import {
   SET_ARTICLES_LOADING, SET_CLASSIFY_ARTICLES_LOADING,
 } from "@/action/article/articles";
 import { IPageInfo } from "@/action/common";
+import { ARTICLE_PAGE_SIZE } from "@/action/pageSize";
 import { IArticle } from "@/api/article";
 import { IClassify } from "@/api/classify";
 import { concatList } from "../util";
@@ -20,6 +21,7 @@ const initialClassify: IClassifyWithArticlesState = {
   page: {
     list: [],
     pageNum: 1,
+    pageSize: ARTICLE_PAGE_SIZE,
     pages: 0,
     total: 0,
   },
@@ -35,6 +37,7 @@ const initialState: IArticlesState = {
   page: {
     list: [],
     pageNum: 1,
+    pageSize: ARTICLE_PAGE_SIZE,
     pages: 0,
     total: 0,
   },
@@ -74,6 +77,7 @@ export default function articlesReducer(
         page: {
           list: newList,
           pageNum: page.pageNum,
+          pageSize: page.pageSize,
           pages: page.pages,
           total: page.total,
         },
@@ -95,6 +99,7 @@ export default function articlesReducer(
           page: {
             list: newList,
             pageNum: page.pageNum,
+            pageSize: page.pageSize,
             pages: page.pages,
             total: page.total,
           },

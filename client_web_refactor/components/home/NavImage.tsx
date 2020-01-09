@@ -3,7 +3,9 @@ import { Button } from "react-bootstrap";
 
 import "./NavImage.scss";
 
-const button = (size, text) => (
+type ButtonSize = "sm" | "lg";
+
+const button = (size: ButtonSize, text: string) => (
   (
     <Button
       size={size}
@@ -15,7 +17,7 @@ const button = (size, text) => (
   )
 );
 
-const buttons = (size) => (
+const buttons = (size: ButtonSize) => (
   <>
     {button(size, "查看SkyBlog源码")}
     {button(size, "查看作者Github")}

@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Nav, Navbar } from "react-bootstrap";
 import { useRouter } from "next/router";
+import { IBaseProps } from "@/components/interfaces";
 
 enum NavType {
   HOME = "/",
@@ -24,11 +25,7 @@ function getNavTypeByPathname(pathname: string): NavType {
   return NavType.HOME;
 }
 
-interface IHeaderProps {
-  className?: string;
-}
-
-export default (props: IHeaderProps) => {
+export default (props: IBaseProps) => {
   const router = useRouter();
   const currentNavType = getNavTypeByPathname(router.pathname);
 

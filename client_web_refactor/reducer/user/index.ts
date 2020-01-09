@@ -1,4 +1,5 @@
 import { IPageInfo } from "@/action/common";
+import { USER_PAGE_SIZE } from "@/action/pageSize";
 import { LIST_USERS_RESPONSE, UserAction } from "@/action/user";
 import { IUser } from "@/api/user";
 
@@ -7,6 +8,7 @@ export type IUserState = IPageInfo<IUser>;
 const initialState: IUserState = {
   list: [],
   pageNum: 1,
+  pageSize: USER_PAGE_SIZE,
   pages: 0,
   total: 0,
 };

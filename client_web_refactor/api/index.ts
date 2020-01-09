@@ -31,11 +31,8 @@ export function setToken(entity: IAccessToken) {
 }
 
 export function getToken(): Token {
-  let token = Cookies.get(COOKIE_TOKEN);
-  if (typeof (token) === "undefined") {
-    token = "";
-  }
-  return token;
+  const token = Cookies.get(COOKIE_TOKEN);
+  return token || "";
 }
 
 export enum ContentType {
@@ -51,14 +48,8 @@ enum HttpMethod {
   PUT = "PUT",
 }
 
-interface IRequestHeaders {
-  [index: string]: string;
-  "Content-Type": string;
-  Token?: Token;
-}
-
-function getHeaders(contentType: ContentType): IRequestHeaders {
-  const headers: IRequestHeaders = {
+function getHeaders(contentType: ContentType): HeadersInit {
+  const headers: HeadersInit = {
     "Content-Type": contentType,
   };
 
@@ -83,7 +74,7 @@ export enum ApiResultCode {
 export interface IApiResult<T = null> {
   code: ApiResultCode | number;
   message: string;
-  entity?: T;
+  entity: T;
   errors?: {
     [key: string]: string;
   };
@@ -91,6 +82,7 @@ export interface IApiResult<T = null> {
 
 export const FAIL_RESULT: IApiResult = {
   code: ApiResultCode.Error,
+  entity: null,
   message: "网络请求失败，请检查网络状态",
 };
 
@@ -120,26 +112,28 @@ async function handleFetch<T>(response: Response): Promise<IApiResult<T>> {
 }
 
 async function handleFetchWithBody<T>(
-  url: string, body: IRequestBody, httpMethod: HttpMethod, contentType: ContentType,
+  url: string, httpMethod: HttpMethod, contentType: ContentType, body?: IRequestBody,
 ):
   Promise<IApiResult<T>> {
-  let bodyStr: string;
-  switch (contentType) {
-    case ContentType.JSON: {
-      bodyStr = JSON.stringify(body);
-      break;
-    }
-    case ContentType.FORM: {
-      const keyAndValues = [];
-      Object.keys(body).forEach((key) => {
-        const value = body[key];
-        keyAndValues.push(`${key}=${value}`);
-      });
-      bodyStr = keyAndValues.join("&");
-      break;
-    }
-    default: {
-      throw new Error(`ContentType ${contentType} not found`);
+  let bodyStr: string | null = null;
+  if (body) {
+    switch (contentType) {
+      case ContentType.JSON: {
+        bodyStr = JSON.stringify(body);
+        break;
+      }
+      case ContentType.FORM: {
+        const keyAndValues: string[] = [];
+        Object.keys(body).forEach((key) => {
+          const value = body[key];
+          keyAndValues.push(`${key}=${value}`);
+        });
+        bodyStr = keyAndValues.join("&");
+        break;
+      }
+      default: {
+        throw new Error(`ContentType ${contentType} not found`);
+      }
     }
   }
   const response = await fetch(url, {
@@ -168,26 +162,26 @@ export function httpPost<T = null>(
   url: string, body?: IRequestBody, contentType: ContentType = ContentType.JSON,
 ):
   Promise<IApiResult<T>> {
-  return handleFetchWithBody<T>(url, body, HttpMethod.POST, contentType);
+  return handleFetchWithBody<T>(url, HttpMethod.POST, contentType, body);
 }
 
 export function httpPut<T = null>(
   url: string, body?: IRequestBody, contentType: ContentType = ContentType.JSON,
 ):
   Promise<IApiResult<T>> {
-  return handleFetchWithBody<T>(url, body, HttpMethod.PUT, contentType);
+  return handleFetchWithBody<T>(url, HttpMethod.PUT, contentType, body);
 }
 
 export function httpPatch<T = null>(
   url: string, body?: IRequestBody, contentType: ContentType = ContentType.JSON,
 ):
   Promise<IApiResult<T>> {
-  return handleFetchWithBody<T>(url, body, HttpMethod.PATCH, contentType);
+  return handleFetchWithBody<T>(url, HttpMethod.PATCH, contentType, body);
 }
 
 export function httpDelete<T = null>(
   url: string, body?: IRequestBody, contentType: ContentType = ContentType.JSON,
 ):
   Promise<IApiResult<T>> {
-  return handleFetchWithBody<T>(url, body, HttpMethod.DELETE, contentType);
+  return handleFetchWithBody<T>(url, HttpMethod.DELETE, contentType, body);
 }

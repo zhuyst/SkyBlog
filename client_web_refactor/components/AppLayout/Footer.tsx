@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { IBaseProps } from "@/components/interfaces";
 import { getProjectStar } from "@/action/github";
 import { useStoreSelector } from "@/store";
 import { SKY_BLOG_URL } from "@/Constant";
 
-interface IFooterProps {
-  className?: string;
-}
-
-export default (props: IFooterProps) => {
+export default (props: IBaseProps) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProjectStar());

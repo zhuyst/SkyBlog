@@ -5,6 +5,7 @@ import {
   SET_PREVIOUS_COMMENT,
 } from "@/action/article/comment";
 import { IPageInfo } from "@/action/common";
+import { COMMENT_PAGE_SIZE } from "@/action/pageSize";
 import { IComment } from "@/api/article/comment";
 import { concatList } from "../util";
 
@@ -17,6 +18,7 @@ export interface ICommentsState {
 const initialComments: IPageInfo<IComment> = {
   list: [],
   pageNum: 1,
+  pageSize: COMMENT_PAGE_SIZE,
   pages: 0,
   total: 0,
 };
@@ -63,6 +65,7 @@ export default function commentsReducer(
         comments: {
           list: newList,
           pageNum: comments.pageNum,
+          pageSize: comments.pageSize,
           pages: comments.pages,
           total: comments.total,
         },

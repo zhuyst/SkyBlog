@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import React from "react";
 import Navigation from "@/components/blog/Navigation";
-import Head from "@/components/Head";
+import Head from "@/components/common/Head";
 import { listArticles } from "@/action/article/articles";
 import { IPageInfo } from "@/action/common";
 import { IArticle } from "@/api/article";

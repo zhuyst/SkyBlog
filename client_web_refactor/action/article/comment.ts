@@ -108,13 +108,10 @@ export function insertComment(comment: IComment): IThunkAction {
 }
 
 export const DELETE_COMMENT_RESPONSE = "DELETE_COMMENT_RESPONSE";
-export interface IDeleteCommentResponseAction extends Action<typeof DELETE_COMMENT_RESPONSE> {
-  result: IApiResult;
-}
-function deleteCommentResponse(result: IApiResult): IDeleteCommentResponseAction {
+export interface IDeleteCommentResponseAction extends Action<typeof DELETE_COMMENT_RESPONSE> {}
+function deleteCommentResponse(): IDeleteCommentResponseAction {
   return {
     type: DELETE_COMMENT_RESPONSE,
-    result,
   };
 }
 

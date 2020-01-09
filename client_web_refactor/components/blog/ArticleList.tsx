@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import List from "../List";
+import List from "../common/List";
 import { listArticles } from "@/action/article/articles";
 import { IPageInfo } from "@/action/common";
 import { IArticle } from "@/api/article";
@@ -22,7 +22,7 @@ export default (props: IArticleListProps) => {
     dispatch(listArticles(page));
   };
 
-  const renderItem = (article) => <ArticleListItem article={article} />;
+  const renderItem = (article: IArticle) => <ArticleListItem article={article} />;
   return (
     <List
       className="article-list"

@@ -1,5 +1,6 @@
 import { IPageInfo } from "@/action/common";
 import { LIST_SYS_LOG_RESPONSE, SysLogAction } from "@/action/log/sysLog";
+import { SYS_LOG_PAGE_SIZE } from "@/action/pageSize";
 import { ISysLog } from "@/api/sysLog";
 
 export type ISysLogState = IPageInfo<ISysLog>;
@@ -7,6 +8,7 @@ export type ISysLogState = IPageInfo<ISysLog>;
 const initialState: ISysLogState = {
   list: [],
   pageNum: 1,
+  pageSize: SYS_LOG_PAGE_SIZE,
   pages: 0,
   total: 0,
 };

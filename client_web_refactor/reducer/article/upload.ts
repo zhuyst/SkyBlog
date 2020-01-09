@@ -1,5 +1,5 @@
 import {
-  IUploadResponse, SET_UPLOAD_MODAL_SHOW, UPLOAD_RESPONSE, UploadAction,
+  IUploadResponse, SET_UPLOAD_MODAL_SHOW, UPLOAD_RESPONSE, UploadAction, UploadStatus,
 } from "@/action/article/upload";
 
 export interface IUploadState {
@@ -10,9 +10,9 @@ export interface IUploadState {
 const initialState: IUploadState = {
   uploadModalShow: false,
   response: {
-    ok: null,
-    message: null,
-    url: "",
+    status: UploadStatus.NONE,
+    message: undefined,
+    url: undefined,
   },
 };
 
@@ -30,7 +30,7 @@ export default function uploadReducer(
       return {
         ...state,
         response: {
-          ok: action.ok,
+          status: action.status,
           message: action.message,
           url: action.url,
         },

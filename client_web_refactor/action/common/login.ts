@@ -26,39 +26,46 @@ export interface ISetLoginUserAction extends Action<typeof SET_LOGIN_USER> {
   user: IUser;
 }
 export function setLoginUser(user: IUser): ISetLoginUserAction {
-  user.password = null;
+  user.password = undefined;
   return {
     type: SET_LOGIN_USER,
     user,
   };
 }
 
+export enum LoginStatus {
+  NONE, SUCCESS, ERROR
+}
+
 export const LOGIN_RESPONSE = "LOGIN_RESPONSE";
 export interface ILoginResponseAction extends Action<typeof LOGIN_RESPONSE> {
-  ok: boolean;
+  status: LoginStatus;
   message: string;
 }
-export function loginResponse(ok: boolean, message: string): ILoginResponseAction {
+export function loginResponse(status: LoginStatus, message: string): ILoginResponseAction {
   return {
     type: LOGIN_RESPONSE,
-    ok,
+    status,
     message,
   };
 }
 
-export function afterLogin(result: IApiResult<IAuthResponse>, dispatch: Dispatch, alert: boolean) {
-  let ok = false;
-  let message = null;
+export function afterLogin(
+  result: IApiResult<IAuthResponse | null>,
+  dispatch: Dispatch, alert: boolean,
+) {
+  let status = LoginStatus.ERROR;
+  let message = "";
 
   if (result.code === ApiResultCode.OK) {
     dispatch(setLoginModalShow(false));
 
     const { entity } = result;
 
-    const { user } = entity;
+    const { user } = entity!;
     dispatch(setLoginUser(user));
 
-    setToken(entity);
+    setToken(entity!);
 
     dispatch(change(FORM_USERINFO, "id", user.id));
     dispatch(change(FORM_USERINFO, "username", user.username));
@@ -68,15 +75,15 @@ export function afterLogin(result: IApiResult<IAuthResponse>, dispatch: Dispatch
       msg.success("登录成功");
     }
 
-    ok = true;
+    status = LoginStatus.SUCCESS;
   } else if (result.code === ApiResultCode.Unauthorized) {
-    ok = null;
+    status = LoginStatus.NONE;
   } else {
     msg.error(result.message);
     message = result.message;
   }
 
-  dispatch(loginResponse(ok, message));
+  dispatch(loginResponse(status, message));
 }
 
 export function login(username: string, password: string): IThunkAction {

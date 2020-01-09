@@ -2,6 +2,7 @@ import { IPageInfo } from "@/action/common";
 import {
   LIST_MSG_RESPONSE, MsgBoardAction, SET_MSG_LOADING, SET_PREVIOUS_MSG,
 } from "@/action/msgBoard";
+import { MSG_PAGE_SIZE } from "@/action/pageSize";
 import { IMsg } from "@/api/msgBoard";
 import { initialPreviousComment } from "../article/comments";
 import { concatList } from "../util";
@@ -16,6 +17,7 @@ const initialState: IMsgBoardState = {
   page: {
     list: [],
     pageNum: 1,
+    pageSize: MSG_PAGE_SIZE,
     pages: 0,
     total: 0,
   },
@@ -50,6 +52,7 @@ export default function msgBoardReducer(
         page: {
           list: newList,
           pageNum: page.pageNum,
+          pageSize: page.pageSize,
           pages: page.pages,
           total: page.total,
         },

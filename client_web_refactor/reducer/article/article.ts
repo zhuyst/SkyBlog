@@ -21,7 +21,7 @@ export const initialState: IArticleState = {
   title: "文章标题",
   subTitle: "文章副标题",
 
-  authorId: null,
+  authorId: 0,
 
   classify: {
     id: 1,
@@ -50,7 +50,7 @@ export default function articleReducer(
         ...article,
         loading: false,
         markdownContent: {
-          text: article.content,
+          text: article.content || "",
           selection: null,
         },
       };

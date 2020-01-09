@@ -1,6 +1,6 @@
 import { NextPageContext, NextComponentType } from "next";
 import withRedux from "next-redux-wrapper";
-import App from "next/app";
+import App, {AppContext} from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
 import { getAccessCount } from "@/action/log/accessLog";
@@ -9,7 +9,7 @@ import AppLayout from "@/components/AppLayout";
 
 import "./_app.scss";
 
-export interface INextPageContext extends NextPageContext {
+interface INextPageContext extends NextPageContext {
   store: IAppStore;
   isServer: boolean;
 }
@@ -24,11 +24,12 @@ export default withRedux(initStore, {
   debug: process.env.NODE_ENV === "development",
 })(
   class MyApp extends App<IReduxAppProps> {
-    public static async getInitialProps({ Component, ctx }) {
-      await ctx.store.dispatch(getAccessCount());
+    static async getInitialProps({ Component, ctx }: AppContext) {
+      const c = ctx as INextPageContext;
+      await c.store.dispatch(getAccessCount());
       return {
         pageProps: Component.getInitialProps
-          ? await Component.getInitialProps(ctx)
+          ? await Component.getInitialProps(c)
           : {},
       };
     }
@@ -38,9 +39,11 @@ export default withRedux(initStore, {
 
       return (
         <Provider store={store}>
-          <AppLayout>
-            <Component {...pageProps} />
-          </AppLayout>
+          <React.StrictMode>
+            <AppLayout>
+              <Component {...pageProps} />
+            </AppLayout>
+          </React.StrictMode>
         </Provider>
       );
     }

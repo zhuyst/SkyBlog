@@ -23,13 +23,10 @@ import { FORM_REGISTER, FORM_USERINFO } from "../form";
 import { USER_PAGE_SIZE } from "../pageSize";
 
 export const REGISTER_USER_RESPONSE = "REGISTER_USER_RESPONSE";
-export interface IRegisterUserResponseAction extends Action<typeof REGISTER_USER_RESPONSE> {
-  result: IApiResult;
-}
-function registerUserResponse(result: IApiResult): IRegisterUserResponseAction {
+export interface IRegisterUserResponseAction extends Action<typeof REGISTER_USER_RESPONSE> {}
+function registerUserResponse(): IRegisterUserResponseAction {
   return {
     type: REGISTER_USER_RESPONSE,
-    result,
   };
 }
 
@@ -42,7 +39,7 @@ export function registerUser(user: IUser): IThunkAction {
     if (result.code === ApiResultCode.OK) {
       dispatch(setRegisterModalShow(false));
       msg.success("注册成功，开始登录");
-      dispatch(registerUserResponse(result));
+      dispatch(registerUserResponse());
       afterLogin(result, dispatch, true);
     } else {
       msg.error(result.message);

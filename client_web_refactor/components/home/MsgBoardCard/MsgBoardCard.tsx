@@ -1,6 +1,6 @@
 import React from "react";
 import { Badge, Card } from "react-bootstrap";
-import List from "@/components/List";
+import List from "@/components/common/List";
 import { IPageInfo } from "@/action/common";
 import { IMsg } from "@/api/msgBoard";
 import { useStoreSelector } from "@/store";
@@ -15,7 +15,7 @@ export default () => {
   const loading = useStoreSelector<boolean>((state) => state.msgBoard.loading);
   const { total, list } = page;
 
-  const renderItem = (msg) => <MsgBoardCardItem msg={msg} />;
+  const renderItem = (msg: IMsg) => <MsgBoardCardItem msg={msg} />;
   return (
     <Card className="msg-board-card">
       <Card.Header>

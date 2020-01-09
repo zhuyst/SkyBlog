@@ -36,7 +36,9 @@ function modifyArticle<T = null>(
       dispatch(listArticles(1, ARTICLE_PAGE_SIZE));
       dispatch(listClassify());
 
-      await extraSuccessFunc(result);
+      if (extraSuccessFunc) {
+        await extraSuccessFunc(result);
+      }
     } else {
       msg.error(result.message);
     }
@@ -139,13 +141,10 @@ export function updateArticle(article: IArticle, back: boolean): IThunkAction {
 }
 
 export const DELETE_ARTICLE_RESPONSE = "DELETE_ARTICLE_RESPONSE";
-export interface IDeleteArticleResponseAction extends Action<typeof DELETE_ARTICLE_RESPONSE> {
-  result: IApiResult;
-}
-function deleteArticleResponse(result: IApiResult): IDeleteArticleResponseAction {
+export interface IDeleteArticleResponseAction extends Action<typeof DELETE_ARTICLE_RESPONSE> {}
+function deleteArticleResponse(): IDeleteArticleResponseAction {
   return {
     type: DELETE_ARTICLE_RESPONSE,
-    result,
   };
 }
 

@@ -40,11 +40,11 @@ function getAboutResponse(result: IApiResult<IAbout>): IGetAboutResponseAction {
   };
 }
 
-export function getAbout(about: IAbout): IThunkAction {
+export function getAbout(): IThunkAction {
   return async (dispatch) => {
     dispatch(setAboutLoading(true));
 
-    const result = await fetchGetAbout(about);
+    const result = await fetchGetAbout();
     dispatch(setAboutLoading(false));
     dispatch(getAboutResponse(result));
   };

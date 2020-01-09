@@ -16,9 +16,13 @@ export interface IUploadResult {
   url: string;
 }
 
+export enum UploadStatus {
+  NONE, SUCCESS, ERROR
+}
+
 export interface IUploadResponse {
-  ok: boolean;
-  message: string;
+  status: UploadStatus;
+  message?: string;
   url?: string;
 }
 
@@ -29,7 +33,7 @@ export function uploadResponse(result: IApiResult<IUploadResult>): IUploadRespon
 
   const action: IUploadResponseAction = {
     type: UPLOAD_RESPONSE,
-    ok: isSuccess,
+    status: isSuccess ? UploadStatus.SUCCESS : UploadStatus.ERROR,
     message: result.message,
   };
 

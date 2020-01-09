@@ -2,6 +2,7 @@ import { IPageInfo } from "@/action/common";
 import {
   httpDelete, httpGet, httpPatch, httpPost, httpPut, IApiResult, IBaseEntity, USER_API_URL,
 } from "@/api";
+import { IAuthResponse } from "@/api/auth";
 
 export type Role = number;
 export type Status = number;
@@ -55,8 +56,8 @@ export const UserStatus: IUserStatus = {
   },
 };
 
-export function fetchRegisterUser(user: IUser): Promise<IApiResult> {
-  return httpPost(`${USER_API_URL}/public/`, user);
+export function fetchRegisterUser(user: IUser): Promise<IApiResult<IAuthResponse>> {
+  return httpPost<IAuthResponse>(`${USER_API_URL}/public/`, user);
 }
 
 export function fetchListUsers(pageNum: number, pageSize: number)

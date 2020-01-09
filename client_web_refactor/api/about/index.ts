@@ -6,6 +6,6 @@ export interface IAbout {
   content: string;
 }
 
-export const fetchGetAbout = (about: IAbout) => httpGet<IAbout>(`${ABOUT_API_URL}/public/`, about);
+export const fetchGetAbout = () => httpGet<IAbout>(`${ABOUT_API_URL}/public/`);
 
 export const fetchUpdateAbout = (about: IAbout): Promise<IApiResult<IAbout>> => httpPut<IAbout>(`${ABOUT_API_URL}/`, about);
