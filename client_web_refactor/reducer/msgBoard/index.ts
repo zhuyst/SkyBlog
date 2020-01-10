@@ -5,7 +5,7 @@ import {
 import { MSG_PAGE_SIZE } from "@/action/pageSize";
 import { IMsg } from "@/api/msgBoard";
 import { initialPreviousComment } from "../article/comments";
-import { concatList } from "../util";
+import { concatList } from "@/util";
 
 export interface IMsgBoardState {
   page: IPageInfo<IMsg>;

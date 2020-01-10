@@ -3,7 +3,7 @@ import * as Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import msg from "@/action/common/notify";
 import { loginClear } from "@/action/common/login";
-import { API_BASE_URL } from "@/Constant";
+import { API_BASE_URL } from "@/config";
 import { IAccessToken, Token } from "./auth";
 
 export const AUTH_URL = `${API_BASE_URL}/auth`;

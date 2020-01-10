@@ -14,7 +14,10 @@ export default (props: IMsgBoardCardItemProps) => {
   return (
     <div className="msg-board-card-item">
       <div className="msg-board-card-item-content">
-        <span dangerouslySetInnerHTML={{ __html: convertBr(msg.content) }} />
+        <span
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: convertBr(msg.content) }}
+        />
       </div>
     </div>
   );

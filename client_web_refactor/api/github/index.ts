@@ -1,5 +1,5 @@
 import fetch from "isomorphic-fetch";
-import { PROJECT_URL } from "@/Constant";
+import { PROJECT_URL } from "@/config";
 import { checkStatus } from "@/api";
 
 const GITHUB_REQUEST = {

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { IBaseProps } from "@/components/interfaces";
 import { getProjectStar } from "@/action/github";
 import { useStoreSelector } from "@/store";
-import { SKY_BLOG_URL } from "@/Constant";
+import { SKY_BLOG_URL } from "@/config";
 
 export default (props: IBaseProps) => {
   const dispatch = useDispatch();

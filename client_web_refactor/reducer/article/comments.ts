@@ -7,7 +7,7 @@ import {
 import { IPageInfo } from "@/action/common";
 import { COMMENT_PAGE_SIZE } from "@/action/pageSize";
 import { IComment } from "@/api/article/comment";
-import { concatList } from "../util";
+import { concatList } from "@/util";
 
 export interface ICommentsState {
   comments: IPageInfo<IComment>;

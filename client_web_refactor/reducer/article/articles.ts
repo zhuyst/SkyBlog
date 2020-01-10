@@ -7,7 +7,7 @@ import { IPageInfo } from "@/action/common";
 import { ARTICLE_PAGE_SIZE } from "@/action/pageSize";
 import { IArticle } from "@/api/article";
 import { IClassify } from "@/api/classify";
-import { concatList } from "../util";
+import { concatList } from "@/util";
 
 interface IClassifyWithArticlesState extends IClassify {
   loading: boolean;
