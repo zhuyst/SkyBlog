@@ -1,5 +1,6 @@
 import { Card, Accordion } from "react-bootstrap";
 import React from "react";
+import Link from "next/link";
 import { IArticle } from "@/api/article";
 
 import "./ArticleListItem.scss";
@@ -19,15 +20,17 @@ export default (props: IArticleListItemProps) => {
           {article.title}
         </Accordion.Toggle>
         <Accordion.Collapse eventKey={articleIdStr}>
-          <Card.Body>
-            <h3 className="article-list-item-title">{article.title}</h3>
-            <p className="article-list-item-sub-title">{article.subTitle}</p>
-            <p className="article-list-item-content">{article.content}</p>
-            <p className="article-list-item-date">
-              发布时间 :
-              {article.createDate}
-            </p>
-          </Card.Body>
+          <Link href={`/blog/article/${articleIdStr}/full`}>
+            <Card.Body>
+              <h3 className="article-list-item-title">{article.title}</h3>
+              <p className="article-list-item-sub-title">{article.subTitle}</p>
+              <p className="article-list-item-content">{article.content}</p>
+              <p className="article-list-item-date">
+                发布时间 :
+                {article.createDate}
+              </p>
+            </Card.Body>
+          </Link>
         </Accordion.Collapse>
       </Card>
     </Accordion>

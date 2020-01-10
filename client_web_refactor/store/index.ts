@@ -4,6 +4,7 @@ import {
 } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware, { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { IArticleState } from "@/reducer/article/article";
 import reducer from "@/reducer";
 import { IAboutState } from "@/reducer/about";
 import { IArticlesState } from "@/reducer/article/articles";
@@ -23,7 +24,7 @@ export interface IAppState {
 
   about: IAboutState;
 
-  article: IAboutState;
+  article: IArticleState;
   articles: IArticlesState;
   classify: IClassifyState;
   comments: ICommentsState;

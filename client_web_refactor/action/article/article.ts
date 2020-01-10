@@ -108,11 +108,8 @@ export function getArticleInfo(id: number): IThunkAction {
     const result = await fetchGetArticle(id);
     dispatch(getArticleInfoResponse(result.entity));
 
-    const article = result.entity;
     dispatch(change(FORM_COMMENT, "articleId", id));
     dispatch(listComments(id, 1, COMMENT_PAGE_SIZE));
-
-    document.title = `${article.title} - 博客文章 - 青云的小窝`;
   };
 }
 

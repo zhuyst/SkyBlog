@@ -7,4 +7,19 @@ $theme-colors: (
 
 html, body, #__next {
   height: 100%;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 3px;
+    background: #f8f9fa;
+    -webkit-box-shadow: inset 0 0 6px #f8f9fa;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: #3BAFDA;
+    -webkit-box-shadow: inset 0 0 12px #f8f9fa;
+  }
 }

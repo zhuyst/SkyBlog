@@ -78,7 +78,6 @@ export function listArticlesByClassify(
     const result = await fetchListArticlesByClassify(classifyId, pageNum, pageSize);
     dispatch(setClassifyArticlesLoading(false));
     dispatch(listArticlesByClassifyResponse(result));
-    document.title = `${result.entity.classify.name} - 博客文章 - 青云的小窝`;
   };
 }
 
