@@ -1,5 +1,6 @@
 import React from "react";
 import { Spinner } from "react-bootstrap";
+import classNames from "classnames";
 import { IBaseProps } from "@/components/interfaces";
 import BPagination, { IBPaginationProps } from "./BPagination";
 
@@ -40,7 +41,7 @@ const List = <T extends any>(props: IListProps<T>) => {
   }
 
   return (
-    <div className={`b-list${props.className ? ` ${props.className}` : ""}`}>
+    <div className={classNames("b-list", props.className)}>
       {content}
     </div>
   );

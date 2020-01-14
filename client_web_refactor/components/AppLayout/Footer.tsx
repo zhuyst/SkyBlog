@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { IBaseProps } from "@/components/interfaces";
 import { getProjectStar } from "@/action/github";
+import { getAccessCount } from "@/action/log/accessLog";
 import { useStoreSelector } from "@/store";
 import { SKY_BLOG_URL } from "@/config";
 
@@ -10,6 +11,7 @@ export default (props: IBaseProps) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProjectStar());
+    dispatch(getAccessCount());
   }, []);
 
   const count = useStoreSelector<number>((state) => state.accessLog.count);

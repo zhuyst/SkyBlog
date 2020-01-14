@@ -2,6 +2,7 @@ const withSass = require("@zeit/next-sass");
 const withCSS = require("@zeit/next-css");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const EslintFriendlyFormatter = require("eslint-friendly-formatter");
+const BundleAnalyzer = require("@next/bundle-analyzer");
 
 const config = {
   webpack: (c) => {
@@ -28,6 +29,12 @@ const config = {
   },
 };
 
-module.exports = withSass(
-  withCSS(config),
+const withBundleAnalyzer = BundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
+
+module.exports = withBundleAnalyzer(
+  withSass(
+    withCSS(config),
+  ),
 );

@@ -3,7 +3,6 @@ import withRedux from "next-redux-wrapper";
 import App, { AppContext } from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
-import { getAccessCount } from "@/action/log/accessLog";
 import { IAppStore, initStore } from "@/store";
 import AppLayout from "@/components/AppLayout";
 
@@ -26,7 +25,6 @@ export default withRedux(initStore, {
   class MyApp extends App<IReduxAppProps> {
     static async getInitialProps({ Component, ctx }: AppContext) {
       const c = ctx as INextPageContext;
-      await c.store.dispatch(getAccessCount());
       return {
         pageProps: Component.getInitialProps
           ? await Component.getInitialProps(c)

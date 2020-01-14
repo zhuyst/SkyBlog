@@ -25,7 +25,7 @@ export default (props: IBaseProps) => {
       router.events.off("routeChangeComplete", handleComplete);
       router.events.off("routeChangeError", handleComplete);
     };
-  });
+  }, [router.pathname]);
 
   return (
     <div className="app-layout">
@@ -40,7 +40,7 @@ export default (props: IBaseProps) => {
         pauseOnHover
       />
       <Header className="app-layout-header" />
-      <div className="app-layout-content">
+      <section className="app-layout-content">
         {loading && (
           <div className="app-layout-loading">
             <Spinner animation="grow" variant="primary" />
@@ -49,7 +49,7 @@ export default (props: IBaseProps) => {
         <Fade in={!loading} appear>
           {loading ? <div /> : (<div>{props.children}</div>)}
         </Fade>
-      </div>
+      </section>
       <Footer className="app-layout-footer" />
     </div>
   );
