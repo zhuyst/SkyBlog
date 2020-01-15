@@ -5,8 +5,8 @@ import {
 } from "react-bootstrap";
 import { getArticleInfo, setArticle } from "@/action/article/article";
 import { IArticle } from "@/api/article";
-import ArticleHeader from "@/components/blog/ArticleHeader";
-import MarkdownViewer from "@/components/blog/MarkdownViewer";
+import ArticleHeader from "@/components/blog/content/ArticleHeader";
+import MarkdownViewer from "@/components/blog/content/MarkdownViewer";
 import Head from "@/components/common/Head";
 import { LayoutType } from "@/define";
 import { INextPage } from "@/pages/_app";

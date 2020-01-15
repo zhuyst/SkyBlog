@@ -31,6 +31,7 @@ module.exports = {
   },
   plugins: [
     'react',
+    'react-hooks',
     "@typescript-eslint",
     'import'
   ],
@@ -47,6 +48,8 @@ module.exports = {
     "import/prefer-default-export": ["off"],
     "react/destructuring-assignment": ["off"],
     "react/jsx-props-no-spreading": ["off"],
-    "react/prop-types": ["off"]
+    "react/prop-types": ["off"],
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
   },
 };

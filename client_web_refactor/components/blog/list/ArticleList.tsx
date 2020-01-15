@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import List from "../common/List";
+import List from "../../common/List";
 import { listArticles } from "@/action/article/articles";
 import { IPageInfo } from "@/action/common";
 import { IArticle } from "@/api/article";

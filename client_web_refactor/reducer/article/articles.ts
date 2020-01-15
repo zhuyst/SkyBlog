@@ -6,10 +6,11 @@ import {
 import { IPageInfo } from "@/action/common";
 import { ARTICLE_PAGE_SIZE } from "@/action/pageSize";
 import { IArticle } from "@/api/article";
-import { IClassify } from "@/api/classify";
 import { concatList } from "@/util";
 
-interface IClassifyWithArticlesState extends IClassify {
+export interface IClassifyWithArticlesState {
+  id: number;
+  name: string;
   loading: boolean;
   page: IPageInfo<IArticle>;
 }

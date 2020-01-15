@@ -1,0 +1,42 @@
+@import "../../../style/global";
+
+.article-list-item {
+  margin-bottom: 30px;
+  @include sky-card;
+
+  .article-list-item-header, .card-body {
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  &-content {
+    color: #999;
+    font-size: 12px;
+
+    // 多行省略号
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+
+  &-title {
+    color: #31708f;
+  }
+
+  &-sub-title {
+    color: #777;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #f16c20;
+  }
+
+  &-date {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #777;
+  }
+}

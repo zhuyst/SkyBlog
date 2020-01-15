@@ -12,7 +12,7 @@ export default (props: IBaseProps) => {
   useEffect(() => {
     dispatch(getProjectStar());
     dispatch(getAccessCount());
-  }, []);
+  }, [dispatch]);
 
   const count = useStoreSelector<number>((state) => state.accessLog.count);
   const star = useStoreSelector<number>((state) => state.github.star);

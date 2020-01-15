@@ -46,12 +46,19 @@ export interface IAppStore extends Store<IAppState> {
   dispatch: IThunkDispatch;
 }
 
+let store: IAppStore;
+
 export function initStore(initialState: any): IAppStore {
-  return createStore(
+  store = createStore(
     reducer,
     initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware)),
   );
+  return store;
+}
+
+export function getStore(): IAppStore {
+  return store;
 }
 
 export function useStoreSelector<TSelected>(

@@ -13,7 +13,7 @@ export default () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listCommits(GITHUB_PAGE_SIZE));
-  }, []);
+  }, [dispatch]);
 
   const commits = useStoreSelector<IGithubCommit[]>((state) => state.github.commits);
   const loading = useStoreSelector<boolean>((state) => state.github.loading);

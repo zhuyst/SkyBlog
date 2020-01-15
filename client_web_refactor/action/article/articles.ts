@@ -70,7 +70,7 @@ IListArticlesByClassifyResponseAction {
 export function listArticlesByClassify(
   classifyId: number,
   pageNum: number,
-  pageSize: number,
+  pageSize: number = ARTICLE_PAGE_SIZE,
 ): IThunkAction {
   return async (dispatch) => {
     dispatch(setClassifyArticlesLoading(true));

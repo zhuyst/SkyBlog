@@ -1,0 +1,17 @@
+.blog-navigation {
+  .navigation-title {
+    margin: 20px auto;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .list-group {
+    margin-bottom: 20px;
+
+    .list-group-item.active {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}

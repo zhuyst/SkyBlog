@@ -39,7 +39,7 @@ export default (props: IBaseProps) => {
     return () => {
       router.events.off("routeChangeStart", handleStart);
     };
-  }, [router.pathname]);
+  }, [router.pathname, router.events]);
 
   return (
     <header className={props.className}>

@@ -1,6 +1,6 @@
 import fetch from "isomorphic-fetch";
 import * as Cookies from "js-cookie";
-import { useDispatch } from "react-redux";
+import { getStore } from "@/store";
 import msg from "@/action/common/notify";
 import { loginClear } from "@/action/common/login";
 import { API_BASE_URL } from "@/config";
@@ -101,8 +101,8 @@ async function handleFetch<T>(response: Response): Promise<IApiResult<T>> {
       msg.info(result.message);
       removeToken();
 
-      const dispatch = useDispatch();
-      dispatch(loginClear());
+      const store = getStore();
+      store.dispatch(loginClear());
     }
     return result;
   } catch (e) {

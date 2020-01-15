@@ -26,7 +26,7 @@ export default (props: IBaseProps) => {
       router.events.off("routeChangeComplete", handleComplete);
       router.events.off("routeChangeError", handleComplete);
     };
-  }, [router.pathname]);
+  }, [router.pathname, router.events]);
 
   return (
     <div className="app-layout">
