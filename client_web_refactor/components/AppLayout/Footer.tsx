@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { IBaseProps } from "@/components/interfaces";
+import { IBaseProps } from "@/define";
 import { getProjectStar } from "@/action/github";
 import { getAccessCount } from "@/action/log/accessLog";
 import { useStoreSelector } from "@/store";

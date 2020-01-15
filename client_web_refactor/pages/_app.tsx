@@ -19,9 +19,7 @@ interface IReduxAppProps {
   store: IAppStore;
 }
 
-export default withRedux(initStore, {
-  debug: process.env.NODE_ENV === "development",
-})(
+export default withRedux(initStore)(
   class MyApp extends App<IReduxAppProps> {
     static async getInitialProps({ Component, ctx }: AppContext) {
       const c = ctx as INextPageContext;
@@ -37,11 +35,9 @@ export default withRedux(initStore, {
 
       return (
         <Provider store={store}>
-          <React.StrictMode>
-            <AppLayout>
-              <Component {...pageProps} />
-            </AppLayout>
-          </React.StrictMode>
+          <AppLayout>
+            <Component {...pageProps} />
+          </AppLayout>
         </Provider>
       );
     }

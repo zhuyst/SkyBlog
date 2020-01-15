@@ -1,22 +1,20 @@
-import {
-  Container, Row, Col, Breadcrumb, Card,
-} from "react-bootstrap";
-import React from "react";
 import Link from "next/link";
-import { initialState } from "@/reducer/article/article";
-import { IArticle } from "@/api/article";
-import MarkdownViewer from "@/components/common/MarkdownViewer";
-import { useStoreSelector } from "@/store";
+import React, { useState } from "react";
+import {
+  Breadcrumb, Card, Col, Container, Row,
+} from "react-bootstrap";
 import { getArticleInfo, setArticle } from "@/action/article/article";
+import { IArticle } from "@/api/article";
+import ArticleHeader from "@/components/blog/ArticleHeader";
+import MarkdownViewer from "@/components/blog/MarkdownViewer";
 import Head from "@/components/common/Head";
+import { LayoutType } from "@/define";
 import { INextPage } from "@/pages/_app";
+import { initialState } from "@/reducer/article/article";
+import { useStoreSelector } from "@/store";
 
-import "./[layout].scss";
-
-enum LayoutType {
-  FULL = "full",
-  JUSTIFY = "justify"
-}
+import "@/pages/blog/index.scss";
+import "./index.scss";
 
 interface IArticlePageProps {
   layout: LayoutType;
@@ -25,9 +23,11 @@ interface IArticlePageProps {
 const ArticlePage: INextPage<IArticlePageProps> = (props) => {
   const article = useStoreSelector<IArticle>((state) => state.article);
   const {
-    title, subTitle, classify, content,
+    title, classify, content,
   } = article;
-  const lg = props.layout === LayoutType.FULL ? 12 : 6;
+
+  const [currentLayout, setCurrentLayout] = useState(props.layout);
+  const lg = currentLayout === LayoutType.FULL ? 12 : 6;
   return (
     <>
       <Head title="Article" />
@@ -51,14 +51,10 @@ const ArticlePage: INextPage<IArticlePageProps> = (props) => {
             </Breadcrumb>
             <Card className="blog-article">
               <Card.Body>
-                <div className="article-header">
-                  <Card.Title>
-                    <h1>{title}</h1>
-                  </Card.Title>
-                  <Card.Subtitle>
-                    <h3 className="mb-2 text-muted">{subTitle}</h3>
-                  </Card.Subtitle>
-                </div>
+                <ArticleHeader
+                  layout={currentLayout}
+                  setCurrentLayout={setCurrentLayout}
+                />
                 <Card.Text className="article-content">
                   <MarkdownViewer text={content || ""} />
                 </Card.Text>
@@ -77,10 +73,11 @@ const ArticlePage: INextPage<IArticlePageProps> = (props) => {
 ArticlePage.getInitialProps = async ({ store, query }) => {
   const { dispatch } = store;
   const { id, layout } = query;
+  const { article } = store.getState();
 
   if (id === "new") {
     await dispatch(setArticle(initialState));
-  } else {
+  } else if (article.id !== Number(id)) {
     await dispatch(getArticleInfo(Number(id)));
   }
 

@@ -20,7 +20,7 @@ export default (props: IArticleListItemProps) => {
           {article.title}
         </Accordion.Toggle>
         <Accordion.Collapse eventKey={articleIdStr}>
-          <Link href={`/blog/article/${articleIdStr}/full`}>
+          <Link href={`/blog/article/${articleIdStr}`}>
             <Card.Body>
               <h3 className="article-list-item-title">{article.title}</h3>
               <p className="article-list-item-sub-title">{article.subTitle}</p>

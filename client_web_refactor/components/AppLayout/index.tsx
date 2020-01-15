@@ -2,11 +2,12 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Spinner, Fade } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
-import { IBaseProps } from "@/components/interfaces";
+import { IBaseProps } from "@/define";
 
 import Header from "./Header";
 import Footer from "./Footer";
 
+import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
 
 export default (props: IBaseProps) => {

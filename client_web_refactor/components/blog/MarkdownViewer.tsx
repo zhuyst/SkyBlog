@@ -2,6 +2,9 @@ import React, { useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import hljs from "highlight.js";
 
+import "highlight.js/styles/default.css";
+import "./MarkdownViewer.scss";
+
 interface ICodeBlockProps {
   language?: string;
   value: string;
@@ -16,13 +19,11 @@ const CodeBlock = (props: ICodeBlockProps) => {
   });
 
   return (
-    <article>
-      <pre>
-        <code ref={codeEl} className={props.language}>
-          {props.value}
-        </code>
-      </pre>
-    </article>
+    <pre>
+      <code ref={codeEl} className={props.language}>
+        {props.value}
+      </code>
+    </pre>
   );
 };
 
@@ -32,8 +33,10 @@ interface IMarkdownViewerProps {
 }
 
 export default (props: IMarkdownViewerProps) => (
-  <ReactMarkdown
-    source={props.text}
-    renderers={{ code: CodeBlock }}
-  />
+  <div className="markdown-viewer">
+    <ReactMarkdown
+      source={props.text}
+      renderers={{ code: CodeBlock }}
+    />
+  </div>
 );

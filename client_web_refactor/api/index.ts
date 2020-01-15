@@ -96,7 +96,7 @@ export function checkStatus<T>(response: Response): Promise<T> {
 async function handleFetch<T>(response: Response): Promise<IApiResult<T>> {
   try {
     const result = await checkStatus<IApiResult<T>>(response);
-    console.log(response.url, result);
+    console.log(response.url, JSON.stringify(result));
     if (result.code === ApiResultCode.Unauthorized) {
       msg.info(result.message);
       removeToken();

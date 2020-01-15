@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { IBaseProps } from "@/components/interfaces";
+import { IBaseProps } from "@/define";
 
 import "./Well.scss";
 
