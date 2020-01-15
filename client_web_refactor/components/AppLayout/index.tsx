@@ -40,6 +40,7 @@ export default (props: IBaseProps) => {
         draggable
         pauseOnHover
       />
+
       <Header className="app-layout-header" />
       <section className="app-layout-content">
         {loading && (

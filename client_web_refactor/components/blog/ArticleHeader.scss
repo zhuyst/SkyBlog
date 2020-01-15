@@ -1,0 +1,31 @@
+.article-header {
+  padding-bottom: 2.25rem;
+  border-bottom: 1px solid #eee;
+  margin: 1.25rem 0;
+
+  .card-title {
+    display: flex;
+    justify-content: space-between;
+
+    .article-title {
+      flex-shrink: 1;
+    }
+
+    .title-info {
+      color: #777;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+  }
+
+  .layout-button-group {
+    display: flex;
+    float: right;
+    transform: translateY(-0.25rem);
+
+    .btn {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

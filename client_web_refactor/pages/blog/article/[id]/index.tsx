@@ -27,13 +27,18 @@ const ArticlePage: INextPage<IArticlePageProps> = (props) => {
   } = article;
 
   const [currentLayout, setCurrentLayout] = useState(props.layout);
-  const lg = currentLayout === LayoutType.FULL ? 12 : 6;
   return (
     <>
       <Head title="Article" />
       <Container className="blog-main" fluid>
         <Row>
-          <Col md={12} lg={lg}>
+          <Col
+            md={12}
+            lg={{
+              span: currentLayout === LayoutType.FULL ? 8 : 6,
+              offset: currentLayout === LayoutType.FULL ? 2 : 0,
+            }}
+          >
             <Breadcrumb>
               <Link href="/">
                 <Breadcrumb.Item>
@@ -61,7 +66,7 @@ const ArticlePage: INextPage<IArticlePageProps> = (props) => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={12} lg={lg}>
+          <Col md={12} lg={currentLayout === LayoutType.FULL ? 12 : 6}>
             <div />
           </Col>
         </Row>

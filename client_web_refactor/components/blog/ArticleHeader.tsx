@@ -1,26 +1,23 @@
 import React from "react";
 import {
-  Card, ButtonToolbar, ToggleButton, ToggleButtonGroup,
+  Card, ToggleButton, ToggleButtonGroup,
 } from "react-bootstrap";
+import { FaAlignJustify, FaAlignLeft } from "react-icons/fa";
 import { IArticle } from "@/api/article";
 import { IBaseProps, LayoutType } from "@/define";
 import { useStoreSelector } from "@/store";
+
+import "./ArticleHeader.scss";
 
 interface IArticleTitleProps extends IBaseProps {
   layout: LayoutType;
   setCurrentLayout: (layout: LayoutType) => void;
 }
 
-const LayoutButton = (layout: LayoutType, text: string) => (
-  <ToggleButton variant="light" value={layout}>
-    {text}
-  </ToggleButton>
-);
-
 export default (props: IArticleTitleProps) => {
   const article = useStoreSelector<IArticle>((state) => state.article);
   const {
-    id, title, subTitle,
+    id, title, subTitle, createDate, updateDate, classify,
   } = article;
 
   const changeLayout = (layout: LayoutType) => {
@@ -32,22 +29,43 @@ export default (props: IArticleTitleProps) => {
   return (
     <div className="article-header">
       <Card.Title>
-        <h1>{title}</h1>
+        <h1 className="article-title">{title}</h1>
+        <small className="title-info d-none d-lg-block">
+          <span>
+            文章发布时间：
+            {createDate}
+          </span>
+          <br />
+          <span>
+            最后修改时间：
+            {updateDate}
+          </span>
+          <br />
+          <span>
+            分类：
+            {classify ? classify.name : "未分类"}
+          </span>
+        </small>
       </Card.Title>
       <Card.Subtitle>
         <h3 className="mb-2 text-muted">{subTitle}</h3>
       </Card.Subtitle>
-      <ButtonToolbar>
-        <ToggleButtonGroup
-          type="radio"
-          name="layout"
-          value={props.layout}
-          onChange={changeLayout}
-        >
-          {LayoutButton(LayoutType.JUSTIFY, "左右布局")}
-          {LayoutButton(LayoutType.FULL, "上下布局")}
-        </ToggleButtonGroup>
-      </ButtonToolbar>
+      <ToggleButtonGroup
+        className="layout-button-group d-none d-lg-flex"
+        type="radio"
+        name="layout"
+        value={props.layout}
+        onChange={changeLayout}
+      >
+        <ToggleButton variant="light" value={LayoutType.JUSTIFY}>
+          <FaAlignLeft />
+          &nbsp;&nbsp;左右布局
+        </ToggleButton>
+        <ToggleButton variant="light" value={LayoutType.FULL}>
+          <FaAlignJustify />
+          &nbsp;&nbsp;上下布局
+        </ToggleButton>
+      </ToggleButtonGroup>
     </div>
   );
 };
