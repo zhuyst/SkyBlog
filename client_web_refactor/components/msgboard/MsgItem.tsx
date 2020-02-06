@@ -1,5 +1,5 @@
 import React from "react";
-import { IMsg } from "@/api/msgBoard";
+import { IMsg } from "@/define/msgBoard";
 
 import "./MsgItem.scss";
 

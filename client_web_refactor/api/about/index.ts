@@ -1,10 +1,7 @@
 import {
   ABOUT_API_URL, httpGet, httpPut, IApiResult,
 } from "@/api";
-
-export interface IAbout {
-  content: string;
-}
+import { IAbout } from "@/define/about";
 
 export const fetchGetAbout = () => httpGet<IAbout>(`${ABOUT_API_URL}/public/`);
 

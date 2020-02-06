@@ -4,8 +4,8 @@ import {
   SET_COMMENTS_LOADING,
   SET_PREVIOUS_COMMENT,
 } from "@/action/article/comment";
-import { IPageInfo } from "@/action/common";
-import { COMMENT_PAGE_SIZE } from "@/action/pageSize";
+import { IPageInfo } from "@/define/common";
+import { COMMENT_PAGE_SIZE } from "@/action-creator/pageSize";
 import { IComment } from "@/api/article/comment";
 import { concatList } from "@/util";
 

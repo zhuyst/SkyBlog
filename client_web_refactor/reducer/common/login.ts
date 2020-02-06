@@ -7,7 +7,7 @@ import {
   SET_MANAGEMENT,
 } from "@/action/common/login";
 import { UPDATE_USER_INFO_RESPONSE } from "@/action/user";
-import { IUser } from "@/api/user";
+import { IUser } from "@/define/user";
 
 const initialUser: IUser = {
   id: 0,

@@ -1,7 +1,7 @@
-import { IPageInfo } from "@/action/common";
-import { USER_PAGE_SIZE } from "@/action/pageSize";
+import { IPageInfo } from "@/define/common";
+import { USER_PAGE_SIZE } from "@/action-creator/pageSize";
 import { LIST_USERS_RESPONSE, UserAction } from "@/action/user";
-import { IUser } from "@/api/user";
+import { IUser } from "@/define/user";
 
 export type IUserState = IPageInfo<IUser>;
 

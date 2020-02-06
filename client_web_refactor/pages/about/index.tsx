@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Spinner } from "react-bootstrap";
 import { useStoreSelector } from "@/store";
 import Head from "@/components/common/Head";
-import { getAbout } from "@/action/about";
+import { getAbout } from "@/action-creator/about";
 import { INextPage } from "@/pages/_app";
 
 import "./index.scss";

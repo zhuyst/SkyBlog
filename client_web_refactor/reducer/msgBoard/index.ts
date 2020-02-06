@@ -1,9 +1,9 @@
-import { IPageInfo } from "@/action/common";
+import { IPageInfo } from "@/define/common";
 import {
   LIST_MSG_RESPONSE, MsgBoardAction, SET_MSG_LOADING, SET_PREVIOUS_MSG,
 } from "@/action/msgBoard";
-import { MSG_PAGE_SIZE } from "@/action/pageSize";
-import { IMsg } from "@/api/msgBoard";
+import { MSG_PAGE_SIZE } from "@/action-creator/pageSize";
+import { IMsg } from "@/define/msgBoard";
 import { initialPreviousComment } from "../article/comments";
 import { concatList } from "@/util";
 

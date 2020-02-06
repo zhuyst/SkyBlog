@@ -4,7 +4,7 @@ import {
   INSERT_ARTICLE_RESPONSE,
   SET_ARTICLE, SET_ARTICLE_LOADING, UPDATE_ARTICLE_RESPONSE,
 } from "@/action/article/article";
-import { IArticle } from "@/api/article";
+import { IArticle } from "@/define/article";
 
 export interface IArticleState extends IArticle {
   loading: boolean;

@@ -1,12 +1,7 @@
-import { IArticle } from "../article";
 import {
-  CLASSIFY_API_URL, httpDelete, httpGet, httpPost, httpPut, IApiResult, IBaseEntity,
+  CLASSIFY_API_URL, httpDelete, httpGet, httpPost, httpPut, IApiResult,
 } from "@/api";
-
-export interface IClassify extends IBaseEntity {
-  name: string;
-  articles?: IArticle[];
-}
+import { IClassify } from "@/define/classify";
 
 export function fetchListClassify(): Promise<IApiResult<IClassify[]>> {
   return httpGet<IClassify[]>(`${CLASSIFY_API_URL}/public/`);

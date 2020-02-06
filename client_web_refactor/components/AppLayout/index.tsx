@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Spinner, Fade } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
-import { IBaseProps } from "@/define";
+import { IBaseProps } from "@/define/common";
 
 import Header from "./Header";
 import Footer from "./Footer";

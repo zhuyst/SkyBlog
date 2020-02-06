@@ -1,18 +1,7 @@
 import {
   AUTH_URL, ContentType, httpPost, IApiResult,
 } from "@/api";
-import { IUser } from "../user";
-
-export type Token = string;
-
-export interface IAccessToken {
-  token: Token;
-  expire: number;
-}
-
-export interface IAuthResponse extends IAccessToken {
-  user: IUser;
-}
+import { IAuthResponse, Token } from "@/define/auth";
 
 export function fetchLogin(username: string, password: string)
   : Promise<IApiResult<IAuthResponse>> {

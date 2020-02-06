@@ -3,9 +3,9 @@ import {
   LIST_ARTICLES_BY_CLASSIFY_RESPONSE, LIST_ARTICLES_RESPONSE,
   SET_ARTICLES_LOADING, SET_CLASSIFY_ARTICLES_LOADING,
 } from "@/action/article/articles";
-import { IPageInfo } from "@/action/common";
-import { ARTICLE_PAGE_SIZE } from "@/action/pageSize";
-import { IArticle } from "@/api/article";
+import { IPageInfo } from "@/define/common";
+import { ARTICLE_PAGE_SIZE } from "@/action-creator/pageSize";
+import { IArticle } from "@/define/article";
 import { concatList } from "@/util";
 
 export interface IClassifyWithArticlesState {

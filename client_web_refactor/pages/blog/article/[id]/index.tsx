@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import {
   Breadcrumb, Card, Col, Container, Row,
 } from "react-bootstrap";
-import { getArticleInfo, setArticle } from "@/action/article/article";
-import { IArticle } from "@/api/article";
+import { getArticleInfo, setArticle } from "@/action-creator/article/article";
+import { IArticle } from "@/define/article";
 import ArticleHeader from "@/components/blog/content/ArticleHeader";
 import MarkdownViewer from "@/components/blog/content/MarkdownViewer";
 import Head from "@/components/common/Head";
-import { LayoutType } from "@/define";
+import { LayoutType } from "@/define/common";
 import { INextPage } from "@/pages/_app";
 import { initialState } from "@/reducer/article/article";
 import { useStoreSelector } from "@/store";

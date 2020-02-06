@@ -934,6 +934,11 @@
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
 
+"@types/humps@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.npm.taobao.org/@types/humps/download/@types/humps-1.1.3.tgz#5a824883eddafe11ffd3b6d44e213698813e2c71"
+  integrity sha1-WoJIg+3a/hH/07bUTiE2mIE+LHE=
+
 "@types/isomorphic-fetch@^0.0.35":
   version "0.0.35"
   resolved "https://registry.npm.taobao.org/@types/isomorphic-fetch/download/@types/isomorphic-fetch-0.0.35.tgz#c1c0d402daac324582b6186b91f8905340ea3361"
@@ -3976,6 +3981,11 @@ https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/https-browserify/download/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
+
+humps@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/humps/download/humps-2.0.1.tgz#dd02ea6081bd0568dc5d073184463957ba9ef9aa"
+  integrity sha1-3QLqYIG9BWjcXQcxhEY5V7qe+ao=
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24, iconv-lite@~0.4.13:
   version "0.4.24"

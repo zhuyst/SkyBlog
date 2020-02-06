@@ -1,10 +1,11 @@
 import fetch from "isomorphic-fetch";
 import * as Cookies from "js-cookie";
+import humps from "humps";
 import { getStore } from "@/store";
-import msg from "@/action/common/notify";
-import { loginClear } from "@/action/common/login";
+import msg from "@/action-creator/common/notify";
+import { loginClear } from "@/action-creator/common/login";
 import { API_BASE_URL } from "@/config";
-import { IAccessToken, Token } from "./auth";
+import { IAccessToken, Token } from "@/define/auth";
 
 export const AUTH_URL = `${API_BASE_URL}/auth`;
 export const USER_API_URL = `${API_BASE_URL}/users`;
@@ -15,10 +16,6 @@ export const ABOUT_API_URL = `${API_BASE_URL}/about`;
 export const SYS_LOG_URL = `${API_BASE_URL}/sys_log`;
 export const ACCESS_LOG_URL = `${API_BASE_URL}/access_log`;
 export const OSS_URL = `${API_BASE_URL}/oss`;
-
-export interface IBaseEntity {
-  id: number;
-}
 
 const COOKIE_TOKEN: string = "Token";
 
@@ -86,9 +83,10 @@ export const FAIL_RESULT: IApiResult = {
   message: "网络请求失败，请检查网络状态",
 };
 
-export function checkStatus<T>(response: Response): Promise<T> {
+export async function checkStatus<T>(response: Response): Promise<T> {
   if (response.ok) {
-    return response.json();
+    const json = await response.json();
+    return humps.camelizeKeys(json) as unknown as T;
   }
   throw new Error(response.statusText);
 }

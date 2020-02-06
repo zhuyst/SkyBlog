@@ -1,7 +1,7 @@
 import React from "react";
 import { Spinner } from "react-bootstrap";
 import classNames from "classnames";
-import { IBaseProps } from "@/define";
+import { IBaseProps } from "@/define/common";
 import BPagination, { IBPaginationProps } from "./BPagination";
 
 import "./List.scss";

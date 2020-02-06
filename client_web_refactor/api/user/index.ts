@@ -1,60 +1,11 @@
-import { IPageInfo } from "@/action/common";
+import { IPageInfo } from "@/define/common";
 import {
-  httpDelete, httpGet, httpPatch, httpPost, httpPut, IApiResult, IBaseEntity, USER_API_URL,
+  httpDelete, httpGet, httpPatch, httpPost, httpPut, IApiResult, USER_API_URL,
 } from "@/api";
-import { IAuthResponse } from "@/api/auth";
-
-export type Role = number;
-export type Status = number;
-
-export interface IUser extends IBaseEntity {
-  username: string;
-  nickname: string;
-  password?: string;
-  admin?: boolean;
-  role?: Role;
-  status?: Status;
-}
-
-interface IUserRole {
-  [key: string]: {
-    id: Role;
-    name: string;
-  };
-}
-
-export const UserRole: IUserRole = {
-  SYS_ADMIN: {
-    id: 1,
-    name: "系统管理员",
-  },
-  ADMIN: {
-    id: 2,
-    name: "管理员",
-  },
-  VISITOR: {
-    id: 3,
-    name: "访客",
-  },
-};
-
-interface IUserStatus {
-  [key: string]: {
-    id: Status;
-    name: string;
-  };
-}
-
-export const UserStatus: IUserStatus = {
-  NORMAL: {
-    id: 0,
-    name: "正常",
-  },
-  LOCKED: {
-    id: 1,
-    name: "锁定",
-  },
-};
+import { IAuthResponse } from "@/define/auth";
+import {
+  IUser, Role, Status,
+} from "@/define/user";
 
 export function fetchRegisterUser(user: IUser): Promise<IApiResult<IAuthResponse>> {
   return httpPost<IAuthResponse>(`${USER_API_URL}/public/`, user);

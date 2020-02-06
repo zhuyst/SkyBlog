@@ -3,8 +3,8 @@ import {
   Card, ToggleButton, ToggleButtonGroup,
 } from "react-bootstrap";
 import { FaAlignJustify, FaAlignLeft } from "react-icons/fa";
-import { IArticle } from "@/api/article";
-import { IBaseProps, LayoutType } from "@/define";
+import { IArticle } from "@/define/article";
+import { IBaseProps, LayoutType } from "@/define/common";
 import { useStoreSelector } from "@/store";
 
 import "./ArticleHeader.scss";

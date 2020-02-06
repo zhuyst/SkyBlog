@@ -1,5 +1,4 @@
-import { IPageInfo } from "@/action/common";
-import { IBaseEntity } from "@/api";
+import { IPageInfo, IBaseEntity } from "@/define/common";
 
 export function convertBr(text: string): string {
   return text.replace(new RegExp("\n", "gm"), "<br/>");

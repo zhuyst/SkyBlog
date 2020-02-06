@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { listArticles } from "@/action/article/articles";
-import { listMsg } from "@/action/msgBoard";
+import { listArticles } from "@/action-creator/article/articles";
+import { listMsg } from "@/action-creator/msgBoard";
 import Head from "@/components/common/Head";
 import ArticleCard from "@/components/home/ArticleCard/ArticleCard";
 import GithubCard from "@/components/home/GithubCard/GithubCard";

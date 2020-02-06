@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { Button, ListGroup, Badge } from "react-bootstrap";
-import { IClassify } from "@/api/classify";
+import { IClassify } from "@/define/classify";
 import { useStoreSelector } from "@/store";
 import Well from "@/components/common/Well";
 

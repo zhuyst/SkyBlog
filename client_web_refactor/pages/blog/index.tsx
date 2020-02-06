@@ -4,12 +4,12 @@ import {
 import React from "react";
 import Link from "next/link";
 import { IClassifyWithArticlesState } from "@/reducer/article/articles";
-import { listClassify } from "@/action/article/classify";
+import { listClassify } from "@/action-creator/article/classify";
 import Navigation from "@/components/blog/list/Navigation";
 import Head from "@/components/common/Head";
-import { listArticles, listArticlesByClassify } from "@/action/article/articles";
-import { IPageInfo } from "@/action/common";
-import { IArticle } from "@/api/article";
+import { listArticles, listArticlesByClassify } from "@/action-creator/article/articles";
+import { IPageInfo } from "@/define/common";
+import { IArticle } from "@/define/article";
 import ArticleList from "@/components/blog/list/ArticleList";
 import { useStoreSelector } from "@/store";
 import { INextPage } from "../_app";

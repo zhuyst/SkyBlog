@@ -1,35 +1,14 @@
-import { IPageInfo } from "@/action/common";
-import { IClassify } from "../classify";
+import { IPageInfo } from "@/define/common";
 import {
-  ARTICLE_API_URL, httpDelete, httpGet, httpPost, httpPut, IApiResult, IBaseEntity,
+  ARTICLE_API_URL, httpDelete, httpGet, httpPost, httpPut, IApiResult,
 } from "@/api";
-import { IUser } from "../user";
-
-export interface IArticle extends IBaseEntity {
-  title: string;
-  subTitle: string;
-  content?: string;
-
-  authorId: number;
-  author?: IUser;
-
-  classifyId: number;
-  classify?: IClassify;
-
-  createDate?: string;
-  updateDate?: string;
-}
+import { IArticle, IClassifyWithArticles } from "@/define/article";
 
 export function fetchListArticles(pageNum: number, pageSize: number)
   : Promise<IApiResult<IPageInfo<IArticle>>> {
   return httpGet<IPageInfo<IArticle>>(`${ARTICLE_API_URL}/public/list/`, {
     pageNum, pageSize,
   });
-}
-
-export interface IClassifyWithArticles {
-  articles: IPageInfo<IArticle>;
-  classify: IClassify;
 }
 
 export function fetchListArticlesByClassify(

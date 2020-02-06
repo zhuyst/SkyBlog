@@ -1,8 +1,8 @@
-import { IPageInfo } from "@/action/common";
+import { IBaseEntity, IPageInfo } from "@/define/common";
 import {
-  ARTICLE_API_URL, httpDelete, httpGet, httpPost, IApiResult, IBaseEntity,
+  ARTICLE_API_URL, httpDelete, httpGet, httpPost, IApiResult,
 } from "@/api";
-import { IUser } from "../user";
+import { IUser } from "@/define/user";
 
 export interface IComment extends IBaseEntity {
   content: string;

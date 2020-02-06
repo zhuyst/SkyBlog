@@ -1,9 +1,9 @@
 import { Container, Row, Col } from "react-bootstrap";
 import React from "react";
-import { listMsg } from "@/action/msgBoard";
+import { listMsg } from "@/action-creator/msgBoard";
 import MsgList from "@/components/msgboard/MsgList";
-import { IPageInfo } from "@/action/common";
-import { IMsg } from "@/api/msgBoard";
+import { IPageInfo } from "@/define/common";
+import { IMsg } from "@/define/msgBoard";
 import Head from "@/components/common/Head";
 import { useStoreSelector } from "@/store";
 import { INextPage } from "@/pages/_app";

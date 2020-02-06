@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Nav, Navbar } from "react-bootstrap";
 import { useRouter } from "next/router";
-import { IBaseProps } from "@/define";
+import { IBaseProps } from "@/define/common";
 
 enum NavType {
   HOME = "/",

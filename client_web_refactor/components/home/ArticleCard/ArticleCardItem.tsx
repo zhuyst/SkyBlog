@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setArticle } from "@/action/article/article";
-import { IArticle } from "@/api/article";
+import { setArticle } from "@/action-creator/article/article";
+import { IArticle } from "@/define/article";
 
 import "./ArticleCardItem.scss";
 

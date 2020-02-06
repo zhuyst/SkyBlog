@@ -1,20 +1,8 @@
-import { IPageInfo } from "@/action/common";
+import { IPageInfo } from "@/define/common";
 import {
-  httpGet, IApiResult, IBaseEntity, SYS_LOG_URL,
+  httpGet, IApiResult, SYS_LOG_URL,
 } from "@/api";
-import { IUser } from "../user";
-
-export interface ISysLog extends IBaseEntity {
-  createDate: number;
-
-  method: string;
-  params: string;
-  resource: string;
-  type: string;
-
-  userId: number;
-  user: IUser;
-}
+import { ISysLog } from "@/define/sysLog";
 
 export function fetchListSysLog(pageNum: number, pageSize: number)
   : Promise<IApiResult<IPageInfo<ISysLog>>> {

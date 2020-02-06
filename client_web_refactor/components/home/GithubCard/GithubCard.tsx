@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import List from "@/components/common/List";
-import { IGithubCommit, listCommits } from "@/action/github";
-import { GITHUB_PAGE_SIZE } from "@/action/pageSize";
+import { IGithubCommit } from "@/action/github";
+import { GITHUB_PAGE_SIZE } from "@/action-creator/pageSize";
 import { useStoreSelector } from "@/store";
 import GithubCardItem from "./GithubCardItem";
+import { listCommits } from "@/action-creator/github";
 
 import "./GithubCard.scss";
 

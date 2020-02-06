@@ -1,7 +1,7 @@
 import { Card, Accordion, Badge } from "react-bootstrap";
 import React from "react";
 import Link from "next/link";
-import { IArticle } from "@/api/article";
+import { IArticle } from "@/define/article";
 
 import "./ArticleListItem.scss";
 

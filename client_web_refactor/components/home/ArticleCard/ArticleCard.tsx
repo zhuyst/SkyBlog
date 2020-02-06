@@ -1,8 +1,8 @@
 import React from "react";
 import { Badge, Card } from "react-bootstrap";
 import List from "@/components/common/List";
-import { IPageInfo } from "@/action/common";
-import { IArticle } from "@/api/article";
+import { IPageInfo } from "@/define/common";
+import { IArticle } from "@/define/article";
 import { useStoreSelector } from "@/store";
 import ArticleCardItem from "./ArticleCardItem";
 

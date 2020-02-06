@@ -1,6 +1,7 @@
 import fetch from "isomorphic-fetch";
 import { PROJECT_URL } from "@/config";
 import { checkStatus } from "@/api";
+import { IGithubFullCommitInfo, IGithubInfo } from "@/define/github";
 
 const GITHUB_REQUEST = {
   method: "GET",
@@ -9,26 +10,10 @@ const GITHUB_REQUEST = {
   },
 };
 
-export interface IGithubFullCommitInfo {
-  sha: string;
-  author: {
-    login: string;
-    html_url: string;
-  };
-  commit: {
-    message: string;
-  };
-  html_url: string;
-}
-
 export async function fetchCommits(perPage: number): Promise<IGithubFullCommitInfo[]> {
   const url = `${PROJECT_URL}/commits?per_page=${perPage}`;
   const response = await fetch(url, GITHUB_REQUEST);
   return checkStatus<IGithubFullCommitInfo[]>(response);
-}
-
-export interface IGithubInfo {
-  stargazers_count: number;
 }
 
 export async function fetchProjectStar(): Promise<IGithubInfo> {

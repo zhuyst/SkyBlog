@@ -1,7 +1,7 @@
 import React from "react";
 import MsgItem from "@/components/msgboard/MsgItem";
-import { IPageInfo } from "@/action/common";
-import { IMsg } from "@/api/msgBoard";
+import { IPageInfo } from "@/define/common";
+import { IMsg } from "@/define/msgBoard";
 import List from "@/components/common/List";
 
 import "./MsgList.scss";

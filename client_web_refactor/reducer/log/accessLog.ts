@@ -1,7 +1,7 @@
-import { IPageInfo } from "@/action/common";
+import { IPageInfo } from "@/define/common";
 import { AccessLogAction, GET_ACCESS_COUNT_RESPONSE, LIST_ACCESS_LOG_RESPONSE } from "@/action/log/accessLog";
-import { ACCESS_LOG_PAGE_SIZE } from "@/action/pageSize";
-import { AccessCount, IAccessLog } from "@/api/accessLog";
+import { ACCESS_LOG_PAGE_SIZE } from "@/action-creator/pageSize";
+import { AccessCount, IAccessLog } from "@/define/accessLog";
 
 export interface IAccessLogState {
   count: AccessCount;

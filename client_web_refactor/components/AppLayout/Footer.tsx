@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { IBaseProps } from "@/define";
-import { getProjectStar } from "@/action/github";
-import { getAccessCount } from "@/action/log/accessLog";
+import { IBaseProps } from "@/define/common";
+import { getProjectStar } from "@/action-creator/github";
+import { getAccessCount } from "@/action-creator/log/accessLog";
 import { useStoreSelector } from "@/store";
 import { SKY_BLOG_URL } from "@/config";
 

@@ -1,10 +1,8 @@
-import { IPageInfo } from "@/action/common";
-import { IComment } from "../article/comment";
+import { IPageInfo } from "@/define/common";
 import {
   httpDelete, httpGet, httpPost, IApiResult, MSG_BOARD_API_URL,
 } from "@/api";
-
-export type IMsg = IComment;
+import { IMsg } from "@/define/msgBoard";
 
 export function fetchInsertMsg(msg: IMsg): Promise<IApiResult<IMsg>> {
   return httpPost<IMsg>(`${MSG_BOARD_API_URL}/`, msg);

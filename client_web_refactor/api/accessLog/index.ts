@@ -1,21 +1,9 @@
-import { IPageInfo } from "@/action/common";
+import { IPageInfo } from "@/define/common";
 import { ACCESS_LOG_URL, httpGet, IApiResult } from "@/api";
-import { IUser } from "../user";
-
-export type AccessCount = number;
+import { AccessCount, IAccessLog } from "@/define/accessLog";
 
 export function fetchGetAccessCount(): Promise<IApiResult<AccessCount>> {
   return httpGet<AccessCount>(`${ACCESS_LOG_URL}/public/total/`);
-}
-
-export interface IAccessLog {
-  id: number;
-
-  accessDate: string;
-  ip: string;
-
-  userId: number;
-  user: IUser;
 }
 
 export function fetchListAccessLog(pageNum: number, pageSize: number)
