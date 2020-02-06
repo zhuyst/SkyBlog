@@ -11,21 +11,20 @@ import "./_app.scss";
 
 // 修复dev模式下切换路由，css不会重新加载的问题
 // https://github.com/zeit/next-plugins/issues/282
-Router.events.on("routeChangeComplete", () => {
-  if (process.env.NODE_ENV === "production") {
-    return;
-  }
-  const href = "/_next/static/css/styles.chunk.css";
-  const els = document.querySelectorAll(`link[href^="${href}"]`);
-  els.forEach((el) => {
-    const newCss = el.cloneNode() as HTMLElement;
-    newCss.setAttribute("href", `${href}?v=${Date.now()}`);
-    newCss.onload = () => el.remove();
-    if (el.parentNode) {
-      el.parentNode.appendChild(newCss);
-    }
+if (process.env.NODE_ENV !== "production") {
+  Router.events.on("routeChangeComplete", () => {
+    const href = "/_next/static/css/styles.chunk.css";
+    const els = document.querySelectorAll(`link[href^="${href}"]`);
+    els.forEach((el) => {
+      const newCss = el.cloneNode() as HTMLElement;
+      newCss.setAttribute("href", `${href}?v=${Date.now()}`);
+      newCss.onload = () => el.remove();
+      if (el.parentNode) {
+        el.parentNode.appendChild(newCss);
+      }
+    });
   });
-});
+}
 
 interface INextPageContext extends NextPageContext {
   store: IAppStore;
