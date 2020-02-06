@@ -7,7 +7,7 @@ import { IBaseProps } from "@/define/common";
 import Header from "./Header";
 import Footer from "./Footer";
 
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/scss/main.scss";
 import "./index.scss";
 
 export default (props: IBaseProps) => {
