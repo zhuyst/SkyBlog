@@ -4,7 +4,6 @@ import {
 } from "@/api/article";
 import { IThunkAction } from "@/store";
 import { IPageInfo } from "@/define/common";
-import { ARTICLE_PAGE_SIZE } from "../pageSize";
 import {
   IListArticlesByClassifyResponseAction,
   IListArticlesResponseAction,
@@ -13,6 +12,7 @@ import {
   SET_ARTICLES_LOADING, SET_CLASSIFY_ARTICLES_LOADING,
 } from "@/action/article/articles";
 import { IArticle, IClassifyWithArticles } from "@/define/article";
+import { ARTICLE_PAGE_SIZE } from "../pageSize";
 
 export function setArticlesLoading(loading: boolean): ISetArticlesLoadingAction {
   return {

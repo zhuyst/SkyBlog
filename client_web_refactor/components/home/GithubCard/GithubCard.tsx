@@ -5,8 +5,8 @@ import List from "@/components/common/List";
 import { IGithubCommit } from "@/action/github";
 import { GITHUB_PAGE_SIZE } from "@/action-creator/pageSize";
 import { useStoreSelector } from "@/store";
-import GithubCardItem from "./GithubCardItem";
 import { listCommits } from "@/action-creator/github";
+import GithubCardItem from "./GithubCardItem";
 
 import "./GithubCard.scss";
 

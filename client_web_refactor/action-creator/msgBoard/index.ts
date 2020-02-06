@@ -8,8 +8,6 @@ import {
 import { initialPreviousComment } from "@/reducer/article/comments";
 import { IAppState, IThunkAction } from "@/store";
 import { IPageInfo } from "@/define/common";
-import { FORM_MSG } from "../form";
-import { MSG_PAGE_SIZE } from "../pageSize";
 import {
   DELETE_MSG_RESPONSE,
   IDeleteMsgResponseAction,
@@ -21,6 +19,8 @@ import {
   SET_PREVIOUS_MSG,
 } from "@/action/msgBoard";
 import { IMsg } from "@/define/msgBoard";
+import { FORM_MSG } from "../form";
+import { MSG_PAGE_SIZE } from "../pageSize";
 
 export function setMsgLoading(loading: boolean): ISetMsgLoadingAction {
   return {

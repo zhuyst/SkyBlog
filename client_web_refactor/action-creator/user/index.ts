@@ -14,10 +14,6 @@ import {
 } from "@/api/user";
 import { IAppState, IThunkAction } from "@/store";
 import { IPageInfo } from "@/define/common";
-import { afterLogin, setLoginUser } from "../common/login";
-import { setRegisterModalShow, setUserInfoModalShow } from "../common/modal";
-import { FORM_REGISTER, FORM_USERINFO } from "../form";
-import { USER_PAGE_SIZE } from "../pageSize";
 import {
   DELETE_USER_RESPONSE,
   GET_USER_INFO_RESPONSE,
@@ -36,6 +32,10 @@ import {
 import {
   IUser, Role, Status, UserRole, UserStatus,
 } from "@/define/user";
+import { afterLogin, setLoginUser } from "../common/login";
+import { setRegisterModalShow, setUserInfoModalShow } from "../common/modal";
+import { FORM_REGISTER, FORM_USERINFO } from "../form";
+import { USER_PAGE_SIZE } from "../pageSize";
 
 function registerUserResponse(): IRegisterUserResponseAction {
   return {

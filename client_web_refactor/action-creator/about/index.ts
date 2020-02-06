@@ -4,7 +4,6 @@ import msg from "@/action-creator/common/notify";
 import { ApiResultCode, IApiResult } from "@/api";
 import { fetchGetAbout, fetchUpdateAbout } from "@/api/about";
 import { IThunkAction } from "@/store";
-import { FORM_ABOUT } from "../form";
 import {
   GET_ABOUT_RESPONSE,
   IGetAboutResponseAction,
@@ -14,6 +13,7 @@ import {
   SET_ABOUT_LOADING, UPDATE_ABOUT_RESPONSE,
 } from "@/action/about";
 import { IAbout } from "@/define/about";
+import { FORM_ABOUT } from "../form";
 
 export function setAbout(about: IAbout): ISetAboutAction {
   return {

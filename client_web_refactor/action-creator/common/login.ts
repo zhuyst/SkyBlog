@@ -1,15 +1,11 @@
 import { Dispatch } from "redux";
 import { change, startSubmit, stopSubmit } from "redux-form";
-import msg from "./notify";
 import {
   ApiResultCode, FAIL_RESULT, getToken, IApiResult, removeToken, setToken,
 } from "@/api";
 import { fetchLogin, fetchRefresh } from "@/api/auth";
 import { IUser } from "@/define/user";
 import { IThunkAction } from "@/store";
-import { FORM_LOGIN, FORM_USERINFO } from "../form";
-import { getAccessCount } from "../log/accessLog";
-import { setLoginModalShow } from "./modal";
 import {
   ILoginClearAction,
   ILoginResponseAction,
@@ -19,6 +15,10 @@ import {
   SET_LOGIN_USER, SET_MANAGEMENT,
 } from "@/action/common/login";
 import { IAuthResponse } from "@/define/auth";
+import { FORM_LOGIN, FORM_USERINFO } from "../form";
+import { getAccessCount } from "../log/accessLog";
+import { setLoginModalShow } from "./modal";
+import msg from "./notify";
 
 export function loginClear(): ILoginClearAction {
   return {

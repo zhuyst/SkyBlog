@@ -10,7 +10,6 @@ import {
   fetchUpdateClassify,
 } from "@/api/classify";
 import { IAppState, IThunkAction } from "@/store";
-import { FORM_CLASSIFY } from "../form";
 import {
   DELETE_CLASSIFY_RESPONSE, IClassifyResponseAction,
   IDeleteClassifyResponseAction,
@@ -22,6 +21,7 @@ import {
   SET_CLASSIFY_SHOW, UPDATE_CLASSIFY_RESPONSE,
 } from "@/action/article/classify";
 import { IClassify } from "@/define/classify";
+import { FORM_CLASSIFY } from "../form";
 
 export function setClassifyShow(show: boolean): ISetClassifyShowAction {
   return {

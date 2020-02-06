@@ -8,8 +8,6 @@ import {
 import { initialPreviousComment } from "@/reducer/article/comments";
 import { IAppState, IThunkAction } from "@/store";
 import { IPageInfo } from "@/define/common";
-import { FORM_COMMENT } from "../form";
-import { COMMENT_PAGE_SIZE } from "../pageSize";
 import {
   DELETE_COMMENT_RESPONSE,
   IDeleteCommentResponseAction,
@@ -20,6 +18,8 @@ import {
   SET_COMMENTS_LOADING,
   SET_PREVIOUS_COMMENT,
 } from "@/action/article/comment";
+import { FORM_COMMENT } from "../form";
+import { COMMENT_PAGE_SIZE } from "../pageSize";
 
 export function setPreviousComment(comment: IComment): ISetPreviousCommentAction {
   return {

@@ -7,11 +7,6 @@ import {
   fetchDeleteArticle, fetchGetArticle, fetchInsertArticle, fetchUpdateArticle,
 } from "@/api/article";
 import { IThunkAction } from "@/store";
-import { FORM_ARTICLE, FORM_COMMENT } from "../form";
-import { ARTICLE_PAGE_SIZE, COMMENT_PAGE_SIZE } from "../pageSize";
-import { listArticles } from "./articles";
-import { listClassify } from "./classify";
-import { listComments } from "./comment";
 import {
   DELETE_ARTICLE_RESPONSE, GET_ARTICLE_INFO_RESPONSE,
   IDeleteArticleResponseAction,
@@ -22,6 +17,11 @@ import {
   SET_ARTICLE_LOADING, UPDATE_ARTICLE_RESPONSE,
 } from "@/action/article/article";
 import { IArticle } from "@/define/article";
+import { FORM_ARTICLE, FORM_COMMENT } from "../form";
+import { ARTICLE_PAGE_SIZE, COMMENT_PAGE_SIZE } from "../pageSize";
+import { listArticles } from "./articles";
+import { listClassify } from "./classify";
+import { listComments } from "./comment";
 
 function modifyArticle<T = null>(
   fetchFunc: () => Promise<IApiResult<T>>,
