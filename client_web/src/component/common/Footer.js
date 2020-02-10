@@ -17,6 +17,7 @@ class Footer extends React.Component{
         return (
             <div className="footer">
                 <p>网页访问次数：{count === null ? "加载中..." : count}</p>
+                <p>备案号：<a href="http://www.beian.miit.gov.cn">粤ICP备16113942号</a></p>
                 <p>
                     Powered by <a href={url}>SkyBlog</a>
                     &nbsp;
